@@ -8,7 +8,7 @@ public class OneeatsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OneeatsApplication.class, args);
-		System.out.println("메인입니다");
+		System.out.println("dddddf");
 	}
 
 }
