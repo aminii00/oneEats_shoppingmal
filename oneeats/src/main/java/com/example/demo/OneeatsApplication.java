@@ -8,6 +8,7 @@ public class OneeatsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OneeatsApplication.class, args);
+		System.out.println("asdfsdaf");
 	}
 
 }
