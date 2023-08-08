@@ -7,34 +7,32 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-
     <meta charset="UTF-8" />
     <title>사이드바</title>
   </head>
   <body>
     <div class="row">
-      <div class="col-lg-3">
-          <div class="hero__categories">
-              <div class="hero__categories__all">
-                  <i class="fa fa-bars"></i>
-                  <span>All departments</span>
-              </div>
-              <ul>
-                  <li><a href="#">Fresh Meat</a></li>
-                  <li><a href="#">Vegetables</a></li>
-                  <li><a href="#">Fruit & Nut Gifts</a></li>
-                  <li><a href="#">Fresh Berries</a></li>
-                  <li><a href="#">Ocean Foods</a></li>
-                  <li><a href="#">Butter & Eggs</a></li>
-                  <li><a href="#">Fastfood</a></li>
-                  <li><a href="#">Fresh Onion</a></li>
-                  <li><a href="#">Papayaya & Crisps</a></li>
-                  <li><a href="#">Oatmeal</a></li>
-                  <li><a href="#">Fresh Bananas</a></li>
-              </ul>
+      <div class="col-lg">
+        <div>
+          <div class="bg-green" style="background-color: #a3d060">
+            <img src="#" />
+            <span>All departments</span>
           </div>
+          <ul>
+            <li><a href="#">Fresh Meat</a></li>
+            <li><a href="#">Vegetables</a></li>
+            <li><a href="#">Fruit & Nut Gifts</a></li>
+            <li><a href="#">Fresh Berries</a></li>
+            <li><a href="#">Ocean Foods</a></li>
+            <li><a href="#">Butter & Eggs</a></li>
+            <li><a href="#">Fastfood</a></li>
+            <li><a href="#">Fresh Onion</a></li>
+            <li><a href="#">Papayaya & Crisps</a></li>
+            <li><a href="#">Oatmeal</a></li>
+            <li><a href="#">Fresh Bananas</a></li>
+          </ul>
+        </div>
       </div>
-      
-  </div>
+    </div>
   </body>
 </html>

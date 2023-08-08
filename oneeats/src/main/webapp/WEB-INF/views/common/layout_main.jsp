@@ -10,6 +10,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/common.css" />
     <script src="js/common.js"></script>
+
+    <!--bootstrap-->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+
     <!-- Google Font -->
     <link
       href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
@@ -32,6 +40,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <!-- <div id="preloder">
       <div class="loader"></div>
     </div> -->
+
     <div id="container">
       <div id="header">
         <tiles:insertAttribute name="header" />
