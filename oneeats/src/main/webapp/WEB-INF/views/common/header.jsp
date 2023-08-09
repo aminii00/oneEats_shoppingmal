@@ -21,9 +21,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       </div>
 
       <div class="row">
-        <div class="col-2"><img src="img/logo.png" alt="Logo" /></div>
+        <div class="col-3">
+          <img
+            src="img/logo.png"
+            alt="Logo"
+            style="width: 100%; height: auto"
+          />
+        </div>
         <div class="col-1">&nbsp;</div>
-        <div class="col-7">
+        <div class="col-6">
           <div class="row">
             <div class="col-md">
               <form action="">
