@@ -16,7 +16,8 @@ public class TilesConfig {
 				"WEB-INF/tiles/tiles_main.xml",
 				"WEB-INF/tiles/tiles_admin.xml",
 				"WEB-INF/tiles/tiles_seller.xml",
-				"WEB-INF/tiles/tiles_mypage.xml"
+				"WEB-INF/tiles/tiles_mypage.xml",
+        "WEB-INF/tiles/tiles_goods.xml"
 				}; 
 		configurer.setDefinitions(configureXmlFiles);
 		return configurer;

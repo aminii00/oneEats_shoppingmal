@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib uri
 ="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix ="c"
@@ -8,8 +9,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="css/common.css" />
-    <script src="js/common.js"></script>
+    <link rel="stylesheet" href="${contextPath}/css/common.css" />
+    <script src="${contextPath}/js/common.js"></script>
 
     <!--bootstrap-->
     <link
@@ -25,14 +26,46 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     />
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/bootstrap.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/font-awesome.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/elegant-icons.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/nice-select.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/jquery-ui.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/owl.carousel.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/slicknav.min.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="${contextPath}/css/style.css"
+      type="text/css"
+    />
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
@@ -67,3 +100,4 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <script src="${contextPath}/js/jQueryRotate.js"></script>
   </body>
 </html>
+

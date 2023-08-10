@@ -9,7 +9,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <script src="js/common.js"></script>
+
+    <script src="${contextPath}/js/common.js"></script>
+
 
     <!--bootstrap-->
     <link
@@ -25,6 +27,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     />
 
     <!-- Css Styles -->
+
     <link rel="stylesheet" href="${contextPath}/css/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="${contextPath}/css/font-awesome.min.css" type="text/css" />
     <link rel="stylesheet" href="${contextPath}/css/elegant-icons.css" type="text/css" />
@@ -33,6 +36,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/owl.carousel.min.css" type="text/css" />
     <link rel="stylesheet" href="${contextPath}/css/slicknav.min.css" type="text/css" />
     <link rel="stylesheet" href="${contextPath}/css/style.css" type="text/css" />
+
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
