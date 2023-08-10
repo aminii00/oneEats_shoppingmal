@@ -3,17 +3,17 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-    <definition name="/admin/goods/adminGoodsMain" extends="baseLayout">
-       <put-attribute name="title" value="관리자 메인 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/adminGoodsMain.jsp" />
+    <definition name="/seller/coupon/sellerCouponList" extends="mainLayout">
+       <put-attribute name="title" value="사업자 쿠폰목록 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponList.jsp" />
     </definition>
-    <definition name="/admin/goods/addNewGoodsForm" extends="baseLayout">
-       <put-attribute name="title" value="새 상품 추가 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/addNewGoodsForm.jsp" />
+    <definition name="/seller/coupon/sellerCouponForm" extends="mainLayout">
+       <put-attribute name="title" value="사업자 쿠폰등록 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponForm.jsp" />
     </definition>
-    <definition name="/admin/goods/modifyGoodsForm" extends="baseLayout">
-       <put-attribute name="title" value="상품 수정 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/modifyGoodsForm.jsp" />
+    <definition name="/seller/order/sellerOrderList" extends="mainLayout">
+       <put-attribute name="title" value="사업자 주문/배송 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerOrderList.jsp" />
     </definition>
 </tiles-definitions>
 

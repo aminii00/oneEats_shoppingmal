@@ -3,18 +3,17 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-	<definition name="mainLayout"
-		template="/WEB-INF/views/common/layout_main.jsp">
-		<put-attribute name="title" value="레이아웃 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-	</definition>
-	
     <definition name="/admin/coupon/adminCouponList" extends="mainLayout">
-       <put-attribute name="title" value="관리자 메인 페이지" />
+       <put-attribute name="title" value="관리자 쿠폰목록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponList.jsp" />
+    </definition>
+    <definition name="/admin/coupon/adminCouponForm" extends="mainLayout">
+       <put-attribute name="title" value="관리자 쿠폰등록 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponForm.jsp" />
+    </definition>
+    <definition name="/admin/order/adminOrderList" extends="mainLayout">
+       <put-attribute name="title" value="관리자 주문/배송 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminOrderList.jsp" />
     </definition>
     
 </tiles-definitions>

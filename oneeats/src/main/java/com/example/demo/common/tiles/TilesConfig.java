@@ -14,7 +14,9 @@ public class TilesConfig {
 		final TilesConfigurer configurer = new TilesConfigurer();
 		final String[] configureXmlFiles =  {
 				"WEB-INF/tiles/tiles_main.xml",
-				"WEB-INF/tiles/tiles_admin.xml"
+				"WEB-INF/tiles/tiles_admin.xml",
+				"WEB-INF/tiles/tiles_seller.xml",
+				"WEB-INF/tiles/tiles_mypage.xml"
 				}; 
 		configurer.setDefinitions(configureXmlFiles);
 		return configurer;

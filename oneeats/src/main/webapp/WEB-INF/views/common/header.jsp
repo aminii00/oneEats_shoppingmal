@@ -70,11 +70,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="col">
               <a href="#">
                 <img
-<<<<<<< HEAD
-                  style="width: 100%; height: 100%"
-=======
                   style="width: auto; height: 100%"
->>>>>>> refs/heads/hanyeji
                   src="${contextPath}/img/icon/cart.png"
                   alt=""
                 />
@@ -83,11 +79,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="col">
               <a>
                 <img
-<<<<<<< HEAD
-                  style="width: 100%; height: 100%"
-=======
                   style="width: auto; height: 100%"
->>>>>>> refs/heads/hanyeji
                   src="${contextPath}/img/icon/bookmark.png"
                   alt=""
                 />
