@@ -17,4 +17,21 @@ public class HomeController {
 		System.out.println(mav);
 		return mav;
 	}
+	
+	@RequestMapping(value={"/*/*/*.do","/*/*.do","/*.do"})
+	public ModelAndView anything(HttpServletRequest request) {
+		String viewName =  (String) request.getAttribute("viewName");
+		System.out.println("/"+viewName);
+		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/adminCouponList.do")
+	public ModelAndView adminCouponList(HttpServletRequest request) {
+		String viewName =  (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		System.out.println(mav);
+		return mav;
+	}
 }

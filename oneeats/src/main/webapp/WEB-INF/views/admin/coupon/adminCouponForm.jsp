@@ -1,0 +1,1 @@
+<button class="bg-lightgreen btn-regular textcolor-white">결제하기</button>

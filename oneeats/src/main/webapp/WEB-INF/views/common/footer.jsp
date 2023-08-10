@@ -20,7 +20,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="footer__about__logo">
                 <a href="./index.html"
                   ><img
-                    src="img/logo.png"
+                    src="${contextPath}/img/logo.png"
                     alt=""
                     style="filter: grayscale(100%)"
                 /></a>
@@ -89,7 +89,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </p>
               </div>
               <div class="footer__copyright__payment">
-                <img src="img/payment-item.png" alt="" />
+                <img src="${contextPath}/img/payment-item.png" alt="" />
               </div>
             </div>
           </div>

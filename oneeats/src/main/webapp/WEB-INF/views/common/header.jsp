@@ -23,7 +23,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="row">
         <div class="col-3">
           <img
-            src="img/logo.png"
+            src="${contextPath}/img/logo.png"
             alt="Logo"
             style="width: 100%; height: auto"
           />
@@ -69,7 +69,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <a href="#">
                 <img
                   style="width: 100%; height: 100%"
-                  src="img/icon/cart.png"
+                  src="${contextPath}/img/icon/cart.png"
                   alt=""
                 />
               </a>
@@ -78,7 +78,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <a>
                 <img
                   style="width: 100%; height: 100%"
-                  src="img/icon/bookmark.png"
+                  src="${contextPath}/img/icon/bookmark.png"
                   alt=""
                 />
               </a>

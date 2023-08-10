@@ -3,18 +3,20 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-    <definition name="/admin/goods/adminGoodsMain" extends="baseLayout">
+	<definition name="mainLayout"
+		template="/WEB-INF/views/common/layout_main.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+    <definition name="/admin/coupon/adminCouponList" extends="mainLayout">
        <put-attribute name="title" value="관리자 메인 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/adminGoodsMain.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponList.jsp" />
     </definition>
-    <definition name="/admin/goods/addNewGoodsForm" extends="baseLayout">
-       <put-attribute name="title" value="새 상품 추가 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/addNewGoodsForm.jsp" />
-    </definition>
-    <definition name="/admin/goods/modifyGoodsForm" extends="baseLayout">
-       <put-attribute name="title" value="상품 수정 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/goods/modifyGoodsForm.jsp" />
-    </definition>
+    
 </tiles-definitions>
 
 
