@@ -3469,3 +3469,8 @@ ol {
 		font-size: 24px;
 	}
 }
+/********* chaeyeon***********/
+.flex-2row{
+	flex-direction: row;
+	justify-content: flex-start;
+}
