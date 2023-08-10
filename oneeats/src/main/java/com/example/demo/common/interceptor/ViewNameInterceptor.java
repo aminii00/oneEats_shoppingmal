@@ -13,6 +13,7 @@ public boolean preHandle(HttpServletRequest req, HttpServletResponse resp, Objec
 	try {
 		String viewName = getViewName(req);
 		req.setAttribute("viewName", viewName);
+		System.out.println(viewName);
 	} catch (Exception e) {
 		e.printStackTrace();
 	}

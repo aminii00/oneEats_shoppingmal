@@ -10,20 +10,22 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   <head>
     <meta charset="UTF-8" />
     <title>헤더</title>
+
+    <link rel="stylesheet" href="${contextPath}/css/header.css">
   </head>
   <body>
     <div class="container">
       <div class="row bg-gray">
         <div class="col-9"></div>
-        <div class="col"><a href="#">회원가입</a></div>
-        <div class="col"><a href="#">로그인</a></div>
-        <div class="col"><a href="#">고객센터</a></div>
+        <div class="col-3 textsize-1 textcolor-black"><a href="#">회원가입</a> &nbsp;<a href="#">로그인</a> &nbsp;<a href="#">고객센터</a></div>
       </div>
-
+      <div class="row">
+        &nbsp;
+      </div>
       <div class="row">
         <div class="col-3">
           <img
-            src="img/logo.png"
+            src="${contextPath}/img/logo.png"
             alt="Logo"
             style="width: 100%; height: auto"
           />
@@ -41,7 +43,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     class="form-control"
                   />
                   <div class="input-group-append">
-                    <button type="submit">Search</button>
+                    <button class="bg-lightgreen textcolor-white border-0" type="submit">Search</button>
                   </div>
                 </div>
               </form>
@@ -68,8 +70,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="col">
               <a href="#">
                 <img
-                  style="width: 100%; height: 100%"
-                  src="img/icon/cart.png"
+                  style="width: auto; height: 100%"
+                  src="${contextPath}/img/icon/cart.png"
                   alt=""
                 />
               </a>
@@ -77,8 +79,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="col">
               <a>
                 <img
-                  style="width: 100%; height: 100%"
-                  src="img/icon/bookmark.png"
+                  style="width: auto; height: 100%"
+                  src="${contextPath}/img/icon/bookmark.png"
                   alt=""
                 />
               </a>

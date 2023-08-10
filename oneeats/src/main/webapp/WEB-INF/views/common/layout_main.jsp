@@ -42,14 +42,16 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     </div> -->
 
     <div id="container">
-      <div id="header">
+      <div id="header" class="container-md">
         <tiles:insertAttribute name="header" />
       </div>
-      <div id="sidebar-left">
-        <tiles:insertAttribute name="side" />
-      </div>
-      <div id="content">
-        <tiles:insertAttribute name="body" />
+      <div class="container-md">
+        <div id="sidebar-left">
+          <tiles:insertAttribute name="side" />
+        </div>
+        <div id="content">
+          <tiles:insertAttribute name="body" />
+        </div>
       </div>
       <div id="footer">
         <tiles:insertAttribute name="footer" />
@@ -57,13 +59,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     </div>
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
+    <script src="${contextPath}/js/bootstrap.min.js"></script>
+    <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
+    <script src="${contextPath}/js/jquery-ui.min.js"></script>
+    <script src="${contextPath}/js/jquery.slicknav.js"></script>
+    <script src="${contextPath}/js/mixitup.min.js"></script>
+    <script src="${contextPath}/js/owl.carousel.min.js"></script>
+    <script src="${contextPath}/js/main.js"></script>
+    <script src="${contextPath}/js/jQueryRotate.js"></script>
   </body>
 </html>
