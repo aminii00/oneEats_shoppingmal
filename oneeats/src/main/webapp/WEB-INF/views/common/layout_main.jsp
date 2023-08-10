@@ -8,8 +8,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <script src="${contextPath}/js/common.js"></script>
 
     <!--bootstrap-->
     <link
@@ -17,12 +15,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- Css Styles -->
     <link
@@ -65,6 +57,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       href="${contextPath}/css/style.css"
       type="text/css"
     />
+
+    <!--추가한 css js-->
+    <link rel="stylesheet" href="${contextPath}/css/common.css" />
+    <script src="${contextPath}/js/common.js"></script>
+    <link rel="stylesheet" href="${contextPath}/css/font.css" />
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
