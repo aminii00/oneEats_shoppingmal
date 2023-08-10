@@ -9,27 +9,89 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <title>사이드바</title>
+    <link rel="stylesheet" href="${contextPath}/css/side.css" />
+
+    <script>
+      var rotate1 = 0;
+      var rotate2 = 0;
+    </script>
+    <script src="${contextPath}/js/side.js"></script>
   </head>
   <body>
     <div class="row">
       <div class="col-lg">
-        <div>
-          <div class="bg-green" style="background-color: #a3d060">
-            <img src="#" />
-            <span>All departments</span>
+        <div style="text-align: left" class="textsize-2 border">
+          <div
+            class="bg-lightgreen textcolor-white"
+            style="
+              width: 100%;
+              height: 50px;
+              display: flex;
+              align-items: center;
+            "
+          >
+            <img
+              style="margin-left: 16px"
+              style="width: 20px"
+              src="${contextPath}/img/icon/list.png"
+            />
+            <span class="textbold">&nbsp;카테고리</span>
           </div>
-          <ul>
-            <li><a href="#">Fresh Meat</a></li>
-            <li><a href="#">Vegetables</a></li>
-            <li><a href="#">Fruit & Nut Gifts</a></li>
-            <li><a href="#">Fresh Berries</a></li>
-            <li><a href="#">Ocean Foods</a></li>
-            <li><a href="#">Butter & Eggs</a></li>
-            <li><a href="#">Fastfood</a></li>
-            <li><a href="#">Fresh Onion</a></li>
-            <li><a href="#">Papayaya & Crisps</a></li>
-            <li><a href="#">Oatmeal</a></li>
-            <li><a href="#">Fresh Bananas</a></li>
+          <ul style="margin-left: 16px; margin-top: 24px">
+            <li>
+              <div style="margin-right: 12px">
+                <div
+                  class="textbold"
+                  style="width: 100%"
+                  onclick="fn_toggle(1);"
+                >
+                  못난이 상품
+                  <img
+                    id="motnan_arrow"
+                    src="${contextPath}/img/icon/uparrow.png"
+                    alt=""
+                    style="width: 10px; float: right"
+                  />
+                </div>
+                <ul
+                  id="category_motnan"
+                  class="toggle-content"
+                  style="margin-left: 12px; margin-top: 12px"
+                >
+                  <li>채소</li>
+                  <li>과일</li>
+                  <li>못난이 주스/수제청</li>
+                </ul>
+              </div>
+            </li>
+            <li style="margin-top: 24px; margin-bottom: 24px">
+              <div style="margin-right: 12px">
+                <div
+                  class="textbold"
+                  style="width: 100%"
+                  onclick="fn_toggle(2)"
+                >
+                  밀키트
+                  <img
+                    id="meal_arrow"
+                    src="${contextPath}/img/icon/uparrow.png"
+                    alt=""
+                    style="width: 10px; float: right"
+                  />
+                </div>
+                <ul
+                  id="category_meal"
+                  class="toggle-content"
+                  style="margin-left: 12px; margin-top: 12px"
+                >
+                  <li>찌개/탕/찜</li>
+                  <li>식사/안주류</li>
+                  <li>죽</li>
+                  <li>식사대용식</li>
+                  <li>간편한끼 반찬</li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
       </div>
