@@ -62,7 +62,20 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/common.css" />
     <script src="${contextPath}/js/common.js"></script>
     <link rel="stylesheet" href="${contextPath}/css/font.css" />
+    <style>
+      .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
 
+        width: 100vw;
+        height: 100vh;
+
+        display: none;
+
+        background-color: rgba(0, 0, 0, 0.4);
+      }
+    </style>
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
@@ -84,6 +97,17 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       </div>
       <div id="footer">
         <tiles:insertAttribute name="footer" />
+      </div>
+    </div>
+    <div class="modal">
+      <div id="alert_window" class="btn-round border-dark bg-white text-center">
+        <div>
+          <p id="alert_message">알림메시지</p>
+        </div>
+        <div class="btn-group">
+          <button class="btn-second">취소</button>
+          <button class="btn-primary">확인</button>
+        </div>
       </div>
     </div>
 
