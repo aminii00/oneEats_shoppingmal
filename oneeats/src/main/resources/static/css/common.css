@@ -53,28 +53,28 @@
 }
 
 .btn-square{
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
 }
 .btn-regular{
-    width: 10px;
-    height: 10px;
+    width: 120px;
+    height: 40px;
 }
 .btn-small{
-    width: 10px;
-    height: 10px;
+    width: 100px;
+    height: 40px;
 }
 .btn-fat{
-    width: 10px;
-    height: 10px;
+    width: 90px;
+    height: 40px;
 }
 .btn-fatfat{
-    width: 10px;
-    height: 10px;
+    width: 60px;
+    height: 40px;
 }
 .btn-long{
-    width: 10px;
-    height: 10px;
+    width: 100%;
+    height: 40px;
 }
 
 .btn-round{
@@ -111,23 +111,23 @@
     font-size: 10px;
 }
 .textsize-2{
-    font-size: 10px;
+    font-size: 16px;
 }
 .textsize-3{
-    font-size: 10px;
+    font-size: 18px;
 }
 .textsize-4{
-    font-size: 10px;
+    font-size: 28px;
 }
 .textsize-5{
-    font-size: 10px;
+    font-size: 36px;
 }
 .textsize-6{
-    font-size: 10px;
+    font-size: 48px;
 }
 
 .textbold{
-    font-weight: 500;
+    font-weight: bold;
 }
 .text-eng{
     font-family: 'Courier New', Courier, monospace;
@@ -142,29 +142,29 @@
 }
 
 .imgsize-square2{
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 200px;
 }
 
 .imgsize-square3{
-    width: 100px;
-    height: 100px;
+    width: 400px;
+    height: 400px;
 }
 
 .imgsize-square4{
-    width: 100px;
-    height: 100px;
+    width: 500px;
+    height: 500px;
 }
 .imgsize-long{
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 50px;
 }
 .imgsize-banner{
     width: 100px;
-    height: 100px;
+    height: 80px;
 }
 .imgsize-main{
-    width: 100px;
+    width: 300px;
     height: 100px;
 }
 
