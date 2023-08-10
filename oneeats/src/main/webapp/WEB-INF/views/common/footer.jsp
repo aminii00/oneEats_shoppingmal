@@ -34,6 +34,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <br />
                 <p>since 2023.</p>
               </div>
+<<<<<<< HEAD
+              <div class="footer__copyright__payment">
+                <img src="${contextPath}/img/payment-item.png" alt="" />
+              </div>
+=======
             </div>
           </div>
           <div class="col-lg-4 text-left">
@@ -59,6 +64,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <a href="">
                 <img src="${contextPath}/img/icon/facebook.png" alt="" />
               </a>
+>>>>>>> refs/heads/hanyeji
             </div>
           </div>
         </div>

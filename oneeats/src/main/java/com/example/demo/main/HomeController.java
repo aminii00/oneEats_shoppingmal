@@ -21,8 +21,10 @@ public class HomeController {
 	@RequestMapping(value = {"/*.do","/*/*.do","/*/*/*.do","/*/*/*/*.do"})
 	public ModelAndView every(HttpServletRequest request) {
 		String viewName =  (String) request.getAttribute("viewName");
+		System.out.println("/"+viewName);
 		ModelAndView mav = new ModelAndView(viewName);
 		System.out.println(mav);
 		return mav;
 	}
+
 }
