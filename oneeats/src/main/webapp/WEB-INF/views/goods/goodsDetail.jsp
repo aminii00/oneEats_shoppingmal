@@ -64,16 +64,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
   <body>
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
+    <section
+      class="breadcrumb-section set-bg"
+      data-setbg="${contextPath}/img/breadcrumb.jpg"
+    >
       <div class="container">
         <div class="row">
           <div class="col-lg-12 text-center">
             <div class="breadcrumb__text">
-              <h2>Vegetable’s Package</h2>
+              <h2>못난이 상품</h2>
               <div class="breadcrumb__option">
                 <a href="./index.html">Home</a>
-                <a href="./index.html">Vegetables</a>
-                <span>Vegetable’s Package</span>
+                <a href="./index.html">못난이 상품</a>
+                <span>채소</span>
               </div>
             </div>
           </div>
@@ -111,19 +114,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   src="${contextPath}/img/product/details/thumb-3.jpg"
                   alt=""
                 />
-                <img
-                  data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/img/product/details/thumb-4.jpg"
-                  alt=""
-                />
+                <img src="${contextPath}//product/discount/star.png" alt="" />
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-md-6">
             <div class="product__details__text">
-              <h3>Vetgetable’s Package</h3>
+              <h3>못난이 당근</h3>
               <div class="product__details__rating">
-                <i class="fa fa-star"></i>
+                <img
+                  data-imgbigurl="img/product/details/product-details-5.jpg"
+                  src="${contextPath}/img/product/details/thumb-3.jpg"
+                  alt=""
+                />
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -310,7 +313,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__item">
               <div
                 class="product__item__pic set-bg"
-                data-setbg="img/product/product-1.jpg"
+                data-setbg="${contextPath}/img/product/product-1.jpg"
               >
                 <ul class="product__item__pic__hover">
                   <li>
@@ -334,7 +337,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__item">
               <div
                 class="product__item__pic set-bg"
-                data-setbg="img/product/product-2.jpg"
+                data-setbg="${contextPath}/img/product/product-2.jpg"
               >
                 <ul class="product__item__pic__hover">
                   <li>
