@@ -85,9 +85,12 @@
     border-radius: 15px;
 }
 
+.btn-border{
+	border: 2px solid #B3B3B3;
+}
 
 .linebold{
-    border-top: 3px solid black;
+    border-top: 2px solid #2C3333;
 }
 
 .textcolor-black{
@@ -177,6 +180,7 @@
 .toggle-content{
 	
 }
+
 
 
 

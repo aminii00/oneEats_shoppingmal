@@ -19,7 +19,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="bg-deepgray">진회색 배경</div>
     <div class="bg-lightgray">연회색 배경</div>
     <div class="bg-black">블랙 배경</div>
-
+    <button class="bg-lightgreen btn-regular textcolor-white border-0">결제하기</button>
     <p>정사각 버튼</p>
     <button class="btn-squre">1</button>
     <br>
