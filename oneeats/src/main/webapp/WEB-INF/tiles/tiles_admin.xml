@@ -16,5 +16,3 @@
        <put-attribute name="body" value="/WEB-INF/views/admin/goods/modifyGoodsForm.jsp" />
     </definition>
 </tiles-definitions>
-
-
