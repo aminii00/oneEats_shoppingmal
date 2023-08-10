@@ -12,169 +12,70 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-    .cart > form {}
+    form > table {
+        border-top: 2px solid #000; 
+        border-bottom: 2px solid #000;
+    }
 
-    .cart > form > table {
-            width: 100%;
-            border-bottom: 1px solid #d3d3d3;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
+    form > table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
 
-    .cart > form > table tr { border-bottom: 1px solid #d3d3d3 ;}
+    form > table th { 
+        text-align: left;
+        padding: 12px 0;
+    }
 
-    .cart > form > table th:first-child {width: 60px;}
+    form > table tr th td input {
+        padding: 6px 11px;
+        border-color: #B3B3B3;
+    }
 
-    .cart > form > table th {
-            padding: 12px 0;
-            border-top: 2px solid #000;
-            border-bottom: 1px solid #d3d3d3;
-            background: #fff;
-            color: #383838;
-            font-size: 0.95em;
-            text-align: center;
-            letter-spacing: -0.1em;
-        }
+    form > table td { 
+        text-align: left;
+        padding: 12px 0;
+    }
 
-    .cart > form > table .empty { display: none ;}
-
-    .cart > form > table td { text-align: center;}
-
-    .cart > form > table td:last-child {
-            color: #ff006c;
-            font-weight: bold;
-        }
-
-    .cart > form > table th > input {}
-
-        
-
-    .cart > form > table tr > td > input {}
-
-    .cart > form > table td > article {
-            padding: 6px;
-            overflow: hidden;
-        }
-
-    .cart > form > table td > article > a {
-            float: left;
-            display: inline-block;
-        }
-
-    .cart > form > table td > article > a > img { width: 80px;}
-
-    .cart > form > table td > article > div {
-            float: left;
-            margin-left: 10px;
-        }
-
-    .cart > form > table td > article > div > h2 { text-align: left; }
-
-    .cart > form > table td > article > div > p {
-            text-align: left;
-            color: #777;
-            margin-top: 4px;
-        }
-
-    .cart > form > input[name=del] {
-            border-color: #bdbdbd;
-            border-bottom-color: #828282;
-            background: #fafafa;
-            color: #4d4d4d;
-            padding: 6px 11px;
-            border-width: 1px;
-            margin-top: 6px;
-        }
-
-    .cart > form > .total {
-            float: right;
-            width: 360px;
-            height: 412px;
-            padding: 20px;
-            margin-top: 12px;
-            background: #fff;
-            border: 1px solid #d3d3d3;
-            box-sizing: border-box;
-        }
-
-    .cart > form > .total > h2 {
-            width: 100%;
-            font-weight: bold;
-            font-size: 16px;
-            border-bottom: 1px solid #111;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            box-sizing: border-box;
-            color: #1e1e1e;
-        }
-
-    .cart > form > .total > table { width: 100%; }
-
-    .cart > form > .total > table tr:nth-last-child(1) td {
-            font-size: 20px;
-        }
-
-    .cart > form > .total > table tr:nth-last-child(1) td:last-child {
-            color: #ff006c;
-            font-size: 20px;
-            font-weight: bold;
-        }
-
-    .cart > form > .total > table td {
-            padding: 10px 0;
-            font-size: 14px;
-            color: #555;
-        }
-
-    .cart > form > .total > table td:last-child { text-align: right; }
-
-    .cart > form > .total > input[type=submit] {
-            width: 100%;
-            height: 56px;
-            font-size: 26px;
-            border-width: 1px;
-            border-color: #d81818;
-            border-bottom-color: #9e1212;
-            background: #ed2f2f;
-            background-image: -webkit-linear-gradient(#ed2f2f, #dd0e0e);
-            color: #fff;
-            box-sizing: border-box;
-            margin-top: 10px;
-        }
+    form > table .empty { 
+        display: none ;
+    }
     </style>
 </head>
 <body>
-        <section class="cart">
-            <nav>
-                <p class="textsize-2">쿠폰목록</p>
-            </nav>
-           <form method="post" action="${contextPath}/admin/coupon/adminCouponList.do">
-                <table border="0">
-                    <tr>
-                        <th>쿠폰명</th>
-                        <td><input type="text" name="name"></td>
-                    </tr>
-                    <tr>
-                        <th>할인금액</th>
-                        <td><input type="text" name="discount_price"></td>
-                    </tr>
-                    <tr>
-                        <th>사용조건</th>
-                        <td><input type="text" name="condition"></td>
-                    </tr>
-                    <tr>
-                        <th>사용처</th>
-                        <td><input type="text" name="seller_memberNo"></td>
-                    </tr>
-                    <tr>
-                        <th>유효기간</th>
-                        <td><input type="text" name="expDate"></td>
-                    </tr>
-                    <tr class="empty">
-                        <td colspan="5">등록한 쿠폰이 없습니다.</td>
-                    </tr>
-                </table>
-    </form>
-    </section>
+<form method="post" action="${contextPath}/admin/coupon/adminCouponForm.do">
+    <p class="textsize-2 text-left textcolor-black textbold">쿠폰등록</p>
+    <table border="0" class="textcolor-black textsize-2">
+        <tr>
+            <th>쿠폰명</th>
+            <td><input type="text" name="name" size="50"></td>
+        </tr>
+        <tr>
+            <th>할인금액</th>
+            <td><input type="text" name="discount_price" size="50"></td>
+        </tr>
+        <tr>
+            <th>사용조건</th>
+            <td><select name="condition" width="80">
+                <option value="회원가입시">회원가입시</option>
+                <option value="30000원 이상 구매시">30000원 이상 구매시</option>
+                <option value="50000원 이상 구매시">50000원 이상 구매시</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <th>사용처</th>
+            <td><input type="text" name="seller_memberNo" size="50"></td>
+        </tr>
+        <tr>
+            <th>유효기간</th>
+            <td><input type="text" name="expDate" size="50"></td>
+        </tr>
+    </table>
+    <br>
+    <button type="reset" class="btn-regular bg-white textcolor-black btn-border textbold text-kr textsize-2">다시쓰기</button>
+    <button type="submit" href="#" class="btn-regular bg-lightgreen textcolor-black border-0 textbold text-kr textsize-2">쿠폰등록</button>
+</form>
 </body>
 </html>
