@@ -15,10 +15,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   <body>
     <div class="bg-green">초록색 배경</div>
     <div class="bg-white">하얀색 배경</div>
+    <div class="bg-lightgreen">연두 배경</div>
     <div class="bg-deepgray">진회색 배경</div>
+    <div class="bg-lightgray">연회색 배경</div>
+    <div class="bg-black">블랙 배경</div>
 
     <p>정사각 버튼</p>
     <button class="btn-squre">1</button>
+    <br>
+    <p>큰버튼</p>
+    <button class="btn-big">1</button>
     <br>
     <p>보통 버튼</p>
     <button class="btn-regular">2</button>
@@ -35,6 +41,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <p>긴 버튼</p>
     <button class="btn-long">6</button>
     <br>
+<p>둥그런 버튼</p>
+<button class="btn-big btn-round bg-lightgreen">동글</button>
+
 
     <p>글씨 사이즈1</p>
     <p class="textsize-1">테스트용 문장입니다.</p>
@@ -56,7 +65,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <br>
 
     <p>굵은 글씨</p>
-    <p class="textbold textsize-2">굵은 문장</p>
+    <p class="textbold textsize-4">굵은 문장</p>
 <br>
     <p>영어 폰트</p>
     <p class="text-eng">Hello! world!</p>

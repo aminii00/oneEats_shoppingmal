@@ -37,19 +37,19 @@
 	background-color: #ffffff;
 }
 .bg-black{
-	background-color: #ffffff;
+	background-color: #2C3333;
 }
 .bg-lightgreen{
-    background-color: #ffffff;
+    background-color: #a3d060;
 }
 .bg-green{
-    background-color: #ffffff;
+    background-color: #14AE5C;
 }
 .bg-deepgray{
-    background-color: #ffffff;
+    background-color: #757575;
 }
 .bg-lightgray{
-    background-color: #ffffff;
+    background-color: #B3B3B3;
 }
 
 .btn-square{
@@ -57,8 +57,12 @@
     height: 20px;
 }
 .btn-regular{
-    width: 120px;
-    height: 40px;
+    width: 110px;
+    height: 50px;
+}
+.btn-big{
+    width: 160px;
+    height: 50px;
 }
 .btn-small{
     width: 100px;
@@ -66,55 +70,53 @@
 }
 .btn-fat{
     width: 90px;
-    height: 40px;
+    height: 45px;
 }
 .btn-fatfat{
     width: 60px;
-    height: 40px;
+    height: 45px;
 }
 .btn-long{
     width: 100%;
-    height: 40px;
+    height: 45px;
 }
 
 .btn-round{
-    border-radius: 2px;
+    border-radius: 15px;
 }
-.btn-corner{
-    border-radius: 0px;
-}
+
 
 .linebold{
     border-top: 3px solid black;
 }
 
 .textcolor-black{
-    color: #ffffff;
+    color: #2C3333;
 }
 .textcolor-white{
     color: #ffffff;
 }
 .textcolor-red{
-    color: #ffffff;
+    color: #FF312E;
 }
 .textcolor-lightgreen{
-    color: #ffffff;
+    color: #a3d060;
 }
 .textcolor-green{
-    color: #ffffff;
+    color: #14AE5C;
 }
 .textcolor-lightgray{
-    color: #ffffff;
+    color: #B3B3B3;
 }
 
 .textsize-1{
-    font-size: 10px;
+    font-size: 12px;
 }
 .textsize-2{
     font-size: 16px;
 }
 .textsize-3{
-    font-size: 18px;
+    font-size: 22px;
 }
 .textsize-4{
     font-size: 28px;
@@ -127,50 +129,54 @@
 }
 
 .textbold{
-    font-weight: bold;
+    font-weight: 600;
 }
 .text-eng{
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Roboto', Courier, monospace;
 }
 .text-kr{
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'NanumSquare', 'Arial Narrow', Arial, sans-serif;
 }
 
 .imgsize-square1{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
 }
 
 .imgsize-square2{
-    width: 200px;
-    height: 200px;
+    width: 260px;
+    height: 260px;
 }
 
 .imgsize-square3{
-    width: 400px;
-    height: 400px;
+    width: 360px;
+    height: 360px;
 }
 
 .imgsize-square4{
-    width: 500px;
-    height: 500px;
+    width: 555px;
+    height: 555px;
 }
 .imgsize-long{
     width: 100%;
-    height: 50px;
+    height: 165px;
 }
 .imgsize-banner{
-    width: 100px;
-    height: 80px;
+    width: 555px;
+    height: 260px;
 }
 .imgsize-main{
-    width: 300px;
-    height: 100px;
+    width: 850px;
+    height: 430px;
 }
 
 
-
-
+.slide-content{
+	
+}
+.toggle-content{
+	
+}
 
 
 
