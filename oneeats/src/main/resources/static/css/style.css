@@ -734,7 +734,7 @@ ol {
 }
 
 .hero__text span {
-	font-size: 14px;
+	font-size: 12px;
 	text-transform: uppercase;
 	font-weight: 700;
 	letter-spacing: 4px;
@@ -742,13 +742,16 @@ ol {
 }
 
 .hero__text h2 {
-	font-size: 46px;
-	color: #252525;
+	font-size: 48px;
+	color: #fff;
 	line-height: 52px;
 	font-weight: 700;
 	margin: 10px 0;
+	margin-bottom:64px;
 }
-
+.margin-bottom{
+	margin-bottom:64px;
+}
 .hero__text p {
 	margin-bottom: 35px;
 }
@@ -758,7 +761,7 @@ ol {
 -----------------------*/
 
 .categories__item {
-	height: 270px;
+	height: 260px;
 	position: relative;
 }
 
@@ -772,7 +775,7 @@ ol {
 }
 
 .categories__item h5 a {
-	font-size: 18px;
+	font-size: 16px;
 	color: #1c1c1c;
 	font-weight: 700;
 	text-transform: uppercase;
@@ -787,7 +790,7 @@ ol {
 }
 
 .categories__slider.owl-carousel .owl-nav button {
-	font-size: 18px;
+	font-size: 16px;
 	color: #1c1c1c;
 	height: 70px;
 	width: 30px;
@@ -2831,7 +2834,7 @@ ol {
 }
 
 .map .map-inside .inside-widget h4 {
-	font-size: 22px;
+	font-size: 16px;
 	font-weight: 700;
 	color: #1c1c1c;
 	margin-bottom: 4px;
@@ -2974,7 +2977,7 @@ ol {
 	}
 	.humberger__open {
 		display: block;
-		font-size: 22px;
+		font-size: 16px;
 		color: #1c1c1c;
 		height: 35px;
 		width: 35px;
@@ -2984,7 +2987,7 @@ ol {
 		cursor: pointer;
 		position: absolute;
 		right: 15px;
-		top: 22px;
+		top: 16px;
 	}
 	.header .container {
 		position: relative;
@@ -3232,7 +3235,7 @@ ol {
 	}
 	.humberger__open {
 		display: block;
-		font-size: 22px;
+		font-size: 16px;
 		color: #1c1c1c;
 		height: 35px;
 		width: 35px;
@@ -3242,7 +3245,7 @@ ol {
 		cursor: pointer;
 		position: absolute;
 		right: 15px;
-		top: 22px;
+		top: 16px;
 	}
 	.header .container {
 		position: relative;
