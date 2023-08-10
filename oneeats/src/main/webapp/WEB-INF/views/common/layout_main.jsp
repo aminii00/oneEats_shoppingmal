@@ -62,6 +62,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/common.css" />
     <script src="${contextPath}/js/common.js"></script>
     <link rel="stylesheet" href="${contextPath}/css/font.css" />
+
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
@@ -69,7 +70,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <!-- <div id="preloder">
       <div class="loader"></div>
     </div> -->
-
     <div id="container">
       <div id="header" class="container-md">
         <tiles:insertAttribute name="header" />

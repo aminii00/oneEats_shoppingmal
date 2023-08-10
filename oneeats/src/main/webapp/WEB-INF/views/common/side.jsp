@@ -37,7 +37,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             />
             <span class="textbold">&nbsp;카테고리</span>
           </div>
-          <ul style="margin-left: 16px; margin-top: 24px">
+          <ul class="ul_menus" style="margin-left: 16px">
             <li>
               <div style="margin-right: 12px">
                 <div
@@ -64,7 +64,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </ul>
               </div>
             </li>
-            <li style="margin-top: 24px; margin-bottom: 24px">
+            <li>
               <div style="margin-right: 12px">
                 <div
                   class="textbold"
