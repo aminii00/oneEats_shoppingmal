@@ -28,3 +28,18 @@ function fn_toggle(num){
 	
 	
 }
+
+
+function fn_slideToggle(num){
+	$("#category_"+num).slideToggle();
+	$("#arrow_"+num).rotate(
+		{
+			angle:rotateArray[num],
+			animateTo:rotateArray[num]+180
+		}
+	);
+	rotateArray[num] += 180;
+	if(rotateArray[num]==360){
+			rotateArray[num]=0;
+		}
+}

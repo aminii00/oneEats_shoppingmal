@@ -12,6 +12,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter{
 		.addPathPatterns("/*.do")
 		.addPathPatterns("/*/*.do")
 		.addPathPatterns("/*/*/*.do")
+		.addPathPatterns("/*/*/*/*.do")
 		.excludePathPatterns("/users/login");
 		
 	}

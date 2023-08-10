@@ -9,9 +9,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="${contextPath}/css/common.css" />
-
     <script src="${contextPath}/js/common.js"></script>
-
 
     <!--bootstrap-->
     <link
