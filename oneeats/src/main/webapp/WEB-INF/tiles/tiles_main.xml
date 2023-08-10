@@ -11,8 +11,7 @@
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
-	
-	
+
 	<definition name="nosidebarLayout"
 	template="/WEB-INF/views/common/layout_nosidebar.jsp">
 	<put-attribute name="title" value="사이드바 없는 레이아웃" />
@@ -25,10 +24,12 @@
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
+
 	<definition name="/loginForm" extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 로그인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
+
 </tiles-definitions>
 
 
