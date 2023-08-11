@@ -163,7 +163,7 @@ ol {
 .primary-btn {
 	display: inline-block;
 	font-size: 14px;
-	padding: 10px 28px 10px;
+	padding: 8px 16px 8px;
 	color: #ffffff;
 	text-transform: uppercase;
 	font-weight: 700;
@@ -1686,6 +1686,7 @@ ol {
 	color: #252525;
 	font-weight: 700;
 	margin-bottom: 16px;
+	text-align: left;
 }
 
 .product__details__text .product__details__rating {
@@ -1699,7 +1700,7 @@ ol {
 }
 
 .product__details__text .product__details__rating span {
-	color: #dd2222;
+	color: rgb(51, 51, 51);
 	margin-left: 4px;
 }
 
@@ -1767,18 +1768,21 @@ ol {
 }
 
 .product__details__quantity {
-	display: inline-block;
+	align-items: center;
+	align-content: center;
 	margin-right: 6px;
 }
 
 .pro-qty {
 	width: 140px;
-	height: 50px;
+	height: 42px;
 	display: inline-block;
 	position: relative;
-	text-align: center;
+	text-align:center;
 	background: #f5f5f5;
-	margin-bottom: 5px;
+	margin-bottom: 8px;
+	align-content: center;
+	align-self: center;
 }
 
 .pro-qty input {
@@ -1815,7 +1819,7 @@ ol {
 	left: 0;
 	top: 12px;
 	height: 1px;
-	width: 370px;
+	width: 300px;
 	background: #ebebeb;
 	content: "";
 }
@@ -2961,6 +2965,7 @@ ol {
 	}
 	.product__details__quantity {
 		margin-bottom: 10px;
+		align-items: center;
 	}
 	.product__details__text .primary-btn {
 		margin-bottom: 10px;
