@@ -28,12 +28,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     width: 100%;
     height: 40px;
     padding: 12px 0px 12px;
-    border-top: 1px solid rgb(244, 244, 244);
+
     font-size: 14px;
     letter-spacing: -0.5px;
   }
   .css-lytdfk {
-    width: 128px;
+    width: 200px;
     height: 100%;
     color: rgb(102, 102, 102);
     font-weight: 400;
@@ -93,7 +93,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     letter-spacing: -0.5px;
   }
   .css-lytdfk {
-    width: 128px;
+    width: 200px;
     height: 100%;
     color: #666;
     font-weight: 400;
@@ -213,9 +213,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   }
   .css-1foiu5e {
     font-weight: bold;
-    font-size: 12px;
+    font-size: 16px;
     color: rgb(51, 51, 51);
     padding-right: 5px;
+    margin: 24px 0 24px 0;
   }
   .margin4 {
     margin: 8px;
@@ -439,7 +440,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <div class="css-1bp09d0 e17iylht1">
                       <div class="css-2lvxh7 e1qy0s5w0">
                         <dl class="css-e6zlnr epzddad2" style="height: 270px">
-                          <dt class="css-lytdfk epzddad1">상품선택</dt>
+                          <dt
+                            class="css-lytdfk epzddad1"
+                            style="margin-top: 16px"
+                          >
+                            상품선택
+                          </dt>
                           <dd class="css-1k8t52o epzddad0">
                             <div style="align-content: center">
                               <select name="select" class="margin4 opt">
@@ -463,11 +469,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           class="cart-option-item css-1cb5lnc e1bjklo17"
                           style="width: 525px"
                         >
-                          <dl class="css-e6zlnr epzddad2" style="height: 270px">
+                          <dl
+                            class="css-e6zlnr epzddad2"
+                            style="height: 150px; border-top: none; margin: 0"
+                          >
                             <dt class="css-lytdfk epzddad1">
-                              <span class="css-1foiu5e e1bjklo10"
-                                >못난이 당근 단품 900원</span
+                              <div
+                                class="css-1foiu5e e1bjklo10 font-bold"
+                                style="margin-bottom: 24px; font-size: 22px"
                               >
+                                못난이 당근 단품
+                              </div>
                               <div class="product__details__quantity">
                                 <div class="quantity text-left">
                                   <div class="pro-qty border6">
@@ -478,8 +490,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="css-1foiu5e e1bjklo10"
-                            style="text-size: "
+                            class="css-1foiu5e e1bjklo10 text-right"
+                            style="
+                              font-size: 16px;
+                              border-top: 1px solid rgb(244, 244, 244);
+                              margin: 12px 0 -10px 0;
+                            "
+                          >
+                            총 상품금액
+                          </span>
+                          <span
+                            class="css-1foiu5e e1bjklo10 text-right"
+                            style="font-size: 22px"
                             >900원</span
                           >
                         </div>
@@ -487,13 +509,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <div class="css-9y0nwt e17iylht0">
                         <div class="css-ixlb9s eebc7rx8">
                           <div class="css-yhijln eebc7rx7">
-                            <div
-                              style="margin-top: 50px, text-size= 12px"
-                              class="text-right"
-                            >
-                              총 상품금액 : 900원
-                            </div>
-
                             <span
                               class="css-x4cdgl eebc7rx5"
                               id="sum"
