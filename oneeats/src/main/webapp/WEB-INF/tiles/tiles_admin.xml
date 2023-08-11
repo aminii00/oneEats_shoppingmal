@@ -16,4 +16,10 @@
        <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminOrderList.jsp" />
     </definition>
     
+    
+    <definition name="/admin/main/adminMain" extends="mainLayout">
+       <put-attribute name="title" value="관리자 메인 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/main/adminMain.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
+    </definition>
 </tiles-definitions>

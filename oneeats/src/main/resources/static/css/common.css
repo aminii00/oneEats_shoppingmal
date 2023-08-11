@@ -89,7 +89,9 @@
 }
 
 .linebold{
-    border-top: 2px solid #2C3333;
+    border: 0px;
+    height: 2px;
+    background-color: black;
 }
 
 .textcolor-black{
