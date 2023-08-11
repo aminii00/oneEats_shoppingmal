@@ -13,7 +13,7 @@
     </definition>
     <definition name="/admin/order/adminOrderList" extends="mainLayout">
        <put-attribute name="title" value="관리자 주문/배송 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminOrderList.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderList.jsp" />
     </definition>
     
 </tiles-definitions>
