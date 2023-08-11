@@ -93,6 +93,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </li>
           </ul>
+          <div>&nbsp;</div>
         </div>
       </div>
     </div>

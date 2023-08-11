@@ -14,7 +14,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
 
     <!-- Css Styles -->
     <link
@@ -58,24 +57,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       type="text/css"
     />
 
-    <!--추가한 css js-->
+    <!--추가한 css-->
     <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <script src="${contextPath}/js/common.js"></script>
     <link rel="stylesheet" href="${contextPath}/css/font.css" />
-    <style>
-      .modal {
-        position: absolute;
-        top: 0;
-        left: 0;
+    <link rel="stylesheet" href="${contetPath}/css/notice-window.css" />
 
-        width: 100vw;
-        height: 100vh;
-
-        display: none;
-
-        background-color: rgba(0, 0, 0, 0.4);
-      }
-    </style>
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
@@ -99,14 +85,29 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         <tiles:insertAttribute name="footer" />
       </div>
     </div>
-    <div class="modal">
-      <div id="alert_window" class="btn-round border-dark bg-white text-center">
-        <div>
-          <p id="alert_message">알림메시지</p>
+
+    <div class="modal-overlay">
+      <div
+        id="alert_window"
+        class="btn-round border-dark bg-white text-center modal-content m-0"
+      >
+        <div class="modal-body">
+          <span id="alert_message"
+            >알림메시지 <br />
+            입니다.</span
+          >
         </div>
-        <div class="btn-group">
-          <button class="btn-second">취소</button>
-          <button class="btn-primary">확인</button>
+        <div class="btn-group modal-footer p-0 m-0">
+          <button
+            id="cancel-button"
+            class="btn textcolor-lightgray border-0 m-0"
+            onclick="closeModal();"
+          >
+            취소
+          </button>
+          <button id="confirm-button" class="btn textcolor-green border-0 m-0">
+            확인
+          </button>
         </div>
       </div>
     </div>
@@ -121,5 +122,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <script src="${contextPath}/js/owl.carousel.min.js"></script>
     <script src="${contextPath}/js/main.js"></script>
     <script src="${contextPath}/js/jQueryRotate.js"></script>
+
+    <!--추가한 js-->
+    <script src="${contextPath}/js/common.js"></script>
   </body>
 </html>

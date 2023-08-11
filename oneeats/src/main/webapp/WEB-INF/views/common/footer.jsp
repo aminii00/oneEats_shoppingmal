@@ -22,7 +22,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   ><img
                     src="${contextPath}/img/logo.png"
                     alt=""
-                    style="filter: grayscale(100%)"
+                    style="filter: grayscale(100%); max-width: 300px"
                 /></a>
               </div>
               <div class="textcolor-black text-left">

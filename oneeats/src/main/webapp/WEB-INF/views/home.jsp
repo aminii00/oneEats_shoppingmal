@@ -118,7 +118,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </div>
 
     <div>
-      <button onclick="fn_openalert('테스트 알림')">알림창 띄워보기</button>
+      <button
+        class="open-alert"
+        onclick="fn_openalert('테스트 알림<br>입니다!!!!!!','${contextPath}/home.do')"
+      >
+        알림창 띄워보기
+      </button>
     </div>
   </body>
 </html>

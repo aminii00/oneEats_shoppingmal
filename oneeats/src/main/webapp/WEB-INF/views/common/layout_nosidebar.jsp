@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib uri
 ="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix ="c"
@@ -9,8 +8,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="${contextPath}/css/common.css" />
-    <script src="${contextPath}/js/common.js"></script>
 
     <!--bootstrap-->
     <link
@@ -18,12 +15,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-      rel="stylesheet"
-    />
 
     <!-- Css Styles -->
     <link
@@ -66,6 +57,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       href="${contextPath}/css/style.css"
       type="text/css"
     />
+
+    <!--추가한 css-->
+    <link rel="stylesheet" href="${contextPath}/css/common.css" />
+    <link rel="stylesheet" href="${contextPath}/css/font.css" />
+    <link rel="stylesheet" href="${contetPath}/css/notice-window.css" />
+
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
@@ -83,11 +80,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           <tiles:insertAttribute name="body" />
         </div>
       </div>
-      <div id="footer">
-        <tiles:insertAttribute name="footer" />
-      </div>
     </div>
-
+    <div id="footer">
+      <tiles:insertAttribute name="footer" />
+    </div>
     <!-- Js Plugins -->
     <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
@@ -98,6 +94,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <script src="${contextPath}/js/owl.carousel.min.js"></script>
     <script src="${contextPath}/js/main.js"></script>
     <script src="${contextPath}/js/jQueryRotate.js"></script>
+
+    <!--추가한 js-->
+    <script src="${contextPath}/js/common.js"></script>
   </body>
 </html>
-
