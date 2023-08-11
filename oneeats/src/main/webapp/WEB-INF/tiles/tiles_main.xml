@@ -35,6 +35,19 @@
 		<put-attribute name="title" value="쇼핑몰 로그인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
+	
+	<definition name="/registerTypeSelect" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 회원가입선택페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/member/registerTypeSelect.jsp" />
+	</definition>
+	
+	<definition name="/registerForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp" />
+	</definition>
+	
+
+	
 
 </tiles-definitions>
 
