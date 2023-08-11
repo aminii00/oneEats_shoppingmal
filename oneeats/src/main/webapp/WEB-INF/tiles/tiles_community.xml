@@ -9,4 +9,22 @@
        <put-attribute name="body" value="/WEB-INF/views/community/mostQnA/mostQnAList.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
     </definition>
+    <definition name="/community/notice/noticeList" extends="mainLayout">
+       <put-attribute name="title" value="공지사항 목록" />
+       <put-attribute name="body" value="/WEB-INF/views/community/notice/noticeList.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
+    </definition>
+    
+    <definition name="/community/oneQnA/oneQnAList" extends="mainLayout">
+       <put-attribute name="title" value="1:1문의 내역" />
+       <put-attribute name="body" value="/WEB-INF/views/community/oneQnA/oneQnAList.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
+    </definition>
+    
+    <definition name="/community/notice/noticeDetail" extends="mainLayout">
+       <put-attribute name="title" value="공지사항 상세" />
+       <put-attribute name="body" value="/WEB-INF/views/community/notice/noticeDetail.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
+    </definition>
+    
 </tiles-definitions>

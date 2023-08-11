@@ -184,7 +184,37 @@
 
 
 
+/*페이지 버튼*/
+.ul-li {
+        margin-top: 60px;
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+      }
+.li-btn {
+    padding-left: 10px;
+}
+  .btn-2 {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(51, 51, 51);
+    line-height: 34px;
+  }
 
-
-
+hr.line-black{
+	border: 0px; height: 2px; background-color: black;
+	margin:4px;
+}
+hr.line-gray{
+	border: 0px; height: 2px; background-color: gray;
+	margin:4px;
+}
 

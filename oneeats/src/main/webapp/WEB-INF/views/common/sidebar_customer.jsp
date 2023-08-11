@@ -38,7 +38,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">공지사항</a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
@@ -51,7 +51,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">자주하는 질문</a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
@@ -63,7 +63,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">1:1문의 </a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
