@@ -16,9 +16,59 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding-left: 40px;
             padding-top: 10px;
         }
+        .div-p {
+            padding: 0 12px;
+        }
+        p {
+            padding-top: 10px;
+        }
         a {
             text-decoration: none;
             color: #2C3333;
+        }
+        input {
+            width: 30%;
+            height: 40px;
+            padding: 0px 11px 1px 15px;
+            border-radius: 4px;
+            border: 1px solid rgb(221, 221, 221);
+            line-height: 1.5;
+            color: rgb(51, 51, 51);
+            outline: none;
+            box-sizing: border-box;
+        }
+        input::placeholder {
+            font-size: 0.9em;
+        }
+        select {
+            width: 100%;
+            height: 40px;
+            padding: 0px 11px 1px 15px;
+            border-radius: 4px;
+            border: 1px solid rgb(221, 221, 221);
+            line-height: 1.5;
+            color: rgb(51, 51, 51);
+            outline: none;
+            box-sizing: border-box;
+        }
+        div.nice-select{
+            width: 30%;
+        }
+        .list {
+            width: 30%;
+        }
+        .div-btn {
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .btn-1 {
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 3px;
+            margin-right: 30px;
         }
         .ul-li {
             margin-top: 60px;
@@ -53,7 +103,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding: 8px 0px 13px;
             -webkit-box-pack: justify;
             justify-content: space-between;
-            border-bottom: 1px solid rgb(221, 223, 225);
+            border-bottom: 1px solid #B3B3B3;
         }
         .css-asma03 {
             font-size: 16px;
@@ -140,15 +190,38 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             -ms-flex-align: center;
             align-items: center;
         }
-        .css-bx0kqw {
-            width: 1px;
-            height: 1px;
+        .css-1fdt947 {
+            width: 100px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: right;
+            color: rgb(51, 51, 51);
+            margin-right: 20px;
+        }
+        .css-1bbz142 {
+            width: 96px;
+        }
+        .css-oyz24n {
+            display: block;
+            padding: 0px 10px;
+            text-align: center;
+            overflow: hidden;
+            width: 100%;
+            height: 36px;
+            border-radius: 3px;
+            color: rgb(95, 0, 128);
+            background-color: rgb(255, 255, 255);
+            border: 1px solid rgb(95, 0, 128);
+        }
+        .css-1bbz142 > button span {
+            font-size: 12px;
+            font-weight: 500;
         }
     </style>
     </head>
     <body>
     <form method="post" action="#">
- <%-- <!--       <div class="div-p">
+    <div class="div-p">
         <p class="textsize-2 text-left textcolor-black textbold">주문내역</p>
         <select name="search-1">
             <option value="전체">전체</option>
@@ -158,28 +231,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </select>
         <input type="text name="search-2" placeholder="search.."">
         <button class="btn-small bg-lightgreen textcolor-white border-0" type="submit">검색</button>
-        </div>
-        <hr class="linebold">
-        <table border="0" class="textcolor-black textsize-1">
-            <tr class="tr-1">
-                <th>2023.08.11</th>
-                <button></button>
-            </tr>
-            <tr>
-                <td>상풍명</td>
-                <td>밀키트 외 9건</td>
-            </tr>
-        </table>
---> --%>
-        <div class="css-4wlxei e1437c6414">
+    </div>
+    <hr class="linebold">
+        
+    <div class="css-4wlxei e1437c6414">
             <div class="css-1hbtwy0 e1437c6413">
                 <span class="css-asma03 e1437c6412">2023.08.11</span>
-                <a class="css-l9y4tx e1437c6411">주문내역 상세보기</a>
+                <a href="#">주문내역 상세보기</a>
             </div>
-            <hr class="linebold">
             <div class="css-7apail e1437c6410">
                 <div class="css-fhxb3m e1437c649">
-                    <img src="https://img-cf.kurly.com/shop/data/goods/1596778215374l0.jpg" alt="아오리 사과 1.5kg(10입내) 상품 이미지" class="css-1oc1pau e1437c648">
+                    <img src="${contextPath}/img/product/review/product-1.jpg" alt="아오리 사과 1.5kg(10입내) 상품 이미지" class="css-1oc1pau e1437c648">
                     <div class="css-1fttcpj e1437c647">
                         <dl class="css-1ccl3pq e1437c646">
                             <dt class="css-dzjp62 e1437c645">상품명</dt>
