@@ -1562,11 +1562,11 @@ ol {
 }
 
 .product__item__text h6 a {
-	color: #252525;
+	color: #495057;
 }
 
 .product__item__text h5 {
-	color: #252525;
+	color:#495057;
 	font-weight: 700;
 }
 
@@ -1631,7 +1631,7 @@ ol {
 }
 
 .product__details__text h3 {
-	color: #252525;
+	color: #495057;
 	font-weight: 700;
 	margin-bottom: 16px;
 }

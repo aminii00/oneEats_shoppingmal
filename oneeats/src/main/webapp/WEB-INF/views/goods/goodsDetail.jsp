@@ -18,12 +18,24 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
 
     <!-- Css Styles -->
 
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
     <link
       rel="stylesheet"
@@ -67,19 +79,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     />
 
     <style>
-      .css-1fttcpj {
-        display: flex;
-        flex-direction: column;
-      }
-      .css-1bhm8h2 {
-        display: flex;
-        flex: 1 1 0%;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-      }
-      .css-iqoq9n {
-        margin-top: 20px;
-      }
       .css-e6zlnr {
         display: flex;
         flex: 1 1 0%;
@@ -88,15 +87,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         overflow: hidden;
         width: 100%;
         height: 40px;
-        padding: 12px 0px 12px;
-
+        padding: 12px 0 12px;
         font-size: 14px;
         letter-spacing: -0.5px;
       }
       .css-lytdfk {
         width: 200px;
         height: 100%;
-        color: rgb(102, 102, 102);
+        color: #666;
         font-weight: 400;
         line-height: 19px;
       }
@@ -106,30 +104,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex-direction: column;
       }
       .css-c02hqi {
-        color: rgb(51, 51, 51);
+        color: #333;
         font-weight: 400;
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
         overflow: hidden;
       }
-      .css-uy94b2 {
-        display: block;
-        font-size: 12px;
-        color: rgb(102, 102, 102);
-        padding-top: 4px;
-        line-height: 16px;
-        white-space: pre-line;
-      }
-
-      /*
-        장바구니부분
-        */
       .css-1bp09d0 {
         padding-bottom: 40px;
       }
       .css-2lvxh7 {
-        border-bottom: 1px solid rgb(244, 244, 244);
+        border-bottom: 1px solid #f4f4f4;
       }
       .css-e6zlnr {
         display: -webkit-box;
@@ -173,7 +159,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex-direction: column;
       }
       .css-1cb5lnc:last-of-type {
-        border-bottom: 1px solid rgb(244, 244, 244);
+        border-bottom: 1px solid #f4f4f4;
       }
       .css-1cb5lnc {
         display: flex;
@@ -182,15 +168,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         justify-content: space-between;
         padding: 11px 10px 11px 15px;
         font-size: 12px;
-        border-left: 1px solid rgb(244, 244, 244);
-        border-top: 1px solid rgb(244, 244, 244);
-        border-right: 1px solid rgb(244, 244, 244);
-      }
-      .css-1qdyvok {
-        display: flex;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        align-items: flex-start;
+        border-left: 1px solid #f4f4f4;
+        border-top: 1px solid #f4f4f4;
+        border-right: 1px solid #f4f4f4;
       }
       *,
       :after,
@@ -198,94 +178,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         box-sizing: border-box;
         margin: 0;
       }
-      .css-100vshh {
-        line-height: 16px;
-        width: 320px;
-        color: rgb(51, 51, 51);
-        overflow-wrap: break-word;
-      }
-      .css-1fnacti {
-        line-height: 16px;
-        width: 320px;
-        overflow-wrap: break-word;
-        font-size: 12px;
-        color: rgb(102, 102, 102);
-        margin-top: 4px;
-      }
-      .css-1liqj4s {
-        display: flex;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        -webkit-box-align: center;
-        align-items: center;
-        padding-top: 12px;
-      }
-      .css-16dy8wz {
-        display: inline-flex;
-        flex-direction: row;
-        -webkit-box-align: center;
-        align-items: center;
-        border: 1px solid rgb(221, 223, 225);
-        width: 88px;
-        border-radius: 3px;
-      }
-      .css-1e90glc {
-        display: inline-flex;
-        width: 28px;
-        height: 28px;
-        border: none;
-        font-size: 1px;
-        color: transparent;
-        background-size: cover;
-        background-color: transparent;
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yMCAxNHYySDEwdi0yeiIgZmlsbD0iI0RERCIgZmlsbC1ydWxlPSJub256ZXJvIi8+Cjwvc3ZnPgo=);
-        vertical-align: top;
-      }
-      .css-16dy8wz .count {
-        font-weight: 400;
-      }
-
-      .css-6m57y0 {
-        display: inline-flex;
-        overflow: hidden;
-        white-space: nowrap;
-        -webkit-box-pack: center;
-        justify-content: center;
-        font-size: 14px;
-        font-weight: 600;
-        color: rgb(51, 51, 51);
-        text-align: center;
-        width: 31px;
-        height: 28px;
-        line-height: 28px;
-      }
-
-      .css-18y6jr4 {
-        display: inline-flex;
-        width: 28px;
-        height: 28px;
-        border: none;
-        font-size: 1px;
-        color: transparent;
-        background-size: cover;
-        background-color: transparent;
-        background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAzMCAzMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0xNiAxMHY0aDR2MmgtNHY0aC0ydi00aC00di0yaDR2LTRoMnoiIGZpbGw9IiMzMzMiIGZpbGwtcnVsZT0ibm9uemVybyIvPgo8L3N2Zz4K);
-        vertical-align: top;
-      }
       .css-1foiu5e {
-        font-weight: bold;
+        font-weight: 700;
         font-size: 16px;
-        color: rgb(51, 51, 51);
+        color: #333;
         padding-right: 5px;
         margin: 24px 0 24px 0;
       }
       .margin4 {
         margin: 8px;
       }
-      .material-symbols-outlined {
-        font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
-      }
-
       .select {
         box-sizing: border-box;
         width: 100px;
@@ -301,7 +203,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         color: #fff;
       }
-      /*장바구니*/
       .css-lay {
         display: flex;
         gap: 8px;
@@ -309,24 +210,20 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
       .css-heartbtn {
         display: block;
-        padding: 0px 10px;
+        padding: 0 10px;
         text-align: center;
         overflow: hidden;
         width: 56px;
         height: 56px;
         border-radius: 3px;
-        color: rgb(51, 51, 51);
-        background-color: rgb(255, 255, 255);
-        border: 1px solid rgb(221, 221, 221);
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #ddd;
       }
       .css-let1 {
         display: inline-block;
         font-size: 22px;
         font-weight: 500;
-      }
-      .css-sthcolor:disabled {
-        border-color: rgb(221, 221, 221);
-        color: rgb(221, 221, 221);
       }
       .css-lay2 {
         -webkit-box-flex: 1;
@@ -337,17 +234,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       }
       .css-cartbtn {
         display: block;
-        padding: 0px 10px;
+        padding: 0 10px;
         text-align: center;
         overflow: hidden;
         width: 100%;
         height: 56px;
         border-radius: 3px;
-        color: rgb(255, 255, 255);
+        color: #fff;
         background-color: #a3d060;
-        border: 0px none;
+        border: 0 none;
       }
-      /* 상품 리뷰*/
       #product > .view > .review > .paging > .num > a.on {
         color: #fe434c;
         font-weight: 700;
@@ -377,12 +273,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         color: #fe434c;
         font-weight: 700;
       }
-
-      /*컬맇기*/
       .css-169773r {
         display: flex;
-        padding: 30px 0px 19px 20px;
-        border-bottom: 1px solid rgb(244, 244, 244);
+        padding: 30px 0 19px 20px;
+        border-bottom: 1px solid #f4f4f4;
         font-size: 14px;
         font-weight: 400;
         line-height: 19px;
@@ -394,22 +288,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         display: flex;
         -webkit-box-align: center;
         align-items: center;
-        margin: -1px 0px 7px;
-      }
-      .css-xtgqlr {
-        display: inline-block;
-        height: 18px;
-        border: 1px solid rgb(95, 0, 128);
-        border-radius: 3px;
-        padding: 3px 4px 3px 5px;
-        margin-right: 4px;
-        font-weight: 500;
-        font-size: 10px;
-        line-height: 10px;
-        text-align: center;
-        word-break: keep-all;
-        background-color: rgb(255, 255, 255);
-        color: rgb(95, 0, 128);
+        margin: -1px 0 7px;
       }
       .css-f3vz0n {
         font-weight: 500;
@@ -430,23 +309,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         font-weight: 400;
         line-height: 19px;
-        color: rgb(153, 153, 153);
+        color: #999;
         display: -webkit-box;
         overflow: hidden;
         word-break: break-all;
         white-space: normal;
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
-      }
-      .css-y49dcn {
-        padding-top: 12px;
-        padding-right: 20px;
-        word-break: break-word;
-        white-space: pre-wrap;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 19px;
-        color: rgb(51, 51, 51);
       }
       .css-1fkegtf {
         display: flex;
@@ -459,7 +328,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         padding-right: 20px;
       }
       .css-14kcwq8 {
-        color: rgb(153, 153, 153);
+        color: #999;
       }
       .css-g3a39p {
         display: flex;
@@ -469,12 +338,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         align-items: center;
         min-width: 88px;
         height: 32px;
-        padding: 0px 13px 0px 11px;
-        border: 1px solid rgb(226, 226, 226);
+        padding: 0 13px 0 11px;
+        border: 1px solid #e2e2e2;
         border-radius: 20px;
         font-size: 12px;
         line-height: 20px;
-        color: rgb(153, 153, 153);
+        color: #999;
       }
       .css-xdee1z {
         width: 15px;
@@ -784,11 +653,26 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               </div>
               <div class="tab-pane" id="tabs-3" role="tabpanel">
                 <div class="product__details__tab__desc">
-                  <h6 class="text-left" style="padding-left: 20px">
+                  <h6
+                    class="text-left textbold"
+                    style="padding-left: 20px; font-size: 24px"
+                  >
                     상품 후기
                   </h6>
+                  <div class="text-left" style="margin-bottom: 30px">
+                    <img
+                      style="padding-top: 8px"
+                      src="${contextPath}/img/product/review/carrot.jpg"
+                      alt="리뷰 별"
+                    />
+                  </div>
+                  <h6 class="text-left" style="padding-left: 20px">총 2개</h6>
+
                   <!--상품 후기-->
-                  <div class="css-169773r">
+                  <div
+                    class="css-169773r"
+                    style="border-top: 1px solid rgb(244, 244, 244)"
+                  >
                     <div class="css-107htc6">
                       <div class="css-1qo6qeh">
                         <span class="css-f3vz0n">강**</span>
@@ -843,7 +727,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           아주 맛있어요 믿고 사요!!
                           <br />
                           <img
-                            style="padding-top: 8px"
+                            style="padding-top: 8px; width: 60px; height: 60px"
                             src="${contextPath}/img/product/review/carrot.jpg"
                             alt="리뷰 별"
                           />
@@ -903,7 +787,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <div class="row">
           <div class="col-lg-12">
             <div class="section-title related__product__title">
-              <h2>Related Product</h2>
+              <h2>관련 상품</h2>
             </div>
           </div>
         </div>
@@ -918,17 +802,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa fa-retweet"></i></a>
-                  </li>
+
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">Crab Pool Security</a></h6>
-                <h5>$30.00</h5>
+                <h6><a href="#">못난이 복숭아</a></h6>
+                <h5>￦3200</h5>
               </div>
             </div>
           </div>
@@ -942,17 +824,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa fa-retweet"></i></a>
-                  </li>
+
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">Crab Pool Security</a></h6>
-                <h5>$30.00</h5>
+                <h6><a href="#">못난이 감자</a></h6>
+                <h5>￦1300</h5>
               </div>
             </div>
           </div>
@@ -966,17 +846,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa fa-retweet"></i></a>
-                  </li>
+
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">Crab Pool Security</a></h6>
-                <h5>$30.00</h5>
+                <h6><a href="#">못난이 수박</a></h6>
+                <h5>￦5400</h5>
               </div>
             </div>
           </div>
@@ -990,17 +868,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-                  <li>
-                    <a href="#"><i class="fa fa-retweet"></i></a>
-                  </li>
+
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">Crab Pool Security</a></h6>
-                <h5>$30.00</h5>
+                <h6><a href="#">못난이 가지</a></h6>
+                <h5>￦1200</h5>
               </div>
             </div>
           </div>
