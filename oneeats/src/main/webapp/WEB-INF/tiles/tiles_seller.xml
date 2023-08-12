@@ -15,6 +15,10 @@
        <put-attribute name="title" value="사업자 주문/배송 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerOrderList.jsp" />
     </definition>
+       <definition name="/seller/goods/sellerGoodsForm" extends="mainLayout">
+       <put-attribute name="title" value="사업자 상품 등록 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsForm.jsp" />
+    </definition>
 </tiles-definitions>
 
 

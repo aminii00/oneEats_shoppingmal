@@ -84,7 +84,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex: 1 1 0%;
         flex-direction: row;
         align-items: flex-start;
-        overflow: hidden;
+        /*overflow: hidden;*/
         width: 100%;
         height: 40px;
         padding: 12px 0 12px;
@@ -109,7 +109,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
-        overflow: hidden;
+        /*  overflow: hidden;*/
       }
       .css-1bp09d0 {
         padding-bottom: 40px;
@@ -132,7 +132,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -webkit-box-align: flex-start;
         -ms-flex-align: flex-start;
         align-items: flex-start;
-        overflow: hidden;
+        /*   overflow: hidden;*/
         width: 100%;
         padding: 17px 0 18px;
         border-top: 1px solid #f4f4f4;
@@ -297,6 +297,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex: 1 1 0%;
         overflow: hidden;
       }
+
       .css-18pn4xv {
         display: flex;
         -webkit-box-align: center;
@@ -474,9 +475,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dl>
 
                     <!--수정-->
-                    <div class="css-1bp09d0" style="margin-bottom: -40px">
+                    <div class="css-1bp09d0">
                       <div class="css-2lvxh7">
-                        <dl class="css-e6zlnr" style="height: 170px">
+                        <dl
+                          class="css-e6zlnr"
+                          style="height: 50px; margin-bottom: 50px"
+                        >
                           <dt
                             class="css-lytdfk textbold"
                             style="margin-top: 16px"
@@ -573,7 +577,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <div class="css-lay2">
                         <button
                           class="cart-button css-cartbtn e4nu7ef3"
-                          type="button"
+                          type="submit"
                           radius="3"
                         >
                           <span class="css-nytqmg textbold">바로 구매</span>
