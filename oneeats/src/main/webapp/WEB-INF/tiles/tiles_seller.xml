@@ -3,6 +3,15 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+
+<definition name="nosidebarLayout"
+	template="/WEB-INF/views/common/layout_nosidebar.jsp">
+	<put-attribute name="title" value="사이드바 없는 레이아웃" />
+	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
     <definition name="/seller/coupon/sellerCouponList" extends="mainLayout">
        <put-attribute name="title" value="사업자 쿠폰목록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponList.jsp" />
@@ -22,6 +31,14 @@
        <put-attribute name="body" value="/WEB-INF/views/seller/main/sellerMain.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
     </definition>
+    <definition name="/seller/member/sellerRegisterForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterForm.jsp" />
+	</definition>
+	<definition name="/seller/member/sellerRegisterAgreeForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterAgreeForm.jsp" />
+	</definition>
 </tiles-definitions>
 
 
