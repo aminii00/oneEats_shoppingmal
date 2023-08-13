@@ -275,7 +275,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="css-1k8t52o">
                       <div style="align-content: center; margin-top: 4px">
                         <select name="select" class="opt">
-                          <option value="카테고리를 선택해주세요">
+                          <option value="category">
                             카테고리를 선택해주세요
                           </option>
                           <option value="vegetable">채소</option>
@@ -297,10 +297,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <div class="css-2lvxh7">
                   <dl class="css-e6zlnr" style="height: 66px">
                     <dt class="css-lytdfk textbold" style="margin-top: 16px">
-                      상품선택
+                      상품명
                     </dt>
                     <dd class="css-1k8t52o">
                       <input
+                        name="name"
                         class="css-c02hqi nice-select"
                         style="width: 176px"
                       />
@@ -314,6 +315,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dt>
                   <dd class="css-1k8t52o">
                     <input
+                      name="price"
                       class="css-c02hqi nice-select"
                       style="width: 176px"
                     />
@@ -338,6 +340,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dt>
                   <dd class="css-1k8t52o">
                     <input
+                      name="rapping"
                       class="css-c02hqi nice-select"
                       style="width: 176px"
                     />
@@ -350,6 +353,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dt>
                   <dd class="css-1k8t52o">
                     <input
+                      name="manufacturer"
                       class="css-c02hqi nice-select"
                       style="width: 176px"
                     />
@@ -362,6 +366,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dt>
                   <dd class="css-1k8t52o">
                     <input
+                      name="weight"
                       class="css-c02hqi nice-select"
                       style="width: 176px"
                     />
@@ -374,6 +379,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dt>
                   <dd class="css-1k8t52o">
                     <input
+                      name="expDate"
                       type="date"
                       class="css-c02hqi nice-select"
                       style="width: 176px"
@@ -388,6 +394,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </div>
                 <p style="margin-top: 16px">
                   <textarea
+                    name="description"
                     class="goodsinfo"
                     cols="50"
                     rows="8"

@@ -11,7 +11,7 @@
 }
 #sidebar-left {
     width: 20%;
-    height: 700px;
+    height: 400px;
     padding: 5px;
     margin-right: 5px;
     margin-bottom: 5px;
@@ -19,6 +19,17 @@
     border: 0px solid #bcbcbc;
     font-size: 10px;
 }
+#sidebar-left1 {
+    width: 20%;
+    height: 400px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    border: 0px solid #bcbcbc;
+    font-size: 10px;
+}
+
 #content {
     width: 70%;
     padding: 5px;

@@ -728,6 +728,7 @@ ol {
 
 .hero__item {
 	height: 431px;
+	width:700px;
 	display: flex;
 	align-items: center;
 	padding-left: 75px;
@@ -809,7 +810,7 @@ ol {
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 160px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
@@ -907,6 +908,7 @@ ol {
 	font-weight: 700;
 	color: #1c1c1c;
 	margin-bottom: 45px;
+
 }
 
 .latest-product__slider.owl-carousel .owl-nav {
