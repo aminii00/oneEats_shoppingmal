@@ -728,6 +728,7 @@ ol {
 
 .hero__item {
 	height: 431px;
+	width:700px;
 	display: flex;
 	align-items: center;
 	padding-left: 75px;
@@ -756,58 +757,6 @@ ol {
 	margin-bottom: 35px;
 }
 
-/*---------------------
-  Categories
------------------------*/
-
-.categories__item {
-	height: 260px;
-	position: relative;
-}
-
-.categories__item h5 {
-	position: absolute;
-	left: 0;
-	width: 100%;
-	padding: 0 20px;
-	bottom: 20px;
-	text-align: center;
-}
-
-.categories__item h5 a {
-	font-size: 16px;
-	color: #1c1c1c;
-	font-weight: 700;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	padding: 12px 0 10px;
-	background: #ffffff;
-	display: block;
-}
-
-.categories__slider .col-lg-3 {
-	max-width: 100%;
-}
-
-.categories__slider.owl-carousel .owl-nav button {
-	font-size: 16px;
-	color: #1c1c1c;
-	height: 70px;
-	width: 30px;
-	line-height: 70px;
-	text-align: center;
-	border: 1px solid #ebebeb;
-	position: absolute;
-	left: -35px;
-	top: 50%;
-	-webkit-transform: translateY(-35px);
-	background: #ffffff;
-}
-
-.categories__slider.owl-carousel .owl-nav button.owl-next {
-	left: auto;
-	right: -35px;
-}
 
 /*---------------------
   Featured
@@ -861,7 +810,7 @@ ol {
 }
 
 .featured__item__pic {
-	height: 270px;
+	height: 160px;
 	position: relative;
 	overflow: hidden;
 	background-position: center center;
@@ -959,6 +908,7 @@ ol {
 	font-weight: 700;
 	color: #1c1c1c;
 	margin-bottom: 45px;
+
 }
 
 .latest-product__slider.owl-carousel .owl-nav {
@@ -1614,11 +1564,11 @@ ol {
 }
 
 .product__item__text h6 a {
-	color: #252525;
+	color: #495057;
 }
 
 .product__item__text h5 {
-	color: #252525;
+	color:#495057;
 	font-weight: 700;
 }
 
@@ -1683,7 +1633,7 @@ ol {
 }
 
 .product__details__text h3 {
-	color: #252525;
+	color: #495057;
 	font-weight: 700;
 	margin-bottom: 16px;
 }
@@ -1699,13 +1649,13 @@ ol {
 }
 
 .product__details__text .product__details__rating span {
-	color: #dd2222;
+	
 	margin-left: 4px;
 }
 
 .product__details__text .product__details__price {
 	font-size: 30px;
-	color: #dd2222;
+	
 	font-weight: 600;
 	margin-bottom: 15px;
 }
@@ -1748,7 +1698,7 @@ ol {
 }
 
 .product__details__text ul li span samp {
-	color: #dd2222;
+
 }
 
 .product__details__text ul li .share {
@@ -2058,7 +2008,7 @@ ol {
 
 .shoping__checkout ul li span {
 	font-size: 18px;
-	color: #dd2222;
+	
 	float: right;
 }
 
