@@ -38,7 +38,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">공지사항</a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
@@ -51,7 +51,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">자주하는 질문</a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
@@ -63,7 +63,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="textbold" style="width: 100%">
                   <a href="">1:1문의 </a>
                   <img
-                    src="${contextPath}/img/icon/uparrow.png"
+                    src="${contextPath}/img/icon/next.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
@@ -74,22 +74,20 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 
           <div
             style="
-              width: 80%;
-              height: 80px;
-              display: flex;
-              align-items: center;
+              width: 90%;
+              height: auto;
               margin-left: auto;
               margin-right: auto;
               margin-top: 24px;
               margin-bottom: 16px;
-              padding: 2px;
+              padding: 12px;
             "
             class="bg-lightgray text-left textcolor-black"
             onclick="location.href='#';"
           >
-            <p class="textsize-2 textbold">빠른 답변을 원하신다면?</p>
+            <span class="textsize-1 textbold">빠른 답변을 원하신다면?</span>
             <br />
-            <p class="textsize-1">챗봇 상담하기→</p>
+            <span class="textsize-1">챗봇 상담하기 → </span>
           </div>
         </div>
       </div>

@@ -11,17 +11,20 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta charset="UTF-8" />
     <title>헤더</title>
 
-    <link rel="stylesheet" href="${contextPath}/css/header.css">
+    <link rel="stylesheet" href="${contextPath}/css/header.css" />
   </head>
   <body>
     <div class="container">
       <div class="row bg-gray">
         <div class="col-9"></div>
-        <div class="col-3 textsize-1 textcolor-black"><a href="#">회원가입</a> &nbsp;<a href="#">로그인</a> &nbsp;<a href="#">고객센터</a></div>
+        <div class="col-3 textsize-1 textcolor-black">
+          <a href="#">회원가입</a> &nbsp;<a href="#">로그인</a> &nbsp;<a
+            href="#"
+            >고객센터</a
+          >
+        </div>
       </div>
-      <div class="row">
-        &nbsp;
-      </div>
+      <div class="row">&nbsp;</div>
       <div class="row">
         <div class="col-3">
           <img
@@ -43,7 +46,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     class="form-control"
                   />
                   <div class="input-group-append">
-                    <button class="bg-lightgreen textcolor-white border-0" type="submit">Search</button>
+                    <button
+                      class="bg-lightgreen textcolor-white border-0"
+                      type="submit"
+                    >
+                      Search
+                    </button>
                   </div>
                 </div>
               </form>
