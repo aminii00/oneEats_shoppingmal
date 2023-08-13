@@ -12,64 +12,180 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-    form > table {
-        border-top: 2px solid #000; 
-        border-bottom: 2px solid #000;
-    }
-
-    form > table {
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-    }
-
-    form > table th { 
-        text-align: left;
-        padding: 12px 0;
-    }
-
-    form > table tr th td input {
-        padding: 6px 11px;
-        border-color: #B3B3B3;
-    }
-
-    form > table tr { 
-        border-bottom: 1px solid #B3B3B3;
-    }
-
-    form > table td { 
-        text-align: left;
-        padding: 12px 0;
-    }
-
-    form > table .empty { 
-        display: none ;
-    }
+        form {
+            padding-left: 40px;
+            padding-top: 10px;
+        }
+        .div-p {
+            padding: 0 12px;
+            display: flex;
+        }
+        p {
+            padding-top: 10px;
+            padding-right: 20px;
+        }
+        select {
+            height: 40px;
+            padding: 0px 11px 1px 15px;
+            border-radius: 4px;
+            border: 1px solid rgb(221, 221, 221);
+            line-height: 1.5;
+            color: rgb(51, 51, 51);
+            outline: none;
+            box-sizing: border-box;
+        }
+        input {
+            width: 60%;
+            height: 40px;
+            padding: 0px 11px 1px 15px;
+            border-radius: 4px;
+            border: 1px solid rgb(221, 221, 221);
+            line-height: 1.5;
+            color: rgb(51, 51, 51);
+            outline: none;
+            box-sizing: border-box;
+        }
+        input::placeholder {
+            font-size: 0.9em;
+        }
+        .btn-1 {
+            display: block;
+            height: 40px;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 3px;
+            margin-right: 30px;
+        }
+        table {
+            border-top: 2px solid #2C3333; 
+            border-bottom: 2px solid #2C3333;
+            padding-bottom: 10px;
+            line-height: 17px;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #B3B3B3;
+        }
+        td {
+            text-align: left;
+            padding: 12px;
+        }
+        a {
+            text-decoration: none;
+            color: #2C3333;
+        }
+        .ul-li {
+            margin-top: 60px;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+        }
+        .li-btn {
+            padding-left: 10px;
+        }
+        .btn-2 {
+            display: flex;
+            flex-direction: row;
+            -webkit-box-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            justify-content: center;
+            color: rgb(51, 51, 51);
+            line-height: 34px;
+        }
     </style>
 </head>
 <body>
-        <section class="cart">
-            <nav>
-                <p class="textsize-2 text-left textbold textcolor-black">쿠폰목록</p>
-            </nav>
-           <form method="post" action="${contextPath}/admin/coupon/adminCouponList.do">
-                <table border="0">
-                    <tr>
-                        <th>번호</th>
-                        <th>쿠폰등록일</th>
-                        <th>쿠폰명</th>
-                        <th>사용처</th>
-                        <th>삭제</th>
-                    </tr>
-                    <tr>
-                        <td>couponNo</td>
-                        <td>creDate</td>
-                        <td>namesize</td>
-                        <td>condition</td>
-                        <td><a href="#" >삭제</td>
-                    </tr>
-                </table>
+    <form method="post" action="#">
+        <div class="div-p">
+        <p class="textsize-2 text-left textcolor-black textbold">쿠폰목록</p>
+        <select name="search-1">
+            <option value="전체">전체</option>
+            <option value="주문번호">주문번호</option>
+            <option value="주문자명">주문자명</option>
+            <option value="아이디">아이디</option>
+        </select>
+        <input type="text name="search-2" placeholder="search.."">
+        <button class="btn-small bg-lightgreen textcolor-white border-0" type="submit">검색</button>
+        </div>
+        <table border="0" class="textcolor-black textsize-1">
+            <tr>
+                <th>번호</th>
+                <th>쿠폰등록일</th>
+                <th>쿠폰명</th>
+                <th>사용처</th>
+                <th>삭제</th>
+            </tr>
+            <tr>
+                <td>&nbsp 1</td>
+                <td>2023-08-11</td>
+                <td>최초 로그인시 1000원 할인 쿠폰</td>
+                <td>원이츠</td>
+                <td><a href="#" >삭제</td>
+            </tr>
+        </table>
+<%-- <!--    <div> 페이징처리
+        <c:if test="${totArticles != null}"
+            <c:choose>
+            <c:when test="${totArticles > 100}">
+                <c:foreach var="page" begin="1" end="10" step="1">
+                    <c:if test="${section > 1 && page == 1}">
+                    <a href="#">&nbsp:prev</a>
+                    </c:if>
+                    <a href="#"></a>
+                    <c:if test="${page == 10}">
+                    <a href="#">&nbsp:next</a>
+                    </c:if>
+                </c:foreach>
+            </c:when>
+            <c:when test="${totArticles == 100}">
+                <c:foreach var="page" begin="1" end="10" step="1">
+                    <a href="#">${page}</a>
+                </c:foreach>
+            </c:when>
+            <c:when test="${totArticles < 100}">
+                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
+                <c:choose>
+                    <c:when test="${page == pageNum}">
+                    <a href="#">${page}</a>
+                    </c:when>
+                    <c:otherwise>
+                    <a href="#">${page}</a>
+                    </c:otherwise>
+                </c:choose>
+                </c:foreach>
+            </c:when>
+            </c:choose>
+        </c:if>
+        </div> 
+--> --%>
+        <div>
+            <ul class="ul-li">
+                <li class="li-btn">
+                    <button class="btn-2 btn-square bg-white btn-border">
+                    <img width="20px" height="20px" src="${contextPath}/img/icon/prev.png" alt="prev">
+                    </button>
+                </li>
+                <li class="li-btn"> 
+                    <button class="btn-2 btn-square bg-white btn-border">1</button>
+                </li>
+                <li class="li-btn">
+                    <button class="btn-2 btn-square bg-white btn-border">
+                    <img width="20px" height="20px" src="${contextPath}/img/icon/next.png" alt="next">
+                    </button>
+                </li>
+            </ul>
+        </div>
     </form>
-    </section>
 </body>
 </html>
