@@ -5,7 +5,7 @@
        
 <tiles-definitions>
 	<definition name="adminsidebarLayout"
-	template="/WEB-INF/views/common/sidebar_admin.jsp">
+	template="/WEB-INF/views/common/layout_main.jsp">
 	<put-attribute name="title" value="관리자 사이드바 레이아웃" />
 	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
 		<put-attribute name="body" value="" />
@@ -13,6 +13,7 @@
 	</definition>
 <!-- 상품 -->
  <definition name="/admin/goods/adminGoodsModForm" extends="mainLayout">
+ 	   <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
        <put-attribute name="title" value="관리자 상품등록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/goods/adminGoodsModForm.jsp" />
     </definition>
@@ -36,6 +37,7 @@
 
 
     <definition name="/admin/coupon/adminCouponList" extends="mainLayout">
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
        <put-attribute name="title" value="관리자 쿠폰목록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponList.jsp" />
     </definition>
