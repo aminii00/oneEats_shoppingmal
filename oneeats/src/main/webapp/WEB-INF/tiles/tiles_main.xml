@@ -73,6 +73,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/newPwSearchForm.jsp" />
 	</definition>
 	
+		<definition name="/cart" extends="nosidebarLayout">
+		<put-attribute name="title" value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/cart.jsp" />
+	</definition>
 
 </tiles-definitions>
 

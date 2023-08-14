@@ -421,73 +421,87 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <h3>못난이 당근</h3>
               <div class="product__details__rating">
                 <img
-                  src="${contextPath}/img/product/review/star.jpg"
+                  src="${contextPath}/img/product/review/star.png"
+                  alt="리뷰 별"
+                />
+                <img
+                  src="${contextPath}/img/product/review/star.png"
+                  alt="리뷰 별"
+                />
+                <img
+                  src="${contextPath}/img/product/review/star.png"
+                  alt="리뷰 별"
+                />
+                <img
+                  src="${contextPath}/img/product/review/star.png"
+                  alt="리뷰 별"
+                />
+                <img
+                  src="${contextPath}/img/product/review/half-star.png"
                   alt="리뷰 별"
                 />
 
-                <span style="color: #dd2222">(3 reviews)</span>
-                <div class="product__details__price" style="color: #dd2222">
-                  ￦900
-                </div>
-                <section>
-                  <div>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                <span>(3 reviews)</span>
+                <div class="product__details__price">￦900</div>
+                <section class="css-1ua1wyk e17iylht2">
+                  <div class="css-iqoq9n e6qx2kx2">
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">배송</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">판매자</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">김씨</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">판매자</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">김씨</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">포장타입</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">상온(종이 포장)</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">포장타입</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">상온(종이 포장)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">원산지</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">논산</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">원산지</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">논산</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">무게 / 용량</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">300g</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">무게 / 용량</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">300g</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">수확시기</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">8월</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">수확시기</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">8월</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
-                      <dt class="css-lytdfk textbold">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                    <dl class="css-e6zlnr epzddad2">
+                      <dt class="css-lytdfk epzddad1 textbold">배송</dt>
+                      <dd class="css-1k8t52o epzddad0">
+                        <p class="css-c02hqi e6qx2kx1">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
                     <!--수정-->
-                    <div class="css-1bp09d0">
-                      <div class="css-2lvxh7">
-                        <dl
-                          class="css-e6zlnr"
-                          style="height: 50px; margin-bottom: 50px"
-                        >
+                    <div
+                      class="css-1bp09d0 e17iylht1"
+                      style="margin-bottom: -40px"
+                    >
+                      <div class="css-2lvxh7 e1qy0s5w0">
+                        <dl class="css-e6zlnr epzddad2" style="height: 170px">
                           <dt
-                            class="css-lytdfk textbold"
+                            class="css-lytdfk epzddad1 textbold"
                             style="margin-top: 16px"
                           >
                             상품선택
                           </dt>
-                          <dd class="css-1k8t52o">
+                          <dd class="css-1k8t52o epzddad0">
                             <div
                               style="align-content: center"
                               style="overflow-y: scrol"
@@ -510,16 +524,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </dd>
                         </dl>
                         <div
-                          class="cart-option-item css-1cb5lnc"
+                          class="cart-option-item css-1cb5lnc e1bjklo17"
                           style="width: 525px"
                         >
                           <dl
-                            class="css-e6zlnr"
+                            class="css-e6zlnr epzddad2"
                             style="height: 150px; border-top: none; margin: 0"
                           >
-                            <dt class="css-lytdfk">
+                            <dt class="css-lytdfk epzddad1">
                               <div
-                                class="css-1foiu5e font-bold"
+                                class="css-1foiu5e e1bjklo10 font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
                               >
                                 못난이 당근 단품
@@ -534,7 +548,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="css-1foiu5e e1bjklo10 text-right"
                             style="
                               font-size: 16px;
                               border-top: 1px solid rgb(244, 244, 244);
@@ -545,53 +559,61 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             총 상품금액
                           </span>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="css-1foiu5e e1bjklo10 text-right"
                             style="font-size: 22px; margin-bottom: -10px"
                             >900원</span
                           >
                         </div>
                       </div>
-                      <div class="css-9y0nwt">
-                        <div class="css-ixlb9s">
-                          <div class="css-yhijln">
-                            <span class="css-x4cdgl" id="sum" value="0"></span>
+                      <div class="css-9y0nwt e17iylht0">
+                        <div class="css-ixlb9s eebc7rx8">
+                          <div class="css-yhijln eebc7rx7">
+                            <span
+                              class="css-x4cdgl eebc7rx5"
+                              id="sum"
+                              value="0"
+                            ></span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="css-lay">
+                    <div class="css-lay e10vtr1i2">
                       <button
-                        class="css-heartbtn btn-regular"
+                        class="css-heartbtn e4nu7ef3 btn-regular"
                         type="button"
                         width="56"
                         height="56"
                         radius="3"
                       >
-                        <span class="css-let1"
+                        <span class="css-let1 e4nu7ef1"
                           ><img
                             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yNS44MDcgNy44NjNhNS43NzcgNS43NzcgMCAwIDAtOC4xNzIgMEwxNiA5LjQ5N2wtMS42MzUtMS42MzRhNS43NzkgNS43NzkgMCAxIDAtOC4xNzMgOC4xNzJsMS42MzQgMS42MzQgNy40NjYgNy40NjdhMSAxIDAgMCAwIDEuNDE1IDBzMCAwIDAgMGw3LjQ2Ni03LjQ2N2gwbDEuNjM0LTEuNjM0YTUuNzc3IDUuNzc3IDAgMCAwIDAtOC4xNzJ6IiBzdHJva2U9IiM1RjAwODAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
                             alt=""
                             class="css-0"
                         /></span>
                       </button>
-                      <div class="css-lay2">
+                      <div class="css-lay2 e10vtr1i0">
                         <button
                           class="cart-button css-cartbtn e4nu7ef3"
-                          type="submit"
+                          type="button"
                           radius="3"
                         >
-                          <span class="css-nytqmg textbold">바로 구매</span>
+                          <span class="css-nytqmg e4nu7ef1 textbold"
+                            >바로 구매</span
+                          >
                         </button>
                       </div>
 
                       <!--중간부분-->
-                      <div class="css-lay2">
+                      <div class="css-lay2 e10vtr1i0">
                         <button
-                          class="cart-button css-cartbtn"
+                          class="cart-button css-cartbtn e4nu7ef3"
                           type="button"
                           radius="3"
                         >
-                          <span class="css-nytqmg textbold">장바구니 담기</span>
+                          <span class="css-nytqmg e4nu7ef1 textbold"
+                            >장바구니 담기</span
+                          >
                         </button>
                       </div>
                     </div>
