@@ -25,8 +25,6 @@ function fn_toggle(num){
 		}
 	}
 	
-	
-	
 }
 
 
@@ -43,3 +41,6 @@ function fn_slideToggle(num){
 			rotateArray[num]=0;
 		}
 }
+
+
+

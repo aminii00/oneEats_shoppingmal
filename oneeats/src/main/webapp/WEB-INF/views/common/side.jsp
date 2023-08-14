@@ -55,7 +55,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
                 <ul
                   id="category_motnan"
-                  class="toggle-content"
                   style="margin-left: 12px; margin-top: 12px"
                 >
                   <li>채소</li>
@@ -81,7 +80,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
                 <ul
                   id="category_meal"
-                  class="toggle-content"
                   style="margin-left: 12px; margin-top: 12px"
                 >
                   <li>찌개/탕/찜</li>

@@ -13,14 +13,14 @@
 	</definition>
 	
 
-		<definition name="mainLayoutformainPage"
+<definition name="mainLayoutformainPage"
 		template="/WEB-INF/views/common/layout_main.jsp">
 		<put-attribute name="title" value="레이아웃 페이지" />
 		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
 		<put-attribute name="side" value="/WEB-INF/views/common/layout_undersidebar.jsp" />
 		<put-attribute name="body" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-	</definition>
+</definition>
 	
 
 	<definition name="nosidebarLayout"
@@ -31,7 +31,7 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 
-	<definition name="/home" extends="mainLayoutformainPage">
+	<definition name="/home" extends="mainLayout">
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>

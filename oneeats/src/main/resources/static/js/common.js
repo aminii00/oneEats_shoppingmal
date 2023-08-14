@@ -35,5 +35,9 @@ function fn_openalert(msg,url,fun) {
          
 }
 
+function fn_show(num){
+	$(".hidden_content_"+num).slideToggle();
+}
+
 
       

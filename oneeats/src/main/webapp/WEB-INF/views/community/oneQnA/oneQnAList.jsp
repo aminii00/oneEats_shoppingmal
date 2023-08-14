@@ -9,6 +9,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>1:1문의 내역</title>
+    <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
   <body>
     <section>
@@ -92,6 +93,20 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </button>
           </li>
         </ul>
+      </div>
+
+      <br />
+      <div class="row">
+        <div class="col">
+          <div style="float: right">
+            <button
+              class="btn-toform"
+              onclick="location.href='${contextPath}/community/oneQnA/oneQnAForm.do'"
+            >
+              문의작성
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   </body>

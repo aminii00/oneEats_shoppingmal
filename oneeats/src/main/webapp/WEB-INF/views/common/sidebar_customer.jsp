@@ -13,10 +13,25 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 
     <script>
       var rotateArray = new Array(0, 0, 0, 0, 0);
+      $(document).ready(function () {
+        var currentPath = window.location.pathname;
+        var lastSlashIndex = currentPath.lastIndexOf("/");
+        var secondLastSlashIndex = currentPath.lastIndexOf(
+          "/",
+          lastSlashIndex - 1
+        );
+        var selectedSideMenu = currentPath.substring(
+          secondLastSlashIndex + 1,
+          lastSlashIndex
+        );
+        $("#menu_" + selectedSideMenu).addClass("selected_menu");
+        console.log(selectedSideMenu);
+      });
     </script>
     <script src="${contextPath}/js/side.js"></script>
   </head>
   <body>
+    <input id="h_selectedSideMenu" type="hidden" value="" />
     <div class="row">
       <div class="col-lg">
         <div style="text-align: left" class="textsize-2 textcolor-black border">
@@ -33,10 +48,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <span class="textsize-3 textbold">&nbsp;&nbsp;관리자 메뉴</span>
           </div>
           <ul class="ul_menus" style="margin-left: 16px">
-            <li>
+            <li id="menu_notice">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">공지사항</a>
+                  <a href="${contextPath}/community/notice/noticeList.do"
+                    >공지사항</a
+                  >
                   <img
                     src="${contextPath}/img/icon/next.png"
                     alt=""
@@ -46,10 +63,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </li>
 
-            <li>
+            <li id="menu_mostQnA">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">자주하는 질문</a>
+                  <a href="${contextPath}/community/mostQnA/mostQnAList.do"
+                    >자주하는 질문</a
+                  >
                   <img
                     src="${contextPath}/img/icon/next.png"
                     alt=""
@@ -58,10 +77,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
               </div>
             </li>
-            <li>
+            <li id="menu_oneQnA">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">1:1문의 </a>
+                  <a href="${contextPath}/community/oneQnA/oneQnAList.do"
+                    >1:1문의
+                  </a>
                   <img
                     src="${contextPath}/img/icon/next.png"
                     alt=""
