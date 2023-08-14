@@ -18,7 +18,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       type="text/javascript"
       src="${contextPath}/js/bootstrap.min.js"
     ></script>
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -66,14 +69,21 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           <div class="col-lg-9">
             <div
               class="hero__item set-bg"
-              style="width: 737px"
-              data-setbg="img/product/main/main1.JPG"
+              style="width: 812px; height: 431"
+              data-setbg="${contextPath}/img/product/main/mainPage.JPG"
             >
               <div class="hero__text">
-                <span>FRUIT FRESH</span>
-                <h2>Vegetable <br />100% Organic</h2>
-                <p>Free Pickup and Delivery Available</p>
-                <a href="#" class="primary-btn">SHOP NOW</a>
+                <span
+                  class="text-left;"
+                  style="text-align: left; margin-left: -68px"
+                  >신선한 제품 One.eats와 함께하세요</span
+                >
+                <h2 style="margin: 24px 0 12px -68px">못난이 <br />상품</h2>
+                <p class="text-left" style="color: #fff">
+                  도매시장을 거치지 않는 산지 직송 못난이 농산물로<br />
+                  시세 대비 20% 이상 저렴한 가격에 판매합니다.
+                </p>
+                <a href="#" class="primary-btn">상품 보기</a>
               </div>
             </div>
           </div>
