@@ -74,7 +74,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             width: 30%;
         }
         .list {
-            width: 30%;
+            width: 100%;
         }
         .div-btn {
             display: flex;
@@ -181,12 +181,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
             <td>결제방법</td>
-            <td><button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">신용카드</button>
-                <button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">계좌이체</button><br>
-                <button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">카카오페이</button>
-                <button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">네이버페이</button><br>
-                <button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">카드사 선택</button>
-                <button class="btn-round bg-white textcolor-black btn-border" type="submit" href="#">일시불</button>
+            <td><button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">신용카드</button>
+                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">계좌이체</button>
+                <button class = "btn-round btn-fat textbold border-0">
+                <img style="width: 30px; height: 30px;" src="${contextPath}/img/icon/kakaopay.png"/></button>
+            <button class = "btn-round btn-fat textbold border-0">
+                <img style="width: 30px; height: 30px;" src="${contextPath}/img/icon/naverpay.png"/>
+                Pay</button>
+                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">카드사 선택</button>
+                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">일시불</button>
             </td>
         </tr>
     </table>

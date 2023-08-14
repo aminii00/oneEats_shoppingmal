@@ -17,16 +17,19 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding-top: 10px;
         }
         .div-p {
-            padding: 0 12px;
             display: flex;
+            margin-bottom: 0;
         }
         p {
             padding-top: 10px;
             padding-right: 20px;
         }
+        .div-sib {
+            margin-left:100px;
+            margin-bottom: 10px;
+        }
         select {
-            height: 40px;
-            padding: 0px 11px 1px 15px;
+            height: 30px;
             border-radius: 4px;
             border: 1px solid rgb(221, 221, 221);
             line-height: 1.5;
@@ -34,10 +37,19 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             outline: none;
             box-sizing: border-box;
         }
+        div.nice-select{
+            height: 30px;
+            width: 70px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+        .list {
+            width: 100%;
+        }
         input {
-            width: 60%;
-            height: 40px;
-            padding: 0px 11px 1px 15px;
+            width: 250px;
+            height: 30px;
+            padding-left: 10;
             border-radius: 4px;
             border: 1px solid rgb(221, 221, 221);
             line-height: 1.5;
@@ -49,12 +61,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             font-size: 0.9em;
         }
         .btn-1 {
-            display: block;
-            height: 40px;
+            height: 30px;
+            width: 70px;
             text-align: center;
             overflow: hidden;
             border-radius: 3px;
-            margin-right: 30px;
         }
         table {
             border-top: 2px solid #2C3333; 
@@ -109,6 +120,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <form method="post" action="#">
         <div class="div-p">
         <p class="textsize-2 text-left textcolor-black textbold">쿠폰목록</p>
+        <div class="div-sib textsize-1">
         <select name="search-1">
             <option value="전체">전체</option>
             <option value="주문번호">주문번호</option>
@@ -116,8 +128,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <option value="아이디">아이디</option>
         </select>
         <input type="text name="search-2" placeholder="search.."">
-        <button class="btn-small bg-lightgreen textcolor-white border-0" type="submit">검색</button>
+        <button class="btn-1 bg-lightgreen textcolor-white border-0" type="submit">검색</button>
         </div>
+    </div>
         <table border="0" class="textcolor-black textsize-1">
             <tr>
                 <th>번호</th>
