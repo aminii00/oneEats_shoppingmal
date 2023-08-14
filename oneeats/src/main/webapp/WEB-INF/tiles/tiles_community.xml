@@ -27,9 +27,16 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
     </definition>
     
-       <definition name="/community/oneQnA/oneQnADetail" extends="mainLayout">
+    <definition name="/community/oneQnA/oneQnADetail" extends="mainLayout">
        <put-attribute name="title" value="1:1문의 상세" />
        <put-attribute name="body" value="/WEB-INF/views/community/oneQnA/oneQnADetail.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
     </definition>
+    
+    <definition name="/community/oneQnA/oneQnAForm" extends="mainLayout">
+       <put-attribute name="title" value="1:1문의 작성" />
+       <put-attribute name="body" value="/WEB-INF/views/community/oneQnA/oneQnAForm.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
+    </definition>
+    
 </tiles-definitions>

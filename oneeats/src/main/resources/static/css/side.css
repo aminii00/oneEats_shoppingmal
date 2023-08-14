@@ -31,3 +31,11 @@ ul.ul_menus{
     overflow: hidden;
     position: relative;
 }
+
+.selected_menu{
+	color:#a3d060;
+	
+}
+.selected_menu img{
+	filter: invert(73%) sepia(63%) saturate(335%) hue-rotate(39deg) brightness(94%) contrast(89%);
+}
