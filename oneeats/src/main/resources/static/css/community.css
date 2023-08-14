@@ -85,3 +85,83 @@ div.oneQnAForm_content{
 	color: white;
 }
 
+
+div.recipeList_grid .img_wrapper{
+	background-color: rgb(213, 213, 213);
+	height:300px;
+	aspect-ratio: 1/1;
+	overflow: hidden; 
+}
+
+div.recipeList_grid .img_wrapper img{
+	height:100%;
+	object-fit: cover;
+	border:1px solid black;
+	
+}
+
+.overlay_gray{
+	z-index: 9998;
+	 position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     display: none;
+     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.hovered{
+	z-index: 9999;
+	transform:scale(1.4);
+}
+
+div.recipeList_grid .recipe_row{
+	margin:8px;
+}
+
+div.recipeList_grid .recipe_col {
+	background-color: white;
+	margin:8px;	
+}
+
+.lightgreen_title {
+        color: #a3d060;
+        font-weight: 600;
+        font-size: 22px;
+      }
+.indegredient_row {
+        width: 600px;
+        border-bottom: 1px solid #b3b3b3;
+        text-align: left;
+      }
+      .recipeDetail_grid {
+        text-align: left;
+      }
+
+div.recipeDetail_grid>div.row {
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+
+div.recipe_recommand_grid{
+	margin-top: 12px;
+}
+
+div.recipe_recommand_grid .img_wrapper{
+	background-color: rgb(213, 213, 213);
+	height:300px;
+	aspect-ratio: 1/1;
+	overflow: hidden; 
+}
+
+
+div.recipe_recommand_grid .img_wrapper img{
+	height:300px;
+	object-fit: cover;
+	border:1px solid black;
+	
+}
+div.recipe_recommand_grid .recipe_recommand_col{
+	margin:12px;
+}

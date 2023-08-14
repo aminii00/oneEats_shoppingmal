@@ -61,7 +61,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <div style="float: right">
         <button
           class="btn-tolist"
-          href="${contextPath}/community/notice/noticeList.do"
+          onclick="location.href='${contextPath}/community/notice/noticeList.do'"
         >
           목록으로
         </button>
