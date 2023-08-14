@@ -14,11 +14,16 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
-      <div class="textsize-3 text-left textbold textcolor-black">레시피</div>
+      <div class="textsize-3 text-left textbold textcolor-black">
+        전체 레시피
+      </div>
       <div class="clear">&nbsp;</div>
       <div class="recipeList_grid">
         <div class="row recipe_row">
-          <div class="col-md recipe_col">
+          <div
+            class="col-md recipe_col hoverexpand"
+            onclick="location.href='${contextPath}/community/recipe/recipeDetail.do'"
+          >
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -50,7 +55,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
             </div>
           </div>
-          <div class="col-md recipe_col">
+          <div class="col-md recipe_col hoverexpand">
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -85,7 +90,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         </div>
         <!--레시피 한 줄 끝-->
         <div class="row recipe_row">
-          <div class="col-md recipe_col">
+          <div class="col-md recipe_col hoverexpand">
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -117,7 +122,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
             </div>
           </div>
-          <div class="col-md recipe_col">
+          <div class="col-md recipe_col hoverexpand">
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -152,7 +157,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         </div>
         <!--레시피 한 줄 끝-->
         <div class="row recipe_row">
-          <div class="col-md recipe_col">
+          <div class="col-md recipe_col hoverexpand">
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -184,7 +189,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
             </div>
           </div>
-          <div class="col-md recipe_col">
+          <div class="col-md recipe_col hoverexpand">
             <div class="row">
               <div class="col img_wrapper">
                 <img
@@ -245,6 +250,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </button>
           </li>
         </ul>
+        <div style="float: right">
+          <button
+            class="btn-write"
+            onclick="location.href='${contextPath}/community/recipe/recipeForm.do'"
+          >
+            레시피 작성
+          </button>
+        </div>
       </div>
     </section>
   </body>
