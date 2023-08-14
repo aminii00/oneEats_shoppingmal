@@ -39,4 +39,10 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_customer.jsp" />
     </definition>
     
+      
+    <definition name="/community/recipe/recipeList" extends="mainLayout">
+       <put-attribute name="title" value="레시피 목록" />
+       <put-attribute name="body" value="/WEB-INF/views/community/recipe/recipeList.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_recipe.jsp" />
+    </definition>
 </tiles-definitions>
