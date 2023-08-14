@@ -18,20 +18,22 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="row bg-gray">
         <div class="col-9"></div>
         <div class="col-3 textsize-1 textcolor-black">
-          <a href="#">회원가입</a> &nbsp;<a href="#">로그인</a> &nbsp;<a
-            href="#"
-            >고객센터</a
-          >
+          <a href="${contextPath}/member/registerTypeSelect.do">회원가입</a
+          >&nbsp; &nbsp;<a href="${contextPath}/member/loginForm.do">로그인</a>
+          &nbsp;&nbsp;
+          <a href="${contextPath}/community/notice/noticeList.do">고객센터</a>
         </div>
       </div>
       <div class="row">&nbsp;</div>
       <div class="row">
         <div class="col-3">
-          <img
-            src="${contextPath}/img/logo.png"
-            alt="Logo"
-            style="width: 100%; height: auto"
-          />
+          <a href="${contextPath}/mainPage.do">
+            <img
+              src="${contextPath}/img/logo.png"
+              alt="Logo"
+              style="width: 100%; height: auto"
+            />
+          </a>
         </div>
         <div class="col-1">&nbsp;</div>
         <div class="col-6">
@@ -60,23 +62,27 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="row">&nbsp;</div>
           <div class="row">
             <div class="col-md">
-              <a href="#">Home</a>
+              <a href="${contextPath}/mainPage.do">Home</a>
             </div>
             <div class="col-md">
-              <a href="#">베스트</a>
+              <a href="${contextPath}/goods/goodsList.do?category=best"
+                >베스트</a
+              >
             </div>
             <div class="col-md">
-              <a href="#">핫딜</a>
+              <a href="${contextPath}/goods/goodsList.do?category=hotdeal"
+                >핫딜</a
+              >
             </div>
             <div class="col-md">
-              <a href="#">레시피</a>
+              <a href="${contextPath}/community/recipe/recipeList.do">레시피</a>
             </div>
           </div>
         </div>
         <div class="col-2">
           <div class="row">
             <div class="col">
-              <a href="#">
+              <a href="${contextPath}/main/cart.do">
                 <img
                   style="width: auto; height: 100%"
                   src="${contextPath}/img/icon/cart.png"
@@ -85,7 +91,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               </a>
             </div>
             <div class="col">
-              <a>
+              <a href="${contextPath}/mypage/mypageBookmarkList.do">
                 <img
                   style="width: auto; height: 100%"
                   src="${contextPath}/img/icon/bookmark.png"

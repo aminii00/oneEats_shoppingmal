@@ -66,13 +66,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <!-- Js Plugins -->
     <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
-    <script src="${contextPath}/js/jquery-ui.min.js"></script>
-    <script src="${contextPath}/js/jquery.slicknav.js"></script>
-    <script src="${contextPath}/js/mixitup.min.js"></script>
-    <script src="${contextPath}/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/js/main.js"></script>
-    <script src="${contextPath}/js/jQueryRotate.js"></script>
 
     <!--추가한 js-->
     <script src="${contextPath}/js/common.js"></script>
@@ -127,4 +120,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </div>
   </body>
+  <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
+  <script src="${contextPath}/js/jquery-ui.min.js"></script>
+  <script src="${contextPath}/js/jquery.slicknav.js"></script>
+  <script src="${contextPath}/js/mixitup.min.js"></script>
+  <script src="${contextPath}/js/owl.carousel.min.js"></script>
+  <script src="${contextPath}/js/main.js"></script>
+  <script src="${contextPath}/js/jQueryRotate.js"></script>
 </html>

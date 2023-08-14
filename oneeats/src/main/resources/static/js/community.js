@@ -1,7 +1,7 @@
 $(document).ready(function () {
 		var overlayDiv = $('<div class="overlay_gray"></div>');
   		$('body').append(overlayDiv);
-        $(".recipe_col").hover(
+        $(".hoverexpand").hover(
           function () {
             $(this).addClass("hovered");
             $('.overlay_gray').show();
