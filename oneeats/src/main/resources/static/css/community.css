@@ -1,4 +1,4 @@
-div.noticeDetail_grid div.row {
+div.noticeDetail_grid>div.row {
         margin-left: 8px;
         margin-right: 8px;
       }
@@ -13,6 +13,43 @@ div.noticeDetail_grid div.row {
     width: 110px;
     height: 50px;
     color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  div.oneQnADetail_grid>div.row{
+	margin-left:8px;
+	margin-right: 8px;
+}
+
+div.oneQnADetail_content{
+	margin-top: 16px;
+	min-height: 400px;
+}
+
+.h_reply_form{
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.btn-write {
+	border:0px;
+    background-color: #a3d060;
+   	width: 100px;
+  	height: 40px;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    font-size: 16px;
+  }
+  
+.btn-cancel {
+	border:1px solid #2c3333;
+    background-color: white;
+   	width: 100px;
+  	height: 40px;
+    color: #2c3333;
     font-weight: 600;
     text-align: center;
     font-size: 16px;
