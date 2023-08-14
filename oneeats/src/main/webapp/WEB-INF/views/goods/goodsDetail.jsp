@@ -18,6 +18,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
       rel="stylesheet"
     />
+
+    <link href="${contextPath}/css/img_expand.css" rel="stylesheet" />
+
+    <script src="${contextPath}/js/img_expand.js"></script>
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
@@ -688,6 +693,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <div class="text-left" style="margin-bottom: 30px">
                     <img
                       style="padding-top: 8px"
+                      class="expand_img"
                       src="${contextPath}/img/product/review/carrot.jpg"
                       alt="리뷰 별"
                     />
@@ -755,6 +761,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <img
                             style="padding-top: 8px; width: 60px; height: 60px"
                             src="${contextPath}/img/product/review/carrot.jpg"
+                            class="expand_img"
                             alt="리뷰 별"
                           />
                         </p>

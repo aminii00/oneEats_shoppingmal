@@ -18,6 +18,15 @@
 	</definition>
 
 
+<definition name="/goods/goodsList" extends="nosidebarLayout">
+		<put-attribute name="title" value="llll" />
+		<put-attribute name="long_image"
+			value="" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/goods/goodsList.jsp" />
+	</definition>
+
+
 </tiles-definitions>
 
 

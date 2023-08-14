@@ -70,6 +70,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/font.css" />
     <link rel="stylesheet" href="${contetPath}/css/notice-window.css" />
 
+    <!-- Js Plugins -->
+    <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
+
+    <!--추가한 js-->
+    <script src="${contextPath}/js/common.js"></script>
     <title><tiles:insertAttribute name="title"/></title>
   </head>
   <body>
