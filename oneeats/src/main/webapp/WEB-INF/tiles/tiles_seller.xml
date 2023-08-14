@@ -75,6 +75,14 @@
 		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterAgreeForm.jsp" />
 	</definition>
+	<definition name="/seller/member/sellerRegisterInfoForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterInfoForm.jsp" />
+	</definition>
+	<definition name="/seller/member/sellerRegisterLastForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterLastForm.jsp" />
+	</definition>
 </tiles-definitions>
 
 

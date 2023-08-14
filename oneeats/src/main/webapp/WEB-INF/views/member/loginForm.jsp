@@ -21,7 +21,11 @@
 	--naver-green-color: #04c75a;
 	--naver-green-border-color: #06b350;
 }
-
+.login-main{
+    align-items: center;
+    width: 390px;
+    height:auto;
+}
 
 
 
@@ -37,7 +41,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/loginForm.do">
+<form method = "post" action = "${contextPath}mainPage.do">
 <br>
 <br>
 <br>
@@ -51,18 +55,20 @@
         <br>
     </header>
         <div>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" type="text"></input>
+             <input class =" brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" type="text" value="#" disabled></input>
         </div>
 
         <div>
             <input class ="brd-lightgray btn-round btn-midlong textsize-1" placeholder=" 비밀번호 입력(8-12자 대소문자+숫자+특수문자)" type="password"></input>
         </div>
         <div class = "textsize-1" align:right>
-            <img class ="imgsize-square1 margin" src="img/icon/btnOn.png"/>
-            아이디 저장&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <a href="">아이디찾기</a>/
-            <a href="">비밀번호 찾기</a>/
-            <a href="">회원가입</a>
+           
+           <input type ="checkbox" name="idcheck">
+            아이디 저장&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+            <a href="${contextPath}/idSearchForm.do">아이디찾기</a>/
+            <a href="${contextPath}/pwSearchForm.do">비밀번호 찾기</a>/
+            <a href="${contextPath}/registerTypeSelect.do">회원가입</a>
         </div> 
         <br>
         <button class = "btn-midlong bg-lightgreen margin textsize-2 textbold border-0 btn-round">로그인</button>
@@ -83,8 +89,8 @@
         <br>
         <p class = "textsize-1 margin1">법인 고객이신가요?</p>
         <p class =" textsize-1">사업자 회원으로 전용 특가 혜택을 누려보세요</p>
-        <a class = "textbold" href="">사업자 간편가입</a>
-    </div>
+        <a class = "textbold" href="${contextPath}/seller/member/sellerRegisterForm.do">사업자 간편가입</a>
+</div>
 </div>
 <br>
 <br>

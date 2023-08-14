@@ -56,8 +56,22 @@
 		<put-attribute name="title" value="쇼핑몰 회원가입" />
 		<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp" />
 	</definition>
-	
-
+	<definition name="/idSearchForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 아이디 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/idSearchForm.jsp" />
+	</definition>
+	<definition name="/idForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 아이디 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/idForm.jsp" />
+	</definition>
+	<definition name="/pwSearchForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/pwSearchForm.jsp" />
+	</definition>
+	<definition name="/newPwSearchForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 비밀번호 찾기" />
+		<put-attribute name="body" value="/WEB-INF/views/member/newPwSearchForm.jsp" />
+	</definition>
 	
 
 </tiles-definitions>

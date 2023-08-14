@@ -27,7 +27,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/loginForm.do">
+<form method = "post" action = "${contextPath}/seller/member/sellerRegisterInfoForm.do">
 <br>
 <br>
 <br>

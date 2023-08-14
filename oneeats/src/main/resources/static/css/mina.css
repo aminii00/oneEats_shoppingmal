@@ -14,6 +14,14 @@
     width: 25%;
     height: 50px;
 }
+.btn-memberInfo{
+	width: 200px;
+    height: 30px;
+}
+.btn-serveInfo{
+	width: 80px;
+    height: 30px;
+}
 
 .flt{
 	float: left;
@@ -49,18 +57,34 @@
 .margin{
     margin: 0 0 7px 0;
 }
+
+
 /*상우하좌*/
 .textpoint-left{
 text-align: left;	
 }
 
+.textpoint-right{
+text-align: right;	
+}
 
+.textpoint-center{
+	align-items:center;
+text-align: center;	
+}
+
+.margin_top{
+	margin-top: 0px;
+}
+.margin_bottom{
+	margin-bottom: 0px;
+}
 .margin1{
     margin: 0 0 3px 0;
     /*아이디 input*/
 }
 .margin-id{
-    margin: 0 0 0 0;
+    margin-right:1px;
 }
 
 .imgsize-square{
@@ -150,3 +174,102 @@ text-align: left;
 	align-items:center;
 	margin: 0;
 }
+
+
+.profile-edit-box{
+    background: white;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    max-width: 600px;
+    padding: 24px 1.5em;
+    display: flex;
+    flex-direction: column;
+    vertical-align: baseline;
+}
+
+.profile-edit-header{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.align-right-header-font{
+    margin: 0 0;
+    font-size: small;
+    color: #999999;
+    text-align: center;
+}
+.profile-edit-main{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+}
+.profile-edit-img-div{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    padding-top: 2em;
+}
+
+.profile-edit-img{
+    width: auto;
+    max-width: 150px;
+    border-radius: 25%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.profile-edit-content{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    
+    flex-grow: 2;
+    flex-shrink: 1;
+}
+.profileintroduce{
+    width:129px;
+    height:150px;
+}
+.profile-edit-box > div{
+    display: flex;
+}
+
+
+.profile-edit-img-div > a{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.profile-edit-form > p > label{
+    font-size: small;
+    margin-left: 1em;
+}
+
+.profile-edit-form > p > input{
+    margin-top: 0.5em;
+    font-size: small;
+    border-top: solid 1.5px #d3d3d3;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1.5px #d3d3d3;
+    width: 80%;
+    margin-left: 1em;
+}
+.profile-edit-form > p > textarea{
+    margin-top: 0.5em;
+    font-size: small;
+    border-top: solid 1.5px #d3d3d3;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1.5px #d3d3d3;
+    width: 80%;
+    margin-left: 1em;
+}
+
+
