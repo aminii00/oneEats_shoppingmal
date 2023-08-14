@@ -204,7 +204,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="div-tot">
         <div class="div-span textbold textcolor-black textsize-1">
             <span>2023.08.11</span>
-            <a style="float: right;" href="#">주문내역 상세보기</a>
+            <a style="float: right;" href="${contextPath}/mypage/orderDetail.do">주문내역 상세보기</a>
         </div>
         <div class="div-t2" style="border-Bottom: 1px solid #B3B3B3">
             <div class="div-left">
@@ -230,7 +230,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">취소완료</span>
-                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3">
+                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3"
+                onclick="location.href='${contextPath}/mypage/orderCancel.do'">
                 <span>취소하기</span>
                 </button>
             </div> 
@@ -260,7 +261,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">배송완료</span>
-                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3">
+                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3"
+                onclick="location.href='${contextPath}/mypage/orderCancel.do'">
                 <span>취소하기</span>
                 </button>
             </div> 
