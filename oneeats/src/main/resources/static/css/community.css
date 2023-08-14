@@ -165,3 +165,22 @@ div.recipe_recommand_grid .img_wrapper img{
 div.recipe_recommand_grid .recipe_recommand_col{
 	margin:12px;
 }
+
+
+.btn-smallsquare{
+	width:20px;
+	height: 20px;
+}
+
+
+
+.vertical-align{
+	display:flex;
+	align-items: center;
+}
+#recipeimg_preview{
+	border: 1px solid black;
+	width: 600px;
+	height: 600px;
+	
+}

@@ -11,26 +11,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <title>레시피 목록</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
-
-    <style>
-      .lightgreen_title {
-        color: #a3d060;
-        font-weight: 600;
-        font-size: 22px;
-      }
-      .indegredient_row {
-        margin-left: 12px;
-        margin-right: 12px;
-        width: 600px;
-        border-bottom: 1px solid #b3b3b3;
-        text-align: left;
-      }
-      .recipeDetail_grid {
-        margin-left: 12px;
-        margin-right: 12px;
-        text-align: left;
-      }
-    </style>
   </head>
   <body>
     <section>
