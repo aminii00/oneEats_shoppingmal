@@ -226,3 +226,28 @@ hr.line-gray {
   background-color: gray;
   margin: 4px;
 }
+
+
+
+/*이미지 클릭했을 때 확대 시키기 위한 클래스의 스타일*/
+.overlay_gray{
+	z-index: 9993;
+	 position: fixed;
+     top: 0;
+     left: 0;
+     width: 100vw;
+     height: 100vh;
+     display: none;
+     background-color: rgba(0, 0, 0, 0.4);
+}
+
+.clicked{
+	width: 80%;
+	height: auto;
+	position: absolute;
+	z-index: 9999;
+	left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+	
+}

@@ -9,19 +9,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>레시피 목록</title>
-    <!-- <link rel="stylesheet" href="${contextPath}/css/community.css" /> -->
-    <!-- <script src="${contextPath}/js/community.js"></script> -->
-
-    <link rel="stylesheet" href="${contextPath}/css/img_expand.css" />
-    <script src="${contextPath}/js/img_expand.js"></script>
+    <link rel="stylesheet" href="${contextPath}/css/community.css" />
+    <script src="${contextPath}/js/community.js"></script>
   </head>
   <body>
     <section>
       <div class="textsize-3 text-left textbold textcolor-black">레시피</div>
-      <div class="expand_img">
-        테스트용 이미지
-        <img src="${contextPath}/img/recipe/1.jpg" alt="" />
-      </div>
       <div class="clear">&nbsp;</div>
       <div class="recipeList_grid">
         <div class="row recipe_row">
