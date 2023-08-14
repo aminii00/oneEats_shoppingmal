@@ -9,6 +9,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>레시피 목록</title>
+
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
     <script type="text/javascript">
@@ -108,7 +109,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
               <div class="row">&nbsp;</div>
               <div class="row indegredient_rows">
-                <div class="col-md-11">
+                <div class="col-md-11 indegredient_col">
                   <div class="row indegredient_row head_row bg-lightgreen">
                     <div class="col-md">이름</div>
                     <div class="col-md">양</div>
@@ -116,28 +117,49 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                   </div>
                   <div class="row indegredient_row">
                     <div class="col-md">
-                      <input type="text" name="name" class="form-control" />
+                      <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="이름"
+                        required
+                      />
                     </div>
                     <div class="col-md">
-                      <input type="text" name="qty" class="form-control" />
+                      <input
+                        type="text"
+                        name="qty"
+                        class="form-control"
+                        placeholder="양"
+                        required
+                      />
                     </div>
                     <div class="col-md-1"></div>
                   </div>
                   <div class="row indegredient_row">
                     <div class="col-md">
-                      <input type="text" name="name" class="form-control" />
+                      <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="이름"
+                      />
                     </div>
                     <div class="col-md">
-                      <input type="text" name="qty" class="form-control" />
+                      <input
+                        type="text"
+                        name="qty"
+                        class="form-control"
+                        placeholder="양"
+                      />
                     </div>
                     <div class="col-md-1">
-                      <a href="" onclick="">
-                        <img
-                          class="btn-smallsquare border"
-                          src="${contextPath}/img/icon/minus.png"
-                          alt="빼기 버튼"
-                        />
-                      </a>
+                      <img
+                        id="minus_btn"
+                        class="btn-smallsquare border"
+                        src="${contextPath}/img/icon/minus.png"
+                        alt="빼기 버튼"
+                      />
                     </div>
                   </div>
                 </div>
@@ -145,14 +167,13 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </div>
           </div>
           <div class="row">
-            <div class="col" style="width: 100%; text-align: center">
-              <a href="" onclick="">
-                <img
-                  src="${contextPath}/img/icon/plus.png"
-                  alt="더하기 버튼"
-                  class="btn-smallsquare border"
-                />
-              </a>
+            <div class="col-md-11" style="width: 100%; text-align: center">
+              <img
+                id="plus_btn"
+                src="${contextPath}/img/icon/plus.png"
+                alt="더하기 버튼"
+                class="btn-smallsquare border"
+              />
             </div>
           </div>
           <div class="row">&nbsp;</div>

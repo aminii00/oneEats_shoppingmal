@@ -30,7 +30,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </div>
         </div>
 
-        <div class="row">&nbsp;</div>
+        <div class="row">
+          <div class="col">
+            <button class="btn-toform" style="float: right">수정</button>
+          </div>
+        </div>
         <div class="row">&nbsp;</div>
         <div class="row recipe_main_img_row">
           <div class="col">

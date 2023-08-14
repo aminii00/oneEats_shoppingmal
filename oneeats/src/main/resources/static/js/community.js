@@ -11,4 +11,37 @@ $(document).ready(function () {
             $('.overlay_gray').hide();
           }
         );
+        
+        
+        $('#plus_btn').on('click',function(){
+			var newRow= `
+			<div class="row indegredient_row">
+                    <div class="col-md">
+                      <input type="text" name="name" class="form-control" placeholder="이름" />
+                    </div>
+                    <div class="col-md">
+                      <input type="text" name="qty" class="form-control" placeholder="양" />
+                    </div>
+                    <div class="col-md-1">
+                      <img
+                        id="minus_btn"
+                        class="btn-smallsquare border"
+                        src="/img/icon/minus.png"
+                        alt="빼기 버튼"
+                      />
+                    </div>
+                  </div>
+			`;
+			$('.indegredient_col').append(newRow);
+			
+		});
+		
       });
+      
+      
+$(document).on('click','#minus_btn',function(){
+	console.log("마이너스 버튼 클릭");
+	$(this).parent().parent().remove();
+	
+});
+      
