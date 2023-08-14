@@ -46,7 +46,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             width: 50px;
         }
         input {
-            width: 30%;
+            width: 250px;
             height: 40px;
             padding: 0px 11px 1px 15px;
             border-radius: 4px;
@@ -71,7 +71,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             box-sizing: border-box;
         }
         div.nice-select{
-            width: 30%;
+            width: 250px;
         }
         .list {
             width: 100%;
@@ -88,6 +88,10 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             overflow: hidden;
             border-radius: 3px;
             margin-right: 30px;
+        }
+        .btn-fat1 {
+            width: 120px;
+            height: 45px;
         }
         </style>
 </head>
@@ -181,15 +185,24 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
             <td>결제방법</td>
-            <td><button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">신용카드</button>
-                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">계좌이체</button>
-                <button class = "btn-round btn-fat textbold border-0">
-                <img style="width: 30px; height: 30px;" src="${contextPath}/img/icon/kakaopay.png"/></button>
-            <button class = "btn-round btn-fat textbold border-0">
-                <img style="width: 30px; height: 30px;" src="${contextPath}/img/icon/naverpay.png"/>
-                Pay</button>
-                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">카드사 선택</button>
-                <button class="btn-round btn-fat bg-white textcolor-black btn-border textsize-1" type="submit" href="#">일시불</button>
+            <td><button class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1" type="submit" href="#">신용카드</button>
+                <button class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1" type="submit" href="#">계좌이체</button><br>
+                <button class = "btn-round btn-fat1 bg-white textbold btn-border">
+                    <img style="width: 40px; height: 25px;" src="${contextPath}/img/icon/kpay.png"/></button>
+                <button class = "btn-round btn-fat1 bg-white textbold btn-border">
+                    <img style="width: 40px; height: 25px;" src="${contextPath}/img/icon/npay.png"/></button><br>
+                <select>
+                    <option value="카드사 선택">카드사 선택</option>
+                    <option value="신한카드">신한카드</option>
+                    <option value="현대카드">현대카드</option>
+                    <option value="삼성카드">삼성카드</option>
+                </select>
+                <select>
+                    <option value="일시불">일시불</option>
+                    <option value="2개월 할부">2개월 할부</option>
+                    <option value="3개월 할부">3개월 할부</option>
+                    <option value="4개월 할부">4개월 할부</option>
+            </select>
             </td>
         </tr>
     </table>

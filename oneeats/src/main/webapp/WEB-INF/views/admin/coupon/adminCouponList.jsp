@@ -18,7 +18,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         }
         .div-p {
             display: flex;
-            margin-bottom: 0;
+            padding: 0 12px;
         }
         p {
             padding-top: 10px;
@@ -26,7 +26,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         }
         .div-sib {
             margin-left:100px;
-            margin-bottom: 10px;
+            margin-top: 10px;
         }
         select {
             height: 30px;
@@ -42,9 +42,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             width: 70px;
             font-size: 0.9em;
             text-align: center;
+            line-height: 30px;
         }
         .list {
             width: 100%;
+            text-align: center;
         }
         input {
             width: 250px;
@@ -127,7 +129,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <option value="주문자명">주문자명</option>
             <option value="아이디">아이디</option>
         </select>
-        <input type="text name="search-2" placeholder="search.."">
+        <input type="text" name="search-2" placeholder="search..">
         <button class="btn-1 bg-lightgreen textcolor-white border-0" type="submit">검색</button>
         </div>
     </div>
