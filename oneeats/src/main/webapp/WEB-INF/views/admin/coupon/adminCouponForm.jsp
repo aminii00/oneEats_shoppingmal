@@ -82,7 +82,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             display: block;
             text-align: center;
             overflow: hidden;
-            border-radius: 3px;
+            border-radius: 5px;
             margin-right: 30px;
         }
         </style>
@@ -123,7 +123,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <br>
         <div class="div-btn">
             <button class="btn-1 btn-regular bg-white textcolor-black btn-border" type="reset">다시쓰기</button>
-            <button class="btn-1 btn-regular bg-lightgreen textcolor-white border-0" type="submit" href="#">쿠폰등록</button>
+            <button class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0" type="button"
+            onclick='fn_openalert("쿠폰을 등록하시겠습니까?","${contextPath}/admin/coupon/adminCouponList.do")'>쿠폰등록</button>
         </div>
     </form>
 </body>

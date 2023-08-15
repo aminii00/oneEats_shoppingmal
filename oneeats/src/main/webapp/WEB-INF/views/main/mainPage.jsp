@@ -83,7 +83,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   도매시장을 거치지 않는 산지 직송 못난이 농산물로<br />
                   시세 대비 20% 이상 저렴한 가격에 판매합니다.
                 </p>
-                <a href="#" class="primary-btn">상품 보기</a>
+                <a href="#" style="background-color:  #A6CD48;" class="primary-btn">상품 보기</a>
               </div>
             </div>
           </div>

@@ -22,12 +22,13 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       <div class="col-lg">
         <div style="text-align: left" class="textsize-2 border">
           <div
-            class="bg-lightgreen textcolor-white"
+            class="textcolor-white"
             style="
               width: 100%;
               height: 50px;
               display: flex;
               align-items: center;
+              background-color: #568203;
             "
           >
             <img
