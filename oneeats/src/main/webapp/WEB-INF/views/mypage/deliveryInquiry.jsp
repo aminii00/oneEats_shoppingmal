@@ -1,0 +1,1 @@
+<img src="${contextPath}/img/deliveryInquiry.png">

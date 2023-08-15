@@ -86,7 +86,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             display: block;
             text-align: center;
             overflow: hidden;
-            border-radius: 3px;
+            border-radius: 5px;
             margin-right: 30px;
         }
         .btn-fat1 {
@@ -206,11 +206,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </td>
         </tr>
     </table>
-    <hr class="linebold">
+    <hr class="linebold" style="margin: 0;">
     <br>
     <div class="div-btn">
         <button class="btn-1 btn-regular bg-white textcolor-black btn-border" type="reset">취소</button>
-        <button class="btn-1 btn-regular bg-lightgreen textcolor-white border-0" type="submit" href="#">결제하기</button>
+        <button class="btn-1 btn-regular textcolor-white textbold border-0" style="background-color:#A6CD48" type="submit" href="#">결제하기</button>
     </div>
     </form>
 </body>

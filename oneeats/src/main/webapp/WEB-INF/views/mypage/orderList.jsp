@@ -25,7 +25,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding-right: 20px;
         }
         .div-sib {
-            margin-left:100px;
+            margin-left:auto;
             margin-top: 10px;
         }
         select {
@@ -182,6 +182,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             text-align: center;
             overflow: hidden;
             border-radius: 3px;
+            width: 80px;
+            height: 30px;
         }
     </style>
 </head>
@@ -197,7 +199,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <option value="1년">1년</option>
         </select>
         <input type="text" name="search-2" placeholder="search..">
-        <button class="btn-1 bg-lightgreen textcolor-white border-0" type="submit">검색</button>
+        <button class="btn-1 textcolor-white border-0 bg-lightgreen" type="submit" >검색</button>
         </div>
     </div>
     <hr class="linebold" style="margin: 0;">
@@ -230,7 +232,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">취소완료</span>
-                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3"
+                <button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff" type="button" radius="3"
                 onclick="location.href='${contextPath}/mypage/orderCancel.do'">
                 <span>취소하기</span>
                 </button>
@@ -261,7 +263,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">배송완료</span>
-                <button class="btn-3 btn-small bg-lightgreen border-0 textsize-1 textcolor-white" type="button" height="36" radius="3"
+                <button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff" type="button" radius="3"
                 onclick="location.href='${contextPath}/mypage/orderCancel.do'">
                 <span>취소하기</span>
                 </button>

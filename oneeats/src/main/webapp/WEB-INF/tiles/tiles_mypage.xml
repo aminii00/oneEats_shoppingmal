@@ -3,10 +3,6 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-     <definition name="/mypage/deliveryInquiry" extends="mainLayout">
-       <put-attribute name="title" value="배송조회 페이지" />
-       <put-attribute name="body" value="/WEB-INF/views/mypage/deliveryInquiry.jsp" />
-    </definition>
    <definition name="/mypage/orderCancel" extends="mainLayout">
        <put-attribute name="title" value="주문취소 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/orderCancel.jsp" />

@@ -192,7 +192,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding: 0px 10px;
             text-align: center;
             overflow: hidden;
-            border-radius: 3px;
+            border-radius: 5px;
         }
         .div-btn2 {
             display: flex;
@@ -258,7 +258,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </div>
         <div class="div-t2">
             <div class="div-left2" style="margin: 5px 0px;">
-                <img class="img-1" src="${contextPath}/img/product/details/product-details-2.jpg" alt="상품 이미지">
+                <img class="img-1" src="${contextPath}/img/product/main/carrot.jpg" alt="상품 이미지">
                 <div class="div-dl">
                 <dl class="dl-dt">
                     <dt class="dt-2 textsize-1 textcolor-black">못난이 당근</dt>
@@ -272,10 +272,10 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 
         <div class="div-t2" style="margin: 5px 0px;">
             <div class="div-left2">
-                <img class="img-1" src="${contextPath}/img/product/details/product-details-2.jpg" alt="상품 이미지">
+                <img class="img-1" src="${contextPath}/img/product/main/apple.jpg" alt="상품 이미지">
                 <div class="div-dl">
                 <dl class="dl-dt">
-                    <dt class="dt-2 textsize-1 textcolor-black">못난이 토마토</dt>
+                    <dt class="dt-2 textsize-1 textcolor-black">못난이 사과</dt>
                 </dl>
                 <dl class="dl-dt">
                     <dt class="dt-2 textsize-1 textcolor-black">￦1000 | 150g 2개</dt>
@@ -287,7 +287,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <hr class="linebold" style="margin: 0;">
 
     <div class="div-btn2">
-        <button class="btn-3 btn-regular bg-lightgreen textcolor-white border-0" type="submit" href="#">취소하기</button>
+        <button class="btn-3 btn-regular textcolor-white border-0 bg-lightgreen" 
+        onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderList.do")' type=button>취소하기</button>
     </div>
 </form>
 </body>

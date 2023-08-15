@@ -25,7 +25,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             padding-right: 20px;
         }
         .div-sib {
-            margin-left:90px;
+            margin-left:auto;
             margin-top: 10px;
         }
         select {
@@ -116,6 +116,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             color: rgb(51, 51, 51);
             line-height: 34px;
         }
+        .btn-3 {
+            display: block;
+            padding: 0px 10px;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 3px;
+            width: 50px;
+            height: 30px;
+        }
     </style>
     </head>
     <body>
@@ -141,7 +150,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <th>아이디</th>
                 <th>주문내역</th>
                 <th>주문상태</th>
-                <th>취소</th>
+                <th style="text-align: right; padding-right: 30px;">취소</th>
             </tr>
             <tr>
                 <td>20230811001</td>
@@ -150,7 +159,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <td>minzy03</td>
                 <td>케일주스 외 6건</td>
                 <td>주문완료</td>
-                <td><a href="#" >취소</td>
+                <td><button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff; margin-left: auto;"
+                    type="button" onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/admin/order/adminOrderList.do")' >취소</button></td>
             </tr>
         </table>
 <%-- <!--    <div> 페이징처리
