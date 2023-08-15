@@ -28,6 +28,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <img src="${contextPath}/img/recipe/1.jpg" alt="레시피 이미지" />
             </div>
           </div>
+          <div class="row">&nbsp;</div>
           <div class="row">
             <div class="text-left textsize-1">2023년 8월 2일</div>
           </div>
@@ -48,6 +49,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <img src="${contextPath}/img/recipe/2.jpg" alt="레시피 이미지" />
             </div>
           </div>
+          <div class="row">&nbsp;</div>
           <div class="row">
             <div class="text-left textsize-1">2023년 8월 2일</div>
           </div>
@@ -68,7 +70,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <img src="${contextPath}/img/recipe/3.jpg" alt="레시피 이미지" />
             </div>
           </div>
-          <div class="row"></div>
+          <div class="row">&nbsp;</div>
           <div class="row">
             <div class="text-left textsize-1">2023년 8월 2일</div>
           </div>

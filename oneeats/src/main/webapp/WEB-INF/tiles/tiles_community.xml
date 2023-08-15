@@ -52,4 +52,17 @@
        <put-attribute name="body2" value="/WEB-INF/views/community/recipe/recipeDetail2.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_recipe.jsp" />
     </definition>
+    
+    
+    <definition name="/community/recipe/recipeForm" extends="mainLayout">
+       <put-attribute name="title" value="레시피 작성" />
+       <put-attribute name="body" value="/WEB-INF/views/community/recipe/recipeForm.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_recipe.jsp" />
+    </definition>
+    
+     <definition name="/community/recipe/recipeModForm" extends="mainLayout">
+       <put-attribute name="title" value="레시피 작성" />
+       <put-attribute name="body" value="/WEB-INF/views/community/recipe/recipeModForm.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_recipe.jsp" />
+    </definition>
 </tiles-definitions>

@@ -32,6 +32,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
@@ -64,6 +65,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
@@ -99,6 +102,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
@@ -131,6 +135,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
@@ -166,6 +171,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
@@ -198,6 +204,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 />
               </div>
             </div>
+            <div class="row">&nbsp;</div>
             <div class="row">
               <div
                 class="col text-left textcolor-black textsize-1 recipe_creDate"
