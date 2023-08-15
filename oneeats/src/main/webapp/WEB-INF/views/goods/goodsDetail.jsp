@@ -426,87 +426,68 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <h3>못난이 당근</h3>
               <div class="product__details__rating">
                 <img
-                  src="${contextPath}/img/product/review/star.png"
-                  alt="리뷰 별"
-                />
-                <img
-                  src="${contextPath}/img/product/review/star.png"
-                  alt="리뷰 별"
-                />
-                <img
-                  src="${contextPath}/img/product/review/star.png"
-                  alt="리뷰 별"
-                />
-                <img
-                  src="${contextPath}/img/product/review/star.png"
-                  alt="리뷰 별"
-                />
-                <img
-                  src="${contextPath}/img/product/review/half-star.png"
+                  src="${contextPath}/img/product/review/star.jpg"
                   alt="리뷰 별"
                 />
 
                 <span>(3 reviews)</span>
                 <div class="product__details__price">￦900</div>
-                <section class="css-1ua1wyk e17iylht2">
-                  <div class="css-iqoq9n e6qx2kx2">
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">배송</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">택배 배송(기본 3일)</p>
+                <section class="css-1ua1wyk">
+                  <div class="css-iqoq9n">
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">배송</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">판매자</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">김씨</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">판매자</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">김씨</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">포장타입</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">상온(종이 포장)</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">포장타입</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">상온(종이 포장)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">원산지</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">논산</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">원산지</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">논산</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">무게 / 용량</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">300g</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">무게 / 용량</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">300g</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">수확시기</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">8월</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">수확시기</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">8월</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr epzddad2">
-                      <dt class="css-lytdfk epzddad1 textbold">배송</dt>
-                      <dd class="css-1k8t52o epzddad0">
-                        <p class="css-c02hqi e6qx2kx1">택배 배송(기본 3일)</p>
+                    <dl class="css-e6zlnr">
+                      <dt style="width: 200px; color: #333333">배송</dt>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
                     <!--수정-->
-                    <div
-                      class="css-1bp09d0 e17iylht1"
-                      style="margin-bottom: -40px"
-                    >
-                      <div class="css-2lvxh7 e1qy0s5w0">
-                        <dl class="css-e6zlnr epzddad2" style="height: 170px">
+                    <div class="css-1bp09d0" style="margin-bottom: -40px">
+                      <div class="css-2lvxh7">
+                        <dl class="css-e6zlnr" style="height: 170px">
                           <dt
-                            class="css-lytdfk epzddad1 textbold"
+                            style="width: 200px; color: #333333"
                             style="margin-top: 16px"
                           >
                             상품선택
                           </dt>
-                          <dd class="css-1k8t52o epzddad0">
+                          <dd class="css-1k8t52o">
                             <div
                               style="align-content: center"
                               style="overflow-y: scrol"
@@ -529,16 +510,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </dd>
                         </dl>
                         <div
-                          class="cart-option-item css-1cb5lnc e1bjklo17"
+                          class="cart-option-item css-1cb5lnc"
                           style="width: 525px"
                         >
                           <dl
-                            class="css-e6zlnr epzddad2"
+                            class="css-e6zlnr"
                             style="height: 150px; border-top: none; margin: 0"
                           >
                             <dt class="css-lytdfk epzddad1">
                               <div
-                                class="css-1foiu5e e1bjklo10 font-bold"
+                                class="css-1foiu5e font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
                               >
                                 못난이 당근 단품
@@ -553,7 +534,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="css-1foiu5e e1bjklo10 text-right"
+                            class="css-1foiu5e text-right"
                             style="
                               font-size: 16px;
                               border-top: 1px solid rgb(244, 244, 244);
@@ -564,61 +545,53 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             총 상품금액
                           </span>
                           <span
-                            class="css-1foiu5e e1bjklo10 text-right"
+                            class="css-1foiu5e text-right"
                             style="font-size: 22px; margin-bottom: -10px"
                             >900원</span
                           >
                         </div>
                       </div>
-                      <div class="css-9y0nwt e17iylht0">
-                        <div class="css-ixlb9s eebc7rx8">
-                          <div class="css-yhijln eebc7rx7">
-                            <span
-                              class="css-x4cdgl eebc7rx5"
-                              id="sum"
-                              value="0"
-                            ></span>
+                      <div class="css-9y0nwt">
+                        <div class="css-ixlb9s">
+                          <div class="css-yhijln">
+                            <span class="css-x4cdgl" id="sum" value="0"></span>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="css-lay e10vtr1i2">
+                    <div class="css-lay">
                       <button
-                        class="css-heartbtn e4nu7ef3 btn-regular"
+                        class="css-heartbtn btn-regular"
                         type="button"
                         width="56"
                         height="56"
                         radius="3"
                       >
-                        <span class="css-let1 e4nu7ef1"
+                        <span class="css-let1"
                           ><img
                             src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yNS44MDcgNy44NjNhNS43NzcgNS43NzcgMCAwIDAtOC4xNzIgMEwxNiA5LjQ5N2wtMS42MzUtMS42MzRhNS43NzkgNS43NzkgMCAxIDAtOC4xNzMgOC4xNzJsMS42MzQgMS42MzQgNy40NjYgNy40NjdhMSAxIDAgMCAwIDEuNDE1IDBzMCAwIDAgMGw3LjQ2Ni03LjQ2N2gwbDEuNjM0LTEuNjM0YTUuNzc3IDUuNzc3IDAgMCAwIDAtOC4xNzJ6IiBzdHJva2U9IiM1RjAwODAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
                             alt=""
                             class="css-0"
                         /></span>
                       </button>
-                      <div class="css-lay2 e10vtr1i0">
+                      <div class="css-lay2">
                         <button
-                          class="cart-button css-cartbtn e4nu7ef3"
+                          class="cart-button css-cartbtn"
                           type="button"
                           radius="3"
                         >
-                          <span class="css-nytqmg e4nu7ef1 textbold"
-                            >바로 구매</span
-                          >
+                          <span class="css-nytqmg textbold">바로 구매</span>
                         </button>
                       </div>
 
                       <!--중간부분-->
-                      <div class="css-lay2 e10vtr1i0">
+                      <div class="css-lay2">
                         <button
-                          class="cart-button css-cartbtn e4nu7ef3"
+                          class="cart-button css-cartbtn"
                           type="button"
                           radius="3"
                         >
-                          <span class="css-nytqmg e4nu7ef1 textbold"
-                            >장바구니 담기</span
-                          >
+                          <span class="css-nytqmg textbold">장바구니 담기</span>
                         </button>
                       </div>
                     </div>
@@ -651,7 +624,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   href="#tabs-3"
                   role="tab"
                   aria-selected="false"
-                  >Reviews <span>(3)</span></a
+                  >Reviews <span>(2)</span></a
                 >
               </li>
             </ul>
@@ -819,8 +792,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <div class="row">
           <div class="col-lg-12">
-            <div class="section-title related__product__title">
-              <h2>관련 상품</h2>
+            <div class="section-title product__discount__title">
+              <h2 style="text-align: center">관련 상품</h2>
             </div>
           </div>
         </div>
@@ -829,7 +802,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__item">
               <div
                 class="product__item__pic set-bg"
-                data-setbg="${contextPath}/img/product/product-1.jpg"
+                data-setbg="${contextPath}/img/product/main/peach.jpg"
               >
                 <ul class="product__item__pic__hover">
                   <li>
@@ -842,8 +815,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">못난이 복숭아</a></h6>
-                <h5>￦3200</h5>
+                <h6><a href="#">못난이 복숭아 1개입</a></h6>
+                <h5>￦2000</h5>
               </div>
             </div>
           </div>
@@ -851,7 +824,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__item">
               <div
                 class="product__item__pic set-bg"
-                data-setbg="${contextPath}/img/product/product-2.jpg"
+                data-setbg="${contextPath}/img/product/main/watermelon.jpg"
               >
                 <ul class="product__item__pic__hover">
                   <li>
@@ -864,16 +837,39 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">못난이 감자</a></h6>
+                <h6><a href="#">못난이 수박 1kg</a></h6>
+                <h5>￦27900</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="product__item">
+              <div
+                class="product__item__pic set-bg"
+                data-setbg="${contextPath}/img/product/main/potato.jpg"
+              >
+                <ul class="product__item__pic__hover">
+                  <li>
+                    <a href="#"><i class="fa fa-heart"></i></a>
+                  </li>
+
+                  <li>
+                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                  </li>
+                </ul>
+              </div>
+              <div class="product__item__text">
+                <h6><a href="#">못난이 감자 1개입</a></h6>
                 <h5>￦1300</h5>
               </div>
             </div>
           </div>
+
           <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="product__item">
               <div
                 class="product__item__pic set-bg"
-                data-setbg="${contextPath}/img/product/product-3.jpg"
+                data-setbg="${contextPath}/img/product/main/nyoki.jpg"
               >
                 <ul class="product__item__pic__hover">
                   <li>
@@ -886,30 +882,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 </ul>
               </div>
               <div class="product__item__text">
-                <h6><a href="#">못난이 수박</a></h6>
-                <h5>￦5400</h5>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="product__item">
-              <div
-                class="product__item__pic set-bg"
-                data-setbg="${contextPath}/img/product/product-7.jpg"
-              >
-                <ul class="product__item__pic__hover">
-                  <li>
-                    <a href="#"><i class="fa fa-heart"></i></a>
-                  </li>
-
-                  <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                  </li>
-                </ul>
-              </div>
-              <div class="product__item__text">
-                <h6><a href="#">못난이 가지</a></h6>
-                <h5>￦1200</h5>
+                <h6><a href="#">포르치니버섯 크림 뇨끼</a></h6>
+                <h5>￦8800</h5>
               </div>
             </div>
           </div>

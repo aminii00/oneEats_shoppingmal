@@ -82,10 +82,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         <div class="row">
           <div class="col-lg-12 text-center">
             <div class="breadcrumb__text">
-              <h2>Organi Shop</h2>
+              <h2>One.eats</h2>
               <div class="breadcrumb__option">
-                <a href="./index.html">Home</a>
-                <span>Shop</span>
+                <a href="./index.html">못난이 과일</a>
+                <span>채소</span>
               </div>
             </div>
           </div>
@@ -104,29 +104,28 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div
                   style="background-color: #a3d060; width: 212px; height: 50px"
                 >
-                  <h4 style="color: #fff">카테고리</h4>
+                  <h4 style="color: #fff; padding-top: 12px">카테고리</h4>
                 </div>
 
-                <ul>
-                  <li><a href="#">Fresh Meat</a></li>
-                  <li><a href="#">Vegetables</a></li>
-                  <li><a href="#">Fruit & Nut Gifts</a></li>
-                  <li><a href="#">Fresh Berries</a></li>
-                  <li><a href="#">Ocean Foods</a></li>
-                  <li><a href="#">Butter & Eggs</a></li>
-                  <li><a href="#">Fastfood</a></li>
-                  <li><a href="#">Fresh Onion</a></li>
-                  <li><a href="#">Papayaya & Crisps</a></li>
-                  <li><a href="#">Oatmeal</a></li>
+                <ul style="width: 212px">
+                  <li><a href="#">채소</a></li>
+                  <li><a href="#">과일</a></li>
+                  <li><a href="#">못난이 주스 / 수제청</a></li>
+                  <li><a href="#">찌개 / 탕 / 찜</a></li>
+                  <li><a href="#">식사 / 안주류</a></li>
+                  <li><a href="#">죽</a></li>
+                  <li><a href="#">식사 대용식</a></li>
+                  <li><a href="#">간편 한끼 반찬</a></li>
                 </ul>
               </div>
+
               <div class="sidebar__item">
                 <h4>Price</h4>
                 <div class="price-range-wrap">
                   <div
                     class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                    data-min="10"
-                    data-max="540"
+                    data-min="0"
+                    data-max="10000"
                   >
                     <div
                       class="ui-slider-range ui-corner-all ui-widget-header"
@@ -143,7 +142,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   <div class="range-slider">
                     <div class="price-input">
                       <input type="text" id="minamount" />
-                      <input type="text" id="maxamount" />
+                      <input type="text" id="maxamount" class="text-right" />
                     </div>
                   </div>
                 </div>
@@ -151,7 +150,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 
               <div class="sidebar__item">
                 <div class="latest-product__text">
-                  <h4>Latest Products</h4>
+                  <div class="section-title">
+                    <h2
+                      class="text-left"
+                      style="font-size: 18px; padding-bottom: 6px"
+                    >
+                      최근 본 상품
+                    </h2>
+                  </div>
                   <div class="latest-product__slider owl-carousel">
                     <div class="latest-prdouct__slider__item">
                       <a href="#" class="latest-product__item">
@@ -237,162 +243,418 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           <div class="col-lg-9 col-md-7">
             <div class="product__discount">
               <div class="section-title product__discount__title">
-                <h2>Sale Off</h2>
+                <h2 style="text-align: center">Hot Deals</h2>
               </div>
               <div class="row">
-                <div class="product__discount__slider owl-carousel">
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-1.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
+                <div
+                  class="product__discount__slider owl-carousel owl-loaded owl-drag"
+                >
+                  <div class="owl-stage-outer">
+                    <div
+                      class="owl-stage"
+                      style="
+                        transform: translate3d(-1328px, 0px, 0px);
+                        transition: all 1.2s ease 0s;
+                        width: 5314px;
+                      "
+                    >
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/carrot.jpg"
+                              style="
+                                background-image: url('/img/product/main/carrot.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-20%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>Dried Fruit</span>
-                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>채소</span>
+                              <h5><a href="#">흙당근 1kg</a></h5>
+                              <div class="product__item__price">
+                                ￦3912 <span>￦4890</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-2.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/grape.jpg"
+                              style="
+                                background-image: url('/img/product/main/grape.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-20%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>Vegetables</span>
-                        <h5><a href="#">Vegetables’package</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>과일</span>
+                              <h5><a href="#">못난이 포도 1kg</a></h5>
+                              <div class="product__item__price">
+                                ￦17520 <span>￦21900</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-3.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/lettuce.jpg"
+                              style="
+                                background-image: url('/img/product/main/lettuce.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-15%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>Dried Fruit</span>
-                        <h5><a href="#">Mixed Fruitss</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>채소</span>
+                              <h5><a href="#">못난이 상추 150g</a></h5>
+                              <div class="product__item__price">
+                                ￦3613 <span>￦4250</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-4.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/peach.jpg"
+                              style="
+                                background-image: url('/img/product/main/peach.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-10%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>Dried Fruit</span>
-                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>과일 </span>
+                              <h5><a href="#">못난이 복숭아 1개입</a></h5>
+                              <div class="product__item__price">
+                                ￦1800 <span>￦2000</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-5.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/sweetpotato.jpg"
+                              style="
+                                background-image: url('/img/product/main/sweetpotato.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-13%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div class="product__discount__item__text">
-                        <span>Dried Fruit</span>
-                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>채소</span>
+                              <h5><a href="#">못난이 호박고구마 800g</a></h5>
+                              <div class="product__item__price">
+                                ￦5133 <span>￦5900</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4">
-                    <div class="product__discount__item">
-                      <div
-                        class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/img/product/discount/pd-6.jpg"
-                      >
-                        <div class="product__discount__percent">-20%</div>
-                        <ul class="product__item__pic__hover">
-                          <li>
-                            <a href="#"><i class="fa fa-heart"></i></a>
-                          </li>
 
-                          <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                          </li>
-                        </ul>
+                      <div class="owl-item active" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/nyoki.jpg"
+                              style="
+                                background-image: url('/img/product/main/nyoki.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-5%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>밀키트</span>
+                              <h5><a href="#">포르치니버섯 크림 뇨끼</a></h5>
+                              <div class="product__item__price">
+                                ￦8360 <span>￦8800</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                      <div class="product__discount__item__text">
-                        <span>Dried Fruit</span>
-                        <h5><a href="#">Raisin’n’nuts</a></h5>
-                        <div class="product__item__price">
-                          $30.00 <span>$36.00</span>
+                      <div class="owl-item active" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/aspiragus.jpg"
+                              style="
+                                background-image: url('/img/product/main/aspiragus.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-20%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>채소</span>
+                              <h5><a href="#">아스파라거스 100g</a></h5>
+                              <div class="product__item__price">
+                                ￦4152 <span>￦5190</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="owl-item active" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/walnam.jpg"
+                              style="
+                                background-image: url('/img/product/main/walnam.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-10%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>밀키트</span>
+                              <h5><a href="#">월남쌈 밀키트</a></h5>
+                              <div class="product__item__price">
+                                ￦18810 <span>￦20900</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/guel.jpg"
+                              style="
+                                background-image: url('/img/product/main/guel.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-17%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>과일</span>
+                              <h5><a href="#">못난이 감귤 500g</a></h5>
+                              <div class="product__item__price">
+                                ￦2490<span>￦3000</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/watermelon.jpg"
+                              style="
+                                background-image: url('/img/product/main/watermelon.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-10%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>과일</span>
+                              <h5><a href="#">수박 5kg</a></h5>
+                              <div class="product__item__price">
+                                ￦25110<span>￦27900</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/aspiragus.jpg"
+                              style="
+                                background-image: url('/img/product/main/aspiragus.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-20%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>채소</span>
+                              <h5><a href="#">아스파라거스 100g</a></h5>
+                              <div class="product__item__price">
+                                ￦4152 <span>￦5190</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="owl-item cloned" style="width: 265.667px">
+                        <div class="col-lg-4">
+                          <div class="product__discount__item">
+                            <div
+                              class="product__discount__item__pic set-bg"
+                              data-setbg="/img/product/main/walnam.jpg"
+                              style="
+                                background-image: url('/img/product/main/walnam.jpg');
+                              "
+                            >
+                              <div class="product__discount__percent">-10%</div>
+                              <ul class="product__item__pic__hover">
+                                <li>
+                                  <a href="#"><i class="fa fa-heart"></i></a>
+                                </li>
+
+                                <li>
+                                  <a href="#"
+                                    ><i class="fa fa-shopping-cart"></i
+                                  ></a>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="product__discount__item__text">
+                              <span>밀키트</span>
+                              <h5><a href="#">월남쌈 밀키트</a></h5>
+                              <div class="product__item__price">
+                                ￦18810 <span>￦20900</span>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -401,25 +663,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               </div>
             </div>
             <div class="filter__item">
-              <div class="row">
-                <div class="col-lg-4 col-md-5">
-                  <div class="filter__sort">
-                    <span>Sort By</span>
-                    <select>
-                      <option value="0">Default</option>
-                      <option value="0">Default</option>
-                    </select>
-                  </div>
-                </div>
+              <div class="row" style="justify-content: space-around">
                 <div class="col-lg-4 col-md-4">
                   <div class="filter__found">
                     <h6><span>16</span> Products found</h6>
-                  </div>
-                </div>
-                <div class="col-lg-4 col-md-3">
-                  <div class="filter__option">
-                    <span class="icon_grid-2x2"></span>
-                    <span class="icon_ul"></span>
                   </div>
                 </div>
               </div>
@@ -480,7 +727,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                         <a href="#"><i class="fa fa-heart"></i></a>
                       </li>
                       <li>
-                        <a href="#"><i class="fa fa-retweet"></i></a>
+                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
                       </li>
                     </ul>
                   </div>

@@ -126,9 +126,9 @@ ol {
   position: absolute;
   left: 0;
   bottom: -15px;
-  right: 0;
+  left: 0;
   height: 4px;
-  width: 80px;
+  width: 94px;
   background: #7fad39;
   content: "";
   margin: 0 auto;
@@ -732,6 +732,7 @@ ol {
   display: flex;
   align-items: center;
   padding-left: 75px;
+  justify-content: space-around;
 }
 
 .hero__text span {
@@ -1089,7 +1090,7 @@ ol {
   font-size: 16px;
   color: #dd2222;
   font-weight: 700;
-  max-width: 20%;
+  max-width: 47%;
   border: none;
   display: inline-block;
 }
@@ -1212,11 +1213,11 @@ ol {
 }
 
 .product__discount {
-  padding-bottom: 50px;
+  padding-bottom: 10px;
 }
 
 .product__discount__title {
-  text-align: left;
+  text-align: center;
   margin-bottom: 65px;
 }
 
@@ -1635,7 +1636,7 @@ ol {
 }
 
 .product__details__text h3 {
-  color: #495057;
+  color: #333333;
   font-weight: 700;
   margin-bottom: 16px;
   text-align: left;
@@ -1658,7 +1659,7 @@ ol {
 
 .product__details__text .product__details__price {
   font-size: 30px;
-
+color:#dd2222;
   font-weight: 600;
   margin-bottom: 15px;
 }
