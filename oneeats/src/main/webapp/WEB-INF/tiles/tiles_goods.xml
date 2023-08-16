@@ -18,10 +18,11 @@
 	</definition>
 
 
-<definition name="/goods/goodsList" extends="nosidebarLayout">
-		<put-attribute name="title" value="llll" />
+<definition name="/goods/goodsList" extends="longimageLayout">
+		<put-attribute name="title" value="상품목록" />
 		<put-attribute name="long_image"
-			value="" />
+			value="/WEB-INF/views/goods/longimage.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sidebar_goods.jsp" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/goods/goodsList.jsp" />
 	</definition>
