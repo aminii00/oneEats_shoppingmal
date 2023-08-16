@@ -13,6 +13,21 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 
     <script>
       var rotateArray = new Array(0, 0, 0, 0, 0);
+      $(document).ready(function () {
+        var currentPath = window.location.pathname;
+        var lastSlashIndex = currentPath.lastIndexOf("/");
+        var secondLastSlashIndex = currentPath.lastIndexOf(
+          "/",
+          lastSlashIndex - 1
+        );
+        var selectedSideMenu = currentPath.substring(
+          secondLastSlashIndex + 1,
+          lastSlashIndex
+        );
+
+        $("#menu_" + selectedSideMenu).addClass("selected_menu");
+        console.log(selectedSideMenu);
+      });
     </script>
     <script src="${contextPath}/js/side.js"></script>
   </head>
@@ -24,17 +39,21 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <span>&nbsp;&nbsp;사업자 메뉴</span>
           </div>
           <ul class="ul_menus">
-            <li>
+            <li id="menu_goods">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">상품</a>
+                  <a href="${contextPath}/seller/goods/sellerGoodsList.do"
+                    >상품</a
+                  >
                 </div>
               </div>
             </li>
-            <li>
+            <li id="menu_order">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">주문/배송</a>
+                  <a href="${contextPath}/seller/order/sellerOrderList.do"
+                    >주문/배송</a
+                  >
                 </div>
               </div>
             </li>
@@ -55,8 +74,16 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">핫딜</a></li>
-                  <li><a href="">쿠폰</a></li>
+                  <li id="menu_hotdeal">
+                    <a href="${contextPath}/seller/hotdeal/sellerHotDealList.do"
+                      >핫딜</a
+                    >
+                  </li>
+                  <li id="menu_coupon">
+                    <a href="${contextPath}/seller/coupon/sellerCouponList.do"
+                      >쿠폰</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
@@ -76,7 +103,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">리뷰</a></li>
+                  <li id="menu_review">
+                    <a
+                      href="${contextPath}/community/review/sellerReviewList.do"
+                      >리뷰</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>

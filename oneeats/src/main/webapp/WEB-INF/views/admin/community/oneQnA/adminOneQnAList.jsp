@@ -71,6 +71,19 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       </div>
       <hr class="line-black" />
       <div>&nbsp;</div>
+      <!--작성 버튼-->
+      <div class="row">
+        <div class="col">
+          <div style="float: right">
+            <button
+              class="btn-toform"
+              onclick="location.href='${contextPath}/admin/community/notice/adminNoticeForm.do'"
+            >
+              작성
+            </button>
+          </div>
+        </div>
+      </div>
 
       <!--페이지 버튼-->
       <div>

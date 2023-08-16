@@ -31,7 +31,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         class="sellerMain_menus"
         style="width: 100%; display: flex; justify-content: space-between"
       >
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/seller/goods/sellerGoodsList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/product.png"
@@ -40,7 +43,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>상품관리</span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/seller/order/sellerOrderList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/truck.png"
@@ -49,7 +55,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>주문/배송관리</span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/seller/hotdeal/sellerHotDealList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/event.png"
@@ -58,7 +67,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>이벤트관리 </span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/seller/community/review/sellerReviewList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/community.png"

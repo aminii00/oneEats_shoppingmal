@@ -4,16 +4,10 @@
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
 
-<definition name="nosidebarLayout"
-	template="/WEB-INF/views/common/layout_nosidebar.jsp">
-	<put-attribute name="title" value="사이드바 없는 레이아웃" />
-	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-	</definition>
-	
+
     <definition name="/seller/coupon/sellerCouponList" extends="mainLayout">
        <put-attribute name="title" value="사업자 쿠폰목록 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponList.jsp" />
     </definition>
     
@@ -21,16 +15,19 @@
     <!-- 상품 -->
   <definition name="/seller/goods/sellerGoodsForm" extends="mainLayout">
        <put-attribute name="title" value="사업자 상품등록 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsForm.jsp" />
     </definition>   
 
       <definition name="/seller/goods/sellerGoodsModForm" extends="mainLayout">
        <put-attribute name="title" value="사업자 상품등록 수정 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsModForm.jsp" />
     </definition> 
     
        <definition name="/seller/goods/sellerGoodsList" extends="mainLayout">
        <put-attribute name="title" value="사업자 상품 리스트 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsList.jsp" />
     </definition>     
     
@@ -38,11 +35,13 @@
        <!-- 핫딜 -->
   <definition name="/seller/hotdeal/sellerHotDealForm" extends="mainLayout">
        <put-attribute name="title" value="사업자 상품등록 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/hotdeal/sellerHotDealForm.jsp" />
     </definition> 
     
       <definition name="/seller/hotdeal/sellerHotDealModForm" extends="mainLayout">
        <put-attribute name="title" value="사업자 상품등록 수정 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />        
        <put-attribute name="body" value="/WEB-INF/views/seller/hotdeal/sellerHotDealModForm.jsp" />
     </definition>   
     
@@ -54,10 +53,12 @@
     
     <definition name="/seller/coupon/sellerCouponForm" extends="mainLayout">
        <put-attribute name="title" value="사업자 쿠폰등록 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />        
        <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponForm.jsp" />
     </definition>
     <definition name="/seller/order/sellerOrderList" extends="mainLayout">
        <put-attribute name="title" value="사업자 주문/배송 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />        
        <put-attribute name="body" value="/WEB-INF/views/seller/order/sellerOrderList.jsp" />
     </definition>
     
@@ -83,6 +84,14 @@
 		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/seller/member/sellerRegisterLastForm.jsp" />
 	</definition>
+
+	<definition name="/seller/community/review/sellerReviewList" extends="mainLayout">
+		<put-attribute name="title" value="쇼핑몰 사업자회원가입페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
+		<put-attribute name="body" value="/WEB-INF/views/seller/community/review/sellerReviewList.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
 
 

@@ -31,7 +31,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         class="adminMain_menus"
         style="width: 100%; display: flex; justify-content: space-between"
       >
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/member/adminMemberList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/member.png"
@@ -40,7 +43,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>회원관리</span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/hotdeal/adminHotDealList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/event.png"
@@ -49,7 +55,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>이벤트관리 </span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/order/adminOrderList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/truck.png"
@@ -64,7 +73,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         class="adminMain_menus"
         style="width: 100%; display: flex; justify-content: space-between"
       >
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/community/notice/adminNoticeList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/customer.png"
@@ -73,7 +85,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           &nbsp;
           <span>고객센터관리</span>
         </a>
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/goods/adminGoodsList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/product.png"
@@ -83,7 +98,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           <span>상품관리</span>
         </a>
 
-        <a href="" class="btn btn-outline-secondary">
+        <a
+          href="${contextPath}/admin/community/review/adminReviewList.do"
+          class="btn btn-outline-secondary"
+        >
           <img
             class="btn-square"
             src="${contextPath}/img/icon/community.png"

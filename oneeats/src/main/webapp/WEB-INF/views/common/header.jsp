@@ -18,7 +18,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="row bg-gray">
         <div class="col-9"></div>
         <div class="col-3 textsize-1 textcolor-black">
-          <a href="${contextPath}/member/registerTypeSelect.do">회원가입</a
+          <a href="${contextPath}/member/registerTypeSelect.do">회원가입 </a
           >&nbsp; &nbsp;<a href="${contextPath}/member/loginForm.do">로그인</a>
           &nbsp;&nbsp;
           <a href="${contextPath}/community/notice/noticeList.do">고객센터</a>
@@ -48,7 +48,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     class="form-control"
                   />
                   <div class="input-group-append">
-                    <button style="background-color:#568203"
+                    <button
+                      style="background-color: #568203"
                       class="textcolor-white border-0"
                       type="submit"
                     >

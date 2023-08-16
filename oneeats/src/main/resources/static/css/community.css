@@ -184,3 +184,13 @@ div.recipe_recommand_grid .recipe_recommand_col{
 	height: 600px;
 	
 }
+
+div.adminMemberDetail_grid {
+        margin: 12px;
+      }
+      div.adminMemberDetail_grid > .row {
+        padding: 2px;
+        margin-left: 12px;
+        margin-right: 12px;
+        border: 1px solid gray;
+      }
