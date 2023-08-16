@@ -77,7 +77,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <section class="product spad">
       <div class="container">
         <div class="row">
-          <div class="col-lg-12 col-md-12">
+          <div class="col-lg-12 col-md-12" style="padding-left: 44px">
             <div class="product__discount">
               <div class="section-title product__discount__title">
                 <h2 style="text-align: center">Hot Deals</h2>
@@ -513,7 +513,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-1.jpg"
+                    data-setbg="${contextPath}/img/product/main/aspiragus.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -526,8 +526,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">아스파라거스 100g</a></h6>
+                    <h5>￦5190</h5>
                   </div>
                 </div>
               </div>
@@ -535,7 +535,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-2.jpg"
+                    data-setbg="${contextPath}/img/product/main/corn.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -548,8 +548,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">찰옥수수 2입</a></h6>
+                    <h5>￦3250</h5>
                   </div>
                 </div>
               </div>
@@ -557,7 +557,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-3.jpg"
+                    data-setbg="${contextPath}/img/product/main/lettuce.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -569,8 +569,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 상추 150g</a></h6>
+                    <h5>￦3250</h5>
                   </div>
                 </div>
               </div>
@@ -578,29 +578,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-4.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-5.jpg"
+                    data-setbg="${contextPath}/img/product/main/potato.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -613,8 +591,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 감자 1입</a></h6>
+                    <h5>￦1300</h5>
                   </div>
                 </div>
               </div>
@@ -622,7 +600,29 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-6.jpg"
+                    data-setbg="${contextPath}/img/product/main/scalion.jpg"
+                  >
+                    <ul class="product__item__pic__hover">
+                      <li>
+                        <a href="#"><i class="fa fa-heart"></i></a>
+                      </li>
+
+                      <li>
+                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <h6><a href="#">못난이 대파 250g</a></h6>
+                    <h5>￦2900</h5>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                  <div
+                    class="product__item__pic set-bg"
+                    data-setbg="${contextPath}/img/product/main/pumpkin.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -634,8 +634,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 호박 1개입</a></h6>
+                    <h5>￦1300</h5>
                   </div>
                 </div>
               </div>
@@ -643,7 +643,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-7.jpg"
+                    data-setbg="${contextPath}/img/product/main/sweetpotato.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -656,8 +656,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 호박 고구마 800g</a></h6>
+                    <h5>￦5900</h5>
                   </div>
                 </div>
               </div>
@@ -665,7 +665,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-8.jpg"
+                    data-setbg="${contextPath}/img/product/main/albaechu.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -678,8 +678,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 알배추 1봉</a></h6>
+                    <h5>￦4990</h5>
                   </div>
                 </div>
               </div>
@@ -687,7 +687,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-9.jpg"
+                    data-setbg="${contextPath}/img/product/main/brocoli.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -700,8 +700,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 브로콜리 1입</a></h6>
+                    <h5>￦2990</h5>
                   </div>
                 </div>
               </div>
@@ -709,7 +709,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-10.jpg"
+                    data-setbg="${contextPath}/img/product/main/brocoli.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -722,8 +722,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">적양배추 1통</a></h6>
+                    <h5>￦3990</h5>
                   </div>
                 </div>
               </div>
@@ -731,7 +731,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-11.jpg"
+                    data-setbg="${contextPath}/img/product/main/onion.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -744,8 +744,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">양파 1.5kg</a></h6>
+                    <h5>￦3990</h5>
                   </div>
                 </div>
               </div>
@@ -753,7 +753,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="product__item">
                   <div
                     class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/product-12.jpg"
+                    data-setbg="${contextPath}/img/product/main/cucumber.jpg"
                   >
                     <ul class="product__item__pic__hover">
                       <li>
@@ -766,8 +766,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     </ul>
                   </div>
                   <div class="product__item__text">
-                    <h6><a href="#">Crab Pool Security</a></h6>
-                    <h5>$30.00</h5>
+                    <h6><a href="#">못난이 오이 3개입</a></h6>
+                    <h5>￦3990</h5>
                   </div>
                 </div>
               </div>
