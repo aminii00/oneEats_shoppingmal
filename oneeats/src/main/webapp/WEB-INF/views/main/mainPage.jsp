@@ -82,7 +82,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 height: 431;
                 justify-content: space-around !important;
               "
-              data-setbg="${contextPath}/img/product/main/mainPage.JPG"
+              data-setbg="${contextPath}/img/product/mainPage/mainPage4.JPG"
             >
               <div class="hero__text">
                 <span style="margin-left: -68px"
@@ -93,7 +93,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   도매시장을 거치지 않는 산지 직송 못난이 농산물로<br />
                   시세 대비 20% 이상 저렴한 가격에 판매합니다.
                 </p>
-                <a href="#" class="primary-btn" style="margin-right: 66px"
+                <a href="#" class="primary-btn" style="margin-right: 60px"
                   >상품 보기</a
                 >
               </div>

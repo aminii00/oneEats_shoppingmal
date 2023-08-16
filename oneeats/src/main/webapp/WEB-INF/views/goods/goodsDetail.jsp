@@ -27,6 +27,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
     />
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -358,6 +363,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIKICAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoCiAgICBkPSJNNC4wNDgzNyAxMi45OTk4SDIuMjE5MzVDMS41NDU5MiAxMi45OTk4IDEgMTIuNDYyNiAxIDExLjc5OTlWNy41OTk5MkMxIDYuOTM3MTggMS41NDU5MiA2LjM5OTkzIDIuMjE5MzUgNi4zOTk5M0g0LjA0ODM3TTguMzE2MDggNS4xOTk5NVYyLjc5OTk4QzguMzE2MDggMS44MDU4OCA3LjQ5NzIgMSA2LjQ4NzA2IDFMNC4wNDgzNyA2LjM5OTkzVjEyLjk5OTlIMTAuOTI1NUMxMS41MzM1IDEzLjAwNjYgMTIuMDUzNyAxMi41NzE1IDEyLjE0NDggMTEuOTc5OUwxMi45ODYyIDYuNTc5OTNDMTMuMDM5OSA2LjIzMTg1IDEyLjkzNTUgNS44NzgxMiAxMi43MDA4IDUuNjEyNDVDMTIuNDY2IDUuMzQ2NzggMTIuMTI0NiA1LjE5NTk2IDExLjc2NjggNS4xOTk5NUg4LjMxNjA4WiIKICAgIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIKICAgIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==)
           center center no-repeat;
       }
+      .btn-hover:hover {
+        color: #568203;
+        transition: 0.5s;
+      }
     </style>
   </head>
 
@@ -580,7 +589,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           type="button"
                           radius="3"
                         >
-                          <span class="css-nytqmg textbold">바로 구매</span>
+                          <div class="css-nytqmg textbold btn-hover">
+                            바로 구매
+                          </div>
                         </button>
                       </div>
 
@@ -590,8 +601,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           class="cart-button css-cartbtn"
                           type="button"
                           radius="3"
+                          onclick="fn_openalert('장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?', '${contextPath}/cart.do')"
                         >
-                          <span class="css-nytqmg textbold">장바구니 담기</span>
+                          <div class="css-nytqmg textbold btn-hover">
+                            장바구니 담기
+                          </div>
                         </button>
                       </div>
                     </div>
