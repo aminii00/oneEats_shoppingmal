@@ -65,7 +65,7 @@
             <p class = "textsize-0  textcolor-red margin-id">동일한 비밀번호를 입력해 주세요.</p>
         </div>
       
-        <button type="button" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0" onclick="fn_openalert('비밀번호가 변경되었습니다.', '${contextPath}/loginForm.do')">
+        <button type="button" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0" onclick="fn_openalert('비밀번호가 변경되었습니다.', '${contextPath}/member/loginForm.do')">
              확인</button>
     </div>
 </div>

@@ -27,7 +27,6 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/loginForm.do">
 <br>
 <br>
 <br>
@@ -44,11 +43,11 @@
             <p class =" textsize-1">카카오, 네이버로 1초만에 회원가입 하세요.</p>
         </div>
         <button class = "btn-midlong bg-kakao textbold margin textsize-1 border-0 btn-round">
-            <img class ="imgsize-square " src="img/icon/kakao.png"/>
+            <img class ="imgsize-square " src="${contextPath}/img/icon/kakao.png"/>
             카카오 1초 회원가입
         </button>
         <button class = "btn-midlong textcolor-white textbold bg-naver margin textsize-1 border-0 btn-round">
-            <img class ="imgsize-square " src="img/icon/naver.png"/>
+            <img class ="imgsize-square " src="${contextPath}/img/icon/naver.png"/>
             네이버로 회원가입하기
         </button>
 
@@ -56,8 +55,7 @@
         <br>
         <p class = "textsize-2 margin1">----------------------또는----------------------</p>
         <br>
-        <button class = "btn-midlong bg-lightgray margin textsize-1 border-0 btn-round">ID/PW 입력이 필요한 회원가입</button>
+        <button class = "btn-midlong bg-lightgray margin textsize-1 border-0 btn-round" onclick="location.href ='${contextPath}/member/registerForm.do'">ID/PW 입력이 필요한 회원가입</button>
         <br><br><br><br><br><br>
-</form>
 </body>
 </html>
