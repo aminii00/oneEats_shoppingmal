@@ -96,6 +96,30 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <tr>
                     <td class="shoping__cart__item">
                       <img
+                        src="${contextPath}/img/product/main/carrot.jpg"
+                        width="100px"
+                        height="100px"
+                        alt=""
+                      />
+                      <h5>못난이 당근</h5>
+                    </td>
+                    <td class="shoping__cart__price">￦900</td>
+                    <td class="shoping__cart__quantity">
+                      <div class="quantity">
+                        <div class="pro-qty">
+                          <input type="text" value="2" />
+                        </div>
+                      </div>
+                    </td>
+                    <td class="shoping__cart__total">￦1800</td>
+                    <td class="shoping__cart__item__close">
+                      <img src="${contextPath}/img/cart/close.png" alt="" />
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td class="shoping__cart__item">
+                      <img
                         src="${contextPath}/img/cart/peach.jpg"
                         width="100px"
                         height="100px"
@@ -124,7 +148,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         width="100px"
                         height="100px"
                       />
-                      <h5>못난이 감자(</h5>
+                      <h5>못난이 감자</h5>
                     </td>
                     <td class="shoping__cart__price">￦2700</td>
                     <td class="shoping__cart__quantity">
@@ -166,7 +190,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <li class="text-left">결제 금액 <span>￦9500</span></li>
                 <li class="text-left">배송비 <span>￦2500</span></li>
                 <li class="text-left" style="font-size: 28px">
-                  합계 <span style="font-size: 28px">￦12000</span>
+                  합계
+                  <span style="font-size: 28px; color: #dd2222">￦12000</span>
                 </li>
               </ul>
               <a href="#" class="primary-btn">결제하기</a>

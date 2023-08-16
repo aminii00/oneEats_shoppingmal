@@ -83,7 +83,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         <div id="sidebar-left">
           <tiles:insertAttribute name="side" />
         </div>
-        <div id="content">
+        <div style="margin-left: 12px">
           <tiles:insertAttribute name="body" />
         </div>
       </div>

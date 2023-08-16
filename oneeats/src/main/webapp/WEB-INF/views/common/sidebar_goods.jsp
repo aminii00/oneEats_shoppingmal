@@ -16,16 +16,17 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <script src="${contextPath}/js/side.js"></script>
   </head>
   <body>
-    <div class="row">
+    <div class="row" style="margin-top: 80px">
       <div class="col-lg">
         <div class="textsize-2 border text-left">
           <div
-            class="bg-lightgreen textcolor-white"
+            class="textcolor-white"
             style="
               width: 100%;
               height: 50px;
               display: flex;
               align-items: center;
+              background-color: #568203;
             "
           >
             <img
@@ -95,42 +96,34 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <div>&nbsp;</div>
     <div class="row">
       <div class="col-lg text-left">
-        <div class="sidebar__item">
-          <h4>가격</h4>
+        <div class="sidebar__item" style="margin-top: 86px">
+          <h4 style="font-size: 20px">가격</h4>
           <div class="price-range-wrap">
             <div
               class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-              data-min="10"
-              data-max="540"
+              data-min="0"
+              data-max="10000"
             >
               <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
               <span
                 tabindex="0"
                 class="ui-slider-handle ui-corner-all ui-state-default"
+                style="left: 0%"
               ></span>
               <span
                 tabindex="0"
                 class="ui-slider-handle ui-corner-all ui-state-default"
+                style="left: 100%"
               ></span>
+              <div
+                class="ui-slider-range ui-corner-all ui-widget-header"
+                style="width: 100%; left: 0%"
+              ></div>
             </div>
             <div class="range-slider">
               <div class="price-input">
-                <div class="row">
-                  <div class="col-md-4">
-                    <input
-                      type="text"
-                      id="minamount"
-                      style="min-width: 100px"
-                    />
-                  </div>
-                  <div class="col-md-4">
-                    <input
-                      type="text"
-                      id="maxamount"
-                      style="min-width: 100px"
-                    />
-                  </div>
-                </div>
+                <input type="text" id="minamount" />
+                <input type="text" id="maxamount" class="text-right" />
               </div>
             </div>
           </div>
@@ -138,69 +131,67 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </div>
 
-    <div class="row">
-      <div class="col-lg text-left">
-        <div id="side_recentgoods_wrapper" class="border">
-          <div class="textcolor-black textsize-2 textbold" style="margin: 12px">
-            최근 본 상품
-            <div style="float: right; display: flex; align-items: center">
-              <a href="">
-                <img
-                  class="btn-square"
-                  src="${contextPath}/img/icon/prev.png"
-                  alt=""
-                />
-              </a>
-              <a href="">
-                <img
-                  class="btn-square"
-                  src="${contextPath}/img/icon/next.png"
-                  alt=""
-                />
-              </a>
-            </div>
-          </div>
-          <div
-            id="side_recentgoods_row"
-            class="row"
-            onclick="location.href='#'"
-            style="margin: 12px"
-          >
-            <div class="col-md-6 p-0">
-              <div class="img-square-wrapper">
-                <img
-                  src="${contextPath}/img/product/product-1.jpg"
-                  alt="상품 사진"
-                  style="width: 100%"
-                />
+    <div class="sidebar__item">
+      <div class="latest-product__text">
+        <h4 style="font-size: 20px" class="text-left">최근 본 상품</h4>
+        <div class="latest-product__slider owl-carousel">
+          <div class="latest-prdouct__slider__item">
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic" style="width: 110px">
+                <img src="${contextPath}/img/product/main/apple.jpg" alt="" />
               </div>
-            </div>
-            <div class="col-md-1 p-0">&nbsp;</div>
-            <div class="col-md-5 p-0">
-              <div class="textbold textsize-2">상품명</div>
-              <div class="textsize-1">￦3,000</div>
-            </div>
-          </div>
-          <div
-            id="side_recentgoods_row"
-            class="row"
-            onclick="location.href='#'"
-            style="margin: 12px"
-          >
-            <div class="col-md-6 p-0">
-              <div class="img-square-wrapper">
-                <img
-                  src="${contextPath}/img/product/product-2.jpg"
-                  alt="상품 사진"
-                  style="width: 100%"
-                />
+              <div class="latest-product__item__text">
+                <h6>못난이 사과 3개</h6>
+                <span>￦3000</span>
               </div>
-            </div>
-            <div class="col-md-1 p-0">&nbsp;</div>
-            <div class="col-md-5 p-0">
-              <div class="textbold textsize-2">상품명</div>
-              <div class="textsize-1">￦5,000</div>
-            </div>
+            </a>
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic" style="width: 110px">
+                <img src="${contextPath}/img/product/main/nyoki.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>포르치니버섯 크림 뇨끼</h6>
+                <span>￦8800</span>
+              </div>
+            </a>
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic" style="width: 110px">
+                <img src="${contextPath}/img/product/main/shabu.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>샤브샤브 밀키트 2인</h6>
+                <span>￦15900</span>
+              </div>
+            </a>
+          </div>
+          <div class="latest-prdouct__slider__item">
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic">
+                <img src="img/latest-product/lp-1.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>Crab Pool Security</h6>
+                <span>$30.00</span>
+              </div>
+            </a>
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic">
+                <img src="img/latest-product/lp-2.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>Crab Pool Security</h6>
+                <span>$30.00</span>
+              </div>
+            </a>
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic">
+                <img src="img/latest-product/lp-3.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>Crab Pool Security</h6>
+                <span>$30.00</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>
