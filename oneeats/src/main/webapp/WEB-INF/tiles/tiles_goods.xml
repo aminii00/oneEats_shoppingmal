@@ -18,7 +18,7 @@
 	</definition>
 
 
-<definition name="/goods/goodsList" extends="longimageLayout">
+	<definition name="/goods/goodsList" extends="longimageLayout">
 		<put-attribute name="title" value="상품목록" />
 		<put-attribute name="long_image"
 			value="/WEB-INF/views/goods/longimage.jsp" />

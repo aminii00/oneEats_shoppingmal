@@ -56,4 +56,24 @@
        <put-attribute name="body" value="/WEB-INF/views/admin/main/adminMain.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
+    
+    <definition name="/admin/community/notice/adminNoticeList" extends="mainLayout">
+       <put-attribute name="title" value="관리자 공지사항 목록" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/community/notice/adminNoticeList.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
+    </definition>
+    
+    
+    <definition name="/admin/community/notice/adminNoticeForm" extends="mainLayout">
+       <put-attribute name="title" value="관리자 공지사항 작성" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/community/notice/adminNoticeForm.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
+    </definition>
+    
+    
+       <definition name="/admin/community/notice/adminNoticeModForm" extends="mainLayout">
+       <put-attribute name="title" value="관리자 공지사항 수정" />
+       <put-attribute name="body" value="/WEB-INF/views/admin/community/notice/adminNoticeModForm.jsp" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
+    </definition>
 </tiles-definitions>

@@ -13,7 +13,17 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
-      <div class="textsize-3 text-left textbold textcolor-black">1:1문의</div>
+      <div class="textsize-3 text-left textbold textcolor-black">
+        1:1문의
+        <div style="float: right">
+          <select name="category">
+            <option value="">카테고리</option>
+            <option value="">결제</option>
+            <option value="">주문</option>
+            <option value="">이벤트</option>
+          </select>
+        </div>
+      </div>
 
       <div class="clear">&nbsp;</div>
       <hr class="line-black" />
@@ -67,6 +77,21 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <hr class="line-black" />
       <div>&nbsp;</div>
 
+      <!--작성 버튼-->
+      <div class="row">
+        <div class="col">
+          <div style="float: right">
+            <button
+              class="btn-toform"
+              onclick="location.href='${contextPath}/community/oneQnA/oneQnAForm.do'"
+            >
+              문의작성
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--페이지 버튼-->
       <div>
         <ul class="ul-li">
           <li class="li-btn">
@@ -96,18 +121,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       </div>
 
       <br />
-      <div class="row">
-        <div class="col">
-          <div style="float: right">
-            <button
-              class="btn-toform"
-              onclick="location.href='${contextPath}/community/oneQnA/oneQnAForm.do'"
-            >
-              문의작성
-            </button>
-          </div>
-        </div>
-      </div>
     </section>
   </body>
 </html>
