@@ -157,7 +157,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <p class="textsize-2 text-left textcolor-black textbold">주문상세</p>
         <div class="div-sib textsize-1">
         <button class="btn-1 textcolor-black border-0" style="background-color: #e6eeff;"
-        onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderCancel.do")' type=button>주문취소</button>
+        onclick='location.href="${contextPath}/mypage/orderCancel.do"' type=button>주문취소</button>
         </div>
     </div>
     <hr class="linebold" style="margin: 0;">

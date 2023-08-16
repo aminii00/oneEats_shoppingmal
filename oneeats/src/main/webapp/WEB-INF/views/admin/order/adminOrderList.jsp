@@ -88,6 +88,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         td {
             text-align: left;
             padding: 12px;
+            margin-left: auto;
         }
         a {
             text-decoration: none;
@@ -150,7 +151,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <th>아이디</th>
                 <th>주문내역</th>
                 <th>주문상태</th>
-                <th style="text-align: right; padding-right: 30px;">취소</th>
+                <th>취소</th>
             </tr>
             <tr>
                 <td>20230811001</td>
@@ -159,8 +160,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <td>minzy03</td>
                 <td>케일주스 외 6건</td>
                 <td>주문완료</td>
-                <td><button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff; margin-left: auto;"
-                    type="button" onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/admin/order/adminOrderList.do")' >취소</button></td>
+                <td><a href="javascript:void(0)" onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/admin/order/adminOrderList.do")' >취소</a></td>
             </tr>
         </table>
 <%-- <!--    <div> 페이징처리

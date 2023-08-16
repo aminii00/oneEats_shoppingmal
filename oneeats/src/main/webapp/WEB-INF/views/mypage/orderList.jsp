@@ -190,7 +190,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 <body>
 <form method="post" action="#">
     <div class="div-p">
-        <p class="textsize-2 text-left textcolor-black textbold">주문내역</p>
+        <p class="textsize-3 text-left textcolor-black textbold">주문내역</p>
         <div class="div-sib textsize-1">
         <select name="search-1">
             <option value="전체">전체</option>
@@ -199,7 +199,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <option value="1년">1년</option>
         </select>
         <input type="text" name="search-2" placeholder="search..">
-        <button class="btn-1 textcolor-white border-0 bg-lightgreen" type="submit" >검색</button>
+        <button class="btn-1 textcolor-white border-0 bg-lightgreen" type="button" >검색</button>
         </div>
     </div>
     <hr class="linebold" style="margin: 0;">
@@ -208,7 +208,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <span>2023.08.11</span>
             <a style="float: right;" href="${contextPath}/mypage/orderDetail.do">주문내역 상세보기</a>
         </div>
-        <div class="div-t2" style="border-Bottom: 1px solid #B3B3B3">
+        <div class="div-t2">
             <div class="div-left">
                 <img class="img-1" src="${contextPath}/img/product/details/product-details-1.jpg" alt="상품 이미지">
                 <div class="div-dl">
@@ -233,15 +233,20 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">취소완료</span>
                 <button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff" type="button" radius="3"
-                onclick="location.href='${contextPath}/mypage/orderCancel.do'">
+                onclick='location.href="${contextPath}/mypage/orderCancel.do"'>
                 <span>취소하기</span>
                 </button>
             </div> 
         </div>
-            
+    
+    <div class="div-tot">
+        <div class="div-span textbold textcolor-black textsize-1">
+            <span>2023.08.10</span>
+            <a style="float: right;" href="${contextPath}/mypage/orderDetail.do">주문내역 상세보기</a>
+        </div>
         <div class="div-t2">
             <div class="div-left">
-                <img class="img-1" src="${contextPath}/img/product/details/product-details-2.jpg" alt="상품 이미지">
+                <img class="img-1" src="${contextPath}/img/product/main/apple.jpg" alt="상품 이미지">
                 <div class="div-dl">
                 <dl class="dl-dt">
                     <dt class="dt-1 textsize-1 textbold textcolor-black">상품명</dt>
@@ -264,7 +269,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <div class="div-right">
                 <span class="span-1 textsize-1 textcolor-black">배송완료</span>
                 <button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff" type="button" radius="3"
-                onclick="location.href='${contextPath}/mypage/orderCancel.do'">
+                onclick='location.href="${contextPath}/mypage/orderCancel.do"'>
                 <span>취소하기</span>
                 </button>
             </div> 

@@ -98,7 +98,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 <body>
     <form method="post" action="#">
     <div class="div-p">
-    <p class="textsize-2 text-left textcolor-black textbold">주문/결제</p>
+    <p class="text-left textcolor-black textbold" style="font-size: 20px;">주문/결제</p>
     </div>
     <hr class="linebold">
     <table border="0" class="textcolor-black textsize-2">

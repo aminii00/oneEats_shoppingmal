@@ -82,7 +82,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 height: 431;
                 justify-content: space-around !important;
               "
-              data-setbg="${contextPath}/img/product/main/mainPage.JPG"
+              data-setbg="${contextPath}/img/product/main/i-2.JPG"
             >
               <div class="hero__text">
                 <span style="margin-left: -68px"
