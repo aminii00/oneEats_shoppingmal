@@ -62,19 +62,22 @@
             <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디를 입력해주세요." type="text"></input>
             
         </div>
-        <div>
+        <div class="margin_bottom_plus">
             휴대폰 번호
             <br>
-            <input class ="brd-lightgray btn-round btn-midlong textsize-1" placeholder=" 휴대폰 번호를 입력해주세요." type="text"></input>
+            <input class ="brd-lightgray btn-round margin1 btn-midlong textsize-1" placeholder=" 휴대폰 번호를 입력해주세요." type="text"></input>
         </div>
-        <input class ="brd-lightgray btn-round btn-midlong-input textsize-1 " placeholder=" 휴대폰 번호를 입력해 주세요." type="text"></input>
+        <div>
+        <input class ="brd-lightgray btn-round margin1 btn-midlong-input textsize-1 " placeholder=" 휴대폰 번호를 입력해 주세요." type="text"></input>
         &nbsp
         <button class = "btn-fatfat-mina bg-lightgreen textsize-0 border-0 margin btn-round textbold">
             인증번호요청
         </button><br>
+    </div>
         <input class ="brd-lightgray btn-round btn-midlong bg-lightgray border-0 textsize-1 margin-id " placeholder=" 인증번호를 입력하세요." type="text"></input>
-        <p class = "textsize-0  textcolor-red margin-id">인증번호가 오지 않는다면, 통신사 수신 차단 혹은 휴대폰 번호</p>
-        <p class =" textsize-0  textcolor-red margin-id">차단 여부를 확인해 주세요.</p><br>
+        <div>
+            <span class = "textsize-0  textcolor-red btn-midlong textbold">인증번호가 오지 않는다면, 통신사 수신 차단 혹은 휴대폰 번호 차단 여부를 확인해 주세요.</span><br>
+            </div>
        <br>
     <button class = "btn-midlong brd-lightgray textsize-1 textbold input btn-round textcolor-white border-0">
         인증번호 받기</button>

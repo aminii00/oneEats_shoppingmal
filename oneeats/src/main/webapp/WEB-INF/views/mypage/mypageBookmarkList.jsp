@@ -73,7 +73,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <br>
         <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품(3) &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품은 최대 100개까지 저장합니다.</span></p>
     <hr class="linebold">
-    
+    <div><img src="${contextPath}/img/"></div>
 
         <br><br>
         <div id="wrapper">
