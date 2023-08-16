@@ -3,7 +3,9 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
+<!-- 주문 -->
    <definition name="/mypage/orderCancel" extends="mainLayout">
+   	   <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="title" value="주문취소 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/orderCancel.jsp" />
     </definition>
@@ -12,13 +14,17 @@
        <put-attribute name="body" value="/WEB-INF/views/mypage/orderConfirm.jsp" />
     </definition>
     <definition name="/mypage/orderDetail" extends="mainLayout">
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="title" value="주문상세 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/orderDetail.jsp" />
     </definition>
     <definition name="/mypage/orderList" extends="mainLayout">
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="title" value="주문내역 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/orderList.jsp" />
     </definition>
+
+<!-- 회원정보 -->
     <definition name="/mypage/mypageProfileModForm" extends="mainLayout">
        <put-attribute name="title" value="프로필 편집 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageProfileModForm.jsp" />

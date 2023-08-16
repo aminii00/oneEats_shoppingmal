@@ -82,7 +82,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 height: 431;
                 justify-content: space-around !important;
               "
-              data-setbg="${contextPath}/img/product/mainPage/mainPage4.JPG"
+              data-setbg="${contextPath}/img/product/main/i-2.JPG"
             >
               <div class="hero__text">
                 <span style="margin-left: -68px"
@@ -565,7 +565,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-/oneeats/src/main/webapp/WEB-INF/views/admin/hotdeal/adminHotDealForm.jsp
+                  /oneeats/src/main/webapp/WEB-INF/views/admin/hotdeal/adminHotDealForm.jsp
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>

@@ -88,6 +88,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         td {
             text-align: left;
             padding: 12px;
+            margin-left: auto;
         }
         a {
             text-decoration: none;
@@ -139,7 +140,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <option value="아이디">아이디</option>
         </select>
         <input type="text" name="search-2" placeholder="search..">
-        <button class="btn-1 bg-lightgreen textcolor-white border-0" type="submit">검색</button>
+        <button class="btn-1 bg-lightgreen textcolor-white border-0" type="button">검색</button>
         </div>
     </div>
         <table border="0" class="textcolor-black textsize-1">
@@ -148,15 +149,14 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <th>쿠폰등록일</th>
                 <th>쿠폰명</th>
                 <th>사용처</th>
-                <th style="text-align: right; padding-right: 30px;">삭제</th>
+                <th>삭제</th>
             </tr>
             <tr>
                 <td>&nbsp 1</td>
                 <td>2023-08-11</td>
                 <td>최초 로그인시 1000원 할인 쿠폰</td>
                 <td>원이츠</td>
-                <td><button class="btn-3 border-0 textsize-1 textcolor-black" style="background-color: #e6eeff; margin-left: auto;"
-                    type="button" onclick='fn_openalert("쿠폰을 삭제하시겠습니까?","${contextPath}/admin/coupon/adminCouponList.do")' >삭제</button></td>
+                <td><a href="javascript:void(0)" onclick='fn_openalert("쿠폰을 삭제하시겠습니까?","${contextPath}/admin/coupon/adminCouponList.do")' >삭제</a></td>
             </tr>
         </table>
 <%-- <!--    <div> 페이징처리
