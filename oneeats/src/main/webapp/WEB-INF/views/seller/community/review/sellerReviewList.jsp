@@ -14,12 +14,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
-      <div class="row vertical-align">
-        <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
-          리뷰
-        </div>
-        <div class="col-md"></div>
-        <form action="">
+      <form action="">
+        <div class="row vertical-align">
+          <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
+            리뷰
+          </div>
+          <div class="col-md"></div>
           <div class="col-md-2 p-0 justify-content-end d-flex">
             <select name="filter_type">
               <option value="goodsName">상품명</option>
@@ -42,8 +42,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
             </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
 
       <div class="clear">&nbsp;</div>
       <hr class="line-black" />
@@ -59,7 +59,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row reviewList-title">
           <div class="col-md-1">121</div>
           <div class="col-md-2">48</div>
-          <div class="col-md-8">
+          <div
+            class="col-md-8"
+            onClick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=48'"
+          >
             <div class="row">
               <div class="col-md-9 text-left">못난이 복숭아</div>
               <div class="col-md-3">hanyeji</div>
@@ -81,9 +84,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <hr class="line-gray" />
 
         <div class="row reviewList-title">
-          <div class="col-md-1">121</div>
+          <div class="col-md-1">122</div>
           <div class="col-md-2">48</div>
-          <div class="col-md-8">
+          <div
+            class="col-md-8"
+            onClick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=48'"
+          >
             <div class="row">
               <div class="col-md-9 text-left">못난이 복숭아</div>
               <div class="col-md-3">hanyeji</div>

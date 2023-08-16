@@ -61,7 +61,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row reviewList-title">
           <div class="col-md-1">121</div>
           <div class="col-md-2">48</div>
-          <div class="col-md-8">
+          <div
+            class="col-md-8"
+            onClick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=48'"
+          >
             <div class="row">
               <div class="col-md-6 text-left">못난이 복숭아</div>
               <div class="col-md-3">uglyfarm</div>
@@ -110,7 +113,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row reviewList-title">
           <div class="col-md-1">121</div>
           <div class="col-md-2">48</div>
-          <div class="col-md-8">
+          <div
+            class="col-md-8"
+            onClick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=48'"
+          >
             <div class="row">
               <div class="col-md-6 text-left">못난이 복숭아</div>
               <div class="col-md-3">uglyfarm</div>

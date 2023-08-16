@@ -14,13 +14,13 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
-      <div class="row vertical-align">
-        <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
-          레시피
-        </div>
-        <div class="col-md"></div>
+      <form action="">
+        <div class="row vertical-align">
+          <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
+            레시피
+          </div>
+          <div class="col-md"></div>
 
-        <form action="">
           <div class="col-md-2 p-0 justify-content-end d-flex">
             <select name="filter_type">
               <option value="title">제목</option>
@@ -43,9 +43,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
             </div>
           </div>
-        </form>
-      </div>
-
+        </div>
+      </form>
       <div class="clear">&nbsp;</div>
       <hr class="line-black" />
       <div class="recipeList_grid textcolor-black text-center">

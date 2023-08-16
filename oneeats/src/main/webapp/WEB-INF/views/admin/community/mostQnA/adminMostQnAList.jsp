@@ -9,6 +9,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>자주하는 질문 목록</title>
+    <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
   <body>
     <section>

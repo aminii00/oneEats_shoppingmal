@@ -105,7 +105,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
                   <li id="menu_review">
                     <a
-                      href="${contextPath}/community/review/sellerReviewList.do"
+                      href="${contextPath}/seller/community/review/sellerReviewList.do"
                       >리뷰</a
                     >
                   </li>

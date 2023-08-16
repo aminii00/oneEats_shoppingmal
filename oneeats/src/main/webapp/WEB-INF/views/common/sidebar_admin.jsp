@@ -25,7 +25,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           lastSlashIndex
         );
         if (selectedSideMenu == "goods") {
-          if (currentPath.includes("seller")) {
+          if (currentPath.includes("Seller")) {
             selectedSideMenu = "sellerGoods";
           } else {
             selectedSideMenu = "adminGoods";
