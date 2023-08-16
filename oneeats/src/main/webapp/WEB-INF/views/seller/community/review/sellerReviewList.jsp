@@ -8,7 +8,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>레시피 목록</title>
+    <title>리뷰 목록</title>
 
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
@@ -16,17 +16,16 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <section>
       <div class="row vertical-align">
         <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
-          레시피
+          리뷰
         </div>
         <div class="col-md"></div>
-
         <form action="">
           <div class="col-md-2 p-0 justify-content-end d-flex">
             <select name="filter_type">
-              <option value="title">제목</option>
+              <option value="goodsName">상품명</option>
+              <option value="goodsNo">상품번호</option>
               <option value="memberId">작성자아이디</option>
-              <option value="ingredient">재료</option>
-              <option value="description">내용</option>
+              <option value="content">내용</option>
             </select>
           </div>
           <div class="col-md-4 p-0">
@@ -48,61 +47,90 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
 
       <div class="clear">&nbsp;</div>
       <hr class="line-black" />
-      <div class="recipeList_grid textcolor-black text-center">
+      <div class="reviewList_grid textcolor-black text-center">
         <div class="row header-row textbold">
           <div class="col-md-1">번호</div>
-          <div class="col-md">제목</div>
-          <div class="col-md-2">작성자id</div>
-          <div class="col-md-2">작성일</div>
+          <div class="col-md-2">상품번호</div>
+          <div class="col-md-6">상품명</div>
+          <div class="col-md-2">작성자아이디</div>
           <div class="col-md-1">삭제</div>
         </div>
         <hr class="line-black" />
-        <div class="row recipeList-title">
-          <div class="col-md-1">120</div>
-          <div class="col-md text-left">단호박죽</div>
-          <div class="col-md-2">qwer</div>
-          <div class="col-md-2">2023/08/11</div>
+        <div class="row reviewList-title">
+          <div class="col-md-1">121</div>
+          <div class="col-md-2">48</div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-9 text-left">못난이 복숭아</div>
+              <div class="col-md-3">hanyeji</div>
+            </div>
+            <div class="row">
+              <div class="col text-left">
+                ★★★★☆ <br />
+                생긴 것과 다르게 아주 맛있습니다.
+              </div>
+            </div>
+          </div>
           <div class="col-md-1">
             <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/recipe/deleteRecipe.do?recipeNo=120');"
+              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/seller/communtiy/review/deleteReview.do?reviewNo=121');"
+              >삭제</a
             >
-              삭제
-            </a>
           </div>
         </div>
         <hr class="line-gray" />
 
-        <div class="row recipeList-title">
+        <div class="row reviewList-title">
           <div class="col-md-1">121</div>
-          <div class="col-md text-left">단호박죽</div>
-          <div class="col-md-2">qwer</div>
-          <div class="col-md-2">2023/08/11</div>
+          <div class="col-md-2">48</div>
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-9 text-left">못난이 복숭아</div>
+              <div class="col-md-3">hanyeji</div>
+            </div>
+            <div class="row">
+              <div class="col text-left">
+                ★★★★☆ <br />
+                생긴 것과 다르게 아주 맛있습니다.
+              </div>
+            </div>
+          </div>
           <div class="col-md-1">
             <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/recipe/deleteRecipe.do?recipeNo=123');"
+              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/seller/communtiy/review/deleteReview.do?reviewNo=121');"
+              >삭제</a
             >
-              삭제
-            </a>
           </div>
         </div>
 
-        <!--레시피 리스트를 넣을 곳-->
+        <!--리뷰 리스트를 넣을 곳-->
         <c:choose>
-          <c:when test="${not empty recipeList}">
-            <c:forEach var="recipe" items="${recipeList}">
+          <c:when test="${not empty reviewList}">
+            <c:forEach var="review" items="${reviewList}">
               <hr class="line-gray" />
-              <div class="row recipeList-title">
-                <div class="col-md-1">${recipe.recipeNo}</div>
-                <div class="col-md text-left">${recipe.title}</div>
-                <div class="col-md-2">${recipe.memberId}</div>
-                <div class="col-md-2">${recipe.creDate}</div>
-
+              <div class="row reviewList-title">
+                <div class="col-md-1">${review.reviewNo}</div>
+                <div class="col-md-2">${review.goodsNo}</div>
+                <div
+                  class="col-md-8"
+                  onClick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${review.goodsNo}'"
+                >
+                  <div class="row" style="border-bottom: gray">
+                    <div class="col-md-9 text-left">${review.goodsName}</div>
+                    <div class="col-md-3">${review.memberId}</div>
+                  </div>
+                  <div class="row">
+                    <div class="col text-left">
+                      ${review.star} <br />
+                      ${review.content}
+                    </div>
+                  </div>
+                </div>
                 <div class="col-md-1">
                   <a
-                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/recipe/deleteRecipe.do?recipeNo=${recipe.recipeNo}');"
+                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/seller/communtiy/review/deleteReview.do?reviewNo=${review.reviewNo}');"
+                    >삭제</a
                   >
-                    삭제
-                  </a>
                 </div>
               </div>
             </c:forEach>
@@ -111,20 +139,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       </div>
       <hr class="line-black" />
       <div>&nbsp;</div>
-
-      <!--작성 버튼-->
-      <div class="row">
-        <div class="col">
-          <div style="float: right">
-            <button
-              class="btn-toform"
-              onclick="location.href='${contextPath}/community/recipe/recipeForm.do'"
-            >
-              작성
-            </button>
-          </div>
-        </div>
-      </div>
 
       <!--페이지 버튼-->
       <div>

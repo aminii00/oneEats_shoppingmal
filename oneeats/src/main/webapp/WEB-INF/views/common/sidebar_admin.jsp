@@ -13,6 +13,28 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
 
     <script>
       var rotateArray = new Array(0, 0, 0, 0, 0);
+      $(document).ready(function () {
+        var currentPath = window.location.pathname;
+        var lastSlashIndex = currentPath.lastIndexOf("/");
+        var secondLastSlashIndex = currentPath.lastIndexOf(
+          "/",
+          lastSlashIndex - 1
+        );
+        var selectedSideMenu = currentPath.substring(
+          secondLastSlashIndex + 1,
+          lastSlashIndex
+        );
+        if (selectedSideMenu == "goods") {
+          if (currentPath.includes("seller")) {
+            selectedSideMenu = "sellerGoods";
+          } else {
+            selectedSideMenu = "adminGoods";
+          }
+        }
+
+        $("#menu_" + selectedSideMenu).addClass("selected_menu");
+        console.log(selectedSideMenu);
+      });
     </script>
     <script src="${contextPath}/js/side.js"></script>
   </head>
@@ -24,10 +46,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <span>&nbsp;&nbsp;관리자 메뉴</span>
           </div>
           <ul class="ul_menus">
-            <li>
+            <li id="menu_member">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">회원</a>
+                  <a href="${contextPath}/admin/member/adminMemberList.do"
+                    >회원</a
+                  >
                 </div>
               </div>
             </li>
@@ -48,16 +72,26 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">핫딜</a></li>
-                  <li><a href="">쿠폰</a></li>
+                  <li id="menu_hotdeal">
+                    <a href="${contextPath}/admin/hotdeal/adminHotDealList.do"
+                      >핫딜</a
+                    >
+                  </li>
+                  <li id="menu_coupon">
+                    <a href="${contextPath}/admin/coupon/adminCouponList.do"
+                      >쿠폰</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
 
-            <li>
+            <li id="menu_order">
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">주문/배송</a>
+                  <a href="${contextPath}/admin/order/adminOrderList.do"
+                    >주문/배송</a
+                  >
                 </div>
               </div>
             </li>
@@ -77,8 +111,16 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">사업자 상품</a></li>
-                  <li><a href="">관리자 상품</a></li>
+                  <li id="menu_sellerGoods">
+                    <a href="${contextPath}/admin/goods/adminSellerGoodsList.do"
+                      >사업자 상품</a
+                    >
+                  </li>
+                  <li id="menu_adminGoods">
+                    <a href="${contextPath}/admin/goods/adminGoodsList.do"
+                      >관리자 상품</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
@@ -98,9 +140,24 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_3" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">공지사항</a></li>
-                  <li><a href="">자주하는 문의</a></li>
-                  <li><a href="">1:1문의</a></li>
+                  <li id="menu_notice">
+                    <a
+                      href="${contextPath}/admin/community/notice/adminNoticeList.do"
+                      >공지사항</a
+                    >
+                  </li>
+                  <li id="menu_mostQnA">
+                    <a
+                      href="${contextPath}/admin/community/mostQnA/adminMostQnAList.do"
+                      >자주하는 문의</a
+                    >
+                  </li>
+                  <li id="menu_oneQnA">
+                    <a
+                      href="${contextPath}/admin/community/oneQnA/adminOneQnAList.do"
+                      >1:1문의</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>
@@ -120,8 +177,18 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_4" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">리뷰</a></li>
-                  <li><a href="">레시피</a></li>
+                  <li id="menu_review">
+                    <a
+                      href="${contextPath}/admin/community/review/adminReviewList.do"
+                      >리뷰</a
+                    >
+                  </li>
+                  <li id="menu_recipe">
+                    <a
+                      href="${contextPath}/admin/community/recipe/adminRecipeList.do"
+                      >레시피</a
+                    >
+                  </li>
                 </ul>
               </div>
             </li>

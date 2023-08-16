@@ -42,23 +42,20 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div
                   class="textbold"
                   style="width: 100%"
-                  onclick="fn_toggle(1);"
+                  onclick="fn_slideToggle(1);"
                 >
                   못난이 상품
                   <img
-                    id="motnan_arrow"
+                    id="arrow_1"
                     src="${contextPath}/img/icon/uparrow.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
                 </div>
-                <ul
-                  id="category_motnan"
-                  style="margin-left: 12px; margin-top: 12px"
-                >
-                  <li>채소</li>
-                  <li>과일</li>
-                  <li>못난이 주스/수제청</li>
+                <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
+                  <li><a href="">채소</a></li>
+                  <li><a href="">과일</a></li>
+                  <li><a href="">못난이 주스/수제청</a></li>
                 </ul>
               </div>
             </li>
@@ -67,25 +64,22 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div
                   class="textbold"
                   style="width: 100%"
-                  onclick="fn_toggle(2)"
+                  onclick="fn_slideToggle(2)"
                 >
                   밀키트
                   <img
-                    id="meal_arrow"
+                    id="arrow_2"
                     src="${contextPath}/img/icon/uparrow.png"
                     alt=""
                     style="width: 10px; float: right"
                   />
                 </div>
-                <ul
-                  id="category_meal"
-                  style="margin-left: 12px; margin-top: 12px"
-                >
-                  <li>찌개/탕/찜</li>
-                  <li>식사/안주류</li>
-                  <li>죽</li>
-                  <li>식사대용식</li>
-                  <li>간편한끼 반찬</li>
+                <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
+                  <li><a href="">찌개/탕/찜</a></li>
+                  <li><a href="">식사/안주류</a></li>
+                  <li><a href="">죽</a></li>
+                  <li><a href="">식사대용식</a></li>
+                  <li><a href="">간편한끼 반찬</a></li>
                 </ul>
               </div>
             </li>

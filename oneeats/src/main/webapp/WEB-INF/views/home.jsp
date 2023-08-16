@@ -13,6 +13,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <title>Document</title>
   </head>
   <body>
+    <a href="${contextPath}/admin/main/adminMain.do">관리자 메인페이지로</a>
+    <a href="${contextPath}/seller/main/sellerMain.do">사업자 메인페이지로</a>
     <div class="bg-green">초록색 배경</div>
     <div class="bg-white">하얀색 배경</div>
     <div class="bg-lightgreen">연두 배경</div>
