@@ -12,11 +12,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <title>헤더</title>
 
     <link rel="stylesheet" href="${contextPath}/css/header.css" />
+    <style>
+      div.row div.nice-select {
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-      <div class="row bg-gray">
-        <div class="float-right textsize-1 textcolor-black">
+      <div class="bg-gray">
+        <div style="float: right" class="textsize-1 textcolor-black">
           <a href="${contextPath}/member/registerTypeSelect.do">회원가입 </a
           >&nbsp; &nbsp;<a href="${contextPath}/member/loginForm.do">로그인</a>
           &nbsp;&nbsp;
@@ -38,22 +43,34 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="col-6">
           <div class="row">
             <div class="col-md">
-              <form action="">
-                <!-- Search bar content -->
-                <div class="input-group">
-                  <input
-                    type="text"
-                    placeholder="Search..."
-                    class="form-control"
-                  />
-                  <div class="input-group-append">
-                    <button
-                      style="background-color: #568203"
-                      class="textcolor-white border-0"
-                      type="submit"
-                    >
-                      Search
-                    </button>
+              <form action="${contextPath}/goods/goodsList.do">
+                <div class="row vertical-align">
+                  <div class="col-md-2 p-0">
+                    <select name="filter_type" id="">
+                      <option value="all">전체</option>
+                      <option value="베스트">베스트</option>
+                      <option value="채소">채소</option>
+                    </select>
+                  </div>
+                  <div class="col-md p-0">
+                    <!-- Search bar content -->
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        placeholder="Search..."
+                        class="form-control"
+                        name="filter_word"
+                      />
+                      <div class="input-group-append">
+                        <button
+                          style="background-color: #568203"
+                          class="textcolor-white border-0"
+                          type="submit"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </form>

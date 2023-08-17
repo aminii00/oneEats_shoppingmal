@@ -289,3 +289,7 @@ hr.line-gray {
 	background-color: lightgray;
 }
 
+.vertical-align{
+	display:flex;
+	align-items: center;
+}
