@@ -194,7 +194,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <span style="font-size: 28px; color: #dd2222">￦12000</span>
                 </li>
               </ul>
-              <a href="#" class="primary-btn">결제하기</a>
+              <a
+                href="${contextPath}/mypage/orderConfirm.do"
+                class="primary-btn"
+                >주문하기</a
+              >
             </div>
           </div>
         </div>
