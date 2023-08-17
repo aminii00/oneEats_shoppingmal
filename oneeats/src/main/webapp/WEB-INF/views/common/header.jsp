@@ -16,8 +16,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   <body>
     <div class="container">
       <div class="row bg-gray">
-        <div class="col-9"></div>
-        <div class="col-3 textsize-1 textcolor-black">
+        <div class="float-right textsize-1 textcolor-black">
           <a href="${contextPath}/member/registerTypeSelect.do">회원가입 </a
           >&nbsp; &nbsp;<a href="${contextPath}/member/loginForm.do">로그인</a>
           &nbsp;&nbsp;

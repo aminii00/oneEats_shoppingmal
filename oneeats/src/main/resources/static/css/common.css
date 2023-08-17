@@ -9,6 +9,10 @@
   margin-bottom: 4px;
   border: 0px solid #bcbcbc;
 }
+
+
+
+
 #sidebar-left {
   width: 20%;
   height: 800px;
@@ -18,6 +22,8 @@
   float: left;
   border: 0px solid #bcbcbc;
 }
+
+
 #sidebar-left1 {
   width: 20%;
   height: 400px;
@@ -36,6 +42,19 @@
   float: left;
   border: 0px solid #bcbcbc;
 }
+
+@media only screen and (max-width: 768px) {
+  #sidebar-left{
+    display: none;
+  }
+  
+  #content{
+	width:95%;
+	margin:auto;
+	}
+}
+
+
 #footer {
   clear: both;
   padding: 4px;
@@ -255,3 +274,18 @@ hr.line-gray {
     transform: translate(-50%, -50%);
 	
 }
+
+
+/*고정 quick menu*/
+.fixed_quick_menu{
+	position:fixed;
+	right:20px;
+	bottom:20px;
+	padding:8px;
+	background-color: rgb(255,200,140,0.2);
+}
+
+.fixed_quick_menu .a{
+	background-color: lightgray;
+}
+

@@ -10,73 +10,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <!-- Css Styles -->
-
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/bootstrap.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/font-awesome.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/elegant-icons.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/nice-select.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/jquery-ui.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/owl.carousel.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/slicknav.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/style.css"
-      type="text/css"
-    />
-
     <style>
       .css-lytdfk {
         width: 200px;
@@ -205,28 +138,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   </head>
 
   <body>
-    <!-- Breadcrumb Section Begin -->
-    <section
-      class="breadcrumb-section set-bg"
-      data-setbg="${contextPath}/img/breadcrumb.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <div class="breadcrumb__text">
-              <h2>못난이 상품</h2>
-              <div class="breadcrumb__option">
-                <a href="./index.html">Home</a>
-                <a href="./index.html">못난이 상품</a>
-                <span>채소</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
     <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
       <div class="container">
