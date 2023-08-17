@@ -12,12 +12,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <title>goodsDetail</title>
 
     <style>
-      .css-e6zlnr {
+      .property-flex2 {
         display: flex;
         flex: 1 1 0%;
         flex-direction: row;
         align-items: flex-start;
-        /*overflow: hidden;*/
         width: 100%;
         height: 40px;
         padding: 12px 0 12px;
@@ -42,7 +41,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
-        /*  overflow: hidden;*/
       }
       .css-1bp09d0 {
         padding-bottom: 40px;
@@ -50,7 +48,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       .css-2lvxh7 {
         border-bottom: 1px solid #f4f4f4;
       }
-      .css-e6zlnr {
+      .property-flex2 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -65,7 +63,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -webkit-box-align: flex-start;
         -ms-flex-align: flex-start;
         align-items: flex-start;
-        /*   overflow: hidden;*/
         width: 100%;
         padding: 17px 0 18px;
         border-top: 1px solid #f4f4f4;
@@ -230,7 +227,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex: 1 1 0%;
         overflow: hidden;
       }
-
       .css-18pn4xv {
         display: flex;
         -webkit-box-align: center;
@@ -366,43 +362,43 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <div class="product__details__price">￦900</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">판매자</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">김씨</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">포장타입</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">상온(종이 포장)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">원산지</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">논산</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">무게 / 용량</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">300g</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">수확시기</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">8월</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
                       <dd class="css-1k8t52o">
                         <p class="css-c02hqi">택배 배송(기본 3일)</p>
@@ -412,7 +408,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <!--수정-->
                     <div class="css-1bp09d0" style="margin-bottom: -40px">
                       <div class="css-2lvxh7">
-                        <dl class="css-e6zlnr" style="height: 170px">
+                        <dl class="property-flex2" style="height: 170px">
                           <dt
                             style="width: 200px; color: #333333"
                             style="margin-top: 16px"
@@ -446,7 +442,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           style="width: 525px"
                         >
                           <dl
-                            class="css-e6zlnr"
+                            class="property-flex2"
                             style="height: 150px; border-top: none; margin: 0"
                           >
                             <dt class="css-lytdfk epzddad1">
