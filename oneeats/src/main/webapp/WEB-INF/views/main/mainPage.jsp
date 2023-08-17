@@ -565,7 +565,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
-                  /oneeats/src/main/webapp/WEB-INF/views/admin/hotdeal/adminHotDealForm.jsp
                   <li>
                     <a href="#"><i class="fa fa-shopping-cart"></i></a>
                   </li>

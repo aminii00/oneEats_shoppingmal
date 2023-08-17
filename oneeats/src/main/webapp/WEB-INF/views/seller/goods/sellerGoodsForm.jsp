@@ -78,19 +78,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     />
 
     <style>
-      .css-lytdfk {
+      .property_title1 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex1 {
         display: flex;
         flex: 1 1 0%;
         flex-direction: column;
       }
-      .css-c02hqi {
+      .property-font1 {
         color: #333;
         font-weight: 400;
         line-height: 19px;
@@ -98,10 +98,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         word-break: break-all;
         /* overflow: hidden;*/
       }
-      .css-2lvxh7 {
+      .property-margin1 {
         border-bottom: 1px solid #f4f4f4;
       }
-      .css-e6zlnr {
+      .property-flex2 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -123,14 +123,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .css-lytdfk {
+      .property_title1 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex1 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -267,12 +267,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <div class="col-lg-6 col-md-6 text-left">
             <div class="product__details__text">
               <section>
-                <div class="css-2lvxh7">
-                  <dl class="css-e6zlnr" style="height: 66px">
-                    <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <div class="property-margin1">
+                  <dl class="property-flex2" style="height: 66px">
+                    <dt class="property_title1 textbold" style="margin-top: 16px">
                       카테고리
                     </dt>
-                    <dd class="css-1k8t52o">
+                    <dd class="property-flex1">
                       <div style="align-content: center; margin-top: 4px">
                         <select name="select" class="opt">
                           <option value="category">
@@ -294,101 +294,101 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </dl>
                 </div>
 
-                <div class="css-2lvxh7">
-                  <dl class="css-e6zlnr" style="height: 66px">
-                    <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <div class="property-margin1">
+                  <dl class="property-flex2" style="height: 66px">
+                    <dt class="property_title1 textbold" style="margin-top: 16px">
                       상품명
                     </dt>
-                    <dd class="css-1k8t52o">
+                    <dd class="property-flex1">
                       <input
                         name="name"
-                        class="css-c02hqi nice-select"
+                        class="property-font1 nice-select"
                         style="width: 176px"
                       />
                     </dd>
                   </dl>
                 </div>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     판매가격
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
                       name="price"
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     판매자
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     포장타입
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
                       name="rapping"
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     원산지
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
                       name="manufacturer"
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     무게 / 용량
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
                       name="weight"
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <dl class="css-e6zlnr" style="height: 60px">
-                  <dt class="css-lytdfk textbold" style="margin-top: 16px">
+                <dl class="property-flex2" style="height: 60px">
+                  <dt class="property_title1 textbold" style="margin-top: 16px">
                     수확시기
                   </dt>
-                  <dd class="css-1k8t52o">
+                  <dd class="property-flex1">
                     <input
                       name="expDate"
                       type="date"
-                      class="css-c02hqi nice-select"
+                      class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
 
-                <div class="css-e6zlnr" style="height: 60px">
-                  <div class="css-lytdfk textbold" style="margin-top: 16px">
+                <div class="property-flex2" style="height: 60px">
+                  <div class="property_title1 textbold" style="margin-top: 16px">
                     상품 정보 기입
                   </div>
                 </div>
