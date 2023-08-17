@@ -468,7 +468,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         </div>
         <div class="row featured__filter">
           <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/pumpkin.jpg"
@@ -490,12 +490,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/peach.jpg"
               >
-                <ul class="featured__item__pic__hover">
+                <ul class="featured__item__pic__hover >
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
@@ -512,7 +512,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/guel.jpg"
@@ -534,7 +534,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/apple.jpg"
@@ -556,7 +556,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/kongbul.jpg"
@@ -577,7 +577,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-            <div class="featured__item">
+            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/shabu.jpg"

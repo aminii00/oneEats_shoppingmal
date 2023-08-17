@@ -256,7 +256,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <button
           class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0"
           type="button"
-          href=""
+          onclick="location.href='${contextPath}/mypage/orderList.do'"
         >
           결제하기
         </button>
