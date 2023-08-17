@@ -3,28 +3,23 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
 <tiles-definitions>
-
-
-
-    
+   
 <!-- 상품 -->
     <definition name="/seller/goods/sellerGoodsForm" extends="mainLayout">  
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
        <put-attribute name="title" value="사업자 상품등록 페이지" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsForm.jsp" />
     </definition>   
 
     <definition name="/seller/goods/sellerGoodsModForm" extends="mainLayout">
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
-       <put-attribute name="title" value="사업자 상품등록 수정 페이지" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
+       <put-attribute name="title" value="사업자 상품등록 수정 페이지" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsModForm.jsp" />
     </definition> 
     
-       <definition name="/seller/goods/sellerGoodsList" extends="mainLayout">
-       <put-attribute name="title" value="사업자 상품 리스트 페이지" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
+    <definition name="/seller/goods/sellerGoodsList" extends="mainLayout">
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
+       <put-attribute name="title" value="사업자 상품 리스트 페이지" /> 
        <put-attribute name="body" value="/WEB-INF/views/seller/goods/sellerGoodsList.jsp" />
     </definition>     
     
@@ -39,6 +34,7 @@
     <definition name="/seller/hotdeal/sellerHotDealModForm" extends="mainLayout">
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
        <put-attribute name="title" value="사업자 핫딜등록 수정 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/seller/hotdeal/sellerHotDealModForm.jsp" />
 	</definition>
   
     <definition name="/seller/hotdeal/sellerHotDealList" extends="mainLayout">
@@ -50,8 +46,7 @@
 <!-- 쿠폰 -->    
     <definition name="/seller/coupon/sellerCouponForm" extends="mainLayout">
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
-       <put-attribute name="title" value="사업자 쿠폰등록 페이지" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />        
+       <put-attribute name="title" value="사업자 쿠폰등록 페이지" />       
        <put-attribute name="body" value="/WEB-INF/views/seller/coupon/sellerCouponForm.jsp" />
     </definition>
     
@@ -64,16 +59,14 @@
 <!-- 주문/배송 -->
     <definition name="/seller/order/sellerOrderList" extends="mainLayout">
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />
-       <put-attribute name="title" value="사업자 주문/배송 페이지" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" />        
+       <put-attribute name="title" value="사업자 주문/배송 페이지" />      
        <put-attribute name="body" value="/WEB-INF/views/seller/order/sellerOrderList.jsp" />
     </definition>
     
-    
     <definition name="/seller/main/sellerMain" extends="mainLayout">
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
        <put-attribute name="title" value="사업자 메인 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/seller/main/sellerMain.jsp" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
     </definition>
     
     <definition name="/seller/member/sellerRegisterForm" extends="nosidebarLayout">
@@ -97,8 +90,8 @@
 	</definition>
 
 	<definition name="/seller/community/review/sellerReviewList" extends="mainLayout">
-		<put-attribute name="title" value="사업자 리뷰 목록" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
+	    <put-attribute name="side" value="/WEB-INF/views/common/sidebar_seller.jsp" /> 
+		<put-attribute name="title" value="사업자 리뷰 목록" /> 
 		<put-attribute name="body" value="/WEB-INF/views/seller/community/review/sellerReviewList.jsp" />
 	</definition>
 	

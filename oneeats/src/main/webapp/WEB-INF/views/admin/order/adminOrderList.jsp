@@ -140,7 +140,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <option value="아이디">아이디</option>
             </select>
             <input type="text" name="search-2" placeholder="search..">
-            <button class="btn-1 bg-lightgreen textcolor-white border-0" type="submit">검색</button>
+            <button class="btn-1 bg-lightgreen textcolor-white border-0" type="button">검색</button>
             </div>
         </div>
         <table border="0" class="textcolor-black textsize-1">

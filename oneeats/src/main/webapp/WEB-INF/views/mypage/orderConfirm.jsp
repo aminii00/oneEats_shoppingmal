@@ -28,8 +28,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         border-collapse: collapse;
         border-spacing: 0;
         width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
       }
       .tr-1 {
         border-bottom: 1px solid #b3b3b3;
@@ -38,7 +36,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         text-align: left;
         padding: 12px;
         border-bottom: 1px solid #b3b3b3;
-        width: 50px;
+        width: 80px;
       }
       td {
         text-align: left;
@@ -46,13 +44,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         width: 50px;
       }
       input {
-        width: 250px;
+        width: 400px;
         height: 40px;
         padding: 0px 11px 1px 15px;
         border-radius: 4px;
         border: 1px solid rgb(221, 221, 221);
         line-height: 1.5;
-        color: rgb(51, 51, 51);
         outline: none;
         box-sizing: border-box;
       }
@@ -66,19 +63,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         border-radius: 4px;
         border: 1px solid rgb(221, 221, 221);
         line-height: 1.5;
-        color: rgb(51, 51, 51);
         outline: none;
         box-sizing: border-box;
       }
       div.nice-select {
-        width: 250px;
+        width: 400px;
       }
       .list {
         width: 100%;
       }
       .div-btn {
         display: flex;
-        -webkit-box-pack: center;
         justify-content: center;
         padding: 20px;
       }
@@ -90,7 +85,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         margin-right: 30px;
       }
       .btn-fat1 {
-        width: 120px;
+        width: 190px;
         height: 45px;
       }
     </style>
@@ -112,26 +107,36 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>이름</td>
-          <td>강민지</td>
+          <td><input type="text" name="orderer_name" value="강민지" /></td>
         </tr>
         <tr>
           <td>연락처</td>
-          <td>010-1234-5678</td>
+          <td>
+            <input type="text" name="orderer_phone" value="010-1234-5678" />
+          </td>
         </tr>
         <tr class="tr-1">
           <th>받는분정보</th>
         </tr>
         <tr>
           <td>이름</td>
-          <td>강민지</td>
+          <td><input type="text" name="receiver_name" value="강민지" /></td>
         </tr>
         <tr>
           <td>배송주소</td>
-          <td>(35234) 대전광역시 서구 대덕대로 182</td>
+          <td>
+            <input
+              type="text"
+              name="receiver_address"
+              value="(35234) 대전광역시 서구 대덕대로 182"
+            />
+          </td>
         </tr>
         <tr>
           <td>연락처</td>
-          <td>010-1234-5678</td>
+          <td>
+            <input type="text" name="reciever_phone" value="010-1234-5678" />
+          </td>
         </tr>
         <tr>
           <td>배송요청사항</td>
@@ -155,7 +160,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>사용적립금</td>
-          <td><input type="text" /></td>
+          <td><input type="text" name="used_point" /></td>
         </tr>
         <tr class="tr-1">
           <th>쿠폰</th>
@@ -163,7 +168,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <tr>
           <td>쿠폰사용</td>
           <td>
-            <select name="coupon">
+            <select name="used_couponId">
               <option value="1000원 할인 쿠폰">1000원 할인 쿠폰</option>
               <option value="2000원 할인 쿠폰">2000원 할인 쿠폰</option>
             </select>
@@ -173,42 +178,44 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <th>결제정보</th>
         </tr>
         <tr>
+          <!-- value는 이엘태그로 값 넣어주기! -->
           <td>상품 금액</td>
-          <td>25800원</td>
+          <td><input type="hidden" name="payment_price" value="" />25800원</td>
         </tr>
         <tr>
           <td>상품 할인 금액</td>
-          <td>-3100원</td>
+          <td><input type="hidden" name="discount_price" value="" />-3100원</td>
         </tr>
         <tr>
           <td>배송비</td>
-          <td>2500원</td>
+          <td><input type="hidden" name="shippingfee" value="" />2500원</td>
         </tr>
         <tr>
           <td>적립금액</td>
-          <td>250원</td>
+          <td><input type="hidden" name="point_price" value="" />250원</td>
         </tr>
         <tr>
           <td>총 결제금액</td>
-          <td>24400원</td>
+          <td><input type="hidden" name="total_price" value="" />24400원</td>
         </tr>
         <tr>
           <td>결제방법</td>
-          <td>
+          <td name="payment_type">
             <button
               class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1"
-              type="submit"
+              type="button"
               href="#"
             >
               신용카드
             </button>
             <button
               class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1"
-              type="submit"
+              type="button"
               href="#"
             >
-              계좌이체</button
-            ><br />
+              계좌이체
+            </button>
+            <br />
             <button class="btn-round btn-fat1 bg-white textbold btn-border">
               <img
                 style="width: 40px; height: 25px"
@@ -219,8 +226,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <img
                 style="width: 40px; height: 25px"
                 src="${contextPath}/img/icon/npay.png"
-              /></button
-            ><br />
+              />
+            </button>
+            <br />
             <select>
               <option value="카드사 선택">카드사 선택</option>
               <option value="신한카드">신한카드</option>
@@ -246,10 +254,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           취소
         </button>
         <button
-          class="btn-1 btn-regular textcolor-white textbold border-0"
-          style="background-color: #a6cd48"
-          type="submit"
-          href="#"
+          class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0"
+          type="button"
+          href=""
         >
           결제하기
         </button>
