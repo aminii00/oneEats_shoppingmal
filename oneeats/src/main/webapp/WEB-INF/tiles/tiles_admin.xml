@@ -57,14 +57,12 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
        <put-attribute name="title" value="관리자 쿠폰목록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponList.jsp" />
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
+    
     <definition name="/admin/coupon/adminCouponForm" extends="mainLayout">
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
        <put-attribute name="title" value="관리자 쿠폰등록 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/coupon/adminCouponForm.jsp" />
-       
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
     
 <!-- 주문/배송 -->
@@ -72,8 +70,6 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
        <put-attribute name="title" value="관리자 주문/배송 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/admin/order/adminOrderList.jsp" />
-       
-       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
     
     
@@ -134,11 +130,13 @@
        <put-attribute name="body" value="/WEB-INF/views/admin/community/recipe/adminRecipeList.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
+    
     <definition name="/admin/community/review/adminReviewList" extends="mainLayout">
        <put-attribute name="title" value="관리자 공지사항 목록" />
        <put-attribute name="body" value="/WEB-INF/views/admin/community/review/adminReviewList.jsp" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />
     </definition>
+    
       <definition name="/admin/member/adminMemberList" extends="mainLayout">
        <put-attribute name="title" value="관리자 회원 목록" />
        <put-attribute name="body" value="/WEB-INF/views/admin/member/adminMemberList.jsp" />
