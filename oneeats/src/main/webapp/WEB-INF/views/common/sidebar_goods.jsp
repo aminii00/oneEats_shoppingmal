@@ -167,29 +167,32 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           <div class="latest-prdouct__slider__item">
             <a href="#" class="latest-product__item">
               <div class="latest-product__item__pic">
-                <img src="img/latest-product/lp-1.jpg" alt="" />
+                <img
+                  src="${contextPath}/img/product/main/sweetpotato.jpg"
+                  alt=""
+                />
               </div>
-              <div class="latest-product__item__text">
-                <h6>Crab Pool Security</h6>
-                <span>$30.00</span>
-              </div>
-            </a>
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic">
-                <img src="img/latest-product/lp-2.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>Crab Pool Security</h6>
-                <span>$30.00</span>
+              <div class="latest-product__item__text" style="width: 110px">
+                <h6>못난이 호박고구마 800g</h6>
+                <span>￦5900</span>
               </div>
             </a>
             <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic">
-                <img src="img/latest-product/lp-3.jpg" alt="" />
+              <div class="latest-product__item__pic" style="width: 110px">
+                <img src="${contextPath}/img/product/main/potato.jpg" alt="" />
               </div>
               <div class="latest-product__item__text">
-                <h6>Crab Pool Security</h6>
-                <span>$30.00</span>
+                <h6>못난이 감자 1개입</h6>
+                <span>￦1300</span>
+              </div>
+            </a>
+            <a href="#" class="latest-product__item">
+              <div class="latest-product__item__pic" style="width: 110px">
+                <img src="${contextPath}/img/product/main/nyoki.jpg" alt="" />
+              </div>
+              <div class="latest-product__item__text">
+                <h6>포르치니버섯 크림 뇨끼</h6>
+                <span>￦8800</span>
               </div>
             </a>
           </div>

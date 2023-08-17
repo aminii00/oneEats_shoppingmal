@@ -89,7 +89,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     />
 
     <style>
-      .css-e6zlnr {
+      .property-flex2 {
         display: flex;
         flex: 1 1 0%;
         flex-direction: row;
@@ -101,19 +101,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .css-lytdfk {
+      .property_title1 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex1 {
         display: flex;
         flex: 1 1 0%;
         flex-direction: column;
       }
-      .css-c02hqi {
+      .property-font1 {
         color: #333;
         font-weight: 400;
         line-height: 19px;
@@ -124,10 +124,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       .css-1bp09d0 {
         padding-bottom: 40px;
       }
-      .css-2lvxh7 {
+      .property-margin1 {
         border-bottom: 1px solid #f4f4f4;
       }
-      .css-e6zlnr {
+      .property-flex2 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -149,14 +149,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .css-lytdfk {
+      .property_title1 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex1 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -440,63 +440,63 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 />
 
                 <span>(3 reviews)</span>
-                <div class="product__details__price">￦900</div>
+                <div class="product__details__price">￦ ${goods.price}</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">판매자</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">김씨</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">김씨</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">포장타입</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">상온(종이 포장)</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">상온(종이 포장)</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">원산지</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">논산</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">논산</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">무게 / 용량</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">300g</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">300g</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">수확시기</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">8월</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">8월</p>
                       </dd>
                     </dl>
-                    <dl class="css-e6zlnr">
+                    <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                      <dd class="property-flex1">
+                        <p class="property-font1">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
                     <!--수정-->
                     <div class="css-1bp09d0" style="margin-bottom: -40px">
-                      <div class="css-2lvxh7">
-                        <dl class="css-e6zlnr" style="height: 170px">
+                      <div class="property-margin1">
+                        <dl class="property-flex2" style="height: 170px">
                           <dt
                             style="width: 200px; color: #333333"
                             style="margin-top: 16px"
                           >
                             상품선택
                           </dt>
-                          <dd class="css-1k8t52o">
+                          <dd class="property-flex1">
                             <div
                               style="align-content: center"
                               style="overflow-y: scrol"
@@ -523,10 +523,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           style="width: 525px"
                         >
                           <dl
-                            class="css-e6zlnr"
+                            class="property-flex2"
                             style="height: 150px; border-top: none; margin: 0"
                           >
-                            <dt class="css-lytdfk epzddad1">
+                            <dt class="property_title1 epzddad1">
                               <div
                                 class="css-1foiu5e font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
