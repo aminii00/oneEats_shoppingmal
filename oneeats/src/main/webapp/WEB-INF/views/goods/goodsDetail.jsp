@@ -100,27 +100,29 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .property_title1 {
+      .css-lytdfk {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .property-flex1 {
+      .css-1k8t52o {
         display: flex;
         flex: 1 1 0%;
         flex-direction: column;
       }
-      .property-font1 {
+      .css-c02hqi {
         color: #333;
         font-weight: 400;
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
       }
-
-      .property-margin1 {
+      .css-1bp09d0 {
+        padding-bottom: 40px;
+      }
+      .css-2lvxh7 {
         border-bottom: 1px solid #f4f4f4;
       }
       .property-flex2 {
@@ -144,14 +146,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .property_title1 {
+      .css-lytdfk {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .property-flex1 {
+      .css-1k8t52o {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -163,10 +165,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -ms-flex-direction: column;
         flex-direction: column;
       }
-      .property-flex3:last-of-type {
+      .css-1cb5lnc:last-of-type {
         border-bottom: 1px solid #f4f4f4;
       }
-      .property-flex3 {
+      .css-1cb5lnc {
         display: flex;
         flex-direction: column;
         -webkit-box-pack: justify;
@@ -183,7 +185,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         box-sizing: border-box;
         margin: 0;
       }
-      .property-font1 {
+      .css-1foiu5e {
         font-weight: 700;
         font-size: 16px;
         color: #333;
@@ -434,55 +436,55 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 />
 
                 <span>(3 reviews)</span>
-                <div class="product__details__price">￦ ${goods.price}</div>
+                <div class="product__details__price">￦900</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">택배 배송(기본 3일)</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">판매자</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">김씨</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">김씨</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">포장타입</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">상온(종이 포장)</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">상온(종이 포장)</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">원산지</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">논산</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">논산</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">무게 / 용량</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">300g</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">300g</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">수확시기</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">8월</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">8월</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="property-flex1">
-                        <p class="property-font1">택배 배송(기본 3일)</p>
+                      <dd class="css-1k8t52o">
+                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
                     <!--수정-->
                     <div class="css-1bp09d0" style="margin-bottom: -40px">
-                      <div class="property-margin1">
+                      <div class="css-2lvxh7">
                         <dl class="property-flex2" style="height: 170px">
                           <dt
                             style="width: 200px; color: #333333"
@@ -490,7 +492,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           >
                             상품선택
                           </dt>
-                          <dd class="property-flex1">
+                          <dd class="css-1k8t52o">
                             <div
                               style="align-content: center"
                               style="overflow-y: scrol"
@@ -513,16 +515,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </dd>
                         </dl>
                         <div
-                          class="cart-option-item property-flex3"
+                          class="cart-option-item css-1cb5lnc"
                           style="width: 525px"
                         >
                           <dl
                             class="property-flex2"
                             style="height: 150px; border-top: none; margin: 0"
                           >
-                            <dt class="property_title1 epzddad1">
+                            <dt class="css-lytdfk epzddad1">
                               <div
-                                class="property-font1 font-bold"
+                                class="css-1foiu5e font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
                               >
                                 못난이 당근 단품
@@ -537,7 +539,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="property-font1 text-right"
+                            class="css-1foiu5e text-right"
                             style="
                               font-size: 16px;
                               border-top: 1px solid rgb(244, 244, 244);
@@ -548,7 +550,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             총 상품금액
                           </span>
                           <span
-                            class="property-font1 text-right"
+                            class="css-1foiu5e text-right"
                             style="font-size: 22px; margin-bottom: -10px"
                             >900원</span
                           >
