@@ -53,6 +53,16 @@
        <put-attribute name="title" value="쿠폰 적립금 페이지" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageCouponPoint.jsp" />
     </definition>
+    
+    <!-- 리뷰 -->
+    <definition name="/mypage/mypageReview" extends="mainLayout">
+       <put-attribute name="title" value="리뷰 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/mypage/mypageReview.jsp" />
+    </definition>
+    <definition name="/review/writeReview" extends="mainLayout">
+       <put-attribute name="title" value="리뷰 페이지" />
+       <put-attribute name="body" value="/WEB-INF/views/review/writeReview.jsp" />
+    </definition>
 </tiles-definitions>
 
 
