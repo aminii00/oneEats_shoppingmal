@@ -58,7 +58,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   id="category_motnan"
                   style="margin-left: 12px; margin-top: 12px"
                 >
-                  <li>채소</li>
+                  <li><a href="${contextPath}/goods/goodsList.do">채소</a></li>
                   <li>과일</li>
                   <li>못난이 주스/수제청</li>
                 </ul>

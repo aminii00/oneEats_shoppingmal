@@ -12,40 +12,29 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <title>goodsDetail</title>
 
     <style>
-      .property-flex2 {
-        display: flex;
-        flex: 1 1 0%;
-        flex-direction: row;
-        align-items: flex-start;
-        width: 100%;
-        height: 40px;
-        padding: 12px 0 12px;
-        font-size: 14px;
-        letter-spacing: -0.5px;
-      }
-      .css-lytdfk {
+      .property-font2 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex4 {
         display: flex;
         flex: 1 1 0%;
         flex-direction: column;
       }
-      .css-c02hqi {
+      .property-input {
         color: #333;
         font-weight: 400;
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
       }
-      .css-1bp09d0 {
+      .property-margin {
         padding-bottom: 40px;
       }
-      .css-2lvxh7 {
+      .property-margin1 {
         border-bottom: 1px solid #f4f4f4;
       }
       .property-flex2 {
@@ -69,14 +58,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-size: 14px;
         letter-spacing: -0.5px;
       }
-      .css-lytdfk {
+      .property-font2 {
         width: 200px;
         height: 100%;
         color: #666;
         font-weight: 400;
         line-height: 19px;
       }
-      .css-1k8t52o {
+      .property-flex4 {
         display: -webkit-box;
         display: -webkit-flex;
         display: -ms-flexbox;
@@ -88,10 +77,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -ms-flex-direction: column;
         flex-direction: column;
       }
-      .css-1cb5lnc:last-of-type {
+      .property-flex5:last-of-type {
         border-bottom: 1px solid #f4f4f4;
       }
-      .css-1cb5lnc {
+      .property-flex5 {
         display: flex;
         flex-direction: column;
         -webkit-box-pack: justify;
@@ -108,7 +97,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         box-sizing: border-box;
         margin: 0;
       }
-      .css-1foiu5e {
+      .property-font3 {
         font-weight: 700;
         font-size: 16px;
         color: #333;
@@ -203,7 +192,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         color: #fe434c;
         font-weight: 700;
       }
-      .css-169773r {
+      .property-input1 {
         display: flex;
         padding: 30px 0 19px 20px;
         border-bottom: 1px solid #f4f4f4;
@@ -211,23 +200,23 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         font-weight: 400;
         line-height: 19px;
       }
-      .css-107htc6 {
+      .property-gdtail-flex {
         flex: 0 0 225px;
       }
-      .css-1qo6qeh {
+      .property-gdtail-flex1 {
         display: flex;
         -webkit-box-align: center;
         align-items: center;
         margin: -1px 0 7px;
       }
-      .css-f3vz0n {
+      .property-gdtail-font {
         font-weight: 500;
       }
-      .css-inxa61 {
+      .property-gdtail-flex2 {
         flex: 1 1 0%;
         overflow: hidden;
       }
-      .css-18pn4xv {
+      .property-gdtail-flex3 {
         display: flex;
         -webkit-box-align: center;
         align-items: center;
@@ -235,7 +224,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         height: 19px;
         padding-right: 20px;
       }
-      .css-11q4ylb {
+      .property-gdtail-font1 {
         font-size: 14px;
         font-weight: 400;
         line-height: 19px;
@@ -260,7 +249,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       .css-14kcwq8 {
         color: #999;
       }
-      .css-g3a39p {
+      .property-btn1 {
         display: flex;
         -webkit-box-pack: center;
         justify-content: center;
@@ -275,7 +264,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         line-height: 20px;
         color: #999;
       }
-      .css-xdee1z {
+      .property-img {
         width: 15px;
         height: 15px;
         margin-right: 4px;
@@ -364,50 +353,50 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <div class="css-iqoq9n">
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">판매자</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">김씨</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">김씨</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">포장타입</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">상온(종이 포장)</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">상온(종이 포장)</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">원산지</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">논산</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">논산</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">무게 / 용량</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">300g</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">300g</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">수확시기</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">8월</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">8월</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="css-1k8t52o">
-                        <p class="css-c02hqi">택배 배송(기본 3일)</p>
+                      <dd class="property-flex4">
+                        <p class="property-input">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
                     <!--수정-->
-                    <div class="css-1bp09d0" style="margin-bottom: -40px">
-                      <div class="css-2lvxh7">
+                    <div class="property-margin" style="margin-bottom: -40px">
+                      <div class="property-margin1">
                         <dl class="property-flex2" style="height: 170px">
                           <dt
                             style="width: 200px; color: #333333"
@@ -415,7 +404,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           >
                             상품선택
                           </dt>
-                          <dd class="css-1k8t52o">
+                          <dd class="property-flex4">
                             <div
                               style="align-content: center"
                               style="overflow-y: scrol"
@@ -438,16 +427,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </dd>
                         </dl>
                         <div
-                          class="cart-option-item css-1cb5lnc"
+                          class="cart-option-item property-flex5"
                           style="width: 525px"
                         >
                           <dl
                             class="property-flex2"
                             style="height: 150px; border-top: none; margin: 0"
                           >
-                            <dt class="css-lytdfk epzddad1">
+                            <dt class="property-font2 epzddad1">
                               <div
-                                class="css-1foiu5e font-bold"
+                                class="property-font3 font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
                               >
                                 못난이 당근 단품
@@ -462,7 +451,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="property-font3 text-right"
                             style="
                               font-size: 16px;
                               border-top: 1px solid rgb(244, 244, 244);
@@ -473,7 +462,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             총 상품금액
                           </span>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="property-font3 text-right"
                             style="font-size: 22px; margin-bottom: -10px"
                             >900원</span
                           >
@@ -608,25 +597,25 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
                   <!--상품 후기-->
                   <div
-                    class="css-169773r"
+                    class="property-input1"
                     style="border-top: 1px solid rgb(244, 244, 244)"
                   >
-                    <div class="css-107htc6">
-                      <div class="css-1qo6qeh">
-                        <span class="css-f3vz0n">강**</span>
+                    <div class="property-gdtail-flex">
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font">강**</span>
                       </div>
-                      <div class="css-1qo6qeh">
-                        <span class="css-f3vz0n" style="padding-top: 11px"
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font" style="padding-top: 11px"
                           ><img
                             src="${contextPath}/img/product/review/star.jpg"
                             alt="리뷰 별"
                         /></span>
                       </div>
                     </div>
-                    <article class="css-inxa61">
+                    <article class="property-gdtail-flex2">
                       <div>
-                        <div class="css-18pn4xv">
-                          <h3 class="css-11q4ylb">[못난이 당근]</h3>
+                        <div class="property-gdtail-flex3">
+                          <h3 class="property-gdtail-font1">[못난이 당근]</h3>
                         </div>
                         <p class="text-left" style="padding: 15px 0 0 0">
                           생긴것과 다르게 맛있어요!!
@@ -635,31 +624,31 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <div>
                             <span class="css-14kcwq8">2023.08.12</span>
                           </div>
-                          <button class="css-g3a39p">
-                            <span class="ico css-xdee1z"></span
+                          <button class="property-btn1">
+                            <span class="ico property-img"></span
                             ><span>도움돼요</span>
                           </button>
                         </footer>
                       </div>
                     </article>
                   </div>
-                  <div class="css-169773r">
-                    <div class="css-107htc6">
-                      <div class="css-1qo6qeh">
-                        <span class="css-f3vz0n">최**</span>
+                  <div class="property-input1">
+                    <div class="property-gdtail-flex">
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font">최**</span>
                       </div>
-                      <div class="css-1qo6qeh">
-                        <span class="css-f3vz0n" style="padding-top: 11px"
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font" style="padding-top: 11px"
                           ><img
                             src="${contextPath}/img/product/review/star.jpg"
                             alt="리뷰 별"
                         /></span>
                       </div>
                     </div>
-                    <article class="css-inxa61">
+                    <article class="property-gdtail-flex2">
                       <div>
-                        <div class="css-18pn4xv">
-                          <h3 class="css-11q4ylb">[못난이 당근]</h3>
+                        <div class="property-gdtail-flex3">
+                          <h3 class="property-gdtail-font1">[못난이 당근]</h3>
                         </div>
                         <p class="text-left" style="padding: 15px 0 0 0">
                           아주 맛있어요 믿고 사요!!
@@ -675,8 +664,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <div>
                             <span class="css-14kcwq8">2023.08.12</span>
                           </div>
-                          <button class="css-g3a39p">
-                            <span class="ico css-xdee1z"></span
+                          <button class="property-btn1">
+                            <span class="ico property-img"></span
                             ><span>도움돼요</span>
                           </button>
                         </footer>
