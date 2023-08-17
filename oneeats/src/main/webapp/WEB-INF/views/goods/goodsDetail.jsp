@@ -94,7 +94,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex: 1 1 0%;
         flex-direction: row;
         align-items: flex-start;
-        /*overflow: hidden;*/
         width: 100%;
         height: 40px;
         padding: 12px 0 12px;
@@ -119,11 +118,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         line-height: 19px;
         white-space: pre-line;
         word-break: break-all;
-        /*  overflow: hidden;*/
       }
-      .css-1bp09d0 {
-        padding-bottom: 40px;
-      }
+
       .property-margin1 {
         border-bottom: 1px solid #f4f4f4;
       }
@@ -142,7 +138,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -webkit-box-align: flex-start;
         -ms-flex-align: flex-start;
         align-items: flex-start;
-        /*   overflow: hidden;*/
         width: 100%;
         padding: 17px 0 18px;
         border-top: 1px solid #f4f4f4;
@@ -168,10 +163,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         -ms-flex-direction: column;
         flex-direction: column;
       }
-      .css-1cb5lnc:last-of-type {
+      .property-flex3:last-of-type {
         border-bottom: 1px solid #f4f4f4;
       }
-      .css-1cb5lnc {
+      .property-flex3 {
         display: flex;
         flex-direction: column;
         -webkit-box-pack: justify;
@@ -188,7 +183,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         box-sizing: border-box;
         margin: 0;
       }
-      .css-1foiu5e {
+      .property-font1 {
         font-weight: 700;
         font-size: 16px;
         color: #333;
@@ -307,7 +302,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         flex: 1 1 0%;
         overflow: hidden;
       }
-
       .css-18pn4xv {
         display: flex;
         -webkit-box-align: center;
@@ -519,7 +513,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </dd>
                         </dl>
                         <div
-                          class="cart-option-item css-1cb5lnc"
+                          class="cart-option-item property-flex3"
                           style="width: 525px"
                         >
                           <dl
@@ -528,7 +522,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           >
                             <dt class="property_title1 epzddad1">
                               <div
-                                class="css-1foiu5e font-bold"
+                                class="property-font1 font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
                               >
                                 못난이 당근 단품
@@ -543,7 +537,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </dt>
                           </dl>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="property-font1 text-right"
                             style="
                               font-size: 16px;
                               border-top: 1px solid rgb(244, 244, 244);
@@ -554,7 +548,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             총 상품금액
                           </span>
                           <span
-                            class="css-1foiu5e text-right"
+                            class="property-font1 text-right"
                             style="font-size: 22px; margin-bottom: -10px"
                             >900원</span
                           >
