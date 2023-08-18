@@ -14,8 +14,9 @@ $(document).ready(function () {
         
         
         $('#plus_btn').on('click',function(){
+			console.log("plus ingredient");
 			var newRow= `
-			<div class="row indegredient_row">
+			<div class="row ingredient_row">
                     <div class="col-md">
                       <input type="text" name="name" class="form-control" placeholder="이름" />
                     </div>
@@ -32,7 +33,7 @@ $(document).ready(function () {
                     </div>
                   </div>
 			`;
-			$('.indegredient_col').append(newRow);
+			$('.ingredient_col').append(newRow);
 			
 		});
 		

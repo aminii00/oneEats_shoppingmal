@@ -18,28 +18,37 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row">
           <div class="col">
             <div class="textsize-3 text-left textbold textcolor-black">
-              몽글몽글 단호박 죽
+              ${recipe.title}
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <div class="recipe_creDate textsize-1 text-left textcolor-black">
-              2023년 3월 23일
+              ${recipe.creDate}
             </div>
           </div>
         </div>
 
         <div class="row">
           <div class="col">
-            <button class="btn-toform" style="float: right">수정</button>
+            <button
+              class="btn-toform"
+              style="float: right"
+              onclick="location.href='${contextPath}/community/recipe/recipeModForm.do?recipeNo=${recipe.recipeNo}'"
+            >
+              수정
+            </button>
           </div>
         </div>
         <div class="row">&nbsp;</div>
         <div class="row recipe_main_img_row">
           <div class="col">
             <div class="recipe_main_img_wrapper">
-              <img src="${contextPath}/img/recipe/1.jpg" alt="" />
+              <img
+                src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}"
+                alt="레시피 메인 이미지"
+              />
             </div>
           </div>
         </div>
@@ -51,27 +60,25 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="col lightgreen_title">소요시간</div>
             </div>
             <div class="row">
-              <div class="col">10분</div>
+              <div class="col">${recipe.cooking_time}</div>
             </div>
           </div>
         </div>
         <div class="row">&nbsp;</div>
         <div class="row">&nbsp;</div>
-        <div class="row indegredient_grid">
+        <div class="row ingredient_grid">
           <div class="col">
             <div class="row">
-              <div class="col lightgreen_title">재료</div>
+              <div class="col lightgreen_title">재료(${recipe.inbun})</div>
             </div>
-            <div class="row indegredient_rows">
+            <div class="row ingredient_rows">
               <div class="col">
-                <div class="row indegredient_row">
-                  <div class="col">단호박</div>
-                  <div class="col">1개</div>
-                </div>
-                <div class="row indegredient_row">
-                  <div class="col">설탕</div>
-                  <div class="col">1큰술</div>
-                </div>
+                <c:forEach items="${ingredientList}" var="ingredient">
+                  <div class="row ingredient_row">
+                    <div class="col">${ingredient.name}</div>
+                    <div class="col">${ingredient.qty}</div>
+                  </div>
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -84,11 +91,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="col lightgreen_title">만드는 법</div>
             </div>
             <div class="row">
-              <div class="col howto_content">
-                1 단호박의 속을 파냅니다. <br />
-                2 설탕과 함께 끓입니다. <br />
-                3 완성!
-              </div>
+              <div class="col howto_content">${recipe.description}</div>
             </div>
           </div>
         </div>
@@ -98,16 +101,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col-md-2"></div>
           <div class="col-md-2 writer_profile_img">
             <div class="profile_img_wrapper">
-              <img src="" alt="프로필 이미지" />
+              <img
+                class="btn-square"
+                src="${contextPath}/download.do?imageFileName=${writer.profileImg}&path=prop"
+                alt="프로필 이미지"
+              />
             </div>
           </div>
           <div class="col-md-6">
             <div class="row text-left textsize-2 textbold writer_name">
-              맛도사
+              ${writer.name}
             </div>
-            <div class="row textsize-1 writer_description">
-              여러분께 간편하고 맛있는 레시피를 알려드립니다!
-            </div>
+            <div class="row textsize-1 writer_description">${writer.intro}</div>
           </div>
           <div class="col-md-2"></div>
         </div>
