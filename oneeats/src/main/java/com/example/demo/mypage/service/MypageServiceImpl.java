@@ -23,6 +23,7 @@ public class MypageServiceImpl implements MypageService{
 		orderList = mypageDAO.selectOrderList();
 		return orderList;
 
+	}
 	
 	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {

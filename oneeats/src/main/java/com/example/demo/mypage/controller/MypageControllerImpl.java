@@ -32,7 +32,8 @@ public class MypageControllerImpl implements MypageController {
 	private MypageService mypageService;
 	@Autowired
 	private OrderVO orderVO;
-	
+	@Autowired
+	private MemberVO memberVO;
 	@RequestMapping(value = "/mypage/orderList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -44,7 +45,6 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println(mav);
 		return mav;
 	}
-	private MemberVO memberVO;
 
 	@Override
 	@RequestMapping(value="/mypage/myPageMain.do" ,method = RequestMethod.GET)
