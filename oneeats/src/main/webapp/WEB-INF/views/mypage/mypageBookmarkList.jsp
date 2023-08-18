@@ -61,7 +61,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       
 
 
-
+.img-01 {
+        width: 120px;
+        height: 120px;
+        margin-left: 40px;
+        background-color: rgb(245, 245, 245);
+      }
 
 
 
@@ -69,11 +74,26 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </head>
     <body>
     <form method="post" action="#">
-    <div class="div-p">
+    <div class="div-p ">
         <br>
         <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품(3) &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품은 최대 100개까지 저장합니다.</span></p>
     <hr class="linebold">
-    <div><img src="${contextPath}/img/"></div>
+    <br>
+    <table>
+      <tr>
+        <hr>
+        <td>
+          <img
+              class="img-01"
+              src="${contextPath}/img/product/details/product-details-1.jpg"
+              alt="상품 이미지"
+            />
+        </td>
+        <td calss ="text-right">
+          못난이 당근
+        </td>
+      </tr>
+    </table>
 
         <br><br>
         <div id="wrapper">

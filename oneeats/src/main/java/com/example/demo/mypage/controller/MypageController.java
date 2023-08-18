@@ -7,4 +7,5 @@ import org.springframework.web.servlet.ModelAndView;
 
 public interface MypageController {
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

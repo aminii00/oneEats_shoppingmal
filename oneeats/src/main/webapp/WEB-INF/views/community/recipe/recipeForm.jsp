@@ -92,7 +92,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </div>
           <div class="row">&nbsp;</div>
           <div class="row">&nbsp;</div>
-          <div class="row indegredient_grid">
+          <div class="row ingredient_grid">
             <div class="col">
               <div class="row">
                 <div class="col lightgreen_title">재료</div>
@@ -108,14 +108,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 </div>
               </div>
               <div class="row">&nbsp;</div>
-              <div class="row indegredient_rows">
-                <div class="col-md-11 indegredient_col">
-                  <div class="row indegredient_row head_row bg-lightgreen">
+              <div class="row ingredient_rows">
+                <div class="col-md-11 ingredient_col">
+                  <div class="row ingredient_row head_row bg-lightgreen">
                     <div class="col-md">이름</div>
                     <div class="col-md">양</div>
                     <div class="col-md-1"></div>
                   </div>
-                  <div class="row indegredient_row">
+                  <div class="row ingredient_row">
                     <div class="col-md">
                       <input
                         type="text"
@@ -136,7 +136,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                     </div>
                     <div class="col-md-1"></div>
                   </div>
-                  <div class="row indegredient_row">
+                  <div class="row ingredient_row">
                     <div class="col-md">
                       <input
                         type="text"

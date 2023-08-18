@@ -10,4 +10,7 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	@Autowired
 	private AdminCommunityService adminCommunityService;
 
+	
+	
+	
 }
