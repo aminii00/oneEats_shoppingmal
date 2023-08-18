@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+@Controller("adminMemberController")
 public class AdminMemberControllerImpl implements AdminMemberController{
 	@RequestMapping(value = "/admin/member/adminMemberDetail.do")
 	public ModelAndView adminMemberDetail(HttpServletRequest request) {

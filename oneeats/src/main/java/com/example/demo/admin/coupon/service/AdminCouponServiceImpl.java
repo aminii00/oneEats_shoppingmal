@@ -8,5 +8,5 @@ import com.example.demo.admin.coupon.dao.AdminCouponDAO;
 @Service("adminCouponService")
 public class AdminCouponServiceImpl implements AdminCouponService {
 	@Autowired
-	AdminCouponDAO adminCouponDAO;
+	private AdminCouponDAO adminCouponDAO;
 }
