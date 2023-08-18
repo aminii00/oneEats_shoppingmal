@@ -21,6 +21,7 @@
 
 </head>
 <body>
+    <form action="${contextPath}/mypage/mypageintro.do" method="post">
     <div class="content-area">
         <div class="profile-edit-box">
             <div class="profile-edit-header">
@@ -33,11 +34,12 @@
                 <div class="profile-edit-img-div ">
                     
                     <c:choose>
-				<c:when test="${user.profile_photo == null}">
+				<c:when test="${myList.profileImg==null}">
 					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2">
+                    
 				</c:when>
 				<c:otherwise>
-					<img src="${contextPath}/img/profilenull.png" class="brd-lightgray btn-round imgsize-square2">
+                    <img class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=prop" alt="">
 				</c:otherwise>
 			</c:choose>
         </div>
@@ -48,21 +50,21 @@
                         <br>
                         <p>
                             <label>닉네임 또는 별명</label><br>
-                            <input type="text" name="nick"  class ="btn-round ">
+                            <input type="text" name="nickname"  class ="btn-round" value="${myList.nickname}">
                         </p>
                         <p>
                             <label>소개</label><br>
-                            <textarea  class ="profileintroduce brd-lightgreen btn-round textsize-0" name="introduce" id="introduce" cols="30" rows="5"></textarea>
+                            <textarea  class ="profileintroduce brd-lightgray btn-round textsize-2" name="intro" id="introduce" cols="30" rows="5" >${myList.intro}</textarea>
                         </p>
                         <br>
                         <p>
                             <button type="reset" class="btn-midlong_2 textsize-1 textbold input btn-round border-0">취소</button>
                             <button type="submit" class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">저장</button>
                         </p>
-                    </form>
                 </div>
             </div>
         </div>
     </div>
+</form>
 </body>
 </html>
