@@ -3,7 +3,7 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-	<mapper namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
+<mapper namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
 	<!-- 리절트 맵 정의 -->	
 	<resultMap id="recipeResult" type="recipeVO">
 	    <result property="recipeNO" column="recipeNO" />
