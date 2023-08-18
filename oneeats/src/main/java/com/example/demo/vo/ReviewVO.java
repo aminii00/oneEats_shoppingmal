@@ -8,13 +8,28 @@ public class ReviewVO {
 	private String star;
 	private String reviewImg;
 	private String content;
+	private int goodsNo;
+	private int memberNo;
 	
-	// 리뷰를 남긴 멤버의 정보
-	private MemberVO memberVO;
 	
-	// 리뷰 대상 상품의 정보
-	private GoodsVO goodsVO;
 	
+	@Override
+	public String toString() {
+		return "ReviewVO [reviewNo=" + reviewNo + ", star=" + star + ", reviewImg=" + reviewImg + ", content=" + content
+				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + "]";
+	}
+	public int getGoodsNo() {
+		return goodsNo;
+	}
+	public void setGoodsNo(int goodsNo) {
+		this.goodsNo = goodsNo;
+	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public int getReviewNo() {
 		return reviewNo;
 	}
@@ -38,18 +53,6 @@ public class ReviewVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public MemberVO getMemberVO() {
-		return memberVO;
-	}
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
-	}
-	public GoodsVO getGoodsVO() {
-		return goodsVO;
-	}
-	public void setGoodsVO(GoodsVO goodsVO) {
-		this.goodsVO = goodsVO;
 	}
 	
 	
