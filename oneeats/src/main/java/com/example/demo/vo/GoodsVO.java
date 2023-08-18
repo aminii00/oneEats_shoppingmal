@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component("goodsVO")
 public class GoodsVO {
 	private int goodsNo;
-	private String name;
+	public String name;
 	private String price;
 	private String rapping;
 	private String manufacturer;

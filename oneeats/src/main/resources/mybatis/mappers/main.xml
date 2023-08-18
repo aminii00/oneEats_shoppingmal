@@ -4,5 +4,61 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="com.example.demo.main.dao.MainDAO">
+	 <resultMap id="MemberResult" type="memberVO">
+      <result property="memberNo" column="memberNo" />
+      <result property="type" column="type" />
+      <result property="id" column="id" />
+      <result property="pwd" column="pwd" />
+      <result property="name" column="name" />
+      <result property="email" column="email" />
+      <result property="phone" column="phone" />
+      <result property="gender" column="gender" />
+      <result property="birth" column="birth" />
+      <result property="sms_agreement" column="sms_agreement" />
+      <result property="email_agreement" column="email_agreement" />
+      <result property="busNo" column="busNo" />
+      <result property="zipCode" column="zipCode" />
+      <result property="address" column="address" />
+      <result property="address_detail" column="address_detail" />
+      <result property="creDate" column="creDate" />
+      <result property="nickname" column="nickname" />
+      <result property="intro" column="intro" />
+      <result property="profileImg" column="profileImg" />
+      <result property="point" column="point" />
+   </resultMap> 
+   
+    <resultMap id="GoodsResult" type="goodsVO">
+    <result property="goodsNo" column="goodsNo" />
+    <result property="name" column="name" />
+    <result property="price" column="price" />
+    <result property="rapping" column="rapping" />
+    <result property="manufacturer" column="manufacturer" />
+    <result property="weight" column="weight" />
+    <result property="expDate" column="expDate" />
+    <result property="description" column="description" />
+    <result property="harvest" column="harvest" />
+    <result property="creDate" column="creDate" />
+    <result property="img1" column="img1" />
+    <result property="img2" column="img2" />
+    <result property="img3" column="img3" />
+    <result property="img4" column="img4" />
+    <result property="img5" column="img5" />
+    <result property="category" column="category" />
+    <result property="type" column="type" />
+
+    </resultMap> 
+	
+	
+	<select id="selectGoodsList"  resultMap="GoodsResult"  parameterType ="java.util.HashMap"   >
+	    <![CDATA[
+		select * from goods
+		]]>
+	</select>
+	
+	<select id="selectAllGoodsList"  resultMap="GoodsResult"  >
+	    <![CDATA[
+		select * from goods
+		]]>
+	</select>
 	
 </mapper>
