@@ -20,10 +20,10 @@ public class FileDownloadController {
 	private static String IMAGE_REPO_PATH = "c:\\oneeats\\file_repo";
 
 	@RequestMapping("/download.do")
-	protected void download(@RequestParam("imageFileName") String imageFileName,HttpServletRequest request,
+	protected void download(@RequestParam("imageFileName") String imageFileName,@RequestParam("path") String path,HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		OutputStream out = response.getOutputStream();
-		String downFile = IMAGE_REPO_PATH + "\\" +imageFileName;
+		String downFile = IMAGE_REPO_PATH +"\\"+path +"\\" +imageFileName;
 		File file = new File(downFile);
 		response.setHeader("Cache-control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + imageFileName);

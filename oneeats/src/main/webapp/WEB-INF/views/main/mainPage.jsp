@@ -18,58 +18,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
-    <script
-      type="text/javascript"
-      src="${contextPath}/js/bootstrap.min.js"
-    ></script>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/common.css"
-      type="text/css"
-    />
-
-    <style>
-      @font-face {
-        font-family: "LINESeedKR-Bd";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2")
-          format("woff2");
-        font-weight: 700;
-        font-style: normal;
-      }
-      @font-face {
-        font-family: "SUIT-Regular";
-        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
-          format("woff2");
-        font-weight: normal;
-        font-style: normal;
-      }
-
-      * {
-        font-family: SUIT-Regular;
-      }
-    </style>
   </head>
 
   <body>
-    <!-- Page Preloder -->
-
     <!-- Hero Section Begin -->
     <section class="hero">
       <div class="container">
@@ -468,7 +419,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         </div>
         <div class="row featured__filter">
           <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/pumpkin.jpg"
@@ -490,12 +444,15 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fastfood">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/peach.jpg"
               >
-                <ul class="featured__item__pic__hover >
+                <ul class="featured__item__pic__hover">
                   <li>
                     <a href="#"><i class="fa fa-heart"></i></a>
                   </li>
@@ -512,7 +469,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix vegetables fresh-meat">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/guel.jpg"
@@ -534,7 +494,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix fastfood oranges">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/apple.jpg"
@@ -556,7 +519,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix fresh-meat vegetables">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/kongbul.jpg"
@@ -577,7 +543,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fastfood">
-            <div class="featured__item" onclick="location.href='${contextPath}/goods/goodsDetail.do'">
+            <div
+              class="featured__item"
+              onclick="location.href='${contextPath}/goods/goodsDetail.do'"
+            >
               <div
                 class="featured__item__pic set-bg"
                 data-setbg="img/product/main/shabu.jpg"
