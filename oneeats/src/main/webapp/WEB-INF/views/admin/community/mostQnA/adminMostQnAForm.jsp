@@ -13,6 +13,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
+      ${jave.key}
       <div class="textsize-3 text-left textbold textcolor-black">
         자주하는 질문
       </div>
