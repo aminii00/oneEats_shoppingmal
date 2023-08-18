@@ -11,13 +11,7 @@
 		<put-attribute name="body2" value="" />
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
-    <definition name="/main/mainPage" extends="undersidebarLayout">
-       <put-attribute name="title" value="메인 페이지" />
-       <put-attribute name="body1" value="/WEB-INF/views/main/mainPage.jsp" />
-       <put-attribute name="body2" value="/WEB-INF/views/main/mainPage.jsp" />
-    </definition>
-    
-    
+
     <definition name="/admin/community/notice/adminNoticeList" extends="mainLayout">
     	<put-attribute name="title" value="관리자 공지사항 목록" />
     	<put-attribute name="side" value="/WEB-INF/views/common/sidebar_admin.jsp" />

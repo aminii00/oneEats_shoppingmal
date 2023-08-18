@@ -20,55 +20,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       rel="stylesheet"
     />
 
-    <!-- Css Styles -->
-    <script
-      type="text/javascript"
-      src="${contextPath}/js/bootstrap.min.js"
-    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/bootstrap.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/font-awesome.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/elegant-icons.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/nice-select.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/jquery-ui.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/owl.carousel.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/slicknav.min.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/style.css"
-      type="text/css"
     />
   </head>
 
@@ -301,9 +255,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                               class="product__discount__item__pic set-bg"
                               data-setbg="/img/product/main/aspiragus.jpg"
                               style="
-                                background-image: url('/img/product/main/aspiragus.jpg');
+                                background-image: url('${contextPath}/download.do?imageFileName=${carrot}&path=prop');
                               "
                             >
+                              />
+
                               <div class="product__discount__percent">-20%</div>
                               <ul class="product__item__pic__hover">
                                 <li>
