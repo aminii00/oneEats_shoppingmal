@@ -5,14 +5,6 @@
 	
 	<mapper namespace="com.example.demo.seller.goods.dao.SellerGoodsDAO">
 	<!-- 리절트 맵 정의 -->	
-	<resultMap id="" type="">
-	    <result property="" column="" />
-	</resultMap>
 	
-	<select id="" resultMap="" parameterType="" >
-	    <![CDATA[
-		
-		]]>
-	</select>
 	
 </mapper>

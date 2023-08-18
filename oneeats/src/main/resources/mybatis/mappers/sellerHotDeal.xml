@@ -5,16 +5,6 @@
 
 <mapper namespace="com.example.demo.seller.hotdeal.dao.SellerHotDealDAO">
 <!-- 리절트 맵 정의 -->	
-	<resultMap id="hotdealResult" type="hotdealVO">
-	    <result property="hotdealNo" column="hotdealNo" />
-		
-	</resultMap>
-	
-	 <select id="selectSellerHotDealList" resultMap="hotdealResult" >
-	    <![CDATA[
-			select * from hotdeal
-		]]>
-	</select>
 	
 	
 </mapper>
