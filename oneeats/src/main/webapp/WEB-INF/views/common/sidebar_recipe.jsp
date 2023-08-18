@@ -85,66 +85,29 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             >
               최신 레시피
             </div>
-            <div
-              id="side_recentrecipe_row"
-              class="row"
-              onclick="location.href='#'"
-            >
-              <div class="col-md-3 p-0">
-                <div class="img-square-wrapper">
-                  <img
-                    src="${contextPath}/img/recipe/1.jpg"
-                    alt="레시피 사진"
-                    style="width: 100%"
-                  />
+
+            <c:forEach items="${newRecipeList}" var="recipe">
+              <div
+                id="side_recentrecipe_row"
+                class="row"
+                onclick="location.href='${contextPath}/community/recipe/recipeDetail.do?recipeNo=${recipe.recipeNo}'"
+              >
+                <div class="col-md-3 p-0">
+                  <div class="img-square-wrapper">
+                    <img
+                      src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipe"
+                      alt="레시피 사진"
+                      style="width: 100%"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-1 p-0">&nbsp;</div>
+                <div class="col-md-8 p-0">
+                  <div class="textbold textsize-2">${recipe.title}</div>
+                  <div style="font-size: 8px">${recipe.creDate}</div>
                 </div>
               </div>
-              <div class="col-md-1 p-0">&nbsp;</div>
-              <div class="col-md-8 p-0">
-                <div class="textbold textsize-2">레시피 제목</div>
-                <div style="font-size: 8px">2023년 8월 11일</div>
-              </div>
-            </div>
-            <div
-              id="side_recentrecipe_row"
-              class="row"
-              onclick="location.href='#'"
-            >
-              <div class="col-md-3 p-0">
-                <div class="img-square-wrapper">
-                  <img
-                    src="${contextPath}/img/recipe/1.jpg"
-                    alt="레시피 사진"
-                    style="width: 100%"
-                  />
-                </div>
-              </div>
-              <div class="col-md-1 p-0">&nbsp;</div>
-              <div class="col-md-8 p-0">
-                <div class="textbold textsize-2">레시피 제목</div>
-                <div style="font-size: 8px">2023년 8월 11일</div>
-              </div>
-            </div>
-            <div
-              id="side_recentrecipe_row"
-              class="row"
-              onclick="location.href='#'"
-            >
-              <div class="col-md-3 p-0">
-                <div class="img-square-wrapper">
-                  <img
-                    src="${contextPath}/img/recipe/1.jpg"
-                    alt="레시피 사진"
-                    style="width: 100%"
-                  />
-                </div>
-              </div>
-              <div class="col-md-1 p-0">&nbsp;</div>
-              <div class="col-md-8 p-0">
-                <div class="textbold textsize-2">레시피 제목</div>
-                <div style="font-size: 8px">2023년 8월 11일</div>
-              </div>
-            </div>
+            </c:forEach>
           </div>
           <div>&nbsp;</div>
         </div>

@@ -27,7 +27,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <body>
     <section>
       <hr class="line-black" />
-      <form action="" method="post" enctype="multipart/form-data">
+      <form
+        action="${contextPath}/community/recipe/modRecipe.do"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="recipeDetail_grid">
           <div class="row vertical-align">
             <div class="col-md-2 text-left textbold textsize-2 textcolor-black">
@@ -54,7 +58,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             <div class="col-md">
               <div class="recipe_category textsize-1 text-left textcolor-black">
                 <select name="category" id="">
-                  <option value="none">미분류</option>
+                  <option class="none" value="none">미분류</option>
                   <option value="">10분 간단 레시피</option>
                   <option value="">영양만점 건강 레시피</option>
                 </select>
@@ -76,6 +80,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                   name="cookingImg"
                   id=""
                   onchange="readURL(this);"
+                  value="${recipe.cookingImg}"
                 />
               </div>
             </div>
@@ -101,7 +106,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </div>
           <div class="row">&nbsp;</div>
           <div class="row">&nbsp;</div>
-          <div class="row indegredient_grid">
+          <div class="row ingredient_grid">
             <div class="col">
               <div class="row">
                 <div class="col lightgreen_title">재료</div>
@@ -122,26 +127,26 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 </div>
               </div>
               <div class="row">&nbsp;</div>
-              <div class="row indegredient_rows">
-                <div class="col-md-11">
-                  <div class="row indegredient_row head_row bg-lightgreen">
+              <div class="row ingredient_rows">
+                <div class="col-md-11 ingredient_col">
+                  <div class="row ingredient_row head_row bg-lightgreen">
                     <div class="col-md">이름</div>
                     <div class="col-md">양</div>
                     <div class="col-md-1"></div>
                   </div>
                   <c:forEach
-                    items="${recipe.indegredients}"
-                    var="indegredient"
+                    items="${ingredientList}"
+                    var="ingredient"
                     varStatus="loop"
                   >
-                    <div class="row indegredient_row">
+                    <div class="row ingredient_row">
                       <div class="col-md">
                         <input
                           type="text"
                           name="name"
                           class="form-control"
                           placeholder="이름"
-                          value="${indegredient.name}"
+                          value="${ingredient.name}"
                         />
                       </div>
                       <div class="col-md">
@@ -150,7 +155,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                           name="qty"
                           class="form-control"
                           placeholder="양"
-                          value="${indegredient.qty}"
+                          value="${ingredient.qty}"
                         />
                       </div>
                       <div class="col-md-1">
