@@ -1,4 +1,4 @@
-package com.example.demo.main;
+package com.example.demo;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,8 +8,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class HomeController {
-	
-	
+
+
 	@RequestMapping(value = "/home.do")
 	public ModelAndView home(HttpServletRequest request) {
 		String viewName =  (String) request.getAttribute("viewName");
@@ -17,7 +17,7 @@ public class HomeController {
 		System.out.println(mav);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = {"/*.do","/*/*.do","/*/*/*.do","/*/*/*/*.do"})
 	public ModelAndView every(HttpServletRequest request) {
 		String viewName =  (String) request.getAttribute("viewName");
