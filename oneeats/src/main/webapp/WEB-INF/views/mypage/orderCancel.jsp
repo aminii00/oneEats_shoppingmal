@@ -37,7 +37,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         outline: none;
         box-sizing: border-box;
       }
-      div.nice-select {
+      .div-sib div.nice-select {
         height: 30px;
         width: 70px;
         font-size: 0.9em;

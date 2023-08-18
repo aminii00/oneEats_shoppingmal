@@ -1,5 +1,10 @@
 package com.example.demo.mypage.controller;
 
-public interface MypageController {
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.servlet.ModelAndView;
+
+public interface MypageController {
+	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }
