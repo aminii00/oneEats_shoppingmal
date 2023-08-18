@@ -29,6 +29,28 @@ public class OrderVO {
 	private String goods_inbun;
 	private int memberNo;
 	private int goodsNo;
+	private String goodsName;
+	private String goodsImg;
+	private int gun;
+	
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public int getGun() {
+		return gun;
+	}
+	public void setGun(int gun) {
+		this.gun = gun;
+	}
 	public int getOrder_seqNo() {
 		return order_seqNo;
 	}
@@ -176,10 +198,8 @@ public class OrderVO {
 				+ ", discount_price=" + discount_price + ", shippingfee=" + shippingfee + ", point_price=" + point_price
 				+ ", total_price=" + total_price + ", payment_type=" + payment_type + ", orderDate=" + orderDate
 				+ ", delivery_status=" + delivery_status + ", deliveryDate=" + deliveryDate + ", goods_qty=" + goods_qty
-				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + "]";
+				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + ", goodsName="
+				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + "]";
 	}
-	
-	
-	
 	
 }

@@ -3,8 +3,38 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-	<mapper namespace="com.example.demo.mypage.dao.MypageDAO">
-	<resultMap id="MemberResult" type="MemberVO">
+<mapper namespace="com.example.demo.mypage.dao.MypageDAO">
+	<resultMap id="orderResult" type="orderVO">
+		<result property="order_seqNo" column="" />
+		<result property="orderNo" column="orderNo" />
+		<result property="orderer_name" column="orderer_name" />
+		<result property="orderer_phone" column="orderer_phone" />
+		<result property="reciever_name" column="reciever_name" />
+		<result property="reciever_address" column="reciever_address" />
+		<result property="reciever_phone" column="reciever_phone" />
+		<result property="reciever_comment" column="reciever_comment" />
+		<result property="used_point" column="used_point" />
+		<result property="used_couponId" column="used_couponId" />
+		<result property="payment_price" column="payment_price" />
+		<result property="discount_price" column="discount_price" />
+		<result property="shippingfee" column="shippingfee" />
+		<result property="point_price" column="point_price" />
+		<result property="total_price" column="total_price" />
+		<result property="payment_type" column="payment_type" />
+		<result property="orderDate" column="orderDate" />
+		<result property="delivery_status" column="delivery_status" />
+		<result property="deliveryDate" column="deliveryDate" />
+		<result property="goods_qty" column="goods_qty" />
+		<result property="goods_inbun" column="goods_inbun" />
+		<result property="memberNo" column="memberNo" />
+		<result property="goodsNo" column="goodsNo" />		
+		<result property="goodsName" column="goodsName" />
+		<result property="goodsImg" column="goodsImg" />
+		<result property="gun" column="gun" />
+	</resultMap>
+	
+  
+  <resultMap id="MemberResult" type="MemberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -26,6 +56,15 @@
 		<result property="profileImg" column="profileImg" />
 		<result property="point" column="point" />
 	</resultMap> 
+  
+	<select id="selectOrderList" resultMap="orderResult">
+		<![CDATA[
+			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
+			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
+    		on orderplusgoods.orderNo=orderGun.orderNo
+		]]>
+	</select>
+
 	
 	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
 	    <![CDATA[

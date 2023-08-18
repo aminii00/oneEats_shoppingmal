@@ -1,9 +1,11 @@
 package com.example.demo.mypage.service;
 
 import java.util.HashMap;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mypage.dao.MypageDAO;
@@ -14,6 +16,13 @@ public class MypageServiceImpl implements MypageService{
 
 	@Autowired
 	private MypageDAO mypageDAO;
+
+	@Override
+	public List selectOrderList() throws DataAccessException {
+		List orderList = null;
+		orderList = mypageDAO.selectOrderList();
+		return orderList;
+
 	
 	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {
@@ -24,6 +33,7 @@ public class MypageServiceImpl implements MypageService{
 	public void mypageintro(HashMap memberMap) {
 		System.out.println("mypageintroService");
 		 mypageDAO.mypageintroupdate(memberMap);
+
 	}
 
 }
