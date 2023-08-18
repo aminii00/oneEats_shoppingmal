@@ -5,13 +5,13 @@
 	
 	<mapper namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
 	<!-- 리절트 맵 정의 -->	
-	<resultMap id="" type="">
-	    <result property="" column="" />
+	<resultMap id="recipeResult" type="recipeVO">
+	    <result property="recipeNO" column="recipeNO" />
 	</resultMap>
 	
-	<select id="" resultMap="" parameterType="" >
+	<select id="sellectAllRecipe" resultMap="recipeResult" parameterType="recipeVO" >
 	    <![CDATA[
-		
+			sellect * from recipe
 		]]>
 	</select>
 	
