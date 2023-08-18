@@ -15,4 +15,5 @@ public class RecipeVO {
 	private String inbun;
 	private Date creDate;
 	private MemberVO memberVO;
+
 }

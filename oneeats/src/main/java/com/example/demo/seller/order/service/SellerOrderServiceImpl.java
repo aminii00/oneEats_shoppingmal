@@ -10,4 +10,5 @@ public class SellerOrderServiceImpl implements SellerOrderService{
 	@Autowired
 	private SellerOrderDAO sellerOrderDAO;
 
+	
 }
