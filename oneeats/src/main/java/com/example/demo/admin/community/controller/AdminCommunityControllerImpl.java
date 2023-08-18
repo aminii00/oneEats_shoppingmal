@@ -10,4 +10,10 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	@Autowired
 	private AdminCommunityService adminCommunityService;
 
+	
+	
+	
+	public static void main(String[] args) {
+		
+	}
 }
