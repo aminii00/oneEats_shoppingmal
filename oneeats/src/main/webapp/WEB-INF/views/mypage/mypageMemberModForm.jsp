@@ -39,7 +39,7 @@
             </div>
         </div>
             <button type="reset" class="btn-midlong_2 textsize-1 textbold input btn-round border-0">취소</button>
-            <button type="submit" class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">저장</button>
+            <button type="submit" class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0" onclick="location.href='${contextPath}/mypage/mypageMemberInfoModForm.do'">저장</button>
         </div>
     </div>
 </body>
