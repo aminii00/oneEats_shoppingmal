@@ -3,7 +3,30 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-	<mapper namespace="com.example.demo.admin.order.dao.AdminOrderDAO">
-	
-	
+<mapper namespace="com.example.demo.admin.order.dao.AdminOrderDAO">
+
+<resultMap id="orderResultMap" type="orderVO">
+  <result column="order_seqNo" property="order_seqNo"/>
+  <result column="orderNo" property="orderNo"/>
+  <result column="orderer_name" property="orderer_name"/>
+  <result column="orderer_phone" property="orderer_phone"/>
+  <result column="reciever_name" property="reciever_name"/>
+  <result column="reciever_address" property="reciever_address"/>
+  <result column="reciever_phone" property="reciever_phone"/>
+  <result column="reciever_comment" property="reciever_comment"/>
+  <result column="used_point" property="used_point"/>
+  <result column="used_couponId" property="used_couponId"/>
+  <result column="payment_price" property="payment_price"/>
+  <result column="discount_price" property="discount_price"/>
+  <result column="shippingfee" property="shippingfee"/>
+  <result column="point_price" property="point_price"/>
+  <result column="total_price" property="total_price"/>
+  <result column="payment_type" property="payment_type"/>
+  <result column="orderDate" property="orderDate" javaType="java.sql.Date"/>
+  <result column="delivery_status" property="delivery_status"/>
+  <result column="deliveryDate" property="deliveryDate" javaType="java.sql.Date"/>
+  <result column="goods_qty" property="goods_qty"/>
+  <result column="goods_inbun" property="goods_inbun"/>
+</resultMap>
+
 </mapper>

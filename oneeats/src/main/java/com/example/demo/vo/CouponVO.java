@@ -12,6 +12,14 @@ public class CouponVO {
 	private String condition;
 	private Date expDate;
 	private Date creDate;
+	private int memberNo;
+	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public int getCouponNo() {
 		return couponNo;
 	}
@@ -51,7 +59,8 @@ public class CouponVO {
 	@Override
 	public String toString() {
 		return "CouponVO [couponNo=" + couponNo + ", name=" + name + ", discount_price=" + discount_price
-				+ ", condition=" + condition + ", expDate=" + expDate + ", creDate=" + creDate + "]";
+				+ ", condition=" + condition + ", expDate=" + expDate + ", creDate=" + creDate + ", memberNo="
+				+ memberNo + "]";
 	}
 	
 	

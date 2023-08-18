@@ -15,9 +15,7 @@ public class RecipeVO {
 	private String category;
 	private String inbun;
 	private Date creDate;
-	
-	// 레시피를 올린 사람의 정보
-	private MemberVO memberVO;
+	private int memberNo;
 	
 	public int getRecipeNo() {
 		return recipeNo;
@@ -67,12 +65,20 @@ public class RecipeVO {
 	public void setCreDate(Date creDate) {
 		this.creDate = creDate;
 	}
-	public MemberVO getMemberVO() {
-		return memberVO;
+	public int getMemberNo() {
+		return memberNo;
 	}
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
+	@Override
+	public String toString() {
+		return "RecipeVO [recipeNo=" + recipeNo + ", title=" + title + ", cooking_time=" + cooking_time
+				+ ", description=" + description + ", cookingImg=" + cookingImg + ", category=" + category + ", inbun="
+				+ inbun + ", creDate=" + creDate + ", memberNo=" + memberNo + "]";
+	}
+	
+	
 
 	
 	

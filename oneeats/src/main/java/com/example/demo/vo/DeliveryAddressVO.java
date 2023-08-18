@@ -9,6 +9,15 @@ public class DeliveryAddressVO {
 	private String zipCode;
 	private String address;
 	private String address_detail;
+	private int memberNo;
+	
+	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public String getReciever_name() {
 		return reciever_name;
 	}
@@ -42,7 +51,8 @@ public class DeliveryAddressVO {
 	@Override
 	public String toString() {
 		return "DeliveryAddressVO [reciever_name=" + reciever_name + ", reciever_phone=" + reciever_phone + ", zipCode="
-				+ zipCode + ", address=" + address + ", address_detail=" + address_detail + "]";
+				+ zipCode + ", address=" + address + ", address_detail=" + address_detail + ", memberNo=" + memberNo
+				+ "]";
 	}
 	
 	

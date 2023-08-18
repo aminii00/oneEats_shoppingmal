@@ -24,6 +24,7 @@
 	  <result column="img5" property="img5"/>
 	  <result column="category" property="category"/>
 	  <result column="type" property="type"/>
+	  <result column="memberNo" property="memberNo" />
 	</resultMap>
 	
 	<select id="selectAllGoodsList" resultMap="goodsResult">

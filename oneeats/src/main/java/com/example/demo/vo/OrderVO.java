@@ -27,10 +27,8 @@ public class OrderVO {
 	private Date deliveryDate;
 	private int goods_qty;
 	private String goods_inbun;
-	// 주문한 회원의 정보
-	private MemberVO memberVO;
-	// 주문한 상품의 정보
-	private GoodsVO goodsVO;
+	private int memberNo;
+	private int goodsNo;
 	public int getOrder_seqNo() {
 		return order_seqNo;
 	}
@@ -157,18 +155,31 @@ public class OrderVO {
 	public void setGoods_inbun(String goods_inbun) {
 		this.goods_inbun = goods_inbun;
 	}
-	public MemberVO getMemberVO() {
-		return memberVO;
+	public int getMemberNo() {
+		return memberNo;
 	}
-	public void setMemberVO(MemberVO memberVO) {
-		this.memberVO = memberVO;
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
 	}
-	public GoodsVO getGoodsVO() {
-		return goodsVO;
+	public int getGoodsNo() {
+		return goodsNo;
 	}
-	public void setGoodsVO(GoodsVO goodsVO) {
-		this.goodsVO = goodsVO;
+	public void setGoodsNo(int goodsNo) {
+		this.goodsNo = goodsNo;
 	}
+	@Override
+	public String toString() {
+		return "OrderVO [order_seqNo=" + order_seqNo + ", orderNo=" + orderNo + ", orderer_name=" + orderer_name
+				+ ", orderer_phone=" + orderer_phone + ", reciever_name=" + reciever_name + ", reciever_address="
+				+ reciever_address + ", reciever_phone=" + reciever_phone + ", reciever_comment=" + reciever_comment
+				+ ", used_point=" + used_point + ", used_couponId=" + used_couponId + ", payment_price=" + payment_price
+				+ ", discount_price=" + discount_price + ", shippingfee=" + shippingfee + ", point_price=" + point_price
+				+ ", total_price=" + total_price + ", payment_type=" + payment_type + ", orderDate=" + orderDate
+				+ ", delivery_status=" + delivery_status + ", deliveryDate=" + deliveryDate + ", goods_qty=" + goods_qty
+				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + "]";
+	}
+	
+	
 	
 	
 }

@@ -14,9 +14,14 @@ public class HotDealVO {
 	private String description;
 	private Date creDate;
 	private String category;
+	private int goodsNo;
 	
-	// 핫딜의 상품 정보
-	private GoodsVO goodsVO;
+	public int getGoodsNo() {
+		return goodsNo;
+	}
+	public void setGoodsNo(int goodsNo) {
+		this.goodsNo = goodsNo;
+	}
 	public int getHotdealNo() {
 		return hotdealNo;
 	}
@@ -65,18 +70,13 @@ public class HotDealVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	public GoodsVO getGoodsVO() {
-		return goodsVO;
-	}
-	public void setGoodsVO(GoodsVO goodsVO) {
-		this.goodsVO = goodsVO;
-	}
 	@Override
 	public String toString() {
 		return "HotDealVO [hotdealNo=" + hotdealNo + ", name=" + name + ", discounted_price=" + discounted_price
 				+ ", goods_qty=" + goods_qty + ", finishDate=" + finishDate + ", description=" + description
-				+ ", creDate=" + creDate + ", category=" + category + ", goodsVO=" + goodsVO + "]";
+				+ ", creDate=" + creDate + ", category=" + category + ", goodsNo=" + goodsNo + "]";
 	}
+	
 	
 	
 	
