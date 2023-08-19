@@ -10,4 +10,6 @@ public interface MainService {
 	public Map<String,List<GoodsVO>> listGoods() throws Exception;
 
 	public List<GoodsVO> selectAllGoodsList();
+
+	public List<GoodsVO> orderByNew();
 }

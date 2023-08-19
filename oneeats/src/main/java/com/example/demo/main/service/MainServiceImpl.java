@@ -27,6 +27,11 @@ public class MainServiceImpl implements MainService{
 		return mainDAO.selectAllGoodsList();
 	}
 
+	@Override
+	public List<GoodsVO> orderByNew() {
+		return mainDAO.orderByNew();
+	}
+
 	
 	
 }

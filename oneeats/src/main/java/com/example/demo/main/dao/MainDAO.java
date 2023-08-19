@@ -15,4 +15,5 @@ public interface MainDAO {
 	public List<GoodsVO> selectGoodsList(String goodsStatus ) throws DataAccessException;
 
 	public List<GoodsVO> selectAllGoodsList();
+	public List<GoodsVO> orderByNew();
 }
