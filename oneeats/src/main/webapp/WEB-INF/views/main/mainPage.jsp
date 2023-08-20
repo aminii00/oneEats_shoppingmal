@@ -22,9 +22,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
   </head>
 
   <body>
-    <!-- 예지의 취미 : ${yeji_hobby}
+    <!-- 예지의 취미 : ${price} -->
 
-    <div>${product}</div>
+    <!-- <div>${product}</div>
     <div>${product.name}</div>
     <div>${apple}</div>
 
@@ -144,71 +144,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <!-- Categories Section End -->
 
     <!-- Featured Section Begin -->
-    <section class="featured spad">
-      <div class="container">
-        <c:set var="goods_count" value="0" />
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="section-title">
-              <h2>Product</h2>
-            </div>
-            <div class="featured__controls">
-              <ul>
-                <li class="active" data-filter="*">All</li>
-                <li data-filter=".oranges">못난이 상품</li>
-                <li data-filter=".fresh-meat">밀키트</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="row featured__filter">
-          <c:forEach var="item" items="${goodsList }">
-            <c:set var="goods_count" value="${goods_count+1}" />
-            <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-              <div
-                class="featured__item"
-                onclick="location.href='${contextPath}/goods/goodsDetail.do'"
-              >
-                <div
-                  class="featured__item__pic set-bg"
-                  data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=prop"
-                >
-                  <ul class="featured__item__pic__hover">
-                    <li>
-                      <a href="#"><i class="fa fa-heart"></i></a>
-                    </li>
 
-                    <li>
-                      <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                    </li>
-                  </ul>
-                </div>
-                <div class="featured__item__text">
-                  <h6><a href="#">${item.name}</a></h6>
-                  <h5>
-                    <!-- <fmt:formatNumber
-                      value="${item.price}"
-                      type="number"
-                      var="goods_price"
-                    />
-
-                    ￦${goods_price} -->
-                    ￦ ${item.price}
-                    <!-- <fmt:formatNumber value="${item.price}" pattern="#,###" /> -->
-                  </h5>
-                </div>
-              </div>
-            </div>
-
-            <c:if test="${goods_count==8}">
-              <div>
-                <a href="#">more</a>
-              </div>
-            </c:if>
-          </c:forEach>
-        </div>
-      </div>
-    </section>
     <!-- Featured Section End -->
 
     <!-- Banner Begin -->
@@ -264,7 +200,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 top: 50%;
                 right: 0%;
                 transform: translate(-50%, -50%);
-                font-family: LINESeedKR-Bd;
               "
             >
               <span style="font-size: 20px; color: white">밀키트</span><br />
@@ -292,92 +227,38 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               </h4>
               <div class="latest-product__slider owl-carousel">
                 <div class="latest-prdouct__slider__item">
-                  <c:forEach var="item" items="${newGoodsList }">
-                    <c:set var="goods_count" value="${goods_count+1 }" />
+                  <c:forEach begin="1" end="3" var="i" items="${newGoodsList }">
                     <a href="#" class="latest-product__item">
                       <div class="latest-product__item__pic">
                         <img
-                          src="img/product/main/apple.jpg"
+                          src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
                           style="width: 110px"
                           ;
                         />
                       </div>
                       <div class="latest-product__item__text">
-                        <h6 style="font-size: 14px">${item.name}</h6>
-                        <span>${item.price}</span>
+                        <h6 style="font-size: 14px">${i.name}</h6>
+                        <span>￦${i.price}</span>
                       </div>
                     </a>
                   </c:forEach>
-                  <!-- <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/nyoki.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">포르치니버섯 크림 뇨끼</h6>
-                      <span>￦8800</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/shabu.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        샤브샤브 밀키트<br />
-                        2인
-                      </h6>
-                      <span>￦15900</span>
-                    </div>
-                  </a> -->
                 </div>
                 <div class="latest-prdouct__slider__item">
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/jam.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">딸기잼 500g</h6>
-                      <span>￦7800</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/watermelon.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">수박 <br />5kg이상</h6>
-                      <span>￦27900</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/corn.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">찰옥수수 <br />2입</h6>
-                      <span>￦3250</span>
-                    </div>
-                  </a>
+                  <c:forEach begin="4" end="6" var="i" items="${newGoodsList }">
+                    <a href="#" class="latest-product__item">
+                      <div class="latest-product__item__pic">
+                        <img
+                          src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
+                          style="width: 110px"
+                          ;
+                        />
+                      </div>
+                      <div class="latest-product__item__text">
+                        <h6 style="font-size: 14px">${i.name}</h6>
+                        <span>${i.price}</span>
+                      </div>
+                    </a>
+                  </c:forEach>
                 </div>
               </div>
             </div>

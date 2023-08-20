@@ -605,7 +605,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <span class="property-gdtail-font">강**</span>
                       </div>
                       <div class="property-gdtail-flex1">
-                        <span class="property-gdtail-font" style="padding-top: 11px"
+                        <span
+                          class="property-gdtail-font"
+                          style="padding-top: 11px"
                           ><img
                             src="${contextPath}/img/product/review/star.jpg"
                             alt="리뷰 별"
@@ -638,7 +640,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <span class="property-gdtail-font">최**</span>
                       </div>
                       <div class="property-gdtail-flex1">
-                        <span class="property-gdtail-font" style="padding-top: 11px"
+                        <span
+                          class="property-gdtail-font"
+                          style="padding-top: 11px"
                           ><img
                             src="${contextPath}/img/product/review/star.jpg"
                             alt="리뷰 별"

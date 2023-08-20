@@ -76,7 +76,7 @@
 	
 	<select id="orderByNew"  resultMap="GoodsResult"  >
 	    <![CDATA[
-		select * from goods where goodsNo <=3
+		select * from goods where goodsNo 
 		order by creDate desc
 		]]>
 	</select>

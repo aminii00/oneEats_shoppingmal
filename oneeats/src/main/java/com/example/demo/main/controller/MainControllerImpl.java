@@ -20,6 +20,8 @@ import com.example.demo.common.file.FileDownloadController;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.GoodsVO;
 
+
+
 @Controller("mainController")
 public class MainControllerImpl implements MainController{
 	@Autowired
@@ -35,15 +37,14 @@ public class MainControllerImpl implements MainController{
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
 
-	//	String hobby = "900";
-//		mav.addObject("price", hobby);
-//		List<String> apple = new ArrayList();
-//		
-//		apple.add("과일");
-//		apple.add("바나나");
-//		apple.add("망고");
-//		mav.addObject("apple", apple);
-//		System.out.println(apple);
+//String hobby = "900";
+//mav.addObject("price", hobby);
+		/*
+		 * List<String> apple = new ArrayList();
+		 * 
+		 * apple.add("과일"); apple.add("바나나"); apple.add("망고"); mav.addObject("apple",
+		 * apple); System.out.println(apple);
+		 */
 		/*
 		 * System.out.println(); for (int i = 0; i <apple.size() ; i++) {
 		 * System.out.println(apple.get(i)); }
@@ -56,12 +57,13 @@ public class MainControllerImpl implements MainController{
 //		
 
 //		
-//		GoodsVO testgoods = new GoodsVO();
+//	GoodsVO testgoods = new GoodsVO();
 //		testgoods.name ="맛잇는 호박";
-//		mav.addObject("product", testgoods);
-//		System.out.println(testgoods);
-//		System.out.println(testgoods.name);
+//	mav.addObject("product", testgoods);
 //		
+//	System.out.println(testgoods);
+//		System.out.println(testgoods.name);
+		
 		List<GoodsVO> goodsList = mainService.selectAllGoodsList();
 		for(GoodsVO i : goodsList ) {
 			System.out.println(i.name);
@@ -80,4 +82,5 @@ public class MainControllerImpl implements MainController{
 
 		return mav;
 	}
+
 }
