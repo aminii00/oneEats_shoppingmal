@@ -129,67 +129,47 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       <div class="latest-product__text">
         <h4 style="font-size: 20px" class="text-left">최근 본 상품</h4>
         <div class="latest-product__slider owl-carousel">
-          <div class="latest-prdouct__slider__item">
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic" style="width: 110px">
-                <img src="${contextPath}/img/product/main/apple.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>못난이 사과 3개</h6>
-                <span>￦3000</span>
-              </div>
-            </a>
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic" style="width: 110px">
-                <img src="${contextPath}/img/product/main/nyoki.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>포르치니버섯 크림 뇨끼</h6>
-                <span>￦8800</span>
-              </div>
-            </a>
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic" style="width: 110px">
-                <img src="${contextPath}/img/product/main/shabu.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>샤브샤브 밀키트 2인</h6>
-                <span>￦15900</span>
-              </div>
-            </a>
-          </div>
-          <div class="latest-prdouct__slider__item">
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic">
-                <img
-                  src="${contextPath}/img/product/main/sweetpotato.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="latest-product__item__text" style="width: 110px">
-                <h6>못난이 호박고구마 800g</h6>
-                <span>￦5900</span>
-              </div>
-            </a>
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic" style="width: 110px">
-                <img src="${contextPath}/img/product/main/potato.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>못난이 감자 1개입</h6>
-                <span>￦1300</span>
-              </div>
-            </a>
-            <a href="#" class="latest-product__item">
-              <div class="latest-product__item__pic" style="width: 110px">
-                <img src="${contextPath}/img/product/main/nyoki.jpg" alt="" />
-              </div>
-              <div class="latest-product__item__text">
-                <h6>포르치니버섯 크림 뇨끼</h6>
-                <span>￦8800</span>
-              </div>
-            </a>
-          </div>
+          <div class="latest-prdouct__slider__item">  <ul>
+            <!--   상품이 없습니다. -->
+             <c:choose>
+              <c:when test="${ empty quickGoodsList }">
+                     <strong>상품이 없습니다.</strong>
+              </c:when>
+              <c:otherwise>
+                 <form name="frm_sticky"  >	        
+                  <c:forEach var="item" items="${quickGoodsList }" varStatus="itemNum">
+                     <c:choose>
+                       <c:when test="${itemNum.count==1 }">
+                    <!-- <a href="javascript:goodsDetail();"> -->
+                           <img width="110" height="110" id="img_sticky"  
+                             src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop">
+         
+                    <!-- </a> -->
+                             <input type="hidden"  name="h_goods_id" value="${item.goodsNo}" />
+                            <input type="hidden" name="h_goods_fileName" value="${item.img1}" />
+                         <br/>
+                    </c:when>
+                    <c:otherwise>
+                      <input type="hidden"  name="h_goods_id" value="${item.goodsNo}" />
+                      <input type="hidden" name="h_goods_fileName" value="${item.img1}" />
+                    </c:otherwise>
+                    </c:choose>
+        </form>
+                 </c:forEach>
+               </c:otherwise>
+                </c:choose>
+             </ul></div>
+         	</div>
+	 <div>
+	 <c:choose>
+	    <c:when test="${ empty quickGoodsList }">
+		    <h5>  &nbsp; &nbsp; &nbsp; &nbsp;  0/0  &nbsp; </h5>
+	    </c:when>
+	    <c:otherwise>
+           <h5><a  href='javascript:fn_show_previous_goods();'> 이전 </a> &nbsp;  <span id="cur_goods_num">1</span>/${quickGoodsListNum}  &nbsp; <a href='javascript:fn_show_next_goods();'> 다음 </a> </h5>
+       </c:otherwise>
+       </c:choose>
+    </div>
         </div>
       </div>
     </div>

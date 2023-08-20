@@ -15,6 +15,8 @@ import com.example.demo.vo.GoodsVO;
 public class GoodsServiceImpl implements GoodsService{
 	@Autowired
 	private GoodsDAO goodsDAO;
+
+
 	
 
 

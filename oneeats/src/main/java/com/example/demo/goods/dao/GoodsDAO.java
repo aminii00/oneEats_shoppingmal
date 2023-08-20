@@ -16,6 +16,8 @@ public class GoodsDAO{
 	@Autowired
 	private SqlSession sqlSession;
 
+
+
 	
 
 }

@@ -47,6 +47,18 @@
     <result property="type" column="type" />
 
     </resultMap> 
+    
+    <resultMap id="ReviewResult" type="reviewVO">
+    <result property="reviewNo" column="reviewNo" />
+    <result property="star" column="star" />
+    <result property="reviewImg" column="reviewImg" />
+    <result property="content" column="content" />
+    <result property="memberNO" column="memberNO" />
+    <result property="goodsNO" column="goodsNO" />
+    
+    </resultMap> 
+    
+    
 	
 	
 	<select id="selectGoodsList"  resultMap="GoodsResult"  parameterType ="java.util.HashMap"   >
@@ -58,7 +70,28 @@
 	<select id="selectAllGoodsList"  resultMap="GoodsResult"  >
 	    <![CDATA[
 		select * from goods
+		order by goodsNo
 		]]>
 	</select>
 	
+	<select id="orderByNew"  resultMap="GoodsResult"  >
+	    <![CDATA[
+		select * from goods where goodsNo 
+		order by creDate desc
+		]]>
+	</select>
+	
+	<select id="orderByPrice"  resultMap="GoodsResult"  >
+	    <![CDATA[
+		select * from goods 
+		order by price
+		]]>
+	</select>
+	
+	<select id="orderByReview"  resultMap="GoodsResult"  >
+	    <![CDATA[
+		select * from goods
+		order by price
+		]]>
+	</select>
 </mapper>
