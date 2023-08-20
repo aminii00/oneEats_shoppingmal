@@ -10,128 +10,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      form {
-        padding-left: 40px;
-        padding-top: 10px;
-      }
-      .div-p {
-        display: flex;
-        padding: 0 12px;
-      }
-      p {
-        padding-top: 10px;
-        padding-right: 20px;
-      }
-      .div-sib {
-        margin-left: auto;
-        margin-top: 10px;
-      }
-      select {
-        height: 30px;
-        border-radius: 4px;
-        border: 1px solid rgb(221, 221, 221);
-        line-height: 1.5;
-        color: rgb(51, 51, 51);
-        outline: none;
-        box-sizing: border-box;
-      }
-      .div-sib div.nice-select {
-        height: 30px;
-        width: 70px;
-        font-size: 0.9em;
-        text-align: center;
-        line-height: 30px;
-      }
-      .list {
-        width: 100%;
-        text-align: center;
-      }
-      input {
-        width: 250px;
-        height: 30px;
-        padding-left: 10;
-        border-radius: 4px;
-        border: 1px solid rgb(221, 221, 221);
-        line-height: 1.5;
-        color: rgb(51, 51, 51);
-        outline: none;
-        box-sizing: border-box;
-      }
-      input::placeholder {
-        font-size: 0.9em;
-      }
-      .btn-1 {
-        height: 30px;
-        width: 70px;
-        text-align: center;
-        overflow: hidden;
-        border-radius: 3px;
-      }
-      table {
-        border-top: 2px solid #2c3333;
-        border-bottom: 2px solid #2c3333;
-        padding-bottom: 10px;
-        line-height: 17px;
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 100%;
-        border-collapse: collapse;
-        border-spacing: 0;
-      }
-      th {
-        text-align: left;
-        padding: 12px;
-        border-bottom: 1px solid #b3b3b3;
-      }
-      td {
-        text-align: left;
-        padding: 12px;
-        margin-left: auto;
-      }
-      a {
-        text-decoration: none;
-        color: #2c3333;
-      }
-      .ul-li {
-        margin-top: 60px;
-        list-style: none;
-        display: flex;
-        flex-direction: row;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;
-      }
-      .li-btn {
-        padding-left: 10px;
-      }
-      .btn-2 {
-        display: flex;
-        flex-direction: row;
-        -webkit-box-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        justify-content: center;
-        color: rgb(51, 51, 51);
-        line-height: 34px;
-      }
-      .btn-3 {
-        display: block;
-        padding: 0px 10px;
-        text-align: center;
-        overflow: hidden;
-        border-radius: 3px;
-        width: 50px;
-        height: 30px;
-      }
-    </style>
+    <title>관리자 쿠폰목록</title>
+    <link rel="stylesheet" href="${contextPath}/css/minzy.css" />
   </head>
   <body>
-    <form method="post" action="#">
+     <!-- 검색창 -->
+     <form method="post" action="#">
       <div class="div-p">
-        <p class="textsize-2 text-left textcolor-black textbold">쿠폰목록</p>
+        <p class="p-1 textsize-2 text-left textcolor-black textbold">
+          쿠폰목록
+        </p>
         <div class="div-sib textsize-1">
           <select name="search-1">
             <option value="전체">전체</option>
@@ -141,27 +29,32 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           </select>
           <input type="text" name="search-2" placeholder="search.." />
           <button
-            class="btn-1 bg-lightgreen textcolor-white border-0"
+            class="btn-1 textcolor-white border-0 bg-lightgreen"
             type="button"
           >
             검색
           </button>
         </div>
       </div>
-      <table border="0" class="textcolor-black textsize-1">
+    </form>
+    
+    <hr class="linebold" />
+
+    <!-- 쿠폰목록 -->
+    <table class="textcolor-black textsize-1">
         <tr>
-          <th>번호</th>
+          <th style="width:10%">번호</th>
           <th>쿠폰등록일</th>
-          <th>쿠폰명</th>
+          <th style="width:40%">쿠폰명</th>
           <th>사용처</th>
-          <th>삭제</th>
+          <th style="width:10%">삭제</th>
         </tr>
         <tr>
-          <td>&nbsp 1</td>
+          <td> 1</td>
           <td>2023-08-11</td>
-          <td>최초 로그인시 1000원 할인 쿠폰</td>
+          <td >최초 로그인시 1000원 할인 쿠폰</td>
           <td>원이츠</td>
-          <td>
+          <td >
             <a
               href="javascript:void(0)"
               onclick='fn_openalert("쿠폰을 삭제하시겠습니까?","${contextPath}/admin/coupon/adminCouponList.do")'
@@ -169,9 +62,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             >
           </td>
         </tr>
-      </table>
-      <%--
-      <!--    <div> 페이징처리
+    </table>
+
+      <hr class="linebold" />
+
+<!-- 페이징 -->
+    <%--
+    <!--    <div> 페이징처리
         <c:if test="${totArticles != null}"
             <c:choose>
             <c:when test="${totArticles > 100}">
@@ -206,34 +103,31 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
         </div> 
 -->
-      --%>
-      <div>
-        <ul class="ul-li">
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/prev.png"
-                alt="prev"
-              />
-            </button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
-        </ul>
-      </div>
-    </form>
+    --%>
+    <div>
+      <ul class="ul-li">
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">
+            <img
+              class="img-2"
+              src="${contextPath}/img/icon/prev.png"
+              alt="prev"
+            />
+          </button>
+        </li>
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">1</button>
+        </li>
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">
+            <img
+            class="img-2"
+              src="${contextPath}/img/icon/next.png"
+              alt="next"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

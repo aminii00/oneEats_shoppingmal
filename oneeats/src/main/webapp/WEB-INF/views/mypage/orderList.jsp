@@ -10,8 +10,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="${contextPath}/css/min.css" />
+    <title>주문내역</title>
+    <link rel="stylesheet" href="${contextPath}/css/minzy.css" />
   </head>
   <body>
     <!-- 검색창 -->
@@ -30,7 +30,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <input type="text" name="search-2" placeholder="search.." />
           <button
             class="btn-1 textcolor-white border-0 bg-lightgreen"
-            type="submit"
+            type="button"
           >
             검색
           </button>
@@ -84,7 +84,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     <dt class="dt-1 textsize-1 textbold textcolor-black">
                       결제방법
                     </dt>
-                    <dd class="dd-2 textsize-1 textcolor-black">
+                    <dd class="dd-1 textsize-1 textcolor-black">
                       ${order.payment_type}
                     </dd>
                   </dl>
@@ -92,7 +92,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     <dt class="dt-1 textsize-1 textbold textcolor-black">
                       결제금액
                     </dt>
-                    <dd class="dd-2 textsize-1 textcolor-black">
+                    <dd class="dd-1 textsize-1 textcolor-black">
                       ${order.total_price}원
                     </dd>
                   </dl>
@@ -163,8 +163,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <li class="li-btn">
           <button class="btn-2 btn-square bg-white btn-border">
             <img
-              width="20px"
-              height="20px"
+              class="img-2"
               src="${contextPath}/img/icon/prev.png"
               alt="prev"
             />
@@ -176,8 +175,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <li class="li-btn">
           <button class="btn-2 btn-square bg-white btn-border">
             <img
-              width="20px"
-              height="20px"
+            class="img-2"
               src="${contextPath}/img/icon/next.png"
               alt="next"
             />

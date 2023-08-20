@@ -10,98 +10,25 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      form {
-        padding-left: 40px;
-        padding-top: 10px;
-      }
-      .div-p {
-        padding: 0 12px;
-      }
-      p {
-        padding-top: 10px;
-      }
-      table {
-        padding-bottom: 10px;
-        line-height: 17px;
-        border-collapse: collapse;
-        border-spacing: 0;
-        width: 100%;
-      }
-      .tr-1 {
-        border-bottom: 1px solid #b3b3b3;
-      }
-      th {
-        text-align: left;
-        padding: 12px;
-        border-bottom: 1px solid #b3b3b3;
-        width: 80px;
-      }
-      td {
-        text-align: left;
-        padding: 12px;
-        width: 50px;
-      }
-      input {
-        width: 400px;
-        height: 40px;
-        padding: 0px 11px 1px 15px;
-        border-radius: 4px;
-        border: 1px solid rgb(221, 221, 221);
-        line-height: 1.5;
-        outline: none;
-        box-sizing: border-box;
-      }
-      input::placeholder {
-        font-size: 0.9em;
-      }
-      select {
-        width: 100%;
-        height: 40px;
-        padding: 0px 11px 1px 15px;
-        border-radius: 4px;
-        border: 1px solid rgb(221, 221, 221);
-        line-height: 1.5;
-        outline: none;
-        box-sizing: border-box;
-      }
-      div.nice-select {
-        width: 400px;
-      }
-      .list {
-        width: 100%;
-      }
-      .div-btn {
-        display: flex;
-        justify-content: center;
-        padding: 20px;
-      }
-      .btn-1 {
-        display: block;
-        text-align: center;
-        overflow: hidden;
-        border-radius: 5px;
-        margin-right: 30px;
-      }
-      .btn-fat1 {
-        width: 190px;
-        height: 45px;
-      }
-    </style>
+    <title>주문하기</title>
+    <link rel="stylesheet" href="${contextPath}/css/minzy2.css" />
   </head>
   <body>
+    <!-- 주문/결제 -->
     <form method="post" action="#">
       <div class="div-p">
         <p
-          class="textsize-2 text-left textcolor-black textbold"
-          style="font-size: 20px"
+          class="p-1 extsize-2 text-left textcolor-black textbold"
         >
           주문/결제
         </p>
       </div>
+
       <hr class="linebold" />
-      <table border="0" class="textcolor-black textsize-2">
+
+      <table class="textcolor-black textsize-2">
+
+        <!-- 구매자정보 -->
         <tr class="tr-1">
           <th>구매자정보</th>
         </tr>
@@ -115,6 +42,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <input type="text" name="orderer_phone" value="010-1234-5678" />
           </td>
         </tr>
+
+        <!-- 받는분정보 -->
         <tr class="tr-1">
           <th>받는분정보</th>
         </tr>
@@ -151,6 +80,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </select>
           </td>
         </tr>
+
+        <!-- 적립금 -->
         <tr class="tr-1">
           <th>적립금</th>
         </tr>
@@ -162,6 +93,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <td>사용적립금</td>
           <td><input type="text" name="used_point" /></td>
         </tr>
+
+        <!-- 쿠폰 -->
         <tr class="tr-1">
           <th>쿠폰</th>
         </tr>
@@ -174,6 +107,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </select>
           </td>
         </tr>
+
+        <!-- 결제정보 -->
         <tr class="tr-1">
           <th>결제정보</th>
         </tr>
@@ -223,8 +158,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               />
             </button>
             <button class="btn-round btn-fat1 bg-white textbold btn-border">
-              <img
-                style="width: 40px; height: 25px"
+              <img class="img-1"
                 src="${contextPath}/img/icon/npay.png"
               />
             </button>
@@ -244,8 +178,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           </td>
         </tr>
       </table>
+
       <hr class="linebold" style="margin: 0" />
       <br />
+
+      <!-- 주문버튼 -->
       <div class="div-btn">
         <button
           class="btn-1 btn-regular bg-white textcolor-black btn-border"
