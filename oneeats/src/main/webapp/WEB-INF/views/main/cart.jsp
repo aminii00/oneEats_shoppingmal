@@ -36,11 +36,29 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   </head>
 
   <body>
-    <!-- Page Preloder -->
-    <!-- <div id="preloder">
-      <div class="loader"></div>
-    </div> -->
+    <!--이 페이지에 있는 input칸들의 name  -->
+    <!--
+      goodsNO : 장바구니에 담긴 상품의 상품 번호
+      여러 개 있음.
+      String[] goodsNos = request.getParameterValues("goodsNo");
+      로 가져올 것.
 
+      goodsQty : 장바구니에 담긴 상품의 수량
+      여러 개 있음.
+
+      goodsInbun : 장바구니에 담긴 상품이 몇 인분인지
+      여러 개 있음.
+
+
+      shippingFee : 배송비
+      하나 있음.
+      String shippingFee = request.getParameter("shippingFee");
+      로 가져올 수 있음.
+
+      totalPrice : 모든 상품의 금액에 배송비까지 더한 합계 금액
+      하나 있음.
+
+      -->
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
       <form action="${contextPath}/mypage/orderConfirm.do" method="post">
@@ -63,8 +81,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <input
                         class="h_goods_name"
                         type="hidden"
-                        name="goodsName"
-                        value="못난이 당근"
+                        name="goodsNo"
+                        value="1"
                       />
                       <input
                         class="h_goods_qty"
@@ -104,8 +122,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <input
                         class="h_goods_name"
                         type="hidden"
-                        name="goodsName"
-                        value="못난이 복숭아"
+                        name="goodsNo"
+                        value="2"
                       />
                       <input
                         class="h_goods_qty"
@@ -145,8 +163,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <input
                         class="h_goods_name"
                         type="hidden"
-                        name="goodsName"
-                        value="못난이 감자"
+                        name="goodsNo"
+                        value="3"
                       />
                       <input
                         class="h_goods_qty"
@@ -206,6 +224,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="shoping__checkout">
                 <h5>총 상품 금액</h5>
                 <ul>
+                  <input type="hidden" name="shippingFee" value="2500" />
+                  <input type="hidden" name="totalPrice" value="12000" />
                   <li class="text-left">결제 금액 <span>￦9500</span></li>
                   <li class="text-left">배송비 <span>￦2500</span></li>
                   <li class="text-left" style="font-size: 28px">

@@ -244,4 +244,26 @@ public class CommunityControllerImpl implements CommunityController {
 		mav.addObject("redirectPage", page);
 		return mav;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
