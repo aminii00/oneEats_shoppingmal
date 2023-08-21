@@ -136,7 +136,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <br />
           </div>
         </div>
-
+        <table>
+          <tr>
+            <td>쿠폰명</td>
+            <td style="margin-left: 200px">기능</td>
+            <td>할인적립</td>
+            <td>사용가능기간</td>
+            <td>사용여부</td>
+          </tr>
+        </table>
         <hr />
 
         <ul>

@@ -1,5 +1,6 @@
 package com.example.demo.admin.member.service;
 
-public interface AdminMemberService {
+import com.example.demo.vo.MemberVO;
 
+public interface AdminMemberService {
 }

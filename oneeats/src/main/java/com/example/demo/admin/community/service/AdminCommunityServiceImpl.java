@@ -7,7 +7,7 @@ import com.example.demo.admin.community.dao.AdminCommunityDAO;
 
 @Service("adminCommunityService")
 public class AdminCommunityServiceImpl implements AdminCommunityService {
-	@Autowired
-	private AdminCommunityDAO adminCommunityDAO;
 
+ @Autowired 
+ private AdminCommunityDAO adminCommunityDAO;
 }

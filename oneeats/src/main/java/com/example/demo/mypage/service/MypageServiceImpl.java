@@ -31,10 +31,22 @@ public class MypageServiceImpl implements MypageService{
 		return mypageDAO.selectMypageList(member_id);
 	}
 	
+	//민아 프로필편집
+	@Override
 	public void mypageintro(HashMap memberMap) {
 		System.out.println("mypageintroService");
 		 mypageDAO.mypageintroupdate(memberMap);
 
 	}
+	
+	//민아 찜
+	@Override
+	public List selectBookList() throws DataAccessException {
+		System.out.println("selectBookList Service");
+		List bookList = null;
+		bookList = mypageDAO.selectBookList();
+		return bookList;
+	}
+	
 
 }
