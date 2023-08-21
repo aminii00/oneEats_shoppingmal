@@ -15,11 +15,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 주문/결제 -->
-    <form method="post" action="#">
+    <form method="post" action="${contextPath}/mypage/addNewOrder.do">
       <div class="div-p">
-        <p
-          class="p-1 extsize-2 text-left textcolor-black textbold"
-        >
+        <p class="p-1 extsize-2 text-left textcolor-black textbold">
           주문/결제
         </p>
       </div>
@@ -27,19 +25,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <hr class="linebold" />
 
       <table class="textcolor-black textsize-2">
-
         <!-- 구매자정보 -->
         <tr class="tr-1">
           <th>구매자정보</th>
         </tr>
         <tr>
           <td>이름</td>
-          <td><input type="text" name="orderer_name" value="강민지" /></td>
+          <td><input type="text" name="orderer_name" /></td>
         </tr>
         <tr>
           <td>연락처</td>
           <td>
-            <input type="text" name="orderer_phone" value="010-1234-5678" />
+            <input type="text" name="orderer_phone" />
           </td>
         </tr>
 
@@ -49,22 +46,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>이름</td>
-          <td><input type="text" name="receiver_name" value="강민지" /></td>
+          <td><input type="text" name="receiver_name" /></td>
         </tr>
         <tr>
           <td>배송주소</td>
           <td>
-            <input
-              type="text"
-              name="receiver_address"
-              value="(35234) 대전광역시 서구 대덕대로 182"
-            />
+            <input type="text" name="receiver_address" />
           </td>
         </tr>
         <tr>
           <td>연락처</td>
           <td>
-            <input type="text" name="reciever_phone" value="010-1234-5678" />
+            <input type="text" name="reciever_phone" />
           </td>
         </tr>
         <tr>
@@ -87,7 +80,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>보유적립금</td>
-          <td>1000</td>
+          <td></td>
         </tr>
         <tr>
           <td>사용적립금</td>
@@ -115,23 +108,23 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <tr>
           <!-- value는 이엘태그로 값 넣어주기! -->
           <td>상품 금액</td>
-          <td><input type="hidden" name="payment_price" value="" />25800원</td>
+          <td><input type="hidden" name="payment_price" />원</td>
         </tr>
         <tr>
           <td>상품 할인 금액</td>
-          <td><input type="hidden" name="discount_price" value="" />-3100원</td>
+          <td><input type="hidden" name="discount_price" value="" />-원</td>
         </tr>
         <tr>
           <td>배송비</td>
-          <td><input type="hidden" name="shippingfee" value="" />2500원</td>
+          <td><input type="hidden" name="shippingfee" value="" />원</td>
         </tr>
         <tr>
           <td>적립금액</td>
-          <td><input type="hidden" name="point_price" value="" />250원</td>
+          <td><input type="hidden" name="point_price" value="" />원</td>
         </tr>
         <tr>
           <td>총 결제금액</td>
-          <td><input type="hidden" name="total_price" value="" />24400원</td>
+          <td><input type="hidden" name="total_price" value="" />원</td>
         </tr>
         <tr>
           <td>결제방법</td>
@@ -158,9 +151,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               />
             </button>
             <button class="btn-round btn-fat1 bg-white textbold btn-border">
-              <img class="img-1"
-                src="${contextPath}/img/icon/npay.png"
-              />
+              <img class="img-1" src="${contextPath}/img/icon/npay.png" />
             </button>
             <br />
             <select>
@@ -192,8 +183,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </button>
         <button
           class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0"
-          type="button"
-          onclick="location.href='${contextPath}/mypage/orderList.do'"
+          type="submit"
         >
           결제하기
         </button>

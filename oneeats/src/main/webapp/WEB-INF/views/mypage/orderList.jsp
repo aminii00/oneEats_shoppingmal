@@ -50,7 +50,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <span>${order.orderDate}</span>
               <a
                 style="float: right"
-                href="${contextPath}/mypage/orderDetail.do"
+                href="${contextPath}/mypage/orderDetail.do?orderNo=${order.orderNo}"
                 >주문내역 상세보기</a
               >
             </div>
@@ -61,7 +61,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <img
                   class="img-1"
                   src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=order"
-                  alt="apple"
+                  alt="상품메인"
                 />
                 <div class="div-dl">
                   <dl class="dl-dt">
@@ -175,7 +175,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <li class="li-btn">
           <button class="btn-2 btn-square bg-white btn-border">
             <img
-            class="img-2"
+              class="img-2"
               src="${contextPath}/img/icon/next.png"
               alt="next"
             />
