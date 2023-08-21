@@ -11,6 +11,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <title>자주하는 질문 작성</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
+
   <body>
     <section>
       ${jave.key}

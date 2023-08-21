@@ -34,7 +34,7 @@
 	</resultMap>
 	
   
-  <resultMap id="MemberResult" type="MemberVO">
+  <resultMap id="MemberResult" type="memberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -57,6 +57,14 @@
 		<result property="point" column="point" />
 	</resultMap> 
   
+  <resultMap id="BookResult" type="bookmarkVO">
+		<result property="memberNo" column="memberNo" />
+		<result property="goodsNo" column="goodsNo" />
+		<result property="img1" column="img1" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+	</resultMap> 
+	
 	<select id="selectOrderList" resultMap="orderResult">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
@@ -73,9 +81,20 @@
 		]]>
 	</select>
 	
+	<!-- 민아 프로필 편집 -->
 	<update id="mypageintroupdate" parameterType="java.util.HashMap">
 	   update member set
 			  nickname=#{nickname},intro=#{intro}
 			  where id=#{id}
 	</update>	
+	
+	<!-- 민아 찜 : 상품이름, 가격, 이미지-->
+	<select id="selectBookList" resultMap="BookResult">
+		<![CDATA[
+			select  goods.name, goods.price, goods.img1 from bookmark 
+			inner join 
+			goods on bookmark.goodsNo=goods.goodsNO where bookmark.memberNO=1
+		]]>
+	</select> 
+	
 </mapper>

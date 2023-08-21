@@ -9,5 +9,11 @@ public interface MypageController {
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView myPageMain(String message, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	
 
 }

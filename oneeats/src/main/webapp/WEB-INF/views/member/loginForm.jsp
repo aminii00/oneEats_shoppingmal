@@ -77,7 +77,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/mainPage.do">
+<form method = "post" action = "${contextPath}/member/login.do">
 <br>
 <br>
 <br>
@@ -91,11 +91,11 @@
         <br>
     </header>
         <div>
-             <input class =" brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" type="text" value="#" disabled></input>
+             <input class =" brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" name = "id" type="text" ></input>
         </div>
 
         <div>
-            <input class ="brd-lightgray btn-round btn-midlong textsize-1" placeholder=" 비밀번호 입력(8-12자 대소문자+숫자+특수문자)" type="password"></input>
+            <input class ="brd-lightgray btn-round btn-midlong textsize-1" placeholder=" 비밀번호 입력(8-12자 대소문자+숫자+특수문자)" name = "pwd" type="password"></input>
         </div>
         <div class = "textsize-1" align:right>
            
@@ -112,7 +112,7 @@
             <a href="${contextPath}/member/registerTypeSelect.do">회원가입</a>
         </div> 
         <br>
-        <button class = "btn-midlong bg-lightgreen margin textsize-2 textbold border-0 btn-round">로그인</button>
+        <button type ="submit" class = "btn-midlong bg-lightgreen margin textsize-2 textbold border-0 btn-round">로그인</button>
     
     </section>
     <br>

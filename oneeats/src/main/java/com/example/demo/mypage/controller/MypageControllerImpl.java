@@ -35,6 +35,7 @@ public class MypageControllerImpl implements MypageController {
 	@Autowired
 	private MemberVO memberVO;
 	
+	//밍디 주문내역1
 	@RequestMapping(value = "/mypage/orderList.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -47,6 +48,7 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	//밍디 주문내역2
 	@RequestMapping(value = "/mypage/orderDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView orderDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
@@ -59,8 +61,9 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	//민아 프로필편집 1
 	@Override
-	@RequestMapping(value="/mypage/myPageMain.do" ,method = RequestMethod.GET)
+	@RequestMapping(value="/mypage/myPageMain.do" , method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView myPageMain(@RequestParam(required = false,value="message")  String message,
 			   HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		System.out.println("여기는 myPageMain.do");
@@ -76,11 +79,13 @@ public class MypageControllerImpl implements MypageController {
 		mav.addObject("myList", myList);
 		mav.setViewName("/mypage/mypageProfileModForm");
 		return mav;
-		
 	}
 	
-	@RequestMapping(value="/mypage/mypageintro.do" ,method={RequestMethod.POST})
+	//민아 프로필편집 2
+	@Override
+	@RequestMapping(value="/mypage/mypageintro.do" ,method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		System.out.println("여기는 mypageintro.do");
 		String nickname = request.getParameter("nickname");
 		String intro = request.getParameter("intro");
 		System.out.println(intro);
@@ -98,8 +103,28 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 		
 	}
+	//민아 찜1
+	@Override
+	@RequestMapping(value="/mypage/bookmarkList.do" ,method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+		System.out.println("여기는 Controller bookmarkList.do");
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
+		String viewName = (String) request.getAttribute("viewName");
+		List bookList = mypageService.selectBookList();
+		System.out.println(bookList);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("bookList", bookList);
+		mav.setViewName("/mypage/mypageBookmarkList");
+		System.out.println(mav);
+		return mav;
+	}
 	
-	@RequestMapping(value="/mypage/*Form.do", method=RequestMethod.GET)
+	
+	
+
+	
+	@RequestMapping(value="/mypage/*Form.do", method= {RequestMethod.GET, RequestMethod.POST})
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("*Form.do");
 		String viewName = (String)request.getAttribute("viewName");

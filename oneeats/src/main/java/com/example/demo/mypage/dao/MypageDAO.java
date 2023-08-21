@@ -22,6 +22,11 @@ public interface MypageDAO {
 	
 	public MemberVO selectMypageList(String member_id) throws DataAccessException;
 	
+	
+	//민아 프로필 편집
 	public void mypageintroupdate(HashMap memberMap) throws DataAccessException;
+	
+	//민아 찜
+	public List selectBookList() throws DataAccessException;
 	
 }
