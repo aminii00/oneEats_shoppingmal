@@ -15,6 +15,30 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   </head>
 
   <body>
+    <!--이 페이지에 있는 input칸들의 name  -->
+    <!--
+      goodsNO : 장바구니에 담긴 상품의 상품 번호
+      여러 개 있음.
+      String[] goodsNos = request.getParameterValues("goodsNo");
+      로 가져올 것.
+
+      goodsQty : 장바구니에 담긴 상품의 수량
+      여러 개 있음.
+
+      goodsInbun : 장바구니에 담긴 상품이 몇 인분인지
+      여러 개 있음.
+
+
+      shippingFee : 배송비
+      하나 있음.
+      String shippingFee = request.getParameter("shippingFee");
+      로 가져올 수 있음.
+
+      totalPrice : 모든 상품의 금액에 배송비까지 더한 합계 금액.
+      하나 있음.
+
+      -->
+
     <!-- Breadcrumb Section Begin -->
     <section
       class="breadcrumb-section set-bg"
@@ -24,11 +48,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <div class="row">
           <div class="col-lg-12 text-center">
             <div class="breadcrumb__text">
-              <h2>못난이 상품</h2>
+              <h2>${goods.category}</h2>
               <div class="breadcrumb__option">
-                <a href="${contextPath}/main/mainPage.do">Home</a>
-                <a href="${contextPath}/goods/goodsList.do">못난이 상품</a>
-                <span>{채소}</span>
+                <span></span>
               </div>
             </div>
           </div>
@@ -44,29 +66,29 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="product__details__pic__item">
                 <img
                   class="product__details__pic__item--large"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
+                  src="${contextPath}/download.do?imgFileName=${goods.img1}&path=goods"
                   alt=""
                 />
               </div>
               <div class="product__details__pic__slider owl-carousel">
                 <img
                   data-imgbigurl="img/product/details/product-details-2.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
+                  src="${contextPath}/download.do?imgFileName=${goods.img2}&path=goods"
                   alt=""
                 />
                 <img
                   data-imgbigurl="img/product/details/product-details-3.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
+                  src="${contextPath}/download.do?imgFileName=${goods.img3}&path=goods"
                   alt=""
                 />
                 <img
                   data-imgbigurl="img/product/details/product-details-5.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
+                  src="${contextPath}/download.do?imgFileName=${goods.img4}&path=goods"
                   alt=""
                 />
                 <img
                   data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
+                  src="${contextPath}/download.do?imgFileName=${goods.img5}&path=goods"
                   alt=""
                 />
               </div>
@@ -74,62 +96,89 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </div>
           <div class="col-lg-6 col-md-6 text-left">
             <div class="product__details__text">
-              <c:forEach var="i" items="${goods }">
-                <h3>${i.name}</h3>
-              </c:forEach>
+              <h3>${goods.name}</h3>
               <div class="product__details__rating">
                 <img
                   src="${contextPath}/img/product/review/star.jpg"
                   alt="리뷰 별"
                 />
-
-                <span>(3 reviews)</span>
-                <c:forEach var="i" items="${goods }">
-                  <div class="product__details__price">￦${i.price}</div>
-                </c:forEach>
+                <span>평균 ${reviewAvg} 점 </span>
+                <span>(${totalReviewsNum} reviews)</span>
+                <div class="product__details__price">￦${goods.price}</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
-                    <dl class="property-flex2">
-                      <dt class="property-input-gd">판매자</dt>
-                      <dd class="property-flex4">
-                        <c:forEach var="i" items="${goods }">
-                          <p class="property-input">${i.memberName}</p>
-                        </c:forEach>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt class="property-input-gd">포장타입</dt>
-                      <dd class="property-flex4">
-                        <c:forEach var="i" items="${goods }">
-                          <p class="property-input">${i.rapping}</p>
-                        </c:forEach>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt class="property-input-gd">원산지</dt>
-
-                      <dd class="property-flex4">
-                        <c:forEach var="i" items="${goods }">
-                          <p class="property-input">${i.manufacturer}</p>
-                        </c:forEach>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt class="property-input-gd">무게 / 용량</dt>
-                      <dd class="property-flex4">
-                        <c:forEach var="i" items="${goods }">
-                          <p class="property-input">${i.weight}</p>
-                        </c:forEach>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt class="property-input-gd">수확시기</dt>
-                      <dd class="property-flex4">
-                        <c:forEach var="i" items="${goods }">
-                          <p class="property-input">${i.harvest}</p>
-                        </c:forEach>
-                      </dd>
-                    </dl>
+                    <c:choose>
+                      <c:when test="${goods.type=='사업자'}">
+                        <div class="goods_detail_description">
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">판매자</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.sellerName}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">포장타입</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.rapping}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">원산지</dt>
+                            <dd class="property-flex4">
+                              ${goods.manufacturer}
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">무게 / 용량</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.weight}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">수확시기</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.harvest}</span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </c:when>
+                      <c:otherwise>
+                        <div class="goods_detail_description">
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">판매자</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.sellerName}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">포장타입</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.rapping}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">제조원</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">
+                                ${goods.manufacturer}
+                              </p>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">무게 / 용량</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.weight}</span>
+                            </dd>
+                          </dl>
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">유통기한</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input">${goods.expDate}</span>
+                            </dd>
+                          </dl>
+                        </div>
+                      </c:otherwise>
+                    </c:choose>
 
                     <!--수정-->
                     <div class="property-margin" style="margin-bottom: -40px">
@@ -146,26 +195,26 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               style="align-content: center"
                               style="overflow-y: scrol"
                             >
-                              <select name="select" class="margin4 opt">
-                                <option value="옵션을 선택해주세요" selected>
-                                  ======= id="select_option" >
-                                </option>
+                              <select
+                                name="select"
+                                id="select_option"
+                                class="margin4 opt"
+                              >
+                                <option
+                                  value="옵션을 선택해주세요"
+                                  selected
+                                ></option>
 
-                                <option value="옵션을 선택해주세요">
-                                  >>>>>>> origin/hanyeji 옵션을 선택해주세요
-                                </option>
-                                <option value="못난이 당근 단품" value2="900">
+                                <option value="못난이 당근 단품">
                                   못난이 당근 단품 900원
                                 </option>
                                 <option
                                   value="못난이 당근 3개묶음"
-                                  value2="2500"
                                 >
                                   못난이 당근 3개묶음 2500원
                                 </option>
                                 <option
                                   value="못난이 당근 5개묶음"
-                                  value="4300"
                                 >
                                   못난이 당근 5개묶음 4300원
                                 </option>
@@ -173,44 +222,46 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </div>
                           </dd>
                         </dl>
-                        <div
-                          class="cart-option-item property-flex5"
-                          style="width: 525px"
+
+                        <form
+                          action="${contextPath}/mypage/orderConfirm.do"
+                          method="post"
                         >
-                          <dl class="property-flex2 goods_option_row" style="">
-                            <dt class="property-font2 epzddad1">
-                              <div
-                                class="property-font3 font-bold"
-                                style="margin-bottom: 24px; font-size: 22px"
-                                id="result"
-                              ></div>
-                              <div class="product__details__quantity">
-                                <div class="quantity text-left">
-                                  <div class="pro-qty border6">
-                                    <input type="text" value="1" />
-                                  </div>
-                                </div>
-                              </div>
-                            </dt>
-                          </dl>
-                          <!-- 상품 행-->
-                          <span
-                            class="property-font3 text-right"
-                            style="
-                              font-size: 16px;
-                              border-top: 1px solid rgb(244, 244, 244);
-                              margin: 12px 0 -10px 0;
-                              padding: 10px 0 10px 0;
-                            "
+                          <div
+                            class="cart-option-item property-flex5 goods_option_grid"
+                            style="width: 525px"
                           >
-                            총 상품금액:
-                          </span>
-                          <span
-                            class="property-font3 text-right"
-                            style="font-size: 22px; margin-bottom: -10px"
-                            id="result1"
-                          ></span>
-                        </div>
+                            <!--선택한 상품 옵션이 나타나는 구역 -->
+                            <div class="goods_option_rows"></div>
+                            <span
+                              class="property-font3 text-right"
+                              style="
+                                font-size: 16px;
+                                border-top: 1px solid rgb(244, 244, 244);
+                                margin: 12px 0 -10px 0;
+                                padding: 10px 0 10px 0;
+                              "
+                            >
+                              총 상품금액
+                            </span>
+                            <span
+                              class="property-font3 text-right"
+                              style="font-size: 22px; margin-bottom: -10px"
+                              >900원</span
+                            >
+                            <!--배송비와 상품금액 hidden-->
+                            <input
+                              type="hidden"
+                              name="shippingFee"
+                              value="2500"
+                            />
+                            <input
+                              type="hidden"
+                              value="12000"
+                              name="totalPrice"
+                            />
+                          </div>
+                        </form>
                       </div>
                       <div class="css-9y0nwt">
                         <div class="css-ixlb9s">
@@ -545,17 +596,48 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </section>
     <!-- Related Product Section End -->
+
+    <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
-      function handleOnChange(e) {
-        const value = e.value;
+      $(document).ready(function () {
+        // Select the select tag
+        var selectTag = $("#select_option");
 
-        document.getElementById("result").innerText = value;
-      }
+        // Select the div.rows
+        var rowsDiv = $("div.goods_option_rows");
 
-      function handleOnChange1(e) {
-        const value2 = e.value;
-        document.getElementById("result1").innerText = value2;
-      }
+        // Attach the change event handler to the select tag
+        selectTag.on("change", function () {
+          // Get the selected value
+          var selectedValue = $(this).val();
+
+          var newRow =
+            `<dl class="property-flex2 goods_option_row">
+                              <dt class="property-font2 epzddad1">
+                                <div
+                                  class="property-font3 font-bold"
+                                  style="margin-bottom: 24px; font-size: 22px"
+                                  id="goods_option_name"
+                                >` +
+            selectedValue +
+            `</div><input type="hidden" value=` +
+            selectedValue +
+            ` name="goodsName" />
+                                <div class="product__details__quantity">
+                                  <div class="quantity text-left">
+                                    <div class="pro-qty border6">
+                                      <span class="dec qtybtn">-</span>
+                                      <input type="text" value="1" name="goodsQty" />
+                                      <span class="inc qtybtn">+</span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </dt>
+                            </dl>
+                        `;
+          rowsDiv.append(newRow);
+        });
+      });
     </script>
     <!-- Js Plugins -->
   </body>

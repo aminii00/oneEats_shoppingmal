@@ -25,6 +25,7 @@
 	  <result column="category" property="category"/>
 	  <result column="type" property="type"/>
 	  <result column="memberNo" property="memberNo" />
+	  <result column="sellerName" property="sellerName" />
 	</resultMap>
 	
 	 <resultMap id="MemberResult" type="memberVO">
@@ -49,6 +50,9 @@
       <result property="profileImg" column="profileImg" />
       <result property="point" column="point" />
    </resultMap> 
+	<resultMap id="reviewResult" type="reviewVO">
+		
+	</resultMap>
 	
 	
 	<select id="selectAllGoodsList" resultMap="goodsResult">
@@ -70,9 +74,20 @@
 	
 	<select id="goodsDetail" resultMap="goodsResult">
 	 <![CDATA[
-		SELECT goods.*,member.name as memberName FROM goods
-		INNER JOIN member
-		where goods.memberNO = member.memberNO and goodsNo=#{goodsNo}
+		select goods.*, member.name as sellerName from goods 
+		inner join member
+		on goods.memberNo=member.memberNo
+		where goodsNo=#{goodsNo}
+		
 		]]>
+	</select>
+	
+	
+	<select id="selectTotalReviewsNum" resultType="int" parameterType="int">
+		select count(*) from (select * from review where goodsNo=#{goodsNo}) t
+	</select>
+	
+	<select id="selectReviewAverage" resultType="float" parameterType="int">
+		SELECT avg(CAST(star AS DECIMAL(2,1))) FROM review where goodsNo=#{goodsNo}
 	</select>
 </mapper> 
