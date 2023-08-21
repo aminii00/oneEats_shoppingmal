@@ -31,7 +31,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 <div class="col img_wrapper">
                   <c:if test="${not empty recipe.cookingImg}">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipe"
+                      src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipeNo${recipe.recipeNo}"
                       alt="레시피 이미지"
                     />
                   </c:if>

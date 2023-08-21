@@ -18,4 +18,8 @@ public interface CommunityService {
 
 	public boolean addRecipe(RecipeVO recipeVO, List<IngredientVO> ingredientList);
 
+	public int selectNewRecipeNo();
+
+	public boolean addRecipe(Map map, List<IngredientVO> ingredientList);
+
 }

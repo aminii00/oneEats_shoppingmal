@@ -31,7 +31,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="row">&nbsp;</div>
       <div class="row">
         <div class="col-3">
-          <a href="${contextPath}/mainPage.do">
+          <a href="${contextPath}/main/mainPage.do">
             <img
               src="${contextPath}/img/logo2.png"
               alt="Logo"

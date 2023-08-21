@@ -1,26 +1,28 @@
 package com.example.demo.community.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.community.service.CommunityService;
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.RecipeVO;
+
 
 @Controller("communityController")
 @RequestMapping("/community")
@@ -93,21 +95,54 @@ public class CommunityControllerImpl implements CommunityController {
 	
 	
 	@RequestMapping(value = "/recipe/addRecipe.do", method = RequestMethod.POST )
-	public ModelAndView addRecipe(@ModelAttribute("recipeVO") RecipeVO recipeVO,HttpServletRequest request ) throws IOException {
+	public ModelAndView addRecipe(MultipartHttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView();
+		int newRecipeNo = communityService.selectNewRecipeNo();
+		List fileList = GeneralFileUploader.upload(request,"/recipe/"+newRecipeNo);
+		System.out.println("fileList : "+fileList);
+		
+		// map에 recipe 정보를 저장
+		Map map = GeneralFileUploader.getParameterMap(request);
+		map.put("recipeNo", newRecipeNo);
+		map.put("cookingImg", fileList.get(0));
+		
+		
+		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("loginUser");
+		if (memberVO == null) {
+			map.put("memberNo", 1);
+		}else {
+			map.put("memberNo", memberVO.getMemberNo());
+		}
+		
+		// 재료들 정보 가져와서 ingredientList에 저장
 		String[] ingredientNames = request.getParameterValues("name");
 		String[] ingredientQtys = request.getParameterValues("qty");
 		List<IngredientVO> ingredientList = new ArrayList<IngredientVO>();
 		for (int i = 0; i < ingredientQtys.length; i++) {
-			IngredientVO ingredientVO = new IngredientVO(ingredientNames[i],ingredientQtys[i]);
+			IngredientVO ingredientVO = new IngredientVO(newRecipeNo,ingredientNames[i],ingredientQtys[i]);
 			ingredientList.add(ingredientVO);
 		}
+		System.out.println("ingredientList : "+ingredientList);
 		
 		
-		boolean result = communityService.addRecipe(recipeVO,ingredientList);
+		// addRecipe
+		boolean result = communityService.addRecipe(map,ingredientList);
 		
 		
+		ModelAndView mav = new ModelAndView();
+		
+		
+		// 등록 성공했을 경우 해당 레시피 상세 페이지로. 실패했을 경우 폼에.
+		if (result) {
+			System.out.println("레시피 등록 성공");
+			mav.setViewName("redirect:/community/recipe/recipeDetail.do?recipeNo="+newRecipeNo);
+		}else {
+			System.out.println("레시피 등록 실패");
+			mav.addObject("result","fail");
+			mav.setViewName("redirect:/community/recipe/recipeForm.do");
+		}
 		
 		return mav;
 	}

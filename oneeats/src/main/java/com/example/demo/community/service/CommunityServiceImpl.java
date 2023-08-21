@@ -36,18 +36,33 @@ public class CommunityServiceImpl implements CommunityService {
 	public boolean addRecipe(RecipeVO recipeVO, List<IngredientVO> ingredientList) {
 		boolean result = true;
 		try {
-			int newRecipeNo = communityDAO.selectNewRecipeNo();
 			communityDAO.insertNewRecipe(recipeVO);
-			Map ingredientMap = new HashMap();
-			ingredientMap.put("ingredientList", ingredientList);
-			ingredientMap.put("recipeNo", newRecipeNo);
-			communityDAO.insertIngredient(ingredientMap);
+			communityDAO.insertIngredients(ingredientList);
 		} catch (Exception e) {
 			result = false;
 		}
 		return result;
 	}
-
+	
+	
+	
+	@Override
+	public boolean addRecipe(Map map, List<IngredientVO> ingredientList) {
+		boolean result = true;
+		try {
+			communityDAO.insertNewRecipeWithMap(map);
+			communityDAO.insertIngredients(ingredientList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	@Override
+	public int selectNewRecipeNo() {
+		return communityDAO.selectNewRecipeNo();
+	};
+	
 	
 
 }

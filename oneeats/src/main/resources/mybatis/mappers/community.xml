@@ -32,7 +32,9 @@
 	
 	<select id="selectRecipeList" resultMap="recipeResult" parameterType="java.util.Map" >
 	    <![CDATA[
-			select * from recipe limit 6
+			select * from recipe
+			order by creDate desc
+			limit 6
 		]]>
 	</select>
 	
@@ -55,7 +57,26 @@
 	</select>
 
 	<insert id="insertNewRecipe" parameterType="recipeVO">
-		insert recipe () values()	
-		
+		insert recipe (recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo) values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})			
+	</insert>
+	
+	<insert id="insertNewRecipeWithMap" parameterType="java.util.Map">
+		insert recipe (recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo) values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})
+	</insert>
+	
+	<insert id="insertIngredients" parameterType="java.util.List" >
+		insert into ingredient (recipeNo,name,qty)
+		values
+		<foreach collection="list" item="i" index="index" separator=",">
+			(#{i.recipeNo}, #{i.name}, #{i.qty})
+		</foreach>
+	</insert>
+	
+	<insert id="insertIngredientsWithMap" parameterType="java.util.Map" >
+		insert into ingredient (recipeNo,name,qty)
+		values
+		<foreach collection="#{ingredientList}" item="i" index="index" separator=",">
+			(#{i.recipeNo}, #{i.name}, #{i.qty})
+		</foreach>
 	</insert>
 </mapper>

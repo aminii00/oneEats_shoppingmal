@@ -28,7 +28,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <body>
     <section>
       <hr class="line-black" />
-      <form action="" method="post" enctype="multipart/form-data">
+      <form
+        action="${contextPath}/community/recipe/addRecipe.do"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="recipeDetail_grid">
           <div class="row vertical-align">
             <div class="col-md-2 text-left textbold textsize-2 textcolor-black">
