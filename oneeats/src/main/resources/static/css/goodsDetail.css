@@ -266,3 +266,10 @@
 	width: 200px; 
 	color: #333333
 }
+
+
+.goods_option_row {
+        height: 150px;
+        border-top: none;
+        margin: 0;
+      }
