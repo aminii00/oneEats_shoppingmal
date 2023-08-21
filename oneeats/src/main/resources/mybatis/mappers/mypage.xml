@@ -80,11 +80,17 @@
 		]]>
 	</select>
 	
-	<insert id="insertOrder"  parameterType="orderVO">
+	<insert id="insertOrderList" parameterType="java.util.List">
 		<![CDATA[
-		 insert into t_order(id,pwd, name, email)
-		 values(#{id}, #{pwd}, #{name}, #{email})
-		]]>      
+  			insert into t_order (orderer_name, orderer_phone, reciever_name, reciever_address, reciever_phone, reciever_comment, used_point, used_couponId, 
+                       payment_price, discount_price, shippingfee, point_price, total_price, payment_type)
+  			values
+  			<foreach collection="list" item="order" separator=",">
+    		(#{order.orderer_name}, #{order.orderer_phone}, #{order.reciever_name}, #{order.reciever_address}, #{order.reciever_phone}, #{order.reciever_comment},
+    		#{order.used_point}, #{order.used_couponId}, #{order.payment_price}, #{order.discount_price}, #{order.shippingfee}, #{order.point_price},
+    		#{order.total_price}, #{order.payment_type})
+  			</foreach>
+		]]>
 	</insert>
 	
 	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
@@ -94,8 +100,7 @@
 		]]>
 	</select>
 	
-	<!-- 민아 프로필 편집 -->
-	<update id="mypageintroupdate" parameterType="java.util.HashMap">
+	<update id="mypageintroupdate" parameterType="java.util.HashMap">.
 	   update member set
 			  nickname=#{nickname},intro=#{intro}
 			  where id=#{id}

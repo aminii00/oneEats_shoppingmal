@@ -59,6 +59,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       하나 있음.
 
       -->
+    <!--다음 페이지로 넘어가는 input-->>
+    <!--goodsNo : 상품 번호-->
     <!-- Shoping Cart Section Begin -->
     <section class="shoping-cart spad">
       <form action="${contextPath}/mypage/orderConfirm.do" method="post">
@@ -78,12 +80,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </thead>
                   <tbody>
                     <tr>
-                      <input
-                        class="h_goods_no"
-                        type="hidden"
-                        name="goodsNo"
-                        value="1"
-                      />
+                      <input <<<<<<< HEAD class="h_goods_no" type="hidden"
+                      name="goodsNo" value="1" ======= class="h_goods_name"
+                      type="hidden" name="goodsName" value="못난이 당근" >>>>>>>
+                      origin/minzy16 />
                       <input
                         class="h_goods_qty"
                         type="hidden"
@@ -119,12 +119,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </td>
                     </tr>
                     <tr>
-                      <input
-                        class="h_goods_no"
-                        type="hidden"
-                        name="goodsNo"
-                        value="2"
-                      />
+                      <input <<<<<<< HEAD class="h_goods_no" type="hidden"
+                      name="goodsNo" value="2" ======= class="h_goods_name"
+                      type="hidden" name="goodsName" value="못난이 복숭아"
+                      >>>>>>> origin/minzy16 />
                       <input
                         class="h_goods_qty"
                         type="hidden"
@@ -160,12 +158,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </td>
                     </tr>
                     <tr>
-                      <input
-                        class="h_goods_no"
-                        type="hidden"
-                        name="goodsNo"
-                        value="3"
-                      />
+                      <input <<<<<<< HEAD class="h_goods_no" type="hidden"
+                      name="goodsNo" value="3" ======= class="h_goods_name"
+                      type="hidden" name="goodsName" value="못난이 감자" >>>>>>>
+                      origin/minzy16 />
                       <input
                         class="h_goods_qty"
                         type="hidden"
@@ -224,8 +220,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="shoping__checkout">
                 <h5>총 상품 금액</h5>
                 <ul>
+                  <<<<<<< HEAD
                   <input type="hidden" name="shippingFee" value="2500" />
                   <input type="hidden" name="totalPrice" value="12000" />
+                  ======= >>>>>>> origin/minzy16
                   <li class="text-left">결제 금액 <span>￦9500</span></li>
                   <li class="text-left">배송비 <span>￦2500</span></li>
                   <li class="text-left" style="font-size: 28px">

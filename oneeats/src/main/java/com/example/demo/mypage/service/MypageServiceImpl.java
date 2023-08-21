@@ -30,10 +30,10 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public int newOrder(OrderVO order) throws DataAccessException {
-		return mypageDAO.insertOrder(order);
+	public void insertOrderList(List<OrderVO> orderList) {
+		mypageDAO.insertOrderList(orderList);
 	}
-	
+
 	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {
 		System.out.println("listMyPageService");
