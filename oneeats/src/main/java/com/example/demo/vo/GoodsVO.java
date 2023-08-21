@@ -24,6 +24,14 @@ public class GoodsVO {
 	private String category;
 	private String type;
 	private int memberNo;
+	private String sellerName;
+	
+	public String getSellerName() {
+		return sellerName;
+	}
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
 	public int getGoodsNo() {
 		return goodsNo;
 	}

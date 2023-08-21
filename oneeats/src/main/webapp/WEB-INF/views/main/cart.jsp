@@ -79,7 +79,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <tbody>
                     <tr>
                       <input
-                        class="h_goods_name"
+                        class="h_goods_no"
                         type="hidden"
                         name="goodsNo"
                         value="1"
@@ -120,7 +120,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </tr>
                     <tr>
                       <input
-                        class="h_goods_name"
+                        class="h_goods_no"
                         type="hidden"
                         name="goodsNo"
                         value="2"
@@ -161,7 +161,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </tr>
                     <tr>
                       <input
-                        class="h_goods_name"
+                        class="h_goods_no"
                         type="hidden"
                         name="goodsNo"
                         value="3"

@@ -11,6 +11,12 @@ public interface GoodsService {
 	public GoodsVO selectNumGoodsList();
 
 	public List<GoodsVO> goodsDetail(int goodsNo);
+
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo);
+
+	public int selectTotalReviewsNum(int goodsNo);
+
+	public float selectReviewAverage(int goodsNo);
 	
 
 }

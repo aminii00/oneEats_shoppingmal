@@ -37,6 +37,25 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 
+	@Override
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo) {
+		return goodsDAO.selectGoodsByGoodsNo(goodsNo);
+	}
+
+
+	@Override
+	public int selectTotalReviewsNum(int goodsNo) {
+		
+		return goodsDAO.selectTotalReviewsNum(goodsNo);
+	}
+
+
+	@Override
+	public float selectReviewAverage(int goodsNo) {
+		return goodsDAO.selectReviewAverage(goodsNo);
+	}
+
+
 	
 
 
