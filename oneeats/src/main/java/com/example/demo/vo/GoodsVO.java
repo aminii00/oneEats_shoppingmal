@@ -148,12 +148,6 @@ public class GoodsVO {
 				+ ", img3=" + img3 + ", img4=" + img4 + ", img5=" + img5 + ", category=" + category + ", type=" + type
 				+ ", memberNo=" + memberNo + "]";
 	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
 	
 	
 	
