@@ -58,6 +58,18 @@
     
     </resultMap> 
     
+    <resultMap id="RecipeResult" type="recipeVO">
+    <result property ="recipeNO" column="ricipeNO"/>
+    <result property ="cooking_time" column="cooking_time"/>
+     <result property ="description" column="description"/>
+     <result property ="cookingImg" column="cookingImg"/>
+     <result property ="category" column="category"/>
+     <result property ="inbun" column ="inbun"/>
+     <result property ="creDate" column="creDate"/>
+     <result property ="memberNo" column="memberNo"/>
+    
+    </resultMap>
+    
     
 	
 	
@@ -69,14 +81,14 @@
 	
 	<select id="selectAllGoodsList"  resultMap="GoodsResult"  >
 	    <![CDATA[
-		select * from goods
-		order by goodsNo
+		select * from goods 
+		order by goodsNo Limit 9
 		]]>
 	</select>
 	
 	<select id="orderByNew"  resultMap="GoodsResult"  >
 	    <![CDATA[
-		select * from goods where goodsNo 
+		select * from goods
 		order by creDate desc
 		]]>
 	</select>
@@ -92,6 +104,13 @@
 	    <![CDATA[
 		select * from goods
 		order by price
+		]]>
+	</select>
+	
+	<select id="selectAllRecipesList" resultMap="RecipeResult">
+	  <![CDATA[
+		select * from recipe 
+		order by creDate desc limit 3
 		]]>
 	</select>
 </mapper>

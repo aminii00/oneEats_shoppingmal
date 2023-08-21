@@ -11,271 +11,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
 
-    <style>
-      .property-font2 {
-        width: 200px;
-        height: 100%;
-        color: #666;
-        font-weight: 400;
-        line-height: 19px;
-      }
-      .property-flex4 {
-        display: flex;
-        flex: 1 1 0%;
-        flex-direction: column;
-      }
-      .property-input {
-        color: #333;
-        font-weight: 400;
-        line-height: 19px;
-        white-space: pre-line;
-        word-break: break-all;
-      }
-      .property-margin {
-        padding-bottom: 40px;
-      }
-      .property-margin1 {
-        border-bottom: 1px solid #f4f4f4;
-      }
-      .property-flex2 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-align-items: flex-start;
-        -webkit-box-align: flex-start;
-        -ms-flex-align: flex-start;
-        align-items: flex-start;
-        width: 100%;
-        padding: 17px 0 18px;
-        border-top: 1px solid #f4f4f4;
-        font-size: 14px;
-        letter-spacing: -0.5px;
-      }
-      .property-font2 {
-        width: 200px;
-        height: 100%;
-        color: #666;
-        font-weight: 400;
-        line-height: 19px;
-      }
-      .property-flex4 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-      }
-      .property-flex5:last-of-type {
-        border-bottom: 1px solid #f4f4f4;
-      }
-      .property-flex5 {
-        display: flex;
-        flex-direction: column;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        padding: 11px 10px 11px 15px;
-        font-size: 12px;
-        border-left: 1px solid #f4f4f4;
-        border-top: 1px solid #f4f4f4;
-        border-right: 1px solid #f4f4f4;
-      }
-      *,
-      :after,
-      :before {
-        box-sizing: border-box;
-        margin: 0;
-      }
-      .property-font3 {
-        font-weight: 700;
-        font-size: 16px;
-        color: #333;
-        padding-right: 5px;
-        margin: 24px 0 24px 0;
-      }
-      .margin4 {
-        margin: 8px;
-      }
-      .select {
-        box-sizing: border-box;
-        width: 100px;
-        padding: 4px;
-        font-size: 14px;
-        border-radius: 6px;
-      }
-      .border6 {
-        border-radius: 6px;
-      }
-      .option {
-        padding: 4px;
-        font-size: 14px;
-        color: #fff;
-      }
-      .css-lay {
-        display: flex;
-        gap: 8px;
-        margin-top: 20px;
-      }
-      .css-heartbtn {
-        display: block;
-        padding: 0 10px;
-        text-align: center;
-        overflow: hidden;
-        width: 56px;
-        height: 56px;
-        border-radius: 3px;
-        color: #333;
-        background-color: #fff;
-        border: 1px solid #ddd;
-      }
-      .css-let1 {
-        display: inline-block;
-        font-size: 22px;
-        font-weight: 500;
-      }
-      .css-lay2 {
-        -webkit-box-flex: 1;
-        flex-grow: 1;
-      }
-      .css-lay2 .cart-button {
-        font-weight: 500;
-      }
-      .css-cartbtn {
-        display: block;
-        padding: 0 10px;
-        text-align: center;
-        overflow: hidden;
-        width: 100%;
-        height: 56px;
-        border-radius: 3px;
-        color: #fff;
-        background-color: #a3d060;
-        border: 0 none;
-      }
-      #product > .view > .review > .paging > .num > a.on {
-        color: #fe434c;
-        font-weight: 700;
-      }
-      #product > .view > .review > .paging {
-        width: 100%;
-        padding: 30px 0;
-        text-align: center;
-      }
-      #product > .view > .review > .paging > span > a {
-        color: #777;
-        font-size: 11px;
-        letter-spacing: -1px;
-      }
-      #product > .view > .review > .paging > .num > a {
-        display: inline-block;
-        min-width: 14px;
-        margin: 0 2px;
-        padding: 8px 9px;
-        border: 1px solid #c4c4c4;
-        color: #000;
-        font-size: 12px;
-        text-align: center;
-        text-decoration: none;
-      }
-      #product > .view > .review > .paging > .num > a.on {
-        color: #fe434c;
-        font-weight: 700;
-      }
-      .property-input1 {
-        display: flex;
-        padding: 30px 0 19px 20px;
-        border-bottom: 1px solid #f4f4f4;
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 19px;
-      }
-      .property-gdtail-flex {
-        flex: 0 0 225px;
-      }
-      .property-gdtail-flex1 {
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        margin: -1px 0 7px;
-      }
-      .property-gdtail-font {
-        font-weight: 500;
-      }
-      .property-gdtail-flex2 {
-        flex: 1 1 0%;
-        overflow: hidden;
-      }
-      .property-gdtail-flex3 {
-        display: flex;
-        -webkit-box-align: center;
-        align-items: center;
-        gap: 5px;
-        height: 19px;
-        padding-right: 20px;
-      }
-      .property-gdtail-font1 {
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 19px;
-        color: #999;
-        display: -webkit-box;
-        overflow: hidden;
-        word-break: break-all;
-        white-space: normal;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-      }
-      .css-1fkegtf {
-        display: flex;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        -webkit-box-align: center;
-        align-items: center;
-        width: 100%;
-        padding-top: 19px;
-        padding-right: 20px;
-      }
-      .css-14kcwq8 {
-        color: #999;
-      }
-      .property-btn1 {
-        display: flex;
-        -webkit-box-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        align-items: center;
-        min-width: 88px;
-        height: 32px;
-        padding: 0 13px 0 11px;
-        border: 1px solid #e2e2e2;
-        border-radius: 20px;
-        font-size: 12px;
-        line-height: 20px;
-        color: #999;
-      }
-      .property-img {
-        width: 15px;
-        height: 15px;
-        margin-right: 4px;
-        background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIKICAgICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoCiAgICBkPSJNNC4wNDgzNyAxMi45OTk4SDIuMjE5MzVDMS41NDU5MiAxMi45OTk4IDEgMTIuNDYyNiAxIDExLjc5OTlWNy41OTk5MkMxIDYuOTM3MTggMS41NDU5MiA2LjM5OTkzIDIuMjE5MzUgNi4zOTk5M0g0LjA0ODM3TTguMzE2MDggNS4xOTk5NVYyLjc5OTk4QzguMzE2MDggMS44MDU4OCA3LjQ5NzIgMSA2LjQ4NzA2IDFMNC4wNDgzNyA2LjM5OTkzVjEyLjk5OTlIMTAuOTI1NUMxMS41MzM1IDEzLjAwNjYgMTIuMDUzNyAxMi41NzE1IDEyLjE0NDggMTEuOTc5OUwxMi45ODYyIDYuNTc5OTNDMTMuMDM5OSA2LjIzMTg1IDEyLjkzNTUgNS44NzgxMiAxMi43MDA4IDUuNjEyNDVDMTIuNDY2IDUuMzQ2NzggMTIuMTI0NiA1LjE5NTk2IDExLjc2NjggNS4xOTk5NUg4LjMxNjA4WiIKICAgIHN0cm9rZT0iIzk5OTk5OSIgc3Ryb2tlLXdpZHRoPSIxLjEiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIKICAgIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==)
-          center center no-repeat;
-      }
-      .btn-hover:hover {
-        color: #568203;
-        transition: 0.5s;
-      }
-    </style>
+    <link href="${contextPath}/css/goodsDetail.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -290,18 +26,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="breadcrumb__text">
               <h2>못난이 상품</h2>
               <div class="breadcrumb__option">
-                <a href="./index.html">Home</a>
-                <a href="./index.html">못난이 상품</a>
-                <span>채소</span>
+                <a href="${contextPath}/main/mainPage.do">Home</a>
+                <a href="${contextPath}/goods/goodsList.do">못난이 상품</a>
+                <span>{채소}</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <!-- Breadcrumb Section End -->
 
-    <!-- Product Details Section Begin -->
     <section class="product-details spad">
       <div class="container">
         <div class="row">
@@ -351,46 +85,43 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <div class="product__details__price">￦900</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
+                    <c:forEach var="i" items="${goods }">
+                      <dl class="property-flex2">
+                        <dt class="property-input-gd">배송</dt>
+
+                        <dd class="property-flex4">
+                          <p class="property-input">${i.name}</p>
+                        </dd>
+                      </dl>
+                    </c:forEach>
                     <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">배송</dt>
+                      <dt class="property-input-gd">판매자</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">택배 배송(기본 3일)</p>
+                        <p class="property-input">${i.name}</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">판매자</dt>
-                      <dd class="property-flex4">
-                        <p class="property-input">김씨</p>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">포장타입</dt>
+                      <dt class="property-input-gd">포장타입</dt>
                       <dd class="property-flex4">
                         <p class="property-input">상온(종이 포장)</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">원산지</dt>
+                      <dt class="property-input-gd">원산지</dt>
                       <dd class="property-flex4">
                         <p class="property-input">논산</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">무게 / 용량</dt>
+                      <dt class="property-input-gd">무게 / 용량</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">300g</p>
+                        <p class="property-input">${goodsList.weight}</p>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">수확시기</dt>
+                      <dt class="property-input-gd">수확시기</dt>
                       <dd class="property-flex4">
                         <p class="property-input">8월</p>
-                      </dd>
-                    </dl>
-                    <dl class="property-flex2">
-                      <dt style="width: 200px; color: #333333">배송</dt>
-                      <dd class="property-flex4">
-                        <p class="property-input">택배 배송(기본 3일)</p>
                       </dd>
                     </dl>
 
@@ -399,7 +130,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <div class="property-margin1">
                         <dl class="property-flex2" style="height: 170px">
                           <dt
-                            style="width: 200px; color: #333333"
+                            class="property-input-gd"
                             style="margin-top: 16px"
                           >
                             상품선택
@@ -409,17 +140,27 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               style="align-content: center"
                               style="overflow-y: scrol"
                             >
-                              <select name="select" class="margin4 opt">
-                                <option value="옵션을 선택해주세요">
+                              <select
+                                name="select"
+                                class="margin4 opt"
+                                onchange="handleOnChange(this)"
+                              >
+                                <option value="옵션을 선택해주세요" selected>
                                   옵션을 선택해주세요
                                 </option>
-                                <option value="900">
+                                <option value="못난이 당근 단품" value2="900">
                                   못난이 당근 단품 900원
                                 </option>
-                                <option value="2500">
+                                <option
+                                  value="못난이 당근 3개묶음"
+                                  value2="2500"
+                                >
                                   못난이 당근 3개묶음 2500원
                                 </option>
-                                <option value="4300">
+                                <option
+                                  value="못난이 당근 5개묶음"
+                                  value2="4300"
+                                >
                                   못난이 당근 5개묶음 4300원
                                 </option>
                               </select>
@@ -438,9 +179,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               <div
                                 class="property-font3 font-bold"
                                 style="margin-bottom: 24px; font-size: 22px"
-                              >
-                                못난이 당근 단품
-                              </div>
+                                id="result"
+                              ></div>
                               <div class="product__details__quantity">
                                 <div class="quantity text-left">
                                   <div class="pro-qty border6">
@@ -817,7 +557,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </section>
     <!-- Related Product Section End -->
+    <script>
+      function handleOnChange(e) {
+        // 선택된 데이터 가져오기
+        const value = e.value;
 
+        // 데이터 출력
+        document.getElementById("result").innerText = value;
+      }
+    </script>
     <!-- Js Plugins -->
   </body>
 </html>

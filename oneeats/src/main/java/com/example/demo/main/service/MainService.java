@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.RecipeVO;
 
 public interface MainService {
 	
@@ -12,4 +13,6 @@ public interface MainService {
 	public List<GoodsVO> selectAllGoodsList();
 
 	public List<GoodsVO> orderByNew();
+
+	public List<RecipeVO> selectAllRecipesList();
 }

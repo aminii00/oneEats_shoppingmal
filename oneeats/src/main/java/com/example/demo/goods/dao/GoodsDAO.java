@@ -11,13 +11,19 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.GoodsVO;
 
+@Mapper
 @Repository("goodsDAO")
-public class GoodsDAO{
-	@Autowired
-	private SqlSession sqlSession;
+public interface GoodsDAO {
 
+
+	public List<GoodsVO> selectAllGoodsList();
+
+	public GoodsVO selectNumGoodsList();
+	
+	public List<GoodsVO>  goodsDetail(int goodsNo);
+}
+	
 
 
 	
 
-}
