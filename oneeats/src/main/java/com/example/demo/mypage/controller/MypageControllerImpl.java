@@ -1,8 +1,7 @@
 package com.example.demo.mypage.controller;
 
 import java.util.List;
-
-
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,6 +21,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.mypage.service.MypageService;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.RecipeVO;
+
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.vo.MemberVO;
@@ -30,38 +32,62 @@ import com.example.demo.vo.MemberVO;
 public class MypageControllerImpl implements MypageController {
 	@Autowired
 	private MypageService mypageService;
-	@Autowired
+	@Autowired 
 	private OrderVO orderVO;
 	@Autowired
 	private MemberVO memberVO;
 	
-	//밍디 주문내역1
-	@RequestMapping(value = "/mypage/orderList.do", method= {RequestMethod.GET, RequestMethod.POST})
+	@Override
+	@RequestMapping(value = "/mypage/orderList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		List orderList = mypageService.selectOrderList();
+		List<OrderVO> orderList = mypageService.selectOrderList();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("orderList", orderList);
 		System.out.println(mav);
 		return mav;
 	}
 	
-	//밍디 주문내역2
-	@RequestMapping(value = "/mypage/orderDetail.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView orderDetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@Override
+	@RequestMapping(value = "/mypage/orderDetail.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView orderDetail(@RequestParam(required = false, value="orderNo") int orderNo,
+			                      HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
-		String viewName = (String) request.getAttribute("viewName");
-		List orderList = mypageService.selectOrderList();
+		String viewName = (String)request.getAttribute("viewName");
+		List<OrderVO> orderDetail = mypageService.selectOrderByOrderNo(orderNo);
+		orderVO = orderDetail.get(0);
 		ModelAndView mav = new ModelAndView(viewName);
-		mav.addObject("orderList", orderList);
-		System.out.println(mav);
+		mav.setViewName(viewName);
+		mav.addObject("orderDetail", orderDetail);
+		mav.addObject("order", orderVO);
 		return mav;
 	}
 	
-	//민아 프로필편집 1
+	@RequestMapping(value = "/mypage/newOrder.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView newOrder(@ModelAttribute("order") OrderVO order,
+			                      HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String)request.getAttribute("viewName");
+		int result = 0;
+		System.out.println(order);
+		result = mypageService.newOrder(order);
+		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
+		return mav;
+	}
+	
+	
+	@RequestMapping(value="/mypage/orderConfirm.do", method=RequestMethod.GET)
+	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String viewName = (String)request.getAttribute("viewName");
+		request.getParameter("price");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		return mav;
+	}
+	
+	
 	@Override
 	@RequestMapping(value="/mypage/myPageMain.do" , method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView myPageMain(@RequestParam(required = false,value="message")  String message,

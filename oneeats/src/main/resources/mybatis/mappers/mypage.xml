@@ -73,6 +73,19 @@
 		]]>
 	</select>
 
+	<select id="selectOrderByOrderNo" resultMap="orderResult"  parameterType="int">
+		<![CDATA[
+			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice, goods.weight from t_order inner join goods on t_order.goodsNo=goods.goodsNo
+			where t_order.orderNo=#{orderNo}
+		]]>
+	</select>
+	
+	<insert id="insertOrder"  parameterType="orderVO">
+		<![CDATA[
+		 insert into t_order(id,pwd, name, email)
+		 values(#{id}, #{pwd}, #{name}, #{email})
+		]]>      
+	</insert>
 	
 	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
 	    <![CDATA[

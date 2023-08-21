@@ -32,7 +32,21 @@ public class OrderVO {
 	private String goodsName;
 	private String goodsImg;
 	private int gun;
+	private int goodsPrice;
+	private int weight;
 	
+	public int getGoodsPrice() {
+		return goodsPrice;
+	}
+	public void setGoodsPrice(int goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
+	}
 	public String getGoodsImg() {
 		return goodsImg;
 	}
@@ -199,7 +213,8 @@ public class OrderVO {
 				+ ", total_price=" + total_price + ", payment_type=" + payment_type + ", orderDate=" + orderDate
 				+ ", delivery_status=" + delivery_status + ", deliveryDate=" + deliveryDate + ", goods_qty=" + goods_qty
 				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + ", goodsName="
-				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + "]";
+				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + ", goodsPrice=" + goodsPrice + ", weight="
+				+ weight + "]";
 	}
 	
 }

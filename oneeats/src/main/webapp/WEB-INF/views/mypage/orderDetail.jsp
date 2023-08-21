@@ -33,8 +33,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <!-- 주문일, 주문번호 -->
     <div class="div-tot">
       <div class="div-t11 textbold textcolor-black textsize-1">
-        <span>2023.08.11 주문</span>
-        <span style="float: right">주문번호 20230811001</span>
+        <span>${order.orderDate} 주문</span>
+        <span style="float: right">주문번호 ${order.orderNo}</span>
       </div>
     </div>
 
@@ -49,31 +49,41 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="div-left">
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">상품금액</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">25800원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.payment_price}원
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">
               상품 할인금액
             </dt>
-            <dd class="dd-1 textsize-1 textcolor-black">-3100원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              -${order.discount_price}원
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">배송비</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">2500원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.shippingfee}원
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">적립금액</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">250원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">${point_price}원</dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">결제방법</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">신용카드</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.payment_type}
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">
               총 결제금액
             </dt>
-            <dd class="dd-1 textsize-1 textcolor-black">24400원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.total_price}원
+            </dd>
           </dl>
         </div>
       </div>
@@ -88,15 +98,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="div-left">
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">주문번호</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">20230811001</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">${order.orderNo}</dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">주문자명</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">강민지</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.orderer_name}
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">결제일시</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">2023-08-11 14:00</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">${order.orderDate}</dd>
           </dl>
         </div>
       </div>
@@ -119,23 +131,29 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="div-left">
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">받는분</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">강민지</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.reciever_name}
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">연락처</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">010-1234-5678</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.reciever_phone}
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">배송지</dt>
             <dd class="dd-1 textsize-1 textcolor-black">
-              (35234) 대전광역시 서구 대덕대로 182 10층 1005호
+              ${order.reciever_address}
             </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">
               배송요청사항
             </dt>
-            <dd class="dd-1 textsize-1 textcolor-black">문 앞에 놔주세요</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.reciever_comment}
+            </dd>
           </dl>
         </div>
       </div>
@@ -146,33 +164,42 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="div-t1 textbold textcolor-black textsize-1">
         <span>상품주문목록</span>
       </div>
-      <div class="div-t2">
-        <div class="div-left2">
-          <img
-            class="img-1"
-            src="${contextPath}/img/product/main/carrot.jpg"
-            alt="상품 이미지"
-          />
-          <div class="div-dl">
-            <dl class="dl-dt">
-              <dt class="dt-2 textsize-1 textcolor-black">못난이 당근</dt>
-            </dl>
-            <dl class="dl-dt">
-              <dt class="dt-2 textsize-1 textcolor-black">￦1000 | 100g 2개</dt>
-            </dl>
+      <c:forEach var="detail" items="${orderDetail}">
+        <div class="div-t2">
+          <div class="div-left2">
+            <img
+              class="img-1"
+              src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=order"
+              alt="상품메인"
+            />
+            <div class="div-dl">
+              <dl class="dl-dt">
+                <dt class="dt-2 textsize-1 textcolor-black">
+                  ${detail.goodsName}
+                </dt>
+              </dl>
+              <dl class="dl-dt">
+                <dt class="dt-2 textsize-1 textcolor-black">
+                  ￦${detail.goodsPrice} | ${detail.weight}g
+                  ${detail.goods_qty}개
+                </dt>
+              </dl>
+            </div>
+          </div>
+          <div class="div-right">
+            <span class="span-1 textsize-1 textcolor-black"
+              >${detail.delivery_status}</span
+            >
+            <button
+              class="btn-5 bg-lightgreen border-0 textsize-1 textbold textcolor-white"
+              type="button"
+              onclick='fn_openalert("장바구니에 담았습니다.<br> 장바구니로 이동하시겠습니까?","${contextPath}/cart.do")'
+            >
+              <span>장바구니 담기</span>
+            </button>
           </div>
         </div>
-        <div class="div-right">
-          <span class="span-1 textsize-1 textcolor-black">취소완료</span>
-          <button
-            class="btn-5 bg-lightgreen border-0 textsize-1 textbold textcolor-white"
-            type="button"
-            onclick='fn_openalert("장바구니에 담았습니다.<br> 장바구니로 이동하시겠습니까?","${contextPath}/cart.do")'
-          >
-            <span>장바구니 담기</span>
-          </button>
-        </div>
-      </div>
+      </c:forEach>
     </div>
 
     <hr class="linebold" />
