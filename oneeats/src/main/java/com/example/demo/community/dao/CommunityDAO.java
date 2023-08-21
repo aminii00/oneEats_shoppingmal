@@ -29,6 +29,14 @@ public interface CommunityDAO {
 
 	public void insertNewRecipeWithMap(Map map);
 
-	public void insertIngredientsWithMap(Map condMap); 
+	public void insertIngredientsWithMap(Map condMap);
+
+	public void updateRecipe(Map map);
+
+	public void deleteIngredientsByRecipeNo(int recipeNo);
+
+	public void deleteRecipe(int recipeNo);
+
+	public List<RecipeVO> selectNewRecipeListExceptCurrentRecipe(int recipeNo); 
 	
 }

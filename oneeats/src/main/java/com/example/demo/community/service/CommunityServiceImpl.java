@@ -45,7 +45,6 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	
-	
 	@Override
 	public boolean addRecipe(Map map, List<IngredientVO> ingredientList) {
 		boolean result = true;
@@ -61,6 +60,28 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public int selectNewRecipeNo() {
 		return communityDAO.selectNewRecipeNo();
+	}
+	@Override
+	public boolean modRecipe(Map map, List<IngredientVO> ingredientList,String recipeNo) {
+		boolean result = true;
+		try {
+			communityDAO.updateRecipe(map);
+			communityDAO.deleteIngredientsByRecipeNo(Integer.parseInt(recipeNo));
+			communityDAO.insertIngredients(ingredientList);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		return result;
+	}
+	@Override
+	public void deleteRecipe(int recipeNo) {
+		communityDAO.deleteRecipe(recipeNo);
+	}
+	@Override
+	public List<RecipeVO> selectNewRecipeList(int recipeNo) {
+		return communityDAO.selectNewRecipeListExceptCurrentRecipe(recipeNo);
 	};
 	
 	

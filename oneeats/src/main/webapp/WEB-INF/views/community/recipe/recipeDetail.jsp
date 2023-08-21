@@ -13,6 +13,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <script src="${contextPath}/js/community.js"></script>
   </head>
   <body>
+    ${result}
     <section>
       <div class="recipeDetail_grid">
         <div class="row">
@@ -33,7 +34,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row">
           <div class="col">
             <button
-              class="btn-toform"
+              class="btn-remove"
+              style="float: right"
+              onclick="fn_openalert('레시피를 삭제하시겠습니까?','${contextPath}/community/recipe/deleteRecipe.do?recipeNo=${recipe.recipeNo}')"
+            >
+              삭제
+            </button>
+            <button
+              class="btn-modify"
               style="float: right"
               onclick="location.href='${contextPath}/community/recipe/recipeModForm.do?recipeNo=${recipe.recipeNo}'"
             >

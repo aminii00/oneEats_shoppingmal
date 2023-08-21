@@ -22,4 +22,10 @@ public interface CommunityService {
 
 	public boolean addRecipe(Map map, List<IngredientVO> ingredientList);
 
+	public boolean modRecipe(Map map, List<IngredientVO> ingredientList, String recipeNo);
+
+	public void deleteRecipe(int recipeNo);
+
+	public List<RecipeVO> selectNewRecipeList(int recipeNo);
+
 }

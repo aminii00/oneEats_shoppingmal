@@ -44,15 +44,7 @@ public class GeneralFileUploader {
 	
 	public static List upload(MultipartHttpServletRequest multipartHttpServletRequest,String repopath) throws IllegalStateException, IOException{
 		CURR_IMAGE_REPO_PATH = "c:/oneeats/file_repo"+repopath;
-		File directory = new File(CURR_IMAGE_REPO_PATH);
-        if (!directory.exists()) {
-            boolean created = directory.mkdirs();
-            if (created) {
-                System.out.println("Directory created successfully.");
-            } else {
-                System.out.println("Failed to create directory.");
-            }
-        }
+
 		return upload(multipartHttpServletRequest);
 	}
 	
@@ -77,5 +69,17 @@ public class GeneralFileUploader {
 		}
 		return fileList;
 		
+	}
+	
+
+	
+	public static void removeFile(String fileName,String repopath) {
+		CURR_IMAGE_REPO_PATH = "c:/oneeats/file_repo"+repopath;
+		String f = CURR_IMAGE_REPO_PATH+"\\"+fileName;
+		File file = new File(f);
+		if (file.exists()) {
+			file.delete();
+		}
+
 	}
 }

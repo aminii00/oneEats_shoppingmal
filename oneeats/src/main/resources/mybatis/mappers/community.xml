@@ -30,17 +30,26 @@
 	</select>
 	
 	
+	
 	<select id="selectRecipeList" resultMap="recipeResult" parameterType="java.util.Map" >
-	    <![CDATA[
 			select * from recipe
+			<if test="category!=null and category!=''" >
+				where category=#{category}
+			</if>
 			order by creDate desc
-			limit 6
-		]]>
+			limit #{start}, 6
+			
 	</select>
 	
 	<select id="selectNewRecipeList" resultMap="recipeResult">
 		select * from recipe order by creDate desc limit 3
 	</select>
+	
+	
+	<select id="selectNewRecipeListExceptCurrentRecipe" resultMap="recipeResult" parameterType="int">
+		select * from recipe where recipeNo!=#{recipeNo} order by creDate desc limit 3
+	</select>
+	
 	
 	<select id="selectRecipeByRecipeNo" resultType="recipeVO" >
 		select * from recipe where recipeNo=#{recipeNo}
@@ -55,6 +64,15 @@
 	<select id="selectNewRecipeNo" resultType="int" >
 		select ifnull(max(recipeNo),0)+1 from recipe
 	</select>
+
+	<select id="selectRecipeTotCount" resultType="int">
+		select count(*) from recipe
+	</select>
+	
+	<select id="selectRecipeCountWithCategory" resultType="int" parameterType="String">
+		select count(*) from recipe where category=#{category}
+	</select>
+
 
 	<insert id="insertNewRecipe" parameterType="recipeVO">
 		insert recipe (recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo) values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})			
@@ -79,4 +97,22 @@
 			(#{i.recipeNo}, #{i.name}, #{i.qty})
 		</foreach>
 	</insert>
+	
+	<update id="updateRecipe" parameterType="java.util.Map">
+		update recipe set title = #{title},
+      	cooking_time = #{cooking_time},
+      	description = #{description},
+      	cookingImg = #{cookingImg},
+      	category = #{category},
+      	inbun = #{inbun}
+    	where recipeNo = #{recipeNo}
+	</update>
+	
+	<delete id="deleteIngredientsByRecipeNo" parameterType="int">
+		delete from ingredient where recipeNo = #{recipeNo}
+	</delete>
+	
+	<delete id="deleteRecipe" parameterType="int">
+		delete from recipe where recipeNo = #{recipeNo}
+	</delete>
 </mapper>

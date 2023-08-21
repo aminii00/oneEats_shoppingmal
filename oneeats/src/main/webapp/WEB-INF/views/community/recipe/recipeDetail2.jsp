@@ -31,8 +31,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             <div class="row">
               <div class="img_wrapper">
                 <img
-                  class="btn-square"
-                  src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipe&no=${recipe.recipeNo}"
+                  src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipeNo${recipe.recipeNo}"
                   alt="레시피 이미지"
                 />
               </div>
