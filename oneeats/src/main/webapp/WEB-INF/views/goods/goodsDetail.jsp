@@ -74,7 +74,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           </div>
           <div class="col-lg-6 col-md-6 text-left">
             <div class="product__details__text">
-              <h3>못난이 당근</h3>
+              <c:forEach var="i" items="${goods }">
+                <h3>${i.name}</h3>
+              </c:forEach>
               <div class="product__details__rating">
                 <img
                   src="${contextPath}/img/product/review/star.jpg"
@@ -82,46 +84,50 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 />
 
                 <span>(3 reviews)</span>
-                <div class="product__details__price">￦900</div>
+                <c:forEach var="i" items="${goods }">
+                  <div class="product__details__price">￦${i.price}</div>
+                </c:forEach>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
-                    <c:forEach var="i" items="${goods }">
-                      <dl class="property-flex2">
-                        <dt class="property-input-gd">배송</dt>
-
-                        <dd class="property-flex4">
-                          <p class="property-input">${i.name}</p>
-                        </dd>
-                      </dl>
-                    </c:forEach>
                     <dl class="property-flex2">
                       <dt class="property-input-gd">판매자</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">${i.name}</p>
+                        <c:forEach var="i" items="${goods }">
+                          <p class="property-input">${i.memberName}</p>
+                        </c:forEach>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt class="property-input-gd">포장타입</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">상온(종이 포장)</p>
+                        <c:forEach var="i" items="${goods }">
+                          <p class="property-input">${i.rapping}</p>
+                        </c:forEach>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt class="property-input-gd">원산지</dt>
+
                       <dd class="property-flex4">
-                        <p class="property-input">논산</p>
+                        <c:forEach var="i" items="${goods }">
+                          <p class="property-input">${i.manufacturer}</p>
+                        </c:forEach>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt class="property-input-gd">무게 / 용량</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">${goodsList.weight}</p>
+                        <c:forEach var="i" items="${goods }">
+                          <p class="property-input">${i.weight}</p>
+                        </c:forEach>
                       </dd>
                     </dl>
                     <dl class="property-flex2">
                       <dt class="property-input-gd">수확시기</dt>
                       <dd class="property-flex4">
-                        <p class="property-input">8월</p>
+                        <c:forEach var="i" items="${goods }">
+                          <p class="property-input">${i.harvest}</p>
+                        </c:forEach>
                       </dd>
                     </dl>
 
@@ -140,13 +146,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               style="align-content: center"
                               style="overflow-y: scrol"
                             >
-                              <select
-                                name="select"
-                                class="margin4 opt"
-                                <<<<<<<
-                                HEAD
-                                onchange="handleOnChange(this)"
-                              >
+                              <select name="select" class="margin4 opt">
                                 <option value="옵션을 선택해주세요" selected>
                                   ======= id="select_option" >
                                 </option>
@@ -165,7 +165,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 </option>
                                 <option
                                   value="못난이 당근 5개묶음"
-                                  value2="4300"
+                                  value="4300"
                                 >
                                   못난이 당근 5개묶음 4300원
                                 </option>
@@ -203,13 +203,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               padding: 10px 0 10px 0;
                             "
                           >
-                            총 상품금액
+                            총 상품금액:
                           </span>
                           <span
                             class="property-font3 text-right"
                             style="font-size: 22px; margin-bottom: -10px"
-                            >900원</span
-                          >
+                            id="result1"
+                          ></span>
                         </div>
                       </div>
                       <div class="css-9y0nwt">
@@ -299,25 +299,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <div class="product__details__tab__desc">
                   <h6>Products Infomation</h6>
                   <p>
-                    자연이 주는 그대로, 수분감 가득한 무농약 못난이 햇
-                    양파입니다.<br />
-                    비교적 작게 자랐지만, 껍질이 단단하고 겹갯수가 적어 수분이
-                    가득하고 식감은 아삭합니다.<br />
-                    단지 조금 작다는 이유만으로 버려질 위기에 처한 무농약 햇
-                    양파 무농약 햇 양파가 버려질 위기에 처했다는 제보를 받고
-                    전북 군산으로 달려갔습니다. <br />약 1,700평에 달하는 광활한
-                    양파밭에는 변화무쌍한 올해 날씨탓인지 비교적 작게 자란
-                    양파들이 수확을 기다리고 있었습니다. <br />날씨탓에 비교적
-                    작게 자랐지만, 박진규 농부님은 무농약 농법으로 재배한 만큼
-                    관심과 정성은 듬뿍 담았다고 자부하셨는데요. <br />기존
-                    납품처에는 크기가 작다는 이유로 납품을 거부해 양파들이
-                    버려질 위기라고 말하는 박진규 농부님의 얼굴에는 근심이
-                    가득했습니다. <br />농부님의 정성이 담긴 햇 양파들이
-                    버려지게 둘순 없어 일단 수확했습니다. 그렇게 모우고 보니
-                    하루만에 약 1톤이 넘는 못난이 양파들이 쌓이네요.<br />
-                    작게 자라 판로를 잃어 버려질 위기에 처한 작아서 남지 않아
-                    오히려 좋은 무농약 햇 양파 구조에 동참해주세요! 여러분의
-                    도움이 농가와 지구를 살리는데 큰 힘이 됩니다<br />
+                    <c:forEach var="i" items="${goods }">
+                      <p>${i.description}</p>
+                    </c:forEach>
                   </p>
                 </div>
               </div>
@@ -563,11 +547,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- Related Product Section End -->
     <script>
       function handleOnChange(e) {
-        // 선택된 데이터 가져오기
         const value = e.value;
 
-        // 데이터 출력
         document.getElementById("result").innerText = value;
+      }
+
+      function handleOnChange1(e) {
+        const value2 = e.value;
+        document.getElementById("result1").innerText = value2;
       }
     </script>
     <!-- Js Plugins -->

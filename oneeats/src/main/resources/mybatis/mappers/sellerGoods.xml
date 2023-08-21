@@ -7,4 +7,38 @@
 	<!-- 리절트 맵 정의 -->	
 	
 	
+	<resultMap id="goodsResult" type="goodsVO">
+	  <result column="goodsNo" property="goodsNo"/>
+	  <result column="name" property="name"/>
+	  <result column="price" property="price"/>
+	  <result column="rapping" property="rapping"/>
+	  <result column="manufacturer" property="manufacturer"/>
+	  <result column="weight" property="weight"/>
+	  <result column="expDate" property="expDate" javaType="java.sql.Date"/>
+	  <result column="description" property="description"/>
+	  <result column="harvest" property="harvest"/>
+	  <result column="creDate" property="creDate" javaType="java.sql.Date"/>
+	  <result column="img1" property="img1"/>
+	  <result column="img2" property="img2"/>
+	  <result column="img3" property="img3"/>
+	  <result column="img4" property="img4"/>
+	  <result column="img5" property="img5"/>
+	  <result column="category" property="category"/>
+	  <result column="type" property="type"/>
+	  </resultMap>
+	
+	
+	
+		<insert id="insertGoods" parameterType="java.util.Map">
+<![CDATA[
+insert into goods(name,price,rapping,manufacturer,weight,description,harvest,img1,img2,img3,img4,img5,category)
+values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{harvest},#{img1},#{img2},#{img3},#{img4},#{img5},#{category})
+]]>
+
+	</insert>
+	
+	
+	
+
+	
 </mapper>
