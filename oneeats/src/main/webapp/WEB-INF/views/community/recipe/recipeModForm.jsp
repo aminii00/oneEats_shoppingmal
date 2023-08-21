@@ -32,6 +32,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         method="post"
         enctype="multipart/form-data"
       >
+        <input type="hidden" name="recipeNo" value="${recipe.recipeNo}" />
         <div class="recipeDetail_grid">
           <div class="row vertical-align">
             <div class="col-md-2 text-left textbold textsize-2 textcolor-black">
@@ -72,7 +73,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="recipe_main_img_wrapper">
                 <img
                   id="recipeimg_preview"
-                  src="${contextPath}/download.do?imgFileName=${recipe.cookingImg}"
+                  src="${contextPath}/download.do?imgFileName=${recipe.cookingImg}&path=recipeNo${recipe.recipeNo}"
                   alt=""
                 />
                 <input
@@ -80,6 +81,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                   name="cookingImg"
                   id=""
                   onchange="readURL(this);"
+                />
+                ${recipe.cookingImg}
+                <input
+                  type="hidden"
+                  name="originalFileName"
                   value="${recipe.cookingImg}"
                 />
               </div>
@@ -194,13 +200,17 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="row">
                 <div class="col howto_form">
                   <textarea
-                    class="howto_recipe form-control"
-                    name="description"
-                    id=""
+                    class="howto_recipe form-control description_textarea"
                     rows="10"
                   >
 ${recipe.description}</textarea
                   >
+                  <input
+                    type="hidden"
+                    value="${recipe.description}"
+                    id="h_description"
+                    name="description"
+                  />
                 </div>
               </div>
             </div>
@@ -226,5 +236,19 @@ ${recipe.description}</textarea
       <div>&nbsp;</div>
       <div>&nbsp;</div>
     </section>
+
+    <script>
+      $(document).ready(function () {
+        var textareaInput = $("#h_description").val();
+        var input = textareaInput.replace(/<br>/g, "\n");
+        $(".description_textarea").val(input);
+
+        $(".description_textarea").on("input", function () {
+          var textareaInput = $(this).val();
+          var output = textareaInput.replace(/\n/g, "<br>");
+          $("#h_description").val(output);
+        });
+      });
+    </script>
   </body>
 </html>

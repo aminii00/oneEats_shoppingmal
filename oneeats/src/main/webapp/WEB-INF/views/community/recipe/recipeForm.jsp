@@ -28,7 +28,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <body>
     <section>
       <hr class="line-black" />
-      <form action="" method="post" enctype="multipart/form-data">
+      <form
+        id="recipe_form"
+        action="${contextPath}/community/recipe/addRecipe.do"
+        method="post"
+        enctype="multipart/form-data"
+      >
         <div class="recipeDetail_grid">
           <div class="row vertical-align">
             <div class="col-md-2 text-left textbold textsize-2 textcolor-black">
@@ -85,7 +90,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               </div>
               <div class="row">
                 <div class="col">
-                  <input type="text" name="cooking_time" class="form-control" />
+                  <input
+                    type="text"
+                    name="cooking_time"
+                    class="form-control"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -100,7 +110,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="row">
                 <div class="col-md-4 vertical-align">
                   <div class="input-group">
-                    <input type="text" name="inbun" class="form-control" />
+                    <input
+                      type="text"
+                      name="inbun"
+                      class="form-control"
+                      required
+                    />
                     <div class="input-group-append vertical-align">
                       &nbsp;인분
                     </div>
@@ -186,12 +201,19 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="row">
                 <div class="col howto_form">
                   <textarea
-                    class="howto_recipe form-control"
-                    name="description"
+                    class="howto_recipe form-control description_textarea"
+                    name=""
                     id=""
                     rows="10"
                     placeholder="입력..."
+                    required
                   ></textarea>
+                  <input
+                    type="hidden"
+                    name="description"
+                    id="h_description"
+                    value=""
+                  />
                 </div>
               </div>
             </div>
@@ -217,5 +239,20 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <div>&nbsp;</div>
       <div>&nbsp;</div>
     </section>
+    <script>
+      $(document).ready(function () {
+        var textareaInput = $(".description_textarea").val();
+        var output = textareaInput.replace(/\n/g, "<br>");
+        var input = textareaInput.replace(/<br>/g, "\n");
+        $(".description_textarea").val(input);
+        $("#h_description").val(output);
+
+        $(".description_textarea").on("input", function () {
+          var textareaInput = $(this).val();
+          var output = textareaInput.replace(/\n/g, "<br>");
+          $("#h_description").val(output);
+        });
+      });
+    </script>
   </body>
 </html>

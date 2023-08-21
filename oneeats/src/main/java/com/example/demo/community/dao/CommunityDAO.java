@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.IngredientVO;
 import com.example.demo.vo.RecipeVO;
 
 @Mapper
@@ -18,6 +19,24 @@ public interface CommunityDAO {
 	
 	public RecipeVO selectRecipeByRecipeNo(int recipeNo);
 
-	public List<Map> selectIngredientByRecipeNo(int recipeNo); 
+	public List<Map> selectIngredientByRecipeNo(int recipeNo);
+
+	public int selectNewRecipeNo();
+
+	public void insertNewRecipe(RecipeVO recipeVO);
+
+	public void insertIngredients(List<IngredientVO> ingredientList);
+
+	public void insertNewRecipeWithMap(Map map);
+
+	public void insertIngredientsWithMap(Map condMap);
+
+	public void updateRecipe(Map map);
+
+	public void deleteIngredientsByRecipeNo(int recipeNo);
+
+	public void deleteRecipe(int recipeNo);
+
+	public List<RecipeVO> selectNewRecipeListExceptCurrentRecipe(int recipeNo); 
 	
 }

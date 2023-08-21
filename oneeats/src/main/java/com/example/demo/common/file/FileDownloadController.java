@@ -23,6 +23,11 @@ public class FileDownloadController {
 	protected void download(@RequestParam("imageFileName") String imageFileName,@RequestParam("path") String path,HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		OutputStream out = response.getOutputStream();
+		if (path.contains("No")) {
+			String[] paths = path.split("No");
+			path = paths[0]+"\\"+paths[1];
+		}
+		System.out.println(path);
 		String downFile = IMAGE_REPO_PATH +"\\"+path +"\\" +imageFileName;
 		File file = new File(downFile);
 		response.setHeader("Cache-control", "no-cache");
@@ -43,6 +48,8 @@ public class FileDownloadController {
 		out.close();
 
 	}
+	
+	
 
 	@RequestMapping("/thumbnailDownload.do")
 	protected void thumbnailDownload(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response)

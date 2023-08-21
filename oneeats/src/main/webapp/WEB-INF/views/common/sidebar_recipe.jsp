@@ -95,7 +95,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="col-md-3 p-0">
                   <div class="img-square-wrapper">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipe"
+                      src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipeNo${recipe.recipeNo}"
                       alt="레시피 사진"
                       style="width: 100%"
                     />

@@ -8,11 +8,12 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>레시피 목록</title>
+    <title>레시피 상세</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
   </head>
   <body>
+    ${result}
     <section>
       <div class="recipeDetail_grid">
         <div class="row">
@@ -33,7 +34,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row">
           <div class="col">
             <button
-              class="btn-toform"
+              class="btn-remove"
+              style="float: right"
+              onclick="fn_openalert('레시피를 삭제하시겠습니까?','${contextPath}/community/recipe/deleteRecipe.do?recipeNo=${recipe.recipeNo}')"
+            >
+              삭제
+            </button>
+            <button
+              class="btn-modify"
               style="float: right"
               onclick="location.href='${contextPath}/community/recipe/recipeModForm.do?recipeNo=${recipe.recipeNo}'"
             >
@@ -46,7 +54,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col">
             <div class="recipe_main_img_wrapper">
               <img
-                src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}"
+                src="${contextPath}/download.do?imageFileName=${recipe.cookingImg}&path=recipeNo${recipe.recipeNo}"
                 alt="레시피 메인 이미지"
               />
             </div>
@@ -69,7 +77,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row ingredient_grid">
           <div class="col">
             <div class="row">
-              <div class="col lightgreen_title">재료(${recipe.inbun})</div>
+              <div class="col lightgreen_title">재료(${recipe.inbun}인분)</div>
             </div>
             <div class="row ingredient_rows">
               <div class="col">
