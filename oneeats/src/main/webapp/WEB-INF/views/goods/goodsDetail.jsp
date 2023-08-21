@@ -275,6 +275,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         color: #568203;
         transition: 0.5s;
       }
+      .goods_option_row {
+        height: 150px;
+        border-top: none;
+        margin: 0;
+      }
     </style>
   </head>
 
@@ -409,7 +414,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               style="align-content: center"
                               style="overflow-y: scrol"
                             >
-                              <select name="select" class="margin4 opt">
+                              <select
+                                name="select"
+                                class="margin4 opt"
+                                id="select_option"
+                              >
                                 <option value="옵션을 선택해주세요">
                                   옵션을 선택해주세요
                                 </option>
@@ -430,10 +439,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           class="cart-option-item property-flex5"
                           style="width: 525px"
                         >
-                          <dl
-                            class="property-flex2"
-                            style="height: 150px; border-top: none; margin: 0"
-                          >
+                          <dl class="property-flex2 goods_option_row" style="">
                             <dt class="property-font2 epzddad1">
                               <div
                                 class="property-font3 font-bold"
@@ -450,6 +456,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               </div>
                             </dt>
                           </dl>
+                          <!-- 상품 행-->
                           <span
                             class="property-font3 text-right"
                             style="
