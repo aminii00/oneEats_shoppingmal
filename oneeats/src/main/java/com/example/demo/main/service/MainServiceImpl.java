@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.main.dao.MainDAO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.RecipeVO;
 
 @Service("mainService")
 public class MainServiceImpl implements MainService{
@@ -30,6 +31,11 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<GoodsVO> orderByNew() {
 		return mainDAO.orderByNew();
+	}
+
+	@Override
+	public List<RecipeVO> selectAllRecipesList() {
+		return mainDAO.selectAllRecipesList();
 	}
 
 	

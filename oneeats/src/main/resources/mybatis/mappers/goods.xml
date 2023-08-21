@@ -28,11 +28,26 @@
 	</resultMap>
 	
 	<select id="selectAllGoodsList" resultMap="goodsResult">
+		 <![CDATA[
 		select * from goods
+		]]>
 	</select>
 	
-	<select id="selectGoodsByGoodsNo" resultType="goodsVO" parameterType="int">
-		select * from goods where goodsNo = #{goodsNo}
+	<select id="selectGoodsByGoodsNo" resultType="goodsVO">
+		select * from goods 
+		where goodsNo=#{goodsNo}
 	</select>
 	
-</mapper>
+	<select id="selectNumGoodsList" resultType="goodsVO" parameterType="int">
+		select goodsNo from goods 
+		order by goodsNo desc Limit 1
+		
+	</select>
+	
+	<select id="goodsDetail" resultMap="goodsResult">
+	 <![CDATA[
+		select * from goods 
+		where goodsNo=#{goodsNo}
+		]]>
+	</select>
+</mapper> 

@@ -1,11 +1,16 @@
 package com.example.demo.goods.service;
 
+import java.util.List;
+
+import com.example.demo.vo.GoodsVO;
 
 public interface GoodsService {
-	/*
-	 * void addToFavorites(int goodsNo, int memberNo); void removeFromFavorites(int
-	 * goodsNo, int memberNo);
-	 */	
+
+	public List<GoodsVO> selectAllGoodsList();
+
+	public GoodsVO selectNumGoodsList();
+
+	public List<GoodsVO> goodsDetail(int goodsNo);
 	
 
 }

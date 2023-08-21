@@ -459,274 +459,36 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               <div class="row" style="justify-content: space-around">
                 <div class="col-lg-4 col-md-4">
                   <div class="filter__found">
-                    <h6><span>16</span> Products found</h6>
+                    <h6><span>${item.goodsNo}</span> Products found</h6>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/aspiragus.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
+              <c:forEach var="item" items="${goodsList }">
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                  <div class="product__item">
+                    <div
+                      class="product__item__pic set-bg"
+                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=prop"
+                    >
+                      <ul class="product__item__pic__hover">
+                        <li>
+                          <a href="#"><i class="fa fa-heart"></i></a>
+                        </li>
 
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">아스파라거스 100g</a></h6>
-                    <h5>￦5190</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/corn.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">찰옥수수 2입</a></h6>
-                    <h5>￦3250</h5>
+                        <li>
+                          <a href="#"><i class="fa fa-shopping-cart"></i></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="product__item__text">
+                      <h6><a href="#">${item.name}</a></h6>
+                      <h5>￦${item.price}</h5>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/lettuce.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 상추 150g</a></h6>
-                    <h5>￦3250</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/potato.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 감자 1입</a></h6>
-                    <h5>￦1300</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/scalion.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 대파 250g</a></h6>
-                    <h5>￦2900</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/pumpkin.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-                      <li>
-                        <a href="#"><i class="fa fa-retweet"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 호박 1개입</a></h6>
-                    <h5>￦1300</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/sweetpotato.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 호박 고구마 800g</a></h6>
-                    <h5>￦5900</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/albaechu.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 알배추 1봉</a></h6>
-                    <h5>￦4990</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/brocoli.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 브로콜리 1입</a></h6>
-                    <h5>￦2990</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/brocoli.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">적양배추 1통</a></h6>
-                    <h5>￦3990</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/onion.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">양파 1.5kg</a></h6>
-                    <h5>￦3990</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                <div class="product__item">
-                  <div
-                    class="product__item__pic set-bg"
-                    data-setbg="${contextPath}/img/product/main/cucumber.jpg"
-                  >
-                    <ul class="product__item__pic__hover">
-                      <li>
-                        <a href="#"><i class="fa fa-heart"></i></a>
-                      </li>
-
-                      <li>
-                        <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div class="product__item__text">
-                    <h6><a href="#">못난이 오이 3개입</a></h6>
-                    <h5>￦3990</h5>
-                  </div>
-                </div>
-              </div>
+              </c:forEach>
             </div>
             <div class="product__pagination">
               <a href="#">1</a>
@@ -740,18 +502,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     </section>
     <!-- Product Section End -->
 
-    <!-- Footer Section Begin -->
-
-    <!-- Footer Section End -->
-
     <!-- Js Plugins -->
-    <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
-    <script src="${contextPath}/js/bootstrap.min.js"></script>
-    <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
-    <script src="${contextPath}/js/jquery-ui.min.js"></script>
-    <script src="${contextPath}/js/jquery.slicknav.js"></script>
-    <script src="${contextPath}/js/mixitup.min.js"></script>
-    <script src="${contextPath}/js/owl.carousel.min.js"></script>
-    <script src="${contextPath}/js/main.js"></script>
   </body>
 </html>

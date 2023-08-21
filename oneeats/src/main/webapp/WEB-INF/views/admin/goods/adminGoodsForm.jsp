@@ -113,7 +113,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         border-top: 1px solid #f4f4f4;
         font-size: 14px;
         letter-spacing: -0.5px;
-        height:44px;
+        height:22px;
         
      
       }

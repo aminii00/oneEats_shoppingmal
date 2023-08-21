@@ -91,7 +91,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               "
             >
               <c:forEach var="item" items="${goodsList }">
-                <c:set var="goods_count" value="${goods_count+1 }" />
                 <div class="owl-item cloned" style="width: 277.5px">
                   <div class="col-lg-4">
                     <div class="product__discount__item">
@@ -102,7 +101,13 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                           background-image: url('${contextPath}/download.do?imageFileName=${item.img1}&path=prop');
                         "
                       >
-                        <div class="product__discount__percent">-17%</div>
+                        <div class="product__discount__percent">
+                          <input
+                            type="hidden"
+                            id="showResult"
+                            value="${item.price}"
+                          />
+                        </div>
                         <ul class="product__item__pic__hover">
                           <li>
                             <a href="#"><i class="fa fa-heart"></i></a>
@@ -117,15 +122,19 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                         <span>${item.category}</span>
                         <h5><a href="#">${item.name}</a></h5>
                         <div class="product__item__price">
-                          ￦2490<span>￦${item.price}</span>
+                          <div>￦2490</div>
+                          <input type="hidden" id="savePrice" value="2490" />
+                          <span>￦${item.price}</span>
+                          <input
+                            type="hidden"
+                            id="oPrice"
+                            value="${item.price}"
+                          />
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <c:if test="${goods_count==12   }">
-                  <font size="12"> <a href="#">more</a></font>
-                </c:if>
               </c:forEach>
             </div>
           </div>
@@ -228,7 +237,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               <div class="latest-product__slider owl-carousel">
                 <div class="latest-prdouct__slider__item">
                   <c:forEach begin="1" end="3" var="i" items="${newGoodsList }">
-                    <a href="#" class="latest-product__item">
+                    <a
+                      href="${contextPage}/goods/goodsDetail.do?goodsNo=${i.goodsNo}"
+                      class="latest-product__item"
+                    >
                       <div class="latest-product__item__pic">
                         <img
                           src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
@@ -245,7 +257,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
                 <div class="latest-prdouct__slider__item">
                   <c:forEach begin="4" end="6" var="i" items="${newGoodsList }">
-                    <a href="#" class="latest-product__item">
+                    <a
+                      href="${contextPage}/goods/goodsDetail.do?goodsNo=${i.goodsNo}"
+                      class="latest-product__item"
+                    >
                       <div class="latest-product__item__pic">
                         <img
                           src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
@@ -485,65 +500,41 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           </div>
         </div>
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="blog__item">
-              <div class="blog__item__pic">
-                <img src="img/blog/carrot-soup.JPG" height="265px" alt="" />
-              </div>
-              <div class="blog__item__text">
-                <ul>
-                  <li><i class="fa fa-calendar-o"></i> 2023. 8. 12</li>
-                  <li><i class="fa fa-comment-o"></i> 2</li>
-                </ul>
-                <h5><a href="#">감기 걸렸을때 먹기 좋은 당근 수프</a></h5>
-                <p>
-                  기운도 입맛도 없어서 부드럽게 넘어가는 음식을 찾게 될 때 있지
-                  않나요? 그런 날엔 당근스프를 드셔 보세요.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="blog__item">
-              <div class="blog__item__pic">
-                <img src="img/blog/mattang.JPG" alt="" height="265px" />
-              </div>
-              <div class="blog__item__text">
-                <ul>
-                  <li><i class="fa fa-calendar-o"></i> 2023. 8. 10</li>
-                  <li><i class="fa fa-comment-o"></i> 1</li>
-                </ul>
-                <h5><a href="#">토달토달해보아요 토마토 달걀 볶음</a></h5>
-                <p>
-                  한 번도 안 먹어본 사람은 있어도, 한 번만 먹어본 사람은 없다는!
-                  토마토달걀볶음
-                </p>
+          <c:forEach var="i" items="${newRecipeList }">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+              <div class="blog__item">
+                <div class="blog__item__pic">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${i.cookingImg}&path=recipe"
+                    height="265px"
+                    alt=""
+                  />
+                </div>
+                <div class="blog__item__text">
+                  <ul>
+                    <li><i class="fa fa-calendar-o"></i> ${i.creDate}</li>
+                    <li><i class="fa fa-comment-o"></i> 2</li>
+                  </ul>
+                  <h5><a href="#">${i.title}</a></h5>
+                  <p>${i.description}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-4 col-md-4 col-sm-6">
-            <div class="blog__item">
-              <div class="blog__item__pic">
-                <img src="img/blog/todal.JPG" alt="" height="265px" />
-              </div>
-              <div class="blog__item__text">
-                <ul>
-                  <li><i class="fa fa-calendar-o"></i> 2023. 8. 8</li>
-                  <li><i class="fa fa-comment-o"></i> 3</li>
-                </ul>
-                <h5><a href="#">고구마 요리의 근본, 고구마 맛탕</a></h5>
-                <p>
-                  튀기지 않고 구워서 담백하게 즐기는 국민 간식 고구마
-                  맛탕입니다.
-                </p>
-              </div>
-            </div>
-          </div>
+          </c:forEach>
         </div>
       </div>
     </section>
-    <!-- Blog Section End -->
+    <script>
+      $(document).ready(function () {
+        var originPrice = document.querySelector("#oPrice").value; //1000원
+        var savePrice = document.querySelector("#savePrice").value; //100원에 살 수 있음 할인율이 90%여야함하ㅡ
+        console.log(originPrice);
+        console.log(savePrice);
 
-    <!-- Js Plugins -->
+        document.querySelector("#showResult").innerHTML =
+          ((originalPrice - savePrice) / originalPrice) * 100;
+        console.log(showResult);
+      });
+    </script>
   </body>
 </html>

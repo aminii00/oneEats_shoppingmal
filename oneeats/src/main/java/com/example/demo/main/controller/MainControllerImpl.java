@@ -19,6 +19,7 @@ import com.example.demo.common.file.FileDownloadController;
 
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.RecipeVO;
 
 
 
@@ -36,49 +37,25 @@ public class MainControllerImpl implements MainController{
 		ModelAndView mav=new ModelAndView();
 		String viewName=(String)request.getAttribute("viewName");
 		mav.setViewName(viewName);
-
-//String hobby = "900";
-//mav.addObject("price", hobby);
-		/*
-		 * List<String> apple = new ArrayList();
-		 * 
-		 * apple.add("과일"); apple.add("바나나"); apple.add("망고"); mav.addObject("apple",
-		 * apple); System.out.println(apple);
-		 */
-		/*
-		 * System.out.println(); for (int i = 0; i <apple.size() ; i++) {
-		 * System.out.println(apple.get(i)); }
-		 */
-		
-		
-//		for(String i : apple ) {
-//			System.out.println(i);
-//		}
-//		
-
-//		
-//	GoodsVO testgoods = new GoodsVO();
-//		testgoods.name ="맛잇는 호박";
-//	mav.addObject("product", testgoods);
-//		
-//	System.out.println(testgoods);
-//		System.out.println(testgoods.name);
 		
 		List<GoodsVO> goodsList = mainService.selectAllGoodsList();
 		for(GoodsVO i : goodsList ) {
-			System.out.println(i.name);
 		}
 		mav.addObject("goodsList", goodsList);
+		
+		
 		
 		List<GoodsVO> newGoodsList = mainService.orderByNew();
 		for(GoodsVO i : newGoodsList ) {
 		}
 		mav.addObject("newGoodsList", newGoodsList);
-//		session=request.getSession();
-//
-//		Map<String,List<GoodsVO>> MainList=mainService.listGoods();
-//		mav.addObject("MainList", MainList);
-//		
+		
+		
+	
+		List<RecipeVO> newRecipeList = mainService.selectAllRecipesList();
+		for(RecipeVO i : newRecipeList ) {
+		}
+		mav.addObject("newRecipeList", newRecipeList);
 
 		return mav;
 	}
