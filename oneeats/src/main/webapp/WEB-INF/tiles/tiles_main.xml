@@ -107,6 +107,22 @@
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
 		<put-attribute name="body" value="/WEB-INF/views/member/newPwSearchForm.jsp" />
 	</definition>
+	<definition name="/member/sellerRegisterForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterForm.jsp" />
+	</definition>
+	<definition name="/member/sellerRegisterAgreeForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterAgreeForm.jsp" />
+	</definition>
+	<definition name="/member/sellerRegisterInfoForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterInfoForm.jsp" />
+	</definition>
+	<definition name="/member/sellerRegisterLastForm" extends="nosidebarLayout">
+		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
+		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterLastForm.jsp" />
+	</definition>
 	
 		<definition name="/cart" extends="nosidebarLayout">
 		<put-attribute name="title" value="" />

@@ -56,4 +56,11 @@
      ]]>
 	</select>
 	
+	 <insert id = "insertSellerNewMember" parameterType="memberVO">
+		<![CDATA[
+		insert into member(memberNo, type, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
+		values(#{memberNo}, "사업자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+		]]>
+	</insert>
+	
    </mapper>

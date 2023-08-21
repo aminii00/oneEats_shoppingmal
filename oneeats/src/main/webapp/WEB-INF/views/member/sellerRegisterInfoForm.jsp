@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/sellerRegisterLast.do">
+     <form method = "post" action = "${contextPath}/member/sellerRegisterLast.do"></form>
 <br>
 
 <div class="main-container">
@@ -71,10 +71,10 @@
 
             <p class = " text-left textsize-1 margin1 textbold">주소</p>
             <button class = "btn-midlong bg-lightgreen margin textsize-1 border-0 btn-round">
-                <input class ="brd-lightgray btn-round btn-midlong textsize-1 " name ="address"  type="text"></input>
-            <input class ="brd-lightgray btn-round btn-midlong textsize-1 " name ="address_detail" placeholder=" 상세주소를 입력해 주세요." type="text"></input>
                 주소 검색
             </button>
+            <input class ="brd-lightgray btn-round btn-midlong textsize-1 " name ="address"  type="text"></input>
+            <input class ="brd-lightgray btn-round btn-midlong textsize-1 " name ="address_detail" placeholder=" 상세주소를 입력해 주세요." type="text"></input>
             <br>
             <p class = " text-left textsize-1 margin1 textbold">성별</span>
                 <div class = "btn-tinylong margin textsize-1 border-0 btn-round">
@@ -89,7 +89,7 @@
             <br>
             <div class="line"></div>
             <br>
-            <button type = "submit" class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round">
+            <button class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round" type="submit">
                 회원가입 완료
             </button>
             <br>

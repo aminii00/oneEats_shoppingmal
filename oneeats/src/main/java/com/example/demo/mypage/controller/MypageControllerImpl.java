@@ -103,7 +103,7 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 		
 	}
-	//민아 찜1
+	//민아 찜 (진행중 ...)
 	@Override
 	@RequestMapping(value="/mypage/bookmarkList.do" ,method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response)  throws Exception {

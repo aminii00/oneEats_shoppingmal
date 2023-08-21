@@ -35,4 +35,11 @@ public class MemberServiceImpl implements MemberService {
 			return memberDAO.idSearch(memberVO);
 			
 		}
+		
+		@Override
+		public void sellerRegisterInfo(MemberVO memberVO) throws Exception{
+			memberDAO.insertSellerNewMember(memberVO);
+		}
+		
+
 }

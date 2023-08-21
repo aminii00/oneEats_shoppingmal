@@ -11,4 +11,6 @@ public interface MemberService {
 	public int registerInfoNo() throws Exception;
 	public MemberVO login(MemberVO memberVO) throws DataAccessException;
 	public String idSearch(MemberVO memberVO) throws Exception;
+	
+	public void sellerRegisterInfo(MemberVO memberVO) throws Exception;
 }

@@ -7,9 +7,9 @@ import com.example.demo.admin.community.service.AdminCommunityService;
 
 @Controller("adminCommunityController")
 public class AdminCommunityControllerImpl implements AdminCommunityController {
-	@Autowired
-	private AdminCommunityService adminCommunityService;
 
+  @Autowired
+  private AdminCommunityService adminCommunityService;
 	
 	
 	

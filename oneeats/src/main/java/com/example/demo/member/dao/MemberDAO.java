@@ -21,4 +21,6 @@ public interface MemberDAO {
 	public MemberVO login(MemberVO memberVO) throws DataAccessException;
 	
 	public String idSearch(MemberVO memberVO) throws DataAccessException;
+	
+	public void insertSellerNewMember(MemberVO memberVO) throws DataAccessException;
 }

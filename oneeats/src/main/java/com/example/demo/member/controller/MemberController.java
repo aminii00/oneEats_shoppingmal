@@ -13,10 +13,18 @@ import com.example.demo.vo.MemberVO;
 public interface MemberController {
 	
 	public ModelAndView Register(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
 			RedirectAttributes rAttr, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 			
 	public ModelAndView idSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
 			RedirectAttributes rAttr) throws Exception;
+	
+	public ModelAndView PwdSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
+			RedirectAttributes rAttr) throws Exception;
+	
+	public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception;
+	public ModelAndView sellerRegister_two(HttpServletRequest request) throws Exception;
+	public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO) throws Exception;
 }

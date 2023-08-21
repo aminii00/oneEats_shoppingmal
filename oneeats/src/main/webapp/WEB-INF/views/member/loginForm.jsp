@@ -77,7 +77,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/login.do">
+<form method = "post" action = "${contextPath}/member/loginForm.do">
 <br>
 <br>
 <br>
@@ -130,7 +130,7 @@
         <br>
         <p class = "textsize-1 margin1">법인 고객이신가요?</p>
         <p class =" textsize-1">사업자 회원으로 전용 특가 혜택을 누려보세요</p>
-        <a class = "textbold" href="${contextPath}/seller/member/sellerRegisterForm.do">사업자 간편가입</a>
+        <a class = "textbold" href="${contextPath}/member/sellerRegisterForm.do">사업자 간편가입</a>
 </div>
 </div>
 <br>

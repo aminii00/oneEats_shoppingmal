@@ -10,7 +10,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
     <meta charset="UTF-8" />
     <title>회원가입 선택 창</title>
-    <style></style>
+    <style>
+      .box {
+        width: 100px;
+        height: 24px;
+        display: inline-block;
+      }
+    </style>
     <c:choose>
       <c:when test="${result=='loginFailed' }">
         <script>
@@ -33,10 +39,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <br />
             <br />
             <div class="textsize-2">
-              <div class="sellerNext"></div>
-              가입 &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              약관동의&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 정보입력
-              &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 가입완료
+              <div class="box">가입</div>
+              <div class="box">약관동의</div>
+              <div class="box">정보입력</div>
+              <div
+                class="box"
+                style="border-top: solid 5px; border-color: #a3d060"
+              >
+                가입완료
+              </div>
             </div>
             <br />
             <br />
