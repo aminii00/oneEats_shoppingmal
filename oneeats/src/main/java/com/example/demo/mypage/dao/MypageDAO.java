@@ -21,7 +21,7 @@ public interface MypageDAO {
 
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws DataAccessException;
-	public int insertOrder(OrderVO orderVO) throws DataAccessException ;
+	public void insertOrderList(List<OrderVO> orderList);
 	public MemberVO selectMypageList(String member_id) throws DataAccessException;
 	
 	public void mypageintroupdate(HashMap memberMap) throws DataAccessException;

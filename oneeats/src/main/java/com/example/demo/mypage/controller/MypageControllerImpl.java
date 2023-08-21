@@ -1,12 +1,9 @@
 package com.example.demo.mypage.controller;
 
-import java.util.List;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,16 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.mypage.service.MypageService;
-import com.example.demo.vo.OrderVO;
-import com.example.demo.vo.RecipeVO;
-
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.OrderVO;
 
 
 @Controller("mypageController")
@@ -69,10 +63,22 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView newOrder(@ModelAttribute("order") OrderVO order,
 			                      HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+		List<OrderVO> orderList = new ArrayList();
 		String viewName = (String)request.getAttribute("viewName");
 		int result = 0;
 		System.out.println(order);
-		result = mypageService.newOrder(order);
+		for (int i = 0; i < selectGoodsList.size(); i++) {
+			OrderVO temp = selectGoodsList.get(i);
+			temp.setOrderer_name(order.getOrderer_name());
+			temp.setReciever_name(order.getReciever_name());
+			temp.setReciever_address(order.getReciever_address());
+			
+			orderList.add(temp);
+		}
+		mypageService.insertOrderList(orderList);
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
@@ -81,9 +87,26 @@ public class MypageControllerImpl implements MypageController {
 	@RequestMapping(value="/mypage/orderConfirm.do", method=RequestMethod.GET)
 	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		request.getParameter("price");
+		String[] goodsNames = request.getParameterValues("goodsName");
+		String[] goodsQtys = request.getParameterValues("goodsQty");
+		String[] goodsInbun = request.getParameterValues("goodsInbun");	
+		
+		List<OrderVO> selectGoodsList = new ArrayList();
+		for (int i = 0; i < goodsInbun.length; i++) {
+			OrderVO temp = new OrderVO();
+			temp.setGoodsName(goodsNames[i]);
+			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
+			temp.setGoods_inbun(goodsInbun[i]);
+			selectGoodsList.add(temp);
+		}
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("selectGoodsList", selectGoodsList);
+		mav.addObject("selectGoodsList",selectGoodsList);
+		
 		return mav;
 	}
 	

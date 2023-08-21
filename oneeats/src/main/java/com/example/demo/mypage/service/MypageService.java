@@ -10,7 +10,7 @@ import com.example.demo.vo.OrderVO;
 public interface MypageService {
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception;
-	public int newOrder(OrderVO orderVO) throws DataAccessException;
+	public void insertOrderList(List<OrderVO> orderList);
 	public MemberVO listMyPage(String member_id) throws Exception;
 	
 	public void mypageintro(HashMap<String, String> memberMap);
