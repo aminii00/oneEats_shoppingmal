@@ -24,6 +24,9 @@ public class GoodsVO {
 	private String category;
 	private String type;
 	private int memberNo;
+	private String memberName;
+	
+	
 	public int getGoodsNo() {
 		return goodsNo;
 	}
@@ -139,6 +142,12 @@ public class GoodsVO {
 				+ description + ", harvest=" + harvest + ", creDate=" + creDate + ", img1=" + img1 + ", img2=" + img2
 				+ ", img3=" + img3 + ", img4=" + img4 + ", img5=" + img5 + ", category=" + category + ", type=" + type
 				+ ", memberNo=" + memberNo + "]";
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 	
 	
