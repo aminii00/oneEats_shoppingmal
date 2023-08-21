@@ -18,6 +18,12 @@ public interface CommunityDAO {
 	
 	public RecipeVO selectRecipeByRecipeNo(int recipeNo);
 
-	public List<Map> selectIngredientByRecipeNo(int recipeNo); 
+	public List<Map> selectIngredientByRecipeNo(int recipeNo);
+
+	public int selectNewRecipeNo();
+
+	public void insertNewRecipe(RecipeVO recipeVO);
+
+	public void insertIngredient(Map ingredientMap); 
 	
 }

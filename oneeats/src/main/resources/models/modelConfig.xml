@@ -16,7 +16,8 @@
     <typeAlias type="com.example.demo.vo.OrderVO" alias="orderVO" />
     <typeAlias type="com.example.demo.vo.RecipeVO" alias="recipeVO" />
     <typeAlias type="com.example.demo.vo.ReviewVO" alias="reviewVO" />
-
+    <typeAlias type="com.example.demo.vo.IngredientVO" alias="ingredientVO" />
+	
     
   </typeAliases>
 </configuration>

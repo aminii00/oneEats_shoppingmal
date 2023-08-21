@@ -16,7 +16,13 @@
 		<result column="creDate" property="creDate" javaType="java.sql.Date"/>
 		<result column="memberNo" property="memberNo"/>
 	</resultMap>
-		
+	
+	<resultMap id="ingredientResult" type="ingredientVO">
+		<result property="recipeNo" column="recipeNo" />
+		<result property="name" column="name" />
+		<result property="qty" column="qty" />
+	</resultMap>
+	
 	<select id="sellectAllRecipe" resultMap="recipeResult" >
 	    <![CDATA[
 			sellect * from recipe
@@ -39,9 +45,17 @@
 	</select>
 	
 	
-	<select id="selectIngredientByRecipeNo" resultType="java.util.Map" parameterType="int">
+	<select id="selectIngredientByRecipeNo" resultMap="ingredientResult"  parameterType="int">
 		select * from ingredient where recipeNo=#{recipeNo}
 	</select>
 	
 	
+	<select id="selectNewRecipeNo" resultType="int" >
+		select ifnull(max(recipeNo),0)+1 from recipe
+	</select>
+
+	<insert id="insertNewRecipe" parameterType="recipeVO">
+		insert recipe () values()	
+		
+	</insert>
 </mapper>
