@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.common.alert.Alert;
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.community.service.CommunityService;
 import com.example.demo.vo.IngredientVO;
@@ -189,7 +190,7 @@ public class CommunityControllerImpl implements CommunityController {
 				GeneralFileUploader.removeFile(originalFileName, "/recipe/" + recipeNo);
 				map.put("cookingImg", cookingImg);
 			}
-			
+
 		}
 
 		String[] ingredientNames = request.getParameterValues("name");
