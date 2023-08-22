@@ -680,6 +680,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           console.log(goodsOptionVar);
         });
       });
+
+
+      function fn_addtocart(){
+
+        
+      }
     </script>
     <!-- Js Plugins -->
   </body>
