@@ -31,6 +31,11 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
+	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws Exception{
+		return mypageDAO.selectCouponByMemberNo(memberNo);
+	}
+	
+	@Override
 	public void insertOrderList(List<OrderVO> orderList) {
 		mypageDAO.insertOrderList(orderList);
 	}
