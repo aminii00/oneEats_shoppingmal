@@ -92,16 +92,17 @@ public class MypageControllerImpl implements MypageController {
 		String[] goodsInbun = request.getParameterValues("goodsInbun");	
 		String shippingFee = request.getParameter("shippingFee");
 		String paymentPrice = request.getParameter("paymentPrice");
-		
+		String discountPrice = request.getParameter("discountPrice");
 		
 		List<OrderVO> selectGoodsList = new ArrayList();
 		for (int i = 0; i < goodsInbun.length; i++) {
 			OrderVO temp = new OrderVO();
-			temp.setGoodsNo(goodsNos[i]);
+			temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
 			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
 			temp.setGoods_inbun(goodsInbun[i]);
-			temp.setShippingfee(shippingFee[i]);
-			temp.setPayment_price(paymentPrice[i]);
+			temp.setShippingfee(Integer.parseInt(shippingFee));
+			temp.setPayment_price(Integer.parseInt(paymentPrice));
+			temp.setDiscount_price(Integer.parseInt(discountPrice));
 			selectGoodsList.add(temp);
 		}
 			

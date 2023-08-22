@@ -42,22 +42,21 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       여러 개 있음.
       String[] goodsNos = request.getParameterValues("goodsNo");
       로 가져올 것.
-
+      
       goodsQty : 장바구니에 담긴 상품의 수량
       여러 개 있음.
 
-      goodsInbun : 장바구니에 담긴 상품이 몇 인분인지
+      goodsInbun : 상품의 인분
       여러 개 있음.
-
 
       shippingFee : 배송비
       하나 있음.
       String shippingFee = request.getParameter("shippingFee");
       로 가져올 수 있음.
 
-      totalPrice : 모든 상품의 금액에 배송비까지 더한 합계 금액
-      하나 있음.
-
+      payment_price : 모든 상품의 금액
+      
+      discount_price : 상품을 퍼센테이지로 할인한 금액의 총합
       -->
     <!--다음 페이지로 넘어가는 input-->>
     <!--goodsNo : 상품 번호-->
