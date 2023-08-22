@@ -213,7 +213,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </c:choose>
                     <form
                       id="optionForm"
-                      action="${contextPath}/mypage/orderConfirm.do"
+                      action="${contextPath}/orderNow.do"
                       method="post"
                     >
                       <!--수정-->
@@ -386,6 +386,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             class="cart-button css-cartbtn"
                             type="button"
                             radius="3"
+                            onclick="fn_toOrder()"
                           >
                             <div class="css-nytqmg textbold btn-hover">
                               바로 구매
@@ -694,6 +695,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       var cartPage = "${contextPath}/main/cart.do";
     </script>
     <script src="${contextPath}/js/goodsDetail.js"></script>
+
+    <script>
+      function fn_toOrder() {
+        $("#optionForm").submit();
+      }
+    </script>
     <!-- Js Plugins -->
   </body>
 </html>
