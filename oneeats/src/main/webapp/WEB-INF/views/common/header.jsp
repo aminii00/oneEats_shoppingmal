@@ -107,7 +107,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="row">&nbsp;</div>
           <div class="row">
             <div class="col-md">
-              <a href="${contextPath}/mainPage.do">Home</a>
+              <a href="${contextPath}/main/mainPage.do">Home</a>
             </div>
             <div class="col-md">
               <a href="${contextPath}/goods/goodsList.do?category=best"
