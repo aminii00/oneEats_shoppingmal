@@ -87,16 +87,22 @@ public class MypageControllerImpl implements MypageController {
 	@RequestMapping(value="/mypage/orderConfirm.do", method=RequestMethod.GET)
 	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		String viewName = (String)request.getAttribute("viewName");
-		String[] goodsNames = request.getParameterValues("goodsName");
+		String[] goodsNos = request.getParameterValues("goodsNo");
 		String[] goodsQtys = request.getParameterValues("goodsQty");
 		String[] goodsInbun = request.getParameterValues("goodsInbun");	
+		String shippingFee = request.getParameter("shippingFee");
+		String paymentPrice = request.getParameter("paymentPrice");
+		String discountPrice = request.getParameter("discountPrice");
 		
 		List<OrderVO> selectGoodsList = new ArrayList();
 		for (int i = 0; i < goodsInbun.length; i++) {
 			OrderVO temp = new OrderVO();
-			temp.setGoodsName(goodsNames[i]);
+			temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
 			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
 			temp.setGoods_inbun(goodsInbun[i]);
+			temp.setShippingfee(Integer.parseInt(shippingFee));
+			temp.setPayment_price(Integer.parseInt(paymentPrice));
+			temp.setDiscount_price(Integer.parseInt(discountPrice));
 			selectGoodsList.add(temp);
 		}
 			
