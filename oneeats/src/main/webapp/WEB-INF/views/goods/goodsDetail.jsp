@@ -12,6 +12,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <title>goodsDetail</title>
 
     <link href="${contextPath}/css/goodsDetail.css" rel="stylesheet" />
+    <style>
+      dl.goods_option_row > dt {
+        width: 100%;
+      }
+      dl.goods_option_row > dt > div.option_price {
+        text-align: right;
+        font-size: 16px;
+        float: right;
+        font-weight: 600;
+      }
+    </style>
   </head>
 
   <body>
@@ -113,13 +124,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">판매자</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.sellerName}</span>
+                              <span class="property-input"
+                                >${goods.sellerName}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">포장타입</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.rapping}</span>
+                              <span class="property-input"
+                                >${goods.rapping}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
@@ -131,13 +146,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">무게 / 용량</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.weight}</span>
+                              <span class="property-input"
+                                >${goods.weight}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">수확시기</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.harvest}</span>
+                              <span class="property-input"
+                                >${goods.harvest}</span
+                              >
                             </dd>
                           </dl>
                         </div>
@@ -147,13 +166,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">판매자</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.sellerName}</span>
+                              <span class="property-input"
+                                >${goods.sellerName}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">포장타입</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.rapping}</span>
+                              <span class="property-input"
+                                >${goods.rapping}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
@@ -161,19 +184,23 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <dd class="property-flex4">
                               <span class="property-input">
                                 ${goods.manufacturer}
-                              </p>
+                              </span>
                             </dd>
                           </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">무게 / 용량</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.weight}</span>
+                              <span class="property-input"
+                                >${goods.weight}</span
+                              >
                             </dd>
                           </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">유통기한</dt>
                             <dd class="property-flex4">
-                              <span class="property-input">${goods.expDate}</span>
+                              <span class="property-input"
+                                >${goods.expDate}</span
+                              >
                             </dd>
                           </dl>
                         </div>
@@ -204,22 +231,22 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                   value="옵션을 선택해주세요"
                                   selected
                                 ></option>
-
-                                <option value="못난이 당근 단품">
-                                  못난이 당근 단품 900원
-                                </option>
-                                <option
-                                  value="못난이 당근 3개묶음"
+                                <c:forEach
+                                  items="${goodsOptionList}"
+                                  var="goodsOption"
                                 >
-                                  못난이 당근 3개묶음 2500원
-                                </option>
-                                <option
-                                  value="못난이 당근 5개묶음"
-                                >
-                                  못난이 당근 5개묶음 4300원
-                                </option>
+                                  <option
+                                    value="${goodsOption.name}"
+                                  >
+                                    ${goodsOption.name} ${goodsOption.price}
+                                  </option>
+                                </c:forEach>
                               </select>
                             </div>
+                            <c:forEach items="${goodsOptionList}" var="goodsOption">
+                              <input id="h_option_price_${goodsOption.name}" type="hidden" value="${goodsOption.price}">
+                              <input id="h_option_price_${goodsOption.name}" type="hidden" value="${goodsOption.inbun}">
+                            </c:forEach>
                           </dd>
                         </dl>
 
@@ -349,11 +376,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="product__details__tab__desc">
                   <h6>Products Infomation</h6>
-                  <p>
-                    <c:forEach var="i" items="${goods }">
-                      <p>${i.description}</p>
-                    </c:forEach>
-                  </p>
+                  <p>${goods.description}</p>
                 </div>
               </div>
               <div class="tab-pane" id="tabs-3" role="tabpanel">
@@ -610,7 +633,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         selectTag.on("change", function () {
           // Get the selected value
           var selectedValue = $(this).val();
-
+          var selectedOptionPrice = 1000;
           var newRow =
             `<dl class="property-flex2 goods_option_row">
                               <dt class="property-font2 epzddad1">
@@ -626,16 +649,35 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 <div class="product__details__quantity">
                                   <div class="quantity text-left">
                                     <div class="pro-qty border6">
-                                      <span class="dec qtybtn">-</span>
-                                      <input type="text" value="1" name="goodsQty" />
-                                      <span class="inc qtybtn">+</span>
+                                      <span class="goods_option_minus_btn">-</span>
+                                      <input type="text" value="1" name="goodsQty" class="goodsQty_input" />
+                                      <span class="goods_option_plus_btn">+</span>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="option_price">+`;
+          selectedOptionPrice`+</div>
                               </dt>
                             </dl>
                         `;
           rowsDiv.append(newRow);
+        });
+
+        $(".goods_option_plus_btn").on("click", function () {
+          var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+          var changedVar = parseInt(goodsOptionVar) + 1;
+          if (changedVar < 100) {
+            $(this).parent().find(".goodsQty_input").val(changedVar);
+          }
+        });
+
+        $(".goods_option_minus_btn").on("click", function () {
+          var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+          var changedVar = parseInt(goodsOptionVar) - 1;
+          if (changedVar > 0) {
+            $(this).parent().find(".goodsQty_input").val(changedVar);
+          }
+          console.log(goodsOptionVar);
         });
       });
     </script>
