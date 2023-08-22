@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-     <form method = "post" action = "${contextPath}/member/sellerRegisterLast.do"></form>
+     <form method = "post" action = "${contextPath}/member/sellerRegisterLast.do">
 <br>
 
 <div class="main-container">

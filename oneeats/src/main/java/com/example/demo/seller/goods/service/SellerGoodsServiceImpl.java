@@ -18,5 +18,10 @@ public class SellerGoodsServiceImpl implements SellerGoodsService{
 		return sellerGoodsDAO.insertGoods(map);
 	}
 
+	@Override
+	public int addOption(Map map) throws DataAccessException {
+		return sellerGoodsDAO.insertGoods(map);
+	}
+
 }
 

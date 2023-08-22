@@ -1,6 +1,7 @@
 package com.example.demo.member.service;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -15,6 +16,12 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 	
+	//민아 로그인
+	@Override
+	public MemberVO login(Map  loginMap) throws Exception{
+		return memberDAO.login(loginMap);
+	}
+	
 	
 	//민아 회원가입
 		@Override
@@ -26,14 +33,10 @@ public class MemberServiceImpl implements MemberService {
 			int MemberNo = memberDAO.insertMemberNo();
 			return MemberNo;
 		}
-		@Override
-		public MemberVO login(MemberVO memberVO) throws DataAccessException {
-			return memberDAO.login(memberVO);
-		}
+
 		@Override
 		public String idSearch(MemberVO memberVO) throws DataAccessException {
 			return memberDAO.idSearch(memberVO);
-			
 		}
 		
 		@Override
@@ -41,5 +44,9 @@ public class MemberServiceImpl implements MemberService {
 			memberDAO.insertSellerNewMember(memberVO);
 		}
 		
-
+		@Override
+		public MemberVO pwSearch(MemberVO memberVO) throws DataAccessException {
+			return memberDAO.pwSearch(memberVO);
+		}
+		
 }

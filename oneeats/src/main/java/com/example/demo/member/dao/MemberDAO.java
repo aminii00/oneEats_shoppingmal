@@ -1,6 +1,7 @@
 package com.example.demo.member.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -11,6 +12,8 @@ import com.example.demo.vo.MemberVO;
 @Mapper
 @Repository("memberDAO")
 public interface MemberDAO {
+	
+	public MemberVO login(Map loginMap) throws DataAccessException;
 
 	public void registerMemberInfo(HashMap memberMap) throws DataAccessException;
 	
@@ -18,9 +21,10 @@ public interface MemberDAO {
 	
 	public int insertMemberNo() throws DataAccessException;
 	
-	public MemberVO login(MemberVO memberVO) throws DataAccessException;
-	
 	public String idSearch(MemberVO memberVO) throws DataAccessException;
 	
 	public void insertSellerNewMember(MemberVO memberVO) throws DataAccessException;
+	
+	public MemberVO pwSearch(MemberVO memberVO) throws DataAccessException;
+	
 }

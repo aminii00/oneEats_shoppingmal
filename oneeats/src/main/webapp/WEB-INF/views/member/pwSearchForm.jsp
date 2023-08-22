@@ -37,7 +37,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/loginForm.do">
+<form method = "post" action = "${contextPath}/member/pwdSearch.do">
 <br>
 <br>
 <br>
@@ -53,35 +53,33 @@
         <div>
             이름 
             <br>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 이름을 입력해주세요." type="text"></input>
+            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 "name ="name" placeholder=" 이름을 입력해주세요." type="text"></input>
             
         </div>
         <div>
             아이디 
             <br>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디를 입력해주세요." type="text"></input>
+            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " name="id" placeholder=" 아이디를 입력해주세요." type="text"></input>
             
         </div>
         <div class="margin_bottom_plus">
             휴대폰 번호
             <br>
-            <input class ="brd-lightgray btn-round margin1 btn-midlong textsize-1" placeholder=" 휴대폰 번호를 입력해주세요." type="text"></input>
         </div>
         <div>
-        <input class ="brd-lightgray btn-round margin1 btn-midlong-input textsize-1 " placeholder=" 휴대폰 번호를 입력해 주세요." type="text"></input>
+        <input class ="brd-lightgray btn-round margin1 btn-midlong-input textsize-1 " placeholder=" 휴대폰 번호를 입력해 주세요." name = "phone" type="text" style="margin-left: 1px;"></input>
         &nbsp
-        <button class = "btn-fatfat-mina bg-lightgreen textsize-0 border-0 margin btn-round textbold">
+        <button class = "btn-fatfat-mina bg-lightgreen textsize-0 border-0 margin btn-round textbold" style="margin-right: 5px;">
             인증번호요청
         </button><br>
     </div>
-        <input class ="brd-lightgray btn-round btn-midlong bg-lightgray border-0 textsize-1 margin-id " placeholder=" 인증번호를 입력하세요." type="text"></input>
+        <input class ="brd-lightgray btn-round btn-midlong bg-lightgray border-0 textsize-1 margin-id " placeholder=" 인증번호를 입력하세요." type="text" style="margin-left: 5px;"></input>
         <div>
             <span class = "textsize-0  textcolor-red btn-midlong textbold">인증번호가 오지 않는다면, 통신사 수신 차단 혹은 휴대폰 번호 차단 여부를 확인해 주세요.</span><br>
             </div>
        <br>
-    <button class = "btn-midlong brd-lightgray textsize-1 textbold input btn-round textcolor-white border-0">
-        인증번호 받기</button>
-        <button class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0">
+
+        <button type ="submit" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0">
              확인</button>
     </div>
 </div>

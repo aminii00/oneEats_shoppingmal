@@ -24,7 +24,10 @@
     width: 390px;
     height:auto;
 }
-
+.adressreload{
+    width: 209px;
+    height: 50px;
+}
 .circle{
     display: inline-block; /* 영역적용가능해짐 */
     width: 20px; height: 20px;
@@ -36,9 +39,8 @@
 }
 .circle:after{
     content: '\2714'; /* 체크박스 특수문자 */
-    font-size: 24px; color: #a3d060;
+    font-size: 20px; color: #a3d060;
     position: absolute; top: -14px; left: 0;
-
     opacity: 0; /* 처음엔 안보이게 처리 */
     transition: 0.2s; /* CSS변화에 시간차 처리 */
 }
@@ -59,12 +61,12 @@
             <div class="main-wrap">
                 
                 
-                <input class =" brd-lightgray btn-round btn-midlong-input textsize-1  border-0.5  " placeholder="#" type="text"></input>
+                <input class =" brd-lightgray btn-round adressreload textsize-1  border-0.5  " placeholder="#" name = "address" type="text"></input>
                     <button style = "margin-bottom: 4px; margin-top:0%" class = "btn-fatfat-mina bg-lightgreen textbold textsize-0 border-0 margin1 btn-round" onclick="">
                         재검색
                     </button>
                     <br>
-                    <input style ="width: 286px; height:50px " class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " placeholder=" 상세 주소를 입력해주세요." type="text"></input>
+                    <input style ="width: 286px; height:50px " class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " name = "address_detail" placeholder=" 상세 주소를 입력해주세요." type="text"></input>
                     <br>
                     
                     <div class="idselect" style="width: 282px; height: 50px;">
@@ -78,7 +80,7 @@
                     </div>
                     <br>
                     <br>
-                    <button class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round">
+                    <button type ="submit" class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round">
                         저장
                     </button>
                     <br>
