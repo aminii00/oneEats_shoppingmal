@@ -17,7 +17,7 @@
     <typeAlias type="com.example.demo.vo.RecipeVO" alias="recipeVO" />
     <typeAlias type="com.example.demo.vo.ReviewVO" alias="reviewVO" />
     <typeAlias type="com.example.demo.vo.IngredientVO" alias="ingredientVO" />
-	
+	 <typeAlias type="com.example.demo.vo.OptionVO" alias="OptionVO" />
     
   </typeAliases>
 </configuration>

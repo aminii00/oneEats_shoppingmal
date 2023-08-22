@@ -63,27 +63,36 @@ public class SellerGoodsControllerImpl implements SellerGoodsController{
 			HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
-		Map<String,Object> articleMap = new HashMap<String, Object>();
+		Map<String,Object> goodsMap = new HashMap<String, Object>();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			articleMap.put(name,value);
+			goodsMap.put(name,value);
+			
 		}
+		
+		
+
+		
+		
 		String img= upload(multipartRequest);
 
-		articleMap.put("img",img);
-		String goodsNo = (String)articleMap.get("goodsNo");
+		goodsMap.put("img",img);
+		String goodsNo = (String)goodsMap.get("goodsNo");
 		
-		System.out.println("articleMap"+articleMap);
+		System.out.println("goodsMap"+goodsMap);
 		String message;
 		ResponseEntity resEnt=null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		try {
 	
-			sellerGoodsService.addGoods(articleMap);
-
+			sellerGoodsService.addGoods(goodsMap);
+			sellerGoodsService.addOption(goodsMap);
+			
+			
+			
 			if(img!=null && img.length()!=0) {
 				File srcFile = new File(ARTICLE_IMAGE_REPO+ "\\" + "temp"+ "\\" + img);
 				File destDir = new File(ARTICLE_IMAGE_REPO+"\\"+goodsNo);
@@ -99,7 +108,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController{
 			srcFile.delete();
 			
 			message = " <script>";
-			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요');');";
+			message +=" alert('오류가 발생했습니다. 다시 시도해 주세요'`);');";
 			message +=" location.href='"+multipartRequest.getContextPath()+"/seller/goods/sellerGoodsForm.do'; ";
 			message +=" </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
