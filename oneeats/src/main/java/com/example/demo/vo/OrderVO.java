@@ -10,10 +10,10 @@ public class OrderVO {
 	private int orderNo;
 	private String orderer_name;
 	private String orderer_phone;
-	private String reciever_name;
-	private String reciever_address;
-	private String reciever_phone;
-	private String reciever_comment;
+	private String receiver_name;
+	private String receiver_address;
+	private String receiver_phone;
+	private String receiver_comment;
 	private int used_point;
 	private int used_couponId;
 	private int payment_price;
@@ -34,21 +34,14 @@ public class OrderVO {
 	private int gun;
 	private int goodsPrice;
 	private int weight;
-	private int paymentPrice;
-	private int discountPrice;
 	private int shippingFee;
+	private int optionNo;
 	
-	public int getPaymentPrice() {
-		return paymentPrice;
+	public int getOptionNo() {
+		return optionNo;
 	}
-	public void setPaymentPrice(int paymentPrice) {
-		this.paymentPrice = paymentPrice;
-	}
-	public int getDiscountPrice() {
-		return discountPrice;
-	}
-	public void setDiscountPrice(int discountPrice) {
-		this.discountPrice = discountPrice;
+	public void setOptionNo(int optionNo) {
+		this.optionNo = optionNo;
 	}
 	public int getShippingFee() {
 		return shippingFee;
@@ -111,28 +104,28 @@ public class OrderVO {
 		this.orderer_phone = orderer_phone;
 	}
 	public String getReciever_name() {
-		return reciever_name;
+		return receiver_name;
 	}
-	public void setReciever_name(String reciever_name) {
-		this.reciever_name = reciever_name;
+	public void setReciever_name(String receiver_name) {
+		this.receiver_name = receiver_name;
 	}
 	public String getReciever_address() {
-		return reciever_address;
+		return receiver_address;
 	}
-	public void setReciever_address(String reciever_address) {
-		this.reciever_address = reciever_address;
+	public void setReciever_address(String receiver_address) {
+		this.receiver_address = receiver_address;
 	}
 	public String getReciever_phone() {
-		return reciever_phone;
+		return receiver_phone;
 	}
-	public void setReciever_phone(String reciever_phone) {
-		this.reciever_phone = reciever_phone;
+	public void setReciever_phone(String receiver_phone) {
+		this.receiver_phone = receiver_phone;
 	}
 	public String getReciever_comment() {
-		return reciever_comment;
+		return receiver_comment;
 	}
-	public void setReciever_comment(String reciever_comment) {
-		this.reciever_comment = reciever_comment;
+	public void setReciever_comment(String receiver_comment) {
+		this.receiver_comment = receiver_comment;
 	}
 	public int getUsed_point() {
 		return used_point;
@@ -227,17 +220,15 @@ public class OrderVO {
 	@Override
 	public String toString() {
 		return "OrderVO [order_seqNo=" + order_seqNo + ", orderNo=" + orderNo + ", orderer_name=" + orderer_name
-				+ ", orderer_phone=" + orderer_phone + ", reciever_name=" + reciever_name + ", reciever_address="
-				+ reciever_address + ", reciever_phone=" + reciever_phone + ", reciever_comment=" + reciever_comment
+				+ ", orderer_phone=" + orderer_phone + ", receiver_name=" + receiver_name + ", receiver_address="
+				+ receiver_address + ", receiver_phone=" + receiver_phone + ", receiver_comment=" + receiver_comment
 				+ ", used_point=" + used_point + ", used_couponId=" + used_couponId + ", payment_price=" + payment_price
 				+ ", discount_price=" + discount_price + ", shippingfee=" + shippingfee + ", point_price=" + point_price
 				+ ", total_price=" + total_price + ", payment_type=" + payment_type + ", orderDate=" + orderDate
 				+ ", delivery_status=" + delivery_status + ", deliveryDate=" + deliveryDate + ", goods_qty=" + goods_qty
 				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + ", goodsName="
 				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + ", goodsPrice=" + goodsPrice + ", weight="
-				+ weight + ", paymentPrice=" + paymentPrice + ", discountPrice=" + discountPrice + ", shippingFee="
-				+ shippingFee + "]";
-	}
-	
+				+ weight + ", shippingFee=" + shippingFee + ", optionNo=" + optionNo + "]";
+	}	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mypage.dao.MypageDAO;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
@@ -27,6 +28,11 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception{
 		return mypageDAO.selectOrderByOrderNo(orderNo);
+	}
+	
+	@Override
+	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws Exception{
+		return mypageDAO.selectCouponByMemberNo(memberNo);
 	}
 	
 	@Override

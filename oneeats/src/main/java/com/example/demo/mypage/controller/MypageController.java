@@ -11,8 +11,13 @@ import com.example.demo.vo.OrderVO;
 
 public interface MypageController {
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView orderDetail(@RequestParam("orderNo") int orderNo, HttpServletRequest request, HttpServletResponse response)  throws Exception;
-	public ModelAndView newOrder(@ModelAttribute("info") OrderVO orderVO,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView orderConfirm(@RequestParam("memberNo") int memberNo, HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	
+	public ModelAndView newOrder(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView myPageMain(String message, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;

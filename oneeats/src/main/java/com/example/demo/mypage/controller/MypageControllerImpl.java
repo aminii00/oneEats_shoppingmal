@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.mypage.service.MypageService;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
@@ -59,45 +60,24 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/mypage/newOrder.do", method = {RequestMethod.GET,RequestMethod.POST})
-	public ModelAndView newOrder(@ModelAttribute("order") OrderVO order,
-			                      HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
-		List<OrderVO> orderList = new ArrayList();
-		String viewName = (String)request.getAttribute("viewName");
-		int result = 0;
-		System.out.println(order);
-		for (int i = 0; i < selectGoodsList.size(); i++) {
-			OrderVO temp = selectGoodsList.get(i);
-			temp.setOrderer_name(order.getOrderer_name());
-			temp.setReciever_name(order.getReciever_name());
-			temp.setReciever_address(order.getReciever_address());
-			
-			orderList.add(temp);
-		}
-		mypageService.insertOrderList(orderList);
-		
-		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
-		return mav;
-	}
-	
-	
+	@Override
 	@RequestMapping(value="/mypage/orderConfirm.do", method = {RequestMethod.GET,RequestMethod.POST})
-	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView orderConfirm(int memberNo, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		System.out.println("여기는 orderConfirm");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		String viewName = (String)request.getAttribute("viewName");
 		
-		/*
 		String[] goodsNos = request.getParameterValues("goodsNo");
 		String[] goodsQtys = request.getParameterValues("goodsQty");
 		String[] goodsInbun = request.getParameterValues("goodsInbun");	
+		String[] optionNos = request.getParameterValues("optionNo");
 		String shippingFee = request.getParameter("shippingFee");
-		String paymentPrice = request.getParameter("paymentPrice");
-		String discountPrice = request.getParameter("discountPrice");
+		String payment_price = request.getParameter("payment_price");
+		String discount_price = request.getParameter("discount_price");
+		
+		List<CouponVO> couponList = mypageService.selectCouponByMemberNo(memberNo);
 		
 		List<OrderVO> selectGoodsList = new ArrayList();
 		for (int i = 0; i < goodsNos.length; i++) {
@@ -105,35 +85,64 @@ public class MypageControllerImpl implements MypageController {
 			temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
 			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
 			temp.setGoods_inbun(goodsInbun[i]);
+			temp.setOptionNo(Integer.parseInt(optionNos[i]));
 			temp.setShippingfee(Integer.parseInt(shippingFee));
-			temp.setPayment_price(Integer.parseInt(paymentPrice));
-			temp.setDiscount_price(Integer.parseInt(discountPrice));
+			temp.setPayment_price(Integer.parseInt(payment_price));
+			temp.setDiscount_price(Integer.parseInt(discount_price));
 			selectGoodsList.add(temp);
 		}
-		*/
-		int goodsNo = 1;
-		int goodsQty =2;
-		int shippingFee = 2500;
-		int paymentPrice = 20000;
-		int discountPrice = 1000;
-		
-		List<OrderVO> selectGoodsList = new ArrayList();
-		OrderVO temp = new OrderVO();
-		temp.setGoodsNo(goodsNo);
-		temp.setGoods_qty(goodsQty);
-		temp.setShippingfee(shippingFee);
-		temp.setPayment_price(paymentPrice);
-		temp.setDiscount_price(discountPrice);
-		selectGoodsList.add(temp);
-		System.out.println(selectGoodsList);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
+		mav.addObject("payment_price", payment_price);
+		mav.addObject("shippingFee", shippingFee);
+		mav.addObject("discount_price", discount_price);
 		mav.addObject("selectGoodsList",selectGoodsList);
+		mav.addObject("couponList", couponList);
 		session.setAttribute("selectGoodsList", selectGoodsList);
 		return mav;
 	}
 	
+	@Override
+	@RequestMapping(value = "/mypage/newOrder.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView newOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 newOrder");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		String viewName = (String)request.getAttribute("viewName");
+		
+		String orderNo = request.getParameter("orderNo");
+		String orderer_name = request.getParameter("orderer_name");
+		String orderer_phone = request.getParameter("orderer_phone");
+		String receiver_name = request.getParameter("receiver_name");
+		String receiver_address = request.getParameter("receiver_address");
+		String receiver_phone = request.getParameter("receiver_phone");
+		String payment_type = request.getParameter("payment_type");
+		
+		
+		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+		List<OrderVO> orderList = new ArrayList();
+		
+		int result = 0;
+		for (int i = 0; i < selectGoodsList.size(); i++) {
+			OrderVO temp = selectGoodsList.get(i);
+			temp.setOrderNo(Integer.parseInt(orderNo));
+			temp.setOrderer_name(orderer_name);
+			temp.setOrderer_phone(orderer_phone);
+			temp.setReciever_name(receiver_name);
+			temp.setReciever_address(receiver_address);
+			temp.setReciever_phone(receiver_phone);
+			temp.setPayment_type(payment_type);
+			
+			orderList.add(temp);
+		}
+		
+		mypageService.insertOrderList(orderList);
+		
+		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
+		return mav;
+	}
+
 	@Override
 	@RequestMapping(value="/mypage/myPageMain.do" , method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView myPageMain(@RequestParam(required = false,value="message")  String message,

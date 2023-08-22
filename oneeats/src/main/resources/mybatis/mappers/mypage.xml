@@ -9,10 +9,10 @@
 		<result property="orderNo" column="orderNo" />
 		<result property="orderer_name" column="orderer_name" />
 		<result property="orderer_phone" column="orderer_phone" />
-		<result property="reciever_name" column="reciever_name" />
-		<result property="reciever_address" column="reciever_address" />
-		<result property="reciever_phone" column="reciever_phone" />
-		<result property="reciever_comment" column="reciever_comment" />
+		<result property="receiver_name" column="receiver_name" />
+		<result property="receiver_address" column="receiver_address" />
+		<result property="receiver_phone" column="receiver_phone" />
+		<result property="receiver_comment" column="receiver_comment" />
 		<result property="used_point" column="used_point" />
 		<result property="used_couponId" column="used_couponId" />
 		<result property="payment_price" column="payment_price" />
@@ -31,13 +31,11 @@
 		<result property="goodsName" column="goodsName" />
 		<result property="goodsImg" column="goodsImg" />
 		<result property="gun" column="gun" />
-		<result property="paymentPrice" column="paymentPrice" />
-		<result property="discountPrice" column="discountPrice" />
 		<result property="shippingFee" column="shippingFee" />
+		<result property="optionNo" column="optionNo" />
 	</resultMap>
 	
-  
-  <resultMap id="MemberResult" type="memberVO">
+  	<resultMap id="MemberResult" type="memberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -60,12 +58,22 @@
 		<result property="point" column="point" />
 	</resultMap> 
   
-  <resultMap id="BookResult" type="bookmarkVO">
+ 	<resultMap id="BookResult" type="bookmarkVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="goodsNo" column="goodsNo" />
 		<result property="img1" column="img1" />
 		<result property="name" column="name" />
 		<result property="price" column="price" />
+	</resultMap> 
+	
+	<resultMap id="CouponResult" type="CouponVO">
+		<result property="couponNo" column="couponNo" />
+		<result property="name" column="name" />
+		<result property="discount_price" column="discount_price" />
+		<result property="condition" column="condition" />
+		<result property="expDate" column="expDate" />
+		<result property="creDate" column="creDate" />
+		<result property="memberNo" column="memberNo" />
 	</resultMap> 
 	
 	<select id="selectOrderList" resultMap="orderResult">
@@ -83,19 +91,23 @@
 		]]>
 	</select>
 	
-	<insert id="insertOrderList" parameterType="java.util.List">
+	<select id="selectCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
 		<![CDATA[
-  			insert into t_order (orderer_name, orderer_phone, reciever_name, reciever_address, reciever_phone, reciever_comment, used_point, used_couponId, 
+			select * from coupon where memberNo=#{memberNo}
+		]]>
+	</select>
+	
+	<insert id="insertOrderList" parameterType="java.util.List">
+  			insert into t_order (orderNo, orderer_name, orderer_phone, receiver_name, receiver_address, receiver_phone, receiver_comment, used_point, used_couponId, 
                        payment_price, discount_price, shippingfee, point_price, total_price, payment_type)
   			values
-  			<foreach collection="list" item="order" separator=",">
-    		(#{order.orderer_name}, #{order.orderer_phone}, #{order.reciever_name}, #{order.reciever_address}, #{order.reciever_phone}, #{order.reciever_comment},
-    		#{order.used_point}, #{order.used_couponId}, #{order.payment_price}, #{order.discount_price}, #{order.shippingfee}, #{order.point_price},
-    		#{order.total_price}, #{order.payment_type})
-  			</foreach>
-		]]>
+  			<foreach collection="list" item="item" separator=",">
+	    		(#{item.orderNo}, #{item.orderer_name}, #{item.orderer_phone}, #{item.receiver_name}, #{item.receiver_address}, #{item.receiver_phone}, #{item.receiver_comment},
+	    		#{item.used_point}, #{item.used_couponId}, #{item.payment_price}, #{item.discount_price}, #{item.shippingfee}, #{item.point_price},	
+	    		#{item.total_price}, #{item.payment_type})
+  			</foreach>	
 	</insert>
-	
+		
 	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
 	    <![CDATA[
 			select * from member
@@ -105,7 +117,7 @@
 	
 	<update id="mypageintroupdate" parameterType="java.util.HashMap">.
 	   update member set
-			  nickname=#{nickname},intro=#{intro}
+			  nickname=#{nickname},intro=#{intro}receiver_name receiver_name
 			  where id=#{id}
 	</update>	
 	
