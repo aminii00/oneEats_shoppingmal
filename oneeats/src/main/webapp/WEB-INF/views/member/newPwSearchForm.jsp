@@ -37,7 +37,7 @@
 	</c:choose>
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/loginForm.do">
+<form method = "post" action = "${contextPath}/member/updatePw.do">
 <br>
 <br>
 <br>
@@ -53,7 +53,7 @@
         <div>
             새 비밀번호 등록 
             <br>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 새 비밀번호를 입력해주세요." type="password"></input>
+            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " name ="pwd" placeholder=" 새 비밀번호를 입력해주세요." type="password"></input>
             <p class = "textsize-1  textcolor-red margin-id">10자 이상 입력</p>
             <p class =" textsize-1  textcolor-red margin-id">영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합</p>
             <p class =" textsize-1  textcolor-red margin-id">동일한 숫자  3개 이상 연속 사용 불가</p><br>
@@ -65,7 +65,7 @@
             <p class = "textsize-1  textcolor-red margin-id">동일한 비밀번호를 입력해 주세요.</p>
         </div>
       
-        <button type="button" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0" onclick="fn_openalert('비밀번호가 변경되었습니다.', '${contextPath}/member/loginForm.do')">
+        <button type="submit" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0" >
              확인</button>
     </div>
 </div>

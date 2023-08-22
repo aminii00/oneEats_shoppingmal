@@ -27,40 +27,49 @@
 <!-- 회원정보 -->
     <definition name="/mypage/mypageProfileModForm" extends="mainLayout">
        <put-attribute name="title" value="프로필 편집 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageProfileModForm.jsp" />
     </definition>
     <definition name="/mypage/mypageMemberModForm" extends="mainLayout">
        <put-attribute name="title" value="회원정보 수정 비밀번호 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageMemberModForm.jsp" />
     </definition>
      <definition name="/mypage/mypageMemberInfoModForm" extends="mainLayout">
        <put-attribute name="title" value="회원정보 수정 비밀번호 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageMemberInfoModForm.jsp" />
     </definition>
     <definition name="/mypage/mypageAddress" extends="mainLayout">
        <put-attribute name="title" value="회원정보 수정 비밀번호 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageAddress.jsp" />
     </definition>
     <definition name="/mypage/mypageBookmarkList" extends="mainLayout">
        <put-attribute name="title" value="회원정보 수정 비밀번호 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageBookmarkList.jsp" />
     </definition>
     <definition name="/mypage/mypageAddressAddForm" extends="mainLayout">
        <put-attribute name="title" value="배송지 수정 팝업창 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageAddressAddForm.jsp" />
     </definition>
     <definition name="/mypage/mypageCouponPoint" extends="mainLayout">
        <put-attribute name="title" value="쿠폰 적립금 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageCouponPoint.jsp" />
     </definition>
     
     <!-- 리뷰 -->
     <definition name="/mypage/mypageReview" extends="mainLayout">
        <put-attribute name="title" value="리뷰 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageReview.jsp" />
     </definition>
     <definition name="/review/writeReview" extends="mainLayout">
        <put-attribute name="title" value="리뷰 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/review/writeReview.jsp" />
     </definition>
     

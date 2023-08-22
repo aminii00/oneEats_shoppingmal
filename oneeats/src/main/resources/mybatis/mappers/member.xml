@@ -64,7 +64,7 @@
 		]]>
 	</insert>
 	
-	<select id="pwSearch"  resultType="String"  parameterType="memberVO">
+	<select id="pwSearch"  resultType="memberVO"  parameterType="memberVO">
      <![CDATA[
        select * from member
        where 
@@ -72,4 +72,12 @@
      ]]>
 	</select>
 	
+	<update id="updatePw" parameterType="memberVO">
+    <![CDATA[
+      update member 
+      set pwd=#{pwd}
+      where 
+      id=#{id}
+]]>
+</update>
    </mapper>

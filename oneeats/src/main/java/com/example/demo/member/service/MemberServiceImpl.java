@@ -49,4 +49,9 @@ public class MemberServiceImpl implements MemberService {
 			return memberDAO.pwSearch(memberVO);
 		}
 		
+		@Override
+		public int updatePw(MemberVO member) throws DataAccessException {
+			return memberDAO.updatePw(member);
+		}
+		
 }

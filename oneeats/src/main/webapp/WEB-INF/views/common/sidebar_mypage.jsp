@@ -40,8 +40,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   />
                 </div>
                 <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
-                  <li><a href="">프로필 편집</a></li>
-                  <li><a href="">개인정보 수정</a></li>
+                  <li>
+                    <a href="${contextPath}/mypage/myPageMain.do"
+                      >프로필 편집</a
+                    >
+                  </li>
+                  <li><a href="">회원정보 수정</a></li>
                   <li><a href="">배송지 관리</a></li>
                 </ul>
               </div>
@@ -56,7 +60,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">찜한 목록</a>
+                  <a href="${contextPath}/mypage/bookmarkList.do">찜한 목록</a>
                 </div>
               </div>
             </li>
@@ -77,7 +81,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">쿠폰/적립금 조회</a>
+                  <a href="${contextPath}/mypage/couponSearch.do"
+                    >쿠폰/적립금 조회</a
+                  >
                 </div>
               </div>
             </li>

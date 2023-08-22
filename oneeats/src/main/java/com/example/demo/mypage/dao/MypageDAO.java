@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
@@ -29,8 +30,11 @@ public interface MypageDAO {
 	public void mypageintroupdate(HashMap memberMap) throws DataAccessException;
 	
 	//민아 찜
-	public List selectBookList() throws DataAccessException;
+	public List selectBookList(MemberVO memberInfo) throws DataAccessException;
 	
 	//민아 찜 삭제
 	public int deleteBookMark(String id) throws DataAccessException;
+	
+	//민아 쿠폰
+	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 }

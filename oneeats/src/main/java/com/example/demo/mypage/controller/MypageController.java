@@ -20,5 +20,7 @@ public interface MypageController {
 	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 	public ModelAndView deleteBook(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 
 }
