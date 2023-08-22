@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.goods.dao.GoodsDAO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.OptionVO;
 
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService{
@@ -53,6 +54,12 @@ public class GoodsServiceImpl implements GoodsService{
 	@Override
 	public float selectReviewAverage(int goodsNo) {
 		return goodsDAO.selectReviewAverage(goodsNo);
+	}
+
+
+	@Override
+	public List<OptionVO> selectOptionsByGoodsNo(int goodsNo) {
+		return goodsDAO.selectOptionsByGoodsNo(goodsNo);
 	}
 
 

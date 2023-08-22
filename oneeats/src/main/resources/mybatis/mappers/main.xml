@@ -70,7 +70,17 @@
     
     </resultMap>
     
-    
+    <resultMap id="CartResult" type="cartVO">
+	    <result property="goodsNo" column="goodsNo" />
+	    <result property="goodsPrice" column="goodsPrice" />
+	  <result property="goodsName" column="goodsName"/>
+	  <result property="goodsImg" column="goodsImg" />
+	  <result property="optionName" column="optionName" />
+	  <result property="optionNo" column="optionNo" />
+	  <result property="optionQty" column="optionQty" />
+	  <result property="optionPrice" column="optionPrice" />
+	  <result property="optionInbun" column="option_inbun" />
+    </resultMap>
 	
 	
 	<select id="selectGoodsList"  resultMap="GoodsResult"  parameterType ="java.util.HashMap"   >
@@ -112,5 +122,14 @@
 		select * from recipe 
 		order by creDate desc limit 3
 		]]>
+	</select>
+	
+	<select id="selectOptionByNo" resultType="cartVO" parameterType="int">
+		select `option`.optionNo, `option`.name as optionName,`option`.option_qty as optionQty,`option`.price as optionPrice,
+		`option`.option_inbun as optionInbun,`option`.goodsNo as goodsNo,
+		goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice from `option` 
+		inner join goods
+		on `option`.goodsNo = goods.goodsNo
+		where `option`.optionNo=#{optionNo}
 	</select>
 </mapper>

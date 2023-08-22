@@ -28,25 +28,28 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   <body>
     <!--이 페이지에 있는 input칸들의 name  -->
     <!--
-      goodsNO : 장바구니에 담긴 상품의 상품 번호
+      goodsNo :  상품의 상품 번호
       여러 개 있음.
       String[] goodsNos = request.getParameterValues("goodsNo");
       로 가져올 것.
-
-      goodsQty : 장바구니에 담긴 상품의 수량
+      
+      goodsQty : 수량
       여러 개 있음.
 
-      goodsInbun : 장바구니에 담긴 상품이 몇 인분인지
+      goodsInbun : 상품의 인분
       여러 개 있음.
 
+      optionNo : 선택한 옵션.
+      여러 개.
 
       shippingFee : 배송비
       하나 있음.
       String shippingFee = request.getParameter("shippingFee");
       로 가져올 수 있음.
 
-      totalPrice : 모든 상품의 금액에 배송비까지 더한 합계 금액.
-      하나 있음.
+      payment_price : 모든 상품의 금액
+      
+      discount_price : 상품을 퍼센테이지로 할인한 금액의 총합
 
       -->
 
@@ -206,54 +209,63 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         </div>
                       </c:otherwise>
                     </c:choose>
-
-                    <!--수정-->
-                    <div class="property-margin" style="margin-bottom: -40px">
-                      <div class="property-margin1">
-                        <dl class="property-flex2" style="height: 170px">
-                          <dt
-                            class="property-input-gd"
-                            style="margin-top: 16px"
-                          >
-                            상품선택
-                          </dt>
-                          <dd class="property-flex4">
-                            <div
-                              style="align-content: center"
-                              style="overflow-y: scrol"
+                    <form
+                      id="optionForm"
+                      action="${contextPath}/mypage/orderConfirm.do"
+                      method="post"
+                    >
+                      <!--수정-->
+                      <div class="property-margin" style="margin-bottom: -40px">
+                        <div class="property-margin1">
+                          <dl class="property-flex2" style="height: 170px">
+                            <dt
+                              class="property-input-gd"
+                              style="margin-top: 16px"
                             >
-                              <select
-                                name="select"
-                                id="select_option"
-                                class="margin4 opt"
+                              상품선택
+                            </dt>
+                            <dd class="property-flex4">
+                              <div
+                                style="align-content: center"
+                                style="overflow-y: scrol"
                               >
-                                <option
-                                  value="옵션을 선택해주세요"
-                                  selected
-                                ></option>
-                                <c:forEach
-                                  items="${goodsOptionList}"
-                                  var="goodsOption"
+                                <select
+                                  name="select"
+                                  id="select_option"
+                                  class="margin4 opt"
                                 >
                                   <option
-                                    value="${goodsOption.name}"
+                                    value="옵션을 선택해주세요"
+                                    selected
+                                  ></option>
+                                  <c:forEach
+                                    items="${goodsOptionList}"
+                                    var="goodsOption"
                                   >
-                                    ${goodsOption.name} ${goodsOption.price}
-                                  </option>
-                                </c:forEach>
-                              </select>
-                            </div>
-                            <c:forEach items="${goodsOptionList}" var="goodsOption">
-                              <input id="h_option_price_${goodsOption.name}" type="hidden" value="${goodsOption.price}">
-                              <input id="h_option_price_${goodsOption.name}" type="hidden" value="${goodsOption.inbun}">
-                            </c:forEach>
-                          </dd>
-                        </dl>
+                                    <option value="${goodsOption.optionNo}">
+                                      ${goodsOption.name} ${goodsOption.price}
+                                    </option>
+                                  </c:forEach>
+                                </select>
+                              </div>
+                              <c:forEach
+                                items="${goodsOptionList}"
+                                var="goodsOption"
+                              >
+                                <input
+                                  type="hidden"
+                                  class="h_option_price_${goodsOption.optionNo}"
+                                  value="${goodsOption.price}"
+                                />
+                                <input
+                                  type="hidden"
+                                  class="h_option_name_${goodsOption.optionNo}"
+                                  value="${goodsOption.name}"
+                                />
+                              </c:forEach>
+                            </dd>
+                          </dl>
 
-                        <form
-                          action="${contextPath}/mypage/orderConfirm.do"
-                          method="post"
-                        >
                           <div
                             class="cart-option-item property-flex5 goods_option_grid"
                             style="width: 525px"
@@ -282,65 +294,61 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               name="shippingFee"
                               value="2500"
                             />
-                            <input
-                              type="hidden"
-                              value="12000"
-                              name="totalPrice"
-                            />
                           </div>
-                        </form>
-                      </div>
-                      <div class="css-9y0nwt">
-                        <div class="css-ixlb9s">
-                          <div class="css-yhijln">
-                            <span class="css-x4cdgl" id="sum" value="0"></span>
+                        </div>
+
+                        <div class="css-9y0nwt">
+                          <div class="css-ixlb9s">
+                            <div class="css-yhijln">
+                              <span
+                                class="css-x4cdgl"
+                                id="sum"
+                                value="0"
+                              ></span>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="css-lay">
-                      <button
-                        class="css-heartbtn btn-regular"
-                        type="button"
-                        width="56"
-                        height="56"
-                        radius="3"
-                      >
-                        <span class="css-let1"
-                          ><img
-                            src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yNS44MDcgNy44NjNhNS43NzcgNS43NzcgMCAwIDAtOC4xNzIgMEwxNiA5LjQ5N2wtMS42MzUtMS42MzRhNS43NzkgNS43NzkgMCAxIDAtOC4xNzMgOC4xNzJsMS42MzQgMS42MzQgNy40NjYgNy40NjdhMSAxIDAgMCAwIDEuNDE1IDBzMCAwIDAgMGw3LjQ2Ni03LjQ2N2gwbDEuNjM0LTEuNjM0YTUuNzc3IDUuNzc3IDAgMCAwIDAtOC4xNzJ6IiBzdHJva2U9IiM1RjAwODAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
-                            alt=""
-                            class="css-0"
-                        /></span>
-                      </button>
-                      <div class="css-lay2">
+                      <div class="css-lay goods_detail_buttons">
                         <button
-                          class="cart-button css-cartbtn"
+                          class="css-heartbtn btn-regular"
                           type="button"
+                          width="56"
+                          height="56"
                           radius="3"
                         >
-                          <div class="css-nytqmg textbold btn-hover">
-                            바로 구매
-                          </div>
+                          <span class="css-let1"
+                            ><img
+                              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxwYXRoIGQ9Ik0yNS44MDcgNy44NjNhNS43NzcgNS43NzcgMCAwIDAtOC4xNzIgMEwxNiA5LjQ5N2wtMS42MzUtMS42MzRhNS43NzkgNS43NzkgMCAxIDAtOC4xNzMgOC4xNzJsMS42MzQgMS42MzQgNy40NjYgNy40NjdhMSAxIDAgMCAwIDEuNDE1IDBzMCAwIDAgMGw3LjQ2Ni03LjQ2N2gwbDEuNjM0LTEuNjM0YTUuNzc3IDUuNzc3IDAgMCAwIDAtOC4xNzJ6IiBzdHJva2U9IiM1RjAwODAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K"
+                              alt=""
+                              class="css-0"
+                          /></span>
                         </button>
-                      </div>
+                        <div class="css-lay2">
+                          <button
+                            class="cart-button css-cartbtn"
+                            type="button"
+                            radius="3"
+                          >
+                            <div class="css-nytqmg textbold btn-hover">
+                              바로 구매
+                            </div>
+                          </button>
+                        </div>
 
-                      <!--중간부분-->
-                      <div class="css-lay2">
-                        <button
-                          class="cart-button css-cartbtn"
-                          type="button"
-                          radius="3"
-                          onclick="fn_openalert('장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?', '${contextPath}/cart.do')"
-                        >
-                          <div class="css-nytqmg textbold btn-hover">
-                            장바구니 담기
-                          </div>
-                        </button>
+                        <div class="css-lay2">
+                          <button
+                            class="cart-button css-cartbtn"
+                            type="submit"
+                            radius="3"
+                          >
+                            <div class="css-nytqmg textbold btn-hover">
+                              장바구니 담기
+                            </div>
+                          </button>
+                        </div>
                       </div>
-                    </div>
-
-                    <!--수정-->
+                    </form>
                   </div>
                 </section>
               </div>
@@ -622,6 +630,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
     <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
+      var storeValueUrl = "${contextPath}" + "/storeValue.do";
       $(document).ready(function () {
         // Select the select tag
         var selectTag = $("#select_option");
@@ -632,8 +641,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         // Attach the change event handler to the select tag
         selectTag.on("change", function () {
           // Get the selected value
-          var selectedValue = $(this).val();
-          var selectedOptionPrice = 1000;
+          var selectedOptionNo = $(this).val();
+          var selectedOptionPrice = $(
+            ".h_option_price_" + selectedOptionNo
+          ).val();
+          var selectedOptionName = $(
+            ".h_option_name_" + selectedOptionNo
+          ).val();
           var newRow =
             `<dl class="property-flex2 goods_option_row">
                               <dt class="property-font2 epzddad1">
@@ -642,50 +656,75 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                   style="margin-bottom: 24px; font-size: 22px"
                                   id="goods_option_name"
                                 >` +
-            selectedValue +
+            selectedOptionName +
             `</div><input type="hidden" value=` +
-            selectedValue +
-            ` name="goodsName" />
+            selectedOptionNo +
+            ` name="optionNo" />
                                 <div class="product__details__quantity">
                                   <div class="quantity text-left">
                                     <div class="pro-qty border6">
-                                      <span class="goods_option_minus_btn">-</span>
+                                      <a class="goods_option_minus_btn">-</a>
                                       <input type="text" value="1" name="goodsQty" class="goodsQty_input" />
-                                      <span class="goods_option_plus_btn">+</span>
+                                      <a class="goods_option_plus_btn">+</a>
                                     </div>
                                   </div>
                                 </div>
-                                <div class="option_price">+`;
-          selectedOptionPrice`+</div>
+                                <div class="option_price">` +
+            selectedOptionPrice +
+            `</div>
                               </dt>
                             </dl>
                         `;
           rowsDiv.append(newRow);
         });
+      });
 
-        $(".goods_option_plus_btn").on("click", function () {
-          var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
-          var changedVar = parseInt(goodsOptionVar) + 1;
-          if (changedVar < 100) {
-            $(this).parent().find(".goodsQty_input").val(changedVar);
-          }
-        });
+      // ajax로 카트 정보를 저장
+      $("#optionForm").submit(function (e) {
+        e.preventDefault(); // Prevent the form from submitting normally
 
-        $(".goods_option_minus_btn").on("click", function () {
-          var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
-          var changedVar = parseInt(goodsOptionVar) - 1;
-          if (changedVar > 0) {
-            $(this).parent().find(".goodsQty_input").val(changedVar);
-          }
-          console.log(goodsOptionVar);
+        var formData = $(this).serialize(); // Serialize the form data
+
+        $.ajax({
+          type: "POST",
+          url: storeValueUrl,
+          data: formData,
+          success: function (response) {
+            if (response == "success") {
+              fn_openalert(
+                "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
+                "${contextPath}/main/cart.do"
+              );
+            } else {
+              alert("장바구니에 담지 못 했습니다.");
+            }
+          },
+          error: function (response) {
+            alert("원인불명의 에러");
+            console.log(response);
+          },
         });
       });
 
+      $(document).on("click", ".goods_option_plus_btn", function () {
+        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+        var changedVar = parseInt(goodsOptionVar) + 1;
+        if (changedVar < 100) {
+          $(this).parent().find(".goodsQty_input").val(changedVar);
+        }
+        console.log(goodsOptionVar);
+        console.log("plus btn click");
+      });
 
-      function fn_addtocart(){
-
-        
-      }
+      $(document).on("click", ".goods_option_minus_btn", function () {
+        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+        var changedVar = parseInt(goodsOptionVar) - 1;
+        if (changedVar > 0) {
+          $(this).parent().find(".goodsQty_input").val(changedVar);
+        }
+        console.log(goodsOptionVar);
+      });
+      function fn_addtocart() {}
     </script>
     <!-- Js Plugins -->
   </body>

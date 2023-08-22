@@ -1,6 +1,7 @@
 package com.example.demo.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.main.service.MainService;
@@ -65,11 +68,40 @@ public class MainControllerImpl implements MainController{
 		String previousPage = request.getHeader("Referer");
 		mav.addObject("previousPage",previousPage);
 		
-		HttpSession session = request.getSession();
-		
-		
-		
 		return mav;
 	}
+	
+	
+	// ajax로 cartList를 session에 저장하기 위한 코드
+	@ResponseBody
+	@PostMapping(value="/storeValue.do")
+	  public String storeValueInSession(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String result = "success";
+		try {
+			String[] optionNos = request.getParameterValues("optionNo");
+			String[] goodsQtys = request.getParameterValues("goodsQty");
+			List<CartVO> cartList = new ArrayList<CartVO>();
+			
+			// cartList에 하나씩 추가
+			for (int i = 0; i < optionNos.length; i++) {
+				CartVO tempcart = mainService.selectOptionByNo(Integer.parseInt(optionNos[i]));
+				tempcart.setGoodsQty(Integer.parseInt(goodsQtys[i]));
+				tempcart.setDiscountPrice();
+				
+				cartList.add(tempcart);
+			}
+			System.out.println("cartList"+cartList);
+			
+			
+			HttpSession session = request.getSession();
+		    session.setAttribute("cartList",cartList);
+		} catch (Exception e) {
+			result = "fail";
+			e.printStackTrace();
+		}
+	    
+	    return result;
+	  }
 
 }

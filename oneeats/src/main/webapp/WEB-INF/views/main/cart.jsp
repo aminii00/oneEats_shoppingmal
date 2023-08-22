@@ -43,6 +43,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       String[] goodsNos = request.getParameterValues("goodsNo");
       로 가져올 것.
       
+      optionNo : 선택한 옵션.
+      여러 개.
+
       goodsQty : 장바구니에 담긴 상품의 수량
       여러 개 있음.
 

@@ -50,8 +50,14 @@
       <result property="profileImg" column="profileImg" />
       <result property="point" column="point" />
    </resultMap> 
-	<resultMap id="reviewResult" type="reviewVO">
-		
+	<resultMap id="OptionResult" type="optionVO">
+		<result property="optionNo" column="optionNo" />
+		 <result property="name" column="name"/>
+	  	<result property="option_qty" column="option_qty"/>
+	  	<result property="option_inbun" column="option_inbun"/>
+	  	<result property="price" column="price"/>
+	  	<result property="goodsNo" column="goodsNo"/>
+			
 	</resultMap>
 	
 	
@@ -89,5 +95,10 @@
 	
 	<select id="selectReviewAverage" resultType="float" parameterType="int">
 		SELECT ifnull(avg(CAST(star AS DECIMAL(2,1))),0) FROM review where goodsNo=#{goodsNo}
+	</select>
+	
+	
+	<select id="selectOptionsByGoodsNo" resultMap="OptionResult" parameterType="int">
+		select * from `option` where goodsNo=#{goodsNo}
 	</select>
 </mapper> 
