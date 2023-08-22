@@ -6,21 +6,31 @@ import org.springframework.stereotype.Component;
 @Component
 public class CartVO {
 	private int goodsNo;
+	// 카트에 몇 개 담았는지
 	private int goodsQty;
 	private String goodsName;
 	// 상품 메인 이미지만 저장
 	private String goodsImg;
+	// 상품이 원래 개당 얼마인지
+	private int goodsPrice;
 	
 	// 원래(상품을 하나씩 살때)보다 얼마나 할인 받았는지
 	private int discountPrice;
 	
 	// 옵션 테이블에서 가져오는 값들. optionQty는 당근 3개 들이의 3개
 	private int optionNo;
+	private String optionName;
 	private int optionQty;
 	private int optionPrice;
 	private String optionInbun;
 	
 	
+	public int getGoodsPrice() {
+		return goodsPrice;
+	}
+	public void setGoodsPrice(int goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
 	public int getOptionPrice() {
 		return optionPrice;
 	}
@@ -80,11 +90,27 @@ public class CartVO {
 	public void setOptionInbun(String optionInbun) {
 		this.optionInbun = optionInbun;
 	}
+	
+	
+	public String getOptionName() {
+		return optionName;
+	}
+	public void setOptionName(String optionName) {
+		this.optionName = optionName;
+	}
+	
+	// discoutPrice를 다른 필드값을 바탕으로 계산해서 저장하는 메소드
+	public void setDiscountPrice() {
+		this.discountPrice = (goodsPrice * optionQty-optionPrice)*goodsQty;
+	}
 	@Override
 	public String toString() {
 		return "CartVO [goodsNo=" + goodsNo + ", goodsQty=" + goodsQty + ", goodsName=" + goodsName + ", goodsImg="
-				+ goodsImg + ", discountPrice=" + discountPrice + ", optionNo=" + optionNo + ", optionQty=" + optionQty
-				+ ", optionPrice=" + optionPrice + ", optionInbun=" + optionInbun + "]";
+				+ goodsImg + ", goodsPrice=" + goodsPrice + ", discountPrice=" + discountPrice + ", optionNo="
+				+ optionNo + ", optionName=" + optionName + ", optionQty=" + optionQty + ", optionPrice=" + optionPrice
+				+ ", optionInbun=" + optionInbun + "]";
 	}
+	
+	
 	
 }

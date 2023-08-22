@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.OptionVO;
 
 @Mapper
 @Repository("goodsDAO")
@@ -27,6 +29,8 @@ public interface GoodsDAO {
 	public int selectTotalReviewsNum(int goodsNo);
 
 	public float selectReviewAverage(int goodsNo);
+
+	public List<CartVO> selectOptionsByGoodsNo(int goodsNo);
 }
 	
 

@@ -3,7 +3,7 @@ package com.example.demo.vo;
 
 import org.springframework.stereotype.Component;
 
-@Component("OptionVO")
+@Component("optionVO")
 public class OptionVO {
 	private int optionNo;
 	private String name;
@@ -11,6 +11,8 @@ public class OptionVO {
 	private String option_inbun;
 	private String price;
 	private int goodsNo;
+	
+	
 	public int getOptionNo() {
 		return optionNo;
 	}

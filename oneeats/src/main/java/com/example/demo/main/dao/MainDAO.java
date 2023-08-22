@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -19,4 +20,6 @@ public interface MainDAO {
 	
 	public List<GoodsVO> orderByNew();
 	public List<RecipeVO> selectAllRecipesList();
+
+	public CartVO selectOptionByNo(int optionNo);
 }

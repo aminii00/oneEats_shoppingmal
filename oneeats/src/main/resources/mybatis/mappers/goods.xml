@@ -50,11 +50,28 @@
       <result property="profileImg" column="profileImg" />
       <result property="point" column="point" />
    </resultMap> 
-	<resultMap id="reviewResult" type="reviewVO">
-		
+	<resultMap id="OptionResult" type="optionVO">
+		<result property="optionNo" column="optionNo" />
+		 <result property="name" column="name"/>
+	  	<result property="option_qty" column="option_qty"/>
+	  	<result property="option_inbun" column="option_inbun"/>
+	  	<result property="price" column="price"/>
+	  	<result property="goodsNo" column="goodsNo"/>
+			
 	</resultMap>
 	
-	
+	<resultMap id="CartResult" type="cartVO">
+	    <result property="goodsNo" column="goodsNo" />
+	    <result property="goodsPrice" column="goodsPrice" />
+	  <result property="goodsName" column="goodsName"/>
+	  <result property="goodsImg" column="goodsImg" />
+	  <result property="optionName" column="optionName" />
+	  <result property="optionNo" column="optionNo" />
+	  <result property="optionQty" column="optionQty" />
+	  <result property="optionPrice" column="optionPrice" />
+	  <result property="optionInbun" column="optionInbun" />
+    </resultMap>
+    
 	<select id="selectAllGoodsList" resultMap="goodsResult">
 		 <![CDATA[
 		select * from goods
@@ -89,5 +106,15 @@
 	
 	<select id="selectReviewAverage" resultType="float" parameterType="int">
 		SELECT ifnull(avg(CAST(star AS DECIMAL(2,1))),0) FROM review where goodsNo=#{goodsNo}
+	</select>
+	
+	
+	<select id="selectOptionsByGoodsNo" resultMap="CartResult" parameterType="int">
+		select `option`.optionNo, `option`.name as optionName,`option`.option_qty as optionQty,`option`.price as optionPrice,
+		`option`.option_inbun as optionInbun,`option`.goodsNo as goodsNo,
+		goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice from `option` 
+		inner join goods
+		on `option`.goodsNo = goods.goodsNo
+		where goods.goodsNo=#{goodsNo}	
 	</select>
 </mapper> 

@@ -9,14 +9,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.goods.service.GoodsService;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 
 @Controller("goodsController")
@@ -72,16 +71,22 @@ public class GoodsControllerImpl implements GoodsController {
 
 @RequestMapping(value= "/goods/goodsDetail.do" ,method={RequestMethod.POST,RequestMethod.GET})
 public ModelAndView goodsDetail(@RequestParam("goodsNo") int goodsNo,HttpServletRequest request) throws Exception{
-	// mapper에 값 비교 위해서
 	String viewName = (String) request.getAttribute("viewName");
 	GoodsVO goods = goodsService.selectGoodsByGoodsNo(goodsNo);
+	
+	// 리뷰 개수
 	int totalReviewsNum = goodsService.selectTotalReviewsNum(goodsNo);
+	// 별점 평균
 	float reviewAvg = goodsService.selectReviewAverage(goodsNo);
+	// 상품의 옵션 리스트
+	List<CartVO> goodsOptionList = goodsService.selectOptionsByGoodsNo(goodsNo);
+	
 	ModelAndView mav=new ModelAndView(viewName);
 	mav.addObject("goods", goods);
 	mav.addObject("totalReviewsNum",totalReviewsNum);
 	mav.addObject("reviewAvg", reviewAvg);
-
+	mav.addObject("goodsOptionList",goodsOptionList);
+	
 	return mav;
 }
 

@@ -43,6 +43,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       String[] goodsNos = request.getParameterValues("goodsNo");
       로 가져올 것.
       
+      optionNo : 선택한 옵션.
+      여러 개.
+
       goodsQty : 장바구니에 담긴 상품의 수량
       여러 개 있음.
 
@@ -75,7 +78,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <thead>
                     <tr>
                       <th class="shoping__product">상품명</th>
-                      <th>가격</th>
+                      <th>원가</th>
+                      <th>할인가격</th>
                       <th>수량</th>
                       <th>합계</th>
                       <th></th>
@@ -89,11 +93,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <!--반복할 때마다 추가-->
                           <c:set
                             var="payment_price"
-                            value="${payment_price+cart.goodsPrice*cart.goodsQty}"
+                            value="${payment_price + cart.goodsPrice * cart.optionQty * cart.goodsQty}"
                           />
                           <c:set
                             var="discount_price"
-                            value="${discount_price+cart.discountPrice}"
+                            value="${discount_price + cart.discountPrice}"
                           />
                           <!--상품 행-->
                           <tr class="cart_goods_row">
@@ -128,20 +132,28 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 height="100px"
                                 alt=""
                               />
-                              <h5>${cart.goodsName}</h5>
+                              <h5>${cart.optionName}</h5>
                             </td>
                             <td class="shoping__cart__price">
-                              ￦${cart.goodsPrice}
+                              ￦${cart.goodsPrice * cart.optionQty *
+                              cart.goodsQty}
+                            </td>
+                            <td class="shoping__cart__discountprice">
+                              ￦${cart.discountPrice}
                             </td>
                             <td class="shoping__cart__quantity">
                               <div class="quantity">
                                 <div class="pro-qty">
-                                  <input type="text" value="2" />
+                                  <input
+                                    type="text"
+                                    value="${cart.goodsQty}"
+                                    name="goodsQty"
+                                  />
                                 </div>
                               </div>
                             </td>
                             <td class="shoping__cart__total">
-                              ￦${cart.goodsPrice * cart.goodsQty}
+                              ￦${cart.optionPrice * cart.goodsQty}
                             </td>
                             <td class="shoping__cart__item__close">
                               <img
@@ -180,14 +192,33 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <h5>총 상품 금액</h5>
                 <ul>
                   <input type="hidden" name="shippingFee" value="2500" />
-                  <input type="hidden" name="payment_price" value="12000" />
-                  <input type="hidden" name="discount_price" value="3000" />
-
-                  <li class="text-left">결제 금액 <span>￦9500</span></li>
-                  <li class="text-left">배송비 <span>￦2500</span></li>
+                  <input
+                    type="hidden"
+                    name="payment_price"
+                    value="${payment_price}"
+                  />
+                  <input
+                    type="hidden"
+                    name="discount_price"
+                    value="${discount_price}"
+                  />
+                  <li class="text-left">
+                    총 상품 금액 <span>￦${payment_price}</span>
+                  </li>
+                  <li class="text-left">
+                    할인 금액 <span>￦${discount_price}</span>
+                  </li>
+                  <li class="text-left">
+                    결제 금액 <span>￦${payment_price-discount_price}</span>
+                  </li>
+                  <li class="text-left">
+                    배송비 <span>￦${shippingFee}</span>
+                  </li>
                   <li class="text-left" style="font-size: 28px">
                     합계
-                    <span style="font-size: 28px; color: #dd2222">￦12000</span>
+                    <span style="font-size: 28px; color: #dd2222"
+                      >￦${payment_price-discount_price+shippingFee}</span
+                    >
                   </li>
                 </ul>
                 <button type="submit" class="primary-btn">주문하기</button>
