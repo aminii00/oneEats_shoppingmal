@@ -28,13 +28,22 @@
 	  </resultMap>
 	
 	
+	<resultMap id="optionResult" type="optionVO">
+<result column="optionNo" property="optionNo"/>
+<result column="name" property="name"/>
+<result column="option_qty" property="option_qty"/>
+<result column="option_inbun" property="option_inbun"/>
+<result column="price" property="price"/>
+<result column="goodsNo" property="goodsNo"/>
+	</resultMap>
+	
+	
 	
 		<insert id="insertGoods" parameterType="java.util.Map">
 <![CDATA[
-insert into goods(name,price,rapping,manufacturer,weight,description,harvest,img1,img2,img3,img4,img5,category)
-values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{harvest},#{img1},#{img2},#{img3},#{img4},#{img5},#{category})
+insert into goods(name,price,rapping,manufacturer,weight,description,harvest,category,type,memberNo,name,option_qty,option_inbun,price,goodsNo)
+values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{harvest},#{category},#{type},#{memberNo},#{name},#{option_qty},#{option_inbun},#{price},#{goodsNo})
 ]]>
-
 	</insert>
 	
 	
