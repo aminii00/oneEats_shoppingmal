@@ -4,33 +4,48 @@ uri="http://java.sun.com/jsp/jstl/fmt"%> <%@ taglib prefix="c"
 uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html>
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Ogani Template" />
     <meta name="keywords" content="Ogani, unica, creative, html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Ogani | Template</title>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="${contextPath}/css/font-awesome.min.css"
-      type="text/css"
-    />
+    <title></title>
 
     <style>
-      .flex2 {
-        display: flex;
-        align-items: stretch;
-        align-content: stretch;
+      .cart_remove_btn {
+        width: 20px;
+        height: 20px;
+      }
+      .qty_box {
+        width: 140px;
+        height: 42px;
+        display: inline-block;
+        position: relative;
         text-align: center;
+        background: #f5f5f5;
+        margin-bottom: 8px;
+        align-content: center;
+        align-self: center;
+      }
+      .qty_box input {
+        height: 100%;
+        width: 100%;
+        font-size: 16px;
+        color: #6f6f6f;
+        width: 50px;
+        border: none;
+        background: #f5f5f5;
+        text-align: center;
+      }
+
+      .qty_box .qtybtn {
+        width: 35px;
+        font-size: 16px;
+        color: #6f6f6f;
+        cursor: pointer;
+        display: inline-block;
       }
     </style>
   </head>
@@ -107,12 +122,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               name="goodsNo"
                               value="${cart.goodsNo}"
                             />
-                            <input
-                              class="h_goods_qty"
-                              type="hidden"
-                              name="goodsQty"
-                              value="${cart.goodsQty}"
-                            />
+
                             <input
                               class="h_option_no"
                               type="hidden"
@@ -125,38 +135,87 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               name="goodsInbun"
                               value="${cart.optionInbun}"
                             />
-                            <td class="shoping__cart__item">
+
+                            <!-- form에는 들어가지 않는 참조용 input들 -->
+                            <input
+                              class="h_row_goods_price"
+                              type="hidden"
+                              value="${cart.goodsPrice}"
+                            />
+                            <input
+                              class="h_row_option_price"
+                              type="hidden"
+                              value="${cart.optionPrice}"
+                            />
+                            <input
+                              class="h_row_option_qty"
+                              type="hidden"
+                              value="${cart.optionQty}"
+                            />
+                            <input
+                              class="h_row_discount_price"
+                              type="hidden"
+                              value="${cart.discountPrice}"
+                            />
+                            <input
+                              type="hidden"
+                              class="h_row_option_discount"
+                              value="${cart.goodsPrice * cart.optionQty - cart.optionPrice}"
+                            />
+                            <input
+                              class="h_row_payment_price"
+                              type="hidden"
+                              value="${cart.goodsPrice * cart.optionQty * cart.goodsQty}"
+                            />
+                            <input
+                              class="h_row_total_price"
+                              type="hidden"
+                              value="${cart.optionPrice * cart.goodsQty}"
+                            />
+                            <td class="vertical-align">
                               <img
                                 src="${contextPath}/download.do?imgFileName=${goodsImg}&path=goods"
                                 width="100px"
                                 height="100px"
                                 alt=""
                               />
+                              &nbsp; &nbsp;
                               <h5>${cart.optionName}</h5>
                             </td>
-                            <td class="shoping__cart__price">
-                              ￦${cart.goodsPrice * cart.optionQty *
-                              cart.goodsQty}
+                            <td>
+                              ￦<span class="row_payment_price">
+                                ${cart.goodsPrice * cart.optionQty *
+                                cart.goodsQty}
+                              </span>
                             </td>
-                            <td class="shoping__cart__discountprice">
-                              ￦${cart.discountPrice}
+
+                            <td>
+                              ￦<span class="row_discount_price"
+                                >${cart.discountPrice}</span
+                              >
                             </td>
-                            <td class="shoping__cart__quantity">
+                            <td>
                               <div class="quantity">
-                                <div class="pro-qty">
+                                <div class="qty_box">
+                                  <a class="goods_option_minus_btn">-</a>
                                   <input
                                     type="text"
                                     value="${cart.goodsQty}"
                                     name="goodsQty"
+                                    class="goodsQty_input"
                                   />
+                                  <a class="goods_option_plus_btn">+</a>
                                 </div>
                               </div>
                             </td>
-                            <td class="shoping__cart__total">
-                              ￦${cart.optionPrice * cart.goodsQty}
+                            <td>
+                              ￦<span class="row_total_price"
+                                >${cart.optionPrice * cart.goodsQty}</span
+                              >
                             </td>
-                            <td class="shoping__cart__item__close">
+                            <td>
                               <img
+                                class="cart_remove_btn"
                                 src="${contextPath}/img/cart/close.png"
                                 alt=""
                               />
@@ -191,33 +250,64 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="shoping__checkout">
                 <h5>총 상품 금액</h5>
                 <ul>
-                  <input type="hidden" name="shippingFee" value="2500" />
                   <input
+                    class="h_shippingFee"
+                    type="hidden"
+                    name="shippingFee"
+                    value="${shippingFee}"
+                  />
+                  <input
+                    class="h_payment_price"
                     type="hidden"
                     name="payment_price"
                     value="${payment_price}"
                   />
                   <input
+                    class="h_discount_price"
                     type="hidden"
                     name="discount_price"
                     value="${discount_price}"
                   />
                   <li class="text-left">
-                    총 상품 금액 <span>￦${payment_price}</span>
+                    총 상품 금액
+                    <span
+                      >￦<span class="payment_price_text"
+                        >${payment_price}</span
+                      ></span
+                    >
                   </li>
                   <li class="text-left">
-                    할인 금액 <span>￦${discount_price}</span>
+                    할인 금액
+                    <span
+                      >￦<span class="discount_price_text"
+                        >${discount_price}</span
+                      ></span
+                    >
                   </li>
                   <li class="text-left">
-                    결제 금액 <span>￦${payment_price-discount_price}</span>
+                    결제 금액
+                    <span
+                      >￦<span class="noshipping_price_text"
+                        >${payment_price-discount_price}</span
+                      ></span
+                    >
                   </li>
                   <li class="text-left">
-                    배송비 <span>￦${shippingFee}</span>
+                    배송비
+                    <span
+                      >￦<span class="shippingFee_text"
+                        >${shippingFee}</span
+                      ></span
+                    >
                   </li>
                   <li class="text-left" style="font-size: 28px">
                     합계
                     <span style="font-size: 28px; color: #dd2222"
-                      >￦${payment_price-discount_price+shippingFee}</span
+                      >￦<span
+                        class="total_price_text"
+                        style="font-size: 28px; color: #dd2222"
+                        >${payment_price-discount_price+shippingFee}</span
+                      ></span
                     >
                   </li>
                 </ul>
@@ -229,5 +319,126 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </form>
     </section>
     <!-- Shoping Cart Section End -->
+
+    <script>
+      var shippingFee = parseInt("${shippingFee}");
+      var payment_price = parseInt("${payment_price}");
+      var discount_price = parseInt("${discount_price}");
+      var noshipping_price = "${payment_price-discount_price}";
+      var total_price = "${payment_price-discount_price+shippingFee}";
+
+      function calculate() {
+        noshipping_price = parseInt(payment_price) - parseInt(discount_price);
+        total_price =
+          parseInt(payment_price) -
+          parseInt(discount_price) +
+          parseInt(shippingFee);
+      }
+
+      function changeTexts() {
+        $(".shippingFee_text").text(shippingFee);
+        $(".payment_price_text").text(payment_price);
+        $(".discount_price_text").text(discount_price);
+        $(".noshipping_price_text").text(noshipping_price);
+        $(".total_price_text").text(total_price);
+      }
+
+      $(document).ready(function () {
+        $();
+      });
+
+      $(document).on("click", ".goods_option_plus_btn", function () {
+        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+        var changedVar = parseInt(goodsOptionVar) + 1;
+        var parentRow = $(this).closest(".cart_goods_row");
+        if (changedVar < 100) {
+          $(this).parent().find(".goodsQty_input").val(changedVar);
+          var row_option_price = parseInt(
+            parentRow.find(".h_row_option_price").val()
+          );
+          var row_option_discount = parseInt(
+            parentRow.find(".h_row_option_discount").val()
+          );
+          var row_discount_price = parseInt(
+            parentRow.find(".h_row_discount_price").val()
+          );
+          var row_total_price = parseInt(
+            parentRow.find(".h_row_total_price").val()
+          );
+          var row_payment_price = parseInt(
+            parentRow.find(".h_row_payment_price").val()
+          );
+          var row_goods_price = parseInt(
+            parentRow.find(".h_row_goods_price").val()
+          );
+          var row_option_qty = parseInt(
+            parentRow.find(".h_row_option_qty").val()
+          );
+          row_payment_price =
+            row_payment_price + row_goods_price * row_option_qty;
+          row_discount_price = row_discount_price + row_option_discount;
+          row_total_price = row_total_price + row_option_price;
+          parentRow.find(".row_payment_price").text(row_payment_price);
+          parentRow.find(".h_row_payment_price").val(row_payment_price);
+          parentRow.find(".row_discount_price").text(row_discount_price);
+          parentRow.find(".h_row_discount_price").val(row_discount_price);
+          parentRow.find(".row_total_price").text(row_total_price);
+          parentRow.find(".h_row_total_price").val(row_total_price);
+
+          payment_price =
+            parseInt(payment_price) + row_goods_price * row_option_qty;
+          discount_price = parseInt(discount_price) + row_option_discount;
+          calculate();
+          changeTexts();
+        }
+      });
+
+      $(document).on("click", ".goods_option_minus_btn", function () {
+        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
+        var changedVar = parseInt(goodsOptionVar) - 1;
+        var parentRow = $(this).closest(".cart_goods_row");
+        if (changedVar > 0) {
+          $(this).parent().find(".goodsQty_input").val(changedVar);
+          var row_option_price = parseInt(
+            parentRow.find(".h_row_option_price").val()
+          );
+          var row_option_discount = parseInt(
+            parentRow.find(".h_row_option_discount").val()
+          );
+          var row_discount_price = parseInt(
+            parentRow.find(".h_row_discount_price").val()
+          );
+          var row_total_price = parseInt(
+            parentRow.find(".h_row_total_price").val()
+          );
+          var row_payment_price = parseInt(
+            parentRow.find(".h_row_payment_price").val()
+          );
+          var row_goods_price = parseInt(
+            parentRow.find(".h_row_goods_price").val()
+          );
+
+          var row_option_qty = parseInt(
+            parentRow.find(".h_row_option_qty").val()
+          );
+          row_payment_price =
+            row_payment_price - row_goods_price * row_option_qty;
+          row_discount_price = row_discount_price - row_option_discount;
+          row_total_price = row_total_price - row_option_price;
+          parentRow.find(".row_payment_price").text(row_payment_price);
+          parentRow.find(".h_row_payment_price").val(row_payment_price);
+          parentRow.find(".row_discount_price").text(row_discount_price);
+          parentRow.find(".h_row_discount_price").val(row_discount_price);
+          parentRow.find(".row_total_price").text(row_total_price);
+          parentRow.find(".h_row_total_price").val(row_total_price);
+
+          payment_price =
+            parseInt(payment_price) - row_goods_price * row_option_qty;
+          discount_price = parseInt(discount_price) - row_option_discount;
+          calculate();
+          changeTexts();
+        }
+      });
+    </script>
   </body>
 </html>
