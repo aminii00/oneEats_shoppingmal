@@ -1,20 +1,24 @@
 package com.example.demo.member.controller;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.common.alert.Alert;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.vo.MemberVO;
 
@@ -23,6 +27,44 @@ public class MemberControllerImpl implements MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	
+	
+	@Override
+	@RequestMapping(value="/member/login.do" ,method = RequestMethod.POST)
+	public ModelAndView login(@RequestParam Map<String, String> loginMap,
+			                  HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(loginMap);
+		 MemberVO memberVO = memberService.login(loginMap);
+		 System.out.println("memberVO = " + memberVO);
+		 
+		if(memberVO!= null && memberVO.getId()!=null){
+			HttpSession session=request.getSession();
+			session=request.getSession();
+			session.setAttribute("isLogOn", true);
+			session.setAttribute("memberInfo",memberVO);
+			mav.setViewName("/main/mainPage");
+			
+		  }else{
+			  System.out.println("로그인 X");
+			  mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/loginForm.do");
+		}
+		return mav;
+	}
+	
+	
+	@Override
+	@RequestMapping(value="/member/logout.do" ,method = RequestMethod.GET)
+	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session=request.getSession();
+		session.setAttribute("isLogOn", false);
+		session.removeAttribute("memberInfo");
+		mav.setViewName("/main/mainPage");
+		return mav;
+	}
+	
 	
 	@Override
 	@RequestMapping(value="/member/register.do" ,method = RequestMethod.POST)
@@ -39,27 +81,7 @@ public class MemberControllerImpl implements MemberController {
 		return mav;
 	}
 	
-	//민아 로그인
-	@Override
-	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
-			RedirectAttributes rAttr, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		MemberVO memberVO = memberService.login(member);
-		if(memberVO != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", memberVO);
-			session.setAttribute("isLogOn", true);
-				mav.setViewName("redirect:/main/mainPage.do");
-			
-		}else {
-			rAttr.addAttribute("result","loginFailed");
-			mav.setViewName("redirect:/member/loginForm.do");
-		}
-		
-		return mav;
-	}
+
 	
 	
 	// 민아 아이디 찾기
@@ -77,19 +99,25 @@ public class MemberControllerImpl implements MemberController {
 	}
 	
 	
-	// 민아 비밀번호 찾기사업자
+	// 민아 비밀번호 찾기
 		@Override
-		@RequestMapping(value = "/member/pw.do", method = RequestMethod.POST)
+		@RequestMapping(value = "/member/pwdSearch.do", method = RequestMethod.POST)
 		public ModelAndView PwdSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
 				RedirectAttributes rAttr) throws Exception{
 			System.out.println("idSearch Controller");
 			ModelAndView mav = new ModelAndView();
-			String id = memberService.idSearch(memberVO);
-			System.out.println("id = " + id);
-			mav.addObject("id", id);
-			mav.setViewName("/member/idForm");
+			try {
+				MemberVO member = memberService.pwSearch(memberVO);
+				System.out.println("memberVO = " + member);
+				mav.setViewName("/member/newPwSearchForm");
+			}catch(Exception e) {
+				mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/pwdSearchForm.do");
+				e.printStackTrace();
+			}
 			return mav;
 		}
+		
+		
 		
 		// 민아 사업자 회원가입-사업자
 		@Override
@@ -97,7 +125,8 @@ public class MemberControllerImpl implements MemberController {
 			public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			System.out.println("sellerRegister_one.do");
-			String busNo = request.getParameter("busNo");
+			String busNo1 = request.getParameter("busNo");
+			int busNo = Integer.parseInt(busNo1);
 			HttpSession session = request.getSession();
 			//세션에 로그인 회원정보 보관
 			session.setAttribute("busNo", busNo);
@@ -133,7 +162,7 @@ public class MemberControllerImpl implements MemberController {
 					int busNo = (int) session.getAttribute("busNo");
 					String sms_agreement = (String) session.getAttribute("sms_agreement");
 					String email_agreement = (String) session.getAttribute("email_agreement");
-					
+					System.out.println("busNo = " +busNo);
 					memberVO.setBusNo(busNo);
 					memberVO.setSms_agreement(sms_agreement);
 					memberVO.setEmail_agreement(email_agreement);
@@ -148,7 +177,7 @@ public class MemberControllerImpl implements MemberController {
 					return mav;
 				}
 
-			
+				
 		
 		
 		

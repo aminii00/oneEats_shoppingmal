@@ -31,4 +31,6 @@ public interface MypageDAO {
 	//민아 찜
 	public List selectBookList() throws DataAccessException;
 	
+	//민아 찜 삭제
+	public int deleteBookMark(String id) throws DataAccessException;
 }

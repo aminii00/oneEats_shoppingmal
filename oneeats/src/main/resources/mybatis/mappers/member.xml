@@ -40,13 +40,14 @@
 		]]>
 	</insert>
   
-   <select id="login" resultType="memberVO" parameterType="memberVO">
+   <select id="login" resultType="memberVO" parameterType="java.util.Map">
      <![CDATA[
-       select * from member
-       where 
-       name=#{name} and pwd=#{pwd}
+      select * from member 
+	   where 
+	   id=#{id} and pwd=#{pwd}	
      ]]>
 	</select>
+
 	
 	 <select id="idSearch"  resultType="String"  parameterType="memberVO">
      <![CDATA[
@@ -58,9 +59,17 @@
 	
 	 <insert id = "insertSellerNewMember" parameterType="memberVO">
 		<![CDATA[
-		insert into member(memberNo, type, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
-		values(#{memberNo}, "사업자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+		insert into member(memberNo, type, busNo, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
+		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
 		]]>
 	</insert>
+	
+	<select id="pwSearch"  resultType="String"  parameterType="memberVO">
+     <![CDATA[
+       select * from member
+       where 
+       name=#{name} and phone=#{phone} and id=#{id}
+     ]]>
+	</select>
 	
    </mapper>

@@ -17,5 +17,5 @@ public interface MypageService {
 	
 	public List selectBookList() throws DataAccessException;
 	
-
+	public int removeBookMark(String id) throws DataAccessException;
 }
