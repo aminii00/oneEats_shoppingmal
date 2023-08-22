@@ -15,7 +15,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 주문/결제 -->
-    <form method="post" action="${contextPath}/mypage/addNewOrder.do">
+    <form method="post" action="${contextPath}/mypage/newgoods.do">
       <div class="div-p">
         <p class="p-1 extsize-2 text-left textcolor-black textbold">
           주문/결제
@@ -31,12 +31,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>이름</td>
-          <td><input type="text" name="orderer_name" /></td>
+          <td>
+            <input type="text" name="orderer_name" value="${memberInfo.name}" />
+          </td>
         </tr>
         <tr>
           <td>연락처</td>
           <td>
-            <input type="text" name="orderer_phone" />
+            <input
+              type="text"
+              name="orderer_phone"
+              value="${memberInfo.phone}"
+            />
           </td>
         </tr>
 
@@ -46,18 +52,32 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>이름</td>
-          <td><input type="text" name="receiver_name" /></td>
+          <td>
+            <input
+              type="text"
+              name="receiver_name"
+              value="${memberInfo.name}"
+            />
+          </td>
         </tr>
         <tr>
           <td>배송주소</td>
           <td>
-            <input type="text" name="receiver_address" />
+            <input
+              type="text"
+              name="receiver_address"
+              value="${memberInfo.address}"
+            />
           </td>
         </tr>
         <tr>
           <td>연락처</td>
           <td>
-            <input type="text" name="reciever_phone" />
+            <input
+              type="text"
+              name="reciever_phone"
+              value="${memberInfo.phone}"
+            />
           </td>
         </tr>
         <tr>
@@ -80,11 +100,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </tr>
         <tr>
           <td>보유적립금</td>
-          <td></td>
+          <td>${memberInfo.point}</td>
         </tr>
         <tr>
           <td>사용적립금</td>
-          <td><input type="text" name="used_point" /></td>
+          <td><input type="text" name="used_point" value="" /></td>
         </tr>
 
         <!-- 쿠폰 -->
@@ -108,23 +128,25 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <tr>
           <!-- value는 이엘태그로 값 넣어주기! -->
           <td>상품 금액</td>
-          <td><input type="hidden" name="payment_price" />원</td>
+          <td name="payment_price">${selectGoodsList.paymentPrice}원</td>
         </tr>
         <tr>
           <td>상품 할인 금액</td>
-          <td><input type="hidden" name="discount_price" value="" />-원</td>
+          <td name="discount_price">-${selectGoodsList.discountPrice}원</td>
         </tr>
         <tr>
           <td>배송비</td>
-          <td><input type="hidden" name="shippingfee" value="" />원</td>
+          <td name="shippingfee">${selectGoodsList.shippingFee}원</td>
         </tr>
         <tr>
           <td>적립금액</td>
-          <td><input type="hidden" name="point_price" value="" />원</td>
+          <td name="point_price">${selectGoodsList.paymentPrice*0.1}원</td>
         </tr>
         <tr>
           <td>총 결제금액</td>
-          <td><input type="hidden" name="total_price" value="" />원</td>
+          <td name="total_price">
+            ${selectGoodsList.paymentPrice-selectGoodsList.discountPrice+selectGoodsList.shippingFee}원
+          </td>
         </tr>
         <tr>
           <td>결제방법</td>
