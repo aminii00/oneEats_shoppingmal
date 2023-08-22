@@ -37,6 +37,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <c:when test="${isLogOn==true and not empty memberInfo }">
               <a href="${contextPath}/member/logout.do">로그아웃</a>
               &nbsp;&nbsp;
+              <a href="${contextPath}/mypage/myPageMain.do">마이페이지</a>
+              &nbsp;&nbsp;
               <a href="${contextPath}/community/notice/noticeList.do"
                 >고객센터</a
               >

@@ -168,7 +168,11 @@ public class MypageControllerImpl implements MypageController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		List bookList = mypageService.selectBookList();
+		
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		System.out.println("memberInfo = " + memberInfo);
+		List bookList = mypageService.selectBookList(memberInfo);
 		
 		
 		System.out.println(bookList);
@@ -179,7 +183,7 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
-	//민아 찜 삭제하기
+	//민아 찜 삭제하기(진행중 ...)
 		@Override
 		@RequestMapping(value="/mypage/deleteBook.do" ,method= {RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView deleteBook(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {

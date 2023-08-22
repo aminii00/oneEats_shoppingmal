@@ -17,7 +17,7 @@ public interface MypageService {
 	
 	public void mypageintro(HashMap<String, String> memberMap);
 	
-	public List selectBookList() throws DataAccessException;
+	public List selectBookList(MemberVO memberInfo) throws DataAccessException;
 	
 	public int removeBookMark(String id) throws DataAccessException;
 	

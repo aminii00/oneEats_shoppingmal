@@ -51,10 +51,10 @@ public class MypageServiceImpl implements MypageService{
 	
 	//민아 찜
 	@Override
-	public List selectBookList() throws DataAccessException {
+	public List selectBookList(MemberVO memberInfo) throws DataAccessException {
 		System.out.println("selectBookList Service");
 		List bookList = null;
-		bookList = mypageDAO.selectBookList();
+		bookList = mypageDAO.selectBookList(memberInfo);
 		return bookList;
 	}
 	

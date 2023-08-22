@@ -70,15 +70,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         height: 38px;
       }
 
-      ul {
-        list-style: none;
-      }
-
-      li {
-        float: left;
-        margin-right: 53px;
-      }
-
       .point {
         text-align: center;
         margin: 0 auto;
@@ -164,12 +155,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <c:forEach var="item" items="${couponDetail}" varStatus="status">
           <tr class="coupontr">
             <td style="width: 200px; text-align: left">
-              &nbsp&nbsp${item.condition}
+              &nbsp&nbsp${item.name}
             </td>
-            <td style="width: 170px">~~</td>
-            <td>${item.name}</td>
-            <td>${item.expdate}</td>
-            <td>${item.discount}</td>
+            <td style="width: 170px">쿠폰</td>
+            <td>${item.discount_price}</td>
+            <td>${item.expDate}</td>
+            <td>${item.condition}</td>
           </tr>
           </c:forEach>
         </table>
@@ -217,20 +208,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <br>
         <table class="coupontd">
           <tr class="coupontr textbold">
-            <td style="width: 200px; text-align: left">&nbsp&nbsp쿠폰명</td>
-            <td style="width: 170px">기능</td>
-            <td>할인적립</td>
-            <td>사용가능기간</td>
-            <td>사용여부</td>
+            <td style="width: 200px; text-align: left">&nbsp&nbsp내용</td>
+            <td style="width: 170px">날짜</td>
+            <td>유효기간</td>
+            <td>금액</td>
           </tr>
           <tr class="coupontr">
             <td style="width: 200px; text-align: left">
-              &nbsp&nbsp회원가입 환영 쿠폰
+              &nbsp&nbsp회원가입 환영 적립금
             </td>
-            <td style="width: 170px">~~</td>
-            <td>10% 할인</td>
-            <td>2024.06.24</td>
-            <td>사용완료</td>
+            <td style="width: 170px">2022.05.06</td>
+            <td>2034.06.24</td>
+            <td>2000 point</td>
           </tr>
         </table>
         <br />

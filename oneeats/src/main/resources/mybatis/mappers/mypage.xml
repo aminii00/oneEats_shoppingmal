@@ -115,14 +115,14 @@
 	</update>	
 	
 	<!-- 민아 찜 : 상품이름, 가격, 이미지-->
-	<select id="selectBookList" resultMap="BookResult">
+	<select id="selectBookList" resultMap="BookResult" parameterType="memberVO">
 		<![CDATA[
 			select  goods.memberNo, goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark 
 			inner join goods 
 			on 
 			bookmark.goodsNo=goods.goodsNO 
 			where 
-			bookmark.memberNO=1
+			bookmark.memberNo=#{memberNo}
 		]]>
 	</select> 
 	
