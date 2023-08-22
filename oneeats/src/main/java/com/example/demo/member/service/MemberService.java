@@ -17,4 +17,6 @@ public interface MemberService {
 	public void sellerRegisterInfo(MemberVO memberVO) throws Exception;
 	
 	public MemberVO pwSearch(MemberVO memberVO) throws DataAccessException;
+	
+	public int updatePw(MemberVO memberVO) throws DataAccessException;
 }

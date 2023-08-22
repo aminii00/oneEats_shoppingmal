@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
+
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 public interface MypageService {
@@ -18,4 +20,6 @@ public interface MypageService {
 	public List selectBookList() throws DataAccessException;
 	
 	public int removeBookMark(String id) throws DataAccessException;
+	
+	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 }

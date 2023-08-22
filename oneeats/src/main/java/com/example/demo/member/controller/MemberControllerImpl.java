@@ -104,17 +104,39 @@ public class MemberControllerImpl implements MemberController {
 		@RequestMapping(value = "/member/pwdSearch.do", method = RequestMethod.POST)
 		public ModelAndView PwdSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
 				RedirectAttributes rAttr) throws Exception{
-			System.out.println("idSearch Controller");
+			System.out.println("pwSearch Controller");
 			ModelAndView mav = new ModelAndView();
 			try {
 				MemberVO member = memberService.pwSearch(memberVO);
-				System.out.println("memberVO = " + member);
+				System.out.println("memberVO = " + member.getId());
+				HttpSession session = request.getSession();
+				//세션에 회원정보 보관
+				session.setAttribute("member", member);
 				mav.setViewName("/member/newPwSearchForm");
-			}catch(Exception e) {
-				mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/pwdSearchForm.do");
+			}catch(NullPointerException e) {
+				System.out.println("비밀번호 찾기 - 정보 X");
+				mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/pwSearchForm.do");
 				e.printStackTrace();
 			}
 			return mav;
+		}
+		
+		
+		//민아 비밀번호 - 업데이트
+		@Override
+		@RequestMapping(value="/member/updatePw.do", method = RequestMethod.POST)
+		public ModelAndView updatePw(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("updatePw Controller");
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			String pwd = request.getParameter("pwd");
+			MemberVO member = (MemberVO) session.getAttribute("member");
+			member.setPwd(pwd);
+			System.out.println("member = " +member);
+			int result=memberService.updatePw(member);
+			ModelAndView mav = new ModelAndView("redirect:/member/loginForm.do");
+			return mav;
+			
 		}
 		
 		

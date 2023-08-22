@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.mypage.dao.MypageDAO;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
@@ -62,5 +63,10 @@ public class MypageServiceImpl implements MypageService{
 		return mypageDAO.deleteBookMark(id);
 	}
 	
+	@Override
+	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException{
+		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
+		return couponVO;
+	}
 
 }

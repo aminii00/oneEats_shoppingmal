@@ -28,6 +28,7 @@ public interface MemberController {
 	
 	public ModelAndView PwdSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
 			RedirectAttributes rAttr) throws Exception;
+	public ModelAndView updatePw(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception;
 	public ModelAndView sellerRegister_two(HttpServletRequest request) throws Exception;

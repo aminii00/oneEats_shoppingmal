@@ -65,6 +65,14 @@
 		<result property="price" column="price" />
 	</resultMap> 
 	
+	<resultMap id="CouponResult" type="couponVO">
+		<result property="memberNo" column="memberNo" />
+		<result property="couponNo" column="couponNo" />
+		<result property="discount_price" column="discount_price" />
+		<result property="condition" column="condition" />
+		<result property="expDate" column="expDate" />
+	</resultMap> 
+	
 	<select id="selectOrderList" resultMap="orderResult">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
@@ -111,10 +119,26 @@
 		<![CDATA[
 			select  goods.memberNo, goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark 
 			inner join goods 
-			on bookmark.goodsNo=goods.goodsNO where bookmark.memberNO=1
+			on 
+			bookmark.goodsNo=goods.goodsNO 
+			where 
+			bookmark.memberNO=1
 		]]>
 	</select> 
 	
+	<!-- 민아 쿠폰, 적립금 조회-->
+	<select id="couponSearch"  resultMap="CouponResult" parameterType="memberVO">
+		<![CDATA[
+		
+		    select * from member_coupon 
+			inner join coupon 
+			on 
+			member_coupon.couponNo=coupon.couponNo 
+			where 
+			member_coupon.memberNo=#{memberNo}
+
+		]]>
+	</select> 
 	
 	
 </mapper>

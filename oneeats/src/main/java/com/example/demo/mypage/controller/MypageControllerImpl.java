@@ -3,6 +3,7 @@ package com.example.demo.mypage.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.mypage.service.MypageService;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
@@ -187,8 +189,25 @@ public class MypageControllerImpl implements MypageController {
 			ModelAndView mav = new ModelAndView("redirect:/mypage/bookmarkList.do");
 			return mav;
 		}
-	
-	
+		
+		//민아 쿠폰, 적립금 조회
+		@Override
+		@RequestMapping(value="/mypage/couponSearch.do" ,method= {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response)  throws Exception{
+			
+			
+			System.out.println("여기는 Controller couponSearch.do");
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+			System.out.println("memberInfo = " + memberInfo);
+			List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo);
+			System.out.println("couponDetail = "+couponDetail);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("couponDetail", couponDetail);
+			mav.setViewName("/mypage/mypageCouponPoint");
+			return mav;
+		}
 
 	
 	@RequestMapping(value="/mypage/*Form.do", method= {RequestMethod.GET, RequestMethod.POST})
