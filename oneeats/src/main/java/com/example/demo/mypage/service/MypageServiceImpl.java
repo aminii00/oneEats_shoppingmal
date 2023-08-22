@@ -57,5 +57,10 @@ public class MypageServiceImpl implements MypageService{
 		return bookList;
 	}
 	
+	@Override
+	public int removeBookMark(String id) throws DataAccessException {
+		return mypageDAO.deleteBookMark(id);
+	}
+	
 
 }

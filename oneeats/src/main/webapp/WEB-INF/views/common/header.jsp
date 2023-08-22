@@ -22,10 +22,36 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="container">
       <div class="bg-gray">
         <div style="float: right" class="textsize-1 textcolor-black">
-          <a href="${contextPath}/member/registerTypeSelect.do">회원가입 </a
-          >&nbsp; &nbsp;<a href="${contextPath}/member/loginForm.do">로그인</a>
-          &nbsp;&nbsp;
-          <a href="${contextPath}/community/notice/noticeList.do">고객센터</a>
+          <c:if test="${isLogOn==true and memberInfo.type =='관리자'}">
+            <a href="${contextPath}/admin/main/adminMain.do"
+              >관리자메뉴&nbsp&nbsp</a
+            >
+          </c:if>
+
+          <c:if test="${isLogOn==true and memberInfo.type =='사업자'}">
+            <a href="${contextPath}/seller/main/sellerMain.do"
+              >사업자메뉴&nbsp&nbsp</a
+            >
+          </c:if>
+          <c:choose>
+            <c:when test="${isLogOn==true and not empty memberInfo }">
+              <a href="${contextPath}/member/logout.do">로그아웃</a>
+              &nbsp;&nbsp;
+              <a href="${contextPath}/community/notice/noticeList.do"
+                >고객센터</a
+              >
+            </c:when>
+
+            <c:otherwise>
+              <a href="${contextPath}/member/registerTypeSelect.do">회원가입 </a
+              >&nbsp; &nbsp;
+              <a href="${contextPath}/member/loginForm.do">로그인</a>
+              &nbsp;&nbsp;
+              <a href="${contextPath}/community/notice/noticeList.do"
+                >고객센터</a
+              >
+            </c:otherwise>
+          </c:choose>
         </div>
       </div>
       <div class="row">&nbsp;</div>

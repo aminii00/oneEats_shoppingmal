@@ -161,6 +161,8 @@ public class MypageControllerImpl implements MypageController {
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		List bookList = mypageService.selectBookList();
+		
+		
 		System.out.println(bookList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookList", bookList);
@@ -169,6 +171,16 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	//민아 찜 삭제하기
+		@Override
+		@RequestMapping(value="/mypage/deleteBook.do" ,method= {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView deleteBook(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("여기는 Controller deleteBook.do");
+			request.setCharacterEncoding("utf-8");
+			mypageService.removeBookMark(id);
+			ModelAndView mav = new ModelAndView("redirect:/mypage/bookmarkList.do");
+			return mav;
+		}
 	
 	
 
