@@ -1,9 +1,7 @@
 package com.example.demo.main.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.common.file.FileDownloadController;
-
 import com.example.demo.main.service.MainService;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -57,6 +54,21 @@ public class MainControllerImpl implements MainController{
 		}
 		mav.addObject("newRecipeList", newRecipeList);
 
+		return mav;
+	}
+	
+	@RequestMapping(value = "/main/cart.do")
+	public ModelAndView cart(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		String previousPage = request.getHeader("Referer");
+		mav.addObject("previousPage",previousPage);
+		
+		HttpSession session = request.getSession();
+		
+		
+		
 		return mav;
 	}
 

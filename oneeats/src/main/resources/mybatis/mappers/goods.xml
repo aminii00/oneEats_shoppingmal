@@ -88,6 +88,6 @@
 	</select>
 	
 	<select id="selectReviewAverage" resultType="float" parameterType="int">
-		SELECT avg(CAST(star AS DECIMAL(2,1))) FROM review where goodsNo=#{goodsNo}
+		SELECT ifnull(avg(CAST(star AS DECIMAL(2,1))),0) FROM review where goodsNo=#{goodsNo}
 	</select>
 </mapper> 
