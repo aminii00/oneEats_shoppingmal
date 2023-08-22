@@ -2,6 +2,7 @@ package com.example.demo.goods.service;
 
 import java.util.List;
 
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
 
@@ -19,7 +20,7 @@ public interface GoodsService {
 
 	public float selectReviewAverage(int goodsNo);
 
-	public List<OptionVO> selectOptionsByGoodsNo(int goodsNo);
+	public List<CartVO> selectOptionsByGoodsNo(int goodsNo);
 	
 
 }

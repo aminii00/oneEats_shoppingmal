@@ -98,17 +98,19 @@ public class CartVO {
 	public void setOptionName(String optionName) {
 		this.optionName = optionName;
 	}
-	@Override
-	public String toString() {
-		return "CartVO [goodsNo=" + goodsNo + ", goodsQty=" + goodsQty + ", goodsName=" + goodsName + ", goodsImg="
-				+ goodsImg + ", discountPrice=" + discountPrice + ", optionNo=" + optionNo + ", optionName="
-				+ optionName + ", optionQty=" + optionQty + ", optionPrice=" + optionPrice + ", optionInbun="
-				+ optionInbun + "]";
-	}
 	
 	// discoutPrice를 다른 필드값을 바탕으로 계산해서 저장하는 메소드
 	public void setDiscountPrice() {
 		this.discountPrice = (goodsPrice * optionQty-optionPrice)*goodsQty;
 	}
+	@Override
+	public String toString() {
+		return "CartVO [goodsNo=" + goodsNo + ", goodsQty=" + goodsQty + ", goodsName=" + goodsName + ", goodsImg="
+				+ goodsImg + ", goodsPrice=" + goodsPrice + ", discountPrice=" + discountPrice + ", optionNo="
+				+ optionNo + ", optionName=" + optionName + ", optionQty=" + optionQty + ", optionPrice=" + optionPrice
+				+ ", optionInbun=" + optionInbun + "]";
+	}
+	
+	
 	
 }

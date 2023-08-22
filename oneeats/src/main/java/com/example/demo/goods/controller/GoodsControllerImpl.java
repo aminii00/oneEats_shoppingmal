@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.goods.service.GoodsService;
+import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
-import com.example.demo.vo.OptionVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController {
@@ -79,7 +79,7 @@ public ModelAndView goodsDetail(@RequestParam("goodsNo") int goodsNo,HttpServlet
 	// 별점 평균
 	float reviewAvg = goodsService.selectReviewAverage(goodsNo);
 	// 상품의 옵션 리스트
-	List<OptionVO> goodsOptionList = goodsService.selectOptionsByGoodsNo(goodsNo);
+	List<CartVO> goodsOptionList = goodsService.selectOptionsByGoodsNo(goodsNo);
 	
 	ModelAndView mav=new ModelAndView(viewName);
 	mav.addObject("goods", goods);

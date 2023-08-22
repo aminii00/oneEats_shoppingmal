@@ -78,23 +78,26 @@ public class MainControllerImpl implements MainController{
 	  public String storeValueInSession(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String result = "success";
+		HttpSession session = request.getSession();
 		try {
 			String[] optionNos = request.getParameterValues("optionNo");
 			String[] goodsQtys = request.getParameterValues("goodsQty");
 			List<CartVO> cartList = new ArrayList<CartVO>();
+			
+			if (session.getAttribute("cartList")!=null) {
+				cartList = (List<CartVO>) session.getAttribute("cartList");
+				session.removeAttribute("cartList");
+			}
 			
 			// cartList에 하나씩 추가
 			for (int i = 0; i < optionNos.length; i++) {
 				CartVO tempcart = mainService.selectOptionByNo(Integer.parseInt(optionNos[i]));
 				tempcart.setGoodsQty(Integer.parseInt(goodsQtys[i]));
 				tempcart.setDiscountPrice();
-				
 				cartList.add(tempcart);
 			}
 			System.out.println("cartList"+cartList);
 			
-			
-			HttpSession session = request.getSession();
 		    session.setAttribute("cartList",cartList);
 		} catch (Exception e) {
 			result = "fail";
@@ -103,5 +106,6 @@ public class MainControllerImpl implements MainController{
 	    
 	    return result;
 	  }
+	
 
 }

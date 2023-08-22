@@ -22,6 +22,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         float: right;
         font-weight: 600;
       }
+      dl.goods_option_row > dt > div.goods_option_x_btn {
+      }
     </style>
   </head>
 
@@ -243,7 +245,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                     var="goodsOption"
                                   >
                                     <option value="${goodsOption.optionNo}">
-                                      ${goodsOption.name} ${goodsOption.price}
+                                      ${goodsOption.optionName}
+                                      ${goodsOption.optionPrice}
                                     </option>
                                   </c:forEach>
                                 </select>
@@ -254,13 +257,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               >
                                 <input
                                   type="hidden"
+                                  class="h_option_qty_${goodsOption.optionNo}"
+                                  value="${goodsOption.optionQty}"
+                                />
+                                <input
+                                  type="hidden"
                                   class="h_option_price_${goodsOption.optionNo}"
-                                  value="${goodsOption.price}"
+                                  value="${goodsOption.optionPrice}"
                                 />
                                 <input
                                   type="hidden"
                                   class="h_option_name_${goodsOption.optionNo}"
-                                  value="${goodsOption.name}"
+                                  value="${goodsOption.optionName}"
                                 />
                               </c:forEach>
                             </dd>
@@ -286,7 +294,43 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <span
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
-                              >900원</span
+                              id="payment_price"
+                              >0</span
+                            >
+                            <span
+                              class="property-font3 text-right"
+                              style="
+                                font-size: 16px;
+                                border-top: 1px solid rgb(244, 244, 244);
+                                margin: 12px 0 -10px 0;
+                                padding: 10px 0 10px 0;
+                              "
+                            >
+                              할인 금액
+                            </span>
+                            <span
+                              class="property-font3 text-right"
+                              style="font-size: 22px; margin-bottom: -10px"
+                              id="discount_price"
+                              >0</span
+                            >
+
+                            <span
+                              class="property-font3 text-right"
+                              style="
+                                font-size: 16px;
+                                border-top: 1px solid rgb(244, 244, 244);
+                                margin: 12px 0 -10px 0;
+                                padding: 10px 0 10px 0;
+                              "
+                            >
+                              결제 금액
+                            </span>
+                            <span
+                              class="property-font3 text-right"
+                              style="font-size: 22px; margin-bottom: -10px"
+                              id="t_price"
+                              >0</span
                             >
                             <!--배송비와 상품금액 hidden-->
                             <input
@@ -294,6 +338,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               name="shippingFee"
                               value="2500"
                             />
+                            <input
+                              type="hidden"
+                              id="h_payment_price"
+                              name="payment_price"
+                              value="0"
+                            />
+                            <input
+                              type="hidden"
+                              id="h_discount_price"
+                              name="discount_price"
+                              value="0"
+                            />
+                            <input type="hidden" id="total_price" value="0" />
                           </div>
                         </div>
 
@@ -631,101 +688,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
       var storeValueUrl = "${contextPath}" + "/storeValue.do";
-      $(document).ready(function () {
-        // Select the select tag
-        var selectTag = $("#select_option");
-
-        // Select the div.rows
-        var rowsDiv = $("div.goods_option_rows");
-
-        // Attach the change event handler to the select tag
-        selectTag.on("change", function () {
-          // Get the selected value
-          var selectedOptionNo = $(this).val();
-          var selectedOptionPrice = $(
-            ".h_option_price_" + selectedOptionNo
-          ).val();
-          var selectedOptionName = $(
-            ".h_option_name_" + selectedOptionNo
-          ).val();
-          var newRow =
-            `<dl class="property-flex2 goods_option_row">
-                              <dt class="property-font2 epzddad1">
-                                <div
-                                  class="property-font3 font-bold"
-                                  style="margin-bottom: 24px; font-size: 22px"
-                                  id="goods_option_name"
-                                >` +
-            selectedOptionName +
-            `</div><input type="hidden" value=` +
-            selectedOptionNo +
-            ` name="optionNo" />
-                                <div class="product__details__quantity">
-                                  <div class="quantity text-left">
-                                    <div class="pro-qty border6">
-                                      <a class="goods_option_minus_btn">-</a>
-                                      <input type="text" value="1" name="goodsQty" class="goodsQty_input" />
-                                      <a class="goods_option_plus_btn">+</a>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="option_price">` +
-            selectedOptionPrice +
-            `</div>
-                              </dt>
-                            </dl>
-                        `;
-          rowsDiv.append(newRow);
-        });
-      });
-
-      // ajax로 카트 정보를 저장
-      $("#optionForm").submit(function (e) {
-        e.preventDefault(); // Prevent the form from submitting normally
-
-        var formData = $(this).serialize(); // Serialize the form data
-
-        $.ajax({
-          type: "POST",
-          url: storeValueUrl,
-          data: formData,
-          success: function (response) {
-            if (response == "success") {
-              fn_openalert(
-                "장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
-                "${contextPath}/main/cart.do"
-              );
-            } else {
-              alert("장바구니에 담지 못 했습니다.");
-            }
-          },
-          error: function (response) {
-            alert("원인불명의 에러");
-            console.log(response);
-          },
-        });
-      });
-
-      $(document).on("click", ".goods_option_plus_btn", function () {
-        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
-        var changedVar = parseInt(goodsOptionVar) + 1;
-        if (changedVar < 100) {
-          $(this).parent().find(".goodsQty_input").val(changedVar);
-        }
-        console.log(goodsOptionVar);
-        console.log("plus btn click");
-      });
-
-      $(document).on("click", ".goods_option_minus_btn", function () {
-        var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
-        var changedVar = parseInt(goodsOptionVar) - 1;
-        if (changedVar > 0) {
-          $(this).parent().find(".goodsQty_input").val(changedVar);
-        }
-        console.log(goodsOptionVar);
-      });
-      function fn_addtocart() {}
+      var storeValueUrl2 = "${contextPath}" + "/storeValue2.do";
+      var goodsPrice = "${goods.price}";
+      goodsPrice = parseInt(goodsPrice);
+      var cartPage = "${contextPath}/main/cart.do";
     </script>
+    <script src="${contextPath}/js/goodsDetail.js"></script>
     <!-- Js Plugins -->
   </body>
 </html>

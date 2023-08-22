@@ -79,7 +79,7 @@
 	  <result property="optionNo" column="optionNo" />
 	  <result property="optionQty" column="optionQty" />
 	  <result property="optionPrice" column="optionPrice" />
-	  <result property="optionInbun" column="option_inbun" />
+	  <result property="optionInbun" column="optionInbun" />
     </resultMap>
 	
 	

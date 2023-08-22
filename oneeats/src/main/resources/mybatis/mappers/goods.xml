@@ -60,7 +60,18 @@
 			
 	</resultMap>
 	
-	
+	<resultMap id="CartResult" type="cartVO">
+	    <result property="goodsNo" column="goodsNo" />
+	    <result property="goodsPrice" column="goodsPrice" />
+	  <result property="goodsName" column="goodsName"/>
+	  <result property="goodsImg" column="goodsImg" />
+	  <result property="optionName" column="optionName" />
+	  <result property="optionNo" column="optionNo" />
+	  <result property="optionQty" column="optionQty" />
+	  <result property="optionPrice" column="optionPrice" />
+	  <result property="optionInbun" column="optionInbun" />
+    </resultMap>
+    
 	<select id="selectAllGoodsList" resultMap="goodsResult">
 		 <![CDATA[
 		select * from goods
@@ -98,7 +109,12 @@
 	</select>
 	
 	
-	<select id="selectOptionsByGoodsNo" resultMap="OptionResult" parameterType="int">
-		select * from `option` where goodsNo=#{goodsNo}
+	<select id="selectOptionsByGoodsNo" resultMap="CartResult" parameterType="int">
+		select `option`.optionNo, `option`.name as optionName,`option`.option_qty as optionQty,`option`.price as optionPrice,
+		`option`.option_inbun as optionInbun,`option`.goodsNo as goodsNo,
+		goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice from `option` 
+		inner join goods
+		on `option`.goodsNo = goods.goodsNo
+		where goods.goodsNo=#{goodsNo}	
 	</select>
 </mapper> 
