@@ -82,6 +82,15 @@
 	  <result property="optionInbun" column="optionInbun" />
     </resultMap>
 	
+	<resultMap id="CouponResult" type="couponVO">
+		<result property="couponNo" column="couponNo" />
+		<result property="name" column="name" />
+		<result property="discount_price" column="discount_price" />
+		<result property="condition" column="condition" />
+		<result property="expDate" column="expDate" />
+		<result property="creDate" column="creDate" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap> 
 	
 	<select id="selectGoodsList"  resultMap="GoodsResult"  parameterType ="java.util.HashMap"   >
 	    <![CDATA[
@@ -131,5 +140,11 @@
 		inner join goods
 		on `option`.goodsNo = goods.goodsNo
 		where `option`.optionNo=#{optionNo}
+	</select>
+	
+	<select id="selectCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
+		<![CDATA[
+			select * from coupon where memberNo=#{memberNo}
+		]]>
 	</select>
 </mapper>

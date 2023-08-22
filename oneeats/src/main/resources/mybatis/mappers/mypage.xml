@@ -66,7 +66,7 @@
 		<result property="price" column="price" />
 	</resultMap> 
 	
-	<resultMap id="CouponResult" type="CouponVO">
+	<resultMap id="CouponResult" type="couponVO">
 		<result property="couponNo" column="couponNo" />
 		<result property="name" column="name" />
 		<result property="discount_price" column="discount_price" />

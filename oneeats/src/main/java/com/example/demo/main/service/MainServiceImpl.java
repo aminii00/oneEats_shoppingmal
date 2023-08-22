@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.main.dao.MainDAO;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -42,6 +43,11 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public CartVO selectOptionByNo(int optionNo) {
 		return mainDAO.selectOptionByNo(optionNo);
+	}
+
+	@Override
+	public List<CouponVO> selectCouponByMemberNo(int memberNo) {
+		return mainDAO.selectCouponByMemberNo(memberNo);
 	}
 
 	

@@ -384,9 +384,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <div class="css-lay2">
                           <button
                             class="cart-button css-cartbtn"
-                            type="button"
+                            type="submit"
                             radius="3"
-                            onclick="fn_toOrder()"
                           >
                             <div class="css-nytqmg textbold btn-hover">
                               바로 구매
@@ -397,8 +396,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <div class="css-lay2">
                           <button
                             class="cart-button css-cartbtn"
-                            type="submit"
+                            type="button"
                             radius="3"
+                            onclick="fn_toCart()"
                           >
                             <div class="css-nytqmg textbold btn-hover">
                               장바구니 담기
@@ -689,18 +689,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
       var storeValueUrl = "${contextPath}" + "/storeValue.do";
-      var storeValueUrl2 = "${contextPath}" + "/storeValue2.do";
       var goodsPrice = "${goods.price}";
       goodsPrice = parseInt(goodsPrice);
       var cartPage = "${contextPath}/main/cart.do";
     </script>
     <script src="${contextPath}/js/goodsDetail.js"></script>
 
-    <script>
-      function fn_toOrder() {
-        $("#optionForm").submit();
-      }
-    </script>
     <!-- Js Plugins -->
   </body>
 </html>

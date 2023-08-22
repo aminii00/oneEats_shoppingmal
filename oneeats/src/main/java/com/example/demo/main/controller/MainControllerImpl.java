@@ -19,7 +19,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.common.alert.Alert;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.CartVO;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.RecipeVO;
 
 @Controller("mainController")
@@ -121,8 +123,15 @@ public class MainControllerImpl implements MainController {
 				tempcart.setDiscountPrice();
 				orderNowGoodsList.add(tempcart);
 			}
+			mav.addObject("shippingFee",shippingFee);
+			mav.addObject("payment_price",paymentPrice);
+			mav.addObject("discount_price",discountPrice);
 			System.out.println("orderNowGoodsList" + orderNowGoodsList);
 			mav.addObject("selectGoodsList",orderNowGoodsList);
+		    HttpSession session = request.getSession();
+		    MemberVO loginMember = (MemberVO) session.getAttribute("memberInfo");
+			List<CouponVO> couponList = mainService.selectCouponByMemberNo(loginMember.getMemberNo());
+			mav.addObject("couponList", couponList);
 			mav.setViewName("/mypage/orderConfirm");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -132,5 +141,4 @@ public class MainControllerImpl implements MainController {
 		
 		return mav;
 	}
-
 }
