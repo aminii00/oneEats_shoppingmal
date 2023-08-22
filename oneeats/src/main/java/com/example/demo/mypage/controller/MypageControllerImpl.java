@@ -84,9 +84,14 @@ public class MypageControllerImpl implements MypageController {
 	}
 	
 	
-	@RequestMapping(value="/mypage/orderConfirm.do", method=RequestMethod.GET)
-	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value="/mypage/orderConfirm.do", method = {RequestMethod.GET,RequestMethod.POST})
+	private ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderConfirm");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
 		String viewName = (String)request.getAttribute("viewName");
+		
+		/*
 		String[] goodsNos = request.getParameterValues("goodsNo");
 		String[] goodsQtys = request.getParameterValues("goodsQty");
 		String[] goodsInbun = request.getParameterValues("goodsInbun");	
@@ -95,7 +100,7 @@ public class MypageControllerImpl implements MypageController {
 		String discountPrice = request.getParameter("discountPrice");
 		
 		List<OrderVO> selectGoodsList = new ArrayList();
-		for (int i = 0; i < goodsInbun.length; i++) {
+		for (int i = 0; i < goodsNos.length; i++) {
 			OrderVO temp = new OrderVO();
 			temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
 			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
@@ -105,17 +110,29 @@ public class MypageControllerImpl implements MypageController {
 			temp.setDiscount_price(Integer.parseInt(discountPrice));
 			selectGoodsList.add(temp);
 		}
-			
+		*/
+		int goodsNo = 1;
+		int goodsQty =2;
+		int shippingFee = 2500;
+		int paymentPrice = 20000;
+		int discountPrice = 1000;
+		
+		List<OrderVO> selectGoodsList = new ArrayList();
+		OrderVO temp = new OrderVO();
+		temp.setGoodsNo(goodsNo);
+		temp.setGoods_qty(goodsQty);
+		temp.setShippingfee(shippingFee);
+		temp.setPayment_price(paymentPrice);
+		temp.setDiscount_price(discountPrice);
+		selectGoodsList.add(temp);
+		System.out.println(selectGoodsList);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
-		
-		HttpSession session = request.getSession();
-		session.setAttribute("selectGoodsList", selectGoodsList);
 		mav.addObject("selectGoodsList",selectGoodsList);
-		
+		session.setAttribute("selectGoodsList", selectGoodsList);
 		return mav;
 	}
-	
 	
 	@Override
 	@RequestMapping(value="/mypage/myPageMain.do" , method= {RequestMethod.GET, RequestMethod.POST})

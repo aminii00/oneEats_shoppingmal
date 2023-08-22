@@ -34,7 +34,28 @@ public class OrderVO {
 	private int gun;
 	private int goodsPrice;
 	private int weight;
+	private int paymentPrice;
+	private int discountPrice;
+	private int shippingFee;
 	
+	public int getPaymentPrice() {
+		return paymentPrice;
+	}
+	public void setPaymentPrice(int paymentPrice) {
+		this.paymentPrice = paymentPrice;
+	}
+	public int getDiscountPrice() {
+		return discountPrice;
+	}
+	public void setDiscountPrice(int discountPrice) {
+		this.discountPrice = discountPrice;
+	}
+	public int getShippingFee() {
+		return shippingFee;
+	}
+	public void setShippingFee(int shippingFee) {
+		this.shippingFee = shippingFee;
+	}
 	public int getGoodsPrice() {
 		return goodsPrice;
 	}
@@ -214,7 +235,9 @@ public class OrderVO {
 				+ ", delivery_status=" + delivery_status + ", deliveryDate=" + deliveryDate + ", goods_qty=" + goods_qty
 				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + ", goodsName="
 				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + ", goodsPrice=" + goodsPrice + ", weight="
-				+ weight + "]";
+				+ weight + ", paymentPrice=" + paymentPrice + ", discountPrice=" + discountPrice + ", shippingFee="
+				+ shippingFee + "]";
 	}
+	
 	
 }

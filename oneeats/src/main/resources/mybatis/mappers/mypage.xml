@@ -31,6 +31,9 @@
 		<result property="goodsName" column="goodsName" />
 		<result property="goodsImg" column="goodsImg" />
 		<result property="gun" column="gun" />
+		<result property="paymentPrice" column="paymentPrice" />
+		<result property="discountPrice" column="discountPrice" />
+		<result property="shippingFee" column="shippingFee" />
 	</resultMap>
 	
   
