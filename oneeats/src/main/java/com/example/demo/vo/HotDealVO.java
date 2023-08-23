@@ -15,7 +15,17 @@ public class HotDealVO {
 	private Date creDate;
 	private String category;
 	private int goodsNo;
+	private String goodsName;
+	private int goodsPrice;
+	private String goodsImg;
 	
+	
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg;
+	}
 	public int getGoodsNo() {
 		return goodsNo;
 	}
@@ -70,13 +80,27 @@ public class HotDealVO {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
+	}
+	public int getGoodsPrice() {
+		return goodsPrice;
+	}
+	public void setGoodsPrice(int goodsPrice) {
+		this.goodsPrice = goodsPrice;
+	}
 	@Override
 	public String toString() {
 		return "HotDealVO [hotdealNo=" + hotdealNo + ", name=" + name + ", discounted_price=" + discounted_price
 				+ ", goods_qty=" + goods_qty + ", finishDate=" + finishDate + ", description=" + description
-				+ ", creDate=" + creDate + ", category=" + category + ", goodsNo=" + goodsNo + "]";
+				+ ", creDate=" + creDate + ", category=" + category + ", goodsNo=" + goodsNo + ", goodsName="
+				+ goodsName + ", goodsPrice=" + goodsPrice + ", goodsImg=" + goodsImg + "]";
 	}
-	
 	
 	
 	

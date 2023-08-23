@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib uri
 ="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix ="c"
-uri ="http://java.sun.com/jsp/jstl/core" %>
-
+uri ="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fn"
+uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
@@ -22,22 +22,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
   </head>
 
   <body>
-    <!-- 예지의 취미 : ${price} -->
-
-    <!-- <div>${product}</div>
-    <div>${product.name}</div>
-    <div>${apple}</div>
-
-    <c:forEach var="i" items="${apple}"> ${i} <br /> </c:forEach> -->
-    <!-- <div style="background-color: red">
-      <c:forEach var="i" items="${goodsList}">
-        <div>이름: ${i.name}</div>
-        <div>가격:${i.price} <br /></div>
-        <div>포장타입:${i.rapping} <br /></div>
-        <div><img src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop" alt=""></div>
-      </c:forEach>
-    </div> -->
-
     <!-- Hero Section Begin -->
     <section class="hero">
       <div class="container">
@@ -90,24 +74,20 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 width: 3330px;
               "
             >
-              <c:forEach var="item" items="${goodsList }">
+              <c:forEach var="item" items="${newHotDealList }">
                 <div class="owl-item cloned" style="width: 277.5px">
                   <div class="col-lg-4">
                     <div class="product__discount__item">
                       <div
                         class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=prop"
+                        data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
                         style="
-                          background-image: url('${contextPath}/download.do?imageFileName=${item.img1}&path=prop');
+                          background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods');
                         "
                       >
-                        <div class="product__discount__percent">
-                          <input
-                            type="hidden"
-                            id="showResult"
-                            value="${item.price}"
-                          />
-                        </div>
+                        <!-- <div class="product__discount__percent">
+                          <input type="hidden" id="showResult" value="" />
+                        </div> -->
                         <ul class="product__item__pic__hover">
                           <li>
                             <a href="#"><i class="fa fa-heart"></i></a>
@@ -122,14 +102,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                         <span>${item.category}</span>
                         <h5><a href="#">${item.name}</a></h5>
                         <div class="product__item__price">
-                          <div>￦2490</div>
-                          <input type="hidden" id="savePrice" value="2490" />
-                          <span>￦${item.price}</span>
-                          <input
-                            type="hidden"
-                            id="oPrice"
-                            value="${item.price}"
-                          />
+                          <div>
+                            ${item.goods_qty}개 ￦${item.discounted_price}
+                          </div>
+                          <span>낱개 ￦${item.goodsPrice} </span>
                         </div>
                       </div>
                     </div>
@@ -151,10 +127,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     </div>
 
     <!-- Categories Section End -->
-
-    <!-- Featured Section Begin -->
-
-    <!-- Featured Section End -->
 
     <!-- Banner Begin -->
     <div class="banner">
@@ -184,7 +156,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <span style="font-size: 20px; color: white">못난이 상품</span
                 ><br />
 
-                <a href="#" class="primary-btn" style="margin-top: 12px"
+                <a
+                  href="${contextPath}/goods/goodsList.do?category=못난이"
+                  class="primary-btn"
+                  style="margin-top: 12px"
                   >바로 가기</a
                 >
               </div>
@@ -212,7 +187,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               "
             >
               <span style="font-size: 20px; color: white">밀키트</span><br />
-              <a href="#" class="primary-btn" style="margin-top: 12px"
+              <a
+                href="${contextPath}/goods/goodsList.do?category=밀키트"
+                class="primary-btn"
+                style="margin-top: 12px"
                 >바로 가기</a
               >
             </div>
@@ -235,46 +213,36 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 New Products
               </h4>
               <div class="latest-product__slider owl-carousel">
-                <div class="latest-prdouct__slider__item">
-                  <c:forEach begin="1" end="3" var="i" items="${newGoodsList }">
-                    <a
-                      href="${contextPage}/goods/goodsDetail.do?goodsNo=${i.goodsNo}"
-                      class="latest-product__item"
-                    >
-                      <div class="latest-product__item__pic">
-                        <img
-                          src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
-                          style="width: 110px"
-                          ;
-                        />
-                      </div>
-                      <div class="latest-product__item__text">
-                        <h6 style="font-size: 14px">${i.name}</h6>
-                        <span>￦${i.price}</span>
-                      </div>
-                    </a>
-                  </c:forEach>
-                </div>
-                <div class="latest-prdouct__slider__item">
-                  <c:forEach begin="4" end="6" var="i" items="${newGoodsList }">
-                    <a
-                      href="${contextPage}/goods/goodsDetail.do?goodsNo=${i.goodsNo}"
-                      class="latest-product__item"
-                    >
-                      <div class="latest-product__item__pic">
-                        <img
-                          src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
-                          style="width: 110px"
-                          ;
-                        />
-                      </div>
-                      <div class="latest-product__item__text">
-                        <h6 style="font-size: 14px">${i.name}</h6>
-                        <span>${i.price}</span>
-                      </div>
-                    </a>
-                  </c:forEach>
-                </div>
+                <c:forEach items="${newGoodsList}" varStatus="loop" step="3">
+                  <!--아이템 슬라이더 하나.-->
+                  <div class="latest-product__slider__item">
+                    <!-- 슬라이더 하나 당 3개의 상품을 출력-->
+                    <c:forEach begin="0" end="2" var="i">
+                      <c:set
+                        var="item"
+                        value="${newGoodsList[loop.index + i]}"
+                      />
+                      <!--상품 하나-->
+                      <a
+                        href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
+                        class="latest-product__item"
+                      >
+                        <div class="latest-product__item__pic">
+                          <img
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            style="width: 110px"
+                            ;
+                          />
+                        </div>
+                        <div class="latest-product__item__text">
+                          <h6 style="font-size: 14px">${item.name}<br /></h6>
+                          <span>￦${item.price}</span>
+                        </div> </a
+                      ><!--상품 하나 끝-->
+                    </c:forEach>
+                  </div>
+                  <!--아이템 슬라이더 하나 끝-->
+                </c:forEach>
               </div>
             </div>
           </div>
@@ -287,201 +255,77 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 Best Products
               </h4>
               <div class="latest-product__slider owl-carousel">
-                <div class="latest-prdouct__slider__item">
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/pattai.jpg"
-                        style="width: 110px"
-                        ;
+                <c:forEach items="${bestGoodsList}" varStatus="loop" step="3">
+                  <!--아이템 슬라이더 하나.-->
+                  <div class="latest-product__slider__item">
+                    <!-- 슬라이더 하나 당 3개의 상품을 출력-->
+                    <c:forEach begin="0" end="2" var="i">
+                      <c:set
+                        var="item"
+                        value="${bestGoodsList[loop.index + i]}"
                       />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">팟타이 밀키트</h6>
-                      <span>￦3250</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/grape.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        못난이 포도<br />
-                        1kg
-                      </h6>
-                      <span>￦21900</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/aspiragus.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        아스파라거스<br />
-                        100g
-                      </h6>
-                      <span>￦5190</span>
-                    </div>
-                  </a>
-                </div>
-                <div class="latest-prdouct__slider__item">
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/walnam.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">월남쌈 밀키트</h6>
-                      <span>￦20900</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/corn.jpg"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        찰옥수수<br />
-                        2입
-                      </h6>
-                      <span>￦3250</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/sweetpotato.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        못난이 호박 고구마<br />
-                        800g
-                      </h6>
-                      <span>￦5900</span>
-                    </div>
-                  </a>
-                </div>
+                      <!--상품 하나-->
+                      <a
+                        href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
+                        class="latest-product__item"
+                      >
+                        <div class="latest-product__item__pic">
+                          <img
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            style="width: 110px"
+                            ;
+                          />
+                        </div>
+                        <div class="latest-product__item__text">
+                          <h6 style="font-size: 14px">${item.name}<br /></h6>
+                          <span>￦${item.price}</span>
+                        </div> </a
+                      ><!--상품 하나 끝-->
+                    </c:forEach>
+                  </div>
+                  <!--아이템 슬라이더 하나 끝-->
+                </c:forEach>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="latest-product__text">
               <h4
                 class="text-left"
                 style="font-size: 18px; padding-bottom: 6px"
               >
                 Top Reviews
               </h4>
-              <div class="latest-product__slider owl-carousel">
-                <div class="latest-prdouct__slider__item">
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/soup.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        크림 스프 <br />
-                        4종
-                      </h6>
-                      <span>￦3480</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/lettuce.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">
-                        못난이 상추<br />
-                        150g
-                      </h6>
-                      <span>￦4250</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/juice.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">과일 주스 <br />260ml 3종</h6>
-                      <span>￦4900</span>
-                    </div>
-                  </a>
+              <c:forEach
+                items="${topReviewGoodsList}"
+                varStatus="loop"
+                step="3"
+              >
+                <!--아이템 슬라이더 하나.-->
+                <div class="latest-product__slider__item">
+                  <!-- 슬라이더 하나 당 3개의 상품을 출력-->
+                  <c:forEach begin="0" end="2" var="i">
+                    <c:set
+                      var="item"
+                      value="${topReviewGoodsList[loop.index + i]}"
+                    />
+                    <!--상품 하나-->
+                    <a
+                      href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
+                      class="latest-product__item"
+                    >
+                      <div class="latest-product__item__pic">
+                        <img
+                          src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                          style="width: 110px"
+                          ;
+                        />
+                      </div>
+                      <div class="latest-product__item__text">
+                        <h6 style="font-size: 14px">${item.name}<br /></h6>
+                        <span>￦${item.price}</span>
+                      </div> </a
+                    ><!--상품 하나 끝-->
+                  </c:forEach>
                 </div>
-                <div class="latest-prdouct__slider__item">
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/watermelon.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">못난이 수박 <br />6kg</h6>
-                      <span>￦37000</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/tteokbboki.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">진짜 부산 떡볶이</h6>
-                      <span>￦11000</span>
-                    </div>
-                  </a>
-                  <a href="#" class="latest-product__item">
-                    <div class="latest-product__item__pic">
-                      <img
-                        src="img/product/main/egg.JPG"
-                        style="width: 110px"
-                        ;
-                      />
-                    </div>
-                    <div class="latest-product__item__text">
-                      <h6 style="font-size: 14px">계란찜 밀키트</h6>
-                      <span>￦4500</span>
-                    </div>
-                  </a>
-                </div>
-              </div>
+                <!--아이템 슬라이더 하나 끝-->
+              </c:forEach>
             </div>
           </div>
         </div>
@@ -505,7 +349,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               <div class="blog__item">
                 <div class="blog__item__pic">
                   <img
-                    src="${contextPath}/download.do?imageFileName=${i.cookingImg}&path=recipe"
+                    src="${contextPath}/download.do?imageFileName=${i.cookingImg}&path=recipeNo${i.recipeNo}"
                     height="265px"
                     alt=""
                   />
@@ -513,10 +357,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <div class="blog__item__text">
                   <ul>
                     <li><i class="fa fa-calendar-o"></i> ${i.creDate}</li>
-                    <li><i class="fa fa-comment-o"></i> 2</li>
                   </ul>
                   <h5><a href="#">${i.title}</a></h5>
-                  <p>${i.description}</p>
+                  <c:set var="des" value="${i.description}" />
+                  <p>
+                    <c:out
+                      value='${fn:substring(des.replaceAll("\\\<.*?\\\>",""), 0, 20)}'
+                    />
+                  </p>
                 </div>
               </div>
             </div>
@@ -524,17 +372,5 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </div>
     </section>
-    <script>
-      $(document).ready(function () {
-        var originPrice = document.querySelector("#oPrice").value; //1000원
-        var savePrice = document.querySelector("#savePrice").value; //100원에 살 수 있음 할인율이 90%여야함하ㅡ
-        console.log(originPrice);
-        console.log(savePrice);
-
-        document.querySelector("#showResult").innerHTML =
-          ((originalPrice - savePrice) / originalPrice) * 100;
-        console.log(showResult);
-      });
-    </script>
   </body>
 </html>
