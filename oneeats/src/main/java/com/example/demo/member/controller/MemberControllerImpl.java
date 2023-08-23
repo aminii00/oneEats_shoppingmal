@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.member.service.MemberService;
 import com.example.demo.vo.MemberVO;
 
@@ -68,15 +69,22 @@ public class MemberControllerImpl implements MemberController {
 	
 	@Override
 	@RequestMapping(value="/member/register.do" ,method = RequestMethod.POST)
-		public ModelAndView Register(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		public ModelAndView Register(HttpServletRequest request) throws Exception {
 		System.out.println("여기는 register.do");
-		ModelAndView mav = new ModelAndView();
-		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
-		System.out.println(memberVO);
-		int MemberNo = memberService.registerInfoNo();
-		memberVO.setMemberNo(MemberNo);
-		memberService.registerInfo(memberVO);
+		
+		ModelAndView mav = new ModelAndView();
+		int memberNo = memberService.registerInfoNo();
+		Map memberMap = GeneralFileUploader.getParameterMap(request);
+		memberMap.put("memberNo", memberNo);
+		try {
+			memberService.insertMemberWithMap(memberMap);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		
 		mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath()+"/member/loginForm.do");
 		return mav;
 	}

@@ -53,5 +53,14 @@ public class MemberServiceImpl implements MemberService {
 		public int updatePw(MemberVO member) throws DataAccessException {
 			return memberDAO.updatePw(member);
 		}
+
+
+		@Override
+		public void insertMemberWithMap(Map memberMap) {
+			memberDAO.insertMemberWithMap(memberMap);
+			
+		}
+		
+		
 		
 }

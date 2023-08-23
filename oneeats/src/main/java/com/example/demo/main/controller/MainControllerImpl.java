@@ -68,7 +68,7 @@ public class MainControllerImpl implements MainController {
 		ModelAndView mav = new ModelAndView(viewName);
 		String previousPage = request.getHeader("Referer");
 		mav.addObject("previousPage", previousPage);
-
+		
 		return mav;
 	}
 
