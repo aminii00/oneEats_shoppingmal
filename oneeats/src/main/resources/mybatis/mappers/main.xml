@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.example.demo.main.dao.MainDAO">
-	<resultMap id="MemberResult" type="memberVO">
+<resultMap id="MemberResult" type="memberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -45,7 +45,6 @@
 		<result property="img5" column="img5" />
 		<result property="category" column="category" />
 		<result property="type" column="type" />
-
 	</resultMap>
 
 	<resultMap id="ReviewResult" type="reviewVO">
@@ -244,4 +243,5 @@
 	<select id="selectNewRecipeList" resultMap="RecipeResult">
 		select * from recipe order by creDate desc limit 3
 	</select>
+	 
 </mapper>
