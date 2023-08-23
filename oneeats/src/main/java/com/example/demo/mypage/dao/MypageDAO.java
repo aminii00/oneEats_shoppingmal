@@ -29,8 +29,6 @@ public interface MypageDAO {
 	//민지 주문하기
 	public void insertOrderList(List<OrderVO> orderList);
 	
-	public int selectNewOrderNo();
-	
 	public int[] selectSeqNoByOrderNo(int orderNo);
 
 	public void updateOrder(int order_seqNo);

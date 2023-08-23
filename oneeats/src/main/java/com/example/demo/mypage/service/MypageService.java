@@ -35,7 +35,5 @@ public interface MypageService {
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
-	public int selectNewOrderNo();
-
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
 }
