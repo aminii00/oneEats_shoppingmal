@@ -25,6 +25,7 @@
     </definition>
 
 <!-- 회원정보 -->
+
     <definition name="/mypage/mypageProfileModForm" extends="mainLayout">
        <put-attribute name="title" value="프로필 편집 페이지" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />

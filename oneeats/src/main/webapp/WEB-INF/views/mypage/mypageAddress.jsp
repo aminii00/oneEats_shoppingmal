@@ -24,7 +24,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="div-p1">
         <br />
         <p class="textsize-2 text-left textcolor-black textbold">
-          주문내역<a class="textsize-1" style="float: right" onclick=address()
+          배송지 관리<a class="textsize-1" style="float: right" onclick=address()
             >+새 배송지 추가</a
           >
         </p>

@@ -66,18 +66,81 @@
 
 
 </style>
-<c:choose>
-	<c:when test = "${result=='loginFailed' }">
-	<script>
-	window.onload=function(){
-		alert("아이디나 비밀번호가 틀립니다. 다시 로그인 하세요");
-	}
-	</script>
-	</c:when>
-	</c:choose>
+<script>
+
+$(function() {
+         
+         fnInit();
+       
+   });
+   
+   function frm_check(){
+       saveid();
+   }
+
+  function fnInit(){
+      var cookieid = getCookie("saveid");
+      console.log(cookieid);
+      if(cookieid !=""){
+          $("input:checkbox[id='saveId']").prop("checked", true);
+          $('#logId').val(cookieid);
+      }
+      
+  }    
+
+  function setCookie(name, value, expiredays) {
+      var todayDate = new Date();
+      todayDate.setTime(todayDate.getTime() + 0);
+      if(todayDate > expiredays){
+          document.cookie = name + "=" + escape(value) + "; path=/; expires=" + expiredays + ";";
+      }else if(todayDate < expiredays){
+          todayDate.setDate(todayDate.getDate() + expiredays);
+          document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";";
+      }
+      
+      
+      console.log(document.cookie);
+  }
+
+  function getCookie(Name) {
+      var search = Name + "=";
+      console.log("search : " + search);
+      
+      if (document.cookie.length > 0) { // 쿠키가 설정되어 있다면 
+          offset = document.cookie.indexOf(search);
+          console.log("offset : " + offset);
+          if (offset != -1) { // 쿠키가 존재하면 
+              offset += search.length;
+              // set index of beginning of value
+              end = document.cookie.indexOf(";", offset);
+              console.log("end : " + end);
+              // 쿠키 값의 마지막 위치 인덱스 번호 설정 
+              if (end == -1)
+                  end = document.cookie.length;
+              console.log("end위치  : " + end);
+              
+              return unescape(document.cookie.substring(offset, end));
+          }
+      }
+      return "";
+  }
+
+  function saveid() {
+      var expdate = new Date();
+      if ($("#saveId").is(":checked")){
+          expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30);
+          setCookie("saveid", $("#logId").val(), expdate);
+          }else{
+         expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30);
+          setCookie("saveid", $("#logId").val(), expdate);
+           
+      }
+  }
+</script>
+
 </head>
 <body>
-<form method = "post" action = "${contextPath}/member/login.do">
+<form method = "post" action = "${contextPath}/member/login.do" onsubmit="return frm_check();">
 <br>
 <br>
 <br>
@@ -91,7 +154,7 @@
         <br>
     </header>
         <div>
-             <input class =" brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" name = "id" type="text" ></input>
+             <input class =" brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 아이디 입력" id ="logId" name = "id" type="text" ></input>
         </div>
 
         <div>
@@ -100,9 +163,8 @@
         <div class = "textsize-1" align:right>
            
             <label for="chk">
-                <input type="checkbox" id="chk">
+                <input type="checkbox" id="saveId" name="checkId" style="margin-top: 5px;" class ="bg-lightgreen">
                 <!--실제로는 글자를 기울이는 태그, 퍼블리셔들이 아이콘담을 때 많이 사용-->
-                <i class="circle"></i>
                 <span class="text">아이디 저장하기
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
             </label>
