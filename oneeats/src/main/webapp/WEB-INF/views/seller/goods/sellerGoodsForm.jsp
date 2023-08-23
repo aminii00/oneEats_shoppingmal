@@ -343,12 +343,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      name="description"
                       class="goodsinfo"
                       cols="50"
                       rows="8"
                       style="width: 350px"
-                    ></textarea>
+                    >
+ ${goods.description}</textarea
+                    >
                   </p>
 
                   <div style="display: inline-block; margin: 50px 145px 0 0">

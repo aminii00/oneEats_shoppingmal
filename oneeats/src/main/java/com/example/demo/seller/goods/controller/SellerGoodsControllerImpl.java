@@ -140,7 +140,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 
 	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
 	@Override
-	@RequestMapping(value="/seller/goods/modSellerGoods.do",method = RequestMethod.GET)
+	@RequestMapping(value="/seller/goods/modSellerGoods.do", method=RequestMethod.POST)
 	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
 		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환

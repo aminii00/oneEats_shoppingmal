@@ -182,243 +182,271 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <div class="col-lg-6 col-md-6 text-left">
             <div class="product__details__text">
               <section>
-                <div class="property-margin1">
-                  <dl class="property-flex2" style="height: 66px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    >
-                      카테고리
-                    </dt>
-                    <dd class="property-flex1">
-                      <div style="align-content: center; margin-top: 4px">
-                        <select name="select" class="opt">
-                          <option value="category">
-                            카테고리를 선택해주세요
-                          </option>
-                          <option value="채소">채소</option>
-                          <option value="과일">과일</option>
-                          <option value=" 못난이 주스 / 수제청">
-                            못난이 주스 / 수제청
-                          </option>
-                          <option value="찌개 / 탕 /찜">찌개 / 탕 /찜</option>
-                          <option value="식사 / 안주류">식사 / 안주류</option>
-                          <option value="죽">죽</option>
-                          <option value="식사 대용식">식사 대용식</option>
-                          <option value="간편 한끼 반찬">간편 한끼 반찬</option>
-                        </select>
-                      </div>
-                    </dd>
-                  </dl>
-                </div>
+                <form
+                  action="${contextPath}/seller/goods/modSellerGoods.do"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <div class="property-margin1">
+                    <dl class="property-flex2" style="height: 66px">
+                      <dt
+                        class="property_title1 textbold"
+                        style="margin-top: 16px"
+                      >
+                        카테고리
+                      </dt>
+                      <dd class="property-flex1">
+                        <div style="align-content: center; margin-top: 4px">
+                          <select name="select" class="opt">
+                            <option value="category">
+                              카테고리를 선택해주세요
+                            </option>
+                            <option value="채소">채소</option>
+                            <option value="과일">과일</option>
+                            <option value=" 못난이 주스 / 수제청">
+                              못난이 주스 / 수제청
+                            </option>
+                            <option value="찌개 / 탕 /찜">찌개 / 탕 /찜</option>
+                            <option value="식사 / 안주류">식사 / 안주류</option>
+                            <option value="죽">죽</option>
+                            <option value="식사 대용식">식사 대용식</option>
+                            <option value="간편 한끼 반찬">
+                              간편 한끼 반찬
+                            </option>
+                          </select>
+                        </div>
+                      </dd>
+                    </dl>
+                  </div>
 
-                <div class="property-margin1">
-                  <dl class="property-flex2" style="height: 66px">
+                  <div class="property-margin1">
+                    <dl class="property-flex2" style="height: 66px">
+                      <dt
+                        class="property_title1 textbold"
+                        style="margin-top: 16px"
+                      >
+                        상품명
+                      </dt>
+                      <dd class="property-flex1">
+                        <input
+                          name="name"
+                          value="${goods.name}"
+                          class="property-font1 nice-select"
+                          style="width: 176px"
+                        />
+                      </dd>
+                    </dl>
+                  </div>
+
+                  <dl class="property-flex2" style="height: 60px">
                     <dt
                       class="property_title1 textbold"
                       style="margin-top: 16px"
                     >
-                      상품명
+                      판매가격
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        name="name"
-                        value="${goods.name}"
+                        name="price"
+                        value="${goods.price}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
                     </dd>
                   </dl>
-                </div>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    판매가격
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      name="price"
-                      value="${goods.price}"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      판매자
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        value="김판매"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    판매자
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      value="김판매"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      포장타입
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        name="rapping"
+                        value="${goods.rapping}"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    포장타입
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      name="rapping"
-                      value="${goods.rapping}"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      원산지
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        name="manufacturer"
+                        value="${goods.manufacturer}"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    원산지
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      name="manufacturer"
-                      value="${goods.manufacturer}"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      무게 / 용량
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        name="weight"
+                        value="${goods.weight}"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    무게 / 용량
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      name="weight"
-                      value="${goods.weight}"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      수확시기
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        value="${goods.harvest}"
+                        type="text"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
+                  <div class="row ingredient_grid">
+                    <div class="col">
+                      <div class="row">&nbsp;</div>
+                      <div class="row ingredient_rows">
+                        <div class="col-md-11 ingredient_col">
+                          <div
+                            class="row ingredient_row head_row bg-lightgreen"
+                          >
+                            <div class="col-md">옵션의 이름</div>
+                            <div class="col-md">옵션의 양</div>
 
-                <dl class="property-flex2" style="height: 60px">
-                  <dt class="property_title1 textbold" style="margin-top: 16px">
-                    수확시기
-                  </dt>
-                  <dd class="property-flex1">
-                    <input
-                      name="${goods.harvest}"
-                      type="text"
-                      class="property-font1 nice-select"
-                      style="width: 176px"
-                    />
-                  </dd>
-                </dl>
-                <div class="row ingredient_grid">
-                  <div class="col">
-                    <div class="row">&nbsp;</div>
-                    <div class="row ingredient_rows">
-                      <div class="col-md-11 ingredient_col">
-                        <div class="row ingredient_row head_row bg-lightgreen">
-                          <div class="col-md">옵션의 이름</div>
-                          <div class="col-md">옵션의 양</div>
-
-                          <div class="col-md">가격</div>
-                          <div class="col-md-1"></div>
-                        </div>
-                        <c:forEach items="${option}" var="goodsOption">
-                          <div class="row ingredient_row">
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="${goodsOption.name}"
-                                class="form-control"
-                                placeholder="상품명"
-                                required
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="${goodsOption.option_qty}"
-                                class="form-control"
-                                placeholder="양"
-                                required
-                              />
-                            </div>
-                            <input type="hidden" name="optionNo" />
-
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="${goodsOption.price}"
-                                class="form-control"
-                                placeholder="가격"
-                                required
-                              />
-                            </div>
+                            <div class="col-md">가격</div>
                             <div class="col-md-1"></div>
                           </div>
-                        </c:forEach>
+                          <c:forEach items="${option}" var="goodsOption">
+                            <div class="row ingredient_row">
+                              <div class="col-md">
+                                <input
+                                  type="text"
+                                  value="${goodsOption.name}"
+                                  class="form-control"
+                                  placeholder="상품명"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md">
+                                <input
+                                  type="text"
+                                  value="${goodsOption.option_qty}"
+                                  class="form-control"
+                                  placeholder="양"
+                                  required
+                                />
+                              </div>
+                              <input type="hidden" name="optionNo" />
+
+                              <div class="col-md">
+                                <input
+                                  type="text"
+                                  value="${goodsOption.price}"
+                                  class="form-control"
+                                  placeholder="가격"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md-1"></div>
+                            </div>
+                          </c:forEach>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div
-                    class="col-md-11"
-                    style="width: 100%; text-align: center"
-                  >
-                    <img
-                      id="plus_btn"
-                      src="${contextPath}/img/icon/plus.png"
-                      alt="더하기 버튼"
-                      class="btn-smallsquare border"
-                    />
+                  <div class="row">
+                    <div
+                      class="col-md-11"
+                      style="width: 100%; text-align: center"
+                    >
+                      <img
+                        id="plus_btn"
+                        src="${contextPath}/img/icon/plus.png"
+                        alt="더하기 버튼"
+                        class="btn-smallsquare border"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div class="row"></div>
-                <div class="property-flex2" style="height: 60px">
-                  <div
-                    class="property_title1 textbold"
-                    style="margin-top: 16px"
-                  >
-                    상품 정보 기입
+                  <div class="row"></div>
+                  <div class="property-flex2" style="height: 60px">
+                    <div
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      상품 정보 기입
+                    </div>
                   </div>
-                </div>
-                <p style="margin-top: 16px">
-                  <textarea
-                    name="description"
-                    class="goodsinfo"
-                    cols="50"
-                    rows="8"
-                    style="width: 350px"
-                  >
-                  일반 시중에서는 찾기 힘든 귀한 품종의 천도 복숭아입니다. 당도 측정시, 평균 14브릭스 이상 고당도의 천도 복숭아랍니다.
-                  한번 맛보신 분들은 계속 찾아주시는 김판매 입니다.</textarea
-                  >
-                </p>
+                  <p style="margin-top: 16px">
+                    <textarea
+                      name="description"
+                      class="goodsinfo"
+                      cols="50"
+                      rows="8"
+                      style="width: 350px"
+                    >
+                    ${goods.description}</textarea
+                    >
+                  </p>
 
-                <div style="display: inline-block; margin: 50px 145px 0 0">
-                  <button
-                    class="cart-button css-cartbtn e4nu7ef3"
-                    type="submit"
-                    radius="3"
-                    style="width: 100px"
-                  >
-                    <span class="css-nytqmg textbold">다시 쓰기</span>
-                  </button>
-                </div>
-                <!--중간부분-->
-                <div style="display: inline-block">
-                  <button
-                    class="cart-button css-cartbtn e4nu7ef3"
-                    type="submit"
-                    radius="3"
-                    style="width: 100px"
-                  >
-                    <span class="css-nytqmg textbold">상품 수정</span>
-                  </button>
-                </div>
+                  <div style="display: inline-block; margin: 50px 145px 0 0">
+                    <button
+                      class="cart-button css-cartbtn e4nu7ef3"
+                      type="reset"
+                      radius="3"
+                      style="width: 100px"
+                      onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do'"
+                    >
+                      <span class="css-nytqmg textbold">취소</span>
+                    </button>
+                  </div>
+                  <!--중간부분-->
+                  <div style="display: inline-block">
+                    <button
+                      class="cart-button css-cartbtn e4nu7ef3"
+                      type="submit"
+                      radius="3"
+                      style="width: 100px"
+                    >
+                      <span class="css-nytqmg textbold">상품 수정</span>
+                    </button>
+                  </div>
+                </form>
               </section>
             </div>
           </div>
