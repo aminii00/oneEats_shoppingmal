@@ -14,7 +14,7 @@ public interface MypageController {
 	
 	public ModelAndView orderDetail(@RequestParam("orderNo") int orderNo, HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
-	public ModelAndView orderConfirm(@RequestParam("memberNo") int memberNo, HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
 	public ModelAndView newOrder(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
