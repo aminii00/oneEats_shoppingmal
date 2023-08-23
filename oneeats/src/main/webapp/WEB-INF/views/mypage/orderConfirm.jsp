@@ -96,7 +96,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>배송요청사항</td>
           <td>
-            <select id="selbox" name="reciver_comment">
+            <select id="selbox" name="receiver_comment">
               <option value="부재시 경비실에 맡겨주세요">
                 부재시 경비실에 맡겨주세요
               </option>
@@ -145,27 +145,59 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           value="${payment_price*0.1}"
           integerOnly="true"
         />
+        <c:set
+          var="total_price"
+          value="${payment_price-discount_price+shippingFee}"
+        />
         <tr>
           <!-- value는 이엘태그로 값 넣어주기! -->
           <td>상품 금액</td>
-          <td name="payment_price">${payment_price}원</td>
+          <td>
+            <input
+              type="hidden"
+              name="payment_price"
+              value="${payment_price}"
+            />${payment_price}원
+          </td>
         </tr>
         <tr>
           <td>상품 할인 금액</td>
-          <td name="discount_price">-${discount_price}원</td>
+          <td>
+            <input
+              type="hidden"
+              name="discount_price"
+              value="${discount_price}"
+            />-${discount_price}원
+          </td>
         </tr>
         <tr>
           <td>배송비</td>
-          <td name="shippingfee">${shippingFee}원</td>
+          <td>
+            <input
+              type="hidden"
+              name="shippingfee"
+              value="${shippingfee}"
+            />${shippingFee}원
+          </td>
         </tr>
         <tr>
           <td>적립금액</td>
-          <td name="point_price">${percent}원</td>
+          <td>
+            <input
+              type="hidden"
+              name="point_price"
+              value="${percent}"
+            />${percent}원
+          </td>
         </tr>
         <tr>
           <td>총 결제금액</td>
-          <td name="total_price">
-            ${payment_price-discount_price+shippingFee}원
+          <td>
+            <input
+              type="hidden"
+              name="total_price"
+              value="${total_price}"
+            />${total_price}원
           </td>
         </tr>
         <tr>

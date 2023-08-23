@@ -33,6 +33,7 @@ public class MypageControllerImpl implements MypageController {
 	@Autowired
 	private MemberVO memberVO;
 	
+	//민지 주문내역
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -46,6 +47,7 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	//민지 주문상세
 	@Override
 	@RequestMapping(value = "/mypage/orderDetail.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView orderDetail(@RequestParam(required = false, value="orderNo") int orderNo,
@@ -61,6 +63,8 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	
+	//민지 주문하기
 	@Override
 	@RequestMapping(value="/mypage/orderConfirm.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView orderConfirm(int memberNo, HttpServletRequest request, HttpServletResponse response)
@@ -104,6 +108,7 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 	
+	//민지 주문하기-결제하기 버튼누르면
 	@Override
 	@RequestMapping(value = "/mypage/newOrder.do", method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView newOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -125,8 +130,7 @@ public class MypageControllerImpl implements MypageController {
 		String used_couponId = request.getParameter("used_couponId");
 		String point_price = request.getParameter("point_price");
 		String total_price = request.getParameter("total_price");
-		String payment_type = request.getParameter("payment_type");
-		
+		String payment_type = request.getParameter("payment_type");		
 		
 		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		List<OrderVO> orderList = new ArrayList();
@@ -140,6 +144,11 @@ public class MypageControllerImpl implements MypageController {
 			temp.setReciever_name(receiver_name);
 			temp.setReciever_address(receiver_address);
 			temp.setReciever_phone(receiver_phone);
+			temp.setReciever_comment(receiver_comment);
+			temp.setUsed_point(Integer.parseInt(used_point));
+			temp.setUsed_couponId(Integer.parseInt(used_couponId));
+			temp.setPoint_price(Integer.parseInt(point_price));
+			temp.setTotal_price(Integer.parseInt(total_price));
 			temp.setPayment_type(payment_type);
 			temp.setMemberNo(memberNo);
 			
@@ -147,6 +156,35 @@ public class MypageControllerImpl implements MypageController {
 		}
 		
 		mypageService.insertOrderList(orderList);
+		session.setAttribute("orderList", orderList);
+		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
+		return mav;
+	}
+	
+	//민지 주문취소	
+	@RequestMapping(value = "/mypage/orderCancel.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView orderCancel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderCancel");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
+		
+		String viewName = (String)request.getAttribute("viewName");
+		/*
+		 * String orderer_name = request.getParameter("orderer_name"); String
+		 * orderer_phone = request.getParameter("orderer_phone");
+		 */
+		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
+		String delivery_status = request.getParameter("delivery_status");
+		
+		List<OrderVO> orderList = (List<OrderVO>) session.getAttribute("orderList");
+		System.out.println("orderLIst출력="+orderList);
+		
+		int[] order_seqNos = mypageService.selectSeqNoByOrderNo(orderNo);
+		for (int order_seqNo : order_seqNos) {
+			mypageService.updateOrder(order_seqNo);
+		}
 		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;

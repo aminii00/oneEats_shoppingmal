@@ -18,6 +18,12 @@ public interface MypageService {
 	
 	public void insertOrderList(List<OrderVO> orderList);
 	
+	public int selectNewOrderNo();
+	
+	public int[] selectSeqNoByOrderNo(int orderNo);
+
+	public void updateOrder(int order_seqNo);
+	
 	public MemberVO listMyPage(String member_id) throws Exception;
 	
 	public void mypageintro(HashMap<String, String> memberMap);
@@ -28,5 +34,4 @@ public interface MypageService {
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
-	public int selectNewOrderNo();
 }
