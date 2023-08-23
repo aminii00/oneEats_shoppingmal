@@ -31,7 +31,7 @@ public interface MypageDAO {
 	
 	public int[] selectSeqNoByOrderNo(int orderNo);
 
-	public void updateOrder(int order_seqNo);
+	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
 	//민지 쿠폰목록(memberNo 기준)
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;

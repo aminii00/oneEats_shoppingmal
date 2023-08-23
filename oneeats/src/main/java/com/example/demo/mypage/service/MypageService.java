@@ -23,7 +23,7 @@ public interface MypageService {
 	
 	public int[] selectSeqNoByOrderNo(int orderNo);
 
-	public void updateOrder(int order_seqNo);
+	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
 	public MemberVO listMyPage(String member_id) throws Exception;
 	
