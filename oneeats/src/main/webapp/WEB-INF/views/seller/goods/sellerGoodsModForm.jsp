@@ -9,6 +9,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   <head>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
+    <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="${contextPath}/css/community.css" />
+    <script src="${contextPath}/js/community.js"></script>
 
     <style>
       .property_title1 {
@@ -180,7 +184,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <section>
                 <div class="property-margin1">
                   <dl class="property-flex2" style="height: 66px">
-                    <dt class="property_title1 textbold" style="margin-top: 16px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
                       카테고리
                     </dt>
                     <dd class="property-flex1">
@@ -189,16 +196,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <option value="category">
                             카테고리를 선택해주세요
                           </option>
-                          <option value="vegetable">채소</option>
-                          <option value="fruit">과일</option>
-                          <option value="juiceAndJam">
+                          <option value="채소">채소</option>
+                          <option value="과일">과일</option>
+                          <option value=" 못난이 주스 / 수제청">
                             못난이 주스 / 수제청
                           </option>
-                          <option value="zzigae">찌개 / 탕 /찜</option>
-                          <option value="meal">식사 / 안주류</option>
-                          <option value="porridge">죽</option>
-                          <option value="meal replacement">식사 대용식</option>
-                          <option value="sidedish">간편 한끼 반찬</option>
+                          <option value="찌개 / 탕 /찜">찌개 / 탕 /찜</option>
+                          <option value="식사 / 안주류">식사 / 안주류</option>
+                          <option value="죽">죽</option>
+                          <option value="식사 대용식">식사 대용식</option>
+                          <option value="간편 한끼 반찬">간편 한끼 반찬</option>
                         </select>
                       </div>
                     </dd>
@@ -207,13 +214,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
                 <div class="property-margin1">
                   <dl class="property-flex2" style="height: 66px">
-                    <dt class="property_title1 textbold" style="margin-top: 16px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
                       상품명
                     </dt>
                     <dd class="property-flex1">
                       <input
                         name="name"
-                        value="못난이 복숭아"
+                        value="${goods.name}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -228,7 +238,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <dd class="property-flex1">
                     <input
                       name="price"
-                      value="3000"
+                      value="${goods.price}"
                       class="property-font1 nice-select"
                       style="width: 176px"
                     />
@@ -255,7 +265,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <dd class="property-flex1">
                     <input
                       name="rapping"
-                      value="박스 포장"
+                      value="${goods.rapping}"
                       class="property-font1 nice-select"
                       style="width: 176px"
                     />
@@ -269,7 +279,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <dd class="property-flex1">
                     <input
                       name="manufacturer"
-                      value="조치원"
+                      value="${goods.manufacturer}"
                       class="property-font1 nice-select"
                       style="width: 176px"
                     />
@@ -283,7 +293,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <dd class="property-flex1">
                     <input
                       name="weight"
-                      value="800"
+                      value="${goods.weight}"
                       class="property-font1 nice-select"
                       style="width: 176px"
                     />
@@ -292,20 +302,86 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
                 <dl class="property-flex2" style="height: 60px">
                   <dt class="property_title1 textbold" style="margin-top: 16px">
-                    유통기한
+                    수확시기
                   </dt>
                   <dd class="property-flex1">
                     <input
-                      name="expDate"
-                      type="date"
+                      name="${goods.harvest}"
+                      type="text"
                       class="property-font1 nice-select"
                       style="width: 176px"
                     />
                   </dd>
                 </dl>
+                <div class="row ingredient_grid">
+                  <div class="col">
+                    <div class="row">&nbsp;</div>
+                    <div class="row ingredient_rows">
+                      <div class="col-md-11 ingredient_col">
+                        <div class="row ingredient_row head_row bg-lightgreen">
+                          <div class="col-md">옵션의 이름</div>
+                          <div class="col-md">옵션의 양</div>
 
+                          <div class="col-md">가격</div>
+                          <div class="col-md-1"></div>
+                        </div>
+                        <c:forEach items="${option}" var="goodsOption">
+                          <div class="row ingredient_row">
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="${goodsOption.name}"
+                                class="form-control"
+                                placeholder="상품명"
+                                required
+                              />
+                            </div>
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="${goodsOption.option_qty}"
+                                class="form-control"
+                                placeholder="양"
+                                required
+                              />
+                            </div>
+                            <input type="hidden" name="optionNo" />
+
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="${goodsOption.price}"
+                                class="form-control"
+                                placeholder="가격"
+                                required
+                              />
+                            </div>
+                            <div class="col-md-1"></div>
+                          </div>
+                        </c:forEach>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div
+                    class="col-md-11"
+                    style="width: 100%; text-align: center"
+                  >
+                    <img
+                      id="plus_btn"
+                      src="${contextPath}/img/icon/plus.png"
+                      alt="더하기 버튼"
+                      class="btn-smallsquare border"
+                    />
+                  </div>
+                </div>
+                <div class="row"></div>
                 <div class="property-flex2" style="height: 60px">
-                  <div class="property_title1 textbold" style="margin-top: 16px">
+                  <div
+                    class="property_title1 textbold"
+                    style="margin-top: 16px"
+                  >
                     상품 정보 기입
                   </div>
                 </div>
