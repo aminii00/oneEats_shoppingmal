@@ -22,6 +22,6 @@ public interface SellerGoodsDAO {
 	//public int insertOption(Map map) throws DataAccessException;
 	public void insertNewGoods(GoodsVO goodsVO);
 	public int selectNewGoodsNo();
-	public void insertOptions(List<OptionVO> optionList);
+	public boolean insertOptions(OptionVO optionVO);
 	public void insertNewGoodsWithMap(Map map);
 }

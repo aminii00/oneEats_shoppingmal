@@ -18,9 +18,11 @@ public interface SellerGoodsService {
 
 	public int selectNewGoodsNo();
 
-	public boolean addGoods(Map map, List<OptionVO> OptionList);
+	//public boolean optionaddGoods(Map map, OptionVO optionVO);
 	
-	
+	public boolean optionaddGoods(OptionVO optionVO);
+
+	public boolean addGoods(Map map);
 	
 
 }

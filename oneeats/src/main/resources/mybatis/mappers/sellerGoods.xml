@@ -67,11 +67,8 @@ values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{ha
 		
 		
 		<insert id="insertOptions" parameterType="java.util.List" >
-		insert into `option`(optionNo,name,option_qty,price,goodsNo)
-		values
-		<foreach collection="list" item="i" index="index" separator=",">
-			(#{i.optionNo}, #{i.name}, #{i.option_qty},#{i.price},#{i.goodsNo})
-		</foreach>
+	
+		insert into `option` (optionNo,name,option_qty,price,goodsNo) values (#{optionNo}, #{name}, #{option_qty},#{price},#{goodsNo})
 		</insert>
 		
 		
