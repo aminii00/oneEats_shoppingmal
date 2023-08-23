@@ -30,6 +30,7 @@
 		<result property="goodsNo" column="goodsNo" />		
 		<result property="goodsName" column="goodsName" />
 		<result property="goodsImg" column="goodsImg" />
+		<result property="weight" column="weight" />
 		<result property="gun" column="gun" />
 		<result property="shippingFee" column="shippingFee" />
 		<result property="optionNo" column="optionNo" />
@@ -95,7 +96,7 @@
 
 	<select id="selectOrderByOrderNo" resultMap="OrderResult"  parameterType="int">
 		<![CDATA[
-			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice from t_order inner join goods on t_order.goodsNo=goods.goodsNo
+			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice, goods.weight as weight from t_order inner join goods on t_order.goodsNo=goods.goodsNo
 			where t_order.orderNo=#{orderNo}
 		]]>
 	</select>
@@ -126,16 +127,16 @@
 		]]>
 	</select>
 	
-	<select id="selectSeqNoByOrderNo" resultMap="OrderResult" parameterType="int">
+	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
 		<![CDATA[
 			select order_seqNo from t_order where orderNo=#{orderNo};
 		]]>
 	</select>
 	
-	<update id="updateOrder" parameterType="java.util.Map">
+	<update id="updateDeliveryStatusToCancel" parameterType="int">
 		<![CDATA[
 			update t_order
-	     	set delivery_status=#{delivery_status}
+	     	set delivery_status='취소완료'
 	     	where order_seqNo=#{order_seqNo}
 		]]>
 	</update>

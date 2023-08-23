@@ -20,7 +20,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="div-sib textsize-1">
         <button
           class="btn-3 textcolor-black border-0"
-          onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderCancel.do")'
+          onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderCancel.do?orderNo=${order.orderNo}")'
           type="button"
         >
           주문취소

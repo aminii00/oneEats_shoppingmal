@@ -15,103 +15,127 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 주문취소 -->
-    <form method="post" action="#">
-      <div class="div-p">
-        <p
-          class="p-1 textsize-2 text-left textcolor-black textbold"
-        >
-          주문취소
-        </p>
+    <div class="div-p">
+      <p class="p-1 textsize-2 text-left textcolor-black textbold">주문취소</p>
+    </div>
+
+    <hr class="linebold" style="margin: 0" />
+
+    <!-- 구매자정보 -->
+    <div class="div-tot">
+      <div class="div-t1 textbold textcolor-black textsize-1">
+        <span>구매자정보</span>
       </div>
-
-      <hr class="linebold" style="margin: 0" />
-
-      <!-- 구매자정보 -->
-      <div class="div-tot">
-        <div class="div-t1 textbold textcolor-black textsize-1">
-          <span>구매자정보</span>
-        </div>
-        <div class="div-t2">
-          <div class="div-left">
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">이름</dt>
-              <dd class="dd-1 textsize-1 textcolor-black">강민지</dd>
-            </dl>
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">연락처</dt>
-              <dd class="dd-1 textsize-1 textcolor-black">010-1234-5678</dd>
-            </dl>
-          </div>
-        </div>
-      </div>
-
-      <!-- 환불정보 -->
-      <div class="div-tot">
-        <div class="div-t1 textbold textcolor-black textsize-1">
-          <span>환불정보</span>
-        </div>
-        <div class="div-t2">
-          <div class="div-left">
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">결제금액</dt>
-              <dd class="dd-1 textsize-1 textcolor-black">24400원</dd>
-            </dl>
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">반품비</dt>
-              <dd class="dd-1 textsize-1 textcolor-black">0원</dd>
-            </dl>
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">
-                환불예상금액
-              </dt>
-              <dd class="dd-1 textsize-1 textcolor-black">24400원</dd>
-            </dl>
-            <dl class="dl-dt">
-              <dt class="dt-1 textsize-1 textbold textcolor-black">환불수단</dt>
-              <dd class="dd-1 textsize-1 textcolor-black">신용카드</dd>
-            </dl>
-          </div>
+      <div class="div-t2">
+        <div class="div-left">
+          <dl class="dl-dt">
+            <dt class="dt-1 textsize-1 textbold textcolor-black">이름</dt>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              <input
+                type="hidden"
+                name="orderer_name"
+                value="${order.orderer_name}"
+              />${order.orderer_name}
+            </dd>
+          </dl>
+          <dl class="dl-dt">
+            <dt class="dt-1 textsize-1 textbold textcolor-black">연락처</dt>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              <input
+                type="hidden"
+                name="orderer_phone"
+                value="${order.orderer_phone}"
+              />
+              ${order.orderer_phone}
+            </dd>
+          </dl>
         </div>
       </div>
+    </div>
 
-      <!-- 취소상품 -->
-      <div class="div-tot">
-        <div class="div-t1 textbold textcolor-black textsize-1">
-          <span>취소상품</span>
+    <!-- 환불정보 -->
+    <div class="div-tot">
+      <div class="div-t1 textbold textcolor-black textsize-1">
+        <span>환불정보</span>
+      </div>
+      <div class="div-t2">
+        <div class="div-left">
+          <dl class="dl-dt">
+            <dt class="dt-1 textsize-1 textbold textcolor-black">결제금액</dt>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              <input
+                type="hidden"
+                value="${order.total_price}"
+              />${order.total_price}원
+            </dd>
+          </dl>
+          <dl class="dl-dt">
+            <dt class="dt-1 textsize-1 textbold textcolor-black">
+              환불예상금액
+            </dt>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              <input
+                type="hidden"
+                value="${order.total_price-order.shippingfee}"
+              />
+              ${order.total_price}원
+            </dd>
+          </dl>
+          <dl class="dl-dt">
+            <dt class="dt-1 textsize-1 textbold textcolor-black">환불수단</dt>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              <input
+                type="hidden"
+                value="${order.payment_type}"
+              />${order.payment_type}
+            </dd>
+          </dl>
         </div>
+      </div>
+    </div>
+
+    <!-- 취소상품 -->
+    <div class="div-tot">
+      <div class="div-t1 textbold textcolor-black textsize-1">
+        <span>취소상품</span>
+      </div>
+      <c:forEach var="cancel" items="${orderCancel}">
         <div class="div-t2">
           <div class="div-left2" style="margin: 5px 0px">
             <img
               class="img-1"
-              src="${contextPath}/img/product/main/carrot.jpg"
-              alt="상품 이미지"
+              src="${contextPath}/download.do?imageFileName=${cancel.goodsImg}&path=order"
+              alt="상품메인"
             />
             <div class="div-dl">
               <dl class="dl-dt">
-                <dt class="dt-2 textsize-1 textcolor-black">못난이 당근</dt>
+                <dt class="dt-2 textsize-1 textcolor-black">
+                  ${cancel.goodsName}
+                </dt>
               </dl>
               <dl class="dl-dt">
                 <dt class="dt-2 textsize-1 textcolor-black">
-                  ￦1000 | 100g 2개
+                  ￦${cancel.goodsPrice} | ${cancel.weight}g
+                  ${cancel.goods_qty}개
                 </dt>
               </dl>
             </div>
           </div>
         </div>
-      </div>
-      
-      <hr class="linebold" style="margin: 0" />
+      </c:forEach>
+    </div>
 
-      <!-- 주문취소버튼 -->
-      <div class="div-btn">
-        <button
-          class="btn-4 btn-regular textcolor-white border-0 bg-lightgreen"
-          onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderList.do")'
-          type="button"
-        >
-          취소하기
-        </button>
-      </div>
-    </form>
+    <hr class="linebold" style="margin: 0" />
+
+    <!-- 주문취소버튼 -->
+    <div class="div-btn">
+      <button
+        class="btn-4 btn-regular bg-lightgreen textcolor-white textbold border-0"
+        onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderCancelResult.do?orderNo=${order.orderNo}")'
+        type="button"
+      >
+        취소하기
+      </button>
+    </div>
   </body>
 </html>

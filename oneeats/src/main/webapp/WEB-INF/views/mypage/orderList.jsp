@@ -106,7 +106,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <button
                   class="btn-3 border-0 textsize-1 textcolor-black"
                   type="button"
-                  onclick="location.href='${contextPath}/mypage/orderCancel.do'"
+                  onclick="location.href='${contextPath}/mypage/orderCancel.do?orderNo=${order.orderNo}'"
                 >
                   <span>취소하기</span>
                 </button>

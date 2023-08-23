@@ -52,8 +52,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 
 	@Override
-	public void updateOrder(int order_seqNo) {
-		mypageDAO.updateOrder(order_seqNo);
+	public void updateDeliveryStatusToCancel(int order_seqNo) {
+		mypageDAO.updateDeliveryStatusToCancel(order_seqNo);
 	}
 
 	@Override
