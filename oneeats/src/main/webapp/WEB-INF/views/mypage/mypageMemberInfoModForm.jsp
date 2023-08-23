@@ -14,7 +14,11 @@
 <meta charset="UTF-8">
 <title>회원가입 선택 창</title>
 <style>
-
+.genderdv{
+    width: 200px;
+    text-align: center;
+    display: inline-block;
+}
 </style>
 <c:choose>
 	<c:when test = "${result=='loginFailed' }">
@@ -38,20 +42,19 @@
             </div>
 
                 <div class = " margin1 textbold textsize-1 text-left">아이디</div>
-                <input class =" brd-lightgray btn-round btn-memberInfo  textsize-1 border-0.5" type="text"></input><br>
+                <div><input class =" brd-lightgray btn-round btn-memberInfo  textsize-1 border-0.5" type="text"></input></div><br>
                
                 <div class = " textpoint-center text-left textsize-1 margin1 textbold">비밀번호</div>
-                <input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " type="password"></input><br>
+                <div><input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " type="password"></input></div><br>
                 
                 <div class = " textpoint-center text-left textsize-1 margin1 textbold">비밀번호 확인</div>
-                <input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " type="password"></input><br>
+                <div><input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " type="password"></input></div><br>
               
                 <div class = " text-left  textsize-1 margin1 textbold">생년월일</div>
-                <input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " placeholder="  YYYY  /  MM  /  DD" type="text"></input><br>
+                <div><input class ="brd-lightgray btn-round btn-memberInfo  textsize-1 " placeholder="  YYYY  /  MM  /  DD" type="text"></input></div><br>
                 
-                <div class = " text-left textsize-1 margin1 textbold">성별&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
-                    <div class = "btn-tinylong margin textsize-1 border-0 btn-round">
-                     
+                <div class = " margin1 textbold textsize-1 text-center">성별</div>
+                <div class =" btn-memberInfo  textsize-1 ">
                     <input type="radio" name="gender" value="man"><span class=" textsize-1">남</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <input type="radio" name="gender" value="woman"><span class="textsize-1">여</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                     <input type="radio" name="no" value="no"><span class="textsize-1">선택안함</span>

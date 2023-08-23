@@ -307,3 +307,73 @@ text-align: center;
     margin-left: 1em;
 }
 
+.div-p {
+        width: 750px;
+        padding: 0 12px;
+      }
+
+      .btn-coupon {
+        width: 210px;
+        height: 38px;
+      }
+
+      .btn-couponsubmit {
+        width: 70px;
+        height: 38px;
+      }
+
+      .point {
+        text-align: center;
+        margin: 0 auto;
+        width: 250px;
+        height: 80px;
+        padding: 40px 0;
+      }
+
+      .one_div {
+        width: 742px;
+        height: 95px;
+        border-color: lightgray;
+        border-style: solid;
+        text-align: left;
+      }
+      .coupontd {
+        width: 742px;
+        height: 60px;
+        align-items: center;
+      }
+      .coupontr {
+        height: 59px;
+        border-top: solid 1px lightgray;
+        border-bottom: solid 1px lightgray;
+      }
+      .pointd{
+        width: 350px; 
+        height:79px; 
+        border: solid 1px lightgray; 
+        display:inline-block;
+      }
+       .div-p1 {
+        padding: 0 12px;
+      }
+      .addresstd1 {
+        width: 100px;
+        height: 50px;
+        text-align: left;
+      }
+      .addresstd2 {
+        width: 330px;
+        text-align: left;
+      }
+      .addresstd3 {
+        width: 100px;
+        text-align: center;
+      }
+      .addresstd4 {
+        width: 150px;
+        text-align: center;
+      }
+
+
+
+

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.common.alert.Alert;
 import com.example.demo.mypage.service.MypageService;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
@@ -32,6 +33,7 @@ public class MypageControllerImpl implements MypageController {
 	private OrderVO orderVO;
 	@Autowired
 	private MemberVO memberVO;
+
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -44,6 +46,7 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println(mav);
 		return mav;
 	}
+
 	@Override
 	@RequestMapping(value = "/mypage/orderDetail.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderDetail(@RequestParam(required = false, value = "orderNo") int orderNo,
@@ -58,6 +61,7 @@ public class MypageControllerImpl implements MypageController {
 		mav.addObject("order", orderVO);
 		return mav;
 	}
+
 	@Override
 	@RequestMapping(value = "/mypage/orderConfirm.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderConfirm(int memberNo, HttpServletRequest request, HttpServletResponse response)
@@ -100,6 +104,7 @@ public class MypageControllerImpl implements MypageController {
 		session.setAttribute("selectGoodsList", selectGoodsList);
 		return mav;
 	}
+
 	@Override
 	@RequestMapping(value = "/mypage/newOrder.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView newOrder(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -147,6 +152,7 @@ public class MypageControllerImpl implements MypageController {
 		}
 
 		mypageService.insertOrderList(orderList);
+
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
@@ -269,5 +275,40 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+	// 민아 회원정보수정1
+	@Override
+	@RequestMapping(value = "/mypage/mypageMemberMod.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView mypageMemberMod(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 Controller myAddress.do");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		String id = memberInfo.getId();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("id", id);
+		mav.setViewName("mypage/mypageMemberModForm");
+		return mav;
+	}
+	
+	// 민아 회원정보수정1
+		@Override
+		@RequestMapping(value = "/mypage/mypageMemberModInfo.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("여기는 Controller myAddress.do");
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+			String inputPwd = request.getParameter("inputPwd");
+			ModelAndView mav = new ModelAndView();
+			if (memberInfo.getPwd() == inputPwd) {
+				mav.addObject("memberInfo", memberInfo);
+				mav.setViewName("mypage/mypageMemberInfoModForm");
+			}else {
+				mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/mypageMemberMod.do");
+			}
+			
+			return mav;
+		}
 
 }

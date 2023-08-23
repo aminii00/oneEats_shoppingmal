@@ -21,6 +21,7 @@
 
 </head>
 <body>
+    <form method="post" action="${contextPath}/mypage/mypageMemberModInfo.do">
     <div class="content-area">
         <div class="profile-edit-box ">
             <div class="profile-edit-header">
@@ -31,16 +32,17 @@
             </div>
             <div class = "textpoint-center">
             <div class = " textpoint-center textbold textsize-1 text-left">아이디  </div>
-            <input class ="textpoint-left brd-lightgray btn-round btn-midlong textsize-1 " placeholder=" 아이디를 입력해 주세요." type="text"></input>
+            <input class ="textpoint-left brd-lightgray btn-round btn-midlong textsize-1 " value="${id}" type="text"></input>
             </div>
             <div class ="textpoint-center">
             <div class = " textpoint-center textbold textsize-1 text-left">비밀번호</div>
-             <input class ="textpoint-center brd-lightgray btn-round btn-midlong textsize-1" placeholder="현재 비밀번호를 입력해 주세요." type="password"></input>
+             <input class ="textpoint-center brd-lightgray btn-round btn-midlong textsize-1" name ="inputPwd" placeholder="현재 비밀번호를 입력해 주세요." type="password"></input>
             </div>
         </div>
             <button type="reset" class="btn-midlong_2 textsize-1 textbold input btn-round border-0">취소</button>
-            <button type="submit" class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">저장</button>
+            <button type="submit" class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">확인</button>
         </div>
     </div>
+</form>
 </body>
 </html>
