@@ -13,8 +13,30 @@
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
 <title>회원가입 창</title>
+<script>
+// 체크박스 전체 선택
+$(".checkbox_group").on("click", "#check_all", function () {
+  var checked = $(this).is(":checked");
 
+  if(checked){
+  	$(this).parents(".checkbox_group").find('input').prop("checked", true);
+  } else {
+  	$(this).parents(".checkbox_group").find('input').prop("checked", false);
+  }
+});
+// 체크박스 개별 선택
+$(".checkbox_group").on("click", ".normal", function() {
+  var checked = $(this).is(":checked");
+
+  if (!checked) {
+  	$("#check_all").prop("checked", false);
+  }
+});
+</script>
 <style>
+    .agreement-container{
+        color: black;
+    }
     form{ padding: 10px; }
 .circle{
     display: inline-block; /* 영역적용가능해짐 */
@@ -107,8 +129,11 @@
             <input class ="brd-lightgray btn-round btn-midlong  textsize-1 " name ="birth" placeholder="  YYYY  -  MM  -  DD" type="date"></input>
             <br>
             <div class="line"></div>
-            <br><p class = " text-left textsize-1 margin1 textbold">
-            <input class = " text-left" type="checkbox" name ="check1" value="agreeTotal">&nbsp&nbsp&nbsp전체 약관 동의</span><br><br>
+            
+            <br>
+            <div class ="agreement-container">
+            <p class = " text-left textsize-1 margin1 textbold">
+            <input class = " text-left" type="checkbox" id ="allcheck" name ="check1" value="agreeTotal"><label>&nbsp&nbsp&nbsp전체 약관 동의</label></span><br><br>
             
             <input type="checkbox" name ="check1" value="1">&nbsp&nbsp&nbsp[필수]서비스 이용 약관 동의<br><br>
             <input type="checkbox" name ="check2" value="1">&nbsp&nbsp&nbsp[필수]개인정보 수집 및 이용에 동의<br><br>
@@ -118,6 +143,7 @@
             <input type="checkbox" name ="check4" value="agree1">&nbsp&nbsp&nbsp[필수]본인은 만 14세 이상입니다.<br><br>
             <br>
             </p>
+        </div>
             <button type="submit" class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round" >
                 회원가입 완료
             </button>

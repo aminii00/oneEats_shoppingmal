@@ -20,12 +20,25 @@
     height: 50px;
 }
 .btn-memberInfo{
+	
 	width: 200px;
     height: 30px;
 }
 .btn-serveInfo{
+	
 	width: 80px;
     height: 30px;
+}
+
+
+.property_margin{
+	margin-left:180px;
+}
+.property_margin1{
+	margin-left:74px;
+}
+.property_margin2{
+	margin-left:168px
 }
 
 .flt{

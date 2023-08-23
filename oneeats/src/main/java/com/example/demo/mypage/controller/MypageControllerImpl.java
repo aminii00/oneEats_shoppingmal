@@ -330,7 +330,7 @@ public class MypageControllerImpl implements MypageController {
 		String id = memberInfo.getId();
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("id", id);
-		mav.setViewName("mypage/mypageMemberModForm");
+		mav.setViewName("/mypage/mypageMemberModForm");
 		return mav;
 	}
 	
@@ -344,10 +344,11 @@ public class MypageControllerImpl implements MypageController {
 			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 			String inputPwd = request.getParameter("inputPwd");
 			ModelAndView mav = new ModelAndView();
-			if (memberInfo.getPwd() == inputPwd) {
+			System.out.println(inputPwd +", "+memberInfo.getPwd());
+			if (memberInfo.getPwd().equals(inputPwd)) {
 				mav.addObject("memberInfo", memberInfo);
-				mav.setViewName("mypage/mypageMemberInfoModForm");
-			}else {
+				mav.setViewName("/mypage/mypageMemberInfoModForm");
+			}else{
 				mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/mypageMemberMod.do");
 			}
 			
