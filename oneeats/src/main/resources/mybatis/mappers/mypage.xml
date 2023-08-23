@@ -98,15 +98,23 @@
 	</select>
 	
 	<insert id="insertOrderList" parameterType="java.util.List">
-  			insert into t_order (orderNo, orderer_name, orderer_phone, receiver_name, receiver_address, receiver_phone, receiver_comment, used_point, used_couponId, 
-                       payment_price, discount_price, shippingfee, point_price, total_price, payment_type)
+  			insert into t_order (orderNo, orderer_name, orderer_phone, receiver_name, receiver_address, receiver_phone, receiver_comment, 
+  			used_point, used_couponId, 
+                       payment_price, discount_price, shippingfee, point_price, total_price, payment_type,goods_qty,goods_inbun,memberNo,goodsNo,optionNo)
   			values
   			<foreach collection="list" item="item" separator=",">
 	    		(#{item.orderNo}, #{item.orderer_name}, #{item.orderer_phone}, #{item.receiver_name}, #{item.receiver_address}, #{item.receiver_phone}, #{item.receiver_comment},
-	    		#{item.used_point}, #{item.used_couponId}, #{item.payment_price}, #{item.discount_price}, #{item.shippingfee}, #{item.point_price},	
-	    		#{item.total_price}, #{item.payment_type})
+	    		#{item.used_point}, #{item.used_couponId}, 
+	    		#{item.payment_price}, #{item.discount_price}, #{item.shippingfee}, #{item.point_price},	
+	    		#{item.total_price}, #{item.payment_type},#{item.goods_qty},#{item.goods_inbun},#{item.memberNo},#{item.goodsNo},#{item.optionNo})
   			</foreach>	
 	</insert>
+	
+	<select id="selectNewOrderNo" resultType="int" >
+		<![CDATA[
+			select max(orderNo)+1 from t_order
+		]]>
+	</select>
 		
 	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
 	    <![CDATA[

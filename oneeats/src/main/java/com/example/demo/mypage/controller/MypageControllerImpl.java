@@ -109,30 +109,38 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println("여기는 newOrder");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
 		String viewName = (String)request.getAttribute("viewName");
 		
-		String orderNo = request.getParameter("orderNo");
+		int orderNo = mypageService.selectNewOrderNo();
 		String orderer_name = request.getParameter("orderer_name");
 		String orderer_phone = request.getParameter("orderer_phone");
 		String receiver_name = request.getParameter("receiver_name");
 		String receiver_address = request.getParameter("receiver_address");
 		String receiver_phone = request.getParameter("receiver_phone");
+		String receiver_comment = request.getParameter("receiver_comment");
+		String used_point = request.getParameter("used_point");
+		String used_couponId = request.getParameter("used_couponId");
+		String point_price = request.getParameter("point_price");
+		String total_price = request.getParameter("total_price");
 		String payment_type = request.getParameter("payment_type");
 		
 		
 		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		List<OrderVO> orderList = new ArrayList();
-		
+		System.out.println("selectGoodsList"+selectGoodsList);
 		int result = 0;
 		for (int i = 0; i < selectGoodsList.size(); i++) {
 			OrderVO temp = selectGoodsList.get(i);
-			temp.setOrderNo(Integer.parseInt(orderNo));
+			temp.setOrderNo(orderNo);
 			temp.setOrderer_name(orderer_name);
 			temp.setOrderer_phone(orderer_phone);
 			temp.setReciever_name(receiver_name);
 			temp.setReciever_address(receiver_address);
 			temp.setReciever_phone(receiver_phone);
 			temp.setPayment_type(payment_type);
+			temp.setMemberNo(memberNo);
 			
 			orderList.add(temp);
 		}
