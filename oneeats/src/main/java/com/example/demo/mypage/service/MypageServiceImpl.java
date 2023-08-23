@@ -39,6 +39,21 @@ public class MypageServiceImpl implements MypageService{
 	public void insertOrderList(List<OrderVO> orderList) {
 		mypageDAO.insertOrderList(orderList);
 	}
+	
+	@Override
+	public int selectNewOrderNo() {
+		return mypageDAO.selectNewOrderNo();
+	}
+
+	@Override
+	public int[] selectSeqNoByOrderNo(int orderNo) {
+		return mypageDAO.selectSeqNoByOrderNo(orderNo);
+	}
+
+	@Override
+	public void updateOrder(int order_seqNo) {
+		mypageDAO.updateOrder(order_seqNo);
+	}
 
 	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {
@@ -66,11 +81,6 @@ public class MypageServiceImpl implements MypageService{
 	@Override
 	public int removeBookMark(String id) throws DataAccessException {
 		return mypageDAO.deleteBookMark(id);
-	}
-
-	@Override
-	public int selectNewOrderNo() {
-		return mypageDAO.selectNewOrderNo();
 	}
 	
 	@Override

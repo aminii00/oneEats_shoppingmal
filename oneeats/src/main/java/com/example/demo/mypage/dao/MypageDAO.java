@@ -28,6 +28,12 @@ public interface MypageDAO {
 	//민지 주문하기
 	public void insertOrderList(List<OrderVO> orderList);
 	
+	public int selectNewOrderNo();
+	
+	public int[] selectSeqNoByOrderNo(int orderNo);
+
+	public void updateOrder(int order_seqNo);
+	
 	//민지 쿠폰목록(memberNo 기준)
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	
@@ -45,5 +51,4 @@ public interface MypageDAO {
 	//민아 쿠폰
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
-	public int selectNewOrderNo();
 }
