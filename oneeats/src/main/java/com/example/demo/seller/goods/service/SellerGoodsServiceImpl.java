@@ -27,34 +27,41 @@ public class SellerGoodsServiceImpl implements SellerGoodsService{
 //		return sellerGoodsDAO.insertOption(map);
 	//}
 	
-	@Override
-	public boolean addGoods(GoodsVO goodsVO, List<OptionVO> optionList) {
-		boolean result = true;
-		try {
-			sellerGoodsDAO.insertNewGoods(goodsVO);
-			sellerGoodsDAO.insertOptions(optionList);
-		} catch (Exception e) {
-			result = false;
-		}
-		return result;
-	}
+	/*
+	 * @Override public boolean addGoods(GoodsVO goodsVO, List<OptionVO> optionList)
+	 * { boolean result = true; try { sellerGoodsDAO.insertNewGoods(goodsVO);
+	 * sellerGoodsDAO.insertOptions(optionList); } catch (Exception e) { result =
+	 * false; } return result; }
+	 */
 	
 	
-	@Override
-	public boolean addGoods(Map map, List<OptionVO> optionList) {
-		boolean result = true;
+@Override
+	public boolean addGoods(Map map) {
+		boolean result1 = true;
 		try {
 			sellerGoodsDAO.insertNewGoodsWithMap(map);
-			sellerGoodsDAO.insertOptions(optionList);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			result = false;
+			result1 = false;
 		}
+		return result1;
+	}
+
+	
+	
+	public boolean optionaddGoods(OptionVO optionVO) {
+		boolean result = sellerGoodsDAO.insertOptions(optionVO);
 		return result;
 	}
 	@Override
 	public int selectNewGoodsNo() {
 		return sellerGoodsDAO.selectNewGoodsNo();
+	}
+	@Override
+	public boolean addGoods(GoodsVO goodsVO, List<OptionVO> OptionList) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

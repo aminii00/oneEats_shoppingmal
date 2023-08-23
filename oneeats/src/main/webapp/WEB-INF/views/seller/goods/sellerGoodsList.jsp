@@ -175,7 +175,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <button
         style="font-size: 12px; margin-top: 22px; float: right"
         class="btn-1 bg-lightgreen textcolor-white border-0"
-        type="submit"
+        type="button"
+        onclick="location.href='${contextPath}/seller/goods/sellerGoodsForm.do'"
       >
         상품 추가
       </button>

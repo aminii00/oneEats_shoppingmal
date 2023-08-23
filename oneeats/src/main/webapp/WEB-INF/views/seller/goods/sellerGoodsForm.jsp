@@ -62,21 +62,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   enctype="multipart/form-data"
                   action="${contextPath}/seller/goods/addSellerGoods.do"
                 >
-                  <dl class="property-flex2" style="height: 60px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    ></dt>
-                    <dd class="property-flex1">
-                      <input
-                        name="type"
-                        type="hidden"
-                        class="property-font1 nice-select"
-                        style="width: 176px"
-                        value="사업자"
-                      />
-                    </dd>
-                  </dl>
+                  <input name="type" type="hidden" value="사업자" />
 
                   <div class="property-margin1">
                     <dl class="property-flex2" style="height: 66px">
@@ -203,23 +189,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="harvest"
-                        type="date"
-                        class="property-font1 nice-select"
-                        style="width: 176px"
-                      />
-                    </dd>
-                  </dl>
-
-                  <dl class="property-flex2" style="height: 60px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    >
-                      회원번호
-                    </dt>
-                    <dd class="property-flex1">
-                      <input
-                        name="memberNo"
                         type="text"
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -260,6 +229,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 required
                               />
                             </div>
+                            <input type="hidden" name="optionNo" />
 
                             <div class="col-md">
                               <input
