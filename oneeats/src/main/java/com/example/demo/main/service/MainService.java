@@ -31,4 +31,6 @@ public interface MainService {
 	public List<GoodsVO> selectNewGoodsList();
 
 	public List<RecipeVO> selectNewRecipeList();
+
+	public List<GoodsVO> selectBestGoodsList();
 }

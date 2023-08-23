@@ -216,13 +216,12 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 <c:forEach items="${newGoodsList}" varStatus="loop" step="3">
                   <!--아이템 슬라이더 하나.-->
                   <div class="latest-product__slider__item">
-                    <!-- 슬라이더 하나 당 3개의 상품을 출력-->
                     <c:forEach begin="0" end="2" var="i">
                       <c:set
                         var="item"
                         value="${newGoodsList[loop.index + i]}"
                       />
-                      <!--상품 하나-->
+
                       <a
                         href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
                         class="latest-product__item"
@@ -237,8 +236,8 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         <div class="latest-product__item__text">
                           <h6 style="font-size: 14px">${item.name}<br /></h6>
                           <span>￦${item.price}</span>
-                        </div> </a
-                      ><!--상품 하나 끝-->
+                        </div>
+                      </a>
                     </c:forEach>
                   </div>
                   <!--아이템 슬라이더 하나 끝-->

@@ -72,10 +72,11 @@ public class MainServiceImpl implements MainService{
 	public List<RecipeVO> selectNewRecipeList() {
 		return mainDAO.selectNewRecipeList();
 	}
-	
-	
-	
 
-	
+	@Override
+	public List<GoodsVO> selectBestGoodsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

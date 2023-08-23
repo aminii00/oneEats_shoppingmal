@@ -49,6 +49,11 @@ public class MainControllerImpl implements MainController {
 
 		List<RecipeVO> newRecipeList = mainService.selectNewRecipeList();
 		mav.addObject("newRecipeList", newRecipeList);
+		
+		
+		
+		List<GoodsVO> bestGoodsList = mainService.selectBestGoodsList();
+		mav.addObject("bestGoodsList",bestGoodsList);
 
 		return mav;
 	}
