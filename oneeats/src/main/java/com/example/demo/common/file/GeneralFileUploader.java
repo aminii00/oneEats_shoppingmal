@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,6 +35,17 @@ public class GeneralFileUploader {
 		}
 		return map;
 		
+	}
+	
+	public static Map getParameterMap(HttpServletRequest request) {
+		Map map = new HashMap();
+		Enumeration enu = request.getParameterNames();
+		while (enu.hasMoreElements()) {
+			String name = (String) enu.nextElement();
+			String value = request.getParameter(name);
+			map.put(name, value);
+		}
+		return map;
 	}
 	
 

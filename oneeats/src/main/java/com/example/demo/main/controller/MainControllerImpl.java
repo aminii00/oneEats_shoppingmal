@@ -2,7 +2,9 @@ package com.example.demo.main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,11 +19,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
 @Controller("mainController")
@@ -103,42 +107,87 @@ public class MainControllerImpl implements MainController {
 		return result;
 	}
 
-	
-	@RequestMapping(value = "/orderNow.do",method = RequestMethod.POST)
+	@RequestMapping(value = "/orderNow.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView storeValueInSessio2n(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
-		try {
-			String[] optionNos = request.getParameterValues("optionNo");
-			String[] goodsQtys = request.getParameterValues("goodsQty");
-			List<CartVO> orderNowGoodsList = new ArrayList<CartVO>();
-			String shippingFee = request.getParameter("shippingFee");
-			String paymentPrice = request.getParameter("payment_price");
-			String discountPrice = request.getParameter("discount_price");
+		HttpSession session = request.getSession();
+		MemberVO loginMember = (MemberVO) session.getAttribute("memberInfo");
 
-			// cartList에 하나씩 추가
-			for (int i = 0; i < optionNos.length; i++) {
-				CartVO tempcart = mainService.selectOptionByNo(Integer.parseInt(optionNos[i]));
-				tempcart.setGoodsQty(Integer.parseInt(goodsQtys[i]));
-				tempcart.setDiscountPrice();
-				orderNowGoodsList.add(tempcart);
+		// 상품 상세 페이지에서 넘겨준 옵션 선택 정보를 session에 저장
+		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
+		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+		if (orderNowList != null && orderNowList.size()>0) {
+			System.out.println("주문 상품을 선택한 정보가 있음");
+			// 첫번째 원소로부터 할인 가격등을 가져와 모델에
+			int shippingFee = orderNowList.get(0).getShippingfee();
+			int paymentPrice = orderNowList.get(0).getPayment_price();
+			int discountPrice = orderNowList.get(0).getDiscount_price();
+			
+			mav.addObject("shippingFee", shippingFee);
+			mav.addObject("payment_price", paymentPrice);
+			mav.addObject("discount_price", discountPrice);
+			
+		}else {
+			orderNowList = new ArrayList<OrderVO>();
+			try {
+				// request에서 정보를 받아옴
+				String shippingFee = request.getParameter("shippingFee");
+				String paymentPrice = request.getParameter("payment_price");
+				String discountPrice = request.getParameter("discount_price");
+				String[] optionNos = request.getParameterValues("optionNo");
+				String[] goodsQtys = request.getParameterValues("goodsQty");
+
+				// list에 하나씩 추가
+				for (int i = 0; i < optionNos.length; i++) {
+					System.out.println("for문 시작");
+					System.out.println(goodsQtys[i]);
+					System.out.println(optionNos[i]);
+					OrderVO temp = mainService.selectOptionsGoodsToOrderByOptionNo(Integer.parseInt(optionNos[i]));
+					temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
+					temp.setShippingfee(Integer.parseInt(shippingFee));
+					temp.setPayment_price(Integer.parseInt(paymentPrice));
+					temp.setDiscount_price(Integer.parseInt(discountPrice));
+					orderNowList.add(temp);
+				}
+				System.out.println("orderNowList" + orderNowList);
+
+				mav.addObject("selectGoodsList", orderNowList);
+				session.setAttribute("selectGoodsList", orderNowList);
+				
+				mav.addObject("shippingFee", shippingFee);
+				mav.addObject("payment_price", paymentPrice);
+				mav.addObject("discount_price", discountPrice);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				String previousPage = request.getHeader("Referer");
+				mav = Alert.alertAndRedirect("주문 정보를 받아오지 못 했습니다.", previousPage);
+				return mav;
 			}
-			mav.addObject("shippingFee",shippingFee);
-			mav.addObject("payment_price",paymentPrice);
-			mav.addObject("discount_price",discountPrice);
-			System.out.println("orderNowGoodsList" + orderNowGoodsList);
-			mav.addObject("selectGoodsList",orderNowGoodsList);
-		    HttpSession session = request.getSession();
-		    MemberVO loginMember = (MemberVO) session.getAttribute("memberInfo");
+		}
+		
+		
+
+		if (loginMember == null || loginMember.getId().length() < 1) {
+			mav = Alert.alertAndRedirect("로그인이 필요한 페이지입니다.", request.getContextPath() + "/member/loginForm.do");
+			return mav;
+		}
+
+		// 멤버에서 쿠폰 리스트를 받아옴
+		try {
 			List<CouponVO> couponList = mainService.selectCouponByMemberNo(loginMember.getMemberNo());
 			mav.addObject("couponList", couponList);
 			mav.setViewName("/mypage/orderConfirm");
+
 		} catch (Exception e) {
+			// 에러가 나면 이전 페이지로 이동
 			e.printStackTrace();
 			String previousPage = request.getHeader("Referer");
-			mav = Alert.alertAndRedirect("페이지 이동에 실패했습니다.", previousPage);
+			mav = Alert.alertAndRedirect("주문자 정보를 받아오지 못 했습니다.", previousPage);
+			return mav;
 		}
-		
+
 		return mav;
 	}
 }

@@ -4,8 +4,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="com.example.demo.mypage.dao.MypageDAO">
-	<resultMap id="orderResult" type="orderVO">
-		<result property="order_seqNo" column="" />
+	<resultMap id="OrderResult" type="orderVO">
+		<result property="order_seqNo" column="order_seqNo" />
 		<result property="orderNo" column="orderNo" />
 		<result property="orderer_name" column="orderer_name" />
 		<result property="orderer_phone" column="orderer_phone" />
@@ -76,7 +76,7 @@
 		<result property="memberNo" column="memberNo" />
 	</resultMap> 
 	
-	<select id="selectOrderList" resultMap="orderResult">
+	<select id="selectOrderList" resultMap="OrderResult">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
 			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
@@ -84,9 +84,9 @@
 		]]>
 	</select>
 
-	<select id="selectOrderByOrderNo" resultMap="orderResult"  parameterType="int">
+	<select id="selectOrderByOrderNo" resultMap="OrderResult"  parameterType="int">
 		<![CDATA[
-			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice, goods.weight from t_order inner join goods on t_order.goodsNo=goods.goodsNo
+			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice from t_order inner join goods on t_order.goodsNo=goods.goodsNo
 			where t_order.orderNo=#{orderNo}
 		]]>
 	</select>
@@ -112,7 +112,7 @@
 	
 	<select id="selectNewOrderNo" resultType="int" >
 		<![CDATA[
-			select max(orderNo)+1 from t_order
+			select ifnull(max(orderNo),0)+1 from t_order
 		]]>
 	</select>
 		

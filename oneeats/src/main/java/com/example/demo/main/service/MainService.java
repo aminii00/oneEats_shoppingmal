@@ -6,6 +6,7 @@ import java.util.Map;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
 public interface MainService {
@@ -21,4 +22,6 @@ public interface MainService {
 	public CartVO selectOptionByNo(int optionNo);
 
 	public List<CouponVO> selectCouponByMemberNo(int memberNo);
+
+	public OrderVO selectOptionsGoodsToOrderByOptionNo(int optionNo);
 }

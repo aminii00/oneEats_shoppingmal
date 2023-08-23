@@ -92,6 +92,37 @@
 		<result property="memberNo" column="memberNo" />
 	</resultMap> 
 	
+	<resultMap id="OrderResult" type="orderVO">
+		<result property="order_seqNo" column="order_seqNo" />
+		<result property="orderNo" column="orderNo" />
+		<result property="orderer_name" column="orderer_name" />
+		<result property="orderer_phone" column="orderer_phone" />
+		<result property="receiver_name" column="receiver_name" />
+		<result property="receiver_address" column="receiver_address" />
+		<result property="receiver_phone" column="receiver_phone" />
+		<result property="receiver_comment" column="receiver_comment" />
+		<result property="used_point" column="used_point" />
+		<result property="used_couponId" column="used_couponId" />
+		<result property="payment_price" column="payment_price" />
+		<result property="discount_price" column="discount_price" />
+		<result property="shippingfee" column="shippingfee" />
+		<result property="point_price" column="point_price" />
+		<result property="total_price" column="total_price" />
+		<result property="payment_type" column="payment_type" />
+		<result property="orderDate" column="orderDate" />
+		<result property="delivery_status" column="delivery_status" />
+		<result property="deliveryDate" column="deliveryDate" />
+		<result property="goods_qty" column="goods_qty" />
+		<result property="goods_inbun" column="goods_inbun" />
+		<result property="memberNo" column="memberNo" />
+		<result property="goodsNo" column="goodsNo" />		
+		<result property="goodsName" column="goodsName" />
+		<result property="goodsImg" column="goodsImg" />
+		<result property="gun" column="gun" />
+		<result property="shippingFee" column="shippingFee" />
+		<result property="optionNo" column="optionNo" />
+	</resultMap>
+	
 	<select id="selectGoodsList"  resultMap="GoodsResult"  parameterType ="java.util.HashMap"   >
 	    <![CDATA[
 		select * from goods
@@ -146,5 +177,13 @@
 		<![CDATA[
 			select * from coupon where memberNo=#{memberNo}
 		]]>
+	</select>
+	
+	
+	<select id="selectOptionsGoodsToOrderByOptionNo" parameterType="int" resultMap="OrderResult">
+		select op.option_inbun as goods_inbun, op.optionNo as optionNo, op.goodsNo as goodsNo, op.name as goodsName from `option` as op
+		inner join goods as go
+		on op.goodsNo=go.goodsNo
+        where op.optionNo=#{optionNo};
 	</select>
 </mapper>

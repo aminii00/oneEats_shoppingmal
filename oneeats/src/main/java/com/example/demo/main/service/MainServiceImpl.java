@@ -11,6 +11,7 @@ import com.example.demo.main.dao.MainDAO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
 @Service("mainService")
@@ -48,6 +49,12 @@ public class MainServiceImpl implements MainService{
 	@Override
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) {
 		return mainDAO.selectCouponByMemberNo(memberNo);
+	}
+
+	@Override
+	public OrderVO selectOptionsGoodsToOrderByOptionNo(int optionNo) {
+		
+		return mainDAO.selectOptionsGoodsToOrderByOptionNo(optionNo);
 	}
 
 	

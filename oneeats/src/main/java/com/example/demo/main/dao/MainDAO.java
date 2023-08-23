@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
 @Mapper
@@ -25,4 +26,6 @@ public interface MainDAO {
 	public CartVO selectOptionByNo(int optionNo);
 
 	public List<CouponVO> selectCouponByMemberNo(int memberNo);
+
+	public OrderVO selectOptionsGoodsToOrderByOptionNo(int optionNo);
 }
