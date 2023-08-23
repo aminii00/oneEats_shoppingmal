@@ -6,122 +6,83 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-       .css-select {
-    flex: 1 1 0%;
-    font-weight: 500;
-    color: rgb(51, 51, 51);
-    line-height: 1.36;
-    display: -webkit-box;
-    overflow: hidden;
-    word-break: break-all;
-    white-space: normal;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-
-.css-address {
-    flex: 1 1 0%;
-    font-weight: 500;
-    color: rgb(51, 51, 51);
-    line-height: 1.36;
-    display: -webkit-box;
-    overflow: hidden;
-    word-break: break-all;
-    white-space: normal;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-
-.css-1ccl3pq {
-    display: flex;
-    padding-top: 6px;
-    flex-direction: row;
-    color: rgb(0, 0, 0);
-    line-height: 20px;
-}
-
-.css-1fttcpj {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-.div-p {
-    padding: 0 12px;
-}
-      
-
-
-
-
-
-
-    </style>
-    </head>
-    <body>
+    <link rel="stylesheet" href="${contextPath}/css/mina.css" />
+    <link rel="stylesheet" href="${contextPath}/css/mina.css" />
+   <script>
+    function address(){
+    
+    }
+   </script>
+  </head>
+  <body>
     <form method="post" action="#">
-    <div class="div-p">
-        <br>
-        <p class=" textsize-2 text-left textcolor-black textbold">주문내역<a class ="textsize-1" style="float:right" href="#">+새 배송지 추가</a></p>
-    <hr class="linebold">
-    <div class="css-1fttcpj ">
-        <dl class="css-1ccl3pq ">
-            <dt class="css-select ">선택</dt>
-            <dd class="css-select ">주소</dd>
-            <dd class="css-select ">받으실 분</dd>
-            <dd class="css-select ">연락처</dd>
-            <dd class="css-select ">수정</dd>
-        </dl>
-        </div>
-        <hr class="linebold">
-        <c:forEach var="item" items="${myAddress}" varStatus="status">
-        <dl class="css-1ccl3pq  textsize-1">
-            <div class="css-select ">선택</div>
-            <div class="css-select ">${item.address} &nbsp ${item.address_detail}</div>
-            <div class="css-select ">${item.reciever_name}</div>
-            <div class="css-select ">${item.reciever_phone}</div>
-            <div class="css-select "><a href="#">수정</a></div>
-        </dl>
-        <hr>
-      </c:forEach>
-        </div>
-      
+      <div class="div-p1">
+        <br />
+        <p class="textsize-2 text-left textcolor-black textbold">
+          주문내역<a class="textsize-1" style="float: right" onclick=address()
+            >+새 배송지 추가</a
+          >
+        </p>
+        <hr class="linebold" />
 
-        <br><br>
+        <table class="coupontd textsize-2">
+          <tr class="coupontr textbold">
+            <td class="addresstd1">&nbsp;선택</td>
+            <td class="addresstd2">주소</td>
+            <td class="addresstd3">받으실 분</td>
+            <td class="addresstd4">연락처</td>
+            <td>수정</td>
+          </tr>
+          <c:forEach var="item" items="${myAddress}" varStatus="status">
+            <tr class="coupontr">
+              <td class="addresstd1">&nbsp&nbsp선택</td>
+              <td class="addresstd2">
+                ${item.address} &nbsp ${item.address_detail}
+              </td>
+              <td class="addresstd3">${item.reciever_name}</td>
+              <td class="addresstd4">${item.reciever_phone}</td>
+              <td><button class ="border-0" type="button">
+                <img class ="border-0" 
+                src="${contextPath}/img/icon/mod.png"
+                alt="Logo"
+                style="width: 35px; height: auto"></button></td>
+            </tr>
+          </c:forEach>
+        </table>
+        <br />
+        <br />
+        <br />
         <div id="wrapper">
-            <main id="product">
-              <section class="view">
-                <article class="review">
-                  <div class="paging">
-                    <span class="prev">
-                      <a href="#">< 이전</a>
-                    </span>
-                    <span class="num">
-                      <a href="#" class="on">1</a>
-                      <a href="#">2</a>
-                      <a href="#">3</a>
-                      <a href="#">4</a>
-                      <a href="#">5</a>
-                      <a href="#">6</a>
-                      <a href="#">7</a>
-                    </span>
-                    <span class="next">
-                      <a href="#">다음 ></a>
-                    </span>
-                  </div>
-                </article>
-              </section>
-            </main>
-          </div>
+          <main id="product">
+            <section class="view">
+              <article class="review">
+                <div class="paging">
+                  <span class="prev">
+                    <a href="#">< 이전</a>
+                  </span>
+                  <span class="num">
+                    <a href="#" class="on">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                  </span>
+                  <span class="next">
+                    <a href="#">다음 ></a>
+                  </span>
+                </div>
+              </article>
+            </section>
+          </main>
+        </div>
+      </div>
     </form>
-</body>
+  </body>
 </html>

@@ -30,5 +30,10 @@ public interface MypageController {
 
 	//민아 배송지관리 - 출력
 	public ModelAndView myAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	//민아 회원정보수정1
+	public ModelAndView mypageMemberMod(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//민아 회원정보수정2
+	public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }
