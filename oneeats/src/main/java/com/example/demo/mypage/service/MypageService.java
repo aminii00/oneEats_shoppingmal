@@ -27,4 +27,6 @@ public interface MypageService {
 	public int removeBookMark(String id) throws DataAccessException;
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
+
+	public int selectNewOrderNo();
 }

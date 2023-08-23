@@ -44,4 +44,6 @@ public interface MypageDAO {
 	
 	//민아 쿠폰
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
+
+	public int selectNewOrderNo();
 }
