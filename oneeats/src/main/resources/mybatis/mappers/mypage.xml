@@ -117,7 +117,7 @@
 		]]>
 	</select>
 	
-	<select id="selectSeqNoByOrderNo" resultType="orderResult" parameterType="int">
+	<select id="selectSeqNoByOrderNo" resultMap="orderResult" parameterType="int">
 		<![CDATA[
 			select order_seqNo from t_order where orderNo=#{orderNo};
 		]]>

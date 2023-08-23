@@ -179,7 +179,7 @@ public class MypageControllerImpl implements MypageController {
 		String delivery_status = request.getParameter("delivery_status");
 		
 		List<OrderVO> orderList = (List<OrderVO>) session.getAttribute("orderList");
-		System.out.println("orderLIst출력="+orderList);
+		System.out.println("orderList출력="+orderList);
 		
 		int[] order_seqNos = mypageService.selectSeqNoByOrderNo(orderNo);
 		for (int order_seqNo : order_seqNos) {
