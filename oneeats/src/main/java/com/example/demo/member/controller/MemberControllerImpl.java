@@ -1,5 +1,6 @@
 package com.example.demo.member.controller;
 
+import java.sql.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,9 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -77,9 +75,21 @@ public class MemberControllerImpl implements MemberController {
 		int memberNo = memberService.registerInfoNo();
 		Map memberMap = GeneralFileUploader.getParameterMap(request);
 		memberMap.put("memberNo", memberNo);
+		String _birth = (String) memberMap.get("birth");
+		String sms_agreement = (String) memberMap.get("sms_agreement");
+		String email_agreement = (String) memberMap.get("email_agreement");
+		if (_birth == null || _birth.trim().length()<1) {
+			memberMap.put("birth", null);
+		}
+		if (email_agreement == null || email_agreement.trim().length()<1) {
+			memberMap.put("email_agreement","no");
+		}
+		if (sms_agreement == null || sms_agreement.trim().length()<1) {
+			memberMap.put("sms_agreement", "no");
+		}
+		
 		try {
 			memberService.insertMemberWithMap(memberMap);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			
