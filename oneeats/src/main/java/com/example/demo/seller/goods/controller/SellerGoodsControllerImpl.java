@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -29,8 +30,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.common.alert.Alert;
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.seller.goods.service.SellerGoodsService;
+import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
+import com.example.demo.vo.OrderVO;
 
 @Controller("sellerGoodsController")
 public class SellerGoodsControllerImpl implements SellerGoodsController {
@@ -47,10 +50,15 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	@RequestMapping(value = "/seller/goods/sellerGoodsList.do")
-	public ModelAndView sellerGoodsList(HttpServletRequest request) {
+	//상품 목록 
+	@RequestMapping(value = "/seller/goods/sellerGoodsList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView sellerGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
+		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addObject("goodsList", goodsList);
 		System.out.println(mav);
 		return mav;
 	}
@@ -63,7 +71,8 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	
+	//상품 등록
+	@Override
 	@RequestMapping(value = "/seller/goods/addSellerGoods.do", method = RequestMethod.POST)
 	public ModelAndView addGoods(MultipartHttpServletRequest request
 			) throws IOException {
@@ -128,5 +137,94 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		mav = Alert.alertAndRedirect("상품을 등록했습니다.", request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + newGoodsNo);
 		return mav;
 	}
+
+	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
+	@Override
+	@RequestMapping(value="/seller/goods/modSellerGoods.do",method = RequestMethod.GET)
+	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
+		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환
+		
+		// goodsNo을 보내서 goodsVO 정보 가져오기
+		GoodsVO goodsVO = sellerGoodsService.selectGoodsVO(goodsNo); 
+		System.out.println("goodsVO = " +goodsVO);
+		
+		List<OptionVO> option =  (List<OptionVO>) sellerGoodsService.selectOptionVO(goodsNo);
+		System.out.println(option);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("option",option);
+		mav.addObject("goods",goodsVO);
+		mav.setViewName("/seller/goods/sellerGoodsModForm");
+		
+		return mav;
+	}
+	
+	/*@Override
+	@RequestMapping(value="/seller/goods/modSellerGoods.do",method = RequestMethod.GET)
+	public ModelAndView modSellerGoods(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		System.out.println("여기는 modSellerGoods");
+		
+		request.setCharacterEncoding("utf-8");
+		String goodsNo1 = request.getParameter("goodsNo");
+		int goodsNo = Integer.parseInt(goodsNo1);
+
+		boolean result1 = sellerGoodsService.ModGoods(goodsNo); // addGodds 수정하기
+		
+		
+		// 옵션정보 가져와서 각각의 VO에 저장
+		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX
+		String[] optionQtys = request.getParameterValues("option_qty");
+		String[] optionPrice = request.getParameterValues("option_price");
+
+		OptionVO[] options = new OptionVO[5];
+		for (int i = 0; i < options.length; i++) {
+			OptionVO optionVO = new OptionVO();
+			options[i] = optionVO;
+			
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		for (int i = 0; i < optionNames.length; i++) {
+			if (optionNames[i] != null) {
+				options[i].setName(optionNames[i]);
+				options[i].setOption_qty(optionQtys[i]);
+				options[i].setPrice(optionPrice[i]);
+				options[i].setGoodsNo(goodsNo);
+				System.out.println(options[i]);
+				boolean result = sellerGoodsService.optionModGoods(options[i]);
+				if (!result) {
+					mav.addObject("redirectMessage", "상품 등록에 실패했습니다.");
+					mav.addObject("redirectPage", request.getContextPath() + "/seller/goods/sellerGoodsForm.do");
+					mav.setViewName("/alert");
+					break;
+				}
+	
+			} else {
+				System.out.println("상품 등록 실패");
+				break;
+			}
+
+		}
+		
+		System.out.println("상품 등록 성공");
+		mav = Alert.alertAndRedirect("상품을 등록했습니다.", request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + goodsNo);
+		return mav;
+	}*/
+	
+	
+//리스트 삭제
+	@Override
+	@RequestMapping(value="/seller/goods/deleteSellerGoods.do",method = RequestMethod.GET)
+	public ModelAndView deleteSellerGoods(@RequestParam("goodsNo") int goodsNo, 
+			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+		request.setCharacterEncoding("utf-8");
+		sellerGoodsService.deleteSellerGoods(goodsNo);
+		ModelAndView mav = new ModelAndView("redirect:/seller/goods/sellerGoodsList.do");
+		return mav;
+	}
+
+	
+
+	
 
 }
