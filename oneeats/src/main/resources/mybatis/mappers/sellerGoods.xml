@@ -32,22 +32,57 @@
 <result column="optionNo" property="optionNo"/>
 <result column="name" property="name"/>
 <result column="option_qty" property="option_qty"/>
-<result column="option_inbun" property="option_inbun"/>
 <result column="price" property="price"/>
 <result column="goodsNo" property="goodsNo"/>
 	</resultMap>
 	
 	
 	
-		<insert id="insertGoods" parameterType="java.util.Map">
+<!-- 		<insert id="insertOption" parameterType="java.util.Map">
 <![CDATA[
-insert into goods(name,price,rapping,manufacturer,weight,description,harvest,category,type,memberNo,name,option_qty,option_inbun,price,goodsNo)
-values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{harvest},#{category},#{type},#{memberNo},#{name},#{option_qty},#{option_inbun},#{price},#{goodsNo})
+insert into option(optionName,option_qty,option_inbun,optionPrice,goodsNo)
+values(#{optionName},#{option_qty},#{option_inbun},#{optionPrice},#{goodsNo})
 ]]>
 	</insert>
 	
 	
 	
+		<insert id="insertGoods" parameterType="java.util.Map">
+<![CDATA[
+insert into goods(name,price,rapping,manufacturer,weight,description,harvest,category,type,memberNo)
+values(#{name},#{price},#{rapping},#{manufacturer},#{weight},#{description},#{harvest},#{category},#{type},#{memberNo},#{name})
+]]>
+	</insert>
+	 -->
 
+		<insert id="insertNewGoods" parameterType="goodsVO">
+		insert goods (category,name,price,rapping,manufacturer,weight,harvest,type,memberNo) values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo})			
+		</insert>
+	
+	
+		<select id="selectNewGoodsNo" resultType="int" >
+		select ifnull(max(goodsNo),0)+1 from goods
+		</select>
+		
+		
+		
+		<insert id="insertOptions" parameterType="java.util.List" >
+		insert into `option`(optionNo,name,option_qty,price,goodsNo)
+		values
+		<foreach collection="list" item="i" index="index" separator=",">
+			(#{i.optionNo}, #{i.name}, #{i.option_qty},#{i.price},#{i.goodsNo})
+		</foreach>
+		</insert>
+		
+		
+		
+		<insert id="insertNewGoodsWithMap" parameterType="java.util.Map" >
+		insert into goods (category,name,price,rapping,manufacturer,weight,harvest,type,memberNo)
+		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo})	
+	
+	</insert>
+	
+	
+	
 	
 </mapper>

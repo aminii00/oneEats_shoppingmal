@@ -60,7 +60,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   id="register-form"
                   method="post"
                   enctype="multipart/form-data"
-                  action="${contextPath}/seller/goods/sellerGoodsForm.do"
+                  action="${contextPath}/seller/goods/addSellerGoods.do"
                 >
                   <dl class="property-flex2" style="height: 60px">
                     <dt
@@ -202,7 +202,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        name="expDate"
+                        name="harvest"
                         type="date"
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -237,6 +237,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           >
                             <div class="col-md">옵션의 이름</div>
                             <div class="col-md">옵션의 양</div>
+
                             <div class="col-md">가격</div>
                             <div class="col-md-1"></div>
                           </div>
@@ -244,7 +245,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="name"
+                                name="option_name"
                                 class="form-control"
                                 placeholder="상품명"
                                 required
@@ -253,46 +254,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="option-qty"
+                                name="option_qty"
                                 class="form-control"
-                                placeholder="0.5인분"
-                                required
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="price"
-                                class="form-control"
-                                placeholder="가격"
+                                placeholder="양"
                                 required
                               />
                             </div>
 
-                            <div class="col-md-1"></div>
-                          </div>
-
-                          <div class="row ingredient_row">
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="name"
-                                class="form-control"
-                                placeholder="상품명"
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="qty"
-                                class="form-control"
-                                placeholder="1인분"
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="price"
+                                name="option_price"
                                 class="form-control"
                                 placeholder="가격"
                                 required
@@ -300,11 +272,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </div>
                             <div class="col-md-1"></div>
                           </div>
+
                           <div class="row ingredient_row">
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="name"
+                                name="option_name"
                                 class="form-control"
                                 placeholder="상품명"
                               />
@@ -312,15 +285,52 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="qty"
+                                name="option_qty"
                                 class="form-control"
-                                placeholder="1.5인분"
+                                placeholder="양"
+                              />
+                            </div>
+
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="option_price"
+                                class="form-control"
+                                placeholder="가격"
+                                required
+                              />
+                            </div>
+                            <div class="col-md-1">
+                              <img
+                                id="minus_btn"
+                                class="btn-smallsquare border"
+                                src="${contextPath}/img/icon/minus.png"
+                                alt="빼기 버튼"
+                              />
+                            </div>
+                          </div>
+                          <div class="row ingredient_row">
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="option_name"
+                                class="form-control"
+                                placeholder="상품명"
                               />
                             </div>
                             <div class="col-md">
                               <input
                                 type="text"
-                                name="qty"
+                                name="option_qty"
+                                class="form-control"
+                                placeholder="양"
+                              />
+                            </div>
+
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="option_price"
                                 class="form-control"
                                 placeholder="가격"
                                 required
@@ -337,6 +347,19 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div
+                      class="col-md-11"
+                      style="width: 100%; text-align: center"
+                    >
+                      <img
+                        id="plus_btn"
+                        src="${contextPath}/img/icon/plus.png"
+                        alt="더하기 버튼"
+                        class="btn-smallsquare border"
+                      />
                     </div>
                   </div>
                   <div class="row"></div>
