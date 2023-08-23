@@ -57,7 +57,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <td style="text-align: right">
                   <a
                     href="javascript:void(0)"
-                    onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath}/seller/goods/sellerGoodsList.do")'
+                    onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath }/seller/goods/deleteSellerGoods.do?goodsNo=${goods.goodsNo}")'
                     >삭제</a
                   >
                 </td>

@@ -33,4 +33,7 @@ public interface SellerGoodsDAO {
 	public boolean updateNewGoodsWithMap(int goodsNo);
 	//주문 목록
 	public List<GoodsVO> selectGoodsList() throws DataAccessException;
+	
+	//주문 삭제
+	public int deleteSellerGoods(int goodsNo) throws DataAccessException;
 }

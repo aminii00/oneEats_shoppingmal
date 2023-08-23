@@ -107,4 +107,14 @@
 		select * from goods
 	</select>
 
+
+	<delete id="deleteSellerGoods" parameterType="int">
+<![CDATA[
+delete from goods
+where 
+goodsNo=#{goodsNo}
+]]>
+	</delete>
+
+
 </mapper>

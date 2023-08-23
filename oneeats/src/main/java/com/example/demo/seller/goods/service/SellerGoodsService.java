@@ -28,10 +28,11 @@ public interface SellerGoodsService {
 //상품 리스트	
 	public List<GoodsVO> selectGoodsList() throws DataAccessException;
 
+	
 // 상품 삭제
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException;
-	
-	
-	public boolean ModGoods(int goodsNo);
+
+//상품 목록
+	public boolean ModGoods(int goodsNo) throws DataAccessException;
 	
 }

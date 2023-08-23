@@ -98,10 +98,10 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return sellerGoodsDAO.selectGoodsList();
 	}
 
+//상품 삭제
 	@Override
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+		return sellerGoodsDAO.deleteSellerGoods(goodsNo);
 	}
 
 }
