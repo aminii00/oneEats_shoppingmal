@@ -59,7 +59,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">주문내역</a>
+                  <a href="${contextPath}/mypage/orderList.do">주문내역</a>
                 </div>
               </div>
             </li>
@@ -73,7 +73,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">1:1문의 내역</a>
+                  <a href="${contextPath}/community/oneQnA/oneQnAList.do"
+                    >1:1문의 내역</a
+                  >
                 </div>
               </div>
             </li>

@@ -75,8 +75,13 @@ public class MainServiceImpl implements MainService{
 
 	@Override
 	public List<GoodsVO> selectBestGoodsList() {
-		// TODO Auto-generated method stub
-		return null;
+		return mainDAO.selectBestGoodsList();
 	}
+
+	@Override
+	public List<GoodsVO> selectTopReviewGoodsList() {
+		return mainDAO.selectTopReviewGoodsList();
+	}
+
 	
 }

@@ -50,10 +50,13 @@ public class MainControllerImpl implements MainController {
 		List<RecipeVO> newRecipeList = mainService.selectNewRecipeList();
 		mav.addObject("newRecipeList", newRecipeList);
 		
-		
-		
 		List<GoodsVO> bestGoodsList = mainService.selectBestGoodsList();
 		mav.addObject("bestGoodsList",bestGoodsList);
+		
+		List<GoodsVO> topReviewGoodsList = mainService.selectTopReviewGoodsList();
+		mav.addObject("topReviewGoodsList",topReviewGoodsList);
+		
+		
 
 		return mav;
 	}
@@ -114,7 +117,8 @@ public class MainControllerImpl implements MainController {
 		// 상품 상세 페이지에서 넘겨준 옵션 선택 정보를 session에 저장
 		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
 		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
-		if (orderNowList != null && orderNowList.size()>0) {
+		String loginFor = (String) session.getAttribute("loginFor");
+		if (orderNowList != null && orderNowList.size()>0 && loginFor != null && loginFor.equals("orderNow")) {
 			System.out.println("주문 상품을 선택한 정보가 있음");
 			// 첫번째 원소로부터 할인 가격등을 가져와 모델에
 			int shippingFee = orderNowList.get(0).getShippingfee();
@@ -124,6 +128,7 @@ public class MainControllerImpl implements MainController {
 			mav.addObject("shippingFee", shippingFee);
 			mav.addObject("payment_price", paymentPrice);
 			mav.addObject("discount_price", discountPrice);
+			session.removeAttribute("loginFor");
 			
 		}else {
 			orderNowList = new ArrayList<OrderVO>();
@@ -168,6 +173,7 @@ public class MainControllerImpl implements MainController {
 
 		if (loginMember == null || loginMember.getId().length() < 1) {
 			mav = Alert.alertAndRedirect("로그인이 필요한 페이지입니다.", request.getContextPath() + "/member/loginForm.do");
+			session.setAttribute("loginFor", "orderNow");
 			return mav;
 		}
 
