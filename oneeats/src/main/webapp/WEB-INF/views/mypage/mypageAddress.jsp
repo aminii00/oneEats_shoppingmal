@@ -83,15 +83,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </dl>
         </div>
         <hr class="linebold">
+        <c:forEach var="item" items="${myAddress}" varStatus="status">
         <dl class="css-1ccl3pq  textsize-1">
             <div class="css-select ">선택</div>
-            <div class="css-select ">대전 서구 청사로</div>
-            <div class="css-select ">그린아트</div>
-            <div class="css-select ">042-222-2222</div>
+            <div class="css-select ">${item.address} &nbsp ${item.address_detail}</div>
+            <div class="css-select ">${item.reciever_name}</div>
+            <div class="css-select ">${item.reciever_phone}</div>
             <div class="css-select "><a href="#">수정</a></div>
         </dl>
-        </div>
         <hr>
+      </c:forEach>
+        </div>
+      
 
         <br><br>
         <div id="wrapper">

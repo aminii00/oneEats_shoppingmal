@@ -46,7 +46,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     >
                   </li>
                   <li><a href="">회원정보 수정</a></li>
-                  <li><a href="">배송지 관리</a></li>
+                  <li>
+                    <a href="${contextPath}/mypage/myAddress.do">배송지 관리</a>
+                  </li>
                 </ul>
               </div>
             </li>

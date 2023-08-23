@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.mypage.service.MypageService;
 import com.example.demo.vo.CouponVO;
+import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
@@ -231,8 +232,6 @@ public class MypageControllerImpl implements MypageController {
 		@Override
 		@RequestMapping(value="/mypage/couponSearch.do" ,method= {RequestMethod.GET, RequestMethod.POST})
 		public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response)  throws Exception{
-			
-			
 			System.out.println("여기는 Controller couponSearch.do");
 			request.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession();
@@ -243,6 +242,25 @@ public class MypageControllerImpl implements MypageController {
 			ModelAndView mav = new ModelAndView();
 			mav.addObject("couponDetail", couponDetail);
 			mav.setViewName("/mypage/mypageCouponPoint");
+			return mav;
+		}
+		
+		
+		
+		//민아 배송지관리 - 출력
+		@Override
+		@RequestMapping(value="/mypage/myAddress.do" ,method= {RequestMethod.GET, RequestMethod.POST})
+		public ModelAndView myAddress(HttpServletRequest request, HttpServletResponse response) throws Exception{
+			System.out.println("여기는 Controller myAddress.do");
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+			int MemberNo = memberInfo.getMemberNo();
+			System.out.println("MemberNo = " + MemberNo);
+			List<DeliveryAddressVO> myAddress = mypageService.myAddress(MemberNo);
+			ModelAndView mav = new ModelAndView();
+			mav.addObject("myAddress", myAddress);
+			mav.setViewName("/mypage/mypageAddress");
 			return mav;
 		}
 

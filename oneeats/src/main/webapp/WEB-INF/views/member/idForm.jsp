@@ -36,7 +36,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 ><br />
                 <span class="textsize-1">아이디 확인 후 로그인 해 주세요.</span>
                 <br /><br />
-                <div class="textsize-2 textbold">${id}</div>
+                <div class="textsize-2 textbold">${id}<br />가입일</div>
                 <br />
                 <button
                   class="btn-midlong bg-lightgray textsize-1 border-0 margin btn-round"
