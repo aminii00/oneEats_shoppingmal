@@ -28,5 +28,7 @@ public interface MemberDAO {
 	public MemberVO pwSearch(MemberVO memberVO) throws DataAccessException;
 	
 	public int updatePw(MemberVO memberVO)  throws DataAccessException;
+
+	public void insertMemberWithMap(Map memberMap);
 	
 }
