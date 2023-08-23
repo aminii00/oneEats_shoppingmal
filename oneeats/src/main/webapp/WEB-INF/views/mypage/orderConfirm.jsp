@@ -118,7 +118,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </tr>
         <tr>
           <td>사용적립금</td>
-          <td><input type="text" name="used_point" /></td>
+          <td><input type="text" name="used_point" value="0" /></td>
         </tr>
 
         <!-- 쿠폰 -->
@@ -129,6 +129,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <td>쿠폰사용</td>
           <td>
             <select name="used_couponId">
+              <option value="0" selected>쿠폰을 선택해주세요</option>
               <c:forEach var="coupon" items="${couponList}">
                 <option value="${coupon.couponNo}">${coupon.name}</option>
               </c:forEach>

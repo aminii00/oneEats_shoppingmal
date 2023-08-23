@@ -35,4 +35,8 @@ public interface MainDAO {
 	public List<GoodsVO> selectNewGoodsList();
 
 	public List<RecipeVO> selectNewRecipeList();
+
+	public List<GoodsVO> selectBestGoodsList();
+
+	public List<GoodsVO> selectTopReviewGoodsList();
 }

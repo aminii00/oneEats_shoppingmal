@@ -346,10 +346,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $(".total_price_text").text(total_price);
       }
 
-      $(document).ready(function () {
-        $();
-      });
-
       $(document).on("click", ".goods_option_plus_btn", function () {
         var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
         var changedVar = parseInt(goodsOptionVar) + 1;

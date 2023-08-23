@@ -77,7 +77,10 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               <c:forEach var="item" items="${newHotDealList }">
                 <div class="owl-item cloned" style="width: 277.5px">
                   <div class="col-lg-4">
-                    <div class="product__discount__item">
+                    <div
+                      class="product__discount__item"
+                      onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.hotdealNo}'"
+                    >
                       <div
                         class="product__discount__item__pic set-bg"
                         data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
@@ -221,9 +224,8 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         var="item"
                         value="${newGoodsList[loop.index + i]}"
                       />
-
                       <a
-                        href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
+                        href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}"
                         class="latest-product__item"
                       >
                         <div class="latest-product__item__pic">
@@ -251,21 +253,19 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 class="text-left"
                 style="font-size: 18px; padding-bottom: 6px"
               >
-                Best Products
+                베스트 상품
               </h4>
               <div class="latest-product__slider owl-carousel">
                 <c:forEach items="${bestGoodsList}" varStatus="loop" step="3">
                   <!--아이템 슬라이더 하나.-->
                   <div class="latest-product__slider__item">
-                    <!-- 슬라이더 하나 당 3개의 상품을 출력-->
                     <c:forEach begin="0" end="2" var="i">
                       <c:set
                         var="item"
                         value="${bestGoodsList[loop.index + i]}"
                       />
-                      <!--상품 하나-->
                       <a
-                        href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
+                        href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}"
                         class="latest-product__item"
                       >
                         <div class="latest-product__item__pic">
@@ -278,53 +278,57 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         <div class="latest-product__item__text">
                           <h6 style="font-size: 14px">${item.name}<br /></h6>
                           <span>￦${item.price}</span>
-                        </div> </a
-                      ><!--상품 하나 끝-->
+                        </div>
+                      </a>
                     </c:forEach>
                   </div>
                   <!--아이템 슬라이더 하나 끝-->
                 </c:forEach>
               </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="latest-product__text">
               <h4
                 class="text-left"
                 style="font-size: 18px; padding-bottom: 6px"
               >
-                Top Reviews
+                탑 리뷰 상품
               </h4>
-              <c:forEach
-                items="${topReviewGoodsList}"
-                varStatus="loop"
-                step="3"
-              >
-                <!--아이템 슬라이더 하나.-->
-                <div class="latest-product__slider__item">
-                  <!-- 슬라이더 하나 당 3개의 상품을 출력-->
-                  <c:forEach begin="0" end="2" var="i">
-                    <c:set
-                      var="item"
-                      value="${topReviewGoodsList[loop.index + i]}"
-                    />
-                    <!--상품 하나-->
-                    <a
-                      href="${contextPath}/goods/goodsDetail?goodsNo=${item.goodsNo}"
-                      class="latest-product__item"
-                    >
-                      <div class="latest-product__item__pic">
-                        <img
-                          src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
-                          style="width: 110px"
-                          ;
-                        />
-                      </div>
-                      <div class="latest-product__item__text">
-                        <h6 style="font-size: 14px">${item.name}<br /></h6>
-                        <span>￦${item.price}</span>
-                      </div> </a
-                    ><!--상품 하나 끝-->
-                  </c:forEach>
-                </div>
-                <!--아이템 슬라이더 하나 끝-->
-              </c:forEach>
+              <div class="latest-product__slider owl-carousel">
+                <c:forEach
+                  items="${topReviewGoodsList}"
+                  varStatus="loop"
+                  step="3"
+                >
+                  <!--아이템 슬라이더 하나.-->
+                  <div class="latest-product__slider__item">
+                    <c:forEach begin="0" end="2" var="i">
+                      <c:set
+                        var="item"
+                        value="${topReviewGoodsList[loop.index + i]}"
+                      />
+                      <a
+                        href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}"
+                        class="latest-product__item"
+                      >
+                        <div class="latest-product__item__pic">
+                          <img
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            style="width: 110px"
+                            ;
+                          />
+                        </div>
+                        <div class="latest-product__item__text">
+                          <h6 style="font-size: 14px">${item.name}<br /></h6>
+                          <span>￦${item.price}</span>
+                        </div>
+                      </a>
+                    </c:forEach>
+                  </div>
+                  <!--아이템 슬라이더 하나 끝-->
+                </c:forEach>
+              </div>
             </div>
           </div>
         </div>

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.example.demo.main.dao.MainDAO">
-<resultMap id="MemberResult" type="memberVO">
+	<resultMap id="MemberResult" type="memberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -215,33 +215,57 @@
 
 
 	<select id="selectNewGoodsList" resultMap="GoodsResult">
-		select * from goods order by creDate desc limit 6
+		select * from goods
+		order by creDate desc limit 6
 	</select>
-	
+
 	<select id="selectNewHotDealList" resultMap="HotDealResult">
 		select
-			h.hotdealNo,
-			h.name,
-			h.discounted_price,
-			h.goods_qty,
-			h.finishDate,
-			h.description,
-			h.creDate,
-			g.goodsNo,
-			g.price as goodsPrice,
-			g.category as category,
-			g.name as goodsName,
-			g.img1 as goodsImg
+		h.hotdealNo,
+		h.name,
+		h.discounted_price,
+		h.goods_qty,
+		h.finishDate,
+		h.description,
+		h.creDate,
+		g.goodsNo,
+		g.price as goodsPrice,
+		g.category as category,
+		g.name as goodsName,
+		g.img1 as goodsImg
 		from hotdeal as h
 		inner join goods as g
 		on
 		h.goodsNo=g.goodsNo
 		order by h.creDate desc
-		limit 3
+		limit 6
 	</select>
-	
+
 	<select id="selectNewRecipeList" resultMap="RecipeResult">
-		select * from recipe order by creDate desc limit 3
+		select * from recipe
+		order by creDate desc limit 3
 	</select>
-	 
+
+	<select id="" resultMap="GoodsResult">
+		select * from goods order by creDate desc limit 3
+	</select>
+
+	<select id="selectTopReviewGoodsList" resultMap="GoodsResult">
+		select g.* from goods as g
+		left outer join
+		(SELECT ifnull(avg(CAST(star AS
+		DECIMAL(2,1))),0) as avgstar, goodsNo FROM review group by goodsNo
+		order by avgstar desc limit 6) as star_tbl
+		on
+		g.goodsNo=star_tbl.goodsNo
+		order by avgstar desc
+	</select>
+
+	<select id="selectBestGoodsList" resultMap="GoodsResult">
+		select g.* from goods as g
+		left outer join (select sum(goods_qty) as sell, goodsNo from t_order group by goodsNo) as sell_tbl
+		on g.goodsNo=sell_tbl.goodsNo
+		order by sell desc
+		limit 6
+	</select>
 </mapper>

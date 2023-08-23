@@ -128,7 +128,7 @@ public class MypageControllerImpl implements MypageController {
 		String point_price = request.getParameter("point_price");
 		String total_price = request.getParameter("total_price");
 		String payment_type = request.getParameter("payment_type");
-
+		
 		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		List<OrderVO> orderList = new ArrayList();
 		System.out.println("selectGoodsList" + selectGoodsList);
@@ -155,6 +155,9 @@ public class MypageControllerImpl implements MypageController {
 		mypageService.insertOrderList(orderList);
 		session.setAttribute("orderList", orderList);
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
+		
+		
+		
 		return mav;
 	}
 	

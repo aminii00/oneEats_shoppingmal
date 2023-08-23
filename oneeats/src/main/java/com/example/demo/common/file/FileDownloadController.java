@@ -14,21 +14,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.coobird.thumbnailator.Thumbnails;
 
-
 @Controller
 public class FileDownloadController {
 	private static String IMAGE_REPO_PATH = "c:\\oneeats\\file_repo";
 
 	@RequestMapping("/download.do")
-	protected void download(@RequestParam("imageFileName") String imageFileName,@RequestParam("path") String path,HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	protected void download(@RequestParam("imageFileName") String imageFileName, @RequestParam("path") String path,
+			HttpServletRequest request, HttpServletResponse response) throws IOException {
 		OutputStream out = response.getOutputStream();
 		if (path.contains("No")) {
 			String[] paths = path.split("No");
-			path = paths[0]+"\\"+paths[1];
+			path = paths[0] + "\\" + paths[1];
+		}
+		if (imageFileName == null || imageFileName.trim().length()<1) {
+			return;
 		}
 		System.out.println(path);
-		String downFile = IMAGE_REPO_PATH +"\\"+path +"\\" +imageFileName;
+		String downFile = IMAGE_REPO_PATH + "\\" + path + "\\" + imageFileName;
 		File file = new File(downFile);
 		response.setHeader("Cache-control", "no-cache");
 		response.addHeader("Content-disposition", "attachment; fileName=" + imageFileName);
@@ -40,16 +42,10 @@ public class FileDownloadController {
 				break;
 			}
 			out.write(buffer, 0, count);
-
 		}
-
-
 		in.close();
 		out.close();
-
 	}
-	
-	
 
 	@RequestMapping("/thumbnailDownload.do")
 	protected void thumbnailDownload(@RequestParam("imageFileName") String imageFileName, HttpServletResponse response)
