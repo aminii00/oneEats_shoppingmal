@@ -152,7 +152,36 @@ public class MypageControllerImpl implements MypageController {
 		}
 
 		mypageService.insertOrderList(orderList);
-
+		session.setAttribute("orderList", orderList);
+		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
+		return mav;
+	}
+	
+	//민지 주문취소	
+	@RequestMapping(value = "/mypage/orderCancel.do", method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView orderCancel(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderCancel");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
+		
+		String viewName = (String)request.getAttribute("viewName");
+		/*
+		 * String orderer_name = request.getParameter("orderer_name"); String
+		 * orderer_phone = request.getParameter("orderer_phone");
+		 */
+		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
+		String delivery_status = request.getParameter("delivery_status");
+		
+		List<OrderVO> orderList = (List<OrderVO>) session.getAttribute("orderList");
+		System.out.println("orderList출력="+orderList);
+		
+		int[] order_seqNos = mypageService.selectSeqNoByOrderNo(orderNo);
+		for (int order_seqNo : order_seqNos) {
+			mypageService.updateOrder(order_seqNo);
+		}
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
