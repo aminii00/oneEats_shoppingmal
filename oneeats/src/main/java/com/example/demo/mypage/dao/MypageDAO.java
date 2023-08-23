@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.CouponVO;
+import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
@@ -46,4 +47,9 @@ public interface MypageDAO {
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
 	public int selectNewOrderNo();
+
+	//민아 배송지관리 - 출력
+	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
+	
+	
 }

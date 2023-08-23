@@ -89,7 +89,7 @@
             <br>
             <div class="line"></div>
             <br>
-            <button class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round" type="submit">
+            <button type="submit" class = "btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round" >
                 회원가입 완료
             </button>
             <br>

@@ -70,14 +70,14 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value="/member/register.do" ,method = RequestMethod.POST)
 		public ModelAndView Register(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 register.do");
+		ModelAndView mav = new ModelAndView();
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("utf-8");
 		System.out.println(memberVO);
 		int MemberNo = memberService.registerInfoNo();
 		memberVO.setMemberNo(MemberNo);
-		 memberService.registerInfo(memberVO);
-		
-		ModelAndView mav = new ModelAndView("redirect:/member/login");
+		memberService.registerInfo(memberVO);
+		mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath()+"/member/loginForm.do");
 		return mav;
 	}
 	

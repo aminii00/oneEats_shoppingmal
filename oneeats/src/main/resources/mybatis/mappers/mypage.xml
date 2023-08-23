@@ -76,7 +76,16 @@
 		<result property="memberNo" column="memberNo" />
 	</resultMap> 
 	
-	<select id="selectOrderList" resultMap="OrderResult">
+	<resultMap id="DeliveryResult" type="deliveryAddressVO">
+		<result property="reciever_name" column="reciever_name" />
+		<result property="reciever_phone" column="reciever_phone" />
+		<result property="zipCode" column="zipCode" />
+		<result property="address" column="address" />
+		<result property="address_detail" column="address_detail" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap> 
+	
+	<select id="selectOrderList" resultMap="orderResult">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
 			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
@@ -155,5 +164,15 @@
 		]]>
 	</select> 
 	
+	<!-- 민아 쿠폰, 적립금 조회-->
+	<select id="myAddress"  resultMap="DeliveryResult" parameterType="int">
+		<![CDATA[
+		
+		   select * from deliveryaddress 
+		   where 
+		   memberNo=#{memberNo}
+
+		]]>
+	</select> 
 	
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.mypage.dao.MypageDAO;
 import com.example.demo.vo.CouponVO;
+import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
@@ -77,6 +78,12 @@ public class MypageServiceImpl implements MypageService{
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException{
 		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
 		return couponVO;
+	}
+	
+	@Override
+	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException{
+		List<DeliveryAddressVO> myAddressVO = mypageDAO.myAddress(memberNo);
+		return myAddressVO;
 	}
 
 }
