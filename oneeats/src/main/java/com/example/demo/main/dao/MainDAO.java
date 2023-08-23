@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -28,4 +29,10 @@ public interface MainDAO {
 	public List<CouponVO> selectCouponByMemberNo(int memberNo);
 
 	public OrderVO selectOptionsGoodsToOrderByOptionNo(int optionNo);
+
+	public List<HotDealVO> selectNewHotDealList();
+
+	public List<GoodsVO> selectNewGoodsList();
+
+	public List<RecipeVO> selectNewRecipeList();
 }

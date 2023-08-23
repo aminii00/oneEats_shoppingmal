@@ -28,4 +28,7 @@ public interface MypageController {
 	
 	public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 
+	//민아 배송지관리 - 출력
+	public ModelAndView myAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
 }

@@ -11,6 +11,7 @@ import com.example.demo.main.dao.MainDAO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -57,6 +58,25 @@ public class MainServiceImpl implements MainService{
 		return mainDAO.selectOptionsGoodsToOrderByOptionNo(optionNo);
 	}
 
-	
+	@Override
+	public List<HotDealVO> selectNewHotDealList() {
+		return mainDAO.selectNewHotDealList();
+	}
+
+	@Override
+	public List<GoodsVO> selectNewGoodsList() {
+		return mainDAO.selectNewGoodsList();
+	}
+
+	@Override
+	public List<RecipeVO> selectNewRecipeList() {
+		return mainDAO.selectNewRecipeList();
+	}
+
+	@Override
+	public List<GoodsVO> selectBestGoodsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

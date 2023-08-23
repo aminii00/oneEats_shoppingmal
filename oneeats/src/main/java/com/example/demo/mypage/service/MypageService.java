@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.example.demo.vo.CouponVO;
+import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 public interface MypageService {
@@ -34,4 +35,7 @@ public interface MypageService {
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
+	public int selectNewOrderNo();
+
+	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
 }

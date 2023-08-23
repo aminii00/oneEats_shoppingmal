@@ -2,9 +2,7 @@ package com.example.demo.main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,11 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
-import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.RecipeVO;
@@ -43,20 +41,19 @@ public class MainControllerImpl implements MainController {
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
 
-		List<GoodsVO> goodsList = mainService.selectAllGoodsList();
-		for (GoodsVO i : goodsList) {
-		}
-		mav.addObject("goodsList", goodsList);
+		List<HotDealVO> newHotDealList = mainService.selectNewHotDealList();
+		mav.addObject("newHotDealList", newHotDealList);
 
-		List<GoodsVO> newGoodsList = mainService.orderByNew();
-		for (GoodsVO i : newGoodsList) {
-		}
+		List<GoodsVO> newGoodsList = mainService.selectNewGoodsList();
 		mav.addObject("newGoodsList", newGoodsList);
 
-		List<RecipeVO> newRecipeList = mainService.selectAllRecipesList();
-		for (RecipeVO i : newRecipeList) {
-		}
+		List<RecipeVO> newRecipeList = mainService.selectNewRecipeList();
 		mav.addObject("newRecipeList", newRecipeList);
+		
+		
+		
+		List<GoodsVO> bestGoodsList = mainService.selectBestGoodsList();
+		mav.addObject("bestGoodsList",bestGoodsList);
 
 		return mav;
 	}
@@ -108,7 +105,7 @@ public class MainControllerImpl implements MainController {
 	}
 
 	@RequestMapping(value = "/orderNow.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView storeValueInSessio2n(HttpServletRequest request) throws IOException {
+	public ModelAndView orderNow(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
