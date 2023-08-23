@@ -88,7 +88,8 @@
 	
 	<select id="selectOrderList" resultMap="OrderResult">
 		<![CDATA[
-			select orderplusgoods.*,orderGun.gun from (select t_order.*,goods.name as goodsName,goods.img1 as goodsImg from t_order inner join goods on t_order.goodsNo=goods.goodsNo) 
+			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
+			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo) 
 			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
     		on orderplusgoods.orderNo=orderGun.orderNo
 		]]>
@@ -96,7 +97,7 @@
 
 	<select id="selectOrderByOrderNo" resultMap="OrderResult"  parameterType="int">
 		<![CDATA[
-			select t_order.*, goods.name as goodsName, goods.img1 as goodsImg, goods.price as goodsPrice, goods.weight as weight from t_order inner join goods on t_order.goodsNo=goods.goodsNo
+			select t_order.*, goodsAndHotdealView.name as goodsName, goodsAndHotdealView.img1 as goodsImg, goodsAndHotdealView.price as goodsPrice, goodsAndHotdealView.weight as weight from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
 			where t_order.orderNo=#{orderNo}
 		]]>
 	</select>

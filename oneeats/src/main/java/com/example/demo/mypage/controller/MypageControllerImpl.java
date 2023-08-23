@@ -65,11 +65,21 @@ public class MypageControllerImpl implements MypageController {
 
 	@Override
 	@RequestMapping(value = "/mypage/orderConfirm.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView orderConfirm(int memberNo, HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		System.out.println("여기는 orderConfirm");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		if(member == null || member.getId().length() < 1) {
+			mav = Alert.alertAndRedirect("로그인이 필요한 페이지입니다.", request.getContextPath() + "/member/loginForm.do");
+			return mav;
+		}
+		
+		
+		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
 
 		String[] goodsNos = request.getParameterValues("goodsNo");
@@ -95,7 +105,6 @@ public class MypageControllerImpl implements MypageController {
 			selectGoodsList.add(temp);
 		}
 
-		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("payment_price", payment_price);
 		mav.addObject("shippingFee", shippingFee);
