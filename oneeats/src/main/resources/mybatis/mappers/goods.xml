@@ -6,7 +6,7 @@
 	<mapper namespace="com.example.demo.goods.dao.GoodsDAO">
 	
 	
-	<resultMap id="goodsResult" type="goodsVO">
+	<resultMap id="GoodsResult" type="goodsVO">
 	  <result column="goodsNo" property="goodsNo"/>
 	  <result column="name" property="name"/>
 	  <result column="price" property="price"/>
@@ -72,7 +72,22 @@
 	  <result property="optionInbun" column="optionInbun" />
     </resultMap>
     
-	<select id="selectAllGoodsList" resultMap="goodsResult">
+    <resultMap id="HotDealResult" type="hotDealVO">
+		<result property="hotdealNo" column="hotdealNo" />
+		<result property="name" column="name" />
+		<result property="discounted_price" column="discounted_price" />
+		<result property="goods_qty" column="goods_qty" />
+		<result property="finishDate" column="finishDate" />
+		<result property="description" column="description" />
+		<result property="creDate" column="creDate" />
+		<result property="category" column="category" />
+		<result property="goodsNo" column="goodsNo" />
+		<result property="goodsName" column="goodsName" />
+		<result property="goodsPrice" column="goodsPrice" />
+		<result property="goodsImg" column="goodsImg" />
+	</resultMap>
+    
+	<select id="selectAllGoodsList" resultMap="GoodsResult">
 		 <![CDATA[
 		select * from goods
 		]]>
@@ -89,7 +104,7 @@
 		
 	</select>
 	
-	<select id="goodsDetail" resultMap="goodsResult">
+	<select id="goodsDetail" resultMap="GoodsResult">
 	 <![CDATA[
 		select goods.*, member.name as sellerName from goods 
 		inner join member
@@ -116,5 +131,31 @@
 		inner join goods
 		on `option`.goodsNo = goods.goodsNo
 		where goods.goodsNo=#{goodsNo}	
+	</select>
+	
+	<select id="selectNewHotDealList" resultMap="HotDealResult">
+		select
+		h.hotdealNo,
+		h.name,
+		h.discounted_price,
+		h.goods_qty,
+		h.finishDate,
+		h.description,
+		h.creDate,
+		g.goodsNo,
+		g.price as goodsPrice,
+		g.category as category,
+		g.name as goodsName,
+		g.img1 as goodsImg
+		from hotdeal as h
+		inner join goods as g
+		on
+		h.goodsNo=g.goodsNo
+		order by h.creDate desc
+		limit 6
+	</select>
+	
+	<select id="selectTotalGoodsNumForAll" resultType="int">
+		select count(goodsNo) from goods
 	</select>
 </mapper> 

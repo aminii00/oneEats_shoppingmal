@@ -45,7 +45,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               margin-left: 4px;
             "
           >
-            <span class="textsize-3 textbold">&nbsp;&nbsp;관리자 메뉴</span>
+            <span class="textsize-3 textbold">&nbsp;&nbsp;고객센터</span>
           </div>
           <ul class="ul_menus" style="margin-left: 16px">
             <li id="menu_notice">

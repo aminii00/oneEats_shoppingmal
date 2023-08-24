@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.goods.dao.GoodsDAO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotDealVO;
 
 @Service("goodsService")
 public class GoodsServiceImpl implements GoodsService{
@@ -60,8 +61,17 @@ public class GoodsServiceImpl implements GoodsService{
 	}
 
 	
+	@Override
+	public List<HotDealVO> selectNewHotDealList(){
+		return goodsDAO.selectNewHotDealList();
+	}
 
-	
+
+	@Override
+	public int selectTotalGoodsNumForAll() {
+		return goodsDAO.selectTotalGoodsNumForAll();
+	};
+
 	
 
 

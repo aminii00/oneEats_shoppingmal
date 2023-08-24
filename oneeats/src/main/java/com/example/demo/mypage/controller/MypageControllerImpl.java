@@ -161,8 +161,14 @@ public class MypageControllerImpl implements MypageController {
 			orderList.add(temp);
 		}
 
-		mypageService.insertOrderList(orderList);
-		session.setAttribute("orderList", orderList);
+		try {
+			mypageService.insertOrderList(orderList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.removeAttribute("cartList");
+		}
+
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		
 		

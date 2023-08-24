@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
+import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.OptionVO;
 
 @Mapper
@@ -31,6 +32,10 @@ public interface GoodsDAO {
 	public float selectReviewAverage(int goodsNo);
 
 	public List<CartVO> selectOptionsByGoodsNo(int goodsNo);
+	
+	public List<HotDealVO> selectNewHotDealList();
+
+	public int selectTotalGoodsNumForAll();
 }
 	
 

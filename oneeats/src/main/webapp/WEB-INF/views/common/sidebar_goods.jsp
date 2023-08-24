@@ -14,6 +14,27 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       var rotateArray = new Array(0, 0, 0, 0, 0);
     </script>
     <script src="${contextPath}/js/side.js"></script>
+    <c:set var="currentViewQuickGoodsNum" value="1" />
+    <!--최근 본 상품을 바꾸기 위한 코드-->
+    <script>
+      var quickGoodsListNum = parseInt("${quickGoodsListNum}");
+      function fn_nextQuickGoods(num) {
+        currentViewQuickGoodsNum++;
+        $("#cur_goods_num").text(currentViewQuickGoodsNum);
+        if (num == quickGoodsListNum) {
+          $("#quick_goods_" + num).addClass("div_hidden");
+          $("#quick_goods_" + 1).removeClass("div_hidden");
+        } else {
+          $("#quick_goods_" + num).addClass("div_hidden");
+          $("#quick_goods_" + num + 1).removeClass("div_hidden");
+        }
+      }
+    </script>
+    <style>
+      .div_hidden {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <div class="row" style="margin-top: 80px">
@@ -129,47 +150,90 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       <div class="latest-product__text">
         <h4 style="font-size: 20px" class="text-left">최근 본 상품</h4>
         <div class="latest-product__slider owl-carousel">
-          <div class="latest-prdouct__slider__item">  <ul>
-            <!--   상품이 없습니다. -->
-             <c:choose>
-              <c:when test="${ empty quickGoodsList }">
-                     <strong>상품이 없습니다.</strong>
-              </c:when>
-              <c:otherwise>
-                 <form name="frm_sticky"  >	        
-                  <c:forEach var="item" items="${quickGoodsList }" varStatus="itemNum">
-                     <c:choose>
-                       <c:when test="${itemNum.count==1 }">
-                    <!-- <a href="javascript:goodsDetail();"> -->
-                           <img width="110" height="110" id="img_sticky"  
-                             src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop">
-         
-                    <!-- </a> -->
-                             <input type="hidden"  name="h_goods_id" value="${item.goodsNo}" />
-                            <input type="hidden" name="h_goods_fileName" value="${item.img1}" />
-                         <br/>
-                    </c:when>
-                    <c:otherwise>
-                      <input type="hidden"  name="h_goods_id" value="${item.goodsNo}" />
-                      <input type="hidden" name="h_goods_fileName" value="${item.img1}" />
-                    </c:otherwise>
-                    </c:choose>
-        </form>
-                 </c:forEach>
-               </c:otherwise>
-                </c:choose>
-             </ul></div>
-         	</div>
-	 <div>
-	 <c:choose>
-	    <c:when test="${ empty quickGoodsList }">
-		    <h5>  &nbsp; &nbsp; &nbsp; &nbsp;  0/0  &nbsp; </h5>
-	    </c:when>
-	    <c:otherwise>
-           <h5><a  href='javascript:fn_show_previous_goods();'> 이전 </a> &nbsp;  <span id="cur_goods_num">1</span>/${quickGoodsListNum}  &nbsp; <a href='javascript:fn_show_next_goods();'> 다음 </a> </h5>
-       </c:otherwise>
-       </c:choose>
-    </div>
+          <div class="latest-prdouct__slider__item">
+            <ul>
+              <!--   상품이 없습니다. -->
+              <c:choose>
+                <c:when test="${ empty quickGoodsList }">
+                  <strong>상품이 없습니다.</strong>
+                </c:when>
+                <c:otherwise>
+                  <form name="frm_sticky">
+                    <c:forEach
+                      var="item"
+                      items="${quickGoodsList }"
+                      varStatus="itemNum"
+                    >
+                      <c:choose>
+                        <c:when test="${itemNum.count==1 }">
+                          <div id="quick_goods_1">
+                            <img
+                              width="110"
+                              height="110"
+                              id="img_sticky"
+                              src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
+                            />
+                            <input
+                              type="hidden"
+                              name="h_goods_id"
+                              value="${item.goodsNo}"
+                            />
+                            <input
+                              type="hidden"
+                              name="h_goods_fileName"
+                              value="${item.img1}"
+                            />
+                            <br />
+                          </div>
+                        </c:when>
+                        <c:otherwise>
+                          <div
+                            id="quick_goods_${itemNum.count}"
+                            class="div_hidden"
+                          >
+                            <img
+                              class="img_hidden"
+                              width="110"
+                              height="110"
+                              id="img_sticky"
+                              src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
+                            />
+                            <input
+                              type="hidden"
+                              name="h_goods_id"
+                              value="${item.goodsNo}"
+                            />
+                            <input
+                              type="hidden"
+                              name="h_goods_fileName"
+                              value="${item.img1}"
+                            />
+                          </div>
+                        </c:otherwise>
+                      </c:choose>
+                    </c:forEach>
+                  </form>
+                </c:otherwise>
+              </c:choose>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <c:choose>
+            <c:when test="${ empty quickGoodsList }">
+              <h5>&nbsp; &nbsp; &nbsp; &nbsp; 0/0 &nbsp;</h5>
+            </c:when>
+            <c:otherwise>
+              <h5>
+                <a href="javascript:fn_show_previous_goods();"> 이전 </a> &nbsp;
+                <span id="cur_goods_num">${currentViewQuickGoodsNum}</span
+                >/${quickGoodsListNum} &nbsp;
+                <a onclick="fn_nextQuickGoods(currentViewQuickGoodsNum)">
+                  다음
+                </a>
+              </h5>
+            </c:otherwise>
+          </c:choose>
         </div>
       </div>
     </div>
