@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
 <title>회원가입 선택 창</title>
+<script>
+
+</script>
 <style>
 .box{
     width: 100px; 
@@ -54,19 +57,16 @@
                 
                 <div class ="serve-wrap">
                     <br><p class = " text-left textsize-1 margin1 textbold">
-                        <input class = "text-left" type="checkbox" name ="check1" value="agreeTotal">&nbsp&nbsp&nbsp전체 약관 동의</span><br>
-                        <input type="checkbox" name ="check2" value="agree1">&nbsp&nbsp&nbsp[필수]서비스 이용 약관 동의<br>
-                        <input type="checkbox" name ="check2" value="agree1">&nbsp&nbsp&nbsp[필수]개인정보 수집 및 이용에 동의<br>
+                        <input class = "text-left" type="checkbox" name ="check" value="agreeTotal">&nbsp&nbsp&nbsp전체 약관 동의</span><br>
+                        <input type="checkbox" name ="check1" value="agree1">&nbsp&nbsp&nbsp[필수]서비스 이용 약관 동의<br>
+                        <input type="checkbox" name ="check1" value="agree1">&nbsp&nbsp&nbsp[필수]개인정보 수집 및 이용에 동의<br>
                         <input type="checkbox" name ="check2" value="yes">&nbsp&nbsp&nbsp[선택]긴급 할인 등 정보,혜택 수신 동의<br>
                         &nbsp&nbsp&nbsp&nbsp<input type="checkbox" name ="sms_agreement" value="yes">&nbsp&nbsp&nbsp&nbsp SMS &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <input type="checkbox" name ="email_agreement" value="yes">&nbsp&nbsp&nbsp이메일<br>
-                        <input type="checkbox" name ="check2" value="agree1">&nbsp&nbsp&nbsp[필수]본인은 만 14세 이상입니다.<br>
+                        <input type="checkbox" name ="check1" value="agree1">&nbsp&nbsp&nbsp[필수]본인은 만 14세 이상입니다.<br>
                         <br>
                         </p>
                 <br>
-                <button class = "btn-long bg-lightgray margin textsize-1 border-0 btn-round">
-                    필수 항목에 모두 동의해주세요.
-                </button>
                 <button type="submit" class = "btn-long bg-lightgreen margin textsize-1 border-0 btn-round">
                     다음으로
                 </button>
