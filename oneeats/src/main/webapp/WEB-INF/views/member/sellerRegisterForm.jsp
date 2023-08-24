@@ -13,6 +13,10 @@
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
 <title>회원가입 선택 창</title>
+<script>
+
+
+</script>
 <style>
 .box{
     width: 100px; 
@@ -54,7 +58,7 @@
                 <div class ="serve-wrap">
                 <span class ="textsize-2">One.Eats에 오신 것을 환영합니다.</span><br>
                 <span class ="textsize-1">사업자 회원가입 페이지 입니다.</span> <br><br>
-                <input class ="btn-midlong-sellerInput btn-round textsize-0 " name ="busNo" placeholder=" 사업자 등록번호 10자리" type="text"></input><br>
+                <input class ="btn-midlong-sellerInput btn-round textsize-0 " name ="busNo" maxlength="10" placeholder=" 사업자 등록번호 10자리" ></input><br>
                 <div class ="textpoint-left textsize-0 margin-id">&nbsp&nbsp&nbsp&nbsp&nbsp사업자 회원으로 가입하려면 사업자등록증 인증이 필요합니다.</div>
                 <div class ="textpoint-left textsize-0 margin-id">&nbsp&nbsp&nbsp&nbsp&nbsp사업자등록증을 미리 준비해주세요.</div><br>
                 <br>

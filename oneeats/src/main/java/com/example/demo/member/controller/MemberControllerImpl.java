@@ -43,8 +43,7 @@ public class MemberControllerImpl implements MemberController {
 			session=request.getSession();
 			session.setAttribute("isLogOn", true);
 			session.setAttribute("memberInfo",memberVO);
-			mav.setViewName("/main/mainPage");
-			
+			mav.setViewName("redirect:/main/mainPage.do");
 		  }else{
 			  System.out.println("로그인 X");
 			  mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/loginForm.do");
@@ -110,6 +109,10 @@ public class MemberControllerImpl implements MemberController {
 		System.out.println("idSearch Controller");
 		ModelAndView mav = new ModelAndView();
 		String id = memberService.idSearch(memberVO);
+		
+		if (id == null) {
+			mav = Alert.alertAndRedirect("비밀번호가 틀립니다.", request.getContextPath()+"/member/idSearchForm.do");
+		}
 		System.out.println("id = " + id);
 		mav.addObject("id", id);
 		mav.setViewName("/member/idForm");
@@ -165,7 +168,10 @@ public class MemberControllerImpl implements MemberController {
 			public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			System.out.println("sellerRegister_one.do");
+			
 			String busNo1 = request.getParameter("busNo");
+			
+			
 			int busNo = Integer.parseInt(busNo1);
 			HttpSession session = request.getSession();
 			//세션에 로그인 회원정보 보관
@@ -183,10 +189,22 @@ public class MemberControllerImpl implements MemberController {
 					System.out.println("sellerRegister_two.do");
 					String sms_agreement = request.getParameter("sms_agreement");
 					String email_agreement = request.getParameter("email_agreement");
+					
+					int memberNo = memberService.registerInfoNo();
+					Map memberMap = GeneralFileUploader.getParameterMap(request);
+					if (email_agreement == null || email_agreement.trim().length()<1) {
+						email_agreement = "no";
+					}
+					
+					if (sms_agreement == null || sms_agreement.trim().length()<1) {
+						sms_agreement = "no";
+					}
+			
 					HttpSession session = request.getSession();
 					//세션에 로그인 회원정보 보관
 					session.setAttribute("sms_agreement",sms_agreement );
 					session.setAttribute("email_agreement",email_agreement );
+					
 					ModelAndView mav = new ModelAndView();
 					mav.setViewName("/member/sellerRegisterInfoForm");
 					return mav;
@@ -195,23 +213,43 @@ public class MemberControllerImpl implements MemberController {
 				// 민아 사업자 회원가입 드디어 insert
 				@Override
 				@RequestMapping(value="/member/sellerRegisterLast.do" ,method = RequestMethod.POST)
-					public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO) throws Exception {
+					public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response) throws Exception {
 					request.setCharacterEncoding("utf-8");
 					System.out.println("sellerRegisterLast.do");
 					HttpSession session = request.getSession();
 					int busNo = (int) session.getAttribute("busNo");
 					String sms_agreement = (String) session.getAttribute("sms_agreement");
 					String email_agreement = (String) session.getAttribute("email_agreement");
-					System.out.println("busNo = " +busNo);
-					memberVO.setBusNo(busNo);
-					memberVO.setSms_agreement(sms_agreement);
-					memberVO.setEmail_agreement(email_agreement);
+					String birth = request.getParameter("birth");
+					String email = request.getParameter("email");
+					String address = request.getParameter("address");
+					String address_detail = request.getParameter("address_detail");
 					
-					System.out.println(memberVO);
-					int MemberNo = memberService.registerInfoNo();
-					memberVO.setMemberNo(MemberNo);
-					 memberService.sellerRegisterInfo(memberVO);
 					
+					if (birth == null || birth.trim().length()<1) {
+						birth = null;
+					}
+					
+					if (email == null || email.trim().length()<1) {
+						email = null;
+					}
+					
+					if (address == null || address.trim().length()<1) {
+						address = null;
+					}
+					
+					if (address_detail == null || address_detail.trim().length()<1) {
+						address_detail = null;
+					}
+					
+					/*
+					 * System.out.println("busNo = " +busNo); memberVO.setBusNo(busNo);
+					 * memberVO.setSms_agreement(sms_agreement);
+					 * memberVO.setEmail_agreement(email_agreement);
+					 * 
+					 * System.out.println(memberVO); int MemberNo = memberService.registerInfoNo();
+					 * memberVO.setMemberNo(MemberNo); memberService.sellerRegisterInfo(memberVO);
+					 */
 					ModelAndView mav = new ModelAndView();
 					mav.setViewName("/member/sellerRegisterLastForm");
 					return mav;

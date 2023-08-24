@@ -267,5 +267,6 @@
 		on g.goodsNo=sell_tbl.goodsNo
 		order by sell desc
 		limit 6
+
 	</select>
 </mapper>

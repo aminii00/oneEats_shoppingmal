@@ -29,7 +29,8 @@
 
 	<select id="insertMemberNo" resultType="int">
 		<![CDATA[
-			SELECT MAX(memberNo)+1 FROM member
+			SELECT IFNULL(MAX(memberNo), 0)+1 From member
+			
 		]]>
 	</select>
 
@@ -60,16 +61,8 @@
 	</select>
 
 	<insert id="insertSellerNewMember" parameterType="memberVO">
-		insert into member(memberNo, type, busNo, id,pwd, name, email, phone, gender, 
-	
-		birth, 
-
-		sms_agreement, email_agreement, address, address_detail)
-		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender},
-	
-		 #{birth},
-
-		  #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+		insert into member(memberNo, type, busNo, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
+		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
 		
 	</insert>
 
