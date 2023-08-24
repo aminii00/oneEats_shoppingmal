@@ -20,20 +20,19 @@ import com.example.demo.vo.OrderVO;
 @Mapper
 @Repository("mypageDAO")
 public interface MypageDAO {
-	//민지 주문내역
+
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	
-	//민지 주문상세(orderNo 기준)
+	public List<OrderVO> selectOrderByMemberNo(int memberNo);
+	
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws DataAccessException;
 	
-	//민지 주문하기
 	public void insertOrderList(List<OrderVO> orderList);
 	
 	public int[] selectSeqNoByOrderNo(int orderNo);
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
-	//민지 쿠폰목록(memberNo 기준)
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	
 	public MemberVO selectMypageList(String member_id) throws DataAccessException;
@@ -54,6 +53,6 @@ public interface MypageDAO {
 
 	//민아 배송지관리 - 출력
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
-	
+
 	
 }

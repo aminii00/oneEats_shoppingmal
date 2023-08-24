@@ -44,6 +44,7 @@ public class MemberControllerImpl implements MemberController {
 			session.setAttribute("isLogOn", true);
 			session.setAttribute("memberInfo",memberVO);
 			mav.setViewName("redirect:/main/mainPage.do");
+			
 		  }else{
 			  System.out.println("로그인 X");
 			  mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/loginForm.do");
@@ -59,7 +60,7 @@ public class MemberControllerImpl implements MemberController {
 		HttpSession session=request.getSession();
 		session.setAttribute("isLogOn", false);
 		session.removeAttribute("memberInfo");
-		mav.setViewName("/main/mainPage");
+		mav.setViewName("redirect:/main/mainPage.do");
 		return mav;
 	}
 	
@@ -115,7 +116,7 @@ public class MemberControllerImpl implements MemberController {
 		}
 		System.out.println("id = " + id);
 		mav.addObject("id", id);
-		mav.setViewName("/member/idForm");
+		mav.setViewName("redirect:/member/idForm.do");
 		return mav;
 	}
 	
@@ -133,7 +134,7 @@ public class MemberControllerImpl implements MemberController {
 				HttpSession session = request.getSession();
 				//세션에 회원정보 보관
 				session.setAttribute("member", member);
-				mav.setViewName("/member/newPwSearchForm");
+				mav.setViewName("redirect:/member/newPwSearchForm.do");
 			}catch(NullPointerException e) {
 				System.out.println("비밀번호 찾기 - 정보 X");
 				mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/pwSearchForm.do");
@@ -177,7 +178,7 @@ public class MemberControllerImpl implements MemberController {
 			//세션에 로그인 회원정보 보관
 			session.setAttribute("busNo", busNo);
 			ModelAndView mav = new ModelAndView();
-			mav.setViewName("/member/sellerRegisterAgreeForm");
+			mav.setViewName("redirect:/member/sellerRegisterAgreeForm.do");
 			return mav;
 		}
 		
@@ -206,7 +207,7 @@ public class MemberControllerImpl implements MemberController {
 					session.setAttribute("email_agreement",email_agreement );
 					
 					ModelAndView mav = new ModelAndView();
-					mav.setViewName("/member/sellerRegisterInfoForm");
+					mav.setViewName("redirect:/member/sellerRegisterInfoForm.do");
 					return mav;
 				}
 				
@@ -251,7 +252,7 @@ public class MemberControllerImpl implements MemberController {
 					 * memberVO.setMemberNo(MemberNo); memberService.sellerRegisterInfo(memberVO);
 					 */
 					ModelAndView mav = new ModelAndView();
-					mav.setViewName("/member/sellerRegisterLastForm");
+					mav.setViewName("redirect:/member/sellerRegisterLastForm.do");
 					return mav;
 				}
 

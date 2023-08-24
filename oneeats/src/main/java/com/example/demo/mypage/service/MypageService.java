@@ -13,6 +13,8 @@ import com.example.demo.vo.OrderVO;
 public interface MypageService {
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	
+	public List<OrderVO> selectOrderByMemberNo(int memberNo);
+	
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception;
 	
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws Exception;
@@ -36,4 +38,5 @@ public interface MypageService {
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
+	
 }

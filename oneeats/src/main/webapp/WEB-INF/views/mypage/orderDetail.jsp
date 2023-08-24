@@ -69,7 +69,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">적립금액</dt>
-            <dd class="dd-1 textsize-1 textcolor-black">${point_price}원</dd>
+            <dd class="dd-1 textsize-1 textcolor-black">
+              ${order.point_price}원
+            </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">결제방법</dt>
@@ -119,7 +121,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="div-t1 textbold textcolor-black textsize-1">
         <span>배송정보</span>
         <button
-          class="btn-4 textcolor-white bg-lightgreen border-0 textsize-1"
+          class="btn-5 textcolor-white bg-lightgreen border-0 textsize-1"
           style="float: right"
           onclick="location.href='${contextPath}/mypage/deliveryInquiry.do'"
           type="button"
@@ -167,15 +169,20 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <c:forEach var="detail" items="${orderDetail}">
         <div class="div-t2">
           <div class="div-left2">
-            <img
-              class="img-1"
-              src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=order"
-              alt="상품메인"
-            />
+            <a
+              href="${contextPath}/goods/goodsDetail.do?goodsNo=${detail.goodsNo}"
+              ><img
+                class="img-1"
+                src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=order"
+                alt="상품메인"
+            /></a>
             <div class="div-dl">
               <dl class="dl-dt">
                 <dt class="dt-2 textsize-1 textcolor-black">
-                  ${detail.goodsName}
+                  <a
+                    href="${contextPath}/goods/goodsDetail.do?goodsNo=${detail.goodsNo}"
+                    >${detail.goodsName}</a
+                  >
                 </dt>
               </dl>
               <dl class="dl-dt">
@@ -190,13 +197,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <span class="span-1 textsize-1 textcolor-black"
               >${detail.delivery_status}</span
             >
-            <button
-              class="btn-5 bg-lightgreen border-0 textsize-1 textbold textcolor-white"
-              type="button"
-              onclick='fn_openalert("장바구니에 담았습니다.<br> 장바구니로 이동하시겠습니까?","${contextPath}/cart.do")'
-            >
-              <span>장바구니 담기</span>
-            </button>
           </div>
         </div>
       </c:forEach>
