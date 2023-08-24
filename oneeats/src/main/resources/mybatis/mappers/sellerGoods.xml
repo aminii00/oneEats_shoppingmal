@@ -50,8 +50,8 @@
 
 	<insert id="insertNewGoods" parameterType="goodsVO">
 		insert goods
-		(category,name,price,rapping,manufacturer,weight,harvest,type,memberNo)
-		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo})
+		(category,name,price,rapping,manufacturer,weight,harvest,type,memberNo,description,img1,img2,img3,img4,img5)
+		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo},#{description},#{img1},#{img2},#{img3},#{img4},#{img5})
 	</insert>
 
 
@@ -88,8 +88,8 @@
 	<insert id="insertNewGoodsWithMap" parameterType="java.util.Map">
 		insert into
 		goods
-		(category,name,price,rapping,manufacturer,weight,harvest,type,memberNo)
-		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo})
+		(category,name,price,rapping,manufacturer,weight,harvest,type,memberNo,description,img1,img2,img3,img4,img5)
+		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{harvest},#{type},#{memberNo},#{description},#{img1},#{img2},#{img3},#{img4},#{img5})
 
 	</insert>
 

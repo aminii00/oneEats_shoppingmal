@@ -37,7 +37,7 @@ import com.example.demo.vo.OrderVO;
 
 @Controller("sellerGoodsController")
 public class SellerGoodsControllerImpl implements SellerGoodsController {
-	private static final String ARTICLE_IMAGE_REPO = "C:\\board\\article_image";
+	
 	@Autowired
 	private SellerGoodsService sellerGoodsService;
 
@@ -78,13 +78,20 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 			) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		int newGoodsNo = sellerGoodsService.selectNewGoodsNo();
+		List fileList = GeneralFileUploader.upload(request, "/goods/" + newGoodsNo);
+		System.out.println("fileList : " + fileList);
 		System.out.println("newGoodsNo = " + newGoodsNo);
 
 		// map에 goods 정보를 저장
 		Map map = GeneralFileUploader.getParameterMap(request);
 		map.put("goodsNo", newGoodsNo);
-//	    map.put("Img1", fileList.get(0));
-
+		map.put("img1", fileList.get(0));
+		map.put("img2", fileList.get(1));
+		map.put("img3", fileList.get(2));
+		map.put("img4", fileList.get(3));
+		map.put("img5", fileList.get(4));
+		
+		System.out.println("map : "+map);
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("loginUser");
@@ -139,8 +146,10 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 	}
 
 	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
+
+	/*
 	@Override
-	@RequestMapping(value="/seller/goods/modSellerGoods.do", method=RequestMethod.POST)
+	@RequestMapping(value="/seller/goods/modSellerGoods.do", method= {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
 		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환
@@ -158,6 +167,35 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		
 		return mav;
 	}
+	*/
+	
+	@Override
+	@RequestMapping(value="/seller/goods/modSellerGoods.do", method= {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
+		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환
+		
+		// goodsNo을 보내서 goodsVO 정보 가져오기
+		GoodsVO goodsVO = sellerGoodsService.selectGoodsVO(goodsNo); 
+		System.out.println("goodsVO = " +goodsVO);
+		
+		List<OptionVO> option =  (List<OptionVO>) sellerGoodsService.selectOptionVO(goodsNo);
+		System.out.println(option);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("option",option);
+		mav.addObject("goods",goodsVO);
+		mav.setViewName("/seller/goods/sellerGoodsModForm");
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+
+	
+	
 	
 	/*@Override
 	@RequestMapping(value="/seller/goods/modSellerGoods.do",method = RequestMethod.GET)
@@ -210,6 +248,9 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		mav = Alert.alertAndRedirect("상품을 등록했습니다.", request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + goodsNo);
 		return mav;
 	}*/
+	
+
+	
 	
 	
 //리스트 삭제

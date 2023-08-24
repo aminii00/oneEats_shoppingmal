@@ -82,29 +82,29 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="product__details__pic__item">
                 <img
                   class="product__details__pic__item--large"
-                  src="${contextPath}/download.do?imgFileName=${goods.img1}&path=goods"
+                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
                   alt=""
                 />
               </div>
               <div class="product__details__pic__slider owl-carousel">
                 <img
-                  data-imgbigurl="img/product/details/product-details-2.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img2}&path=goods"
+                  data-imgbigurl="${contextPath}/download.do?imageFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
                   alt=""
                 />
                 <img
-                  data-imgbigurl="img/product/details/product-details-3.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img3}&path=goods"
+                  data-imgbigurl="${contextPath}/download.do?imageFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
                   alt=""
                 />
                 <img
-                  data-imgbigurl="img/product/details/product-details-5.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img4}&path=goods"
+                  data-imgbigurl="${contextPath}/download.do?imageFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
                   alt=""
                 />
                 <img
-                  data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img5}&path=goods"
+                  data-imgbigurl="${contextPath}/download.do?imageFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
                   alt=""
                 />
               </div>

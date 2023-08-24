@@ -85,7 +85,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         class="product__discount__item__pic set-bg"
                         data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
                         style="
-                          background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods');
+                          background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}');
                         "
                       >
                         <!-- <div class="product__discount__percent">
@@ -230,7 +230,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                       >
                         <div class="latest-product__item__pic">
                           <img
-                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             style="width: 110px"
                             ;
                           />
