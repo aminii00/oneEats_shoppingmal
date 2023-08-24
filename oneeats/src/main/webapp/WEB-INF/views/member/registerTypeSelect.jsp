@@ -57,5 +57,10 @@
         <br>
         <button class = "btn-midlong bg-lightgray margin textsize-1 border-0 btn-round" onclick="location.href ='${contextPath}/member/registerForm.do'">ID/PW 입력이 필요한 회원가입</button>
         <br><br><br><br><br><br>
+
+        <br>
+        <p class = "textsize-1 margin1">법인 고객이신가요?</p>
+        <p class =" textsize-1">사업자 회원으로 전용 특가 혜택을 누려보세요</p>
+        <a class = "textbold" href="${contextPath}/member/sellerRegisterForm.do">사업자 간편가입</a>
 </body>
 </html>

@@ -20,4 +20,6 @@ public interface MemberService {
 	
 	public int updatePw(MemberVO memberVO) throws DataAccessException;
 	public void insertMemberWithMap(Map memberMap);
+	public MemberVO selectMemberByEmail(String email);
+	public MemberVO selectMemberById(String string);
 }

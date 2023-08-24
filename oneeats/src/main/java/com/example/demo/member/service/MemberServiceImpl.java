@@ -60,6 +60,19 @@ public class MemberServiceImpl implements MemberService {
 			memberDAO.insertMemberWithMap(memberMap);
 			
 		}
+
+
+		@Override
+		public MemberVO selectMemberByEmail(String email) {
+			
+			return memberDAO.selectMemberByEmail(email);
+		}
+
+
+		@Override
+		public MemberVO selectMemberById(String id) {
+			return memberDAO.selectMemberById(id);
+		}
 		
 		
 		
