@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 
 @Component("deliveryAddressVO")
 public class DeliveryAddressVO {
-	private String reciever_name;
-	private String reciever_phone;
+	private String receiver_name;
+	private String receiver_phone;
 	private String zipCode;
 	private String address;
 	private String address_detail;
@@ -18,17 +18,17 @@ public class DeliveryAddressVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
-	public String getReciever_name() {
-		return reciever_name;
+	public String getreceiver_name() {
+		return receiver_name;
 	}
-	public void setReciever_name(String reciever_name) {
-		this.reciever_name = reciever_name;
+	public void setreceiver_name(String receiver_name) {
+		this.receiver_name = receiver_name;
 	}
-	public String getReciever_phone() {
-		return reciever_phone;
+	public String getreceiver_phone() {
+		return receiver_phone;
 	}
-	public void setReciever_phone(String reciever_phone) {
-		this.reciever_phone = reciever_phone;
+	public void setreceiver_phone(String receiver_phone) {
+		this.receiver_phone = receiver_phone;
 	}
 	public String getZipCode() {
 		return zipCode;
@@ -50,7 +50,7 @@ public class DeliveryAddressVO {
 	}
 	@Override
 	public String toString() {
-		return "DeliveryAddressVO [reciever_name=" + reciever_name + ", reciever_phone=" + reciever_phone + ", zipCode="
+		return "DeliveryAddressVO [receiver_name=" + receiver_name + ", receiver_phone=" + receiver_phone + ", zipCode="
 				+ zipCode + ", address=" + address + ", address_detail=" + address_detail + ", memberNo=" + memberNo
 				+ "]";
 	}

@@ -36,6 +36,53 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }
       });
     </script>
+
+    <!-- 다음 주소 api 스크립트 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      function execDaumPostCode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            var addr = ""; // 주소 변수
+            var extraAddr = ""; // 참고항목 변수
+
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
+
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+
+              document.getElementById("address_extra_input").value = extraAddr;
+            } else {
+              document.getElementById("address_extra_input").value = "";
+            }
+
+            document.getElementById("sample6_postcode").value = data.zonecode;
+            document.getElementById("address_input").value = addr;
+
+            document.getElementById("address_detail_input").focus();
+          },
+        }).open();
+      }
+    </script>
+    <!--다음 주소 api 스크립트 종료-->
+
     <style>
       .agreement-container {
         color: black;
@@ -180,20 +227,40 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
           <p class="text-left textsize-1 margin1 textbold">주소</p>
           <button
+            onclick="execDaumPostCode()"
             class="btn-midlong bg-lightgreen margin textsize-1 border-0 btn-round"
           >
             주소 검색
           </button>
+
+          <input
+            type="hidden"
+            id="sample6_postcode"
+            placeholder="우편번호"
+            name="zipCode"
+          />
+
           <input
             class="brd-lightgray btn-round btn-midlong textsize-1"
             name="address"
             type="text"
+            id="address_input"
+            placeholder="주소"
+            readonly
+          />
+          <input
+            class="brd-lightgray btn-round btn-midlong textsize-1"
+            type="text"
+            id="address_extra_input"
+            placeholder="참고항목"
+            readonly
           />
           <input
             class="brd-lightgray btn-round btn-midlong textsize-1"
             name="address_detail"
-            placeholder=" 상세주소를 입력해 주세요."
             type="text"
+            id="address_detail_input"
+            placeholder=" 상세주소를 입력해 주세요."
           />
           <br />
           <p class="text-left textsize-1 margin1 textbold">성별</p>
@@ -286,5 +353,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </div>
     </form>
+
+    <br />
   </body>
 </html>

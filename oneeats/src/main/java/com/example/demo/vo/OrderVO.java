@@ -103,28 +103,28 @@ public class OrderVO {
 	public void setOrderer_phone(String orderer_phone) {
 		this.orderer_phone = orderer_phone;
 	}
-	public String getReciever_name() {
+	public String getreceiver_name() {
 		return receiver_name;
 	}
-	public void setReciever_name(String receiver_name) {
+	public void setreceiver_name(String receiver_name) {
 		this.receiver_name = receiver_name;
 	}
-	public String getReciever_address() {
+	public String getreceiver_address() {
 		return receiver_address;
 	}
-	public void setReciever_address(String receiver_address) {
+	public void setreceiver_address(String receiver_address) {
 		this.receiver_address = receiver_address;
 	}
-	public String getReciever_phone() {
+	public String getreceiver_phone() {
 		return receiver_phone;
 	}
-	public void setReciever_phone(String receiver_phone) {
+	public void setreceiver_phone(String receiver_phone) {
 		this.receiver_phone = receiver_phone;
 	}
-	public String getReciever_comment() {
+	public String getreceiver_comment() {
 		return receiver_comment;
 	}
-	public void setReciever_comment(String receiver_comment) {
+	public void setreceiver_comment(String receiver_comment) {
 		this.receiver_comment = receiver_comment;
 	}
 	public int getUsed_point() {
