@@ -179,12 +179,15 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     >
                       <c:choose>
                         <c:when test="${itemNum.count==1 }">
-                          <div id="quick_goods_1">
+                          <div
+                            id="quick_goods_1"
+                            onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
+                          >
                             <img
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             />
                             <div class="quick_item_row">
                               <div class="quick_item_name textbold textsize-2">
@@ -211,13 +214,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                           <div
                             id="quick_goods_${itemNum.count}"
                             class="div_hidden"
+                            onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
                           >
                             <img
                               class="img_hidden"
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             />
                             <div class="quick_item_name textbold textsize-2">
                               ${item.name}

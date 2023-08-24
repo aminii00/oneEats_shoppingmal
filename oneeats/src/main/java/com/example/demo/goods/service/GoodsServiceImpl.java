@@ -6,75 +6,76 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.goods.dao.GoodsDAO;
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
 
 @Service("goodsService")
-public class GoodsServiceImpl implements GoodsService{
-	
+public class GoodsServiceImpl implements GoodsService {
+
 	@Autowired
 	private GoodsDAO goodsDAO;
-
 
 	@Override
 	public List<GoodsVO> selectAllGoodsList() {
 		return goodsDAO.selectAllGoodsList();
-		 
-	}
 
+	}
 
 	@Override
 	public GoodsVO selectNumGoodsList() {
 		return goodsDAO.selectNumGoodsList();
 	}
 
-
 	@Override
 	public List<GoodsVO> goodsDetail(int goodsNo) {
 		return goodsDAO.goodsDetail(goodsNo);
 	}
-
 
 	@Override
 	public GoodsVO selectGoodsByGoodsNo(int goodsNo) {
 		return goodsDAO.selectGoodsByGoodsNo(goodsNo);
 	}
 
-
 	@Override
 	public int selectTotalReviewsNum(int goodsNo) {
-		
+
 		return goodsDAO.selectTotalReviewsNum(goodsNo);
 	}
-
 
 	@Override
 	public float selectReviewAverage(int goodsNo) {
 		return goodsDAO.selectReviewAverage(goodsNo);
 	}
 
-
 	@Override
 	public List<CartVO> selectOptionsByGoodsNo(int goodsNo) {
 		return goodsDAO.selectOptionsByGoodsNo(goodsNo);
 	}
 
-	
 	@Override
-	public List<HotDealVO> selectNewHotDealList(){
+	public List<HotDealVO> selectNewHotDealList() {
 		return goodsDAO.selectNewHotDealList();
 	}
-
 
 	@Override
 	public int selectTotalGoodsNumForAll() {
 		return goodsDAO.selectTotalGoodsNumForAll();
+	}
+
+	@Override
+	public void insertNewBookmark(BookmarkVO bookmarkVO) {
+
+		goodsDAO.insertNewBookmark(bookmarkVO);
+	}
+
+	@Override
+	public boolean isExistBookmark(BookmarkVO bookmarkVO) {
+		if (goodsDAO.isExistBookmark(bookmarkVO) > 0) {
+			return true;
+		}
+		return false;
 	};
-
-	
-
-
-
 
 }

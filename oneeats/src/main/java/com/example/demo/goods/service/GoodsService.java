@@ -2,6 +2,7 @@ package com.example.demo.goods.service;
 
 import java.util.List;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
@@ -26,6 +27,10 @@ public interface GoodsService {
 	public List<HotDealVO> selectNewHotDealList();
 
 	public int selectTotalGoodsNumForAll();
+
+	public void insertNewBookmark(BookmarkVO bookmarkVO);
+
+	public boolean isExistBookmark(BookmarkVO bookmarkVO);
 	
 
 }

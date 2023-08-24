@@ -95,7 +95,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <td>
           <img
               class="img-01"
-              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
               alt="상품 이미지"
             />
         </td>

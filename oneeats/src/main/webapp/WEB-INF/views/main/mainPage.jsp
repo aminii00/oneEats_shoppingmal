@@ -79,11 +79,11 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                   <div class="col-lg-4">
                     <div
                       class="product__discount__item"
-                      onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.hotdealNo}'"
+                      onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
                     >
                       <div
                         class="product__discount__item__pic set-bg"
-                        data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
+                        data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
                         style="
                           background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}');
                         "
