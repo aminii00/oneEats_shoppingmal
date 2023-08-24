@@ -133,6 +133,7 @@ public class MypageControllerImpl implements MypageController {
 		String orderer_phone = request.getParameter("orderer_phone");
 		String receiver_name = request.getParameter("receiver_name");
 		String receiver_address = request.getParameter("receiver_address");
+		String receiver_addressDetail = request.getParameter("receiver_addressDetail");
 		String receiver_phone = request.getParameter("receiver_phone");
 		String receiver_comment = request.getParameter("receiver_comment");
 		String used_point = request.getParameter("used_point");
@@ -150,7 +151,7 @@ public class MypageControllerImpl implements MypageController {
 			temp.setOrderer_name(orderer_name);
 			temp.setOrderer_phone(orderer_phone);
 			temp.setreceiver_name(receiver_name);
-			temp.setreceiver_address(receiver_address);
+			temp.setreceiver_address(receiver_address+"&nbsp"+receiver_addressDetail);
 			temp.setreceiver_phone(receiver_phone);
 			temp.setreceiver_comment(receiver_comment);
 			temp.setUsed_point(Integer.parseInt(used_point));
