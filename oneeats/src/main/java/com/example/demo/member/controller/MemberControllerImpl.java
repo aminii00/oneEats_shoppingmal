@@ -72,9 +72,10 @@ public class MemberControllerImpl implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		
 		ModelAndView mav = new ModelAndView();
-		int memberNo = memberService.registerInfoNo();
-		Map memberMap = GeneralFileUploader.getParameterMap(request);
+		int memberNo = memberService.registerInfoNo();  // 새로운 No
+		Map memberMap = GeneralFileUploader.getParameterMap(request); 
 		memberMap.put("memberNo", memberNo);
+		System.out.println(memberMap);
 		String _birth = (String) memberMap.get("birth");
 		String sms_agreement = (String) memberMap.get("sms_agreement");
 		String email_agreement = (String) memberMap.get("email_agreement");
@@ -116,7 +117,7 @@ public class MemberControllerImpl implements MemberController {
 		}
 		System.out.println("id = " + id);
 		mav.addObject("id", id);
-		mav.setViewName("redirect:/member/idForm.do");
+		mav.setViewName("/member/idForm");
 		return mav;
 	}
 	

@@ -35,8 +35,8 @@
 
 	<insert id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-		insert into member(memberNo, type, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail,zipCode)
-		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail},#{zipCode})
+		insert into member(memberNo, type, id, pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail, zipCode)
+		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail}, #{zipCode})
 		]]>
 	</insert>
 
@@ -60,8 +60,8 @@
 	</select>
 
 	<insert id="insertSellerNewMember" parameterType="memberVO">
-		insert into member(memberNo, type, busNo, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
-		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+		insert into member(memberNo, type, busNo, id, pwd, zipCode, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail , )
+		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{zipCode}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
 		
 	</insert>
 
@@ -89,10 +89,10 @@
 	<insert id="insertMemberWithMap" parameterType="java.util.Map">
 
 		insert into member(memberNo, type, id,pwd, name, email, phone, gender,
-		birth, sms_agreement, email_agreement, address, address_detail)
+		birth, sms_agreement, email_agreement, address, address_detail, zipCode)
 		values(#{memberNo}, "사용자", #{id}, #{pwd}, #{name}, #{email}, #{phone},
 		#{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address},
-		#{address_detail})
+		#{address_detail}, #{zipCode})
 
 	</insert>
 </mapper>
