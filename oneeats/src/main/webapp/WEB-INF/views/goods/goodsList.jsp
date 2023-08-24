@@ -58,7 +58,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                             >
                               <div
                                 class="product__discount__item__pic set-bg"
-                                data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
+                                data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
                                 style="
                                   background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods');
                                 "
@@ -113,7 +113,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   <div class="product__item">
                     <div
                       class="product__item__pic set-bg"
-                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
+                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
                     >
                       <ul class="product__item__pic__hover">
                         <li onclick="fn_bookmark('${item.goodsNo}')">
@@ -152,31 +152,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </section>
     <!-- Product Section End -->
-    <script>
-      function fn_bookmark(goodsNo) {
-        $.ajax({
-          type: "POST",
-          url: "/goods/bookmark.do",
-          data: {
-            num: goodsNo,
-          },
-          success: function (response) {
-            if (response == "success") {
-              alert("찜 했습니다.");
-            } else {
-              fn_openalert(
-                "로그인이 필요합니다. <br> 로그인 페이지로 이동하시겠습니까?",
-                "/member/loginForm.do"
-              );
-            }
-          },
-          error: function (response) {
-            alert("원인불명의 에러");
-            console.log(response);
-          },
-        });
-      }
-    </script>
+    <script></script>
     <!-- Js Plugins -->
   </body>
 </html>
