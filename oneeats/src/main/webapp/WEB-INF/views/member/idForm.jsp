@@ -22,7 +22,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     </c:choose>
   </head>
   <body>
-    <form method="post" action="${contextPath}/member/loginForm.do">
+    <form method="post" action="${contextPath}/member/login.do">
       <br />
       <br />
       <br />

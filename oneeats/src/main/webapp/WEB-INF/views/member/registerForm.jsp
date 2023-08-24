@@ -35,6 +35,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           $("#check_all").prop("checked", false);
         }
       });
+
+      function chkPW() {
+        var pwd = $("#pwd").val();
+        var num = pw.search(/[0-9]/g);
+        var eng = pw.search(/[a-z]/gi);
+        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+        if (pwd.length < 8 || pwd.length > 12) {
+          alert("8자리 ~ 20자리 이내로 입력해주세요.");
+          return false;
+        } else if (pwd.search(/\s/) != -1) {
+          alert("비밀번호는 공백 없이 입력해주세요.");
+          return false;
+        } else if (num < 0 || eng < 0 || spe < 0) {
+          alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
+          return false;
+        } else {
+          console.log("통과");
+          return true;
+        }
+      }
     </script>
 
     <!-- 다음 주소 api 스크립트 -->
@@ -68,15 +89,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 extraAddr = " (" + extraAddr + ")";
               }
 
-              document.getElementById("address_extra_input").value = extraAddr;
+              document.getElementById("address_extra_input").value = extraAddr; //참고항목
             } else {
               document.getElementById("address_extra_input").value = "";
             }
 
-            document.getElementById("sample6_postcode").value = data.zonecode;
+            document.getElementById("sample6_postcode").value = data.zonecode; // 우편번호
             document.getElementById("address_input").value = addr;
 
-            document.getElementById("address_detail_input").focus();
+            document.getElementById("address_detail_input").focus(); // 상세주소
           },
         }).open();
       }
@@ -164,6 +185,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </p>
           <input
             class="brd-lightgray btn-round btn-midlong textsize-1"
+            onclick="chkPW"
+            id="pwd"
             name="pwd"
             placeholder=" 비밀번호를 입력해 주세요.."
             type="password"
@@ -263,6 +286,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             id="address_detail_input"
             placeholder=" 상세주소를 입력해 주세요."
           />
+          <input type="hidden" id="sample6_postcode" name="zipCode" />
           <br />
           <p class="text-left textsize-1 margin1 textbold">성별</p>
           <div class="btn-tinylong margin textsize-1 border-0 btn-round">
