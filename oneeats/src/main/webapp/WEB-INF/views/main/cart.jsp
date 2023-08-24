@@ -174,7 +174,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             />
                             <td class="vertical-align">
                               <img
-                                src="${contextPath}/download.do?imgFileName=${goodsImg}&path=goods"
+                                src="${contextPath}/download.do?imageFileName=${cart.goodsImg}&path=goods"
                                 width="100px"
                                 height="100px"
                                 alt=""

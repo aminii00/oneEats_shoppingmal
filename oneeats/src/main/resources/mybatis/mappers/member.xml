@@ -29,7 +29,7 @@
 
 	<select id="insertMemberNo" resultType="int">
 		<![CDATA[
-			SELECT MAX(memberNo)+1 FROM member
+			SELECT ifnull(MAX(memberNo),0)+1 FROM member;
 		]]>
 	</select>
 

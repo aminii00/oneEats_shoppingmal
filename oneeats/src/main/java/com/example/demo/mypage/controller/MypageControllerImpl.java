@@ -39,9 +39,12 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
 			
-		List<OrderVO> orderList = mypageService.selectOrderList();
+		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(memberNo);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("orderList", orderList);
 		System.out.println(mav);
@@ -141,7 +144,6 @@ public class MypageControllerImpl implements MypageController {
 		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		List<OrderVO> orderList = new ArrayList();
 		System.out.println("selectGoodsList" + selectGoodsList);
-		int result = 0;
 		for (int i = 0; i < selectGoodsList.size(); i++) {
 			OrderVO temp = selectGoodsList.get(i);
 			temp.setOrderNo(orderNo);
@@ -162,11 +164,7 @@ public class MypageControllerImpl implements MypageController {
 		}
 
 		mypageService.insertOrderList(orderList);
-		session.setAttribute("orderList", orderList);
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
-		
-		
-		
 		return mav;
 	}
 	
@@ -204,7 +202,12 @@ public class MypageControllerImpl implements MypageController {
 		for (int order_seqNo : order_seqNos) {
 			mypageService.updateDeliveryStatusToCancel(order_seqNo);
 		}
-
+		
+		
+		  int firstOrderSeqNo = order_seqNos.length > 0 ? order_seqNos[0] : 0;
+		  mypageService.updateDeliveryStatusToCancel(firstOrderSeqNo);
+		 
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}

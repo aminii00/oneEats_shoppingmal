@@ -108,6 +108,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </td>
         </tr>
 
+        <c:set var="used_point" value="${param.used_point}" />
         <!-- 적립금 -->
         <tr class="tr-1">
           <th>적립금</th>
@@ -118,9 +119,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </tr>
         <tr>
           <td>사용적립금</td>
-          <td><input type="text" name="used_point" value="0" /></td>
+          <td>
+            <input type="text" id="used_point" name="used_point" value="0" />
+          </td>
         </tr>
 
+        <c:set var="used_coupon" value="${param.used_coupon}" />
         <!-- 쿠폰 -->
         <tr class="tr-1">
           <th>쿠폰</th>
@@ -132,6 +136,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <option value="0" selected>쿠폰을 선택해주세요</option>
               <c:forEach var="coupon" items="${couponList}">
                 <option value="${coupon.couponNo}">${coupon.name}</option>
+                <input
+                  type="hidden"
+                  id="used_coupon"
+                  value="${coupon.discount_price}"
+                />
               </c:forEach>
             </select>
           </td>
@@ -143,7 +152,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </tr>
         <fmt:parseNumber
           var="percent"
-          value="${payment_price*0.1}"
+          value="${payment_price*0.05}"
           integerOnly="true"
         />
         <c:set

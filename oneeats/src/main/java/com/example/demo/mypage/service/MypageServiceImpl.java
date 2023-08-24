@@ -27,6 +27,11 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
+	public List<OrderVO> selectOrderByMemberNo(int memberNo) {
+		return mypageDAO.selectOrderByMemberNo(memberNo);
+	}
+	
+	@Override
 	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception{
 		return mypageDAO.selectOrderByOrderNo(orderNo);
 	}
@@ -96,4 +101,5 @@ public class MypageServiceImpl implements MypageService{
 		return myAddressVO;
 	}
 
+	
 }

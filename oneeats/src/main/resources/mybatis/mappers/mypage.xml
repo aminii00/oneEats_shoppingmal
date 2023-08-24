@@ -92,6 +92,17 @@
 			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo) 
 			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
     		on orderplusgoods.orderNo=orderGun.orderNo
+    		order by orderplusgoods.orderNo 
+		]]>
+	</select>
+	
+	<select id="selectOrderByMemberNo" resultMap="OrderResult" parameterType="int">
+		<![CDATA[
+			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
+			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo WHERE t_order.memberNo=#{memberNo}) 
+			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
+    		on orderplusgoods.orderNo=orderGun.orderNo
+    		order by orderplusgoods.orderNo
 		]]>
 	</select>
 
