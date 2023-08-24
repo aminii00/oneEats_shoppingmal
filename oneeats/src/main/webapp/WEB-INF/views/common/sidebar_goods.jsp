@@ -14,20 +14,33 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       var rotateArray = new Array(0, 0, 0, 0, 0);
     </script>
     <script src="${contextPath}/js/side.js"></script>
-    <c:set var="currentViewQuickGoodsNum" value="1" />
     <!--최근 본 상품을 바꾸기 위한 코드-->
     <script>
+      var currentViewQuickGoodsNum = 1;
       var quickGoodsListNum = parseInt("${quickGoodsListNum}");
       function fn_nextQuickGoods(num) {
-        currentViewQuickGoodsNum++;
-        $("#cur_goods_num").text(currentViewQuickGoodsNum);
         if (num == quickGoodsListNum) {
           $("#quick_goods_" + num).addClass("div_hidden");
           $("#quick_goods_" + 1).removeClass("div_hidden");
+          currentViewQuickGoodsNum = 1;
         } else {
           $("#quick_goods_" + num).addClass("div_hidden");
           $("#quick_goods_" + num + 1).removeClass("div_hidden");
+          currentViewQuickGoodsNum++;
         }
+        $("#cur_goods_num").text(currentViewQuickGoodsNum);
+      }
+      function fn_prevQuickGoods(num) {
+        if (num == 1) {
+          $("#quick_goods_" + num).addClass("div_hidden");
+          $("#quick_goods_" + quickGoodsListNum).removeClass("div_hidden");
+          currentViewQuickGoodsNum = quickGoodsListNum;
+        } else {
+          $("#quick_goods_" + num).addClass("div_hidden");
+          $("#quick_goods_" + num + 1).removeClass("div_hidden");
+          currentViewQuickGoodsNum--;
+        }
+        $("#cur_goods_num").text(currentViewQuickGoodsNum);
       }
     </script>
     <style>
@@ -149,8 +162,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <div class="sidebar__item">
       <div class="latest-product__text">
         <h4 style="font-size: 20px" class="text-left">최근 본 상품</h4>
-        <div class="latest-product__slider owl-carousel">
-          <div class="latest-prdouct__slider__item">
+        <div class="">
+          <div class="">
             <ul>
               <!--   상품이 없습니다. -->
               <c:choose>
@@ -171,8 +184,16 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
                             />
+                            <div class="quick_item_row">
+                              <div class="quick_item_name textbold textsize-2">
+                                ${item.name}
+                              </div>
+                              <div class="quick_item_price">
+                                ￦${item.price}
+                              </div>
+                            </div>
                             <input
                               type="hidden"
                               name="h_goods_id"
@@ -196,8 +217,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${i.img1}&path=prop"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
                             />
+                            <div class="quick_item_name textbold textsize-2">
+                              ${item.name}
+                            </div>
+                            <div class="quick_item_price">￦${item.price}</div>
                             <input
                               type="hidden"
                               name="h_goods_id"
@@ -225,10 +250,12 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </c:when>
             <c:otherwise>
               <h5>
-                <a href="javascript:fn_show_previous_goods();"> 이전 </a> &nbsp;
-                <span id="cur_goods_num">${currentViewQuickGoodsNum}</span
-                >/${quickGoodsListNum} &nbsp;
-                <a onclick="fn_nextQuickGoods(currentViewQuickGoodsNum)">
+                <a onClick="fn_prevQuickGoods(currentViewQuickGoodsNum);">
+                  이전
+                </a>
+                &nbsp;
+                <span id="cur_goods_num">1</span>/${quickGoodsListNum} &nbsp;
+                <a onClick="fn_nextQuickGoods(currentViewQuickGoodsNum);">
                   다음
                 </a>
               </h5>

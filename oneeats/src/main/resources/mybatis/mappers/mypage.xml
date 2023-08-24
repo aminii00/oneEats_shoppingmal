@@ -78,8 +78,8 @@
 	</resultMap> 
 	
 	<resultMap id="DeliveryResult" type="deliveryAddressVO">
-		<result property="reciever_name" column="reciever_name" />
-		<result property="reciever_phone" column="reciever_phone" />
+		<result property="receiver_name" column="receiver_name" />
+		<result property="receiver_phone" column="receiver_phone" />
 		<result property="zipCode" column="zipCode" />
 		<result property="address" column="address" />
 		<result property="address_detail" column="address_detail" />

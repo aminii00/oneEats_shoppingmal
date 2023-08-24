@@ -44,8 +44,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <td class="addresstd2">
                 ${item.address} &nbsp ${item.address_detail}
               </td>
-              <td class="addresstd3">${item.reciever_name}</td>
-              <td class="addresstd4">${item.reciever_phone}</td>
+              <td class="addresstd3">${item.receiver_name}</td>
+              <td class="addresstd4">${item.receiver_phone}</td>
               <td><button class ="border-0" type="button">
                 <img class ="border-0" 
                 src="${contextPath}/img/icon/mod.png"

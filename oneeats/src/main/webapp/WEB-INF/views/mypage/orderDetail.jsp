@@ -132,19 +132,19 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">받는분</dt>
             <dd class="dd-1 textsize-1 textcolor-black">
-              ${order.reciever_name}
+              ${order.receiver_name}
             </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">연락처</dt>
             <dd class="dd-1 textsize-1 textcolor-black">
-              ${order.reciever_phone}
+              ${order.receiver_phone}
             </dd>
           </dl>
           <dl class="dl-dt">
             <dt class="dt-1 textsize-1 textbold textcolor-black">배송지</dt>
             <dd class="dd-1 textsize-1 textcolor-black">
-              ${order.reciever_address}
+              ${order.receiver_address}
             </dd>
           </dl>
           <dl class="dl-dt">
@@ -152,7 +152,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               배송요청사항
             </dt>
             <dd class="dd-1 textsize-1 textcolor-black">
-              ${order.reciever_comment}
+              ${order.receiver_comment}
             </dd>
           </dl>
         </div>

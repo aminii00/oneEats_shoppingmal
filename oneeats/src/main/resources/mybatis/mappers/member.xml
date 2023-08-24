@@ -35,8 +35,8 @@
 
 	<insert id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-		insert into member(memberNo, type, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail)
-		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+		insert into member(memberNo, type, id,pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail,zipCode)
+		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail},#{zipCode})
 		]]>
 	</insert>
 

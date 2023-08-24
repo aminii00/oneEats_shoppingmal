@@ -10,10 +10,10 @@
   <result column="orderNo" property="orderNo"/>
   <result column="orderer_name" property="orderer_name"/>
   <result column="orderer_phone" property="orderer_phone"/>
-  <result column="reciever_name" property="reciever_name"/>
-  <result column="reciever_address" property="reciever_address"/>
-  <result column="reciever_phone" property="reciever_phone"/>
-  <result column="reciever_comment" property="reciever_comment"/>
+  <result column="receiver_name" property="receiver_name"/>
+  <result column="receiver_address" property="receiver_address"/>
+  <result column="receiver_phone" property="receiver_phone"/>
+  <result column="receiver_comment" property="receiver_comment"/>
   <result column="used_point" property="used_point"/>
   <result column="used_couponId" property="used_couponId"/>
   <result column="payment_price" property="payment_price"/>
