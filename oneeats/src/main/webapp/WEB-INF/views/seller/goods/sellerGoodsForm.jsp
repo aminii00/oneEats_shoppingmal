@@ -14,54 +14,69 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
   </head>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#goods_preview").attr("src", e.target.result);
+        };
 
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
   <body>
     <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <div class="product__details__pic">
-              <div class="product__details__pic__item">
-                <img
-                  class="product__details__pic__item--large"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="product__details__pic__slider owl-carousel">
-                <img
-                  data-imgbigurl="img/product/details/product-details-2.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-3.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-5.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
+        <form
+          id="register-form"
+          method="post"
+          enctype="multipart/form-data"
+          action="${contextPath}/seller/goods/addSellerGoods.do"
+        >
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="product__details__pic">
+                <div class="product__details__pic__item">
+                  <img id="goods_preview" src="" alt="" />
+                  <input
+                    type="file"
+                    name="img1"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img2"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img3"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img4"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img5"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-6 text-left">
-            <div class="product__details__text">
-              <section>
-                <form
-                  id="register-form"
-                  method="post"
-                  enctype="multipart/form-data"
-                  action="${contextPath}/seller/goods/addSellerGoods.do"
-                >
+            <div class="col-lg-6 col-md-6 text-left">
+              <div class="product__details__text">
+                <section>
                   <input name="type" type="hidden" value="사업자" />
 
                   <div class="property-margin1">
@@ -125,6 +140,22 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="price"
+                        class="property-font1 nice-select"
+                        style="width: 176px"
+                      />
+                    </dd>
+                  </dl>
+
+                  <dl class="property-flex2" style="height: 60px">
+                    <dt
+                      class="property_title1 textbold"
+                      style="margin-top: 16px"
+                    >
+                      판매자
+                    </dt>
+                    <dd class="property-flex1">
+                      <input
+                        value="${memberInfo.name}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -343,13 +374,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      class="goodsinfo"
+                      class="goodsinfo description_textarea"
                       cols="50"
                       rows="8"
                       style="width: 350px"
-                    >
- ${goods.description}</textarea
-                    >
+                    ></textarea>
+
+                    <input
+                      type="hidden"
+                      name="description"
+                      id="goods_description"
+                      value=""
+                    />
                   </p>
 
                   <div style="display: inline-block; margin: 50px 145px 0 0">
@@ -359,7 +395,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       radius="3"
                       style="width: 100px"
                     >
-                      <span class="btn textbold">다시 쓰기</span>
+                      <span class="css-nytqmg textbold">다시 쓰기</span>
                     </button>
                   </div>
                   <!--중간부분-->
@@ -373,12 +409,28 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <div class="css-nytqmg textbold">상품 등록</div>
                     </button>
                   </div>
-                </form>
-              </section>
+                </section>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </section>
+    <script>
+      $(document).ready(function () {
+        var textareaInput = $(".description_textarea").val();
+        var output = textareaInput.replace(/\n/g, "<br>");
+        var input = textareaInput.replace(/<br>/g, "\n");
+        $(".description_textarea").val(input);
+        $("#goods_description").val(output);
+
+        $(".description_textarea").on("input", function () {
+          var textareaInput = $(this).val();
+          var output = textareaInput.replace(/\n/g, "<br>");
+
+          $("#goods_description").val(output);
+        });
+      });
+    </script>
   </body>
 </html>

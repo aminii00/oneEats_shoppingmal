@@ -255,7 +255,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                               class="product__discount__item__pic set-bg"
                               data-setbg="/img/product/main/aspiragus.jpg"
                               style="
-                                background-image: url('${contextPath}/download.do?imageFileName=${carrot}&path=prop');
+                                background-image: url('${contextPath}/download.do?imageFileName=${carrot}&path=goods');
                               "
                             >
                               />
@@ -470,7 +470,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   <div class="product__item">
                     <div
                       class="product__item__pic set-bg"
-                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=prop"
+                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
                     >
                       <ul class="product__item__pic__hover">
                         <li>
