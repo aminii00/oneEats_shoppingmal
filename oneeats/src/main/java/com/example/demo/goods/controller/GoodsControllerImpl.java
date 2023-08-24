@@ -9,15 +9,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.goods.service.GoodsService;
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
+import com.example.demo.vo.MemberVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController {
@@ -32,7 +36,10 @@ public class GoodsControllerImpl implements GoodsController {
 		if (quickGoodsList != null) {
 			for (int i = 0; i < quickGoodsList.size(); i++) {
 				GoodsVO _goodsBean = (GoodsVO) quickGoodsList.get(i);
-				if (goodsNo == _goodsBean.getGoodsNo()) {
+				if (_goodsBean==null) {
+					quickGoodsList.remove(i);
+				}
+				else if (goodsNo == _goodsBean.getGoodsNo()) {
 					already_existed = true;
 					break;
 				}
@@ -112,6 +119,39 @@ public class GoodsControllerImpl implements GoodsController {
 		mav.addObject("goodsOptionList", goodsOptionList);
 
 		return mav;
+	}
+	
+	
+	// 찜 버튼을 눌렀을 때 ajax로 불러오기 위한 매핑
+	@ResponseBody
+	@PostMapping("/goods/bookmark.do")
+	public String goodsBookmark(HttpServletRequest request) {
+		String result = "";
+		String _goodsNo = request.getParameter("num");
+		HttpSession session =  request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		if (member==null || member.getId().length()<1) {
+			return "login";
+		}
+		
+		
+		
+		try {
+			int memberNo = member.getMemberNo();
+			int goodsNo = Integer.parseInt(_goodsNo);
+			BookmarkVO bookmarkVO = new BookmarkVO();
+			bookmarkVO.setGoodsNo(goodsNo);
+			bookmarkVO.setMemberNo(memberNo);
+
+			goodsService.isExistBookmark(bookmarkVO);
+			
+			goodsService.insertNewBookmark(bookmarkVO);
+			result = "success";
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		}
+		return result;
 	}
 
 }

@@ -159,4 +159,12 @@ INNER JOIN member on goods.memberNo = member.memberNo
 	<select id="selectTotalGoodsNumForAll" resultType="int">
 		select count(goodsNo) from goods
 	</select>
+	
+	<insert id="insertNewBookmark" parameterType="bookmarkVO">
+		insert into bookmark (memberNo,goodsNo) values(#{memberNo},#{goodsNo}) 
+	</insert>
+	
+	<select id="isExistBookmark" resultType="int" parameterType="bookmarkVO">
+		select count(goodsNo) from bookmark where goodsNo=#{goodsNo} and memberNo=#{memberNo}
+	</select>
 </mapper> 

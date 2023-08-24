@@ -63,7 +63,6 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/font.css" />
     <link rel="stylesheet" href="${contetPath}/css/notice-window.css" />
 
-
     <!-- Js Plugins -->
     <script src="${contextPath}/js/jquery-3.3.1.min.js"></script>
     <script src="${contextPath}/js/bootstrap.min.js"></script>
@@ -78,7 +77,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <!-- <div id="preloder">
       <div class="loader"></div>
     </div> -->
-
+    <div id="top"></div>
     <div id="container">
       <div id="header" class="container-md">
         <tiles:insertAttribute name="header" />
@@ -118,7 +117,34 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </div>
     </div>
-  </body>
+    <div class="fixed_quick_menu">
+      <div class="btn_grid">
+        <div class="row">
+          <div class="col">
+            <a href="#top">
+              <img
+                class="btn_square"
+                src="${contextPath}/img/icon/uparrow.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+        <div class="row"></div>
+        <div class="row">
+          <div class="col">
+            <a href="#bottom">
+              <img
+                class="btn_square"
+                src="${contextPath}/img/icon/downarrow.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bottom"></div>
   </body>
   <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
   <script src="${contextPath}/js/jquery-ui.min.js"></script>

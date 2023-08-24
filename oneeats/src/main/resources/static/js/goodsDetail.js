@@ -16,22 +16,24 @@ $(document).ready(function() {
 		var selectedOptionName = $(
 			".h_option_name_" + selectedOptionNo
 		).val();
-
-		// 표시되는 상품 가격, 할인가격 변경
+		
 		var payment_price = parseInt($("#h_payment_price").val());
 		selectedOptionPrice = parseInt(selectedOptionPrice);
-		$("#h_payment_price").val(payment_price + selectedOptionPrice);
-		$("#payment_price").text(payment_price + selectedOptionPrice);
+		
 		var discount_price = parseInt($("#h_discount_price").val());
 		var option_qty = parseInt(
 			$(".h_option_qty_" + selectedOptionNo).val()
 		);
+		// 표시되는 상품 가격, 할인가격 변경
+		$("#h_payment_price").val(payment_price + goodsPrice*option_qty);
+		$("#payment_price").text(payment_price + goodsPrice*option_qty);
 		$("#h_discount_price").val(
 			discount_price + (goodsPrice * option_qty - selectedOptionPrice)
 		);
 		$("#discount_price").text(
 			discount_price + (goodsPrice * option_qty - selectedOptionPrice)
 		);
+		console.log("상품 가격 : "+goodsPrice+"선택 상품 개수 : "+option_qty+"선택 옵션 가격 : "+selectedOptionPrice);
 		changeTotalValue();
 
 		// 새 행을 만든다
@@ -102,16 +104,28 @@ function fn_toCart() {
 }
 
 $(document).on("click", ".goods_option_plus_btn", function() {
+	
+	
+	
 	var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
 	var changedVar = parseInt(goodsOptionVar) + 1;
 	var parentRow = $(this).closest(".goods_option_row");
+	
+	var selectedOptionNo = parentRow.find(".h_optionNo").val();
+	var option_qty = parseInt(
+			$(".h_option_qty_" + selectedOptionNo).val()
+		);
+	option_qty = parseInt(option_qty);
+	
+	
+	
 	if (changedVar < 100) {
 		$(this).parent().find(".goodsQty_input").val(changedVar);
 		var discount_plus = parentRow.find(".h_option_discount").val();
 		discount_plus = parseInt(discount_plus);
 		changeDiscountValue(discount_plus);
-		var payment_plus = parentRow.find(".h_option_price").val();
-		payment_plus = parseInt(payment_plus);
+		var payment_plus = goodsPrice;
+		payment_plus = parseInt(payment_plus)*option_qty;
 		changePaymentValue(payment_plus);
 		changeTotalValue();
 	}
@@ -121,13 +135,23 @@ $(document).on("click", ".goods_option_minus_btn", function() {
 	var goodsOptionVar = $(this).parent().find(".goodsQty_input").val();
 	var changedVar = parseInt(goodsOptionVar) - 1;
 	var parentRow = $(this).closest(".goods_option_row");
+	
+	var selectedOptionNo = parentRow.find(".h_optionNo").val();
+	var option_qty = parseInt(
+			$(".h_option_qty_" + selectedOptionNo).val()
+		);
+	option_qty = parseInt(option_qty);
+	
+	
+	
+	
 	if (changedVar > 0) {
 		$(this).parent().find(".goodsQty_input").val(changedVar);
 		var discount_plus = parentRow.find(".h_option_discount").val();
 		discount_plus = parseInt(discount_plus);
 		changeDiscountValue(-discount_plus);
-		var payment_plus = parentRow.find(".h_option_price").val();
-		payment_plus = parseInt(payment_plus);
+		var payment_plus = goodsPrice;
+		payment_plus = parseInt(payment_plus)*option_qty;
 		changePaymentValue(-payment_plus);
 		changeTotalValue();
 	}
@@ -140,7 +164,7 @@ $(document).on("click", ".goods_option_x_btn", function() {
 	var discount_plus = parentRow.find(".h_option_discount").val();
 	discount_plus = parseInt(discount_plus);
 	changeDiscountValue(-discount_plus * qty);
-	var payment_plus = parentRow.find(".h_option_price").val();
+	var payment_plus = goodsPrice;
 	payment_plus = parseInt(payment_plus);
 	changePaymentValue(-payment_plus * qty);
 	changeTotalValue();
@@ -149,12 +173,17 @@ $(document).on("click", ".goods_option_x_btn", function() {
 function changePaymentValue(num) {
 	var payment_price = parseInt($("#h_payment_price").val());
 	$("#h_payment_price").val(payment_price + num);
+	console.log("payment_price가 "+num+"만큼 늘어남");
+	console.log($("#h_payment_price").val() + " 이것은 현재= h_payment_price의 값");
 	$("#payment_price").text(payment_price + num);
 }
 
 function changeDiscountValue(num) {
 	var discount_price = parseInt($("#h_discount_price").val());
 	$("#h_discount_price").val(discount_price + num);
+	console.log(discount_price + num);
+	console.log("discount_price가 "+num+"만큼 늘어남");
+	console.log($("#h_discount_price").val() + " 이것은 현재= dicsount의 값");
 	$("#discount_price").text(discount_price + num);
 }
 

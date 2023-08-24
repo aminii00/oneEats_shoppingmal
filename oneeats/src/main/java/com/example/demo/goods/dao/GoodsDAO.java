@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
@@ -36,6 +37,10 @@ public interface GoodsDAO {
 	public List<HotDealVO> selectNewHotDealList();
 
 	public int selectTotalGoodsNumForAll();
+
+	public void insertNewBookmark(BookmarkVO bookmarkVO);
+
+	public int isExistBookmark(BookmarkVO bookmarkVO);
 }
 	
 

@@ -123,10 +123,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <button
           class="btn-5 textcolor-white bg-lightgreen border-0 textsize-1"
           style="float: right"
-          onclick="location.href='${contextPath}/mypage/deliveryInquiry.do'"
           type="button"
         >
-          배송조회
+          <a
+            href="https://tracker.delivery/#/kr.epost/1111111111111"
+            target="_blank"
+            >배송조회</a
+          >
         </button>
       </div>
       <div class="div-t2">

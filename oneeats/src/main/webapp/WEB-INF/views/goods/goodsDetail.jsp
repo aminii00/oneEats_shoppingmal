@@ -373,6 +373,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           width="56"
                           height="56"
                           radius="3"
+                          onclick="fn_bookmark('${goods.goodsNo}')"
                         >
                           <span class="css-let1"
                             ><img
@@ -424,7 +425,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   href="#tabs-1"
                   role="tab"
                   aria-selected="true"
-                  >Information</a
+                  >정보</a
                 >
               </li>
               <li class="nav-item">
@@ -434,14 +435,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   href="#tabs-3"
                   role="tab"
                   aria-selected="false"
-                  >Reviews <span>(2)</span></a
+                  >리뷰 <span>(${totalReviewsNum})</span></a
                 >
               </li>
             </ul>
             <div class="tab-content">
               <div class="tab-pane active" id="tabs-1" role="tabpanel">
                 <div class="product__details__tab__desc">
-                  <h6>Products Infomation</h6>
+                  <h6>상품 소개</h6>
                   <p>${goods.description}</p>
                 </div>
               </div>
@@ -461,7 +462,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       alt="리뷰 별"
                     />
                   </div>
-                  <h6 class="text-left" style="padding-left: 20px">총 2개</h6>
+                  <h6 class="text-left" style="padding-left: 20px">
+                    총 ${totalReviewsNum}개
+                  </h6>
 
                   <!--상품 후기-->
                   <div

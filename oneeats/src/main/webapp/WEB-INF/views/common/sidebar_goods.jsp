@@ -21,11 +21,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       function fn_nextQuickGoods(num) {
         if (num == quickGoodsListNum) {
           $("#quick_goods_" + num).addClass("div_hidden");
-          $("#quick_goods_" + 1).removeClass("div_hidden");
+          $("#quick_goods_" + 1).removeClass();
           currentViewQuickGoodsNum = 1;
         } else {
           $("#quick_goods_" + num).addClass("div_hidden");
-          $("#quick_goods_" + num + 1).removeClass("div_hidden");
+          $("#quick_goods_" + (num + 1)).removeClass();
           currentViewQuickGoodsNum++;
         }
         $("#cur_goods_num").text(currentViewQuickGoodsNum);
@@ -33,11 +33,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       function fn_prevQuickGoods(num) {
         if (num == 1) {
           $("#quick_goods_" + num).addClass("div_hidden");
-          $("#quick_goods_" + quickGoodsListNum).removeClass("div_hidden");
+          $("#quick_goods_" + quickGoodsListNum).removeClass();
           currentViewQuickGoodsNum = quickGoodsListNum;
         } else {
           $("#quick_goods_" + num).addClass("div_hidden");
-          $("#quick_goods_" + num + 1).removeClass("div_hidden");
+          $("#quick_goods_" + (num - 1)).removeClass();
           currentViewQuickGoodsNum--;
         }
         $("#cur_goods_num").text(currentViewQuickGoodsNum);
@@ -179,12 +179,15 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                     >
                       <c:choose>
                         <c:when test="${itemNum.count==1 }">
-                          <div id="quick_goods_1">
+                          <div
+                            id="quick_goods_1"
+                            onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
+                          >
                             <img
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             />
                             <div class="quick_item_row">
                               <div class="quick_item_name textbold textsize-2">
@@ -211,13 +214,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                           <div
                             id="quick_goods_${itemNum.count}"
                             class="div_hidden"
+                            onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
                           >
                             <img
                               class="img_hidden"
                               width="110"
                               height="110"
                               id="img_sticky"
-                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                              src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             />
                             <div class="quick_item_name textbold textsize-2">
                               ${item.name}
@@ -233,6 +237,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                               name="h_goods_fileName"
                               value="${item.img1}"
                             />
+                            <br />
                           </div>
                         </c:otherwise>
                       </c:choose>

@@ -85,12 +85,9 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		// map에 goods 정보를 저장
 		Map map = GeneralFileUploader.getParameterMap(request);
 		map.put("goodsNo", newGoodsNo);
-		map.put("img1", fileList.get(0));
-		map.put("img2", fileList.get(1));
-		map.put("img3", fileList.get(2));
-		map.put("img4", fileList.get(3));
-		map.put("img5", fileList.get(4));
-		
+		for (int i = 0; i < fileList.size(); i++) {
+			map.put("img"+(i+1), fileList.get(i));
+		}
 		System.out.println("map : "+map);
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
@@ -109,7 +106,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX
 		String[] optionQtys = request.getParameterValues("option_qty");
 		String[] optionPrice = request.getParameterValues("option_price");
-
+		
 		OptionVO[] options = new OptionVO[5];
 		for (int i = 0; i < options.length; i++) {
 			OptionVO optionVO = new OptionVO();

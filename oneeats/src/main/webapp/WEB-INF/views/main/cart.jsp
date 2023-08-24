@@ -174,7 +174,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             />
                             <td class="vertical-align">
                               <img
-                                src="${contextPath}/download.do?imageFileName=${cart.goodsImg}&path=goods"
+                                src="${contextPath}/download.do?imageFileName=${cart.goodsImg}&path=goodsNo${cart.goodsNo}"
                                 width="100px"
                                 height="100px"
                                 alt=""
@@ -225,7 +225,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </c:when>
                       <c:otherwise>
                         <tr class="cart_goods_row">
-                          카트에 담긴 상품이 없습니다.
+                          <td colspan="5">카트에 담긴 상품이 없습니다.</td>
                         </tr>
                       </c:otherwise>
                     </c:choose>
