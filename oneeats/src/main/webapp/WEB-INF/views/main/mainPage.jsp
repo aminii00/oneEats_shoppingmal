@@ -213,7 +213,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 class="text-left"
                 style="font-size: 18px; padding-bottom: 6px"
               >
-                New Products
+                새 상품
               </h4>
               <div class="latest-product__slider owl-carousel">
                 <c:forEach items="${newGoodsList}" varStatus="loop" step="3">
@@ -270,7 +270,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                       >
                         <div class="latest-product__item__pic">
                           <img
-                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             style="width: 110px"
                             ;
                           />
@@ -314,7 +314,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                       >
                         <div class="latest-product__item__pic">
                           <img
-                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
+                            src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             style="width: 110px"
                             ;
                           />
