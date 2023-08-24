@@ -116,7 +116,7 @@ public class MemberControllerImpl implements MemberController {
 		}
 		System.out.println("id = " + id);
 		mav.addObject("id", id);
-		mav.setViewName("redirect:/member/idForm.do");
+		mav.setViewName("/member/idForm");
 		return mav;
 	}
 	

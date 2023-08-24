@@ -227,6 +227,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
           <p class="text-left textsize-1 margin1 textbold">주소</p>
           <button
+            type="button"
             onclick="execDaumPostCode()"
             class="btn-midlong bg-lightgreen margin textsize-1 border-0 btn-round"
           >
