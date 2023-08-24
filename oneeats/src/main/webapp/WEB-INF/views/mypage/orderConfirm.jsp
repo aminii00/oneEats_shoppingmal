@@ -12,6 +12,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>주문하기</title>
     <link rel="stylesheet" href="${contextPath}/css/minzy2.css" />
+
+    <!-- 배송요청사항 직접입력 선택했을 때 input창 떠요 -->
     <script>
       $(function () {
         $("#selboxDirect").hide();
@@ -24,6 +26,48 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           }
         });
       });
+    </script>
+
+    <!-- 다음 주소 api 스크립트 -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      function execDaumPostCode() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            var addr = ""; // 주소 변수
+            var extraAddr = ""; // 참고항목 변수
+
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
+
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+            } else {
+            }
+
+            var choizongzuso = "(" + data.zonecode + ")" + addr;
+            document.getElementById("address_input").value = choizongzuso;
+
+            document.getElementById("address_detail_input").focus();
+          },
+        }).open();
+      }
     </script>
   </head>
   <body>
@@ -77,9 +121,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <td>배송주소</td>
           <td>
             <input
+              onclick="execDaumPostCode()"
+              readonly
               type="text"
+              id="address_input"
               name="receiver_address"
-              value="(${memberInfo.zipCode}) ${memberInfo.address} ${memberInfo.address_detail}"
+              value="(${memberInfo.zipCode}) ${memberInfo.address}"
+            /><br />
+            <input
+              type="text"
+              id="address_detail_input"
+              name="receiver_addressDetail"
+              value="${memberInfo.address_detail}"
             />
           </td>
         </tr>
