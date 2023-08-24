@@ -349,7 +349,10 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
         <div class="row">
           <c:forEach var="i" items="${newRecipeList }">
             <div class="col-lg-4 col-md-4 col-sm-6">
-              <div class="blog__item">
+              <div
+                class="blog__item"
+                onclick="location.href='${contextPath}/community/recipe/recipeDetail.do?recipeNo=${i.recipeNo}'"
+              >
                 <div class="blog__item__pic">
                   <img
                     src="${contextPath}/download.do?imageFileName=${i.cookingImg}&path=recipeNo${i.recipeNo}"
