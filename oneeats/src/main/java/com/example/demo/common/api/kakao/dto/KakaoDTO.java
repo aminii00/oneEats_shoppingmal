@@ -2,7 +2,6 @@ package com.example.demo.common.api.kakao.dto;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class KakaoDTO {
 
     private long id;
@@ -32,5 +31,22 @@ public class KakaoDTO {
 		this.email = email;
 		this.nickname = nickname;
 	}
-
+	
+	@Override
+	public String toString() {
+		return "KakaoDTO [id=" + id + ", email=" + email + ", nickname=" + nickname + "]";
+	}
+	
+	
+	public long hash() {
+		long result = 0;
+		result += this.id;
+		result *= 13;
+		result += this.email.hashCode();
+		result *= 13;
+		result += this.nickname.hashCode();
+		
+		return result;
+	}
+	
 }

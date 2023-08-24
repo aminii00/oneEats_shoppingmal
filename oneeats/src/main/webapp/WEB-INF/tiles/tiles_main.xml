@@ -6,134 +6,180 @@
 	<definition name="mainLayout"
 		template="/WEB-INF/views/common/layout_main.jsp">
 		<put-attribute name="title" value="레이아웃 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/side.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
-	
-	
-	<definition name="longimageLayout"
-      template="/WEB-INF/views/common/layout_longimage.jsp">
-      <put-attribute name="title" value="긴 레이아웃 페이지" />
-      <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-      <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
-      <put-attribute name="body" value="" />
-      <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-</definition>
-	
-	
 
-<definition name="mainLayoutformainPage"
-		template="/WEB-INF/views/common/layout_main.jsp">
-		<put-attribute name="title" value="레이아웃 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/layout_undersidebar.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-</definition>
-	
-	
+
 	<definition name="longimageLayout"
 		template="/WEB-INF/views/common/layout_longimage.jsp">
 		<put-attribute name="title" value="긴 레이아웃 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+
+
+
+	<definition name="mainLayoutformainPage"
+		template="/WEB-INF/views/common/layout_main.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/layout_undersidebar.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+
+
+	<definition name="longimageLayout"
+		template="/WEB-INF/views/common/layout_longimage.jsp">
+		<put-attribute name="title" value="긴 레이아웃 페이지" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/side.jsp" />
 		<put-attribute name="long_image" value="" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-		
-		
-</definition>
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+
+
+	</definition>
 
 	<definition name="undersidebarLayout"
 		template="/WEB-INF/views/common/layout_undersidebar.jsp">
 		<put-attribute name="title" value="긴 레이아웃 페이지" />
-		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/side.jsp" />
 		<put-attribute name="body1" value="" />
 		<put-attribute name="body2" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
-		</definition>
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
 
 
 	<definition name="nosidebarLayout"
-	template="/WEB-INF/views/common/layout_nosidebar.jsp">
-	<put-attribute name="title" value="사이드바 없는 레이아웃" />
-	<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		template="/WEB-INF/views/common/layout_nosidebar.jsp">
+		<put-attribute name="title" value="사이드바 없는 레이아웃" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/common/header.jsp" />
 		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 
 	<definition name="/home" extends="mainLayout">
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/home.jsp" />
 	</definition>
 
-	
+
 	<definition name="/main/mainPage" extends="mainLayout">
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />
-		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
-		<put-attribute name="body" value="/WEB-INF/views/main/mainPage.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/mainPage.jsp" />
 	</definition>
 
-	<definition name="/member/loginForm" extends="nosidebarLayout">
+	<definition name="/member/loginForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 로그인페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/member/loginForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/loginForm.jsp" />
 	</definition>
-	
-	<definition name="/member/registerTypeSelect" extends="nosidebarLayout">
+
+	<definition name="/member/registerTypeSelect"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 회원가입선택페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/member/registerTypeSelect.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/registerTypeSelect.jsp" />
 	</definition>
-	
-	<definition name="/member/registerForm" extends="nosidebarLayout">
+
+	<definition name="/member/registerForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 회원가입" />
-		<put-attribute name="body" value="/WEB-INF/views/member/registerForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/registerForm.jsp" />
 	</definition>
-	<definition name="/member/idSearchForm" extends="nosidebarLayout">
+	<definition name="/member/idSearchForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 아이디 찾기" />
-		<put-attribute name="body" value="/WEB-INF/views/member/idSearchForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/idSearchForm.jsp" />
 	</definition>
 	<definition name="/member/idForm" extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 아이디 찾기" />
-		<put-attribute name="body" value="/WEB-INF/views/member/idForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/idForm.jsp" />
 	</definition>
-	<definition name="/member/pwSearchForm" extends="nosidebarLayout">
+	<definition name="/member/pwSearchForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 비밀번호 찾기" />
-		<put-attribute name="body" value="/WEB-INF/views/member/pwSearchForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/pwSearchForm.jsp" />
 	</definition>
-	<definition name="/member/newPwSearchForm" extends="nosidebarLayout">
+	<definition name="/member/newPwSearchForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
-		<put-attribute name="body" value="/WEB-INF/views/member/newPwSearchForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/newPwSearchForm.jsp" />
 	</definition>
-	<definition name="/member/sellerRegisterForm" extends="nosidebarLayout">
+	<definition name="/member/sellerRegisterForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
-		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/sellerRegisterForm.jsp" />
 	</definition>
-	<definition name="/member/sellerRegisterAgreeForm" extends="nosidebarLayout">
+	<definition name="/member/sellerRegisterAgreeForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
-		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterAgreeForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/sellerRegisterAgreeForm.jsp" />
 	</definition>
-	<definition name="/member/sellerRegisterInfoForm" extends="nosidebarLayout">
+	<definition name="/member/sellerRegisterInfoForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
-		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterInfoForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/sellerRegisterInfoForm.jsp" />
 	</definition>
-	<definition name="/member/sellerRegisterLastForm" extends="nosidebarLayout">
+	<definition name="/member/sellerRegisterLastForm"
+		extends="nosidebarLayout">
 		<put-attribute name="title" value="쇼핑몰 새 비밀번호 설정" />
-		<put-attribute name="body" value="/WEB-INF/views/member/sellerRegisterLastForm.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/member/sellerRegisterLastForm.jsp" />
 	</definition>
-	
-		<definition name="/cart" extends="nosidebarLayout">
+
+	<definition name="/cart" extends="nosidebarLayout">
 		<put-attribute name="title" value="" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/main/cart.jsp" />
 	</definition>
-	
-			<definition name="/main/cart" extends="nosidebarLayout">
+
+	<definition name="/main/cart" extends="nosidebarLayout">
 		<put-attribute name="title" value="" />
 		<put-attribute name="body"
 			value="/WEB-INF/views/main/cart.jsp" />
+	</definition>
+
+	<definition name="/member/registerApi" extends="nosidebarLayout">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/member/registerApi.jsp" />
 	</definition>
 
 </tiles-definitions>

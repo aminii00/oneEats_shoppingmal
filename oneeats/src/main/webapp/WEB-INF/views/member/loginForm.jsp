@@ -179,9 +179,9 @@ $(function() {
     </section>
     <br>
     
-    <button class = "btn-midlong_2 bg-kakao textsize-1 textbold input btn-round border-0">
+    <button type="button" class = "btn-midlong_2 bg-kakao textsize-1 textbold input btn-round border-0" onclick="location.href='${kakaoUrl}'">
         <img class ="imgsize-square " src="${contextPath}/img/icon/kakao.png"/>카카오로 로그인하기</button>
-    <button class = "btn-midlong_2 bg-naver textsize-1 textbold input btn-round textcolor-white border-0">
+    <button type="button" class = "btn-midlong_2 bg-naver textsize-1 textbold input btn-round textcolor-white border-0">
         <img class ="imgsize-square " src="${contextPath}/img/icon/naver.png"/>
         네이버로 로그인하기</button>
     
@@ -189,10 +189,7 @@ $(function() {
 
     <div>
         <br>
-        <br>
-        <p class = "textsize-1 margin1">법인 고객이신가요?</p>
-        <p class =" textsize-1">사업자 회원으로 전용 특가 혜택을 누려보세요</p>
-        <a class = "textbold" href="${contextPath}/member/sellerRegisterForm.do">사업자 간편가입</a>
+       
 </div>
 </div>
 <br>
