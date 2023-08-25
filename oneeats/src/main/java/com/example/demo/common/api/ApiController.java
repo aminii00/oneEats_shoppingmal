@@ -15,7 +15,7 @@ public class ApiController {
 	@Autowired
 	private KakaoService kakaoService;
 	
-    @RequestMapping(value="/apitest/loginForm.do", method= RequestMethod.GET)
+    @RequestMapping(value="/member/loginForm.do", method= RequestMethod.GET)
     public ModelAndView loginForm(HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("/member/loginForm");
     	mav.addObject("kakaoUrl", kakaoService.getKakaoLogin());
