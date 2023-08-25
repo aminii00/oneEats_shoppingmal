@@ -21,5 +21,12 @@ public class ApiController {
     	mav.addObject("kakaoUrl", kakaoService.getKakaoLogin());
         return mav;
     }
+    
+    @RequestMapping(value = "/apitest/registerSelect.do")
+    public ModelAndView registerForm(HttpServletRequest request) {
+    	ModelAndView mav = new ModelAndView("/member/registerTypeSelect");  
+    	mav.addObject("kakaoUrl",kakaoService.getKakaoLogin());
+    	return mav;
+    }
 
 }

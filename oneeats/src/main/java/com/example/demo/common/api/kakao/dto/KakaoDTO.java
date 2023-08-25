@@ -41,10 +41,7 @@ public class KakaoDTO {
 	public long hash() {
 		long result = 0;
 		result += this.id;
-		result *= 13;
-		result += this.email.hashCode();
-		result *= 13;
-		result += this.nickname.hashCode();
+
 		
 		return result;
 	}

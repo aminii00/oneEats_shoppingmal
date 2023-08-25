@@ -31,7 +31,7 @@ public class KakaoController {
 	public ModelAndView callback(HttpServletRequest request) throws Exception {
 		KakaoDTO kakaoInfo = kakaoService.getKakaoInfo(request.getParameter("code"));
 
-		// email을 참조해서 가입된 유저인지 판단한다.
+		// id를 참조해서 가입된 유저인지 판단한다.
 		// 가입된 유저면 그대로 로그인, 가입되지 않은 유저면 회원가입창으로 이동.
 		long hash = kakaoInfo.hash();
 		System.out.println(kakaoInfo);
@@ -40,13 +40,13 @@ public class KakaoController {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		if (member == null || member.getId().trim().length() < 1) {
-			mav =  Alert.alertAndRedirect("카카오 계정으로 가입되지 않았습니다. <br> 회원가입 페이지로 이동합니다.", "/kakao/registerApi.do");
+			mav =  Alert.alertAndRedirect("카카오 계정으로 가입된 계정이 아닙니다. \\n 회원가입 페이지로 이동합니다.", "/kakao/registerApi.do");
 			session.setAttribute("kakaoInfo", kakaoInfo);
 		} else {
 			session = request.getSession();
 			session.setAttribute("isLogOn", true);
 			session.setAttribute("memberInfo", member);
-			mav.setViewName("redirect:/main/mainPage.do");
+			mav = Alert.alertAndRedirect("로그인 되었습니다.", "/main/mainPage.do");
 		}
 
 		return mav;
