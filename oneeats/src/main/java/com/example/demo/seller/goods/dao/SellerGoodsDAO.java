@@ -11,6 +11,7 @@ import com.example.demo.vo.GoodsVO;
 
 import com.example.demo.vo.OptionVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.RecipeVO;
 
 
 
@@ -31,8 +32,12 @@ public interface SellerGoodsDAO {
 	public List<OptionVO> selectOptionVO(int goodsNo);
 	
 	public boolean updateNewGoodsWithMap(int goodsNo);
+	
 	//주문 목록
 	public List<GoodsVO> selectGoodsList() throws DataAccessException;
+	
+	//페이징 처리
+	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
 	
 	//주문 삭제
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException;

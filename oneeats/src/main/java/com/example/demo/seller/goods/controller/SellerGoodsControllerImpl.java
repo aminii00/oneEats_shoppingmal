@@ -34,6 +34,7 @@ import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.RecipeVO;
 
 @Controller("sellerGoodsController")
 public class SellerGoodsControllerImpl implements SellerGoodsController {
@@ -56,17 +57,47 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		String _pageNum = request.getParameter("pageNum");
+		String _section = request.getParameter("section");
+		int pageNum;
+		int section;
+		if(_pageNum == null || _pageNum.length()<=0) {
+			pageNum=1;
+		}else {
+			pageNum = Integer.parseInt(_pageNum);
+		}
+		if (_section == null || _section.length() <= 0) {
+			section = 1;
+		} else {
+			section = Integer.parseInt(_section);
+		}
+		Map pagingMap= new HashMap();
+		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("section", section);
+		pagingMap.put("start",((section - 1) * 10 + pageNum -1)*10);
+		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList(pagingMap);		
+		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
+		
 		mav.addObject("goodsList", goodsList);
+		mav.addObject("newGoodsList",newGoodsList);
+		mav.addAllObjects(pagingMap);
 		System.out.println(mav);
+		System.out.println("newGoodsList:"+newGoodsList);
 		return mav;
 	}
+	
 
 	@RequestMapping(value = "/seller/goods/sellerModForm.do")
 	public ModelAndView sellerModForm(HttpServletRequest request) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
+		HttpSession session = request.getSession();
+	
+		
 		System.out.println(mav);
 		return mav;
 	}
@@ -91,7 +122,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		System.out.println("map : "+map);
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("loginUser");
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		if (memberVO == null) {
 			map.put("memberNo", 1);
 		} else {
