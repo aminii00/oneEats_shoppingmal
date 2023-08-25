@@ -66,7 +66,20 @@ public class CommunityControllerImpl implements CommunityController {
 		mav.addObject("recipeList", recipeList);
 		mav.addObject("newRecipeList", newRecipeList);
 		mav.addAllObjects(pagingMap);
-
+		
+		List<Map> resultMap = communityService.countRecipeNums();
+		long totalRecipeNum = 0; 
+		// Output the result
+		for (Map<String, Object> row : resultMap) {
+		    String cate = (String) row.get("category");
+		    long count = (long) row.get("cnt");
+		    System.out.println("Category: " + cate + ", Count: " + count);
+		    totalRecipeNum = count;
+		}
+		
+		mav.addObject("recipeNumMap",resultMap);
+		mav.addObject("totalRecipeNum",totalRecipeNum);
+		
 		System.out.println(mav);
 
 		return mav;

@@ -10,7 +10,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <meta charset="UTF-8" />
     <title>레시피 목록</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
-    <script src="${contextPath}/js/community.js"></script>
+    <script src="${contextPath}/js/recipe.js"></script>
     <script type="text/javascript">
       function readURL(input) {
         if (input.files && input.files[0]) {

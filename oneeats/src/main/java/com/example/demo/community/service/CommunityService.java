@@ -28,4 +28,6 @@ public interface CommunityService {
 
 	public List<RecipeVO> selectNewRecipeList(int recipeNo);
 
+	public List<Map> countRecipeNums();
+
 }

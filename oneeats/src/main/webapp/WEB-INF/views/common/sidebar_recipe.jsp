@@ -59,7 +59,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   style="width: 100%"
                   onclick="fn_slideToggle(1);"
                 >
-                  전체(15)
+                  전체(${totalRecipeNum})
                   <img
                     id="arrow_1"
                     src="${contextPath}/img/icon/uparrow.png"
@@ -72,7 +72,21 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   class="textsize-1"
                   style="margin-left: 12px; margin-top: 12px"
                 >
-                  <li><a href="">10분 간단 레시피(10)</a></li>
+                  <c:forEach
+                    items="${recipeNumMap}"
+                    var="numsMap"
+                    varStatus="i"
+                  >
+                    <c:if test="${i.index>0}">
+                      <li>
+                        <a
+                          href="${contextPath}/community/recipe/recipeList.do?category=${numsMap.category}"
+                          >${numsMap.category}(${numsMap.cnt})</a
+                        >
+                      </li>
+                    </c:if>
+                  </c:forEach>
+
                   <li><a href="">영양만점 레시피(5)</a></li>
                 </ul>
               </div>

@@ -1,6 +1,5 @@
 package com.example.demo.community.service;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +81,10 @@ public class CommunityServiceImpl implements CommunityService {
 	@Override
 	public List<RecipeVO> selectNewRecipeList(int recipeNo) {
 		return communityDAO.selectNewRecipeListExceptCurrentRecipe(recipeNo);
+	}
+	@Override
+	public List<Map> countRecipeNums() {
+		return communityDAO.countRecipeNums();
 	};
 	
 	

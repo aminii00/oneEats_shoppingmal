@@ -11,7 +11,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
     <meta charset="UTF-8" />
     <title>레시피 목록</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
-    <script src="${contextPath}/js/community.js"></script>
+    <script src="${contextPath}/js/recipe.js"></script>
   </head>
   <body>
     <section>

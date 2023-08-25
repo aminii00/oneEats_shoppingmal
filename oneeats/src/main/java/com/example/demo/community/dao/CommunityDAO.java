@@ -37,6 +37,8 @@ public interface CommunityDAO {
 
 	public void deleteRecipe(int recipeNo);
 
-	public List<RecipeVO> selectNewRecipeListExceptCurrentRecipe(int recipeNo); 
+	public List<RecipeVO> selectNewRecipeListExceptCurrentRecipe(int recipeNo);
+
+	public List<Map> countRecipeNums(); 
 	
 }
