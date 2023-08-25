@@ -27,5 +27,4 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 		ModelAndView mav = new ModelAndView(viewName);
 		return mav;
 	}
-	
 }

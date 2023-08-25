@@ -57,17 +57,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }
       }
     </script>
-    
-    // 전체 체크박스 선택 해봄(대신 이름이 check1로 같아야함)..밍지
+
     <script>
-    function selectAll(selectAll)  {
-      const checkboxes 
-       = document.getElementsByName('check1');
-  
-      checkboxes.forEach((checkbox) => {
-      checkbox.checked = selectAll.checked;
-      })
-    }
+      function selectAll(selectAll) {
+        const checkboxes = document.getElementsByName("check1");
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.checked = selectAll.checked;
+        });
+      }
     </script>
 
     <!-- 다음 주소 api 스크립트 -->
@@ -335,7 +333,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 id="allcheck"
                 name="check1"
                 value="agreeTotal"
-                onclick='selectAll(this)'
+                onclick="selectAll(this)"
               /><label>&nbsp&nbsp&nbsp전체 약관 동의</label>
             </p>
             <br /><br />

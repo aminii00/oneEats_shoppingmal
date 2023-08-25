@@ -2,117 +2,155 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.example.demo.community.dao.CommunityDAO">
-	
+
 	<resultMap id="recipeResult" type="recipeVO">
-	    <result property="recipeNo" column="recipeNo" />
-	    <result column="title" property="title"/>
-		<result column="cooking_time" property="cooking_time"/>
-		<result column="description" property="description"/>
-		<result column="cookingImg" property="cookingImg"/>
-		<result column="category" property="category"/>
-		<result column="inbun" property="inbun"/>
-		<result column="creDate" property="creDate" javaType="java.sql.Date"/>
-		<result column="memberNo" property="memberNo"/>
+		<result property="recipeNo" column="recipeNo" />
+		<result column="title" property="title" />
+		<result column="cooking_time" property="cooking_time" />
+		<result column="description" property="description" />
+		<result column="cookingImg" property="cookingImg" />
+		<result column="category" property="category" />
+		<result column="inbun" property="inbun" />
+		<result column="creDate" property="creDate"
+			javaType="java.sql.Date" />
+		<result column="memberNo" property="memberNo" />
 	</resultMap>
-	
+
 	<resultMap id="ingredientResult" type="ingredientVO">
 		<result property="recipeNo" column="recipeNo" />
 		<result property="name" column="name" />
 		<result property="qty" column="qty" />
 	</resultMap>
 	
-	<select id="sellectAllRecipe" resultMap="recipeResult" >
+	<resultMap id="noticeResult" type="noticeVO">
+		<result property="noticeNo" column="noticeNo" />
+		<result property="category" column="category" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+	</resultMap>
+
+	<select id="sellectAllRecipe" resultMap="recipeResult">
 	    <![CDATA[
 			sellect * from recipe
 		]]>
 	</select>
-	
-	
-	
-	<select id="selectRecipeList" resultMap="recipeResult" parameterType="java.util.Map" >
-			select * from recipe
-			<if test="category!=null and category!=''" >
-				where category=#{category}
-			</if>
-			order by creDate desc
-			limit #{start}, 6
-			
+
+
+
+	<select id="selectRecipeList" resultMap="recipeResult"
+		parameterType="java.util.Map">
+		select * from recipe
+		<if test="category!=null and category!=''">
+			where category=#{category}
+		</if>
+		order by creDate desc
+		limit #{start}, 6
+
 	</select>
-	
+
 	<select id="selectNewRecipeList" resultMap="recipeResult">
-		select * from recipe order by creDate desc limit 3
+		select * from recipe
+		order by creDate desc limit 3
 	</select>
-	
-	
-	<select id="selectNewRecipeListExceptCurrentRecipe" resultMap="recipeResult" parameterType="int">
-		select * from recipe where recipeNo!=#{recipeNo} order by creDate desc limit 3
+
+
+	<select id="selectNewRecipeListExceptCurrentRecipe"
+		resultMap="recipeResult" parameterType="int">
+		select * from recipe where
+		recipeNo!=#{recipeNo} order by creDate desc limit 3
 	</select>
-	
-	
-	<select id="selectRecipeByRecipeNo" resultType="recipeVO" >
+
+
+	<select id="selectRecipeByRecipeNo" resultType="recipeVO">
 		select * from recipe where recipeNo=#{recipeNo}
 	</select>
-	
-	
-	<select id="selectIngredientByRecipeNo" resultMap="ingredientResult"  parameterType="int">
-		select * from ingredient where recipeNo=#{recipeNo}
+
+
+	<select id="selectIngredientByRecipeNo"
+		resultMap="ingredientResult" parameterType="int">
+		select * from ingredient
+		where recipeNo=#{recipeNo}
 	</select>
-	
-	
-	<select id="selectNewRecipeNo" resultType="int" >
-		select ifnull(max(recipeNo),0)+1 from recipe
+
+
+	<select id="selectNewRecipeNo" resultType="int">
+		select
+		ifnull(max(recipeNo),0)+1 from recipe
 	</select>
 
 	<select id="selectRecipeTotCount" resultType="int">
-		select count(*) from recipe
+		select count(*)
+		from recipe
 	</select>
-	
-	<select id="selectRecipeCountWithCategory" resultType="int" parameterType="String">
+
+	<select id="selectRecipeCountWithCategory" resultType="int"
+		parameterType="String">
 		select count(*) from recipe where category=#{category}
 	</select>
 
+	<select id="noticeList" resultMap="noticeResult"
+		parameterType="String">
+		select * from notice
+	</select>
+	
+	<select id="noticeDetail" resultMap="noticeResult"
+		parameterType="int">
+		select * from notice where noticeNo=#{noticeNo}
+	</select>
 
 	<insert id="insertNewRecipe" parameterType="recipeVO">
-		insert recipe (recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo) values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})			
+		insert recipe
+		(recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo)
+		values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})
 	</insert>
-	
-	<insert id="insertNewRecipeWithMap" parameterType="java.util.Map">
-		insert recipe (recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo) values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})
+
+	<insert id="insertNewRecipeWithMap"
+		parameterType="java.util.Map">
+		insert recipe
+		(recipeNo,title,cooking_time,description,cookingImg,category,inbun,memberNo)
+		values(#{recipeNo},#{title},#{cooking_time},#{description},#{cookingImg},#{category},#{inbun},#{memberNo})
 	</insert>
-	
-	<insert id="insertIngredients" parameterType="java.util.List" >
+
+	<insert id="insertIngredients" parameterType="java.util.List">
 		insert into ingredient (recipeNo,name,qty)
 		values
-		<foreach collection="list" item="i" index="index" separator=",">
+		<foreach collection="list" item="i" index="index"
+			separator=",">
 			(#{i.recipeNo}, #{i.name}, #{i.qty})
 		</foreach>
 	</insert>
-	
-	<insert id="insertIngredientsWithMap" parameterType="java.util.Map" >
+
+	<insert id="insertIngredientsWithMap"
+		parameterType="java.util.Map">
 		insert into ingredient (recipeNo,name,qty)
 		values
-		<foreach collection="#{ingredientList}" item="i" index="index" separator=",">
+		<foreach collection="#{ingredientList}" item="i" index="index"
+			separator=",">
 			(#{i.recipeNo}, #{i.name}, #{i.qty})
 		</foreach>
 	</insert>
-	
+
 	<update id="updateRecipe" parameterType="java.util.Map">
-		update recipe set title = #{title},
-      	cooking_time = #{cooking_time},
-      	description = #{description},
-      	cookingImg = #{cookingImg},
-      	category = #{category},
-      	inbun = #{inbun}
-    	where recipeNo = #{recipeNo}
+		update recipe set title
+		= #{title},
+		cooking_time = #{cooking_time},
+		description = #{description},
+		cookingImg = #{cookingImg},
+		category = #{category},
+		inbun = #{inbun}
+		where recipeNo = #{recipeNo}
 	</update>
-	
+
 	<delete id="deleteIngredientsByRecipeNo" parameterType="int">
-		delete from ingredient where recipeNo = #{recipeNo}
+		delete
+		from ingredient where recipeNo = #{recipeNo}
 	</delete>
-	
+
 	<delete id="deleteRecipe" parameterType="int">
-		delete from recipe where recipeNo = #{recipeNo}
+		delete from recipe where
+		recipeNo = #{recipeNo}
 	</delete>
 </mapper>
