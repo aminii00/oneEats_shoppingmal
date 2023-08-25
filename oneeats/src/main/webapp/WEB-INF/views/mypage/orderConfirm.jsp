@@ -89,7 +89,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>이름</td>
           <td>
-            <input type="text" name="orderer_name" value="${memberInfo.name}" />
+            <input
+              type="text"
+              name="orderer_name"
+              value="${memberInfo.name}"
+              readonly
+            />
           </td>
         </tr>
         <tr>
@@ -99,6 +104,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               type="text"
               name="orderer_phone"
               value="${memberInfo.phone}"
+              readonly
             />
           </td>
         </tr>
