@@ -2,6 +2,7 @@ package com.example.demo.main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,14 +50,12 @@ public class MainControllerImpl implements MainController {
 
 		List<RecipeVO> newRecipeList = mainService.selectNewRecipeList();
 		mav.addObject("newRecipeList", newRecipeList);
-		
+
 		List<GoodsVO> bestGoodsList = mainService.selectBestGoodsList();
-		mav.addObject("bestGoodsList",bestGoodsList);
-		
+		mav.addObject("bestGoodsList", bestGoodsList);
+
 		List<GoodsVO> topReviewGoodsList = mainService.selectTopReviewGoodsList();
-		mav.addObject("topReviewGoodsList",topReviewGoodsList);
-		
-		
+		mav.addObject("topReviewGoodsList", topReviewGoodsList);
 
 		return mav;
 	}
@@ -68,7 +67,7 @@ public class MainControllerImpl implements MainController {
 		ModelAndView mav = new ModelAndView(viewName);
 		String previousPage = request.getHeader("Referer");
 		mav.addObject("previousPage", previousPage);
-		
+
 		return mav;
 	}
 
@@ -107,7 +106,37 @@ public class MainControllerImpl implements MainController {
 		return result;
 	}
 
-	@RequestMapping(value = "/orderNow.do", method = {RequestMethod.POST,RequestMethod.GET})
+	// ajax로 cart에 담긴 상품을 지우기 위한 코드
+	@ResponseBody
+	@PostMapping(value = "/removeCartItem.do")
+	public String removeCartItem(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String result = "success";
+		HttpSession session = request.getSession();
+		List<CartVO> cartList = (List<CartVO>) session.getAttribute("cartList");
+		String _optionNo = request.getParameter("num");
+		System.out.println("option_no = " + _optionNo);
+		try {
+			int optionNo = Integer.parseInt(_optionNo);
+			int idx = -1;
+			for (int i = 0; i < cartList.size(); i++) {
+				CartVO carttemp = cartList.get(i);
+				if (carttemp.getOptionNo() == optionNo) {
+					idx = i;
+					break;
+				}
+			}
+			cartList.remove(idx);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		}
+
+		return result;
+	}
+
+	@RequestMapping(value = "/orderNow.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView orderNow(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
@@ -118,19 +147,19 @@ public class MainControllerImpl implements MainController {
 		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
 		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		String loginFor = (String) session.getAttribute("loginFor");
-		if (orderNowList != null && orderNowList.size()>0 && loginFor != null && loginFor.equals("orderNow")) {
+		if (orderNowList != null && orderNowList.size() > 0 && loginFor != null && loginFor.equals("orderNow")) {
 			System.out.println("주문 상품을 선택한 정보가 있음");
 			// 첫번째 원소로부터 할인 가격등을 가져와 모델에
 			int shippingFee = orderNowList.get(0).getShippingfee();
 			int paymentPrice = orderNowList.get(0).getPayment_price();
 			int discountPrice = orderNowList.get(0).getDiscount_price();
-			
+
 			mav.addObject("shippingFee", shippingFee);
 			mav.addObject("payment_price", paymentPrice);
 			mav.addObject("discount_price", discountPrice);
 			session.removeAttribute("loginFor");
-			
-		}else {
+
+		} else {
 			orderNowList = new ArrayList<OrderVO>();
 			try {
 				// request에서 정보를 받아옴
@@ -156,7 +185,7 @@ public class MainControllerImpl implements MainController {
 
 				mav.addObject("selectGoodsList", orderNowList);
 				session.setAttribute("selectGoodsList", orderNowList);
-				
+
 				mav.addObject("shippingFee", shippingFee);
 				mav.addObject("payment_price", paymentPrice);
 				mav.addObject("discount_price", discountPrice);
@@ -168,8 +197,6 @@ public class MainControllerImpl implements MainController {
 				return mav;
 			}
 		}
-		
-		
 
 		if (loginMember == null || loginMember.getId().length() < 1) {
 			mav = Alert.alertAndRedirect("로그인이 필요한 페이지입니다.", request.getContextPath() + "/member/loginForm.do");

@@ -321,6 +321,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!-- Shoping Cart Section End -->
 
     <script>
+      var removeValUrl = "${contextPath}/removeCartItem.do";
+
       var shippingFee = parseInt("${shippingFee}");
       var payment_price = parseInt("${payment_price}");
       var discount_price = parseInt("${discount_price}");
@@ -341,6 +343,24 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         $(".discount_price_text").text(discount_price);
         $(".noshipping_price_text").text(noshipping_price);
         $(".total_price_text").text(total_price);
+      }
+
+      function fn_removeCartItem(row) {
+        var row_discount_price = parseInt(
+          row.find(".h_row_discount_price").val()
+        );
+        var row_total_price = parseInt(row.find(".h_row_total_price").val());
+        var row_payment_price = parseInt(
+          row.find(".h_row_payment_price").val()
+        );
+
+        payment_price = parseInt(payment_price) - row_payment_price;
+        discount_price = parseInt(discount_price) - row_discount_price;
+        total_price = parseInt(total_price) - row_total_price;
+        calculate();
+        changeTexts();
+
+        row.remove();
       }
 
       $(document).on("click", ".goods_option_plus_btn", function () {
@@ -434,6 +454,32 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           calculate();
           changeTexts();
         }
+      });
+
+      $(document).on("click", ".cart_remove_btn", function () {
+        var parentRow = $(this).closest(".cart_goods_row");
+        var row_option_qty = parseInt(
+          parentRow.find(".h_row_option_qty").val()
+        );
+        var row_option_No = parseInt(parentRow.find(".h_option_no").val());
+
+        $.ajax({
+          type: "POST",
+          url: removeValUrl,
+          data: { num: row_option_No },
+          success: function (response) {
+            if (response == "success") {
+              alert("삭제되었습니다.");
+              fn_removeCartItem(parentRow);
+            } else {
+              alert("카트에서 삭제하지 못 했습니다.");
+            }
+          },
+          error: function (response) {
+            alert("원인불명의 에러");
+            console.log(response);
+          },
+        });
       });
     </script>
   </body>
