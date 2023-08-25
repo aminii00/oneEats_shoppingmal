@@ -12,18 +12,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <meta name="keywords" content="Ogani, unica, creative, html" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Ogani | Template</title>
-
-    <!-- Google Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap"
-      rel="stylesheet"
-    />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+    <title>상품 목록</title>
   </head>
 
   <body>
@@ -102,7 +91,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
               <div class="row" style="justify-content: space-around">
                 <div class="col-lg-4 col-md-4">
                   <div class="filter__found">
-                    <h6><span>${totalGoodsNum}</span> Products found</h6>
+                    <h6><span>${totalGoodsNum}</span> 개의 상품이 있습니다.</h6>
                   </div>
                 </div>
               </div>
@@ -116,11 +105,15 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                       data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goods"
                     >
                       <ul class="product__item__pic__hover">
-                        <li onclick="fn_bookmark('${item.goodsNo}')">
+                        <li
+                          onclick="fn_bookmark('${contextPath}','${item.goodsNo}')"
+                        >
                           <a><i class="fa fa-heart"></i></a>
                         </li>
 
-                        <li>
+                        <li
+                          onclick="fn_toCartFromList('${contextPath}','${item.goodsNo}')"
+                        >
                           <a href="#"><i class="fa fa-shopping-cart"></i></a>
                         </li>
                       </ul>
@@ -152,7 +145,5 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
       </div>
     </section>
     <!-- Product Section End -->
-    <script></script>
-    <!-- Js Plugins -->
   </body>
 </html>

@@ -246,8 +246,8 @@ hr.line-black {
 }
 hr.line-gray {
   border: 0px;
-  height: 2px;
-  background-color: gray;
+  height: 1px;
+  background-color: #b3b3b3;
   margin: 4px;
 }
 

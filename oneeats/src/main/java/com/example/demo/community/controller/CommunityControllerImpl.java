@@ -55,7 +55,7 @@ public class CommunityControllerImpl implements CommunityController {
 			section = Integer.parseInt(_section);
 		}
 
-		Map pagingMap = new HashMap();
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
 		pagingMap.put("category", category);
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
@@ -66,20 +66,31 @@ public class CommunityControllerImpl implements CommunityController {
 		mav.addObject("recipeList", recipeList);
 		mav.addObject("newRecipeList", newRecipeList);
 		mav.addAllObjects(pagingMap);
-		
+
 		List<Map> resultMap = communityService.countRecipeNums();
-		long totalRecipeNum = 0; 
+		// 등록된 레시피가 몇 개인지
+		long totalRecipeNum = (long) resultMap.get(0).get("cnt") ;
+		// 현재 보고 있는 카테고리의 레시피가 몇 개인지
+		long searchRecipeNum = -1;
 		// Output the result
 		for (Map<String, Object> row : resultMap) {
-		    String cate = (String) row.get("category");
-		    long count = (long) row.get("cnt");
-		    System.out.println("Category: " + cate + ", Count: " + count);
-		    totalRecipeNum = count;
+			String cate = (String) row.get("category");
+			long count = (long) row.get("cnt");
+			System.out.println("Category: " + cate + ", Count: " + count);
+			if (cate.equals(category)) {
+				searchRecipeNum = count;
+			}
 		}
 		
-		mav.addObject("recipeNumMap",resultMap);
-		mav.addObject("totalRecipeNum",totalRecipeNum);
+		if (searchRecipeNum<0) {
+			searchRecipeNum = totalRecipeNum;
+		}
 		
+
+		
+		mav.addObject("recipeNumMap", resultMap);
+		mav.addObject("totalRecipeNum", totalRecipeNum);
+		mav.addObject("searchRecipeNum",searchRecipeNum);
 		System.out.println(mav);
 
 		return mav;
@@ -257,26 +268,5 @@ public class CommunityControllerImpl implements CommunityController {
 		mav.addObject("redirectPage", page);
 		return mav;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

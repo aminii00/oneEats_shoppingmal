@@ -419,7 +419,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
     <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
-      var storeValueUrl = "${contextPath}" + "/storeValue.do";
+      var storeValueUrl = "${contextPath}" + "/addCartToListValue.do";
       var goodsPrice = "${goods.price}";
       goodsPrice = parseInt(goodsPrice);
       var cartPage = "${contextPath}/main/cart.do";

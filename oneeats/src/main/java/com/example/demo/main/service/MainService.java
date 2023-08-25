@@ -35,4 +35,6 @@ public interface MainService {
 	public List<GoodsVO> selectBestGoodsList();
 
 	public List<GoodsVO> selectTopReviewGoodsList();
+
+	public CartVO selectOneOptionByGoodsNo(int goodsNo);
 }

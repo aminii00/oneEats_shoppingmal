@@ -69,7 +69,7 @@ function fn_show(num) {
 
 
 // goodsNo을 주면 해당하는 상품을 찜하는 함수. 로그인이 되어 있지 않으면 알림창을 띄움.
-function fn_bookmark(goodsNo) {
+function fn_bookmark(contextPath,goodsNo) {
 	$.ajax({
 		type: "POST",
 		url: "/goods/bookmark.do",
@@ -82,7 +82,7 @@ function fn_bookmark(goodsNo) {
 			} else if (response == "login") {
 				fn_openalert(
 					"로그인이 필요합니다. <br> 로그인 페이지로 이동하시겠습니까?",
-					"/member/loginForm.do"
+					contextPath+"/member/loginForm.do"
 				);
 			} else {
 				alert("에러가 일어나 찜하지 못 했습니다.");
@@ -93,4 +93,29 @@ function fn_bookmark(goodsNo) {
 			console.log(response);
 		},
 	});
+}
+
+
+// 상품 목록 페이지에서 상품을 카트에 첫번째 옵션으로 추가
+function fn_toCartFromList(contextPath,num) {
+	$.ajax({
+		type: "POST",
+		url: contextPath+"/addCartItem.do",
+		data: {num:num},
+		success: function(response) {
+			if (response == "success") {
+				fn_openalert(
+					"장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
+					contextPath+"/main/cart.do"
+				);
+			} else {
+				alert("장바구니에 담지 못 했습니다.");
+			}
+		},
+		error: function(response) {
+			alert("원인불명의 에러");
+			console.log(response);
+		},
+	});
+
 }

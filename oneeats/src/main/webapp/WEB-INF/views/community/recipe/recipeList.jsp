@@ -16,8 +16,17 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
   <body>
     <section>
       <div class="textsize-3 text-left textbold textcolor-black">
-        전체 레시피
+        <c:if test="${not empty category}"> ${category} </c:if>
+        <c:if test="${empty category}">전체 </c:if>
+        레시피
       </div>
+      <c:if test="${not empty category}">
+        <div class="float-right">
+          <a href="${contextPath}/community/recipe/recipeList.do"
+            >전체 레시피로</a
+          >
+        </div>
+      </c:if>
       <div class="clear">&nbsp;</div>
       <div class="recipeList_grid">
         <c:forEach items="${recipeList}" varStatus="loop" step="2">
@@ -127,7 +136,17 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               </button>
             </li>
           </c:if>
-          <c:forEach begin="1" end="10" var="i">
+          <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
+          <c:set var="endPage" value="1" />
+          <c:if test="${not empty searchRecipeNum && searchRecipeNum>0}">
+            <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
+            <c:set
+              var="result"
+              value="${(searchRecipeNum - (section-1)*60)/6}"
+            />
+            <c:set var="endPage" value="${Math.ceil(result)}" />
+          </c:if>
+          <c:forEach begin="1" end="${endPage}" var="i">
             <li class="li-btn">
               <button
                 class="btn-2 btn-square bg-white btn-border"
@@ -137,19 +156,21 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               </button>
             </li>
           </c:forEach>
-          <li class="li-btn">
-            <button
-              class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/community/recipe/recipeList.do?category=${category}&section=${section+1}&pageNum=1'"
-            >
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
+          <c:if test="${searchRecipeNum > (section)*60}">
+            <li class="li-btn">
+              <button
+                class="btn-2 btn-square bg-white btn-border"
+                onclick="location.href='${contextPath}/community/recipe/recipeList.do?category=${category}&section=${section+1}&pageNum=1'"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/next.png"
+                  alt="next"
+                />
+              </button>
+            </li>
+          </c:if>
         </ul>
         <div style="float: right">
           <button

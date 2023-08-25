@@ -35,9 +35,28 @@
 	<select id="selectRecipeList" resultMap="recipeResult"
 		parameterType="java.util.Map">
 		select * from recipe
+		where 1=1
+		<choose>
+			<when test="recipe_search_type==null or recipe_search_type==''">
+				and title Like CONCAT('%', #{recipe_search_word}, '%') or description like CONCAT('%', #{recipe_search_word}, '%')	
+			</when>
+			<otherwise>
+				<choose>
+					<when test="recipe_search_type=='title'">
+						and title like CONCAT('%', #{recipe_search_word}, '%')
+					</when>
+					<when test="recipe_search_type=='description'">
+						and description like CONCAT('%', #{recipe_search_word}, '%')
+					</when>
+				</choose>
+			</otherwise>
+		</choose>
+		
+		
 		<if test="category!=null and category!=''">
-			where category=#{category}
+			and category=#{category}
 		</if>
+		
 		order by creDate desc
 		limit #{start}, 6
 
@@ -57,7 +76,8 @@
 
 
 	<select id="selectRecipeByRecipeNo" resultType="recipeVO">
-		select * from recipe where recipeNo=#{recipeNo}
+		select * from
+		recipe where recipeNo=#{recipeNo}
 	</select>
 
 
@@ -120,7 +140,8 @@
 		update recipe set title
 		= #{title},
 		cooking_time = #{cooking_time},
-		description = #{description},
+		description =
+		#{description},
 		cookingImg = #{cookingImg},
 		category = #{category},
 		inbun = #{inbun}
@@ -140,8 +161,8 @@
 	<select id="countRecipeNums" resultType="java.util.Map">
 		select * from (
 		select count(*) as cnt, concat('전체') as category from recipe
-		union (select count(*) as cnt, category from recipe group by category)) as
-		t
-		where category!=''
+		union (select count(*) as cnt, category from recipe group by category order
+		by cnt desc limit 10)) as t
+		where category!='' and category!='none'
 	</select>
 </mapper>

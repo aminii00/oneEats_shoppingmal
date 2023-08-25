@@ -83,5 +83,11 @@ public class MainServiceImpl implements MainService{
 		return mainDAO.selectTopReviewGoodsList();
 	}
 
+	@Override
+	public CartVO selectOneOptionByGoodsNo(int goodsNo) {
+		
+		return mainDAO.selectOneOptionByGoodsNo(goodsNo);
+	}
+
 	
 }

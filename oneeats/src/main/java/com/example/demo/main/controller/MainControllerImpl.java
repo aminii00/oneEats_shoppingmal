@@ -2,8 +2,10 @@ package com.example.demo.main.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,7 +75,7 @@ public class MainControllerImpl implements MainController {
 
 	// ajax로 cartList를 session에 저장하기 위한 코드
 	@ResponseBody
-	@PostMapping(value = "/storeValue.do")
+	@PostMapping(value = "/addCartToListValue.do")
 	public String storeValueInSession(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String result = "success";
@@ -88,13 +90,86 @@ public class MainControllerImpl implements MainController {
 				session.removeAttribute("cartList");
 			}
 
+			// 같은 옵션으로 주문한 정보가 있는지 참조하기 위한 맵
+			Map<Integer, Integer> optionNoToidxMap = new HashMap();
+			for (int i = 0; i < cartList.size(); i++) {
+				CartVO temp = cartList.get(i);
+				optionNoToidxMap.put(temp.getOptionNo(), i);
+			}
+
 			// cartList에 하나씩 추가
 			for (int i = 0; i < optionNos.length; i++) {
-				CartVO tempcart = mainService.selectOptionByNo(Integer.parseInt(optionNos[i]));
-				tempcart.setGoodsQty(Integer.parseInt(goodsQtys[i]));
-				tempcart.setDiscountPrice();
+				int optionNo = Integer.parseInt(optionNos[i]);
+				int goodsQty = Integer.parseInt(goodsQtys[i]);
+
+				// 이미 존재하면 그 index에서 빼와서 GoodsQty를 더해줌
+				if (optionNoToidxMap.containsKey(optionNo)) {
+					int idx = optionNoToidxMap.get(optionNo);
+					
+					CartVO tempcart = cartList.get(idx);
+					System.out.println("존재해서 더함 : "+tempcart);
+					tempcart.setGoodsQty(goodsQty + tempcart.getGoodsQty());
+					tempcart.setDiscountPrice();
+					System.out.println("계산 후 : "+tempcart);
+					cartList.set(idx, tempcart);
+				} else {
+					CartVO tempcart = new CartVO();
+					tempcart = mainService.selectOptionByNo(optionNo);
+					tempcart.setGoodsQty(goodsQty);
+					tempcart.setDiscountPrice();
+					cartList.add(tempcart);
+					optionNoToidxMap.put(optionNo, cartList.size() - 1);
+				}
+			}
+			System.out.println("cartList" + cartList);
+
+			session.setAttribute("cartList", cartList);
+		} catch (Exception e) {
+			result = "fail";
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+
+	// ajax로 카트에 상품을 하나 담기 위한 코드
+	@ResponseBody
+	@PostMapping(value = "/addCartItem.do")
+	public String addCartItem(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String result = "success";
+		HttpSession session = request.getSession();
+		try {
+			List<CartVO> cartList = new ArrayList<CartVO>();
+
+			if (session.getAttribute("cartList") != null) {
+				cartList = (List<CartVO>) session.getAttribute("cartList");
+			}
+
+			String _goodsNo = request.getParameter("num");
+			int goodsNo = Integer.parseInt(_goodsNo);
+			CartVO tempcart = mainService.selectOneOptionByGoodsNo(goodsNo);
+			tempcart.setGoodsQty(1);
+			tempcart.setDiscountPrice();
+
+			int idx = -1;
+			for (int i = 0; i < cartList.size(); i++) {
+				CartVO t = cartList.get(i);
+				int tempoptionNo = t.getOptionNo();
+				if (tempoptionNo == tempcart.getOptionNo()) {
+					idx = i;
+					break;
+				}
+			}
+			if (idx > 0) {
+				CartVO tempcart2 = cartList.get(idx);
+				tempcart2.setGoodsQty(tempcart.getGoodsQty() + tempcart2.getGoodsQty());
+				tempcart2.setDiscountPrice();
+				cartList.set(idx, tempcart2);
+			} else {
 				cartList.add(tempcart);
 			}
+
 			System.out.println("cartList" + cartList);
 
 			session.setAttribute("cartList", cartList);

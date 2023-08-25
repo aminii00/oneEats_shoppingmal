@@ -234,7 +234,8 @@
 		g.name as goodsName,
 		g.img1 as goodsImg
 		from hotdeal as h
-		inner join goods as g
+		inner join
+		goods as g
 		on
 		h.goodsNo=g.goodsNo
 		order by h.creDate desc
@@ -247,11 +248,13 @@
 	</select>
 
 	<select id="" resultMap="GoodsResult">
-		select * from goods order by creDate desc limit 3
+		select * from goods order by creDate
+		desc limit 3
 	</select>
 
 	<select id="selectTopReviewGoodsList" resultMap="GoodsResult">
-		select g.* from goods as g
+		select g.* from
+		goods as g
 		left outer join
 		(SELECT ifnull(avg(CAST(star AS
 		DECIMAL(2,1))),0) as avgstar, goodsNo FROM review group by goodsNo
@@ -262,11 +265,36 @@
 	</select>
 
 	<select id="selectBestGoodsList" resultMap="GoodsResult">
-		select g.* from goods as g
-		left outer join (select sum(goods_qty) as sell, goodsNo from t_order group by goodsNo) as sell_tbl
+		select g.* from goods
+		as g
+		left outer join (select sum(goods_qty) as sell, goodsNo from
+		t_order group by goodsNo) as sell_tbl
 		on g.goodsNo=sell_tbl.goodsNo
 		order by sell desc
 		limit 6
 
 	</select>
+	<select id="selectOneOptionByGoodsNo" parameterType="int"
+		resultType="cartVO">
+		select `option`.optionNo, `option`.name as
+		optionName,`option`.option_qty as
+		optionQty,`option`.price as
+		optionPrice,
+		`option`.option_inbun as
+		optionInbun,`option`.goodsNo as
+		goodsNo,
+		goods.name as goodsName,
+		goods.img1 as goodsImg, goods.price
+		as goodsPrice from `option`
+		inner
+		join goods
+		on `option`.goodsNo =
+		goods.goodsNo
+		where
+		goods.goodsNo=#{goodsNo}
+		order by `option`.optionNo
+		limit 1
+
+	</select>
+
 </mapper>

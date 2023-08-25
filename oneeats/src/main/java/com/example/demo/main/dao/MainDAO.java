@@ -39,4 +39,6 @@ public interface MainDAO {
 	public List<GoodsVO> selectBestGoodsList();
 
 	public List<GoodsVO> selectTopReviewGoodsList();
+
+	public CartVO selectOneOptionByGoodsNo(int goodsNo);
 }
