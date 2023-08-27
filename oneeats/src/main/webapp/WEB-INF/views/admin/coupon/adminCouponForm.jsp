@@ -54,7 +54,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </select>
           </td>
         </tr>
-        <tr>
+        <!-- <tr>
           <th>사용처</th>
           <td>
             <input
@@ -63,7 +63,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               placeholder="사용처를 입력하세요"
             />
           </td>
-        </tr>
+        </tr> -->
         <tr>
           <th>유효기간</th>
           <td>
