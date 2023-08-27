@@ -27,6 +27,7 @@
 		<result column="img5" property="img5" />
 		<result column="category" property="category" />
 		<result column="type" property="type" />
+		<result column="memberNo" property="memberNo"/>
 	</resultMap>
 
 
@@ -105,6 +106,18 @@
 
 	<select id="selectGoodsList" resultMap="GoodsResult">
 		select * from goods
+			where memberNo =#{memberNo}
+	</select>
+
+
+
+	
+	<select id="selectNewGoodsList" resultMap="GoodsResult" parameterType="java.util.Map" >
+			select * from goods
+			order by creDate desc
+			limit #{start}, 10
+		
+			
 	</select>
 
 

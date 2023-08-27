@@ -11,6 +11,7 @@ import com.example.demo.seller.goods.dao.SellerGoodsDAO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.RecipeVO;
 
 @Service("sellerGoodsService")
 public class SellerGoodsServiceImpl implements SellerGoodsService {
@@ -98,6 +99,14 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return sellerGoodsDAO.selectGoodsList();
 	}
 
+	
+//상품 페이징 처리
+	
+	@Override
+	public List<GoodsVO> selectNewGoodsList(Map pagingMap) {
+		return sellerGoodsDAO.selectNewGoodsList(pagingMap); 
+	}
+	
 //상품 삭제
 	@Override
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException {

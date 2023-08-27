@@ -37,10 +37,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th>상품번호</th>
         <th>등록일</th>
         <th>상품명</th>
+
         <th style="text-align: right">수정</th>
         <th style="text-align: right">삭제</th>
+        <th style="text-align: right">상품 보기</th>
       </tr>
-      <c:forEach var="goods" items="${goodsList}">
+      <c:forEach var="goods" items="${newGoodsList}">
         <c:choose>
           <c:when test="${goods.goodsNo != preGoodsNo}">
             <tr>
@@ -48,6 +50,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <td>${goods.goodsNo}</td>
                 <td>${goods.creDate}</td>
                 <td>${goods.name}</td>
+
                 <td style="text-align: right">
                   <a
                     href="${contextPath}/seller/goods/modSellerGoods.do?goodsNo=${goods.goodsNo}"
@@ -59,6 +62,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     href="javascript:void(0)"
                     onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath }/seller/goods/deleteSellerGoods.do?goodsNo=${goods.goodsNo}")'
                     >삭제</a
+                  >
+                </td>
+                <td style="text-align: right">
+                  <a
+                    href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
+                    >상품보기</a
                   >
                 </td>
               </div>
@@ -117,21 +126,36 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     --%>
     <div>
       <ul class="ul-li">
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?&section=${section-1}&pageNum=1'"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </button>
+          </li>
+        </c:if>
+        <c:forEach begin="1" end="10" var="i">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?section=${section}&pageNum=${i}'"
+            >
+              ${(section-1)*10+i}
+            </button>
+          </li>
+        </c:forEach>
         <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/prev.png"
-              alt="prev"
-            />
-          </button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">1</button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
+          <button
+            class="btn-2 btn-square bg-white btn-border"
+            onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?section=${section+1}&pageNum=1'"
+          >
             <img
               width="20px"
               height="20px"
