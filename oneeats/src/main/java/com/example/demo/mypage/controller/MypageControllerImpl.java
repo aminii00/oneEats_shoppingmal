@@ -150,10 +150,10 @@ public class MypageControllerImpl implements MypageController {
 			temp.setOrderNo(orderNo);
 			temp.setOrderer_name(orderer_name);
 			temp.setOrderer_phone(orderer_phone);
-			temp.setreceiver_name(receiver_name);
-			temp.setreceiver_address(receiver_address+"&nbsp"+receiver_addressDetail);
-			temp.setreceiver_phone(receiver_phone);
-			temp.setreceiver_comment(receiver_comment);
+			temp.setReceiver_name(receiver_name);
+			temp.setReceiver_address(receiver_address+"&nbsp"+receiver_addressDetail);
+			temp.setReceiver_phone(receiver_phone);
+			temp.setReceiver_comment(receiver_comment);
 			temp.setUsed_point(Integer.parseInt(used_point));
 			temp.setUsed_couponId(Integer.parseInt(used_couponId));
 			temp.setPoint_price(Integer.parseInt(point_price));

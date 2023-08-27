@@ -120,11 +120,11 @@
 .linebold {
   border: 0px;
   height: 2px;
-  background-color: black;
+  background-color: #333333;
 }
 
 .textcolor-black {
-  color: #2c3333;
+  color: #333333;
 }
 .textcolor-white {
   color: #ffffff;

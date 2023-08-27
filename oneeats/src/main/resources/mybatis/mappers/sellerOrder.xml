@@ -5,30 +5,62 @@
 	
 <mapper namespace="com.example.demo.seller.order.dao.SellerOrderDAO">
 
-<resultMap id="orderResultMap" type="orderVO">
-  <result column="order_seqNo" property="order_seqNo"/>
-  <result column="orderNo" property="orderNo"/>
-  <result column="orderer_name" property="orderer_name"/>
-  <result column="orderer_phone" property="orderer_phone"/>
-  <result column="receiver_name" property="receiver_name"/>
-  <result column="receiver_address" property="receiver_address"/>
-  <result column="receiver_phone" property="receiver_phone"/>
-  <result column="receiver_comment" property="receiver_comment"/>
-  <result column="used_point" property="used_point"/>
-  <result column="used_couponId" property="used_couponId"/>
-  <result column="payment_price" property="payment_price"/>
-  <result column="discount_price" property="discount_price"/>
-  <result column="shippingfee" property="shippingfee"/>
-  <result column="point_price" property="point_price"/>
-  <result column="total_price" property="total_price"/>
-  <result column="payment_type" property="payment_type"/>
-  <result column="orderDate" property="orderDate" javaType="java.sql.Date"/>
-  <result column="delivery_status" property="delivery_status"/>
-  <result column="deliveryDate" property="deliveryDate" javaType="java.sql.Date"/>
-  <result column="goods_qty" property="goods_qty"/>
-  <result column="goods_inbun" property="goods_inbun"/>
-</resultMap>
-
-
+<resultMap id="OrderResult" type="orderVO">
+		<result property="order_seqNo" column="order_seqNo" />
+		<result property="orderNo" column="orderNo" />
+		<result property="orderer_name" column="orderer_name" />
+		<result property="orderer_phone" column="orderer_phone" />
+		<result property="receiver_name" column="receiver_name" />
+		<result property="receiver_address" column="receiver_address" />
+		<result property="receiver_phone" column="receiver_phone" />
+		<result property="receiver_comment" column="receiver_comment" />
+		<result property="used_point" column="used_point" />
+		<result property="used_couponId" column="used_couponId" />
+		<result property="payment_price" column="payment_price" />
+		<result property="discount_price" column="discount_price" />
+		<result property="shippingfee" column="shippingfee" />
+		<result property="point_price" column="point_price" />
+		<result property="total_price" column="total_price" />
+		<result property="payment_type" column="payment_type" />
+		<result property="orderDate" column="orderDate" />
+		<result property="delivery_status" column="delivery_status" />
+		<result property="deliveryDate" column="deliveryDate" />
+		<result property="goods_qty" column="goods_qty" />
+		<result property="goods_inbun" column="goods_inbun" />
+		<result property="memberNo" column="memberNo" />
+		<result property="goodsNo" column="goodsNo" />		
+		<result property="goodsName" column="goodsName" />
+		<result property="goodsImg" column="goodsImg" />
+		<result property="weight" column="weight" />
+		<result property="gun" column="gun" />
+		<result property="shippingFee" column="shippingFee" />
+		<result property="optionNo" column="optionNo" />
+		<result property="orderer_id" column="orderer_id" />
+	</resultMap>
+	
+	<select id="selectOrderList" resultMap="OrderResult">
+		<![CDATA[
+			select a.*,b.orderer_id from (select orderplusgoods.*, orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName,  
+			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo)
+			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun 
+			on orderplusgoods.orderNo=orderGun.orderNo order by orderplusgoods.orderNo) a inner join
+            (select t_order.*,member.id as orderer_id from t_order inner join member on t_order.memberNo=member.memberNo) b 
+            on a.order_seqNo=b.order_seqNo order by a.orderNo;
+		]]>
+	</select>
+	
+	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
+		<![CDATA[
+			select order_seqNo from t_order where orderNo=#{orderNo};
+		]]>
+	</select>
+	
+	<update id="updateDeliveryStatusToCancel" parameterType="int">
+		<![CDATA[
+			update t_order
+	     	set delivery_status='취소완료'
+	     	where order_seqNo=#{order_seqNo}
+		]]>
+	</update>
 
 </mapper>

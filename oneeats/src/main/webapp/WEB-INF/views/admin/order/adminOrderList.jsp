@@ -17,7 +17,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <!-- 검색창 -->
     <form method="post" action="#">
       <div class="div-p2">
-        <p class="p-1 textsize-2 text-left textcolor-black textbold">주문/배송</p>
+        <p class="p-1 textsize-2 text-left textcolor-black textbold">
+          주문/배송
+        </p>
         <div class="div-sib textsize-1">
           <select name="search-1">
             <option value="전체">전체</option>
@@ -36,40 +38,54 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       </div>
     </form>
 
-      <hr class="linebold" />
+    <hr class="linebold" />
 
-      <table class="textcolor-black textsize-1">
-        <tr>
-          <th>주문번호</th>
-          <th style="width:20%">결제일시</th>
-          <th>주문자명</th>
-          <th>아이디</th>
-          <th style="width:20%">주문내역</th>
-          <th>주문상태</th>
-          <th style="width:10%">취소</th>
-        </tr>
-        <tr>
-          <td>20230811001</td>
-          <td>2023-08-11 12:36</td>
-          <td>강민지</td>
-          <td>minzy03</td>
-          <td>케일주스 외 6건</td>
-          <td>주문완료</td>
-          <td>
-            <a
-              href="javascript:void(0)"
-              onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/admin/order/adminOrderList.do")'
-              >취소</a
-            >
-          </td>
-        </tr>
-      </table>
+    <!-- 주문/배송 -->
+    <table class="textcolor-black textsize-1">
+      <tr>
+        <th style="text-align: center">주문번호</th>
+        <th style="width: 20%">결제일시</th>
+        <th>주문자명</th>
+        <th>아이디</th>
+        <th style="width: 20%">주문내역</th>
+        <th>주문상태</th>
+        <th style="width: 10%">취소</th>
+      </tr>
+      <c:forEach var="adminOrder" items="${adminOrderList}">
+        <c:choose>
+          <c:when test="${adminOrder.orderNo != preOrderNo}">
+            <tr style="border-top: 1px solid #b3b3b3">
+              <td style="text-align: center">${adminOrder.orderNo}</td>
+              <td>${adminOrder.orderDate}</td>
+              <td>${adminOrder.orderer_name}</td>
+              <td>${adminOrder.orderer_id}</td>
+              <td>
+                <a
+                  href="${contextPath}/mypage/orderDetail.do?orderNo=${adminOrder.orderNo}"
+                >
+                  ${adminOrder.goodsName} 외 ${adminOrder.gun}건</a
+                >
+              </td>
+              <td>${adminOrder.delivery_status}</td>
+              <td>
+                <a
+                  href="javascript:void(0)"
+                  onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/admin/order/adminOrderCancel.do?orderNo=${adminOrder.orderNo}")'
+                  >취소</a
+                >
+              </td>
+            </tr>
+          </c:when>
+        </c:choose>
+        <c:set var="preOrderNo" value="${adminOrder.orderNo}" />
+      </c:forEach>
+    </table>
 
-      <hr class="linebold" />
+    <hr class="linebold" />
 
-      <!-- 페이징 -->
-      <%--
-      <!--    <div> 페이징처리
+    <!-- 페이징 -->
+    <%--
+    <!--    <div> 페이징처리
         <c:if test="${totArticles != null}"
             <c:choose>
             <c:when test="${totArticles > 100}">
@@ -104,33 +120,33 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
         </div> 
 -->
-      --%>
-      <div>
-        <ul class="ul-li">
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/prev.png"
-                alt="prev"
-              />
-            </button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
-        </ul>
-      </div>
+    --%>
+    <div>
+      <ul class="ul-li">
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">
+            <img
+              width="20px"
+              height="20px"
+              src="${contextPath}/img/icon/prev.png"
+              alt="prev"
+            />
+          </button>
+        </li>
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">1</button>
+        </li>
+        <li class="li-btn">
+          <button class="btn-2 btn-square bg-white btn-border">
+            <img
+              width="20px"
+              height="20px"
+              src="${contextPath}/img/icon/next.png"
+              alt="next"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>
