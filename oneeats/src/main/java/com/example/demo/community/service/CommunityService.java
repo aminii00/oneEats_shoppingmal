@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.RecipeVO;
 
 public interface CommunityService {
@@ -27,6 +28,10 @@ public interface CommunityService {
 	public void deleteRecipe(int recipeNo);
 
 	public List<RecipeVO> selectNewRecipeList(int recipeNo);
+	
+	public List<NoticeVO> noticeList();
+	
+	public NoticeVO noticeDetail(int noticeNo);
 
 	public List<Map> countRecipeNums();
 

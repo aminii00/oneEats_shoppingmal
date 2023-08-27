@@ -24,6 +24,14 @@
 		<result property="qty" column="qty" />
 	</resultMap>
 
+	<resultMap id="noticeResult" type="noticeVO">
+		<result property="noticeNo" column="noticeNo" />
+		<result property="category" column="category" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+	</resultMap>
+
 	<select id="sellectAllRecipe" resultMap="recipeResult">
 	    <![CDATA[
 			sellect * from recipe
@@ -38,7 +46,7 @@
 		where 1=1
 		<choose>
 			<when test="recipe_search_type==null or recipe_search_type==''">
-				and title Like CONCAT('%', #{recipe_search_word}, '%') or description like CONCAT('%', #{recipe_search_word}, '%')	
+				and title Like CONCAT('%', #{recipe_search_word}, '%') or description like CONCAT('%', #{recipe_search_word}, '%')
 			</when>
 			<otherwise>
 				<choose>
@@ -51,12 +59,12 @@
 				</choose>
 			</otherwise>
 		</choose>
-		
-		
+
+
 		<if test="category!=null and category!=''">
 			and category=#{category}
 		</if>
-		
+
 		order by creDate desc
 		limit #{start}, 6
 
@@ -103,6 +111,15 @@
 		select count(*) from recipe where category=#{category}
 	</select>
 
+	<select id="noticeList" resultMap="noticeResult"
+		parameterType="String">
+		select * from notice
+	</select>
+
+	<select id="noticeDetail" resultMap="noticeResult"
+		parameterType="int">
+		select * from notice where noticeNo=#{noticeNo}
+	</select>
 
 	<insert id="insertNewRecipe" parameterType="recipeVO">
 		insert recipe

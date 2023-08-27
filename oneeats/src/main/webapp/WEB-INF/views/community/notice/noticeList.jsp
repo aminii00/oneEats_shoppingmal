@@ -37,46 +37,26 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div
           class="row noticeList-title"
           onclick="location.href='${contextPath}/community/notice/noticeDetail.do';"
-        >
-          <div class="col-md-2">121</div>
-          <div class="col-md-2">결제</div>
-          <div class="col-md text-left">결제실패오류 공지</div>
-          <div class="col-md-3">2023/08/11</div>
-        </div>
-        <hr class="line-gray" />
-
-        <div class="row noticeList-title" onclick="location.href='';">
-          <div class="col-md-2">122</div>
-          <div class="col-md-2">이벤트</div>
-          <div class="col-md text-left">포인트백 이벤트(~9/14)</div>
-          <div class="col-md-3">2023/08/11</div>
-        </div>
-        <hr class="line-gray" />
-
-        <div class="row noticeList-title" onclick="location.href='';">
-          <div class="col-md-2">123</div>
-          <div class="col-md-2">이벤트</div>
-          <div class="col-md text-left">신규 회원 이벤트</div>
-          <div class="col-md-3">2023/08/11</div>
-        </div>
+        ></div>
 
         <!--공지사항 리스트를 넣을 곳-->
         <c:choose>
           <c:when test="${not empty noticeList}">
             <c:forEach var="notice" items="${noticeList}">
-              <hr class="line-gray" />
-              <div class="row noticeList-title">
+              <div
+                class="row noticeList-title"
+                onclick="location.href='${contextPath}/community/notice/noticeDetail.do?noticeNo=${notice.noticeNo}';"
+              >
                 <div class="col-md-2">${notice.noticeNo}</div>
                 <div class="col-md-2">${notice.category}</div>
                 <div class="col-md text-left">${notice.title}</div>
                 <div class="col-md-3">${notice.creDate}</div>
               </div>
+              <hr class="line-gray" />
             </c:forEach>
           </c:when>
         </c:choose>
       </div>
-      <hr class="line-black" />
-      <div>&nbsp;</div>
 
       <div>
         <ul class="ul-li">

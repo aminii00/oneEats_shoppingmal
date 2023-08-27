@@ -18,24 +18,21 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <div class="noticeDetail_grid">
         <div class="row noticeDetail_title">
           <div class="col textcolor-black textbold text-left textsize-3">
-            결제실패오류 공지
+            ${notice.title}
           </div>
         </div>
         <hr class="line-black" />
         <div class="row noticeDetail_info">
           <div class="col textcolor-black text-left textsize-2">
-            <span>카테고리: 결제</span>
+            <span>카테고리: ${notice.category}</span>
             &nbsp;
-            <span>작성일: 2023년 8월 11일</span>
+            <span>작성일: ${notice.creDate}</span>
           </div>
         </div>
         <hr class="line-gray" />
         <div class="row noticeDetail_content">
           <div class="col textcolor-black text-left textsize-2">
-            8월 1일 18시경 서버 오류로 결제가 실패하는 오류가 발생했습니다.
-            <br />
-            현재는 정상화 되었습니다. <br />
-            고객님들께 불편을 드려 죄송합니다.
+            ${notice.content}
           </div>
         </div>
         <hr class="line-black" />
@@ -43,7 +40,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row">
           <div class="col noticeDetail_prevNotice">
             <div class="textcolor-black text-left textsize-2">
-              <a href="">이전 공지사항 | 신규 회원가입 이벤트</a>
+              <a
+                href="${contextPath}/community/notice/noticeDetail.do?noticeNo=${noticeBefore.noticeNo}"
+                >이전 공지사항 | ${noticeBefore.title}</a
+              >
             </div>
           </div>
         </div>
@@ -51,7 +51,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="row">
           <div class="col noticeDetail_nextNotice">
             <div class="textcolor-black text-left textsize-2">
-              <a href="">다음 공지사항 | 포인트백 이벤트(~9/14)</a>
+              <a
+                href="${contextPath}/community/notice/noticeDetail.do?noticeNo=${noticeAfter.noticeNo}"
+              >
+                다음 공지사항 | ${noticeAfter.title}</a
+              >
             </div>
           </div>
         </div>
