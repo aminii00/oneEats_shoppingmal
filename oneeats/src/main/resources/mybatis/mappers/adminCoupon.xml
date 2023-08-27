@@ -15,11 +15,17 @@
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
 	
-	<insert id="insertAdminCoupon" parameterType="int">
+	<select id="adminCouponByMemberNo" resultMap="CouponResult" parameterType="int">
 		<![CDATA[
-			insert into coupon couponNo, name, discount_price, condition, expDate, creDate, memberNo
+			select * from coupon where memberNo=#{memberNo};
+		]]>
+	</select>
+	
+	<insert id="insertAdminCoupon" parameterType="CouponVO">
+		<![CDATA[
+			insert into coupon (name, discount_price, condition, expDate, memberNo)
 	     	values
-	     	#{couponNo}, #{name}, #{discount_price}, #{condition}, #{expDate}, #{creDate}, #{memberNo}
+	     	(#{name}, #{discount_price}, #{condition}, {expDate}, #{memberNo})
 		]]>
 	</insert>
 

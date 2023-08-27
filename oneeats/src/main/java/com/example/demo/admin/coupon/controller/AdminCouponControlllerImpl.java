@@ -26,6 +26,7 @@ public class AdminCouponControlllerImpl implements AdminCouponController {
 	@Override
 	@RequestMapping(value = "/admin/coupon/adminCouponList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView adminCouponList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 adminCouponList");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
