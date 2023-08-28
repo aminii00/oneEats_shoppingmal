@@ -7,66 +7,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="${contextPath}/css/mina.css" />
     <meta charset="UTF-8" />
     <title>회원가입 창</title>
-    <script>
-      // 체크박스 전체 선택
-      $(".checkbox_group").on("click", "#check_all", function () {
-        var checked = $(this).is(":checked");
-
-        if (checked) {
-          $(this)
-            .parents(".checkbox_group")
-            .find("input")
-            .prop("checked", true);
-        } else {
-          $(this)
-            .parents(".checkbox_group")
-            .find("input")
-            .prop("checked", false);
-        }
-      });
-      // 체크박스 개별 선택
-      $(".checkbox_group").on("click", ".normal", function () {
-        var checked = $(this).is(":checked");
-
-        if (!checked) {
-          $("#check_all").prop("checked", false);
-        }
-      });
-
-      function chkPW() {
-        var pwd = $("#pwd").val();
-        var num = pw.search(/[0-9]/g);
-        var eng = pw.search(/[a-z]/gi);
-        var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
-
-        if (pwd.length < 8 || pwd.length > 12) {
-          alert("8자리 ~ 20자리 이내로 입력해주세요.");
-          return false;
-        } else if (pwd.search(/\s/) != -1) {
-          alert("비밀번호는 공백 없이 입력해주세요.");
-          return false;
-        } else if (num < 0 || eng < 0 || spe < 0) {
-          alert("영문,숫자, 특수문자를 혼합하여 입력해주세요.");
-          return false;
-        } else {
-          console.log("통과");
-          return true;
-        }
-      }
-    </script>
-
-    <script>
-      function selectAll(selectAll) {
-        const checkboxes = document.getElementsByName("check1");
-
-        checkboxes.forEach((checkbox) => {
-          checkbox.checked = selectAll.checked;
-        });
-      }
-    </script>
 
     <!-- 다음 주소 api 스크립트 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -104,7 +46,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               document.getElementById("address_extra_input").value = "";
             }
 
-            document.getElementById("sample6_postcode").value = data.zonecode; // 우편번호
+            document.getElementById("h_input_zipcode").value = data.zonecode; // 우편번호
             document.getElementById("address_input").value = addr;
 
             document.getElementById("address_detail_input").focus(); // 상세주소
@@ -115,277 +57,458 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <!--다음 주소 api 스크립트 종료-->
 
     <style>
-      .agreement-container {
-        color: black;
+      .redText {
+        color: red;
       }
-      form {
-        padding: 10px;
-      }
-      .circle {
-        display: inline-block; /* 영역적용가능해짐 */
-        width: 20px;
-        height: 20px;
-        border: 2px solid #333;
-        box-sizing: border-box;
-        border-radius: 10px; /* 모서리둥글게 처리 */
-        position: relative;
-        top: 4px;
-        cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
-      }
-      .circle:after {
-        content: "\2714"; /* 체크박스 특수문자 */
-        font-size: 24px;
-        color: #333;
-        position: absolute;
-        top: -14px;
-        left: 0;
-
-        opacity: 0; /* 처음엔 안보이게 처리 */
-        transition: 0.2s; /* CSS변화에 시간차 처리 */
-      }
-
-      /* input이 체크되면 특수문자 보이게 처리 */
-      #chk:checked + .circle:after {
-        opacity: 1;
-      }
-
-      /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-      #chk {
-        position: absolute;
-        left: -999em;
+      .blueText {
+        color: green;
       }
     </style>
+
+    <script>
+      var check_map = new Map([
+        ["id", false],
+        ["pwd", false],
+        ["pwd_confirm", false],
+        ["phone", false],
+      ]);
+
+      var pwd_input_text = "";
+      var pwd_check_text = "-1";
+      var contextPath = "${contextPath}";
+    </script>
+    <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
+    <script src="${contextPath}/js/registerForm.js"></script>
   </head>
   <body>
     <br />
-    <form method="post" action="${contextPath}/member/register.do">
+    <form
+      id="registerForm"
+      method="post"
+      action="${contextPath}/member/register.do"
+    >
+      <br />
+      <br />
+      <br />
       <div class="main-container">
         <div class="main-wrap">
-          <div class="textsize-3 textbold text-left">
-            회원가입
-            <div class="mainline"></div>
-            <br />
-            <br />
+          <div class="row">
+            <div class="col textsize-3 textbold text-center">
+              회원가입
+              <div class="line-black"></div>
+              <br />
+              <br />
+            </div>
           </div>
-          <div class="margin1 textbold textsize-1 text-left">
-            아이디<span class="textcolor-red">*</span>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="textbold textsize-2 text-left">
+                <span>아이디<span class="textcolor-red">*</span></span>
+              </div>
+            </div>
+            <div class="col-md input-group">
+              <input
+                class="form-control"
+                id="id"
+                name="id"
+                placeholder="아이디를 입력해주세요"
+                type="text"
+                required
+              />
+              <div class="input-group-append">
+                <button
+                  class="bg-lightgreen border-0"
+                  type="button"
+                  onclick="checkDuplicateId()"
+                >
+                  중복확인
+                </button>
+              </div>
+            </div>
           </div>
-          <input
-            class="brd-lightgray btn-round btn-midlong-input textsize-1 border-0.5"
-            name="id"
-            placeholder=" 아이디를 입력해 주세요."
-            type="text"
-            required
-          />
-          &nbsp
-          <button
-            class="btn-fatfat-mina bg-lightgreen textbold textsize-0 border-0 btn-round"
-          >
-            중복확인</button
-          ><br />
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md"><span id="errmsg_id">&nbsp;</span></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="textbold textsize-2 text-left">
+                <span> 비밀번호<span class="textcolor-red">*</span> </span>
+              </div>
+            </div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                id="pwd"
+                name="pwd"
+                placeholder="영숫자+특수문자를 포함한 8~12자"
+                type="password"
+                required
+              />
+            </div>
+          </div>
 
-          <c:set var="name" value="홍길동" />
-          <c:if test="${name eq '홍길동'}">
-            <c:out value="${str}" />
-          </c:if>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md"><span id="errmsg_pwd">&nbsp;</span></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="text-left textsize-2 textbold">
+                <span> 비밀번호 확인<span class="textcolor-red">*</span> </span>
+              </div>
+            </div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                placeholder=" 비밀번호를 한 번 더 입력해주세요"
+                id="pwd_confirm"
+                type="password"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md">
+              <span id="errmsg_pwd_confirm">&nbsp;</span>
+            </div>
+          </div>
 
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">
-            비밀번호<span class="textcolor-red">*</span>
-          </p>
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            onclick="chkPW"
-            id="pwd"
-            name="pwd"
-            placeholder=" 비밀번호를 입력해 주세요.."
-            type="password"
-            required
-          />
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">
-            비밀번호 확인<span class="textcolor-red">*</span>
-          </p>
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            placeholder=" 비밀번호를 한 번 더 입력해주세요."
-            type="password"
-            required
-          />
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">
-            이름<span class="textcolor-red">*</span>
-          </p>
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            name="name"
-            placeholder=" 이름을 입력해 주세요."
-            type="text"
-            required
-          />
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">이메일</p>
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            name="email"
-            placeholder=" 이메일을 입력해 주세요."
-            type="text"
-          />
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">
-            휴대폰 번호<span class="textcolor-red">*</span>
-          </p>
-          <input
-            class="brd-lightgray btn-round btn-midlong-input textsize-1"
-            name="phone"
-            placeholder=" 휴대폰 번호를 입력해 주세요."
-            type="text"
-            required
-          />
-          &nbsp
-          <button
-            class="btn-fatfat-mina bg-lightgreen textsize-0 border-0 margin btn-round textbold"
-          >
-            인증번호요청</button
-          ><br />
-          <input
-            class="brd-lightgray btn-round btn-midlong bg-lightgray border-0 textsize-1 margin1"
-            placeholder=" 인증번호를 입력하세요."
-            type="text"
-          /><br />
-          <span class="textsize-0 margin-id"
-            >인증번호가 오지 않는다면, 통신사 수신 차단 혹은 휴대폰 번호</span
-          ><br />
-          <span class="textsize-0 margin-id">차단 여부를 확인해 주세요.</span>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="text-left textsize-2 textbold">
+                <span>이름<span class="textcolor-red">*</span></span>
+              </div>
+            </div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                id="name"
+                name="name"
+                placeholder=" 이름을 입력해 주세요"
+                type="text"
+                required
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md" id="errmsg_name">&nbsp;</div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="text-left textsize-2 textbold">
+                <span>이메일</span>
+              </div>
+            </div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                id="email"
+                name="email"
+                placeholder=" 이메일을 입력해 주세요"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md"><span id="errmsg_email">&nbsp;</span></div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 d-flex align-items-center">
+              <div class="text-left textsize-2 textbold">
+                <span>휴대폰 번호<span class="textcolor-red">*</span></span>
+              </div>
+            </div>
+            <div class="col-md input-group">
+              <input
+                class="form-control"
+                id="phone"
+                name="phone"
+                placeholder="휴대폰번호를 입력해주세요"
+                type="text"
+                required
+              />
+              <div class="input-group-append">
+                <button
+                  class="bg-lightgreen border-0"
+                  onclick="fn_open_inzung_row()"
+                  type="button"
+                >
+                  인증번호요청
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md"><span id="errmsg_phone">&nbsp;</span></div>
+          </div>
+          <div class="row toggle-content inzung_row">
+            <div class="col">
+              <div class="row">
+                <div class="col input-group">
+                  <input
+                    class="form-control"
+                    id="inzung"
+                    placeholder=" 인증번호를 입력하세요"
+                    type="text"
+                  />
+                  <div class="input-group-append">
+                    <button
+                      onclick="fn_phone_inzung()"
+                      type="button"
+                      class="border-0"
+                    >
+                      인증
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md"><span id="errmsg_inzung">&nbsp;</span></div>
+              </div>
+              <br />
+              <div class="row">
+                <div class="col">
+                  인증번호가 오지 않는다면, <br />
+                  통신사 수신 차단 혹은 휴대폰 번호 차단 여부를 확인해 주세요.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col-md-3 text-left textsize-2 textbold">
+              <span class="">주소</span>
+            </div>
+          </div>
 
-          <p class="text-left textsize-1 margin1 textbold">주소</p>
-          <button
-            type="button"
-            onclick="execDaumPostCode()"
-            class="btn-midlong bg-lightgreen margin textsize-1 border-0 btn-round"
-          >
-            주소 검색
-          </button>
-
+          <div class="row">&nbsp;</div>
           <input
             type="hidden"
-            id="sample6_postcode"
+            id="h_input_zipcode"
             placeholder="우편번호"
             name="zipCode"
           />
 
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            name="address"
-            type="text"
-            id="address_input"
-            placeholder="주소"
-            readonly
-          />
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            type="text"
-            id="address_extra_input"
-            placeholder="참고항목"
-            readonly
-          />
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            name="address_detail"
-            type="text"
-            id="address_detail_input"
-            placeholder=" 상세주소를 입력해 주세요."
-          />
-          <input type="hidden" id="sample6_postcode" name="zipCode" />
-          <br />
-          <p class="text-left textsize-1 margin1 textbold">성별</p>
-          <div class="btn-tinylong margin textsize-1 border-0 btn-round">
-            <input type="radio" name="gender" value="m" /><span
-              class="textsize-1"
-              >남</span
-            >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <input type="radio" name="gender" value="w" /><span
-              class="textsize-1"
-              >여</span
-            >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <input type="radio" name="no" value="no" checked /><span
-              class="textsize-1"
-              >선택안함</span
-            >
+          <div class="row">
+            <div class="col">
+              <input
+                class="form-control"
+                name="address"
+                type="text"
+                id="address_input"
+                placeholder="주소"
+                readonly
+              />
+            </div>
+            <div class="col">
+              <input
+                class="form-control"
+                type="text"
+                id="address_extra_input"
+                placeholder="참고항목"
+                readonly
+              />
+            </div>
           </div>
 
-          <p class="text-left textsize-1 margin1 textbold">생년월일</p>
-          <input
-            class="brd-lightgray btn-round btn-midlong textsize-1"
-            name="birth"
-            placeholder="  YYYY  -  MM  -  DD"
-            type="date"
-          />
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col">
+              <input
+                class="form-control"
+                name="address_detail"
+                type="text"
+                id="address_detail_input"
+                placeholder=" 상세주소를 입력해 주세요."
+              />
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col">
+              <button
+                type="button"
+                onclick="execDaumPostCode()"
+                class="bg-lightgreen btn-long border-0"
+              >
+                주소 검색
+              </button>
+            </div>
+          </div>
+          <input type="hidden" id="h_input_zipcode" name="zipCode" />
+          <br />
+          <div class="row">
+            <div class="col-md-3">
+              <div class="text-left textsize-2 textbold">
+                <span>성별</span>
+              </div>
+            </div>
+            <div class="col-md select-radio">
+              <input type="radio" name="gender" value="m" /><span
+                class="textsize-2"
+                >남</span
+              >
+              <input type="radio" name="gender" value="w" /><span
+                class="textsize-2"
+                >여</span
+              >
+              <input type="radio" name="gender" value="no" checked /><span
+                class="textsize-2"
+                >선택안함</span
+              >
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="text-left textsize-2 textbold">
+                <span>생년월일</span>
+              </div>
+            </div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                name="birth"
+                placeholder="  YYYY  -  MM  -  DD"
+                type="date"
+              />
+            </div>
+          </div>
+
           <br />
           <div class="line"></div>
 
           <br />
           <div class="agreement-container">
-            <p class="text-left textsize-1 margin1 textbold">
-              <input
-                class="text-left"
-                type="checkbox"
-                id="allcheck"
-                name="check1"
-                value="agreeTotal"
-                onclick="selectAll(this)"
-              /><label>&nbsp&nbsp&nbsp전체 약관 동의</label>
-            </p>
-            <br /><br />
-
-            <input
-              class="req_checkbox"
-              type="checkbox"
-              name="check1"
-              value="1"
-            />&nbsp&nbsp&nbsp[필수]서비스 이용 약관 동의<br /><br />
-            <input
-              class="req_checkbox"
-              type="checkbox"
-              name="check2"
-              value="1"
-            />&nbsp&nbsp&nbsp[필수]개인정보 수집 및 이용에 동의<br /><br />
-            <input
-              class="req_checkbox"
-              type="checkbox"
-              name="check3"
-            />&nbsp&nbsp&nbsp[선택]긴급 할인 등 정보,혜택 수신 동의<br />
-            &nbsp&nbsp&nbsp&nbsp<input
-              type="checkbox"
-              name="sms_agreement"
-              value="yes"
-            />&nbsp&nbsp&nbsp&nbsp SMS &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <input
-              class="req_checkbox"
-              type="checkbox"
-              name="email_agreement"
-              value="yes"
-            />&nbsp&nbsp&nbsp이메일<br /><br />
-            <input
-              class="req_checkbox"
-              type="checkbox"
-              name="check4"
-            />&nbsp&nbsp&nbsp[필수]본인은 만 14세 이상입니다.<br /><br />
+            <div class="row">
+              <div
+                class="col text-left textsize-2 margin1 textbold select-check"
+              ></div>
+            </div>
             <br />
+
+            <div class="row agreement_box_grid">
+              <div class="col">
+                <div class="row toggle-btn border-bottom">
+                  <div class="col agreement_box_col">
+                    <input
+                      class="text-left"
+                      type="checkbox"
+                      id="allcheck"
+                    /><span>전체 약관 동의</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row agreement_box_grid">
+              <div class="col">
+                <div class="row toggle-btn border-bottom">
+                  <div class="col">[필수]서비스 이용 약관 동의</div>
+                  <div class="float-right">
+                    <img
+                      class="agreement_arrow_icon"
+                      src="${contextPath}/img/icon/downarrow.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <div class="row toggle-content">
+                  <div class="col-md">
+                    <div class="row">
+                      <div class="col">이용규약 내용 <br /></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md agreement_box_col">
+                    <span>약관 내용에 동의합니다.</span>
+                    <input class="req_checkbox check_box" type="checkbox" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row agreement_box_grid">
+              <div class="col">
+                <div class="row toggle-btn border-bottom">
+                  <div class="col">[필수]개인정보 수집 및 이용에 동의</div>
+                  <div class="float-right">
+                    <img
+                      class="agreement_arrow_icon"
+                      src="${contextPath}/img/icon/downarrow.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <div class="row toggle-content">
+                  <div class="col-md">
+                    <div class="row">
+                      <div class="col">이용규약 내용 <br /></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md agreement_box_col">
+                    <span>약관 내용에 동의합니다.</span>
+                    <input class="req_checkbox check_box" type="checkbox" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div class="row agreement_box_grid">
+              <div class="col select-check">
+                <div class="row border-bottom">
+                  <div class="col">
+                    [선택]긴급 할인 등 정보,혜택 수신 동의<br />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col agreement_box_col">
+                    <input
+                      type="checkbox"
+                      name="sms_agreement"
+                      class="check_box"
+                      value="yes"
+                    />
+                    <span>SMS</span>
+                    <input
+                      class="check_box"
+                      type="checkbox"
+                      name="email_agreement"
+                      value="yes"
+                    /><span>이메일</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br />
+            <div class="row agreement_box_grid">
+              <div class="col agreement_box_col">
+                <span>[필수]본인은 만 14세 이상입니다.</span
+                ><input class="req_checkbox check_box" type="checkbox" />
+              </div>
+            </div>
           </div>
-          <button
-            type="submit"
-            class="btn-midlong bg-lightgreen margin textsize-2 border-0 btn-round"
-          >
-            회원가입 완료
-          </button>
           <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
+          <div class="row">
+            <div class="col">
+              <button
+                type="submit"
+                class="bg-lightgreen textsize-2 border-0 btn-long"
+              >
+                회원가입 완료
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </form>

@@ -31,7 +31,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           </div>
           <form action="${contextPath}/community/recipe/recipeList.do">
             <div
-              class="toggle-btn textsize-1 tesxt-right"
+              class="toggle-btn textsize-1 text-right"
               style="margin-right: 8px"
             >
               상세검색

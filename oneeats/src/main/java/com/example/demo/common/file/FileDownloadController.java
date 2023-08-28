@@ -24,7 +24,7 @@ public class FileDownloadController {
 		OutputStream out = response.getOutputStream();
 		if (path.contains("No")) {
 			String[] paths = path.split("No");
-			if (paths.length<1) {
+			if (paths.length<2) {
 				System.out.println("이미지 파일 참조 번호가 없음");
 				return;
 			}

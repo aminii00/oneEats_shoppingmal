@@ -1,116 +1,179 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"
-      isELIgnored="false"%>       
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/core" %>
-    <c:set var = "contextPath" value= "${pageContext.request.contextPath}" />
-    <%
-    request.setCharacterEncoding("UTF-8");
-    %>
+pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix="c"
+uri="http://java.sun.com/jsp/jstl/core" %> <%@ taglib prefix="fmt"
+uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
-<head>
-<link rel="stylesheet" href="${contextPath}/css/mina.css">
-<meta charset="UTF-8">
-<title>로그인창</title>
-<script>
-    const getToken = () => {
+  <head>
+    <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
+    <meta charset="UTF-8" />
+    <title>비밀번호 찾기</title>
+    <style>
+      .redText {
+        color: red;
+      }
+      .blueText {
+        color: green;
+      }
+    </style>
 
-// 인증확인 버튼 활성화
-document.getElementById("completion").setAttribute("style","background-color:yellow;")
-document.getElementById("completion").disabled = false;
+    <script>
+      var check_map = new Map([
+        ["pwd", false],
+        ["pwd_confirm", false],
+      ]);
 
-if (processID != -1) clearInterval(processID);
-const token = String(Math.floor(Math.random() * 1000000)).padStart(6, "0");
-document.getElementById("certificationNumber").innerText = token;
-let time = 180;
-processID = setInterval(function () {
-  if (time < 0 || document.getElementById("sendMessage").disabled) {
-    clearInterval(processID);
-    initButton();
-    return;
-  }
-  let mm = String(Math.floor(time / 60)).padStart(2, "0");
-  let ss = String(time % 60).padStart(2, "0");
-  let result = mm + ":" + ss;
-  document.getElementById("timeLimit").innerText = result;
-  time--;
-}, 50);
-};
+      var pwd_input_text = "";
+      var pwd_check_text = "-1";
+      var contextPath = "${contextPath}";
 
-function checkCompletion(){
-alert("문자 인증이 완료되었습니다.")
-initButton();
-document.getElementById("completion").innerHTML="인증완료"
-document.getElementById("signUpButton").disabled = false;
-document.getElementById("signUpButton").setAttribute("style","background-color:yellow;")
-}
-</script>
-<style>
-    :root{
-	--body-background-color: #f5f6f7;
-	--font-color: #4e4e4e;
-	--border-gray-color : #dadada;
-	--naver-green-color: #04c75a;
-	--naver-green-border-color: #06b350;
-}
+      function changeMessage(elname, str, clr) {
+        $("#errmsg_" + elname).removeClass();
+        $("#errmsg_" + elname).addClass(clr + "Text");
+        if (str.length < 1) {
+          $("#errmsg_" + elname).html("&nbsp;");
+        } else {
+          $("#errmsg_" + elname).text(str);
+        }
+      }
+      $(document).ready(function () {
+        $("#pwd").on("input", function () {
+          var puttedText = $(this).val();
+          pwd_input_text = puttedText;
+          var regex = /[^a-zA-Z0-9!@#$%^&*()]/;
+          var regex2 = /^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^a-zA-Z0-9]).+$/;
+          if (puttedText.length < 8) {
+            changeMessage("pwd", "비밀번호가 너무 짧습니다.", "red");
+          } else if (puttedText.length > 12) {
+            changeMessage("pwd", "비밀번호가 너무 깁니다.", "red");
+          } else if (regex.test(puttedText)) {
+            changeMessage(
+              "pwd",
+              "비밀번호에는 알파벳, 숫자, 혹은 특수문자(!@#$%^&*())만 사용할 수 있습니다.",
+              "red"
+            );
+          } else if (!regex2.test(puttedText)) {
+            changeMessage(
+              "pwd",
+              "비밀번호에는 영숫자와 특수문자가 하나 이상 들어가 있어야 합니다.",
+              "red"
+            );
+          } else {
+            if (pwd_check_text != "-1" && pwd_check_text != puttedText) {
+              changeMessage(
+                "pwd_confirm",
+                "비밀번호가 일치하지 않습니다.",
+                "red"
+              );
+              check_map.set("pwd_confirm", false);
+            } else {
+              changeMessage("pwd_confirm", "", "blue");
+              check_map.set("pwd_confirm", true);
+            }
+            changeMessage("pwd", "", "blue");
+            check_map.set("pwd", true);
+          }
+        });
 
+        $("#pwd_confirm").on("input", function () {
+          var puttedText = $(this).val();
+          var regex = /[^a-zA-Z0-9!@#~]/;
+          pwd_check_text = puttedText;
+          if (puttedText != pwd_input_text) {
+            changeMessage(
+              "pwd_confirm",
+              "비밀번호가 일치하지 않습니다.",
+              "red"
+            );
+            check_map.set("pwd_confirm", false);
+          } else {
+            changeMessage("pwd_confirm", "", "blue");
+            check_map.set("pwd_confirm", true);
+          }
+        });
+      });
 
+      $("#registerForm").submit(function (event) {
+        event.preventDefault();
 
+        for (let [key, value] of check_map) {
+          console.log(key, value);
+          if (value == false) {
+            alert("다시 입력해주세요.");
+            $("#" + key).focus();
+            return false;
+          }
+        }
 
-</style>
-<c:choose>
-	<c:when test = "${result=='loginFailed' }">
-	<script>
-	window.onload=function(){
-		alert("아이디나 비밀번호가 틀립니다. 다시 로그인 하세요");
-	}
-	</script>
-	</c:when>
-	</c:choose>
-</head>
-<body>
-<form method = "post" action = "${contextPath}/member/updatePw.do">
-<br>
-<br>
-<br>
-<div class="main-container">
-    <div class="main-wrap">
-    <header>
-        <div class="textbold textsize-4">
-            비밀번호 찾기
-            <br>
+        $(this).unbind("submit").submit();
+      });
+    </script>
+  </head>
+  <body>
+    <form method="post" action="${contextPath}/member/updatePw.do">
+      <br />
+      <br />
+      <br />
+      <div class="main-container">
+        <div class="main-wrap">
+          <div class="row">
+            <div class="col textbold textsize-4 text-center">
+              <span>비밀번호 찾기</span>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col-md-3">새 비밀번호 등록</div>
+            <div class="col-md">
+              <input
+                class="form-control"
+                id="pwd"
+                name="pwd"
+                placeholder=" 새 비밀번호를 입력해주세요."
+                type="password"
+              />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div id="errmsg_pwd">&nbsp;</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-3">새 비밀번호 확인</div>
+            <div class="col-md">
+              <input
+                id="pwd_confirm"
+                class="form-control"
+                placeholder=" 새 비밀번호를 한 번 더 입력해주세요."
+                type="password"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div id="errmsg_pwd_confirm">&nbsp;</div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <button
+                type="submit"
+                class="bg-lightgreen textbold border-0 btn-long"
+              >
+                확인
+              </button>
+            </div>
+          </div>
         </div>
-        <br>
-    </header>
-        <div>
-            새 비밀번호 등록 
-            <br>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " name ="pwd" placeholder=" 새 비밀번호를 입력해주세요." type="password"></input>
-            <p class = "textsize-1  textcolor-red margin-id">10자 이상 입력</p>
-            <p class =" textsize-1  textcolor-red margin-id">영문/숫자/특수문자(공백제외)만 허용하며, 2개 이상 조합</p>
-            <p class =" textsize-1  textcolor-red margin-id">동일한 숫자  3개 이상 연속 사용 불가</p><br>
-        </div>
-        <div>
-            새 비밀번호 확인
-            <br>
-            <input class ="brd-lightgray btn-round margin btn-midlong textsize-1 " placeholder=" 새 비밀번호를 한 번 더 입력해주세요." type="password"></input>
-           
-        </div>
-      
-        <button type="submit" class = "btn-midlong bg-lightgreen textsize-1 textbold input btn-round textcolor-white border-0" >
-             확인</button>
-    </div>
-</div>
-<br>
-<br>
-<br>
-<br>  
-</body>
-</html>
-<table>
-
-</table>
-</form>
-</body>
+      </div>
+      <br />
+      <br />
+    </form>
+  </body>
 </html>

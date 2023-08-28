@@ -45,15 +45,21 @@
 		where 1=1
 		<choose>
 			<when test="recipe_search_type==null or recipe_search_type==''">
-				and title Like CONCAT('%', #{recipe_search_word}, '%') or description like CONCAT('%', #{recipe_search_word}, '%')
+				and 1=1
+			</when>
+			<when test="recipe_search_type=='all'">
+				and title Like CONCAT('%', #{recipe_search_word},
+				'%') or description like CONCAT('%', #{recipe_search_word}, '%')
 			</when>
 			<otherwise>
 				<choose>
 					<when test="recipe_search_type=='title'">
-						and title like CONCAT('%', #{recipe_search_word}, '%')
+						and title like CONCAT('%', #{recipe_search_word},
+						'%')
 					</when>
 					<when test="recipe_search_type=='description'">
-						and description like CONCAT('%', #{recipe_search_word}, '%')
+						and description like CONCAT('%',
+						#{recipe_search_word}, '%')
 					</when>
 				</choose>
 			</otherwise>
@@ -177,9 +183,12 @@
 
 	<select id="countRecipeNums" resultType="java.util.Map">
 		select * from (
-		select count(*) as cnt, concat('전체') as category from recipe
-		union (select count(*) as cnt, category from recipe group by category order
-		by cnt desc limit 10)) as t
+		select
+		count(*) as cnt, concat('전체') as category from recipe
+		union (select
+		count(*) as cnt, category from recipe group by category order
+		by cnt
+		desc limit 10)) as t
 		where category!='' and category!='none'
 	</select>
 </mapper>
