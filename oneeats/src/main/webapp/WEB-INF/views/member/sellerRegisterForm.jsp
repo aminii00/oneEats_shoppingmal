@@ -58,14 +58,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="brd-lightgreen btn-round">
               <br />
               <br />
-              <div class="serve-wrap">
-                <span class="textsize-2">One.Eats에 오신 것을 환영합니다.</span
-                ><br />
-                <span class="textsize-1">사업자 회원가입 페이지 입니다.</span>
-                <br /><br />
-
-                <br /><br />
-              </div>
             </div>
             <br />
             <br />

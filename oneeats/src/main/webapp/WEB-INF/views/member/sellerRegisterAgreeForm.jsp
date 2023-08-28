@@ -22,6 +22,36 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         background-color: rgb(226, 226, 226);
         border-top: 2px solid #a3d060;
       }
+      .brd-lightgreen {
+        border: 0.5px;
+        border-style: solid;
+        border-color: #a3d060;
+      }
+      .sellermain-wrap {
+        max-width: 600px;
+        margin: auto;
+      }
+      .seller_registerForm_wrap {
+        max-width: 600px;
+        margin: auto;
+      }
+      .seller_registerForm_header {
+        max-width: 600px;
+      }
+      .sellermain-wrap .main-wrap {
+        padding: 8px;
+      }
+
+      .sellermain-wrap .main-wrap a {
+        min-width: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .seller_registerForm_wrap .main-wrap {
+        min-height: auto;
+      }
     </style>
     <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
     <script src="${contextPath}/js/registerForm.js"></script>
@@ -48,68 +78,90 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <div class="sellermain-wrap">
           <div class="textsize-3 textbold">
             <div class="mainline"></div>
-            <br />
-            <br />
-            <div class="row">
-              <div class="col">
-                <a
-                  href="#tab1"
-                  class="nav-link"
-                  role="tab"
-                  data-toggle="tab"
-                  aria-selected="true"
-                  >가입</a
-                >
-              </div>
-              <div class="col">
-                <a
-                  href="#tab2"
-                  class="nav-link"
-                  role="tab"
-                  data-toggle="tab"
-                  aria-selected="false"
-                  >약관동의</a
-                >
-              </div>
-              <div class="col">
-                <a
-                  href="#tab3"
-                  class="nav-link"
-                  role="tab"
-                  data-toggle="tab"
-                  aria-selected="false"
-                  >정보입력</a
-                >
-              </div>
-              <div class="col">
-                <a
-                  href="#tab4"
-                  class="nav-link"
-                  role="tab"
-                  data-toggle="tab"
-                  aria-selected="false"
-                  >가입완료</a
-                >
+
+            <div class="seller_registerForm_header">
+              <div class="row">
+                <div class="col">
+                  <a
+                    href="#tab1"
+                    class="nav-link"
+                    role="tab"
+                    data-toggle="tab"
+                    aria-selected="true"
+                    >가입</a
+                  >
+                </div>
+                <div class="col">
+                  <a
+                    href="#tab2"
+                    class="nav-link"
+                    role="tab"
+                    data-toggle="tab"
+                    aria-selected="false"
+                    >약관동의</a
+                  >
+                </div>
+                <div class="col">
+                  <a
+                    href="#tab3"
+                    class="nav-link"
+                    role="tab"
+                    data-toggle="tab"
+                    aria-selected="false"
+                    >정보입력</a
+                  >
+                </div>
+                <div class="col">
+                  <a
+                    href="#tab4"
+                    class="nav-link"
+                    role="tab"
+                    data-toggle="tab"
+                    aria-selected="false"
+                    >가입완료</a
+                  >
+                </div>
               </div>
             </div>
 
             <br />
 
-            <div class="brd-lightgreen btn-round">
+            <div class="seller_registerForm_wrap">
               <div
-                class="busNo-container tab-pane fade show active"
+                class="busNo-container brd-lightgreen tab-pane fade show active"
                 role="tabpanel"
                 id="tab1"
               >
                 <div class="main-wrap">
+                  <div class="row">&nbsp;</div>
                   <div class="row">
                     <div class="col">
+                      <span class="textsize-3"
+                        >One.Eats에 오신 것을 환영합니다.</span
+                      >
+                      <hr class="line-gray" />
+                      <span class="textsize-2"
+                        >사업자 회원가입 페이지 입니다.</span
+                      >
+                    </div>
+                  </div>
+                  <div class="row">&nbsp;</div>
+                  <div class="row">
+                    <div class="col input-group">
                       <input
                         class="form-control"
                         name="busNo"
                         maxlength="10"
                         placeholder=" 사업자 등록번호 10자리"
                       />
+                      <div class="input-group-append">
+                        <button
+                          type="submit"
+                          class="bg-lightgreen textsize-2 border-0"
+                        >
+                          인증
+                        </button>
+                      </div>
                     </div>
                   </div>
                   <div class="row">&nbsp;</div>
@@ -123,14 +175,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                       </div>
                     </div>
                   </div>
+
+                  <div class="row">&nbsp;</div>
                   <div class="row">
                     <div class="col">
-                      <button
-                        type="submit"
-                        class="bg-lightgreen btn-long textsize-2 border-0"
+                      <a
+                        href="#tab2"
+                        class="nav-link btn-long bg-lightgreen textsize-2 border-0"
+                        role="tab"
+                        data-toggle="tab"
                       >
-                        인증
-                      </button>
+                        다음으로
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -141,112 +197,120 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 role="tabpanel"
                 id="tab2"
               >
-                <div class="row agreement_box_grid">
-                  <div class="col">
-                    <div class="row toggle-btn border-bottom">
-                      <div class="col agreement_box_col">
-                        <input
-                          class="text-left"
-                          type="checkbox"
-                          id="allcheck"
-                        /><span>전체 약관 동의</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <br />
-                <div class="row agreement_box_grid">
-                  <div class="col">
-                    <div class="row toggle-btn border-bottom">
-                      <div class="col">[필수]서비스 이용 약관 동의</div>
-                      <div class="float-right">
-                        <img
-                          class="agreement_arrow_icon"
-                          src="${contextPath}/img/icon/downarrow.png"
-                          alt=""
-                        />
-                      </div>
-                    </div>
-
-                    <div class="row toggle-content">
-                      <div class="col-md">
-                        <div class="row">
-                          <div class="col">이용규약 내용 <br /></div>
+                <div class="main-wrap">
+                  <div class="row agreement_box_grid">
+                    <div class="col">
+                      <div class="row toggle-btn border-bottom">
+                        <div class="col agreement_box_col">
+                          <input
+                            class="text-left"
+                            type="checkbox"
+                            id="allcheck"
+                          /><span>전체 약관 동의</span>
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md agreement_box_col">
-                        <span>약관 내용에 동의합니다.</span>
-                        <input class="req_checkbox check_box" type="checkbox" />
-                      </div>
-                    </div>
                   </div>
-                </div>
-                <br />
-                <div class="row agreement_box_grid">
-                  <div class="col">
-                    <div class="row toggle-btn border-bottom">
-                      <div class="col">[필수]개인정보 수집 및 이용에 동의</div>
-                      <div class="float-right">
-                        <img
-                          class="agreement_arrow_icon"
-                          src="${contextPath}/img/icon/downarrow.png"
-                          alt=""
-                        />
+                  <br />
+                  <div class="row agreement_box_grid">
+                    <div class="col">
+                      <div class="row toggle-btn border-bottom">
+                        <div class="col">[필수]서비스 이용 약관 동의</div>
+                        <div class="float-right">
+                          <img
+                            class="agreement_arrow_icon"
+                            src="${contextPath}/img/icon/downarrow.png"
+                            alt=""
+                          />
+                        </div>
                       </div>
-                    </div>
-                    <div class="row toggle-content">
-                      <div class="col-md">
-                        <div class="row">
-                          <div class="col">이용규약 내용 <br /></div>
+                      <div class="row toggle-content">
+                        <div class="col-md">
+                          <div class="row">
+                            <div class="col">이용규약 내용 <br /></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md agreement_box_col">
+                          <span>약관 내용에 동의합니다.</span>
+                          <input
+                            class="req_checkbox check_box"
+                            type="checkbox"
+                          />
                         </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-md agreement_box_col">
-                        <span>약관 내용에 동의합니다.</span>
-                        <input class="req_checkbox check_box" type="checkbox" />
+                  </div>
+                  <br />
+                  <div class="row agreement_box_grid">
+                    <div class="col">
+                      <div class="row toggle-btn border-bottom">
+                        <div class="col">
+                          [필수]개인정보 수집 및 이용에 동의
+                        </div>
+                        <div class="float-right">
+                          <img
+                            class="agreement_arrow_icon"
+                            src="${contextPath}/img/icon/downarrow.png"
+                            alt=""
+                          />
+                        </div>
+                      </div>
+                      <div class="row toggle-content">
+                        <div class="col-md">
+                          <div class="row">
+                            <div class="col">이용규약 내용 <br /></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md agreement_box_col">
+                          <span>약관 내용에 동의합니다.</span>
+                          <input
+                            class="req_checkbox check_box"
+                            type="checkbox"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <br />
-
-                <div class="row agreement_box_grid">
-                  <div class="col select-check">
-                    <div class="row border-bottom">
-                      <div class="col">
-                        [선택]긴급 할인 등 정보,혜택 수신 동의<br />
+                  <br />
+                  <div class="row agreement_box_grid">
+                    <div class="col select-check">
+                      <div class="row border-bottom">
+                        <div class="col">
+                          [선택]긴급 할인 등 정보,혜택 수신 동의<br />
+                        </div>
                       </div>
-                    </div>
-                    <div class="row">
-                      <div class="col agreement_box_col">
-                        <input
-                          type="checkbox"
-                          name="sms_agreement"
-                          class="check_box"
-                          value="yes"
-                        />
-                        <span>SMS</span>
-                        <input
-                          class="check_box"
-                          type="checkbox"
-                          name="email_agreement"
-                          value="yes"
-                        /><span>이메일</span>
+                      <div class="row">
+                        <div class="col agreement_box_col">
+                          <input
+                            type="checkbox"
+                            name="sms_agreement"
+                            class="check_box"
+                            value="yes"
+                          />
+                          <span>SMS</span>
+                          <input
+                            class="check_box"
+                            type="checkbox"
+                            name="email_agreement"
+                            value="yes"
+                          /><span>이메일</span>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <br />
-                <div class="row agreement_box_grid">
-                  <div class="col agreement_box_col">
-                    <span>[필수]본인은 만 14세 이상입니다.</span
-                    ><input class="req_checkbox check_box" type="checkbox" />
+                  <br />
+                  <div class="row agreement_box_grid">
+                    <div class="col agreement_box_col">
+                      <span>[필수]본인은 만 14세 이상입니다.</span
+                      ><input class="req_checkbox check_box" type="checkbox" />
+                    </div>
                   </div>
+                  <a class="btn-long bg-lightgreen"> 다음으로 </a>
                 </div>
-                <a class="btn-long bg-lightgreen"> 다음으로 </a>
               </div>
 
               <div
