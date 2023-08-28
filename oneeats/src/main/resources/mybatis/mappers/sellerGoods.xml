@@ -77,14 +77,6 @@
 		#{option_qty},#{price},#{goodsNo})
 	</insert>
 
-	<update id="updateOptions" parameterType="java.util.List">
-
-		update goods
-		set optionNo=#{optionNo},
-		name=#{name}, option_qty=#{option_qty}, goodsNo=#{goodsNo}
-		where goodsNo=#{goodsNo}
-
-	</update>
 
 	<insert id="insertNewGoodsWithMap" parameterType="java.util.Map">
 		insert into
@@ -94,14 +86,31 @@
 
 	</insert>
 
-	<update id="updateNewGoodsWithMap" parameterType="int">
+	<update id="updateNewGoodsWithMap" parameterType="goodsVO">
 		update goods
 		set 
 		category=#{category}, name=#{name}, price=#{price}, manufacturer=#{manufacturer},
-		weight=#{weight}, harvest=#{harvest}, type=#{type}, category=#{category}
+		weight=#{weight}, harvest=#{harvest}, type=#{type},img1=#{img1}
 		where goodsNo=#{goodsNo} and memberNo=#{memberNo}
 
 	</update>
+	
+	
+	<update id="updateOptions" parameterType="java.util.List">
+
+		update `option`
+		set 
+		name=#{name}, option_qty=#{option_qty}, price=#{price}
+		where goodsNo=#{goodsNo}
+
+	</update>
+
+
+	<delete id="DeleteGoods" parameterType="int">
+	delete from `option` where goodsNo = #{goodsNo}
+	</delete>
+
+
 
 
 	<select id="selectGoodsList" resultMap="GoodsResult">
@@ -114,11 +123,21 @@
 	
 	<select id="selectNewGoodsList" resultMap="GoodsResult" parameterType="java.util.Map" >
 			select * from goods
+			  where type = "사업자"
 			order by creDate desc
 			limit #{start}, 10
 		
 			
 	</select>
+
+	<select id="goodsItem" parameterType="int" resultMap="GoodsResult">
+	 select * from goods
+	 where goodsNo = #{goodsNo}
+	
+	</select>
+
+
+
 
 
 	<delete id="deleteSellerGoods" parameterType="int">
@@ -128,6 +147,50 @@ where
 goodsNo=#{goodsNo}
 ]]>
 	</delete>
+
+
+
+
+<!-- 북샵따라하기 -->
+<update id="updateGoodsInfo" parameterType="java.util.HashMap" >
+	   update goods
+	    <set> 
+	      <if test=" category!='' and category!=null">
+	        category=#{category},
+	      </if>
+	      <if test=" name!='' and name!=null">
+	        name=#{name},
+	      </if>
+	      <if test=" price!='' and price!=null">
+	        price=#{price},
+	      </if>
+	      <if test=" manufacturer!='' and manufacturer!=null">
+	        manufacturer=#{manufacturer},
+	      </if>
+	      <if test=" weight!='' and weight!=null">
+	        weight=#{weight},
+	      </if>
+	      <if test=" harvest!='' and harvest!=null">
+	        harvest=#{harvest},
+	      </if>
+	      <if test=" type!='' and type!=null">
+	        type=#{type},
+	      </if>
+	      <if test=" img1!='' and img1!=null">
+	        img1=#{img1},
+	      </if>
+	        <if test=" memberNo!='' and memberNo!=null">
+	        memberNo=#{memberNo},
+	      </if>
+	      
+	     </set>
+	    where 
+	    goodsNo=#{goodsNo} and memberNo=#{memberNo}
+	    
+	
+	</update>	
+
+
 
 
 </mapper>

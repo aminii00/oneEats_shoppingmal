@@ -80,18 +80,7 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return false;
 	}
 
-	@Override
-	public boolean ModGoods(int goodsNo) {
-		boolean result1;
-		try {
-			result1 = sellerGoodsDAO.updateNewGoodsWithMap(goodsNo);
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			result1 = false;
-		}
-		return result1;
-	}
 	
 //상품 목록
 	@Override
@@ -113,4 +102,29 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return sellerGoodsDAO.deleteSellerGoods(goodsNo);
 	}
 
+	@Override
+	public void DeleteGoods(GoodsVO goodsvo) {
+		sellerGoodsDAO.DeleteGoods(goodsvo);
+		
+	}
+
+	@Override
+	public GoodsVO goodsItem(int goodsNo) {
+	GoodsVO goodsItem =	sellerGoodsDAO.goodsItem(goodsNo);
+	return goodsItem;
+	}
+
+	
+	@Override
+	public void ModGoods(GoodsVO goodsvo) {
+		sellerGoodsDAO.updateNewGoodsWithMap(goodsvo);
+		
+	}
+	//북샵 따라해보기
+	//@Override
+	//public void modifyGoodsInfo(Map goodsMap) throws Exception{
+		//sellerGoodsDAO.updateGoodsInfo(goodsMap);
+		
+	//}	
+	
 }

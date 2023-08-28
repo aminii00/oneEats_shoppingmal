@@ -27,6 +27,55 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         reader.readAsDataURL(input.files[0]);
       }
     }
+
+    function fn_modify_goods(goodsNo, attribute) {
+      //goodsId여ㅑㅆ음
+      var frm_mod_goods = document.frm_mod_goods;
+      var value = "";
+      if (attribute == "goods_sort") {
+        value = frm_mod_goods.goods_sort.value;
+      } else if (attribute == "category") {
+        value = frm_mod_goods.category.value;
+      } else if (attribute == "name") {
+        value = frm_mod_goods.name.value;
+      } else if (attribute == "price") {
+        value = frm_mod_goods.price.value;
+      } else if (attribute == "manufacturer") {
+        value = frm_mod_goods.manufacturer.value;
+      } else if (attribute == "weight") {
+        value = frm_mod_goods.weight.value;
+      } else if (attribute == "harvest") {
+        value = frm_mod_goods.harvest.value;
+      } else if (attribute == "type") {
+        value = frm_mod_goods.type.value;
+      } else if (attribute == "img1") {
+        value = frm_mod_goods.img1.value;
+      }
+
+      $.ajax({
+        type: "post",
+        async: false, //false인 경우 동기식으로 처리한다.
+        url: "${contextPath}/seller/goods/modSellerGoods.do",
+        data: {
+          goodsNo: goodsNo,
+          attribute: attribute,
+          value: value,
+        },
+        success: function (data, textStatus) {
+          if (data.trim() == "mod_success") {
+            alert("상품 정보를 수정했습니다.");
+          } else if (data.trim() == "failed") {
+            alert("다시 시도해 주세요.");
+          }
+        },
+        error: function (data, textStatus) {
+          alert("에러가 발생했습니다." + data);
+        },
+        complete: function (data, textStatus) {
+          alert("작업을완료 했습니다");
+        },
+      }); //end ajax
+    }
   </script>
 
   <body>
@@ -35,7 +84,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <form
           id="mod-form"
-          action="${contextPath}/seller/goods/modSellerGoods.do"
+          action="${contextPath}/seller/goods/modSellerGoods.do?goodsNo=${goods.goodsNo}"
           method="post"
           enctype="multipart/form-data"
         >
@@ -157,7 +206,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        value="${memberInfo.name}"
+                        value="가나다"
                         readonly
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -250,6 +299,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="row ingredient_row">
                               <div class="col-md">
                                 <input
+                                  name="option_name"
                                   type="text"
                                   value="${goodsOption.name}"
                                   class="form-control"
@@ -259,6 +309,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               </div>
                               <div class="col-md">
                                 <input
+                                  name="option_qty"
                                   type="text"
                                   value="${goodsOption.option_qty}"
                                   class="form-control"
@@ -270,6 +321,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
                               <div class="col-md">
                                 <input
+                                  name="option_price"
                                   type="text"
                                   value="${goodsOption.price}"
                                   class="form-control"

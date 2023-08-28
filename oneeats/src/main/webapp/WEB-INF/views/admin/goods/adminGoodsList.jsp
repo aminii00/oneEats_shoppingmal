@@ -14,58 +14,77 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <link rel="stylesheet" href="${contextPath}/css/list.css" />
   </head>
   <body>
-    <form method="post" action="#">
-      <div class="div-p">
-        <p class="textsize-2 text-left textcolor-black textbold">상품목록</p>
-        <div class="div-sib textsize-1">
-          <select name="search-1">
-            <option value="전체">전체</option>
-            <option value="등록일">등록일</option>
-            <option value="상품명">상품명</option>
-          </select>
-          <input type="text" name="search-2" placeholder="search.." />
-          <button
-            class="btn-1 bg-lightgreen textcolor-white border-0"
-            type="button"
-          >
-            검색
-          </button>
-        </div>
+    <div class="div-p">
+      <p class="textsize-2 text-left textcolor-black textbold">상품목록</p>
+      <div class="div-sib textsize-1">
+        <select name="search-1">
+          <option value="전체">전체</option>
+          <option value="등록일">등록일</option>
+          <option value="상품명">상품명</option>
+        </select>
+        <input type="text" name="search-2" placeholder="search.." />
+        <button
+          class="btn-1 bg-lightgreen textcolor-white border-0"
+          type="button"
+        >
+          검색
+        </button>
       </div>
-      <table border="0" class="textcolor-black textsize-1">
-        <tr>
-          <th>번호</th>
-          <th>등록일</th>
-          <th>상품명</th>
-          <th style="text-align: right">수정</th>
-          <th style="text-align: right">삭제</th>
-        </tr>
-        <tr>
-          <td>&nbsp 1</td>
-          <td>2023-08-11</td>
-          <td>수제 착즙케일주스</td>
-          <td style="text-align: right">
-            <a href="${contextPath}/admin/goods/adminGoodsModForm.do">수정</a>
-          </td>
-          <td style="text-align: right">
-            <a
-              href="javascript:void(0)"
-              onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath}/admin/goods/adminGoodsList.do")'
-              >삭제</a
-            >
-          </td>
-        </tr>
-      </table>
-      <button
-        style="font-size: 12px; margin-top: 22px; float: right"
-        class="btn-1 bg-lightgreen textcolor-white border-0"
-        type="button"
-        onclick="location.href='${contextPath}/admin/goods/adminGoodsForm.do'"
-      >
-        상품 추가
-      </button>
-      <%--
-      <!--    <div> 페이징처리
+    </div>
+    <table border="0" class="textcolor-black textsize-1">
+      <tr>
+        <th>번호</th>
+        <th>등록일</th>
+        <th>상품명</th>
+        <th style="text-align: right">수정</th>
+        <th style="text-align: right">삭제</th>
+        <th style="text-align: right">상품 보기</th>
+      </tr>
+      <c:forEach var="goods" items="${newGoodsList}">
+        <c:choose>
+          <c:when test="${goods.goodsNo != preGoodsNo}">
+            <tr>
+              <div class="th-1">
+                <td>${goods.goodsNo}</td>
+                <td>${goods.creDate}</td>
+                <td>${goods.name}</td>
+
+                <td style="text-align: right">
+                  <a
+                    href="${contextPath}/admin/goods/modAdminGoods.do?goodsNo=${goods.goodsNo}"
+                    >수정</a
+                  >
+                </td>
+                <td style="text-align: right">
+                  <a
+                    href="javascript:void(0)"
+                    onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath }/admin/goods/deleteAdminGoods.do?goodsNo=${goods.goodsNo}")'
+                    >삭제</a
+                  >
+                </td>
+                <td style="text-align: right">
+                  <a
+                    href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
+                    >상품보기</a
+                  >
+                </td>
+              </div>
+            </tr>
+          </c:when>
+        </c:choose>
+        <c:set var="preGoodsNo" value="${goods.goodsNo}" />
+      </c:forEach>
+    </table>
+    <button
+      style="font-size: 12px; margin-top: 22px; float: right"
+      class="btn-1 bg-lightgreen textcolor-white border-0"
+      type="button"
+      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm.do'"
+    >
+      상품 추가
+    </button>
+    <%--
+    <!--    <div> 페이징처리
         <c:if test="${totArticles != null}"
             <c:choose>
             <c:when test="${totArticles > 100}">
@@ -100,11 +119,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
         </div> 
 -->
-      --%>
-      <div>
-        <ul class="ul-li">
+    --%>
+    <div>
+      <ul class="ul-li">
+        <c:if test="${section>1}">
           <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?&section=${section-1}&pageNum=1'"
+            >
               <img
                 width="20px"
                 height="20px"
@@ -113,21 +136,31 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               />
             </button>
           </li>
+        </c:if>
+        <c:forEach begin="1" end="10" var="i">
           <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?section=${section}&pageNum=${i}'"
+            >
+              ${(section-1)*10+i}
             </button>
           </li>
-        </ul>
-      </div>
-    </form>
+        </c:forEach>
+        <li class="li-btn">
+          <button
+            class="btn-2 btn-square bg-white btn-border"
+            onclick="location.href='${contextPath}/admin/goods/sellerGoodsList.do?section=${section+1}&pageNum=1'"
+          >
+            <img
+              width="20px"
+              height="20px"
+              src="${contextPath}/img/icon/next.png"
+              alt="next"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
   </body>
 </html>

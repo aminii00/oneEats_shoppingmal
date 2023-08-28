@@ -36,7 +36,15 @@ public interface SellerGoodsService {
 // 상품 삭제
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException;
 
-//상품 목록
-	public boolean ModGoods(int goodsNo) throws DataAccessException;
+//상품 수정
+	public void ModGoods(GoodsVO goodsvo) throws DataAccessException;
+
+	public void DeleteGoods(GoodsVO goodsvo);
+
+	public GoodsVO goodsItem(int goodsvo);
+
+
+//북샵 따라해보기	
+	//public void modifyGoodsInfo(Map goodsMap) throws Exception;
 	
 }
