@@ -45,6 +45,7 @@ public class CommunityControllerImpl implements CommunityController {
 		String category = request.getParameter("category");
 		String _section = request.getParameter("section");
 		String _pageNum = request.getParameter("pageNum");
+		String recipe_search_type = request.getParameter("recipe_search_type");
 		int pageNum;
 		int section;
 		if (_pageNum == null || _pageNum.length() <= 0) {
@@ -57,11 +58,14 @@ public class CommunityControllerImpl implements CommunityController {
 		} else {
 			section = Integer.parseInt(_section);
 		}
-
+		if (recipe_search_type !=null && recipe_search_type.length()<1) {
+			recipe_search_type = "all";
+		}
 		Map pagingMap = GeneralFileUploader.getParameterMap(request);
 		pagingMap.put("category", category);
 		pagingMap.put("section", section);
 		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("recipe_search_type", recipe_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 6);
 
 		List<RecipeVO> recipeList = communityService.selectRecipeList(pagingMap);
