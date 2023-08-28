@@ -9,13 +9,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <meta charset="UTF-8" />
     <title>회원가입 선택 창</title>
-    <link rel="stylesheet" href="${contextPath}/css/registerForm.css" />
+    <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
   </head>
   <body>
+    <br />
+    <br />
+    <br />
     <div class="main-container">
       <div class="main-wrap">
-        <br />
-        <br />
         <div class="row">
           <div class="col text-center textsize-4 textbold">회원가입</div>
         </div>
@@ -34,10 +35,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             class="d-flex justify-content-center align-items-center"
             href="${contextPath}/kakao/registerForm.do"
           >
-            <img
-              class="imgsize-square"
-              src="${contextPath}/img/icon/kakao.png"
-            />
+            <img src="${contextPath}/img/icon/kakao.png" />
             카카오 로그인
           </a>
         </div>
@@ -48,10 +46,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             class="d-flex justify-content-center align-items-center"
             href="#"
           >
-            <img
-              class="imgsize-square"
-              src="${contextPath}/img/icon/naver.png"
-            />
+            <img src="${contextPath}/img/icon/naver.png" />
             네이버 로그인
           </a>
         </div>

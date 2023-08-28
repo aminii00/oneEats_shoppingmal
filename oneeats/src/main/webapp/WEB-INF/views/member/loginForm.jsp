@@ -168,6 +168,33 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <br />
+
+          <div class="row">
+            <div class="col">
+              <a
+                id="kakao-btn"
+                class="d-flex justify-content-center align-items-center"
+                href="${contextPath}/kakao/registerForm.do"
+              >
+                <img src="${contextPath}/img/icon/kakao.png" />
+                카카오 로그인
+              </a>
+            </div>
+
+            <div class="col">
+              <a
+                id="naver-btn"
+                class="d-flex justify-content-center align-items-center"
+                href="#"
+              >
+                <img src="${contextPath}/img/icon/naver.png" />
+                네이버 로그인
+              </a>
+            </div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <!-- <div class="row"></div>
+
           <div class="row">
             <div class="col d-flex justify-content-start">
               <a href="${contextPath}/kakao/loginForm.do">
@@ -185,7 +212,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 />
               </a>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </form>

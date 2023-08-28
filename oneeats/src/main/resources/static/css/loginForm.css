@@ -17,3 +17,43 @@
         min-height: 800px;
         margin: auto;
       }
+        #kakao-btn {
+        width: 100%;
+        height: 60px;
+        border-radius: 15px;
+        color: rgba(0, 0, 0, 0.9);
+        font-weight: 600;
+        background-color: #fee500;
+        font-size: 22px;
+      }
+
+      #kakao-btn:hover {
+        color: rgba(0, 0, 0, 0.9) !important;
+        text-decoration: none;
+      }
+
+      #naver-btn {
+        width: 100%;
+        height: 60px;
+        border-radius: 15px;
+        color: #ffffff;
+        font-weight: 600;
+        background-color: #03c75a;
+        font-size: 22px;
+      }
+
+      #naver-btn:hover {
+        color: #ffffff !important;
+        text-decoration: none;
+      }
+      
+      #register-btn{
+		width: 100%;
+		height:60px;
+		border-radius: 15px;
+	}
+	
+	
+	#naver-btn>img,#kakao-btn>img{
+		width: 35px;
+	}
