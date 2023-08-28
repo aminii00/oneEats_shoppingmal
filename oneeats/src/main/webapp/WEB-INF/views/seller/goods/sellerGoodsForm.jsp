@@ -8,7 +8,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="zxx">
   <head>
     <meta charset="UTF-8" />
-    <title>goodsDetail</title>
+    <title>sellerGoodsDetail</title>
     <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
@@ -27,7 +27,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     }
   </script>
   <body>
-    <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
       <div class="container">
         <form

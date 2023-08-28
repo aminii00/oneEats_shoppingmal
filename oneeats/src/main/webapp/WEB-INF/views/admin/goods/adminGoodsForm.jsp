@@ -8,204 +8,76 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="zxx">
   <head>
     <meta charset="UTF-8" />
-    <title>goodsDetail</title>
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-
-    <!-- Css Styles -->
+    <title>adminGoodsDetail</title>
+    <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
-
-    <style>
-      .property-flex1 {
-        display: flex;
-        flex: 1 1 0%;
-        flex-direction: column;
-      }
-      .property-font1 {
-        color: #333;
-        font-weight: 400;
-        line-height: 19px;
-        white-space: pre-line;
-        word-break: break-all;
-      }
-      .property-margin1 {
-        border-bottom: 1px solid #f4f4f4;
-      }
-      .property-flex2 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-align-items: flex-start;
-        -webkit-box-align: flex-start;
-        -ms-flex-align: flex-start;
-        align-items: flex-start;
-        width: 100%;
-        padding: 17px 0 18px;
-        border-top: 1px solid #f4f4f4;
-        font-size: 14px;
-        letter-spacing: -0.5px;
-        height: 22px;
-      }
-      .property_title1 {
-        width: 200px;
-        height: 100%;
-        color: #666;
-        font-weight: 400;
-        line-height: 19px;
-      }
-      .property-flex1 {
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex: 1;
-        -ms-flex: 1;
-        flex: 1;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-      }
-      *,
-      :after,
-      :before {
-        box-sizing: border-box;
-        margin: 0;
-      }
-      .margin4 {
-        margin: 8px;
-      }
-      .select {
-        box-sizing: border-box;
-        width: 100px;
-        padding: 4px;
-        font-size: 14px;
-        border-radius: 6px;
-      }
-      .option {
-        padding: 4px;
-        font-size: 14px;
-        color: #fff;
-      }
-      .css-cartbtn {
-        display: block;
-        padding: 0 10px;
-        text-align: center;
-        width: 100%;
-        height: 56px;
-        border-radius: 3px;
-        color: #fff;
-        background-color: #a3d060;
-        border: 0 none;
-      }
-      .goodsinfo {
-        -webkit-tap-highlight-color: transparent;
-        background-color: #fff;
-        border-radius: 5px;
-        border: solid 1px #e8e8e8;
-        box-sizing: border-box;
-        clear: both;
-        cursor: pointer;
-        display: block;
-        float: left;
-        font-family: inherit;
-        font-size: 14px;
-        font-weight: 400;
-        outline: 0;
-        padding-left: 18px;
-        padding-right: 30px;
-        position: relative;
-        text-align: left !important;
-        -webkit-transition: all 0.2s ease-in-out;
-        transition: all 0.2s ease-in-out;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
-    </style>
   </head>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#goods_preview").attr("src", e.target.result);
+        };
 
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
   <body>
-    <!-- Breadcrumb Section Begin -->
-    <section
-      class="breadcrumb-section set-bg"
-      data-setbg="${contextPath}/img/breadcrumb.jpg"
-    >
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <div class="breadcrumb__text">
-              <h2>못난이 상품</h2>
-              <div class="breadcrumb__option">
-                <a href="./index.html">Home</a>
-                <a href="./index.html">못난이 상품</a>
-                <span>채소</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Breadcrumb Section End -->
-
     <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-6 col-md-6">
-            <div class="product__details__pic">
-              <div class="product__details__pic__item">
-                <img
-                  class="product__details__pic__item--large"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-              </div>
-              <div class="product__details__pic__slider owl-carousel">
-                <img
-                  data-imgbigurl="img/product/details/product-details-2.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-3.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-5.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/img/product/details/product-details-1.jpg"
-                  alt=""
-                />
+        <form
+          id="register-form"
+          method="post"
+          enctype="multipart/form-data"
+          action="${contextPath}/admin/goods/addAdminGoods.do"
+        >
+          <div class="row">
+            <div class="col-lg-6 col-md-6">
+              <div class="product__details__pic">
+                <div class="product__details__pic__item">
+                  <img id="goods_preview" src="" alt="" />
+                  <input
+                    type="file"
+                    name="img1"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img2"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img3"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img4"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                  <input
+                    type="file"
+                    name="img5"
+                    id=""
+                    onchange="readURL(this)"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-lg-6 col-md-6 text-left">
-            <div class="product__details__text">
-              <section>
-                <form
-                  id="register-form"
-                  method="post"
-                  enctype="multipart/form-data"
-                  action="${contextPath}/admin/goods/addAdminGoods.do"
-                >
+            <div class="col-lg-6 col-md-6 text-left">
+              <div class="product__details__text">
+                <section>
+                  <input name="type" type="hidden" value="관리자" />
                   <div class="property-margin1">
                     <dl class="property-flex2" style="height: 66px">
                       <dt
@@ -281,7 +153,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        name="name"
                         class="property-font1 nice-select"
                         style="width: 176px"
                         value="원이츠"
@@ -499,12 +370,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      name="description"
-                      class="goodsinfo"
+                      class="goodsinfo description_textarea"
                       cols="50"
                       rows="8"
                       style="width: 350px"
                     ></textarea>
+                    <input
+                      type="hidden"
+                      name="description"
+                      id="goods_description"
+                      value=""
+                    />
                   </p>
 
                   <div style="display: inline-block; margin: 50px 145px 0 0">
@@ -528,12 +404,28 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <span class="css-nytqmg textbold">상품 등록</span>
                     </button>
                   </div>
-                </form>
-              </section>
+                </section>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
     </section>
+    <script>
+      $(document).ready(function () {
+        var textareaInput = $(".description_textarea").val();
+        var output = textareaInput.replace(/\n/g, "<br>");
+        var input = textareaInput.replace(/<br>/g, "\n");
+        $(".description_textarea").val(input);
+        $("#goods_description").val(output);
+
+        $(".description_textarea").on("input", function () {
+          var textareaInput = $(this).val();
+          var output = textareaInput.replace(/\n/g, "<br>");
+
+          $("#goods_description").val(output);
+        });
+      });
+    </script>
   </body>
 </html>

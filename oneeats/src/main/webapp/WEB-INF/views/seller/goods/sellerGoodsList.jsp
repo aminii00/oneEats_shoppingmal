@@ -53,7 +53,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 
                 <td style="text-align: right">
                   <a
-                    href="${contextPath}/seller/goods/modSellerGoods.do?goodsNo=${goods.goodsNo}"
+                    href="${contextPath}/seller/goods/modSellerGoodsForm.do?goodsNo=${goods.goodsNo}"
                     >수정</a
                   >
                 </td>

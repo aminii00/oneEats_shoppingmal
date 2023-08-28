@@ -2,7 +2,106 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
-	<mapper namespace="com.example.demo.admin.goods.dao.AdminGoodsDAO">
+
+<mapper
+	namespace="com.example.demo.admin.goods.dao.AdminGoodsDAO">
+	<resultMap id="GoodsResult" type="goodsVO">
+		<result column="goodsNo" property="goodsNo" />
+		<result column="name" property="name" />
+		<result column="price" property="price" />
+		<result column="rapping" property="rapping" />
+		<result column="manufacturer" property="manufacturer" />
+		<result column="weight" property="weight" />
+		<result column="expDate" property="expDate"
+			javaType="java.sql.Date" />
+		<result column="description" property="description" />
+		<result column="harvest" property="harvest" />
+		<result column="creDate" property="creDate"
+			javaType="java.sql.Date" />
+		<result column="img1" property="img1" />
+		<result column="img2" property="img2" />
+		<result column="img3" property="img3" />
+		<result column="img4" property="img4" />
+		<result column="img5" property="img5" />
+		<result column="category" property="category" />
+		<result column="type" property="type" />
+		<result column="memberNo" property="memberNo" />
+	</resultMap>
+
+
+	<resultMap id="OptionResult" type="optionVO">
+		<result column="optionNo" property="optionNo" />
+		<result column="name" property="name" />
+		<result column="option_qty" property="option_qty" />
+		<result column="price" property="price" />
+		<result column="goodsNo" property="goodsNo" />
+	</resultMap>
+
+	<insert id="insertNewGoods" parameterType="goodsVO">
+		insert goods
+		(category,name,price,rapping,manufacturer,weight,expDate,type,memberNo,description,img1,img2,img3,img4,img5)
+		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{expDate},#{type},#{memberNo},#{description},#{img1},#{img2},#{img3},#{img4},#{img5})
+	</insert>
+
+
+	<select id="selectNewGoodsNo" resultType="int">
+		select
+		ifnull(max(goodsNo),0)+1 from goods
+	</select>
+
+	<insert id="insertNewGoodsWithMap" parameterType="java.util.Map">
+		insert into
+		goods
+		(category,name,price,rapping,manufacturer,weight,expDate,type,memberNo,description,img1,img2,img3,img4,img5)
+		values(#{category},#{name},#{price},#{rapping},#{manufacturer},#{weight},#{expDate},#{type},#{memberNo},#{description},#{img1},#{img2},#{img3},#{img4},#{img5})
+
+	</insert>
+
+	<insert id="insertOptions" parameterType="java.util.List">
+
+		insert into `option`
+		(optionNo,name,option_qty,price,goodsNo) values
+		(#{optionNo}, #{name},
+		#{option_qty},#{price},#{goodsNo})
+	</insert>
+
+	<select id="selectGoodsList" resultMap="GoodsResult">
+		select * from goods
+		where
+		memberNo =#{memberNo}
+	</select>
+
+
+	<select id="selectNewGoodsList" resultMap="GoodsResult"
+		parameterType="java.util.Map">
+		select * from goods
+		where type = "관리자"
+		order by creDate
+		desc
+		limit #{start}, 10
+
+
+	</select>
+
+	<delete id="deleteAdminGoods" parameterType="int">
+<![CDATA[
+delete from goods
+where 
+goodsNo=#{goodsNo}
+]]>
+	</delete>
+
+
+
+	<select id="selectOptionsBygoodsNo"
+		resultMap="GoodsResult" parameterType="int">
+		select * from goods
+		where goodsNo=#{goodsNo}
+	</select>
+
+	<select id="selectGoodsByGoodsNo" resultType="goodsVO">
+		select * from
+		goods where goodsNo=#{goodsNo}
+	</select>
 
 </mapper>

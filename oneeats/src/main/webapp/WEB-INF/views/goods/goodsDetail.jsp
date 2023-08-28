@@ -171,9 +171,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">판매자</dt>
                             <dd class="property-flex4">
-                              <span class="property-input"
-                                >${goods.sellerName}</span
-                              >
+                              <span class="property-input">원이츠</span>
                             </dd>
                           </dl>
                           <dl class="property-flex2">

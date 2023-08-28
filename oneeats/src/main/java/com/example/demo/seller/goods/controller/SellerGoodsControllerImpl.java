@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.common.alert.Alert;
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.seller.goods.service.SellerGoodsService;
+import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
@@ -38,7 +39,7 @@ import com.example.demo.vo.RecipeVO;
 
 @Controller("sellerGoodsController")
 public class SellerGoodsControllerImpl implements SellerGoodsController {
-	
+
 	@Autowired
 	private SellerGoodsService sellerGoodsService;
 
@@ -51,21 +52,21 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	//상품 목록 
+	// 상품 목록
 	@RequestMapping(value = "/seller/goods/sellerGoodsList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView sellerGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		
+
 		String _pageNum = request.getParameter("pageNum");
 		String _section = request.getParameter("section");
 		int pageNum;
 		int section;
-		if(_pageNum == null || _pageNum.length()<=0) {
-			pageNum=1;
-		}else {
+		if (_pageNum == null || _pageNum.length() <= 0) {
+			pageNum = 1;
+		} else {
 			pageNum = Integer.parseInt(_pageNum);
 		}
 		if (_section == null || _section.length() <= 0) {
@@ -73,40 +74,38 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		} else {
 			section = Integer.parseInt(_section);
 		}
-		Map pagingMap= new HashMap();
+		Map pagingMap = new HashMap();
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("section", section);
-		pagingMap.put("start",((section - 1) * 10 + pageNum -1)*10);
-		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList(pagingMap);		
+		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList(pagingMap);
 		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
-		
+
 		mav.addObject("goodsList", goodsList);
-		mav.addObject("newGoodsList",newGoodsList);
+		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
 		System.out.println(mav);
-		System.out.println("newGoodsList:"+newGoodsList);
+		System.out.println("newGoodsList:" + newGoodsList);
+		System.out.println("goodsList:" + goodsList);
 		return mav;
 	}
-	
 
 	@RequestMapping(value = "/seller/goods/sellerModForm.do")
 	public ModelAndView sellerModForm(HttpServletRequest request) {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		
+
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
-	
-		
+
 		System.out.println(mav);
 		return mav;
 	}
 
-	//상품 등록
+	// 상품 등록
 	@Override
 	@RequestMapping(value = "/seller/goods/addSellerGoods.do", method = RequestMethod.POST)
-	public ModelAndView addGoods(MultipartHttpServletRequest request
-			) throws IOException {
+	public ModelAndView addGoods(MultipartHttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		int newGoodsNo = sellerGoodsService.selectNewGoodsNo();
 		List fileList = GeneralFileUploader.upload(request, "/goods/" + newGoodsNo);
@@ -117,9 +116,9 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		Map map = GeneralFileUploader.getParameterMap(request);
 		map.put("goodsNo", newGoodsNo);
 		for (int i = 0; i < fileList.size(); i++) {
-			map.put("img"+(i+1), fileList.get(i));
+			map.put("img" + (i + 1), fileList.get(i));
 		}
-		System.out.println("map : "+map);
+		System.out.println("map : " + map);
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
@@ -130,21 +129,19 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		}
 		System.out.println(map.get("memberNo"));
 		boolean result1 = sellerGoodsService.addGoods(map);
-		
 
-		
 		// 옵션정보 가져와서 각각의 VO에 저장
 		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX
 		String[] optionQtys = request.getParameterValues("option_qty");
 		String[] optionPrice = request.getParameterValues("option_price");
-		
+
 		OptionVO[] options = new OptionVO[5];
 		for (int i = 0; i < options.length; i++) {
 			OptionVO optionVO = new OptionVO();
 			options[i] = optionVO;
-			
+
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
 		for (int i = 0; i < optionNames.length; i++) {
 			if (optionNames[i] != null) {
@@ -160,140 +157,184 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 					mav.setViewName("/alert");
 					break;
 				}
-	
+
 			} else {
 				System.out.println("상품 등록 실패");
 				break;
 			}
 
 		}
-		
+
 		System.out.println("상품 등록 성공");
-		mav = Alert.alertAndRedirect("상품을 등록했습니다.", request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + newGoodsNo);
+		mav = Alert.alertAndRedirect("상품을 등록했습니다.",
+				request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + newGoodsNo);
 		return mav;
 	}
 
 	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
 
 	/*
-	@Override
-	@RequestMapping(value="/seller/goods/modSellerGoods.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
-		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환
-		
-		// goodsNo을 보내서 goodsVO 정보 가져오기
-		GoodsVO goodsVO = sellerGoodsService.selectGoodsVO(goodsNo); 
-		System.out.println("goodsVO = " +goodsVO);
-		
-		List<OptionVO> option =  (List<OptionVO>) sellerGoodsService.selectOptionVO(goodsNo);
-		System.out.println(option);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("option",option);
-		mav.addObject("goods",goodsVO);
-		mav.setViewName("/seller/goods/sellerGoodsModForm");
-		
-		return mav;
-	}
-	*/
-	
-	@Override
-	@RequestMapping(value="/seller/goods/modSellerGoods.do", method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
-		int goodsNo = Integer.parseInt(goodsNo1);          // int로 형 변환
-		
-		// goodsNo을 보내서 goodsVO 정보 가져오기
-		GoodsVO goodsVO = sellerGoodsService.selectGoodsVO(goodsNo); 
-		System.out.println("goodsVO = " +goodsVO);
-		
-		List<OptionVO> option =  (List<OptionVO>) sellerGoodsService.selectOptionVO(goodsNo);
-		System.out.println(option);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("option",option);
-		mav.addObject("goods",goodsVO);
-		mav.setViewName("/seller/goods/sellerGoodsModForm");
-		
-		return mav;
-	}
-	
-	
-	
-	
-	
+	 * @Override
+	 * 
+	 * @RequestMapping(value="/seller/goods/modSellerGoods.do", method=
+	 * {RequestMethod.GET, RequestMethod.POST}) public ModelAndView
+	 * modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response)
+	 * throws IOException{ String goodsNo1 = request.getParameter("goodsNo"); // 경로와
+	 * 같이 던져준 goodsNo 가져오기 int goodsNo = Integer.parseInt(goodsNo1); // int로 형 변환
+	 * 
+	 * // goodsNo을 보내서 goodsVO 정보 가져오기 GoodsVO goodsVO =
+	 * sellerGoodsService.selectGoodsVO(goodsNo); System.out.println("goodsVO = "
+	 * +goodsVO);
+	 * 
+	 * List<OptionVO> option = (List<OptionVO>)
+	 * sellerGoodsService.selectOptionVO(goodsNo); System.out.println(option);
+	 * ModelAndView mav = new ModelAndView(); mav.addObject("option",option);
+	 * mav.addObject("goods",goodsVO);
+	 * mav.setViewName("/seller/goods/sellerGoodsModForm");
+	 * 
+	 * return mav; }
+	 */
 
+	@Override
+	@RequestMapping(value = "/seller/goods/modSellerGoodsForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		System.out.println("modSellerGoodsForm Controller");
+		String goodsNo1 = request.getParameter("goodsNo"); // 경로와 같이 던져준 goodsNo 가져오기
+		int goodsNo = Integer.parseInt(goodsNo1); // int로 형 변환
+
+		// goodsNo을 보내서 goodsVO 정보 가져오기
+		GoodsVO goodsVO = sellerGoodsService.selectGoodsVO(goodsNo);
+		System.out.println("goodsVO = " + goodsVO);
+
+		List<OptionVO> option = (List<OptionVO>) sellerGoodsService.selectOptionVO(goodsNo);
+		System.out.println(option);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("option", option);
+		mav.addObject("goods", goodsVO);
+		mav.setViewName("/seller/goods/sellerGoodsModForm");
+
+		return mav;
+	}
+
+	//북샵
+	/*
+			@Override
+			@RequestMapping(value="/seller/goods/modSellerGoods.do", method = { RequestMethod.GET, RequestMethod.POST })
+			public ResponseEntity modifyGoodsInfo( @RequestParam("goodsNo") String goodsNo,
+					                     @RequestParam("attribute") String attribute,
+					                     @RequestParam("value") String value,
+					HttpServletRequest request, HttpServletResponse response)  throws Exception {
+				Map<String,String> goodsMap=new HashMap<String,String>();
+				goodsMap.put("goodsNo", goodsNo);
+				System.out.println("나오나요0");
+				
+				
+				goodsMap.put(attribute, value);
+				
+				
+				
+				sellerGoodsService.modifyGoodsInfo(goodsMap);
+				System.out.println("나오나요1");
+				String message = null;
+				ResponseEntity resEntity = null;
+				System.out.println("나오나요2");
+				HttpHeaders responseHeaders = new HttpHeaders();
+				message  = "mod_success";
+				
+				System.out.println("나오나요3");
+				resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+				return resEntity;
+			}
+			
+		*/	
+	//북샵
+			
 	
 	
-	
-	/*@Override
-	@RequestMapping(value="/seller/goods/modSellerGoods.do",method = RequestMethod.GET)
-	public ModelAndView modSellerGoods(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		System.out.println("여기는 modSellerGoods");
-		
+	/*
+	@Override
+
+	@RequestMapping(value = "/seller/goods/modSellerGoods.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView modSellerGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
 		request.setCharacterEncoding("utf-8");
-		String goodsNo1 = request.getParameter("goodsNo");
-		int goodsNo = Integer.parseInt(goodsNo1);
+		int goodsNo = (Integer.parseInt(request.getParameter("goodsNo")));
+		
+		GoodsVO goodsvo = sellerGoodsService.goodsItem(goodsNo);
+		System.out.println("goodsvo:"+goodsvo);
+		
+		
+		
+		sellerGoodsService.ModGoods(goodsvo);
+		System.out.println("ModGoods:"+goodsvo);
+		
+		sellerGoodsService.DeleteGoods(goodsvo);
+		System.out.println("DeleteGoods:"+goodsvo);
 
-		boolean result1 = sellerGoodsService.ModGoods(goodsNo); // addGodds 수정하기
-		
-		
+
 		// 옵션정보 가져와서 각각의 VO에 저장
-		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX
+		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX String[]
+		System.out.println("optionNames: "+optionNames);//null
+		
+		
 		String[] optionQtys = request.getParameterValues("option_qty");
 		String[] optionPrice = request.getParameterValues("option_price");
-
 		OptionVO[] options = new OptionVO[5];
 		for (int i = 0; i < options.length; i++) {
 			OptionVO optionVO = new OptionVO();
 			options[i] = optionVO;
-			
+
 		}
+
 		
 		ModelAndView mav = new ModelAndView();
 		for (int i = 0; i < optionNames.length; i++) {
 			if (optionNames[i] != null) {
 				options[i].setName(optionNames[i]);
+				
+				
+				
 				options[i].setOption_qty(optionQtys[i]);
 				options[i].setPrice(optionPrice[i]);
 				options[i].setGoodsNo(goodsNo);
 				System.out.println(options[i]);
 				boolean result = sellerGoodsService.optionModGoods(options[i]);
 				if (!result) {
-					mav.addObject("redirectMessage", "상품 등록에 실패했습니다.");
+					mav.addObject("redirectMessage", "상품 수정에 실패했습니다.");
 					mav.addObject("redirectPage", request.getContextPath() + "/seller/goods/sellerGoodsForm.do");
 					mav.setViewName("/alert");
 					break;
 				}
-	
+
 			} else {
-				System.out.println("상품 등록 실패");
+				System.out.println("상품 수정 실패");
 				break;
 			}
 
 		}
-		
-		System.out.println("상품 등록 성공");
-		mav = Alert.alertAndRedirect("상품을 등록했습니다.", request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + goodsNo);
+		mav.addObject("goodsvo",goodsvo);
+		System.out.println("상품 수정 성공");
+		mav = Alert.alertAndRedirect("상품을 수정했습니다.",
+				request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + goodsNo);
 		return mav;
-	}*/
-	
+	}
 
-	
+
+
+*/
 	
 	
 //리스트 삭제
 	@Override
-	@RequestMapping(value="/seller/goods/deleteSellerGoods.do",method = RequestMethod.GET)
-	public ModelAndView deleteSellerGoods(@RequestParam("goodsNo") int goodsNo, 
-			           HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/seller/goods/deleteSellerGoods.do", method = RequestMethod.GET)
+	public ModelAndView deleteSellerGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		sellerGoodsService.deleteSellerGoods(goodsNo);
 		ModelAndView mav = new ModelAndView("redirect:/seller/goods/sellerGoodsList.do");
 		return mav;
 	}
 
-	
-
-	
 
 }
