@@ -10,6 +10,7 @@ import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.ReviewVO;
 public interface MypageService {
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	
@@ -33,10 +34,14 @@ public interface MypageService {
 	
 	public List selectBookList(MemberVO memberInfo) throws DataAccessException;
 	
-	public int removeBookMark(String id) throws DataAccessException;
+	public int removeBookMark(int goodsNo) throws DataAccessException;
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
 
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
+	
+	public void updateMember(MemberVO memberVO) throws DataAccessException;
+	
+	public List<ReviewVO> reviewList(int memberNo) throws DataAccessException;
 	
 }

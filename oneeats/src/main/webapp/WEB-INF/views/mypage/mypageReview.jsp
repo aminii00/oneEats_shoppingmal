@@ -12,71 +12,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-       .css-select {
-    flex: 1 1 0%;
-    font-weight: 500;
-    color: rgb(51, 51, 51);
-    line-height: 1.36;
-    display: -webkit-box;
-    overflow: hidden;
-    word-break: break-all;
-    white-space: normal;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
+   
 
-.css-address {
-    flex: 1 1 0%;
-    font-weight: 500;
-    color: rgb(51, 51, 51);
-    line-height: 1.36;
-    display: -webkit-box;
-    overflow: hidden;
-    word-break: break-all;
-    white-space: normal;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}
-
-.css-1ccl3pq {
-    display: flex;
-    padding-top: 6px;
-    flex-direction: row;
-    color: rgb(0, 0, 0);
-    line-height: 20px;
-}
-
-.css-1fttcpj {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-}
-.div-p {
-    padding: 0 12px;
-}
-      
-.btn-coupon{
-    width: 210px;
-    height: 38px;
-}
-
-.btn-couponsubmit{
-    width: 70px;
-    height: 38px;
-}
-
-ul {
-    list-style:none;
-}
- 
-li {
-    float: left;
-    margin-right: 53px;
-}
 
 .point{
     text-align: center;
@@ -131,16 +68,13 @@ table {
                 <hr class= "linebold">
                 <br>
                 <table style="width: 641px; height: 110px;">
+                    <c:forEach var="item" items="${reviewList}" varStatus="status">
                     <tr style="border-bottom: 1px solid lightgray;">
                         <td><img class ="reviewImage" src= "${contextPath}/img/product/review/noImage.jpg" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
-                        <td class = "textsize-2 textbold" >못난이 복숭아 총 수량 3개<br>2023.08.01 배송완료</td>
+                        <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} 배송완료</td>
                         <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br><button class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">리뷰작성</button></td>
                     </tr>
-                    <tr>
-                        <td><img class ="reviewImage" src= "${contextPath}/img/product/review/noImage.jpg" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
-                        <td class = "textsize-2 textbold" >못난이 복숭아 총 수량 3개<br>2023.08.01 배송완료</td>
-                        <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br><button class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">리뷰작성</button></td>
-                    </tr>
+                </c:forEach>
                 </table>
 
                 <br><br>

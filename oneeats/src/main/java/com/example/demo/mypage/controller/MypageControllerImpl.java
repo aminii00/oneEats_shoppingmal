@@ -15,15 +15,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.mypage.service.MypageService;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.ReviewVO;
 
 @Controller("mypageController")
 public class MypageControllerImpl implements MypageController {
@@ -43,7 +47,7 @@ public class MypageControllerImpl implements MypageController {
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
-			
+
 		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(memberNo);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("orderList", orderList);
@@ -68,20 +72,18 @@ public class MypageControllerImpl implements MypageController {
 
 	@Override
 	@RequestMapping(value = "/mypage/orderConfirm.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	public ModelAndView orderConfirm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderConfirm");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView();
-		
+
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		if(member == null || member.getId().length() < 1) {
+		if (member == null || member.getId().length() < 1) {
 			mav = Alert.alertAndRedirect("로그인이 필요한 페이지입니다.", request.getContextPath() + "/member/loginForm.do");
 			return mav;
 		}
-		
-		
+
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
 
@@ -141,7 +143,7 @@ public class MypageControllerImpl implements MypageController {
 		String point_price = request.getParameter("point_price");
 		String total_price = request.getParameter("total_price");
 		String payment_type = request.getParameter("payment_type");
-		
+
 		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 		List<OrderVO> orderList = new ArrayList();
 		System.out.println("selectGoodsList" + selectGoodsList);
@@ -151,7 +153,7 @@ public class MypageControllerImpl implements MypageController {
 			temp.setOrderer_name(orderer_name);
 			temp.setOrderer_phone(orderer_phone);
 			temp.setReceiver_name(receiver_name);
-			temp.setReceiver_address(receiver_address+"&nbsp"+receiver_addressDetail);
+			temp.setReceiver_address(receiver_address + "&nbsp" + receiver_addressDetail);
 			temp.setReceiver_phone(receiver_phone);
 			temp.setReceiver_comment(receiver_comment);
 			temp.setUsed_point(Integer.parseInt(used_point));
@@ -170,38 +172,38 @@ public class MypageControllerImpl implements MypageController {
 			e.printStackTrace();
 		}
 		session.removeAttribute("cartList");
-		
+
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
-	
-	@RequestMapping(value = "/mypage/orderCancel.do", method = {RequestMethod.GET,RequestMethod.POST})
+
+	@RequestMapping(value = "/mypage/orderCancel.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderCancel(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderCancel");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
-		String viewName = (String)request.getAttribute("viewName");
-		
+		String viewName = (String) request.getAttribute("viewName");
+
 		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
 		List<OrderVO> orderCancel = mypageService.selectOrderByOrderNo(orderNo);
 		orderVO = orderCancel.get(0);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("orderCancel", orderCancel);
 		mav.addObject("order", orderVO);
 		session.setAttribute("orderCancel", orderCancel);
 		return mav;
-	}	
+	}
 
-	@RequestMapping(value = "/mypage/orderCancelResult.do", method = {RequestMethod.GET,RequestMethod.POST})
+	@RequestMapping(value = "/mypage/orderCancelResult.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderCancelResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderCancelResult");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
-		String viewName = (String)request.getAttribute("viewName");
+		String viewName = (String) request.getAttribute("viewName");
 		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
 		String delivery_status = request.getParameter("delivery_status");
 
@@ -209,16 +211,14 @@ public class MypageControllerImpl implements MypageController {
 		for (int order_seqNo : order_seqNos) {
 			mypageService.updateDeliveryStatusToCancel(order_seqNo);
 		}
-		
-		
-		  int firstOrderSeqNo = order_seqNos.length > 0 ? order_seqNos[0] : 0;
-		  mypageService.updateDeliveryStatusToCancel(firstOrderSeqNo);
-		 
-		
+
+		int firstOrderSeqNo = order_seqNos.length > 0 ? order_seqNos[0] : 0;
+		mypageService.updateDeliveryStatusToCancel(firstOrderSeqNo);
+
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
-	
+
 	@Override
 	@RequestMapping(value = "/mypage/myPageMain.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView myPageMain(@RequestParam(required = false, value = "message") String message,
@@ -229,10 +229,10 @@ public class MypageControllerImpl implements MypageController {
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		memberVO = (MemberVO) session.getAttribute("memberInfo");
-		String member_id = "mina";
+		String member_id = memberVO.getId();
 		// String member_id=memberVO.getId();
 		MemberVO myList = mypageService.listMyPage(member_id);
-		System.out.println(myList);
+		System.out.println("myList = " + myList);
 		mav.addObject("myList", myList);
 		mav.setViewName("/mypage/mypageProfileModForm");
 		return mav;
@@ -241,22 +241,32 @@ public class MypageControllerImpl implements MypageController {
 	// 민아 프로필편집 2
 	@Override
 	@RequestMapping(value = "/mypage/mypageintro.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView mypageintro(MultipartHttpServletRequest request) throws Exception {
 		System.out.println("여기는 mypageintro.do");
 		String nickname = request.getParameter("nickname");
 		String intro = request.getParameter("intro");
 		System.out.println(intro);
-		String id = request.getParameter("id");
-		HashMap<String, String> memberMap = new HashMap<String, String>();
+		HttpSession session = request.getSession();
+		session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = memberInfo.getMemberNo();
+		String id = memberInfo.getId();
+		List fileList = GeneralFileUploader.upload(request, "/member/" + memberNo);
+		String profileImg = (String) fileList.get(0);
+		System.out.println("fileList : " + fileList);
+		System.out.println("profileImg : " + profileImg);
 
+		HashMap<String, String> memberMap = new HashMap<String, String>();
+		memberMap.put("profileImg", profileImg);
 		memberMap.put("nickname", nickname);
 		memberMap.put("intro", intro);
-		memberMap.put("id", "mina");
+		memberMap.put("id", id);
+		System.out.println("memberMap = " + memberMap);
 		mypageService.mypageintro(memberMap);
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("memberMap", memberMap);
-		mav.setViewName("/mypage/mypageProfileModForm");
+		mav = Alert.alertAndRedirect("저장되었습니다.", request.getContextPath() + "/mypage/myPageMain.do");
 		return mav;
 
 	}
@@ -286,11 +296,12 @@ public class MypageControllerImpl implements MypageController {
 	// 민아 찜 삭제하기(진행중 ...)
 	@Override
 	@RequestMapping(value = "/mypage/deleteBook.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView deleteBook(@RequestParam("id") String id, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	public ModelAndView deleteBook(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 Controller deleteBook.do");
 		request.setCharacterEncoding("utf-8");
-		mypageService.removeBookMark(id);
+		String goodsNo_ = request.getParameter("goodsNo");
+		int goodsNo = Integer.parseInt(goodsNo_);
+		mypageService.removeBookMark(goodsNo);
 		ModelAndView mav = new ModelAndView("redirect:/mypage/bookmarkList.do");
 		return mav;
 	}
@@ -352,26 +363,65 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName("/mypage/mypageMemberModForm");
 		return mav;
 	}
-	
+
 	// 민아 회원정보수정1
-		@Override
-		@RequestMapping(value = "/mypage/mypageMemberModInfo.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			System.out.println("여기는 Controller myAddress.do");
-			request.setCharacterEncoding("utf-8");
-			HttpSession session = request.getSession();
-			MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
-			String inputPwd = request.getParameter("inputPwd");
-			ModelAndView mav = new ModelAndView();
-			System.out.println(inputPwd +", "+memberInfo.getPwd());
-			if (memberInfo.getPwd().equals(inputPwd)) {
-				mav.addObject("memberInfo", memberInfo);
-				mav.setViewName("/mypage/mypageMemberInfoModForm");
-			}else{
-				mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요", request.getContextPath()+"/member/mypageMemberMod.do");
-			}
-			
-			return mav;
+	@Override
+	@RequestMapping(value = "/mypage/mypageMemberModInfo.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 Controller myAddress.do");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		String inputPwd = request.getParameter("inputPwd");
+		ModelAndView mav = new ModelAndView();
+		System.out.println(inputPwd + ", " + memberInfo.getPwd());
+		if (memberInfo.getPwd().equals(inputPwd)) {
+			mav.addObject("memberInfo", memberInfo);
+			mav.setViewName("/mypage/mypageMemberInfoModForm");
+		} else {
+			mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요",
+					request.getContextPath() + "/member/mypageMemberMod.do");
 		}
+
+		return mav;
+	}
+
+	// 민아 회원정보 수정2
+	@RequestMapping(value = "/mypage/memberInfoMod.do", method = RequestMethod.POST)
+	public ModelAndView memberInfoMod(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("memberVO") MemberVO memberVO) throws Exception {
+		System.out.println("memberInfoMod Controller");
+		ModelAndView mav = new ModelAndView();
+		String sms_agreement = request.getParameter("sms_agreement");
+		String email_agreement = request.getParameter("email_agreement");
+
+		if (email_agreement == null || email_agreement.trim().length() < 1) {
+			memberVO.setEmail_agreement("no");
+		}
+		if (sms_agreement == null || sms_agreement.trim().length() < 1) {
+			memberVO.setSms_agreement("no");
+		}
+		mypageService.updateMember(memberVO);
+		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/member/mypageMemberMod.do");
+		return mav;
+	}
+
+	// 민아 리뷰
+	@RequestMapping(value = "/mypage/mypageReviewList.do",  method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView mypageReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 mypageReview Controller");
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		System.out.println("1");
+		int memberNo = memberInfo.getMemberNo();
+		System.out.println("2");
+		List<ReviewVO> reviewList = mypageService.reviewList(memberNo);
+		System.out.println("3");
+		System.out.println("reviewList = "+reviewList);
+		mav.addObject("reviewList",reviewList);
+		mav.setViewName("/mypage/mypageReview");
+		return mav;
+	}
 
 }

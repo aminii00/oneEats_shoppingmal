@@ -18,10 +18,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         공지사항
         <div style="float: right">
           <select name="category">
-            <option value="">카테고리</option>
-            <option value="">결제</option>
-            <option value="">주문</option>
-            <option value="">이벤트</option>
+            <option value="no">카테고리</option>
+            <option value="결제">결제</option>
+            <option value="주문">주문</option>
+            <option value="이벤트">이벤트</option>
           </select>
         </div>
       </div>
@@ -31,71 +31,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <div class="noticeList_grid textcolor-black text-center">
         <div class="row header-row textbold">
           <div class="col-md-1">번호</div>
-          <div class="col-md-1">카테고리</div>
+          <div class="col-md-2">카테고리</div>
           <div class="col-md">제목</div>
           <div class="col-md-2">작성일</div>
           <div class="col-md-1">수정</div>
           <div class="col-md-1">삭제</div>
-        </div>
-        <hr class="line-black" />
-        <div class="row noticeList-title">
-          <div class="col-md-1">121</div>
-          <div class="col-md-2">결제</div>
-          <div class="col-md text-left">결제실패오류 공지</div>
-          <div class="col-md-2">2023/08/11</div>
-          <div class="col-md-1">
-            <a
-              href="${contextPath}/admin/community/notice/adminNoticeModForm.do?noticeNo=121"
-              >수정</a
-            >
-          </div>
-          <div class="col-md-1">
-            <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/notice/deleteNotice.do?noticeNo=121');"
-              >삭제</a
-            >
-          </div>
-        </div>
-        <hr class="line-gray" />
-
-        <div class="row noticeList-title" onclick="location.href='';">
-          <div class="col-md-1">121</div>
-          <div class="col-md-2">결제</div>
-          <div class="col-md text-left">결제실패오류 공지</div>
-          <div class="col-md-2">2023/08/11</div>
-          <div class="col-md-1">
-            <a
-              href="${contextPath}/admin/community/notice/adminNoticeModForm.do?noticeNo=122"
-              >수정</a
-            >
-          </div>
-          <div class="col-md-1">
-            <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/notice/deleteNotice.do?noticeNo=122');"
-              >삭제</a
-            >
-          </div>
-        </div>
-        <hr class="line-gray" />
-
-        <div class="row noticeList-title">
-          <div class="col-md-1">121</div>
-          <div class="col-md-2">결제</div>
-          <div class="col-md text-left">결제실패오류 공지</div>
-          <div class="col-md-2">2023/08/11</div>
-          <div class="col-md-1">
-            <a
-              href="${contextPath}/admin/community/notice/adminNoticeModForm.do?noticeNo=123"
-              >수정</a
-            >
-          </div>
-          <div class="col-md-1">
-            <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/notice/deleteNotice.do?noticeNo=123');"
-            >
-              삭제
-            </a>
-          </div>
         </div>
 
         <!--공지사항 리스트를 넣을 곳-->
@@ -110,13 +50,13 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 <div class="col-md-2">${notice.creDate}</div>
                 <div class="col-md-1">
                   <a
-                    href="${contextPath}/admin/community/notice/adminNoticeModForm.do?noticeNo=${notice.noticeNo}"
+                    href="${contextPath}/admin/community/notice/adminNoticeMod.do?noticeNo=${notice.noticeNo}"
                     >수정</a
                   >
                 </div>
                 <div class="col-md-1">
                   <a
-                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/notice/deleteNotice.do?noticeNo=${notice.noticeNo}');"
+                    href="${contextPath}/admin/community/notice/admindeleteNotice.do?noticeNo=${notice.noticeNo}"
                   >
                     삭제
                   </a>

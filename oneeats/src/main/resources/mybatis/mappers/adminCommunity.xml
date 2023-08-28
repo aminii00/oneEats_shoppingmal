@@ -9,10 +9,54 @@
 	    <result property="recipeNO" column="recipeNO" />
 	</resultMap>
 	
+	<resultMap id="noticeResult" type="noticeVO">
+		<result property="noticeNo" column="noticeNo" />
+		<result property="category" column="category" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+	</resultMap>
+	
 	<select id="sellectAllRecipe" resultMap="recipeResult" parameterType="recipeVO" >
 	    <![CDATA[
-			sellect * from recipe
+			select * from recipe
 		]]>
 	</select>
 	
+	<update id="adminNotideDetailupdate" parameterType="noticeVO">
+		update notice set category = #{category}, title = #{title}, content = #{content}
+		where
+		noticeNo=#{noticeNo}
+	</update>
+	
+	<select id="adminNoticeList" resultMap="noticeResult"
+		parameterType="String">
+		select * from notice
+	</select>
+	
+	<select id="adminNoticeDetail" resultMap="noticeResult">
+	    <![CDATA[
+			select * from notice 
+			where
+			noticeNo=#{noticeNo}
+		]]>
+	</select>
+	
+	<select id="newNum" resultType="int">
+		<![CDATA[
+			select ifnull(max(noticeNo),0)+1 from notice
+		]]>
+	</select>
+	
+	<insert id="addNotice" parameterType="noticeVO">
+		<![CDATA[
+		insert into notice(noticeNo,title, category, content)
+		values
+		(#{noticeNo}, #{title}, #{category}, #{content})
+		]]>
+	</insert>
+	
+	<delete id="deleteNotice" parameterType="int">
+	delete from notice where noticeNo=#{noticeNo}
+	</delete>
 </mapper>

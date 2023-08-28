@@ -39,7 +39,6 @@
 	</select>
 
 
-
 	<select id="selectRecipeList" resultMap="recipeResult"
 		parameterType="java.util.Map">
 		select * from recipe
@@ -164,7 +163,8 @@
 		inbun = #{inbun}
 		where recipeNo = #{recipeNo}
 	</update>
-
+	
+	
 	<delete id="deleteIngredientsByRecipeNo" parameterType="int">
 		delete
 		from ingredient where recipeNo = #{recipeNo}

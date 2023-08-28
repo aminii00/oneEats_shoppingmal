@@ -12,6 +12,17 @@
 <head>
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
+<script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+              $('#preview').attr('src', e.target.result);
+          }
+          reader.readAsDataURL(input.files[0]);
+      }
+  }  
+</script>
 <title>프로필 편집</title>
 <style>
 
@@ -21,7 +32,7 @@
 
 </head>
 <body>
-    <form action="${contextPath}/mypage/mypageintro.do" method="post">
+    <form action="${contextPath}/mypage/mypageintro.do" method="post" enctype="multipart/form-data">
     <div class="content-area">
         <div class="profile-edit-box">
             <div class="profile-edit-header">
@@ -36,10 +47,12 @@
                     <c:choose>
 				<c:when test="${myList.profileImg==null}">
 					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2">
+                    <input type="file" name="profileImg"><br>
                     
 				</c:when>
 				<c:otherwise>
-                    <img class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=prop" alt="">
+                    <img class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=member/${myList.memberNo}" alt="프로필사진">
+                    <input type="file" name="profileImg" ><br>
 				</c:otherwise>
 			</c:choose>
         </div>
