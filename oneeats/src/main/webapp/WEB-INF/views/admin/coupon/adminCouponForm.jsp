@@ -15,7 +15,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 쿠폰등록 -->
-    <form method="post" action="#{contextPath}/admin/coupon/adminAddCoupon.do">
+    <form method="post" action="${contextPath}/admin/coupon/adminAddCoupon.do">
       <div class="div-p2">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           쿠폰등록
@@ -54,21 +54,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </select>
           </td>
         </tr>
-        <!-- <tr>
+        <tr>
           <th>사용처</th>
           <td>
-            <input
-              type="text"
-              name="seller_memberNo"
-              placeholder="사용처를 입력하세요"
-            />
+            <input type="text" name="adminName" value="${memberInfo.name}" />
           </td>
-        </tr> -->
+        </tr>
         <tr>
           <th>유효기간</th>
           <td>
             <input
-              type="text"
+              type="date"
               name="expDate"
               placeholder="유효기간을 입력하세요"
             />

@@ -29,7 +29,7 @@ public class SellerOrderControllerImpl implements SellerOrderController{
 		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
 			
-		List<OrderVO> sellerOrderList = sellerOrderService.selectOrderList();
+		List<OrderVO> sellerOrderList = sellerOrderService.selectOrderByMemberType();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("sellerOrderList", sellerOrderList);
 		System.out.println(mav);

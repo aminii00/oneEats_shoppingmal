@@ -12,4 +12,6 @@ public interface SellerOrderService {
 
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
+	List<OrderVO> selectOrderByMemberType();
+
 }

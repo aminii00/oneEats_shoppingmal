@@ -5,6 +5,38 @@
 	
 <mapper namespace="com.example.demo.seller.coupon.dao.SellerCouponDAO">
 	
+	<resultMap id="CouponResult" type="couponVO">
+		<result property="couponNo" column="couponNo" />
+		<result property="name" column="name" />
+		<result property="discount_price" column="discount_price" />
+		<result property="condition" column="condition" />
+		<result property="expDate" column="expDate" />
+		<result property="creDate" column="creDate" />
+		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
+	</resultMap>
 	
+	<select id="selectSellerCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
+		<![CDATA[
+			select coupon.*, member.Name as memberName from coupon 
+			inner join member on coupon.memberNo=member.memberNo 
+			where coupon.memberNo=#{memberNo}
+		]]>
+	</select>
+	
+	<insert id="insertSellerCoupon" parameterType="CouponVO">
+		<![CDATA[
+			insert into coupon (name, discount_price, `condition`, expDate, memberNo) 
+			values (#{name}, #{discount_price}, #{condition}, #{expDate}, #{memberNo});
+		]]>
+	</insert>
+	
+	<delete id="deleteSellerCoupon" parameterType="int">
+		<![CDATA[
+			delete from coupon
+			where 
+			couponNo=#{couponNo}
+		]]>
+	</delete>
 	
 </mapper>

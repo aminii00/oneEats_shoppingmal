@@ -36,6 +36,7 @@
 		<result property="shippingFee" column="shippingFee" />
 		<result property="optionNo" column="optionNo" />
 		<result property="orderer_id" column="orderer_id" />
+		<result property="memberType" column="memberType" />
 	</resultMap>
 	
 	<select id="selectOrderList" resultMap="OrderResult">
@@ -46,6 +47,12 @@
 			on orderplusgoods.orderNo=orderGun.orderNo order by orderplusgoods.orderNo) a inner join
             (select t_order.*,member.id as orderer_id from t_order inner join member on t_order.memberNo=member.memberNo) b 
             on a.order_seqNo=b.order_seqNo order by a.orderNo;
+		]]>
+	</select>
+	
+	<select id="selectOrderByMemberType" resultMap="OrderResult">
+		<![CDATA[
+			select * from order_by_membertype where memberType='사업자'
 		]]>
 	</select>
 	

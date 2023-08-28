@@ -28,6 +28,11 @@ public class SellerOrderServiceImpl implements SellerOrderService{
 		sellerOrderDAO.updateDeliveryStatusToCancel(order_seqNo);
 		
 	}
+
+	@Override
+	public List<OrderVO> selectOrderByMemberType() {
+		return sellerOrderDAO.selectOrderByMemberType();
+	}
 	
 	
 

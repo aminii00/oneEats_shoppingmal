@@ -13,20 +13,30 @@
 		<result property="expDate" column="expDate" />
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
 	</resultMap>
 	
-	<select id="adminCouponByMemberNo" resultMap="CouponResult" parameterType="int">
+	<select id="selectAdminCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
 		<![CDATA[
-			select * from coupon where memberNo=#{memberNo};
+			select coupon.*, member.Name as memberName from coupon 
+			inner join member on coupon.memberNo=member.memberNo 
+			where coupon.memberNo=#{memberNo}
 		]]>
 	</select>
 	
 	<insert id="insertAdminCoupon" parameterType="CouponVO">
 		<![CDATA[
-			insert into coupon (name, discount_price, condition, expDate, memberNo)
-	     	values
-	     	(#{name}, #{discount_price}, #{condition}, {expDate}, #{memberNo})
+			insert into coupon (name, discount_price, `condition`, expDate, memberNo) 
+			values (#{name}, #{discount_price}, #{condition}, #{expDate}, #{memberNo});
 		]]>
 	</insert>
+	
+	<delete id="deleteAdminCoupon" parameterType="int">
+		<![CDATA[
+			delete from coupon
+			where 
+			couponNo=#{couponNo}
+		]]>
+	</delete>
 
 </mapper>

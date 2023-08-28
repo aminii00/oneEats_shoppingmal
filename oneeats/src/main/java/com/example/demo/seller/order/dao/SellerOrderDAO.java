@@ -17,4 +17,6 @@ public interface SellerOrderDAO {
 
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
+	List<OrderVO> selectOrderByMemberType();
+
 }
