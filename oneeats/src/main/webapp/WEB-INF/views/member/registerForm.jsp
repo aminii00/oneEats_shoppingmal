@@ -86,6 +86,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
       function fn_phone_inzung() {
         var inzung_bunho = $("#inzung").val();
+
         $.ajax({
           type: "post",
           async: true,
@@ -118,11 +119,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       function fn_open_inzung_row() {
         var phone_text = $("input[name=phone]").val();
         var regex = /[^a-zA-Z0-9]/;
+        phone_text = phone_text.replace(/-/g, "");
 
         if (phone_text.length < 8 || regex.test(phone_text)) {
           alert("휴대폰 번호를 입력해주세요");
           $("input[name=phone]").focus();
         } else {
+          $("input[name=phone]").val(phone_text);
           $(".inzung_row").show();
         }
       }
@@ -240,6 +243,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           var puttedText = $(this).val();
           if (puttedText.length < 1) {
             changeMessage("name", "이름을 입력해주세요", "red");
+          } else {
+            changeMessage("name", "", "blue");
           }
         });
 

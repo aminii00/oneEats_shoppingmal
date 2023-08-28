@@ -1,5 +1,7 @@
 package com.example.demo.member.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -254,6 +257,31 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("redirect:/member/sellerRegisterLastForm.do");
 		return mav;
+	}
+	
+	
+
+	@ResponseBody
+	@RequestMapping("/checkDuplicatedId.do")
+	public String checkDuplicatedId(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String id = request.getParameter("id");
+		String result = "fail";
+		
+		MemberVO checkMem = memberService.selectMemberById(id);
+		System.out.println("checkMem : " + checkMem);
+		if (checkMem==null) {
+			result = "success";
+		}
+		return result;
+	} 
+	
+	@ResponseBody
+	@RequestMapping("/phoneInzung.do")
+	public String phoneInzung(HttpServletRequest request) {
+		String result = "success";
+		
+		return result;
 	}
 
 }

@@ -297,19 +297,4 @@ public class MainControllerImpl implements MainController {
 	}
 	
 	
-	@ResponseBody
-	@RequestMapping("/checkDuplicatedId.do")
-	public String checkDuplicatedId(HttpServletRequest request) {
-		String result = "success";
-		
-		return result;
-	} 
-	
-	@ResponseBody
-	@RequestMapping("/phoneInzung.do")
-	public String phoneInzung(HttpServletRequest request) {
-		String result = "success";
-		
-		return result;
-	}
 }
