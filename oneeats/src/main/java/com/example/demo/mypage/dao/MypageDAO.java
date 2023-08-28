@@ -16,6 +16,7 @@ import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.ReviewVO;
 
 @Mapper
 @Repository("mypageDAO")
@@ -44,7 +45,7 @@ public interface MypageDAO {
 	public List selectBookList(MemberVO memberInfo) throws DataAccessException;
 	
 	//민아 찜 삭제
-	public int deleteBookMark(String id) throws DataAccessException;
+	public int deleteBookMark(int goodsNo) throws DataAccessException;
 	
 	//민아 쿠폰
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
@@ -53,6 +54,11 @@ public interface MypageDAO {
 
 	//민아 배송지관리 - 출력
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
+	
+	//민아 회원정보 수정
+	public void updateMemberInfo(MemberVO memberVO) throws DataAccessException;
+	
+	public List<ReviewVO> reviewList(int memberNo) throws DataAccessException;
 
 	
 }

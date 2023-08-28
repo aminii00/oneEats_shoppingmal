@@ -1,5 +1,7 @@
 package com.example.demo.vo;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 
 @Component("reviewVO")
@@ -10,13 +12,17 @@ public class ReviewVO {
 	private String content;
 	private int goodsNo;
 	private int memberNo;
+	private int goods_qty;
+	private Date deliveryDate;
+	private String goodsName;
 	
 	
 	
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewNo=" + reviewNo + ", star=" + star + ", reviewImg=" + reviewImg + ", content=" + content
-				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + "]";
+				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + ", goods_qty=" + goods_qty + ", deliveryDate="
+				+ deliveryDate + ", goodsName=" + goodsName + "]";
 	}
 	public int getGoodsNo() {
 		return goodsNo;
@@ -53,6 +59,24 @@ public class ReviewVO {
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public int getGoods_qty() {
+		return goods_qty;
+	}
+	public void setGoods_qty(int goods_qty) {
+		this.goods_qty = goods_qty;
+	}
+	public Date getDeliveryDate() {
+		return deliveryDate;
+	}
+	public void setDeliveryDate(Date deliveryDate) {
+		this.deliveryDate = deliveryDate;
+	}
+	public String getGoodsName() {
+		return goodsName;
+	}
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
 	
 	

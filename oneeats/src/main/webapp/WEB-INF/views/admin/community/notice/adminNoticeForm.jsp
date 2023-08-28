@@ -15,7 +15,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <section>
       <div class="textsize-3 text-left textbold textcolor-black">공지사항</div>
       <hr class="line-black" />
-      <form action="" method="post">
+      <form
+        action="${contextPath}/admin/community/notice/adminNoticeAddList.do"
+        method="post"
+      >
         <div class="noticeForm_grid">
           <div class="row noticeForm_title">
             <div class="col textcolor-black textbold text-left textsize-3">
@@ -37,9 +40,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </div>
             <div class="col-md">
               <select name="category" id="">
-                <option value="">결제</option>
-                <option value="">배송</option>
-                <option value="">주문</option>
+                <option value="결제">결제</option>
+                <option value="배송">배송</option>
+                <option value="주문">주문</option>
               </select>
             </div>
           </div>
@@ -69,7 +72,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 취소
               </button>
               &nbsp;
-              <button class="btn-write" onclick="" type="submit">작성</button>
+              <button class="btn-write" type="submit">작성</button>
             </div>
           </div>
         </div>

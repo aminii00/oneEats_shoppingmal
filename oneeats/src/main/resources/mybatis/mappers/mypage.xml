@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.example.demo.mypage.dao.MypageDAO">
 	<resultMap id="OrderResult" type="orderVO">
 		<result property="order_seqNo" column="order_seqNo" />
@@ -27,7 +27,7 @@
 		<result property="goods_qty" column="goods_qty" />
 		<result property="goods_inbun" column="goods_inbun" />
 		<result property="memberNo" column="memberNo" />
-		<result property="goodsNo" column="goodsNo" />		
+		<result property="goodsNo" column="goodsNo" />
 		<result property="goodsName" column="goodsName" />
 		<result property="goodsImg" column="goodsImg" />
 		<result property="weight" column="weight" />
@@ -35,8 +35,8 @@
 		<result property="shippingFee" column="shippingFee" />
 		<result property="optionNo" column="optionNo" />
 	</resultMap>
-	
-  	<resultMap id="MemberResult" type="memberVO">
+
+	<resultMap id="MemberResult" type="memberVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="type" column="type" />
 		<result property="id" column="id" />
@@ -57,16 +57,16 @@
 		<result property="intro" column="intro" />
 		<result property="profileImg" column="profileImg" />
 		<result property="point" column="point" />
-	</resultMap> 
-  
- 	<resultMap id="BookResult" type="bookmarkVO">
+	</resultMap>
+
+	<resultMap id="BookResult" type="bookmarkVO">
 		<result property="memberNo" column="memberNo" />
 		<result property="goodsNo" column="goodsNo" />
 		<result property="img1" column="img1" />
 		<result property="name" column="name" />
 		<result property="price" column="price" />
-	</resultMap> 
-	
+	</resultMap>
+
 	<resultMap id="CouponResult" type="couponVO">
 		<result property="couponNo" column="couponNo" />
 		<result property="name" column="name" />
@@ -75,8 +75,8 @@
 		<result property="expDate" column="expDate" />
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
-	</resultMap> 
-	
+	</resultMap>
+
 	<resultMap id="DeliveryResult" type="deliveryAddressVO">
 		<result property="receiver_name" column="receiver_name" />
 		<result property="receiver_phone" column="receiver_phone" />
@@ -84,8 +84,20 @@
 		<result property="address" column="address" />
 		<result property="address_detail" column="address_detail" />
 		<result property="memberNo" column="memberNo" />
-	</resultMap> 
-	
+	</resultMap>
+
+	<resultMap id="ReviewResult" type="reviewVO">
+		<result property="reviewNo" column="reviewNo" />
+		<result property="star" column="star" />
+		<result property="reviewImg" column="reviewImg" />
+		<result property="content" column="content" />
+		<result property="goodsNo" column="goodsNo" />
+		<result property="memberNo" column="memberNo" />
+		<result property="goods_qty" column="goods_qty" />
+		<result property="deliveryDate" column="deliveryDate" />
+		<result property="goodsName" column="goodsName" />
+	</resultMap>
+
 	<select id="selectOrderList" resultMap="OrderResult">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
@@ -95,8 +107,9 @@
     		order by orderplusgoods.orderNo 
 		]]>
 	</select>
-	
-	<select id="selectOrderByMemberNo" resultMap="OrderResult" parameterType="int">
+
+	<select id="selectOrderByMemberNo" resultMap="OrderResult"
+		parameterType="int">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
 			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo WHERE t_order.memberNo=#{memberNo}) 
@@ -106,45 +119,59 @@
 		]]>
 	</select>
 
-	<select id="selectOrderByOrderNo" resultMap="OrderResult"  parameterType="int">
+	<select id="selectOrderByOrderNo" resultMap="OrderResult"
+		parameterType="int">
 		<![CDATA[
 			select t_order.*, goodsAndHotdealView.name as goodsName, goodsAndHotdealView.img1 as goodsImg, goodsAndHotdealView.price as goodsPrice, goodsAndHotdealView.weight as weight from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
 			where t_order.orderNo=#{orderNo}
 		]]>
 	</select>
-	
-	<select id="selectCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
+
+	<select id="selectCouponByMemberNo" resultMap="CouponResult"
+		parameterType="int">
 		<![CDATA[
 			select * from coupon where memberNo=#{memberNo}
 		]]>
 	</select>
-	
+
 	<insert id="insertOrderList" parameterType="java.util.List">
-  			insert into t_order (orderNo, orderer_name, orderer_phone, receiver_name, receiver_address, receiver_phone, receiver_comment, 
-  								used_point, used_couponId, payment_price, discount_price, shippingfee, point_price, total_price, 
-  								payment_type, goods_qty, goods_inbun, memberNo, goodsNo, optionNo)
-  			
-  			values
-  			
-  			<foreach collection="list" item="item" separator=",">
-	    		(#{item.orderNo}, #{item.orderer_name}, #{item.orderer_phone}, #{item.receiver_name}, #{item.receiver_address}, #{item.receiver_phone}, #{item.receiver_comment},
-	    		#{item.used_point}, #{item.used_couponId}, #{item.payment_price}, #{item.discount_price}, #{item.shippingfee}, #{item.point_price},	#{item.total_price}, 
-	    		#{item.payment_type}, #{item.goods_qty}, #{item.goods_inbun}, #{item.memberNo}, #{item.goodsNo}, #{item.optionNo})
-  			</foreach>	
+		insert into t_order (orderNo, orderer_name, orderer_phone,
+		receiver_name, receiver_address, receiver_phone, receiver_comment,
+		used_point, used_couponId, payment_price, discount_price, shippingfee,
+		point_price, total_price,
+		payment_type, goods_qty, goods_inbun,
+		memberNo, goodsNo, optionNo)
+
+		values
+
+		<foreach collection="list" item="item" separator=",">
+			(#{item.orderNo}, #{item.orderer_name}, #{item.orderer_phone},
+			#{item.receiver_name}, #{item.receiver_address},
+			#{item.receiver_phone}, #{item.receiver_comment},
+			#{item.used_point},
+			#{item.used_couponId}, #{item.payment_price},
+			#{item.discount_price},
+			#{item.shippingfee}, #{item.point_price},
+			#{item.total_price},
+			#{item.payment_type}, #{item.goods_qty}, #{item.goods_inbun},
+			#{item.memberNo},
+			#{item.goodsNo}, #{item.optionNo})
+		</foreach>
 	</insert>
-	
-	<select id="selectNewOrderNo" resultType="int" >
+
+	<select id="selectNewOrderNo" resultType="int">
 		<![CDATA[
 			select ifnull(max(orderNo),0)+1 from t_order
 		]]>
 	</select>
-	
-	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
+
+	<select id="selectSeqNoByOrderNo" resultType="int"
+		parameterType="int">
 		<![CDATA[
 			select order_seqNo from t_order where orderNo=#{orderNo};
 		]]>
 	</select>
-	
+
 	<update id="updateDeliveryStatusToCancel" parameterType="int">
 		<![CDATA[
 			update t_order
@@ -152,22 +179,33 @@
 	     	where order_seqNo=#{order_seqNo}
 		]]>
 	</update>
-	
-	 <select id="selectMypageList" resultType="memberVO"  parameterType="String"  >
+
+	<update id="updateMemberInfo" parameterType="memberVO">
+		<![CDATA[
+			  update member set
+			  pwd=#{pwd}, name=#{name}, birth=#{birth}, gender=#{gender}, phone=#{phone}, sms_agreement=#{sms_agreement}, email_agreement=#{email_agreement}
+			  where id=#{id}
+		]]>
+	</update>
+
+	<select id="selectMypageList" resultType="memberVO"
+		parameterType="String">
 	    <![CDATA[
 			select * from member
             where id=#{member_id}
 		]]>
 	</select>
-	
-	<update id="mypageintroupdate" parameterType="java.util.HashMap">.
-	   update member set
-			  nickname=#{nickname},intro=#{intro}receiver_name receiver_name
-			  where id=#{id}
-	</update>	
-	
-	<!-- 민아 찜 : 상품이름, 가격, 이미지-->
-	<select id="selectBookList" resultMap="BookResult" parameterType="memberVO">
+
+	<update id="mypageintroupdate" parameterType="java.util.HashMap">
+		update member set
+		nickname=#{nickname}, profileImg=#{profileImg}, intro=#{intro}
+		where
+		id=#{id}
+	</update>
+
+	<!-- 민아 찜 : 상품이름, 가격, 이미지 -->
+	<select id="selectBookList" resultMap="BookResult"
+		parameterType="memberVO">
 		<![CDATA[
 			select  goods.memberNo, goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark 
 			inner join goods 
@@ -176,10 +214,20 @@
 			where 
 			bookmark.memberNo=#{memberNo}
 		]]>
-	</select> 
-	
-	<!-- 민아 쿠폰, 적립금 조회-->
-	<select id="couponSearch"  resultMap="CouponResult" parameterType="memberVO">
+	</select>
+
+	<!-- 리뷰 수정중 -->
+	<select id="reviewList" parameterType="int" resultMap="ReviewResult">
+	    <![CDATA[
+select * from review inner join
+(select t_order.goods_qty, t_order.deliveryDate, goods.name as goodsName, goods.goodsNo from t_order inner join goods on t_order.memberNo=goods.memberNo) as orderplusgoods
+on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
+		]]>
+	</select>
+
+	<!-- 민아 쿠폰, 적립금 조회 -->
+	<select id="couponSearch" resultMap="CouponResult"
+		parameterType="memberVO">
 		<![CDATA[
 		
 		    select * from member_coupon 
@@ -190,10 +238,11 @@
 			member_coupon.memberNo=#{memberNo}
 
 		]]>
-	</select> 
-	
-	<!-- 민아 쿠폰, 적립금 조회-->
-	<select id="myAddress"  resultMap="DeliveryResult" parameterType="int">
+	</select>
+
+	<!-- 민아 쿠폰, 적립금 조회 -->
+	<select id="myAddress" resultMap="DeliveryResult"
+		parameterType="int">
 		<![CDATA[
 		
 		   select * from deliveryaddress 
@@ -201,6 +250,16 @@
 		   memberNo=#{memberNo}
 
 		]]>
-	</select> 
-	
+	</select>
+
+	<delete id="deleteBookMark" parameterType="int">
+<![CDATA[
+delete from bookmark
+where 
+goodsNo=#{goodsNo}
+]]>
+	</delete>
+
+
+
 </mapper>

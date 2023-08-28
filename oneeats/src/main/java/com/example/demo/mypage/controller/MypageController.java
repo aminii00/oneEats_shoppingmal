@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.vo.OrderVO;
@@ -20,11 +21,11 @@ public interface MypageController {
 	
 	public ModelAndView myPageMain(String message, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response)  throws Exception;
+	public ModelAndView mypageintro(MultipartHttpServletRequest request)  throws Exception;
 	
 	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	
-	public ModelAndView deleteBook(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView deleteBook(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response)  throws Exception;
 

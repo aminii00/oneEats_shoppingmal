@@ -15,6 +15,7 @@ import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.ReviewVO;
 
 @Service("mypageService")
 public class MypageServiceImpl implements MypageService{
@@ -85,8 +86,8 @@ public class MypageServiceImpl implements MypageService{
 	}
 	
 	@Override
-	public int removeBookMark(String id) throws DataAccessException {
-		return mypageDAO.deleteBookMark(id);
+	public int removeBookMark(int goodsNo) throws DataAccessException {
+		return mypageDAO.deleteBookMark(goodsNo);
 	}
 	
 	@Override
@@ -100,6 +101,18 @@ public class MypageServiceImpl implements MypageService{
 		List<DeliveryAddressVO> myAddressVO = mypageDAO.myAddress(memberNo);
 		return myAddressVO;
 	}
+	
+	//민아 회원정보 수정2
+	@Override
+	public void updateMember(MemberVO memberVO) throws DataAccessException{
+		mypageDAO.updateMemberInfo(memberVO);
+	}
 
+	//민아 회원정보 수정2
+		@Override
+		public List<ReviewVO> reviewList(int memberNo) throws DataAccessException{
+			List<ReviewVO> reviewList = mypageDAO.reviewList(memberNo);
+			return reviewList;
+		}
 	
 }

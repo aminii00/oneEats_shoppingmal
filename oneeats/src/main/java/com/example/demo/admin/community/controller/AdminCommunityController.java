@@ -9,6 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 public interface AdminCommunityController {
 
 	
-	public ModelAndView adminReviewList(HttpServletRequest request) throws IOException;
+	public ModelAndView adminReviewList(HttpServletRequest request) throws Exception;
 
 }

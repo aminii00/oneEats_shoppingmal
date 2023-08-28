@@ -82,7 +82,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="">상품리뷰</a>
+                  <a href="${contextPath}/mypage/mypageReviewList.do"
+                    >상품리뷰</a
+                  >
                 </div>
               </div>
             </li>
