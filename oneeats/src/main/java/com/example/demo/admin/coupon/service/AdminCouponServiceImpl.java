@@ -14,14 +14,18 @@ public class AdminCouponServiceImpl implements AdminCouponService {
 	private AdminCouponDAO adminCouponDAO;
 
 	@Override
-	public List<CouponVO> adminCouponByMemberNo(int memberNo) {
-		return adminCouponDAO.adminCouponByMemberNo(memberNo);
+	public List<CouponVO> selectAdminCouponByMemberNo(int memberNo) {
+		return adminCouponDAO.selectAdminCouponByMemberNo(memberNo);
 	}
 
 	@Override
-	public void insertAdminCoupon(int memberNo) {
-		adminCouponDAO.insertAdminCoupon(memberNo);
-		
-	}	
-	
+	public void insertAdminCoupon(CouponVO coupon) {
+		adminCouponDAO.insertAdminCoupon(coupon);
+	}
+
+	@Override
+	public void deleteAdminCoupon(int couponNo) {
+		adminCouponDAO.deleteAdminCoupon(couponNo);
+	}
+
 }

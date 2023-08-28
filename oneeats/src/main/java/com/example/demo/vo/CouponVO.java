@@ -13,7 +13,15 @@ public class CouponVO {
 	private Date expDate;
 	private Date creDate;
 	private int memberNo;
+	private String memberName;
 	
+	
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -60,8 +68,7 @@ public class CouponVO {
 	public String toString() {
 		return "CouponVO [couponNo=" + couponNo + ", name=" + name + ", discount_price=" + discount_price
 				+ ", condition=" + condition + ", expDate=" + expDate + ", creDate=" + creDate + ", memberNo="
-				+ memberNo + "]";
+				+ memberNo + ", memberName=" + memberName + "]";
 	}
-	
 	
 }

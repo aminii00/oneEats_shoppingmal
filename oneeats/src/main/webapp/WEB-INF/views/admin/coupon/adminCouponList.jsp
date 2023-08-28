@@ -14,8 +14,8 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <link rel="stylesheet" href="${contextPath}/css/minzy.css" />
   </head>
   <body>
-     <!-- 검색창 -->
-     <form method="post" action="#">
+    <!-- 검색창 -->
+    <form method="post" action="#">
       <div class="div-p">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           쿠폰목록
@@ -23,9 +23,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="div-sib textsize-1">
           <select name="search-1">
             <option value="전체">전체</option>
-            <option value="주문번호">주문번호</option>
-            <option value="주문자명">주문자명</option>
-            <option value="아이디">아이디</option>
+            <option value="쿠폰등록일">쿠폰등록일</option>
+            <option value="쿠폰명">쿠폰명</option>
+            <option value="사용처">사용처</option>
           </select>
           <input type="text" name="search-2" placeholder="search.." />
           <button
@@ -37,36 +37,48 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </div>
       </div>
     </form>
-    
+
     <hr class="linebold" />
 
     <!-- 쿠폰목록 -->
     <table class="textcolor-black textsize-1">
-        <tr>
-          <th style="width:10%">번호</th>
-          <th>쿠폰등록일</th>
-          <th style="width:40%">쿠폰명</th>
-          <th>사용처</th>
-          <th style="width:10%">삭제</th>
-        </tr>
-        <tr>
-          <td> 1</td>
-          <td>2023-08-11</td>
-          <td >최초 로그인시 1000원 할인 쿠폰</td>
-          <td>원이츠</td>
-          <td >
+      <tr>
+        <th style="width: 10%">번호</th>
+        <th>쿠폰등록일</th>
+        <th style="width: 40%">쿠폰명</th>
+        <th>사용처</th>
+        <th style="width: 10%">삭제</th>
+      </tr>
+
+      <c:forEach var="adminCoupon" items="${adminCouponList}">
+        <tr style="border-top: 1px solid #b3b3b3">
+          <td>${adminCoupon.couponNo}</td>
+          <td>${adminCoupon.creDate}</td>
+          <td>${adminCoupon.name}</td>
+          <td>${adminCoupon.memberName}</td>
+          <td>
             <a
               href="javascript:void(0)"
-              onclick='fn_openalert("쿠폰을 삭제하시겠습니까?","${contextPath}/admin/coupon/adminCouponList.do")'
+              onclick='fn_openalert("쿠폰을 삭제하시겠습니까?","${contextPath}/admin/coupon/deleteCoupon.do?couponNo=${adminCoupon.couponNo}")'
               >삭제</a
             >
           </td>
         </tr>
+      </c:forEach>
     </table>
 
-      <hr class="linebold" />
+    <hr class="linebold" />
 
-<!-- 페이징 -->
+    <button
+      style="font-size: 12px; margin-top: 22px; float: right"
+      class="btn-1 bg-lightgreen textcolor-white border-0"
+      type="button"
+      onclick="location.href='${contextPath}/admin/coupon/adminCouponForm.do'"
+    >
+      쿠폰등록
+    </button>
+
+    <!-- 페이징 -->
     <%--
     <!--    <div> 페이징처리
         <c:if test="${totArticles != null}"
@@ -121,7 +133,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <li class="li-btn">
           <button class="btn-2 btn-square bg-white btn-border">
             <img
-            class="img-2"
+              class="img-2"
               src="${contextPath}/img/icon/next.png"
               alt="next"
             />

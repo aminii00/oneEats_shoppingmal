@@ -29,8 +29,8 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
-			
-		List<OrderVO> adminOrderList = adminOrderService.selectOrderList();
+					
+		List<OrderVO> adminOrderList = adminOrderService.selectOrderByMemberType();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("adminOrderList", adminOrderList);
 		System.out.println(mav);

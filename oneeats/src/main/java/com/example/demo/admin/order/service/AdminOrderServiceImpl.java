@@ -29,7 +29,10 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		adminOrderDAO.updateDeliveryStatusToCancel(order_seqNo);
 		
 	}
-	
-	
+
+	@Override
+	public List<OrderVO> selectOrderByMemberType() {
+		return adminOrderDAO.selectOrderByMemberType();
+	}	
 	
 }

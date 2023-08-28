@@ -10,5 +10,7 @@ public interface AdminCouponController {
 	public ModelAndView adminCouponList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView adminAddCoupon(HttpServletRequest request,HttpServletResponse response) throws Exception;
+	
+	public ModelAndView deleteCoupon(HttpServletRequest request,HttpServletResponse response) throws Exception;
 
 }

@@ -7,8 +7,10 @@ import com.example.demo.vo.OrderVO;
 
 public interface AdminCouponService {
 
-	List<CouponVO> adminCouponByMemberNo(int memberNo);
+	List<CouponVO> selectAdminCouponByMemberNo(int memberNo);
 
-	void insertAdminCoupon(int memberNo);
+	void insertAdminCoupon(CouponVO coupon);
+
+	void deleteAdminCoupon(int couponNo);
 
 }

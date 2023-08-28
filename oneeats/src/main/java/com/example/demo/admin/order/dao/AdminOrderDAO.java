@@ -18,4 +18,6 @@ public interface AdminOrderDAO {
 
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
+	List<OrderVO> selectOrderByMemberType();
+
 }
