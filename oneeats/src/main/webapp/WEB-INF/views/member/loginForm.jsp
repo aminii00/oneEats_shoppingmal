@@ -8,81 +8,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
+    <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
     <meta charset="UTF-8" />
     <title>로그인창</title>
-    <!--bootstrap-->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css"
-    />
 
-    <style>
-      :root {
-        --body-background-color: #f5f6f7;
-        --font-color: #4e4e4e;
-        --border-gray-color: #dadada;
-        --naver-green-color: #04c75a;
-        --naver-green-border-color: #06b350;
-      }
-      .login-main {
-        align-items: center;
-        width: 390px;
-        height: auto;
-      }
-
-      .circle {
-        display: inline-block; /* 영역적용가능해짐 */
-        width: 20px;
-        height: 20px;
-        border: 2px solid #a3d060;
-        box-sizing: border-box;
-        border-radius: 10px; /* 모서리둥글게 처리 */
-        position: relative;
-        top: 4px;
-        cursor: pointer; /* 마우스 올렸을때 손모양 처리 */
-      }
-
-      .circle:after {
-        content: "\2714"; /* 체크박스 특수문자 */
-        font-size: 24px;
-        color: #a3d060;
-        position: absolute;
-        top: -14px;
-        left: 0;
-
-        opacity: 0; /* 처음엔 안보이게 처리 */
-        transition: 0.2s; /* CSS변화에 시간차 처리 */
-      }
-
-      /* input이 체크되면 특수문자 보이게 처리 */
-      #chk:checked + .circle:after {
-        opacity: 1;
-      }
-
-      /* 체크박스는 display:none;을 주면 데이터 처리가 안됨 */
-      #chk {
-        position: absolute;
-        left: -999em;
-      }
-
-      .btn-long {
-        width: 100%;
-        height: 60px;
-      }
-
-      .api-btn-img {
-        height: 90%;
-      }
-
-      .input-tall {
-        height: 60px;
-      }
-      .main-wrap {
-        max-width: 600px;
-        min-height: 800px;
-        margin: auto;
-      }
-    </style>
+    <style></style>
     <script>
       $(function () {
         fnInit();
@@ -240,7 +170,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <br />
           <div class="row">
             <div class="col d-flex justify-content-start">
-              <a href="${kakaoUrl}">
+              <a href="${contextPath}/kakao/loginForm.do">
                 <img
                   class="api-btn-img"
                   src="${contextPath}/img/icon/kakao_login_medium_narrow.png"

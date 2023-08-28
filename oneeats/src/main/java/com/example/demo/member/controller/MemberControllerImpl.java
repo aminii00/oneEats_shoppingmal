@@ -67,33 +67,43 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView Register(HttpServletRequest request) throws Exception {
 		System.out.println("여기는 register.do");
 		request.setCharacterEncoding("utf-8");
-
 		ModelAndView mav = new ModelAndView();
-		int memberNo = memberService.registerInfoNo(); // 새로운 No
-		Map memberMap = GeneralFileUploader.getParameterMap(request);
-		memberMap.put("memberNo", memberNo);
-		System.out.println(memberMap);
-		String _birth = (String) memberMap.get("birth");
-		String sms_agreement = (String) memberMap.get("sms_agreement");
-		String email_agreement = (String) memberMap.get("email_agreement");
-		if (_birth == null || _birth.trim().length() < 1) {
-			memberMap.put("birth", null);
-		}
-		if (email_agreement == null || email_agreement.trim().length() < 1) {
-			memberMap.put("email_agreement", "no");
-		}
-		if (sms_agreement == null || sms_agreement.trim().length() < 1) {
-			memberMap.put("sms_agreement", "no");
-		}
-
 		try {
-			memberService.insertMemberWithMap(memberMap);
+			int memberNo = memberService.registerInfoNo(); // 새로운 No
+			Map memberMap = GeneralFileUploader.getParameterMap(request);
+			memberMap.put("memberNo", memberNo);
+			System.out.println(memberMap);
+			String _birth = (String) memberMap.get("birth");
+			String sms_agreement = (String) memberMap.get("sms_agreement");
+			String email_agreement = (String) memberMap.get("email_agreement");
+			String zipCode = (String) memberMap.get("zipCode");
+			
+			if (_birth == null || _birth.trim().length() < 1) {
+				memberMap.put("birth", null);
+			}
+			if (email_agreement == null || email_agreement.trim().length() < 1) {
+				memberMap.put("email_agreement", "no");
+			}
+			if (sms_agreement == null || sms_agreement.trim().length() < 1) {
+				memberMap.put("sms_agreement", "no");
+			}
+			
+			if(zipCode == null || zipCode.trim().length()<1) {
+				memberMap.put("zipCode", 0);
+			}
+			
+			try {
+				memberService.insertMemberWithMap(memberMap);
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+
+			mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath() + "/member/loginForm.do");
 		} catch (Exception e) {
-			e.printStackTrace();
-
+			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못 했습니다.", request.getContextPath()+"/member/registerTypeSelect.do");
 		}
-
-		mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath() + "/member/loginForm.do");
+		
 		return mav;
 	}
 

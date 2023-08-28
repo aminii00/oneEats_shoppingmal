@@ -127,7 +127,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </head>
   <body>
     <br />
-    <form method="post" action="${contextPath}/member/register.do">
+    <form method="post" action="${contextPath}/api/register.do">
       <div class="main-container">
         <div class="main-wrap">
           <div class="textsize-3 textbold text-left">

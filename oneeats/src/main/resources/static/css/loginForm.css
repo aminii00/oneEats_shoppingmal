@@ -1,0 +1,19 @@
+
+
+      .btn-long {
+        width: 100%;
+        height: 60px;
+      }
+
+      .api-btn-img {
+        height: 90%;
+      }
+
+      .input-tall {
+        height: 60px;
+      }
+      .main-wrap {
+        max-width: 520px;
+        min-height: 800px;
+        margin: auto;
+      }
