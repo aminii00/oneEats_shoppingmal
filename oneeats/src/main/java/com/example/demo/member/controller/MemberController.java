@@ -20,12 +20,6 @@ public interface MemberController {
 	
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-			
-	public ModelAndView idSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
-			RedirectAttributes rAttr) throws Exception;
-	
-	public ModelAndView PwdSearch( HttpServletRequest request, HttpServletResponse response, @ModelAttribute("memberVO") MemberVO memberVO, 
-			RedirectAttributes rAttr) throws Exception;
 	public ModelAndView updatePw(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception;
@@ -33,4 +27,8 @@ public interface MemberController {
 	public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView Register(HttpServletRequest request) throws Exception;
+
+	public ModelAndView idSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView PwdSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

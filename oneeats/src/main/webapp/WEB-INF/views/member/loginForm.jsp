@@ -151,7 +151,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="col-md col-lg text-right">
               <a href="${contextPath}/member/idSearchForm.do">아이디찾기</a>
               /
-              <a href="${contextPath}/member/pwSearchForm.do">비밀번호 찾기</a>
+              <a href="${contextPath}/member/idSearchForm.do">비밀번호 찾기</a>
               /
               <a href="${contextPath}/member/registerTypeSelect.do">회원가입</a>
             </div>

@@ -113,14 +113,21 @@ public class MemberControllerImpl implements MemberController {
 	// 민아 아이디 찾기
 	@Override
 	@RequestMapping(value = "/member/idSearch.do", method = RequestMethod.POST)
-	public ModelAndView idSearch(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("memberVO") MemberVO memberVO, RedirectAttributes rAttr) throws Exception {
+	public ModelAndView idSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		System.out.println("idSearch Controller");
 		ModelAndView mav = new ModelAndView();
+		MemberVO memberVO = new MemberVO();
+		String phone = request.getParameter("phone");
+		String name = request.getParameter("name");
+		memberVO.setName(name);
+		memberVO.setPhone(phone);
+		
 		String id = memberService.idSearch(memberVO);
 
 		if (id == null) {
-			mav = Alert.alertAndRedirect("비밀번호가 틀립니다.", request.getContextPath() + "/member/idSearchForm.do");
+			mav = Alert.alertAndRedirect("해당하는 아이디가 존재하지 않습니다.", request.getContextPath() + "/member/idSearchForm.do");
+			return mav;
 		}
 		System.out.println("id = " + id);
 		mav.addObject("id", id);
@@ -131,21 +138,29 @@ public class MemberControllerImpl implements MemberController {
 	// 민아 비밀번호 찾기
 	@Override
 	@RequestMapping(value = "/member/pwdSearch.do", method = RequestMethod.POST)
-	public ModelAndView PwdSearch(HttpServletRequest request, HttpServletResponse response,
-			@ModelAttribute("memberVO") MemberVO memberVO, RedirectAttributes rAttr) throws Exception {
-		System.out.println("pwSearch Controller");
+	public ModelAndView PwdSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
+		
+		MemberVO memberVO = new MemberVO();
+		String phone = request.getParameter("phone");
+		String name = request.getParameter("name");
+		String id = request.getParameter("id");
+		
+		memberVO.setPhone(phone);
+		memberVO.setName(name);
+		memberVO.setId(id);
+		
 		try {
 			MemberVO member = memberService.pwSearch(memberVO);
-			System.out.println("memberVO = " + member.getId());
 			HttpSession session = request.getSession();
 			// 세션에 회원정보 보관
 			session.setAttribute("member", member);
 			mav.setViewName("redirect:/member/newPwSearchForm.do");
 		} catch (NullPointerException e) {
 			System.out.println("비밀번호 찾기 - 정보 X");
-			mav = Alert.alertAndRedirect("아이디나 비밀번호가 틀립니다. 다시 시도해 주세요",
-					request.getContextPath() + "/member/pwSearchForm.do");
+			mav = Alert.alertAndRedirect("해당하는 비밀번호가 없습니다.",
+					request.getContextPath() + "/member/idSearchForm.do");
 			e.printStackTrace();
 		}
 		return mav;

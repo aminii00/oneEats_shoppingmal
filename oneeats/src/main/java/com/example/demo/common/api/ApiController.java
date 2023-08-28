@@ -53,6 +53,8 @@ public class ApiController {
 			if (zipCode == null || zipCode.trim().length() < 1 || !GeneralFunctions.isInteger(zipCode)) {
 				memberMap.put("zipCode", 0);
 			}
+			
+			memberMap.put("pwd", "kakao");
 
 			try {
 				memberService.insertMemberWithMap(memberMap);
