@@ -9,17 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <head>
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
     <meta charset="UTF-8" />
-    <title>회원가입 선택 창</title>
-    <style></style>
-    <c:choose>
-      <c:when test="${result=='loginFailed' }">
-        <script>
-          window.onload = function () {
-            alert("아이디나 비밀번호가 틀립니다. 다시 로그인 하세요");
-          };
-        </script>
-      </c:when>
-    </c:choose>
+    <title>아이디 찾기</title>
   </head>
   <body>
     <form method="post" action="${contextPath}/member/login.do">
@@ -36,7 +26,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 ><br />
                 <span class="textsize-1">아이디 확인 후 로그인 해 주세요.</span>
                 <br /><br />
-                <div class="textsize-2 textbold">${id}<br /></div>
+                <c:forEach var="id" items="${idList}"
+                  ><div class="textsize-2 textbold">${id}<br /></div
+                ></c:forEach>
+
                 <br />
                 <button
                   class="btn-midlong bg-lightgray textsize-1 border-0 margin btn-round"
