@@ -66,7 +66,7 @@ public class KakaoController {
 
 		if (member == null || member.getId().trim().length() < 1) {
 			if (kakaoFor.equals("login")) {
-				mav = Alert.alertAndRedirect("카카오 계정으로 가입된 계정이 아닙니다. \\\n 회원가입 페이지로 이동합니다.",
+				mav = Alert.alertAndRedirect("카카오 계정으로 가입된 계정이 아닙니다. \\n 회원가입 페이지로 이동합니다.",
 						"/kakao/registerApiForm.do");
 			} else {
 				mav.setViewName("redirect:/kakao/registerApiForm.do");
@@ -83,7 +83,7 @@ public class KakaoController {
 				session = request.getSession();
 				session.setAttribute("isLogOn", true);
 				session.setAttribute("memberInfo", member);
-				mav = Alert.alertAndRedirect("이미 카카오로 가입되어 있는 계정입니다. \\\n 로그인 되었습니다.", "/main/mainPage.do");
+				mav = Alert.alertAndRedirect("이미 카카오로 가입되어 있는 계정입니다. \\n 로그인 되었습니다.", "/main/mainPage.do");
 			}
 
 		}

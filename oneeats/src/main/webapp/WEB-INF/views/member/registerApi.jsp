@@ -103,7 +103,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <form
       id="registerForm"
       method="post"
-      action="${contextPath}/member/register.do"
+      action="${contextPath}/api/register.do"
     >
       <br />
       <br />

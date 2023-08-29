@@ -55,6 +55,7 @@ public class ApiController {
 			}
 			
 			memberMap.put("pwd", "kakao");
+			memberMap.put("phone", "kakao");
 
 			try {
 				memberService.insertMemberWithMap(memberMap);

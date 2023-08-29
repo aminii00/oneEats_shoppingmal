@@ -1,6 +1,7 @@
 package com.example.demo.member.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
@@ -22,4 +23,6 @@ public interface MemberService {
 	public void insertMemberWithMap(Map memberMap);
 	public MemberVO selectMemberByEmail(String email);
 	public MemberVO selectMemberById(String string);
+	public void insertSellerMemberWithMap(Map memberMap);
+	public List<String> selectIdList(MemberVO memberVO);
 }

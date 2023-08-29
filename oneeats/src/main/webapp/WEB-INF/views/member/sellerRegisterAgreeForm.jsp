@@ -18,9 +18,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         display: inherit;
       }
 
-      .nav-link.active {
+      a.active {
         background-color: rgb(226, 226, 226);
-        border-top: 2px solid #a3d060;
+        border-top: 4px solid #a3d060;
       }
       .brd-lightgreen {
         border: 0.5px;
@@ -54,23 +54,71 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       }
     </style>
     <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
-    <script src="${contextPath}/js/registerForm.js"></script>
+
     <script>
+      var check_map = new Map([
+        ["id", false],
+        ["pwd", false],
+        ["pwd_confirm", false],
+        ["phone", false],
+        ["busNo", false],
+      ]);
+
       $(document).ready(function () {
         $(".nav-link").click(function () {
           $(".nav-link").removeClass("active");
           $(this).addClass("active");
 
-          // Hide all tab content
           $(".tab-pane").removeClass("show active");
 
           $($(this).attr("href")).addClass("show active");
+
+          var num = $(this).attr("value");
+          $("a.tab-menu").removeClass("active");
+          $("#register" + num).addClass("active");
         });
       });
+
+      function fn_bus_inzung() {
+        var inzung_bunho = $("input[name=busNo]").val();
+        var regex = /[^0-9]/;
+        if (regex.test(inzung_bunho)) {
+          alert("올바른 인증번호를 입력해주세요");
+          return false;
+        }
+
+        var path = contextPath + "/busInzung.do";
+        $.ajax({
+          type: "post",
+          async: true,
+          dataType: "text",
+          data: {
+            bunho: inzung_bunho,
+          },
+          url: path,
+          success: function (data, textStatus) {
+            if (data == "success") {
+              alert("인증되었습니다.");
+              check_map.set("busNo", true);
+            } else if (data == "fail") {
+              alert("인증에 실패했습니다.");
+            } else {
+              alert("원인불명의 에러 발생");
+            }
+          },
+          error: function (xhr, status, error) {
+            alert("에러발생");
+          },
+          complete: function (data) {
+            // alert("성공적으로 처리되었습니다.");
+          },
+        });
+      }
     </script>
+    <script src="${contextPath}/js/registerForm.js"></script>
   </head>
   <body>
-    <form method="post" action="${contextPath}/member/sellerRegister_two.do">
+    <form method="post" action="${contextPath}/member/sellerRegister.do">
       <br />
       <br />
       <br />
@@ -82,50 +130,22 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="seller_registerForm_header">
               <div class="row">
                 <div class="col">
-                  <a
-                    href="#tab1"
-                    class="nav-link"
-                    role="tab"
-                    data-toggle="tab"
-                    aria-selected="true"
-                    >가입</a
-                  >
+                  <a id="register1" class="tab-menu active">사업자인증</a>
                 </div>
                 <div class="col">
-                  <a
-                    href="#tab2"
-                    class="nav-link"
-                    role="tab"
-                    data-toggle="tab"
-                    aria-selected="false"
-                    >약관동의</a
-                  >
+                  <a id="register2" class="tab-menu">약관동의</a>
                 </div>
                 <div class="col">
-                  <a
-                    href="#tab3"
-                    class="nav-link"
-                    role="tab"
-                    data-toggle="tab"
-                    aria-selected="false"
-                    >정보입력</a
-                  >
+                  <a id="register3" class="tab-menu">정보입력</a>
                 </div>
                 <div class="col">
-                  <a
-                    href="#tab4"
-                    class="nav-link"
-                    role="tab"
-                    data-toggle="tab"
-                    aria-selected="false"
-                    >가입완료</a
-                  >
+                  <a id="register4" class="tab-menu">가입완료</a>
                 </div>
               </div>
             </div>
 
             <br />
-
+            <hr class="line-black" />
             <div class="seller_registerForm_wrap">
               <div
                 class="busNo-container brd-lightgreen tab-pane fade show active"
@@ -153,10 +173,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         name="busNo"
                         maxlength="10"
                         placeholder=" 사업자 등록번호 10자리"
+                        value="${busNo}"
                       />
                       <div class="input-group-append">
                         <button
-                          type="submit"
+                          type="button"
                           class="bg-lightgreen textsize-2 border-0"
                         >
                           인증
@@ -177,6 +198,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   </div>
 
                   <div class="row">&nbsp;</div>
+                  <div class="row">&nbsp;</div>
                   <div class="row">
                     <div class="col">
                       <a
@@ -184,6 +206,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         class="nav-link btn-long bg-lightgreen textsize-2 border-0"
                         role="tab"
                         data-toggle="tab"
+                        value="2"
                       >
                         다음으로
                       </a>
@@ -309,7 +332,32 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                       ><input class="req_checkbox check_box" type="checkbox" />
                     </div>
                   </div>
-                  <a class="btn-long bg-lightgreen"> 다음으로 </a>
+                  <div class="row">&nbsp;</div>
+
+                  <div class="row">
+                    <div class="col">
+                      <a
+                        class="btn-long bg-lightgreen nav-link btn-long bg-lightgreen textsize-2 border-0"
+                        href="#tab1"
+                        role="tab"
+                        data-toggle="tab"
+                        value="1"
+                      >
+                        이전으로
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a
+                        class="btn-long bg-lightgreen nav-link btn-long bg-lightgreen textsize-2 border-0"
+                        href="#tab3"
+                        role="tab"
+                        data-toggle="tab"
+                        value="3"
+                      >
+                        다음으로
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -340,6 +388,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         name="id"
                         placeholder="아이디를 입력해주세요"
                         type="text"
+                        value="${id}"
                         required
                       />
                       <div class="input-group-append">
@@ -371,6 +420,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         id="pwd"
                         name="pwd"
                         placeholder="영숫자+특수문자를 포함한 8~12자"
+                        value="${pwd}"
                         type="password"
                         required
                       />
@@ -420,6 +470,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         id="name"
                         name="name"
                         placeholder=" 이름을 입력해 주세요"
+                        value="${name}"
                         type="text"
                         required
                       />
@@ -441,6 +492,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         id="email"
                         name="email"
                         placeholder=" 이메일을 입력해 주세요"
+                        value="${email}"
                         type="text"
                       />
                     </div>
@@ -466,6 +518,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         name="phone"
                         placeholder="휴대폰번호를 입력해주세요"
                         type="text"
+                        value="${phone}"
                         required
                       />
                       <div class="input-group-append">
@@ -534,6 +587,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                     id="h_input_zipcode"
                     placeholder="우편번호"
                     name="zipCode"
+                    value="${zipCode}"
                   />
 
                   <div class="row">
@@ -544,6 +598,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         type="text"
                         id="address_input"
                         placeholder="주소"
+                        value="${address}"
                         readonly
                       />
                     </div>
@@ -566,6 +621,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         name="address_detail"
                         type="text"
                         id="address_detail_input"
+                        value="${address_detail}"
                         placeholder=" 상세주소를 입력해 주세요."
                       />
                     </div>
@@ -620,6 +676,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                         name="birth"
                         placeholder="  YYYY  -  MM  -  DD"
                         type="date"
+                        value="${birth}"
                       />
                     </div>
                   </div>
@@ -630,6 +687,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   <br />
 
                   <div class="row">
+                    <div class="col">
+                      <a
+                        class="btn-long bg-lightgreen nav-link btn-long bg-lightgreen textsize-2 border-0"
+                        href="#tab2"
+                        role="tab"
+                        data-toggle="tab"
+                        value="2"
+                      >
+                        이전으로
+                      </a>
+                    </div>
                     <div class="col">
                       <button
                         type="submit"

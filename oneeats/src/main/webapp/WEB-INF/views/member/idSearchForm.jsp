@@ -25,6 +25,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
     <script>
       var contextPath = "${contextPath}";
+      var check_map = new Map([
+        ["phone1", false],
+        ["phone2", false],
+      ]);
+
       function changeMessage(elname, str, clr) {
         $("#errmsg_" + elname).removeClass();
         $("#errmsg_" + elname).addClass(clr + "Text");
@@ -52,6 +57,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               changeMessage("inzung" + num, "인증되었습니다.", "blue");
               $("#phone" + num).attr("readonly", "readonly");
               $("#inzung" + num).attr("readonly", "readonly");
+              check_map.set("phone" + num, true);
             } else if (data == "fail") {
               changeMessage("inzung" + num, "인증되지 않았습니다.", "red");
             } else {
@@ -90,6 +96,23 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           $(".tab-pane").removeClass("show active");
 
           $($(this).attr("href")).addClass("show active");
+        });
+
+        $("#registerForm1").submit(function (event) {
+          event.preventDefault();
+          if (check_map.get("phone1") == false) {
+            alert("휴대폰 인증을 해주세요.");
+            return false;
+          }
+          $(this).unbind("submit").submit();
+        });
+
+        $("#registerForm2").submit(function (event) {
+          if (check_map.get("phone2") == false) {
+            alert("휴대폰 인증을 해주세요");
+            return false;
+          }
+          $(this).unbind("submit").submit();
         });
       });
     </script>
@@ -133,7 +156,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           role="tabpanel"
           id="tab1"
         >
-          <form action="${contextPath}/member/idSearch.do" method="post">
+          <form
+            action="${contextPath}/member/idSearch.do"
+            method="post"
+            id="registerForm1"
+          >
             <div class="row text-left textbold">
               <div class="col-md-3 d-flex align-items-center">이름</div>
               <div class="col-md">
@@ -211,7 +238,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </div>
 
         <div class="pw_search_form tab-pane fade" role="tabpanel" id="tab2">
-          <form action="${contextPath}/member/pwdSearch.do" method="post">
+          <form
+            action="${contextPath}/member/pwdSearch.do"
+            method="post"
+            id="registerForm2"
+          >
             <div class="row text-left textbold">
               <div class="col-md-3 d-flex align-items-center">아이디</div>
               <div class="col-md">
