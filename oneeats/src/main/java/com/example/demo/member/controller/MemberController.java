@@ -22,13 +22,12 @@ public interface MemberController {
 	
 	public ModelAndView updatePw(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception;
-	public ModelAndView sellerRegister_two(HttpServletRequest request) throws Exception;
-	public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView Register(HttpServletRequest request) throws Exception;
 
 	public ModelAndView idSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView PwdSearch(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView sellerRegister(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

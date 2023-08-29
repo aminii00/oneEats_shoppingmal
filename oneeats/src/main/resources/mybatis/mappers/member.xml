@@ -35,9 +35,22 @@
 
 	<insert id="insertNewMember" parameterType="memberVO">
 		<![CDATA[
-		insert into member(memberNo, type, id, pwd, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail, zipCode)
-		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail}, #{zipCode})
+		insert into member(memberNo, type, id, pwd, name, email, phone, 
+		gender, birth, sms_agreement, email_agreement, address, address_detail, zipCode)
+		values(#{memberNo}, "사용자" ,#{id}, #{pwd}, #{name}, #{email}, #{phone}, 
+		#{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail}, #{zipCode})
 		]]>
+	</insert>
+
+	<insert id="insertSellerNewMember" parameterType="memberVO">
+		insert into
+		member(memberNo, type, busNo, id, pwd, zipCode,
+		name, email, phone, gender, birth, 
+		sms_agreement, email_agreement, address, address_detail)
+		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd},#{zipCode},
+		#{name}, #{email}, #{phone}, #{gender}, #{birth},
+		#{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+
 	</insert>
 
 	<select id="login" resultType="memberVO"
@@ -59,11 +72,6 @@
      ]]>
 	</select>
 
-	<insert id="insertSellerNewMember" parameterType="memberVO">
-		insert into member(memberNo, type, busNo, id, pwd, zipCode, name, email, phone, gender, birth, sms_agreement, email_agreement, address, address_detail , )
-		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd}, #{zipCode}, #{name}, #{email}, #{phone}, #{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
-		
-	</insert>
 
 	<select id="pwSearch" resultType="memberVO"
 		parameterType="memberVO">
@@ -87,21 +95,40 @@
 
 
 	<insert id="insertMemberWithMap" parameterType="java.util.Map">
-
-		insert into member(memberNo, type, id,pwd, name, email, phone, gender,
-		birth, sms_agreement, email_agreement, address, address_detail, zipCode)
+		insert into
+		member(memberNo, type, id, pwd, name, email, phone, gender,
+		birth,
+		sms_agreement, email_agreement, address, address_detail, zipCode)
 		values(#{memberNo}, "사용자", #{id}, #{pwd}, #{name}, #{email}, #{phone},
 		#{gender}, #{birth}, #{sms_agreement}, #{email_agreement}, #{address},
 		#{address_detail}, #{zipCode})
 
 	</insert>
 	
+	<insert id="insertSellerMemberWithMap" parameterType="java.util.Map">
+		insert into
+		member(memberNo, type, busNo, id, pwd, zipCode,
+		name, email, phone, gender, birth, 
+		sms_agreement, email_agreement, address, address_detail)
+		values(#{memberNo}, "사업자", #{busNo}, #{id}, #{pwd},#{zipCode},
+		#{name}, #{email}, #{phone}, #{gender}, #{birth},
+		#{sms_agreement}, #{email_agreement}, #{address}, #{address_detail})
+
+	</insert>
+	
+
 	<!-- api 로그인을 위해 이메일로 회원이 존재하는지 확인하는 쿼리 -->
 	<select id="selectMemberByEmail" parameterType="String">
-		select * from member where email=#{email}
+		select * from
+		member where email=#{email}
+	</select>
+
+	<select id="selectMemberById" parameterType="String">
+		select * from member
+		where id=#{id}
 	</select>
 	
-	<select id="selectMemberById" parameterType="String">
-		select * from member where id=#{id}
+	<select id="selectIdList" parameterType="memberVO" resultType="String">
+		select id from member where name=#{name} and phone=#{phone}
 	</select>
 </mapper>

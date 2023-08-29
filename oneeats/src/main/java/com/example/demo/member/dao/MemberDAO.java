@@ -1,6 +1,7 @@
 package com.example.demo.member.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -34,5 +35,9 @@ public interface MemberDAO {
 	public MemberVO selectMemberByEmail(String email);
 
 	public MemberVO selectMemberById(String id);
+
+	public void insertSellerMemberWithMap(Map memberMap);
+
+	public List<String> selectIdList(MemberVO memberVO);
 	
 }

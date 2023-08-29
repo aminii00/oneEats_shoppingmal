@@ -3,6 +3,7 @@ package com.example.demo.member.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,19 +69,17 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/register.do", method = RequestMethod.POST)
 	public ModelAndView Register(HttpServletRequest request) throws Exception {
-		System.out.println("여기는 register.do");
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
 		try {
 			int memberNo = memberService.registerInfoNo(); // 새로운 No
 			Map memberMap = GeneralFileUploader.getParameterMap(request);
 			memberMap.put("memberNo", memberNo);
-			System.out.println(memberMap);
 			String _birth = (String) memberMap.get("birth");
 			String sms_agreement = (String) memberMap.get("sms_agreement");
 			String email_agreement = (String) memberMap.get("email_agreement");
 			String zipCode = (String) memberMap.get("zipCode");
-			
+
 			if (_birth == null || _birth.trim().length() < 1) {
 				memberMap.put("birth", null);
 			}
@@ -90,23 +89,20 @@ public class MemberControllerImpl implements MemberController {
 			if (sms_agreement == null || sms_agreement.trim().length() < 1) {
 				memberMap.put("sms_agreement", "no");
 			}
-			
-			if(zipCode == null || zipCode.trim().length()<1) {
+
+			if (zipCode == null || zipCode.trim().length() < 1) {
 				memberMap.put("zipCode", 0);
 			}
-			
-			try {
-				memberService.insertMemberWithMap(memberMap);
-			} catch (Exception e) {
-				e.printStackTrace();
 
-			}
-
+			System.out.println(memberMap);
+			memberService.insertMemberWithMap(memberMap);
 			mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath() + "/member/loginForm.do");
+
 		} catch (Exception e) {
-			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못 했습니다.", request.getContextPath()+"/member/registerTypeSelect.do");
+			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못 했습니다.",
+					request.getContextPath() + "/member/registerTypeSelect.do");
 		}
-		
+
 		return mav;
 	}
 
@@ -114,23 +110,25 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/idSearch.do", method = RequestMethod.POST)
 	public ModelAndView idSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 		System.out.println("idSearch Controller");
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
 		String phone = request.getParameter("phone");
+		
+		phone = phone.replaceAll("-", "");
 		String name = request.getParameter("name");
 		memberVO.setName(name);
 		memberVO.setPhone(phone);
-		
-		String id = memberService.idSearch(memberVO);
 
-		if (id == null) {
+		List<String> idList = memberService.selectIdList(memberVO);
+
+		if (idList == null || idList.size()<1) {
 			mav = Alert.alertAndRedirect("해당하는 아이디가 존재하지 않습니다.", request.getContextPath() + "/member/idSearchForm.do");
 			return mav;
 		}
-		System.out.println("id = " + id);
-		mav.addObject("id", id);
+		System.out.println("idList = " + idList);
+		mav.addObject("idList", idList);
 		mav.setViewName("/member/idForm");
 		return mav;
 	}
@@ -139,18 +137,18 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/pwdSearch.do", method = RequestMethod.POST)
 	public ModelAndView PwdSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		MemberVO memberVO = new MemberVO();
 		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
-		
+
 		memberVO.setPhone(phone);
 		memberVO.setName(name);
 		memberVO.setId(id);
-		
+
 		try {
 			MemberVO member = memberService.pwSearch(memberVO);
 			HttpSession session = request.getSession();
@@ -159,8 +157,7 @@ public class MemberControllerImpl implements MemberController {
 			mav.setViewName("redirect:/member/newPwSearchForm.do");
 		} catch (NullPointerException e) {
 			System.out.println("비밀번호 찾기 - 정보 X");
-			mav = Alert.alertAndRedirect("해당하는 비밀번호가 없습니다.",
-					request.getContextPath() + "/member/idSearchForm.do");
+			mav = Alert.alertAndRedirect("해당하는 비밀번호가 없습니다.", request.getContextPath() + "/member/idSearchForm.do");
 			e.printStackTrace();
 		}
 		return mav;
@@ -183,98 +180,48 @@ public class MemberControllerImpl implements MemberController {
 
 	}
 
-	// 민아 사업자 회원가입-사업자
+	
 	@Override
-	@RequestMapping(value = "/member/sellerRegister_one.do", method = RequestMethod.POST)
-	public ModelAndView sellerRegister_one(HttpServletRequest request) throws Exception {
+	@RequestMapping(value = "/member/sellerRegister.do", method = RequestMethod.POST)
+	public ModelAndView sellerRegister(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("sellerRegister_one.do");
-
-		String busNo1 = request.getParameter("busNo");
-
-		int busNo = Integer.parseInt(busNo1);
-		HttpSession session = request.getSession();
-		// 세션에 로그인 회원정보 보관
-		session.setAttribute("busNo", busNo);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/sellerRegisterAgreeForm.do");
-		return mav;
-	}
-
-	// 민아 사업자 회원가입 약관동의
-	@Override
-	@RequestMapping(value = "/member/sellerRegister_two.do", method = RequestMethod.POST)
-	public ModelAndView sellerRegister_two(HttpServletRequest request) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		System.out.println("sellerRegister_two.do");
-		String sms_agreement = request.getParameter("sms_agreement");
-		String email_agreement = request.getParameter("email_agreement");
-
-		int memberNo = memberService.registerInfoNo();
 		Map memberMap = GeneralFileUploader.getParameterMap(request);
-		if (email_agreement == null || email_agreement.trim().length() < 1) {
-			email_agreement = "no";
+		try {
+			String sms_agreement = request.getParameter("sms_agreement");
+			String email_agreement = request.getParameter("email_agreement");
+			String birth = request.getParameter("birth");
+			String zipCode = request.getParameter("zipCode");
+			
+			
+			if (birth == null || birth.trim().length() < 1) {
+				memberMap.put("birth", null);
+			}
+			if (email_agreement == null || email_agreement.trim().length() < 1) {
+				memberMap.put("email_agreement", "no");
+			}
+			if (sms_agreement == null || sms_agreement.trim().length() < 1) {
+				memberMap.put("sms_agreement", "no");
+			}
+			if (zipCode == null || zipCode.trim().length() < 1) {
+				memberMap.put("zipCode", 0);
+			}
+			
+			
+			
+			memberService.insertSellerMemberWithMap(memberMap);
+			mav.addObject("registerResult","success");
+			mav.setViewName("/member/sellerRegisterForm");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav.addAllObjects(memberMap);
+			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못했습니다.", request.getContextPath()+"/member/sellerRegisterForm.do");
 		}
-
-		if (sms_agreement == null || sms_agreement.trim().length() < 1) {
-			sms_agreement = "no";
-		}
-
-		HttpSession session = request.getSession();
-		// 세션에 로그인 회원정보 보관
-		session.setAttribute("sms_agreement", sms_agreement);
-		session.setAttribute("email_agreement", email_agreement);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/sellerRegisterInfoForm.do");
+		
+		
+		
 		return mav;
 	}
-
-	// 민아 사업자 회원가입 드디어 insert
-	@Override
-	@RequestMapping(value = "/member/sellerRegisterLast.do", method = RequestMethod.POST)
-	public ModelAndView sellerRegisterLast(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		System.out.println("sellerRegisterLast.do");
-		HttpSession session = request.getSession();
-		int busNo = (int) session.getAttribute("busNo");
-		String sms_agreement = (String) session.getAttribute("sms_agreement");
-		String email_agreement = (String) session.getAttribute("email_agreement");
-		String birth = request.getParameter("birth");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
-		String address_detail = request.getParameter("address_detail");
-
-		if (birth == null || birth.trim().length() < 1) {
-			birth = null;
-		}
-
-		if (email == null || email.trim().length() < 1) {
-			email = null;
-		}
-
-		if (address == null || address.trim().length() < 1) {
-			address = null;
-		}
-
-		if (address_detail == null || address_detail.trim().length() < 1) {
-			address_detail = null;
-		}
-
-		/*
-		 * System.out.println("busNo = " +busNo); memberVO.setBusNo(busNo);
-		 * memberVO.setSms_agreement(sms_agreement);
-		 * memberVO.setEmail_agreement(email_agreement);
-		 * 
-		 * System.out.println(memberVO); int MemberNo = memberService.registerInfoNo();
-		 * memberVO.setMemberNo(MemberNo); memberService.sellerRegisterInfo(memberVO);
-		 */
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("redirect:/member/sellerRegisterLastForm.do");
-		return mav;
-	}
-	
-	
 
 	@ResponseBody
 	@RequestMapping("/checkDuplicatedId.do")
@@ -282,20 +229,28 @@ public class MemberControllerImpl implements MemberController {
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
 		String result = "fail";
-		
+
 		MemberVO checkMem = memberService.selectMemberById(id);
 		System.out.println("checkMem : " + checkMem);
-		if (checkMem==null) {
+		if (checkMem == null) {
 			result = "success";
 		}
 		return result;
-	} 
-	
+	}
+
 	@ResponseBody
 	@RequestMapping("/phoneInzung.do")
 	public String phoneInzung(HttpServletRequest request) {
 		String result = "success";
-		
+
+		return result;
+	}
+
+	@ResponseBody
+	@RequestMapping("/busInzung.do")
+	public String busInzung(HttpServletRequest request) {
+		String result = "success";
+
 		return result;
 	}
 
