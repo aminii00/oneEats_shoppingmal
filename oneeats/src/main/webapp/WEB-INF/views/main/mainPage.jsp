@@ -19,6 +19,58 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+
+    <script>
+      function updateSeconds() {
+        $(".hotdeal_time_row").each(function () {
+          changeTexts($(this));
+        });
+      }
+
+      function changeTexts(obj) {
+        var currentDate = new Date();
+        var specificDate = new Date(obj.find(".h_finishDate").val());
+        var remainingTime = specificDate.getTime() - currentDate.getTime();
+
+        var remainingDays = Math.floor(remainingTime / (1000 * 60 * 60 * 24));
+        var remainingHours = Math.floor(
+          (remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var remainingMinutes = Math.floor(
+          (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+        );
+        var remainingSeconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+        if (remainingDays < 10) {
+          remainingDays = "0" + remainingDays;
+        }
+        if (remainingHours < 10) {
+          remainingHours = "0" + remainingHours;
+        }
+        if (remainingMinutes < 10) {
+          remainingMinutes = "0" + remainingMinutes;
+        }
+        if (remainingSeconds < 10) {
+          remainingSeconds = "0" + remainingSeconds;
+        }
+        var dateText =
+          remainingDays +
+          ":" +
+          remainingHours +
+          ":" +
+          remainingMinutes +
+          ":" +
+          remainingSeconds;
+        obj.find(".hotdeal_time_text").text(dateText);
+      }
+
+      setInterval(updateSeconds, 1000);
+    </script>
+    <style>
+      .hotdeal_time_row {
+        color: red;
+      }
+    </style>
   </head>
 
   <body>
@@ -81,6 +133,15 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                       class="product__discount__item"
                       onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
                     >
+                      <div class="hotdeal_time_row">
+                        <input
+                          type="hidden"
+                          class="h_finishDate"
+                          value="${item.finishDate}"
+                        />
+                        <span>남은 시간 </span>
+                        <div class="hotdeal_time_text"></div>
+                      </div>
                       <div
                         class="product__discount__item__pic set-bg"
                         data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
