@@ -13,8 +13,11 @@ public interface AdminGoodsController {
 
 	public ModelAndView addGoods(MultipartHttpServletRequest request) throws IOException;
 	
-	public ModelAndView deleteSellerGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
+	
+	public ModelAndView deleteAdminGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 
-	
+	public ModelAndView deleteAdminSellerGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
+			HttpServletResponse response) throws Exception;
+
 }

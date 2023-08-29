@@ -78,4 +78,20 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 			return adminGoodsDAO.selectGoodsByGoodsNo(goodsNo);
 		}
 		
+		// 관리자 상품 페이징 처리
+
+		@Override
+		public List<GoodsVO> selectNewSellerGoodsList(Map pagingMap) {
+			return adminGoodsDAO.selectNewSellerGoodsList(pagingMap);
+		}
+
+		// 관리자 상품 목록
+		@Override
+		public List<GoodsVO> selectSellerGoodsList() throws DataAccessException {
+			return adminGoodsDAO.selectSellerGoodsList();
+		}
+		
+		
+		
+		
 }

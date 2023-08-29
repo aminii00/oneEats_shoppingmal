@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
-import com.example.demo.vo.RecipeVO;
+
 
 public interface SellerGoodsService {
 
@@ -29,6 +29,14 @@ public interface SellerGoodsService {
 //상품 리스트	
 	public List<GoodsVO> selectGoodsList();
 
+	
+	
+//카테고리 
+	public List<Map> countGoodsNums();
+	
+	
+	
+	
 
 //상품 목록 페이징	
 	public List<GoodsVO> selectNewGoodsList(Map pagingMap);

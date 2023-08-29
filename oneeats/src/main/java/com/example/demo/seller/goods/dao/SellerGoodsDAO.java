@@ -37,6 +37,11 @@ public interface SellerGoodsDAO {
 	// 주문 목록
 	public List<GoodsVO> selectGoodsList() throws DataAccessException;
 
+	
+	//카테고리
+	public List<Map> countGoodsNums(); 
+	
+	
 	// 페이징 처리
 	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
 

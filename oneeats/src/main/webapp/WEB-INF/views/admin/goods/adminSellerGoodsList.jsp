@@ -6,165 +6,73 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 <% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <style>
-        form {
-            padding-left: 40px;
-            padding-top: 10px;
-        }
-        .div-p {
-            display: flex;
-            padding: 0 12px;
-        }
-        p {
-            padding-top: 10px;
-            padding-right: 20px;
-        }
-        .div-sib {
-            margin-left:auto;
-            margin-top: 10px;
-        }
-        select {
-            height: 30px;
-            border-radius: 4px;
-            border: 1px solid rgb(221, 221, 221);
-            line-height: 1.5;
-            color: rgb(51, 51, 51);
-            outline: none;
-            box-sizing: border-box;
-        }
-        div.nice-select{
-            height: 30px;
-            width: 70px;
-            font-size: 0.9em;
-            text-align: center;
-            line-height: 30px;
-        }
-        .list {
-            width: 100%;
-            text-align: center;
-        }
-        input {
-            width: 250px;
-            height: 30px;
-            padding-left: 10;
-            border-radius: 4px;
-            border: 1px solid rgb(221, 221, 221);
-            line-height: 1.5;
-            color: rgb(51, 51, 51);
-            outline: none;
-            box-sizing: border-box;
-        }
-        input::placeholder {
-            font-size: 0.9em;
-        }
-        .btn-1 {
-            height: 30px;
-            width: 70px;
-            text-align: center;
-            overflow: hidden;
-            border-radius: 3px;
-        }
-        table {
-            border-top: 2px solid #2C3333; 
-            border-bottom: 2px solid #2C3333;
-            padding-bottom: 10px;
-            line-height: 17px;
-            border-collapse: collapse;
-            border-spacing: 0;
-            width: 100%;
-            border-collapse: collapse;
-            border-spacing: 0;
-        }
-        th {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #B3B3B3;
-        }
-        td {
-            text-align: left;
-            padding: 12px;
-            margin-left: auto;
-        }
-        a {
-            text-decoration: none;
-            color: #2C3333;
-        }
-        .ul-li {
-            margin-top: 60px;
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-        }
-        .li-btn {
-            padding-left: 10px;
-        }
-        .btn-2 {
-            display: flex;
-            flex-direction: row;
-            -webkit-box-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            justify-content: center;
-            color: rgb(51, 51, 51);
-            line-height: 34px;
-        }
-        .btn-3 {
-            display: block;
-            padding: 0px 10px;
-            text-align: center;
-            overflow: hidden;
-            border-radius: 3px;
-            width: 50px;
-            height: 30px;
-        }
-    </style>
-    </head>
-    <body>
-    <form method="post" action="#">
-        <div class="div-p">
-        <p class="textsize-2 text-left textcolor-black textbold">상품</p>
-        <div class="div-sib textsize-1">
-            <select name="search-1">
-                <option value="전체">전체</option>
-                <option value="사업자번호">사업자번호</option>
-                <option value="상품명">상품명</option>
-                <option value="아이디">아이디</option>
-                <option value="등록일">등록일</option>
-            </select>
-            <input type="text" name="search-2" placeholder="search..">
-            <button class="btn-1 bg-lightgreen textcolor-white border-0" type="button">검색</button>
-            </div>
-        </div>
-        <table border="0" class="textcolor-black textsize-1">
+    <link rel="stylesheet" href="${contextPath}/css/sellerForm.css" />
+  </head>
+  <body>
+    <div class="div-p">
+      <p class="textsize-2 text-left textcolor-black textbold">상품</p>
+      <div class="div-sib textsize-1">
+        <select name="search-1">
+          <option value="전체">전체</option>
+          <option value="사업자번호">사업자번호</option>
+          <option value="상품명">상품명</option>
+          <option value="아이디">아이디</option>
+          <option value="등록일">등록일</option>
+        </select>
+        <input type="text" name="search-2" placeholder="search.." />
+        <button
+          class="btn-1 bg-lightgreen textcolor-white border-0"
+          type="button"
+        >
+          검색
+        </button>
+      </div>
+    </div>
+    <table border="0" class="textcolor-black textsize-1">
+      <tr>
+        <th>상품 번호</th>
+        <th>사업자번호</th>
+        <th>상품명</th>
+        <th>아이디</th>
+        <th>작성일</th>
+        <th style="text-align: right">삭제</th>
+      </tr>
+
+      <c:forEach var="goods" items="${newGoodsList}">
+        <c:choose>
+          <c:when test="${goods.goodsNo != preGoodsNo}">
             <tr>
-                <th>번호</th>
-                <th>사업자번호</th>
-                <th>상품명</th>
-                <th>아이디</th>
-                <th>작성일</th>
-                <th>삭제</th>
-                <th style="text-align: right;">상품보기</th>
+              <td>${goods.goodsNo}</td>
+              <td>${goods.memberNo}</td>
+              <td>
+                <a
+                  href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
+                >
+                  ${goods.name}</a
+                >
+              </td>
+              <td>${goods.seller_id}</td>
+              <td>${goods.creDate}</td>
+              <td style="text-align: right">
+                <a
+                  href="javascript:void(0)"
+                  onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath }/admin/goods/deleteAdminSellerGoods.do?goodsNo=${goods.goodsNo}")'
+                  >삭제</a
+                >
+              </td>
             </tr>
-            <tr>
-                <td>120</td>
-                <td>123457651</td>
-                <td>못난이 복숭아</td>
-                <td>bizman12</td>
-                <td>2023-08-02</td>
-                <td><a href="javascript:void(0)" onclick='fn_openalert("상품을 삭제하시겠습니까?","${contextPath}/admin/goods/adminSellerGoodsList.do")' >삭제</a></td>
-                <td style="text-align: right;"><a href="${contextPath}/goods/goodsDetail.do"><img src="${contextPath}/img/icon/click.png" style="width:15px; height:15px;">&nbsp&nbsp&nbsp&nbsp</a></td>
-            </tr>
-        </table>
-<%-- <!--    <div> 페이징처리
+          </c:when>
+        </c:choose>
+        <c:set var="preGoodsNo" value="${goods.goodsNo}" />
+      </c:forEach>
+    </table>
+    <%--
+    <!--    <div> 페이징처리
         <c:if test="${totArticles != null}"
             <c:choose>
             <c:when test="${totArticles > 100}">
@@ -198,24 +106,49 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </c:choose>
         </c:if>
         </div> 
---> --%>
-        <div>
-            <ul class="ul-li">
-                <li class="li-btn">
-                    <button class="btn-2 btn-square bg-white btn-border">
-                    <img width="20px" height="20px" src="${contextPath}/img/icon/prev.png" alt="prev">
-                    </button>
-                </li>
-                <li class="li-btn"> 
-                    <button class="btn-2 btn-square bg-white btn-border">1</button>
-                </li>
-                <li class="li-btn">
-                    <button class="btn-2 btn-square bg-white btn-border">
-                    <img width="20px" height="20px" src="${contextPath}/img/icon/next.png" alt="next">
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </form>
-</body>
+-->
+    --%>
+    <div>
+      <ul class="ul-li">
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?&section=${section-1}&pageNum=1'"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </button>
+          </li>
+        </c:if>
+        <c:forEach begin="1" end="10" var="i">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?section=${section}&pageNum=${i}'"
+            >
+              ${(section-1)*10+i}
+            </button>
+          </li>
+        </c:forEach>
+        <li class="li-btn">
+          <button
+            class="btn-2 btn-square bg-white btn-border"
+            onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?section=${section+1}&pageNum=1'"
+          >
+            <img
+              width="20px"
+              height="20px"
+              src="${contextPath}/img/icon/next.png"
+              alt="next"
+            />
+          </button>
+        </li>
+      </ul>
+    </div>
+  </body>
 </html>

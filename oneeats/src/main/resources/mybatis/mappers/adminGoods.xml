@@ -26,6 +26,7 @@
 		<result column="category" property="category" />
 		<result column="type" property="type" />
 		<result column="memberNo" property="memberNo" />
+		<result column="seller_id" property="seller_id" />
 	</resultMap>
 
 
@@ -93,15 +94,46 @@ goodsNo=#{goodsNo}
 
 
 
-	<select id="selectOptionsBygoodsNo"
-		resultMap="GoodsResult" parameterType="int">
+	<select id="selectOptionsBygoodsNo" resultMap="GoodsResult"
+		parameterType="int">
 		select * from goods
 		where goodsNo=#{goodsNo}
 	</select>
 
 	<select id="selectGoodsByGoodsNo" resultType="goodsVO">
 		select * from
-		goods where goodsNo=#{goodsNo}
+		goods
+		where goodsNo=#{goodsNo}
 	</select>
+
+
+
+	<!-- 관리자 사업자 목록 -->
+	<select id="selectSellerGoodsList" resultMap="GoodsResult">
+	select goods.*, member.id as seller_id
+		from goods
+		inner join member on goods.memberNo = member.memberNo
+		where goods.type = '사업자'
+		order by goods.creDate desc
+
+	
+	</select>
+
+
+	<select id="selectNewSellerGoodsList" resultMap="GoodsResult"
+		parameterType="java.util.Map">
+		select goods.*, member.id as seller_id
+		from goods
+		inner join member on goods.memberNo = member.memberNo
+		where goods.type = '사업자'
+		order by goods.creDate desc
+			limit #{start}, 10
+	
+
+
+
+	</select>
+
+
 
 </mapper>

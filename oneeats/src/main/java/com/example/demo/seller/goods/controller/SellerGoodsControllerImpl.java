@@ -30,12 +30,12 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.common.alert.Alert;
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.seller.goods.service.SellerGoodsService;
-import com.example.demo.vo.CouponVO;
+
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
-import com.example.demo.vo.OrderVO;
-import com.example.demo.vo.RecipeVO;
+
+
 
 @Controller("sellerGoodsController")
 public class SellerGoodsControllerImpl implements SellerGoodsController {
@@ -59,9 +59,10 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-
+		String category = request.getParameter("category");
 		String _pageNum = request.getParameter("pageNum");
 		String _section = request.getParameter("section");
+		String goods_search_type = request.getParameter("goods_search_type");
 		int pageNum;
 		int section;
 		if (_pageNum == null || _pageNum.length() <= 0) {
@@ -74,20 +75,58 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		} else {
 			section = Integer.parseInt(_section);
 		}
+		if (goods_search_type !=null && goods_search_type.length()<1) {
+			goods_search_type = "all";
+		}	
 		Map pagingMap = new HashMap();
+		pagingMap.put("category", category);
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("section", section);
+		pagingMap.put("goods_search_type", goods_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+		
 		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList(pagingMap);
 		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
 
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
-		System.out.println(mav);
-		System.out.println("newGoodsList:" + newGoodsList);
-		System.out.println("goodsList:" + goodsList);
-		return mav;
+		
+		List<Map> resultMap = sellerGoodsService.countGoodsNums();
+		// 등록된 레시피가 몇 개인지
+				long totalGoodsNum = (long) resultMap.get(0).get("cnt") ;
+				// 현재 보고 있는 카테고리의 레시피가 몇 개인지
+				long searchGoodsNum = -1;
+				// Output the result
+				for (Map<String, Object> row : resultMap) {
+					String cate = (String) row.get("category");
+					long count = (long) row.get("cnt");
+					System.out.println("Category: " + cate + ", Count: " + count);
+					if (cate.equals(category)) {
+						searchGoodsNum = count;
+					}
+				}
+				
+				if (searchGoodsNum<0) {
+					searchGoodsNum = totalGoodsNum;
+				}
+				
+				
+				
+				mav.addObject("goodsNumMap", resultMap);
+				mav.addObject("totalGoodsNum", totalGoodsNum);
+				mav.addObject("searchGoodsNum",searchGoodsNum);
+				
+				
+				
+				System.out.println("resultMap:"+ resultMap);
+				System.out.println("totalGoodsNum:"+ totalGoodsNum);
+				System.out.println("searchGoodsNum:"+ searchGoodsNum);
+				
+				System.out.println("newGoodsList:" + newGoodsList);
+				System.out.println("goodsList:" + goodsList);
+				System.out.println("mav :"+mav);
+				return mav;
 	}
 
 	@RequestMapping(value = "/seller/goods/sellerModForm.do")
@@ -97,7 +136,6 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
-
 		System.out.println(mav);
 		return mav;
 	}
@@ -217,114 +255,96 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	//북샵
+	// 북샵
 	/*
-			@Override
-			@RequestMapping(value="/seller/goods/modSellerGoods.do", method = { RequestMethod.GET, RequestMethod.POST })
-			public ResponseEntity modifyGoodsInfo( @RequestParam("goodsNo") String goodsNo,
-					                     @RequestParam("attribute") String attribute,
-					                     @RequestParam("value") String value,
-					HttpServletRequest request, HttpServletResponse response)  throws Exception {
-				Map<String,String> goodsMap=new HashMap<String,String>();
-				goodsMap.put("goodsNo", goodsNo);
-				System.out.println("나오나요0");
-				
-				
-				goodsMap.put(attribute, value);
-				
-				
-				
-				sellerGoodsService.modifyGoodsInfo(goodsMap);
-				System.out.println("나오나요1");
-				String message = null;
-				ResponseEntity resEntity = null;
-				System.out.println("나오나요2");
-				HttpHeaders responseHeaders = new HttpHeaders();
-				message  = "mod_success";
-				
-				System.out.println("나오나요3");
-				resEntity =new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-				return resEntity;
-			}
-			
-		*/	
-	//북샵
-			
-	
-	
+	 * @Override
+	 * 
+	 * @RequestMapping(value="/seller/goods/modSellerGoods.do", method = {
+	 * RequestMethod.GET, RequestMethod.POST }) public ResponseEntity
+	 * modifyGoodsInfo( @RequestParam("goodsNo") String goodsNo,
+	 * 
+	 * @RequestParam("attribute") String attribute,
+	 * 
+	 * @RequestParam("value") String value, HttpServletRequest request,
+	 * HttpServletResponse response) throws Exception { Map<String,String>
+	 * goodsMap=new HashMap<String,String>(); goodsMap.put("goodsNo", goodsNo);
+	 * System.out.println("나오나요0");
+	 * 
+	 * 
+	 * goodsMap.put(attribute, value);
+	 * 
+	 * 
+	 * 
+	 * sellerGoodsService.modifyGoodsInfo(goodsMap); System.out.println("나오나요1");
+	 * String message = null; ResponseEntity resEntity = null;
+	 * System.out.println("나오나요2"); HttpHeaders responseHeaders = new HttpHeaders();
+	 * message = "mod_success";
+	 * 
+	 * System.out.println("나오나요3"); resEntity =new ResponseEntity(message,
+	 * responseHeaders, HttpStatus.OK); return resEntity; }
+	 * 
+	 */
+	// 북샵
+
 	/*
-	@Override
+	 * @Override
+	 * 
+	 * @RequestMapping(value = "/seller/goods/modSellerGoods.do", method = {
+	 * RequestMethod.GET, RequestMethod.POST }) public ModelAndView
+	 * modSellerGoods(HttpServletRequest request, HttpServletResponse response)
+	 * throws IOException {
+	 * 
+	 * request.setCharacterEncoding("utf-8"); int goodsNo =
+	 * (Integer.parseInt(request.getParameter("goodsNo")));
+	 * 
+	 * GoodsVO goodsvo = sellerGoodsService.goodsItem(goodsNo);
+	 * System.out.println("goodsvo:"+goodsvo);
+	 * 
+	 * 
+	 * 
+	 * sellerGoodsService.ModGoods(goodsvo);
+	 * System.out.println("ModGoods:"+goodsvo);
+	 * 
+	 * sellerGoodsService.DeleteGoods(goodsvo);
+	 * System.out.println("DeleteGoods:"+goodsvo);
+	 * 
+	 * 
+	 * // 옵션정보 가져와서 각각의 VO에 저장 String[] optionNames =
+	 * request.getParameterValues("option_name"); // 당근당근 optionX String[]
+	 * System.out.println("optionNames: "+optionNames);//null
+	 * 
+	 * 
+	 * String[] optionQtys = request.getParameterValues("option_qty"); String[]
+	 * optionPrice = request.getParameterValues("option_price"); OptionVO[] options
+	 * = new OptionVO[5]; for (int i = 0; i < options.length; i++) { OptionVO
+	 * optionVO = new OptionVO(); options[i] = optionVO;
+	 * 
+	 * }
+	 * 
+	 * 
+	 * ModelAndView mav = new ModelAndView(); for (int i = 0; i <
+	 * optionNames.length; i++) { if (optionNames[i] != null) {
+	 * options[i].setName(optionNames[i]);
+	 * 
+	 * 
+	 * 
+	 * options[i].setOption_qty(optionQtys[i]); options[i].setPrice(optionPrice[i]);
+	 * options[i].setGoodsNo(goodsNo); System.out.println(options[i]); boolean
+	 * result = sellerGoodsService.optionModGoods(options[i]); if (!result) {
+	 * mav.addObject("redirectMessage", "상품 수정에 실패했습니다.");
+	 * mav.addObject("redirectPage", request.getContextPath() +
+	 * "/seller/goods/sellerGoodsForm.do"); mav.setViewName("/alert"); break; }
+	 * 
+	 * } else { System.out.println("상품 수정 실패"); break; }
+	 * 
+	 * } mav.addObject("goodsvo",goodsvo); System.out.println("상품 수정 성공"); mav =
+	 * Alert.alertAndRedirect("상품을 수정했습니다.", request.getContextPath() +
+	 * "/goods/goodsDetail.do?goodsNo=" + goodsNo); return mav; }
+	 * 
+	 * 
+	 * 
+	 */
 
-	@RequestMapping(value = "/seller/goods/modSellerGoods.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView modSellerGoods(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-		request.setCharacterEncoding("utf-8");
-		int goodsNo = (Integer.parseInt(request.getParameter("goodsNo")));
-		
-		GoodsVO goodsvo = sellerGoodsService.goodsItem(goodsNo);
-		System.out.println("goodsvo:"+goodsvo);
-		
-		
-		
-		sellerGoodsService.ModGoods(goodsvo);
-		System.out.println("ModGoods:"+goodsvo);
-		
-		sellerGoodsService.DeleteGoods(goodsvo);
-		System.out.println("DeleteGoods:"+goodsvo);
-
-
-		// 옵션정보 가져와서 각각의 VO에 저장
-		String[] optionNames = request.getParameterValues("option_name"); // 당근당근 optionX String[]
-		System.out.println("optionNames: "+optionNames);//null
-		
-		
-		String[] optionQtys = request.getParameterValues("option_qty");
-		String[] optionPrice = request.getParameterValues("option_price");
-		OptionVO[] options = new OptionVO[5];
-		for (int i = 0; i < options.length; i++) {
-			OptionVO optionVO = new OptionVO();
-			options[i] = optionVO;
-
-		}
-
-		
-		ModelAndView mav = new ModelAndView();
-		for (int i = 0; i < optionNames.length; i++) {
-			if (optionNames[i] != null) {
-				options[i].setName(optionNames[i]);
-				
-				
-				
-				options[i].setOption_qty(optionQtys[i]);
-				options[i].setPrice(optionPrice[i]);
-				options[i].setGoodsNo(goodsNo);
-				System.out.println(options[i]);
-				boolean result = sellerGoodsService.optionModGoods(options[i]);
-				if (!result) {
-					mav.addObject("redirectMessage", "상품 수정에 실패했습니다.");
-					mav.addObject("redirectPage", request.getContextPath() + "/seller/goods/sellerGoodsForm.do");
-					mav.setViewName("/alert");
-					break;
-				}
-
-			} else {
-				System.out.println("상품 수정 실패");
-				break;
-			}
-
-		}
-		mav.addObject("goodsvo",goodsvo);
-		System.out.println("상품 수정 성공");
-		mav = Alert.alertAndRedirect("상품을 수정했습니다.",
-				request.getContextPath() + "/goods/goodsDetail.do?goodsNo=" + goodsNo);
-		return mav;
-	}
-
-
-
-*/
-	
-	
 //리스트 삭제
 	@Override
 	@RequestMapping(value = "/seller/goods/deleteSellerGoods.do", method = RequestMethod.GET)
@@ -335,6 +355,5 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		ModelAndView mav = new ModelAndView("redirect:/seller/goods/sellerGoodsList.do");
 		return mav;
 	}
-
 
 }

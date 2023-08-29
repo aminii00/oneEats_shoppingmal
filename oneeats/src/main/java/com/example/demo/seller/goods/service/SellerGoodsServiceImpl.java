@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.seller.goods.dao.SellerGoodsDAO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
-import com.example.demo.vo.OrderVO;
-import com.example.demo.vo.RecipeVO;
+
 
 @Service("sellerGoodsService")
 public class SellerGoodsServiceImpl implements SellerGoodsService {
@@ -88,6 +87,14 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return sellerGoodsDAO.selectGoodsList();
 	}
 
+//카테고리
+	@Override
+	public List<Map> countGoodsNums() {
+		return sellerGoodsDAO.countGoodsNums();
+	};
+	
+	
+	
 	
 //상품 페이징 처리
 	

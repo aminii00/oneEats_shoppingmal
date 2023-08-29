@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
 
-
 @Mapper
 @Repository("adminGoodsDAO")
 public interface AdminGoodsDAO {
@@ -23,16 +22,24 @@ public interface AdminGoodsDAO {
 
 	public void insertNewGoodsWithMap(Map map);
 
-	// 주문 목록
+	// 상품 목록
 	public List<GoodsVO> selectGoodsList() throws DataAccessException;
 
 	// 페이징 처리
 	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
 
-	// 주문 삭제
-		public int deleteAdminGoods(int goodsNo) throws DataAccessException;
-		
-	//수정
-		public GoodsVO selectGoodsByGoodsNo(int goodsNo);
-		public List<Map> selectOptionsBygoodsNo(int goodsNo);
+	// 상품 삭제
+	public int deleteAdminGoods(int goodsNo) throws DataAccessException;
+
+	// 수정
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo);
+
+	public List<Map> selectOptionsBygoodsNo(int goodsNo);
+
+	// 관리자 상품 목록
+	public List<GoodsVO> selectSellerGoodsList() throws DataAccessException;
+
+	// 관리자 페이징 처리
+	public List<GoodsVO> selectNewSellerGoodsList(Map pagingMap);
+
 }

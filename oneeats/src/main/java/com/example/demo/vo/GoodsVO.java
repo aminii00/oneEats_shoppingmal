@@ -25,6 +25,7 @@ public class GoodsVO {
 	private String type;
 	private int memberNo;
 	private String sellerName;
+	private String seller_id;
 	
 	public String getSellerName() {
 		return sellerName;
@@ -146,7 +147,13 @@ public class GoodsVO {
 				+ ", manufacturer=" + manufacturer + ", weight=" + weight + ", expDate=" + expDate + ", description="
 				+ description + ", harvest=" + harvest + ", creDate=" + creDate + ", img1=" + img1 + ", img2=" + img2
 				+ ", img3=" + img3 + ", img4=" + img4 + ", img5=" + img5 + ", category=" + category + ", type=" + type
-				+ ", memberNo=" + memberNo + "]";
+				+ ", memberNo=" + memberNo + ", seller_id=" +seller_id +"]";
+	}
+	public String getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(String seller_id) {
+		this.seller_id = seller_id;
 	}
 	
 	

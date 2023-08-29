@@ -150,17 +150,28 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 	//리스트 삭제
 		@Override
 		@RequestMapping(value = "/admin/goods/deleteAdminGoods.do", method = RequestMethod.GET)
-		public ModelAndView deleteSellerGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
+		public ModelAndView deleteAdminGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
 				HttpServletResponse response) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			adminGoodsService.deleteAdminGoods(goodsNo);
 			ModelAndView mav = new ModelAndView("redirect:/admin/goods/adminGoodsList.do");
 			return mav;
 		}
+		
+	//관리자 상품 삭제
+		@Override
+		@RequestMapping(value = "/admin/goods/deleteAdminSellerGoods.do", method = RequestMethod.GET)
+		public ModelAndView deleteAdminSellerGoods(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request,
+				HttpServletResponse response) throws Exception {
+			request.setCharacterEncoding("utf-8");
+			adminGoodsService.deleteAdminGoods(goodsNo);
+			ModelAndView mav = new ModelAndView("redirect:/admin/goods/adminSellerGoodsList.do");
+			return mav;
+		}
 
 	//상품 수정 창
 		@RequestMapping(value = "/admin/goods/AdminGoodsModForm.do")
-		public ModelAndView recipeForm(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request)
+		public ModelAndView modForm(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request)
 				throws IOException {
 			request.setCharacterEncoding("utf-8");
 			String viewName = (String) request.getAttribute("viewName");
@@ -177,6 +188,55 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 
 		}
 
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		//관리자 사업자 목록창
+		@RequestMapping(value = "/admin/goods/adminSellerGoodsList.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView adminSellerGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			request.setCharacterEncoding("utf-8");
+			response.setContentType("html/text;charset=utf-8");
+			
+			HttpSession session = request.getSession();
+			String viewName = (String) request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+
+			String _pageNum = request.getParameter("pageNum");
+			String _section = request.getParameter("section");
+			int pageNum;
+			int section;
+			if (_pageNum == null || _pageNum.length() <= 0) {
+				pageNum = 1;
+			} else {
+				pageNum = Integer.parseInt(_pageNum);
+			}
+			if (_section == null || _section.length() <= 0) {
+				section = 1;
+			} else {
+				section = Integer.parseInt(_section);
+			}
+			Map pagingMap = new HashMap();
+			pagingMap.put("pageNum", pageNum);
+			pagingMap.put("section", section);
+			pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+			List<GoodsVO> newGoodsList = adminGoodsService.selectNewSellerGoodsList(pagingMap);
+			List<GoodsVO> goodsList = adminGoodsService.selectSellerGoodsList();		
+			mav.addObject("goodsList", goodsList);
+			mav.addObject("newGoodsList", newGoodsList);
+			mav.addAllObjects(pagingMap);
+			System.out.println(mav);
+			System.out.println("newGoodsList:" + newGoodsList);
+			return mav;
+		}
+
+		
+		
 		
 	
 }

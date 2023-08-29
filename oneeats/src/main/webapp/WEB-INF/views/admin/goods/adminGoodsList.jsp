@@ -38,7 +38,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th>상품명</th>
         <th style="text-align: right">수정</th>
         <th style="text-align: right">삭제</th>
-        <th style="text-align: right">상품 보기</th>
       </tr>
       <c:forEach var="goods" items="${newGoodsList}">
         <c:choose>
@@ -47,7 +46,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <div class="th-1">
                 <td>${goods.goodsNo}</td>
                 <td>${goods.creDate}</td>
-                <td>${goods.name}</td>
+                <td>
+                  <a
+                    href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
+                  >
+                    ${goods.name}</a
+                  >
+                </td>
 
                 <td style="text-align: right">
                   <a
@@ -62,12 +67,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     >삭제</a
                   >
                 </td>
-                <td style="text-align: right">
-                  <a
-                    href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
-                    >상품보기</a
-                  >
-                </td>
               </div>
             </tr>
           </c:when>
@@ -79,47 +78,10 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       style="font-size: 12px; margin-top: 22px; float: right"
       class="btn-1 bg-lightgreen textcolor-white border-0"
       type="button"
-      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm.do'"
     >
       상품 추가
     </button>
-    <%--
-    <!--    <div> 페이징처리
-        <c:if test="${totArticles != null}"
-            <c:choose>
-            <c:when test="${totArticles > 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <c:if test="${section > 1 && page == 1}">
-                    <a href="#">&nbsp:prev</a>
-                    </c:if>
-                    <a href="#"></a>
-                    <c:if test="${page == 10}">
-                    <a href="#">&nbsp:next</a>
-                    </c:if>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles == 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <a href="#">${page}</a>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles < 100}">
-                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
-                <c:choose>
-                    <c:when test="${page == pageNum}">
-                    <a href="#">${page}</a>
-                    </c:when>
-                    <c:otherwise>
-                    <a href="#">${page}</a>
-                    </c:otherwise>
-                </c:choose>
-                </c:foreach>
-            </c:when>
-            </c:choose>
-        </c:if>
-        </div> 
--->
-    --%>
+
     <div>
       <ul class="ul-li">
         <c:if test="${section>1}">
@@ -150,7 +112,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <li class="li-btn">
           <button
             class="btn-2 btn-square bg-white btn-border"
-            onclick="location.href='${contextPath}/admin/goods/sellerGoodsList.do?section=${section+1}&pageNum=1'"
+            onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?section=${section+1}&pageNum=1'"
           >
             <img
               width="20px"
