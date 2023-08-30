@@ -25,4 +25,6 @@ public interface MemberService {
 	public MemberVO selectMemberById(String string);
 	public void insertSellerMemberWithMap(Map memberMap);
 	public List<String> selectIdList(MemberVO memberVO);
+	public void saveRandomSMSInzungBunho(String randomNumber);
+	public String loadRandomSMSInzungBunho(String bunho);
 }

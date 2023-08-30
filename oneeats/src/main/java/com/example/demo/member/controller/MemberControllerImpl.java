@@ -3,6 +3,7 @@ package com.example.demo.member.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -242,7 +243,13 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping("/phoneInzung.do")
 	public String phoneInzung(HttpServletRequest request) {
 		String result = "success";
-
+		String bunho = request.getParameter("bunho");
+		
+		String resultNumber = memberService.loadRandomSMSInzungBunho(bunho);
+		if (resultNumber!=null || resultNumber.trim().length()<1) {
+			result = "fail";
+		}
+		
 		return result;
 	}
 

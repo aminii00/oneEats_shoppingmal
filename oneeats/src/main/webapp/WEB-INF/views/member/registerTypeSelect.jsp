@@ -44,7 +44,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <a
             id="naver-btn"
             class="d-flex justify-content-center align-items-center"
-            href="#"
+            href="${contextPath}/naver/registerForm.do"
           >
             <img src="${contextPath}/img/icon/naver.png" />
             네이버 로그인

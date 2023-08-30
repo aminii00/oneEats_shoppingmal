@@ -131,4 +131,13 @@
 	<select id="selectIdList" parameterType="memberVO" resultType="String">
 		select id from member where name=#{name} and phone=#{phone}
 	</select>
+	
+	
+	<insert id="insertRandomBunho" parameterType="String">
+		insert into random_verification (number) values(#{randomNumber}) 
+	</insert>
+	
+	<select id="selectVerificationNumber" parameterType="String">
+		select number from random_verification where number=#{inputNumber} and verificated="no" and creDate BETWEEN DATE_SUB(CURRENT_TIMESTAMP, INTERVAL 5 MINUTE) AND CURRENT_TIMESTAMP 
+	</select>
 </mapper>

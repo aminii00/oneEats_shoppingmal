@@ -39,7 +39,8 @@ public class ApiController {
 			String sms_agreement = (String) memberMap.get("sms_agreement");
 			String email_agreement = (String) memberMap.get("email_agreement");
 			String zipCode = (String) memberMap.get("zipCode");
-
+			String phone = (String) memberMap.get("phone");
+			
 			if (_birth == null || _birth.trim().length() < 1) {
 				memberMap.put("birth", null);
 			}
@@ -54,8 +55,11 @@ public class ApiController {
 				memberMap.put("zipCode", 0);
 			}
 			
-			memberMap.put("pwd", "kakao");
-			memberMap.put("phone", "kakao");
+			if(phone == null || phone.trim().length()<1) {
+				memberMap.put("phone", "snsRegister");
+			}
+			
+			memberMap.put("pwd", "snsRegister");
 
 			try {
 				memberService.insertMemberWithMap(memberMap);

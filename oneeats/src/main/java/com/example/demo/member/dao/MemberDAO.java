@@ -39,5 +39,10 @@ public interface MemberDAO {
 	public void insertSellerMemberWithMap(Map memberMap);
 
 	public List<String> selectIdList(MemberVO memberVO);
+
+	public void insertRandomBunho(String randomNumber);
+
+
+	public String selectVerificationNumber(String inputNumber);
 	
 }

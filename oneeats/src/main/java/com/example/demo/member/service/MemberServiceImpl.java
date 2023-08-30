@@ -82,6 +82,17 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> selectIdList(MemberVO memberVO) {
 		return memberDAO.selectIdList(memberVO);
 	}
+
+	@Override
+	public void saveRandomSMSInzungBunho(String randomNumber) {
+		memberDAO.insertRandomBunho(randomNumber);
+		
+	}
+
+	@Override
+	public String loadRandomSMSInzungBunho(String inputNumber) {
+		return memberDAO.selectVerificationNumber(inputNumber);
+	}
 	
 	
 

@@ -52,7 +52,10 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                                   class="h_finishDate"
                                   value="${item.finishDate}"
                                 />
-                                <span>남은 시간 </span>
+                                <span>
+                                  <i class="bi bi-alarm"></i>
+                                  남은 시간
+                                </span>
                                 <div class="hotdeal_time_text"></div>
                               </div>
                               <div
@@ -67,19 +70,17 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                                 </div> -->
                                 <ul class="product__item__pic__hover">
                                   <li>
-                                    <a href="#"><i class="fa fa-heart"></i></a>
+                                    <a><i class="fa fa-heart"></i></a>
                                   </li>
 
                                   <li>
-                                    <a href="#"
-                                      ><i class="fa fa-shopping-cart"></i
-                                    ></a>
+                                    <a><i class="fa fa-shopping-cart"></i></a>
                                   </li>
                                 </ul>
                               </div>
                               <div class="product__discount__item__text">
                                 <span>${item.category}</span>
-                                <h5><a href="#">${item.name}</a></h5>
+                                <h5><a>${item.name}</a></h5>
                                 <div class="product__item__price">
                                   <div>
                                     ${item.goods_qty}개
