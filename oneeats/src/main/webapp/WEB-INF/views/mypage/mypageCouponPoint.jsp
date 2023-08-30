@@ -15,7 +15,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
    
   </head>
   <body>
-    <form method="post" action="${contextPath}/mypage/couponSearch.do">
+    <form method="post" action="${contextPath}/mypage/couponNum.do">
       <div class="div-p">
         <br />
         <p class="textsize-2 text-left textcolor-black textbold">
@@ -36,13 +36,14 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <input
               style="border-color: lightgray"
               class="brd-lightgray btn-coupon btn-midlong-input textsize-1"
-              placeholder="발급된 쿠폰 번호를 입력해주세요."
+              placeholder="쿠폰 번호를 입력해주세요."
               type="text"
               name="couponNo"
             />
             <button
               type="submit"
-              class="btn-couponsubmit bg-lightgreen textsize-0 border-0 margin textbold textsize-1">
+              class="btn-couponsubmit bg-lightgreen textsize-0 border-0 margin textbold textsize-1"
+             >
               쿠폰등록
             </button>
             <br />

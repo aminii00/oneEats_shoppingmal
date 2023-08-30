@@ -11,20 +11,36 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+     <!-- 다음 주소 api 스크립트 -->
+     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+     <script>
+
+      // 팝업창 띄우기
+      function openPopUp() {
+        // 함수 동작 테스트
+        //alert("팝업 테스트");
+
+        //window.open("[팝업을 띄울 파일명 path]", "[별칭]", "[팝업 옵션]")
+        window.open(
+          "mypageAddressAddForm.do",
+          "배송지추가",
+          "width=450, height=450, top=150, left=200"
+        );
+      }
+      function showHidden() {
+        alert(document.testForm.flag.value);
+      }
+     </script>
+     
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
-    <link rel="stylesheet" href="${contextPath}/css/mina.css" />
-   <script>
-    function address(){
-    
-    }
-   </script>
+   
   </head>
   <body>
     <form method="post" action="#">
       <div class="div-p1">
         <br />
         <p class="textsize-2 text-left textcolor-black textbold">
-          배송지 관리<a class="textsize-1" style="float: right" onclick=address()
+          배송지 관리<a class="textsize-1" style="float: right" onclick="openPopUp()"
             >+새 배송지 추가</a
           >
         </p>
@@ -46,7 +62,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               </td>
               <td class="addresstd3">${item.receiver_name}</td>
               <td class="addresstd4">${item.receiver_phone}</td>
-              <td><button class ="border-0" type="button">
+              <td><button class ="border-0" type="button" onclick="openPopUp()">
                 <img class ="border-0" 
                 src="${contextPath}/img/icon/mod.png"
                 alt="Logo"

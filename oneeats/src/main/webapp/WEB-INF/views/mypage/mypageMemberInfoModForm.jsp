@@ -98,8 +98,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div>
               <input
                 class="brd-lightgray btn-round btn-memberInfo textsize-1 text-center"
-                placeholder="  YYYY  /  MM  /  DD"
-                type="date"
+                placeholder="${memberInfo.birth}"
+                value="${memberInfo.birth}"
+                type="datetime"
                 name="birth"
               />
             </div>

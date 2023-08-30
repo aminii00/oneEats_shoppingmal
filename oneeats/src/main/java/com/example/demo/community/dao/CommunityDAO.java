@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.IngredientVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
 
 @Mapper
@@ -45,5 +46,9 @@ public interface CommunityDAO {
 	public List<NoticeVO> noticeList();
 	
 	public NoticeVO noticeDetail(int noticeNo);
+	
+	public List<OneQnAVO> oneQnAList();
+	
+	public OneQnAVO oneQnADetail(int qnaNo);
 	
 }

@@ -46,16 +46,8 @@ table {
             <br>
             <span class="textsize-3 textbold" >리뷰작성</span>
             <hr class = "line-black">
-            <br>
-            <table class="table-review">
-                <tr>
-                    <td type ="button" class="point textsize-2" style="border-bottom: 5px solid #a3d060;">작성 가능 리뷰
-                    </td>
-                    <td type ="button" class="point textsize-2">작성한 리뷰
-                    </td>
-                </tr>
-            </table >
-            <p class = "textsize-1 textcolor-lightgray"> 
+            
+            <p class = "textsize-1 text-center textcolor-lightgray"> 
                 <br><br>
                 · 주간 베스트 후기로 선정시 5000원 추가 적립<br>
                 · 사진후기 150원, 글후기 50원 적립<br>
@@ -63,16 +55,37 @@ table {
                 · 후기 작성 후 첫 영업일에 적립금이 지급됩니다.
                 </p>
 
-                <br><br>
-                <h5 style = "text-align: left;">총 1개</h5>
-                <hr class= "linebold">
+                <br>
+                <h5 style = "text-align: left;">작성 가능 리뷰</h5>
+                <hr>
                 <br>
                 <table style="width: 641px; height: 110px;">
                     <c:forEach var="item" items="${reviewList}" varStatus="status">
                     <tr style="border-bottom: 1px solid lightgray;">
                         <td><img class ="reviewImage" src= "${contextPath}/img/product/review/noImage.jpg" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
                         <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} 배송완료</td>
-                        <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br><button class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">리뷰작성</button></td>
+                        <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br>
+                          <button 
+                          class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0" 
+                          onclick="location.href='${contextPath}/review/writeReview.do'" >
+                          리뷰작성
+                         </button>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </table>
+
+
+                <br><br>
+                <h5 style = "text-align: left;">작성한 리뷰</h5>
+                <hr>
+                <br>
+                <table style="width: 641px; height: 110px;">
+                    <c:forEach var="item" items="${reviewList}" varStatus="status">
+                    <tr style="border-bottom: 1px solid lightgray;">
+                        <td><img class ="reviewImage" src= "${contextPath}/img/product/review/noImage.jpg" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
+                        <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} 배송완료</td>
+                        <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br><button class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0">리뷰보기</button></td>
                     </tr>
                 </c:forEach>
                 </table>

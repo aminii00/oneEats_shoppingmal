@@ -1,6 +1,7 @@
 package com.example.demo.mypage.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -369,6 +370,36 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/mypage/couponNum.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView couponNum(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 Controller couponNum.do");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		ModelAndView mav = new ModelAndView();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = memberInfo.getMemberNo();
+		
+		String couponNo_ = request.getParameter("couponNo");
+		int couponNo = Integer.parseInt(couponNo_);
+		System.out.println("couponNo = "+couponNo);
+		CouponVO result;
+		try {
+			result = mypageService.couponNum(couponNo);
+			System.out.println("result = " + result);
+			
+			
+		}catch(Exception e){
+			mav = Alert.alertAndRedirect("쿠폰이 존재하지 않습니다.", request.getContextPath() + "/mypage/couponSearch.do");
+		}
+		result = mypageService.couponNum(couponNo);
+		System.out.println("result = " + result);
+		result.setMemberNo(memberNo);
+		mypageService.couponInsert(result);
+		
+		mav = Alert.alertAndRedirect("등록되었습니다.", request.getContextPath() + "/mypage/couponSearch.do");
+		return mav;
+	}
+
 	// 민아 배송지관리 - 출력
 	@Override
 	@RequestMapping(value = "/mypage/myAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -380,6 +411,7 @@ public class MypageControllerImpl implements MypageController {
 		int MemberNo = memberInfo.getMemberNo();
 		System.out.println("MemberNo = " + MemberNo);
 		List<DeliveryAddressVO> myAddress = mypageService.myAddress(MemberNo);
+		System.out.println("myaddress = " + myAddress);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("myAddress", myAddress);
 		mav.setViewName("/mypage/mypageAddress");
@@ -440,6 +472,7 @@ public class MypageControllerImpl implements MypageController {
 		ModelAndView mav = new ModelAndView();
 		String sms_agreement = request.getParameter("sms_agreement");
 		String email_agreement = request.getParameter("email_agreement");
+		String birth = request.getParameter("birth");
 
 		if (email_agreement == null || email_agreement.trim().length() < 1) {
 			memberVO.setEmail_agreement("no");
@@ -447,13 +480,16 @@ public class MypageControllerImpl implements MypageController {
 		if (sms_agreement == null || sms_agreement.trim().length() < 1) {
 			memberVO.setSms_agreement("no");
 		}
+		if (birth == null || birth.trim().length() < 1) {
+			memberVO.setBirth(null);
+		}
 		mypageService.updateMember(memberVO);
-		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/member/mypageMemberMod.do");
+		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberModForm.do");
 		return mav;
 	}
 
 	// 민아 리뷰
-	@RequestMapping(value = "/mypage/mypageReviewList.do",  method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/mypage/mypageReviewList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView mypageReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 mypageReview Controller");
 		ModelAndView mav = new ModelAndView();
@@ -464,8 +500,8 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println("2");
 		List<ReviewVO> reviewList = mypageService.reviewList(memberNo);
 		System.out.println("3");
-		System.out.println("reviewList = "+reviewList);
-		mav.addObject("reviewList",reviewList);
+		System.out.println("reviewList = " + reviewList);
+		mav.addObject("reviewList", reviewList);
 		mav.setViewName("/mypage/mypageReview");
 		return mav;
 	}

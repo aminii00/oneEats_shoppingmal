@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.community.dao.CommunityDAO;
 import com.example.demo.vo.IngredientVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
 
 @Service("communityService")
@@ -99,6 +100,17 @@ public class CommunityServiceImpl implements CommunityService {
 		return noticeVO;
 	}
 	
+	@Override
+	public List<OneQnAVO> oneQnAList(){
+		List<OneQnAVO> oneQnAList = communityDAO.oneQnAList();
+		return oneQnAList;
+	}
+	
+	@Override
+	public OneQnAVO oneQnADetail(int qnaNo){
+		OneQnAVO oneQnaVO = communityDAO.oneQnADetail(qnaNo);
+		return oneQnaVO;
+	}
 	
 
 }

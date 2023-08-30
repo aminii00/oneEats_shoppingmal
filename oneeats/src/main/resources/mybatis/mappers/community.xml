@@ -31,6 +31,27 @@
 		<result property="content" column="content" />
 		<result property="creDate" column="creDate" />
 	</resultMap>
+	
+	<resultMap id="oneQnAResult" type="oneQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="status" column="status" />
+		<result property="parentNo" column="parentNo" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap>
+	
+	
+	<select id="oneQnAList" resultMap="oneQnAResult">
+		select * from oneqna
+	</select>
+	
+	<select id="oneQnADetail" resultType="oneQnAVO" parameterType="int" >
+		select * from oneqna
+		where qnaNo=#{qnaNo}
+		
+	</select>
 
 	<select id="sellectAllRecipe" resultMap="recipeResult">
 	    <![CDATA[
@@ -74,6 +95,7 @@
 		limit #{start}, 6
 
 	</select>
+
 
 	<select id="selectNewRecipeList" resultMap="recipeResult">
 		select * from recipe
@@ -169,8 +191,8 @@
 		inbun = #{inbun}
 		where recipeNo = #{recipeNo}
 	</update>
-	
-	
+
+
 	<delete id="deleteIngredientsByRecipeNo" parameterType="int">
 		delete
 		from ingredient where recipeNo = #{recipeNo}

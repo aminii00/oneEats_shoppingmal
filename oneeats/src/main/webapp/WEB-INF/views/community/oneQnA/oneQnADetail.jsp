@@ -18,19 +18,19 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <div class="oneQnADetail_grid">
         <div class="row oneQnADetail_title">
           <div class="col textcolor-black textbold text-left textsize-3">
-            배송조회가 안 됩니다...
+            ${oneQnAList.title}
           </div>
         </div>
         <hr class="line-black" />
         <div class="row oneQnADetail_info">
           <div class="col textcolor-black text-left textsize-2">
-            <span>작성일: 2023년 8월 11일 11:02</span>
+            <span>작성일: ${oneQnAList.creDate}</span>
           </div>
         </div>
         <hr class="line-gray" />
         <div class="row oneQnADetail_content">
           <div class="col textcolor-black text-left textsize-2">
-            배송 조회를 눌러도 하얀 페이지만 뜨고 배송조회가 안 됩니다ㅠㅠ
+            ${oneQnAList.content}
           </div>
         </div>
         <br />

@@ -16,9 +16,55 @@
     />
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
-<title>로그인창</title>
-<style>
 
+<title>로그인창</title>
+    // <!-- 다음 주소 api 스크립트 -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+  function execDaumPostCode_() {
+    new daum.Postcode({
+      oncomplete: function (data) {
+        var addr = ""; // 주소 변수
+        var extraAddr = ""; // 참고항목 변수
+
+        if (data.userSelectedType === "R") {
+          addr = data.roadAddress;
+        } else {
+          addr = data.jibunAddress;
+        }
+
+        if (data.userSelectedType === "R") {
+          if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+            extraAddr += data.bname;
+          }
+
+          if (data.buildingName !== "" && data.apartment === "Y") {
+            extraAddr +=
+              extraAddr !== ""
+                ? ", " + data.buildingName
+                : data.buildingName;
+          }
+
+          if (extraAddr !== "") {
+            extraAddr = " (" + extraAddr + ")";
+          }
+
+          document.getElementById("address_extra_input").value = extraAddr; //참고항목
+        } else {
+          document.getElementById("address_extra_input").value = "";
+        }
+
+        document.getElementById("h_input_zipcode").value = data.zonecode; // 우편번호
+        document.getElementById("address_input").value = addr;
+
+        document.getElementById("address_detail_input").focus(); // 상세주소
+      },
+    }).open();
+  }
+ // 다음 주소 api 스크립트 종료
+</script>
+
+<style>
 .login-main{
     align-items: center;
     width: 390px;
@@ -52,6 +98,7 @@
 #chk{ position: absolute; left: -999em; }
 
 </style>
+
 </head>
 <body>
     <form method = "post" action = "${contextPath}/loginForm.do">
@@ -61,13 +108,14 @@
             <div class="main-wrap">
                 
                 
-                <input class =" brd-lightgray btn-round adressreload textsize-1  border-0.5  " placeholder="#" name = "address" type="text"></input>
-                    <button style = "margin-bottom: 4px; margin-top:0%" class = "btn-fatfat-mina bg-lightgreen textbold textsize-0 border-0 margin1 btn-round" onclick="">
-                        재검색
+                <input class =" brd-lightgray btn-round adressreload textsize-1  border-0.5" name = "address" type="text"></input>
+                    <button style = "margin-bottom: 4px; margin-top:0%" class = "btn-fatfat-mina bg-lightgreen textbold textsize-0 border-0 margin1 btn-round" onclick="execDaumPostCode_()">
+                        주소검색
                     </button>
                     <br>
-                    <input style ="width: 286px; height:50px " class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " name = "address_detail" placeholder=" 상세 주소를 입력해주세요." type="text"></input>
+                    <input style ="width: 286px; height:50px " id="address_detail_input" class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " name = "address_detail" placeholder=" 상세 주소를 입력해주세요." type="text"></input>
                     <br>
+                    <input type="hidden" id="h_input_zipcode" placeholder="우편번호"name="zipCode"/>
                     
                     <div class="idselect" style="width: 282px; height: 50px;">
                         &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<label for="chk" >
