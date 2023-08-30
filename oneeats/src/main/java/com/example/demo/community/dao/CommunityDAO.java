@@ -51,4 +51,9 @@ public interface CommunityDAO {
 	
 	public OneQnAVO oneQnADetail(int qnaNo);
 	
+	public void replyInsert(OneQnAVO oneQnAVO);
+	
+	public int newQnANo();
+	
+	public List<OneQnAVO> replyList(int qnaNo);
 }

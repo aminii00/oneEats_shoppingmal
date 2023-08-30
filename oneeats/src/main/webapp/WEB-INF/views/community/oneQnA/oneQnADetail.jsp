@@ -9,6 +9,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>1:1문의 상세</title>
+    <style>
+      .reply_reply {
+        width: 624px;
+      }
+    </style>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
   <body>
@@ -42,11 +47,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
 
         <div class="toggle-content hidden_content_1">
           <hr class="line-black" />
-          <form action="" method="post">
+          <form
+            action="${contextPath}/community/oneQnA/QnAReply.do?qnaNo=${oneQnAList.qnaNo}"
+            method="post"
+          >
             <div class="row h_reply_form">
               <div class="col">
                 <textarea
-                  name="reply_content"
+                  name="content"
                   id=""
                   rows="10"
                   placeholder="댓글 입력..."
@@ -61,11 +69,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                   취소
                 </button>
                 &nbsp;
-                <button class="btn-write" onclick="" type="submit">작성</button>
+                <button
+                  class="btn-write"
+                  onclick="location.href='${contextPath}/community/oneQnA/QnAReply.do?qnaNo=${oneQnAList.qnaNo}'"
+                  type="submit"
+                >
+                  작성
+                </button>
               </div>
             </div>
           </form>
         </div>
+
         <hr class="line-black" />
         <div class="row">
           <div class="col text-left textbold textcolor-black textsize-2">
@@ -73,61 +88,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </div>
         </div>
         <hr class="line-black" />
-
-        <div class="row oneQnA_reply_row">
-          <div class="col">
-            <div class="row oneQnA_reply_head">
-              <div class="col-md-2">
-                <img src="" alt="프로필 사진" />
-              </div>
-              <div class="col-md text-left">
-                <span class="textsize-2 textbold textcolor-black">관리자</span>
-                <br />
-                <span class="textsize-1">2023년 8월 23일 11:10</span>
-              </div>
-            </div>
-            <div class="row oneQnA_reply_content">
-              <div class="col text-left textcolor-black textsize-2">
-                안녕하세요 원이츠 관리자입니다. <br />
-                현재 정상적으로 복구 되었습니다. <br />
-                감사합니다.
-              </div>
-            </div>
-            <br />
-            <div class="row oneQnA_reply_footer">
-              <div class="col text-left textsize-2">
-                <a onclick="fn_show(2)">→답글작성</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="toggle-content hidden_content_2">
-          <hr class="line-black" />
-
-          <form action="" method="post">
-            <div class="row h_reply_form">
-              <div class="col">
-                <textarea
-                  name="rereply_content"
-                  id=""
-                  rows="10"
-                  style="width: 100%"
-                ></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md"></div>
-              <div class="col-md-4">
-                <button class="btn-cancel" onclick="fn_show(2)" type="reset">
-                  취소
-                </button>
-                &nbsp;
-                <button class="btn-write" onclick="" type="submit">작성</button>
-              </div>
-            </div>
-          </form>
-        </div>
       </div>
       <!--댓글 리스트 예정지-->
       <c:choose>
@@ -139,11 +99,14 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="col">
                 <div class="row oneQnA_reply_head">
                   <div class="col-md-2">
-                    <img src="${reply.profileImg}" alt="프로필 사진" />
+                    <img
+                      src="${contextPath}/download.do?imageFileName=${reply.profile}&path=member/${reply.memberNo}"
+                      alt="프로필 사진"
+                    />
                   </div>
                   <div class="col-md text-left">
                     <span class="textsize-2 textbold textcolor-black"
-                      >${reply.name}</span
+                      >${reply.memberName}</span
                     >
                     <br />
                     <span class="textsize-1">${reply.creDate}</span>
@@ -157,9 +120,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 <br />
                 <div class="row oneQnA_reply_footer">
                   <div class="col text-left textsize-2">
-                    <a href="" onclick="fn_show('${loop.index+2}')"
-                      >→답글작성</a
-                    >
+                    <a onclick="fn_show('${loop.index+2}')">→답글작성</a>
                   </div>
                 </div>
               </div>
@@ -168,13 +129,16 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             <!--답글 입력 폼-->
             <div class="toggle-content hidden_content_${loop.index+2}">
               <hr class="line-black" />
-              <form action="" method="post">
+              <form
+                action="${contextPath}/community/oneQnA/DoubleReply.do?qnaNo=${reply.qnaNo}"
+                method="post"
+              >
                 <div class="row h_reply_form">
                   <div class="col">
                     <textarea
-                      name="rereply_content"
+                      name="content"
+                      class="reply_reply"
                       id=""
-                      cols="30"
                       rows="10"
                       placeholder="답글 입력..."
                     ></textarea>
@@ -191,9 +155,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                       취소
                     </button>
                     &nbsp;
-                    <button class="btn-write" onclick="" type="submit">
-                      작성
-                    </button>
+                    <button class="btn-write" type="submit">작성</button>
                   </div>
                 </div>
               </form>

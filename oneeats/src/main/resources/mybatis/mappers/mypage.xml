@@ -200,6 +200,7 @@
 			select ifnull(max(orderNo),0)+1 from t_order
 		]]>
 	</select>
+	
 
 	<select id="selectSeqNoByOrderNo" resultType="int"
 		parameterType="int">

@@ -13,11 +13,25 @@ public class OneQnAVO {
 	private String status;
 	private int parentNo;
 	private int memberNo;
+	private String memberName;
+	private String profile;
 	public int getQnaNo() {
 		return qnaNo;
 	}
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 	public String getTitle() {
 		return title;

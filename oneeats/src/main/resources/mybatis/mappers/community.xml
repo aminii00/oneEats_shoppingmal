@@ -31,7 +31,7 @@
 		<result property="content" column="content" />
 		<result property="creDate" column="creDate" />
 	</resultMap>
-	
+
 	<resultMap id="oneQnAResult" type="oneQnAVO">
 		<result property="qnaNo" column="qnaNo" />
 		<result property="title" column="title" />
@@ -40,17 +40,40 @@
 		<result property="status" column="status" />
 		<result property="parentNo" column="parentNo" />
 		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
+		<result property="profile" column="profile" />
 	</resultMap>
-	
-	
-	<select id="oneQnAList" resultMap="oneQnAResult">
-		select * from oneqna
+
+	<select id="newQnANo" resultType="int">
+		select ifnull(max(qnaNo),0)+1
+		from oneqna
 	</select>
-	
-	<select id="oneQnADetail" resultType="oneQnAVO" parameterType="int" >
+
+	<insert id="replyInsert" parameterType="oneQnAVO">
+		insert into oneqna(qnaNo,
+		content, parentNo, memberNo )
+		values (#{qnaNo}, #{content}, #{parentNo}, #{memberNo})
+	</insert>
+
+	<select id="oneQnAList" resultMap="oneQnAResult">
+		select * from oneqna where
+		parentNo=0
+	</select>
+
+	<select id="oneQnADetail" resultType="oneQnAVO"
+		parameterType="int">
 		select * from oneqna
 		where qnaNo=#{qnaNo}
-		
+
+	</select>
+
+	<select id="replyList" resultType="oneQnAVO" parameterType="int">
+
+		SELECT oneqna.*, member.name as memberName, member.profileImg as profile
+		FROM oneqna
+		INNER JOIN member on oneqna.memberNo = member.memberNo
+		where parentNo=#{qnaNo}
+
 	</select>
 
 	<select id="sellectAllRecipe" resultMap="recipeResult">

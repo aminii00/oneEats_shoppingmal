@@ -113,7 +113,7 @@
                         주소검색
                     </button>
                     <br>
-                    <input style ="width: 286px; height:50px " id="address_detail_input" class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " name = "address_detail" placeholder=" 상세 주소를 입력해주세요." type="text"></input>
+                    <input style ="width: 286px; height:50px " id="address_extra_input" class="brd-lightgray margin1 btn-round btn-midlong-address textsize-1 " name = "address_detail" placeholder=" 상세 주소를 입력해주세요." type="text"></input>
                     <br>
                     <input type="hidden" id="h_input_zipcode" placeholder="우편번호"name="zipCode"/>
                     

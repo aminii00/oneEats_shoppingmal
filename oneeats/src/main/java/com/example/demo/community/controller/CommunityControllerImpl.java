@@ -68,16 +68,16 @@ public class CommunityControllerImpl implements CommunityController {
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("recipe_search_type", recipe_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 6);
-		System.out.println("section="+section);
-		System.out.println("pageNum="+pageNum);
-		
+		System.out.println("section=" + section);
+		System.out.println("pageNum=" + pageNum);
+
 		List<RecipeVO> recipeList = communityService.selectRecipeList(pagingMap);
 		List<RecipeVO> newRecipeList = communityService.selectNewRecipeList();
 		mav.addObject("recipeList", recipeList);
 		mav.addObject("newRecipeList", newRecipeList);
 		mav.addAllObjects(pagingMap);
-		System.out.println("recipList="+recipeList);
-		System.out.println("newRecipeList="+newRecipeList);
+		System.out.println("recipList=" + recipeList);
+		System.out.println("newRecipeList=" + newRecipeList);
 
 		List<Map> resultMap = communityService.countRecipeNums();
 		// 등록된 레시피가 몇 개인지
@@ -336,10 +336,70 @@ System.out.println("map : " + map);
 		String qnaNo_ = request.getParameter("qnaNo");
 		int qnaNo = Integer.parseInt(qnaNo_);
 		OneQnAVO oneQnADetail = communityService.oneQnADetail(qnaNo);
-		mav.addObject("oneQnAList",oneQnADetail);
+		mav.addObject("oneQnAList", oneQnADetail);
+		System.out.println("oneQnAList = " +oneQnADetail);
+		
+		//parentNo이 qnaNo인 값을 가져오기
+		List<OneQnAVO> replyList = communityService.replyList(qnaNo);
+		System.out.println("replyList = " +replyList);
+		mav.addObject("replyList",replyList);
 		mav.setViewName(viewName);
 		return mav;
 	}
+
+	// 민아 1:1 답글달기
+	@Override
+	@RequestMapping(value = "/oneQnA/QnAReply.do", method = RequestMethod.POST)
+	public ModelAndView oneQnAReply(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("여기는 community QnAReply Controller");
+		ModelAndView mav = new ModelAndView();
+		String content = request.getParameter("content");
+		String qnaNo_ = request.getParameter("qnaNo");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
+		int qnaNo = Integer.parseInt(qnaNo_);
+		System.out.println("content = " + content+ "qnaNo = " +qnaNo);
+		// no을 parentNo으롷 memberNo는 댓글이나 답글을 작성 한 사람
+		int NewqnaNo = communityService.newQnANo(); // 새로운 qnaNo 찾기
+		OneQnAVO oneqnaVO = new OneQnAVO();
+		oneqnaVO.setParentNo(qnaNo); // parentNo을 qnaNo으로
+		oneqnaVO.setContent(content);
+		oneqnaVO.setQnaNo(NewqnaNo); // 새로운 qnaNo값을 가져와서 set
+		oneqnaVO.setMemberNo(memberNo); // 세션에 있는 로그인정보를 가져와서 memberNo에 넣기
+		communityService.replyInsert(oneqnaVO); // parentNo에 1을 넣은 oneqnaVO insert하기
+		mav.addObject("qnaNo",qnaNo);
+		mav.setViewName("redirect:/community/oneQnA/oneQnADetail.do");
+		return mav;
+
+	}
+	
+	// 민아 1:1 대댓글
+		@Override
+		@RequestMapping(value = "/oneQnA/DoubleReply.do", method = RequestMethod.POST)
+		public ModelAndView DoubleReply(HttpServletRequest request, HttpServletResponse response) {
+			System.out.println("여기는 community DoubleReply Controller");
+			ModelAndView mav = new ModelAndView();
+			String content = request.getParameter("content"); //input content 가져오기
+			String qnaNo_ = request.getParameter("qnaNo");    //경로와 같이 보낸 qnaNo 가져오기
+			int qnaNo = Integer.parseInt(qnaNo_); //int로 형 변환
+			HttpSession session = request.getSession();  
+			MemberVO member = (MemberVO) session.getAttribute("memberInfo");  //session에 저장되어있는 회원정보
+			int memberNo = member.getMemberNo(); // memberNo가져오기
+			System.out.println("content = " + content+ "qnaNo = " +qnaNo);
+			// no을 parentNo으롷 memberNo는 댓글이나 답글을 작성 한 사람
+			int NewqnaNo = communityService.newQnANo(); // 새로운 qnaNo 찾기
+			OneQnAVO oneqnaVO = new OneQnAVO();
+			oneqnaVO.setParentNo(qnaNo); // parentNo을 qnaNo으로
+			oneqnaVO.setContent(content);
+			oneqnaVO.setQnaNo(NewqnaNo); // 새로운 qnaNo값을 가져와서 set
+			oneqnaVO.setMemberNo(memberNo); // 세션에 있는 로그인정보를 가져와서 memberNo에 넣기
+			communityService.replyInsert(oneqnaVO); // parentNo에 1을 넣은 oneqnaVO insert하기
+			mav.addObject("qnaNo",qnaNo);
+			mav.setViewName("redirect:/community/oneQnA/oneQnADetail.do");
+			return mav;
+
+		}
 
 	private ModelAndView redirectAlertMessage(String msg, String page) {
 		ModelAndView mav = new ModelAndView("/alert");
