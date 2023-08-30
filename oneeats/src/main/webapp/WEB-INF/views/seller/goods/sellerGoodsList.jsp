@@ -19,7 +19,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <div class="div-sib textsize-1">
         <form action="${contextPath}/seller/goods/sellerGoodsList.do">
           <select name="goods_search_type">
-            <option value="전체">전체</option>
+            <option value="">전체</option>
             <option value="creDate">등록일</option>
             <option value="name">상품명</option>
           </select>
@@ -39,11 +39,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th>상품번호</th>
         <th>등록일</th>
         <th>상품명</th>
+        <th>핫딜 등록</th>
 
         <th style="text-align: right">수정</th>
         <th style="text-align: right">삭제</th>
       </tr>
-      <c:forEach var="goods" items="${newGoodsList}">
+      <c:forEach var="goods" items="${goodsList}">
         <c:choose>
           <c:when test="${goods.goodsNo != preGoodsNo}">
             <tr>
@@ -56,6 +57,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     href="${contextPath}/goods/goodsDetail.do?goodsNo=${goods.goodsNo}"
                   >
                     ${goods.name}</a
+                  >
+                </td>
+
+                <td style="text-align: right">
+                  <a
+                    href="${contextPath}/seller/hotdeal/sellerHotDealForm.do?goodsNo=${goods.goodsNo}"
+                    >핫딜 등록</a
                   >
                 </td>
 
@@ -95,7 +103,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?&section=${section-1}&pageNum=1'"
+              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?&category=${category}&section=${section-1}&pageNum=1'"
             >
               <img
                 width="20px"
@@ -106,29 +114,41 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </button>
           </li>
         </c:if>
-        <c:forEach begin="1" end="10" var="i">
+        <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
+        <c:set var="endPage" value="1" />
+        <c:if test="${not empty searchGoodsNum && searchGoodsNum>0}">
+          <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
+          <c:set
+            var="result"
+            value="${(searchGoodsNum - (section-1)*100)/10}"
+          />
+          <c:set var="endPage" value="${Math.ceil(result)}" />
+        </c:if>
+        <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?section=${section}&pageNum=${i}'"
+              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?category=${category}&section=${section}&pageNum=${i}'"
             >
               ${(section-1)*10+i}
             </button>
           </li>
         </c:forEach>
-        <li class="li-btn">
-          <button
-            class="btn-2 btn-square bg-white btn-border"
-            onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?section=${section+1}&pageNum=1'"
-          >
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${searchGoodsNum > (section)*100}">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/seller/goods/sellerGoodsList.do?category=${category}&section=${section+1}&pageNum=1'"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </button>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>

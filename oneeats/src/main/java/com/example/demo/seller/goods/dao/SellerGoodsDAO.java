@@ -35,7 +35,7 @@ public interface SellerGoodsDAO {
 	public void updateNewGoodsWithMap(GoodsVO goodsvo);
 
 	// 주문 목록
-	public List<GoodsVO> selectGoodsList() throws DataAccessException;
+	public List<GoodsVO> selectGoodsList(Map pagingMap) throws DataAccessException;
 
 	
 	//카테고리
@@ -43,7 +43,7 @@ public interface SellerGoodsDAO {
 	
 	
 	// 페이징 처리
-	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
+	public List<GoodsVO> selectNewGoodsList();
 
 	// 주문 삭제
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException;

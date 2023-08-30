@@ -11,7 +11,6 @@ import com.example.demo.seller.goods.dao.SellerGoodsDAO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OptionVO;
 
-
 @Service("sellerGoodsService")
 public class SellerGoodsServiceImpl implements SellerGoodsService {
 	@Autowired
@@ -51,17 +50,18 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		boolean result = sellerGoodsDAO.insertOptions(optionVO);
 		return result;
 	}
-	
+
 	public boolean optionModGoods(OptionVO optionVO) {
 		boolean result = sellerGoodsDAO.updateOptions(optionVO);
 		return result;
 	}
+
 	@Override
 	public GoodsVO selectGoodsVO(int goodsNo) {
 		GoodsVO goodsVO = sellerGoodsDAO.selectGoodsVO(goodsNo);
 		return goodsVO;
 	}
-	
+
 	@Override
 	public List<OptionVO> selectOptionVO(int goodsNo) {
 		List<OptionVO> optionVO = sellerGoodsDAO.selectOptionVO(goodsNo);
@@ -79,12 +79,17 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		return false;
 	}
 
+	// 상품 페이징 처리
 
-	
+	@Override
+	public List<GoodsVO> selectGoodsList(Map pagingMap) {
+		return sellerGoodsDAO.selectGoodsList(pagingMap);
+	}
+
 //상품 목록
 	@Override
-	public List<GoodsVO> selectGoodsList() throws DataAccessException {
-		return sellerGoodsDAO.selectGoodsList();
+	public List<GoodsVO> selectNewGoodsList() {
+		return sellerGoodsDAO.selectNewGoodsList();
 	}
 
 //카테고리
@@ -92,17 +97,7 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 	public List<Map> countGoodsNums() {
 		return sellerGoodsDAO.countGoodsNums();
 	};
-	
-	
-	
-	
-//상품 페이징 처리
-	
-	@Override
-	public List<GoodsVO> selectNewGoodsList(Map pagingMap) {
-		return sellerGoodsDAO.selectNewGoodsList(pagingMap); 
-	}
-	
+
 //상품 삭제
 	@Override
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException {
@@ -112,26 +107,25 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 	@Override
 	public void DeleteGoods(GoodsVO goodsvo) {
 		sellerGoodsDAO.DeleteGoods(goodsvo);
-		
+
 	}
 
 	@Override
 	public GoodsVO goodsItem(int goodsNo) {
-	GoodsVO goodsItem =	sellerGoodsDAO.goodsItem(goodsNo);
-	return goodsItem;
+		GoodsVO goodsItem = sellerGoodsDAO.goodsItem(goodsNo);
+		return goodsItem;
 	}
 
-	
 	@Override
 	public void ModGoods(GoodsVO goodsvo) {
 		sellerGoodsDAO.updateNewGoodsWithMap(goodsvo);
-		
+
 	}
-	//북샵 따라해보기
-	//@Override
-	//public void modifyGoodsInfo(Map goodsMap) throws Exception{
-		//sellerGoodsDAO.updateGoodsInfo(goodsMap);
-		
-	//}	
-	
+	// 북샵 따라해보기
+	// @Override
+	// public void modifyGoodsInfo(Map goodsMap) throws Exception{
+	// sellerGoodsDAO.updateGoodsInfo(goodsMap);
+
+	// }
+
 }

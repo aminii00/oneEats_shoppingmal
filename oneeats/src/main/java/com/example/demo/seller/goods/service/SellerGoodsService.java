@@ -27,7 +27,7 @@ public interface SellerGoodsService {
 	public boolean addGoods(Map map);
 
 //상품 리스트	
-	public List<GoodsVO> selectGoodsList();
+	public List<GoodsVO> selectGoodsList(Map pagingMap);
 
 	
 	
@@ -39,7 +39,7 @@ public interface SellerGoodsService {
 	
 
 //상품 목록 페이징	
-	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
+	public List<GoodsVO> selectNewGoodsList();
 	
 // 상품 삭제
 	public int deleteSellerGoods(int goodsNo) throws DataAccessException;
