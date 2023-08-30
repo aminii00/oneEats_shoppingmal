@@ -13,6 +13,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>상품 목록</title>
+    <script src="${contextPath}/js/hotdealClock.js"></script>
   </head>
 
   <body>
@@ -22,8 +23,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         <div class="row">
           <div class="col-lg-12 col-md-12" style="padding-left: 44px">
             <div class="product__discount">
-              <div class="section-title product__discount__title">
-                <h2 style="text-align: center">Hot Deals</h2>
+              <div class="section-title">
+                <h2>Hot Deals</h2>
               </div>
               <div class="row">
                 <div
@@ -43,18 +44,27 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                           <div class="col-lg-4">
                             <div
                               class="product__discount__item"
-                              onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.hotdealNo}'"
+                              onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
                             >
+                              <div class="hotdeal_time_row textcolor-red">
+                                <input
+                                  type="hidden"
+                                  class="h_finishDate"
+                                  value="${item.finishDate}"
+                                />
+                                <span>남은 시간 </span>
+                                <div class="hotdeal_time_text"></div>
+                              </div>
                               <div
                                 class="product__discount__item__pic set-bg"
-                                data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods"
+                                data-setbg="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
                                 style="
-                                  background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods');
+                                  background-image: url('${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}');
                                 "
                               >
                                 <!-- <div class="product__discount__percent">
-                                <input type="hidden" id="showResult" value="" />
-                              </div> -->
+                                  <input type="hidden" id="showResult" value="" />
+                                </div> -->
                                 <ul class="product__item__pic__hover">
                                   <li>
                                     <a href="#"><i class="fa fa-heart"></i></a>
@@ -84,6 +94,14 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                       </c:forEach>
                     </div>
                   </div>
+                  <div class="owl-nav disabled">
+                    <button type="button" role="presentation" class="owl-prev">
+                      <span aria-label="Previous">‹</span></button
+                    ><button type="button" role="presentation" class="owl-next">
+                      <span aria-label="Next">›</span>
+                    </button>
+                  </div>
+                  <div class="owl-dots"></div>
                 </div>
               </div>
             </div>
