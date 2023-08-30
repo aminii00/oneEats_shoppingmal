@@ -55,7 +55,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <c:choose>
           <c:when test="${sellerOrder.orderNo != preOrderNo}">
             <tr style="border-top: 1px solid #b3b3b3">
-              <td style="text-align: center">${sellerOrder.orderNo}</td>
+              <td>${sellerOrder.orderNo}</td>
               <td>${sellerOrder.orderDate}</td>
               <td>${sellerOrder.orderer_name}</td>
               <td>${sellerOrder.orderer_id}</td>

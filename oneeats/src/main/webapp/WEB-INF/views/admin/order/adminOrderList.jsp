@@ -43,7 +43,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <!-- 주문/배송 -->
     <table class="textcolor-black textsize-1">
       <tr>
-        <th style="text-align: center">주문번호</th>
+        <th>주문번호</th>
         <th style="width: 20%">결제일시</th>
         <th>주문자명</th>
         <th>아이디</th>
@@ -55,7 +55,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <c:choose>
           <c:when test="${adminOrder.orderNo != preOrderNo}">
             <tr style="border-top: 1px solid #b3b3b3">
-              <td style="text-align: center">${adminOrder.orderNo}</td>
+              <td>${adminOrder.orderNo}</td>
               <td>${adminOrder.orderDate}</td>
               <td>${adminOrder.orderer_name}</td>
               <td>${adminOrder.orderer_id}</td>

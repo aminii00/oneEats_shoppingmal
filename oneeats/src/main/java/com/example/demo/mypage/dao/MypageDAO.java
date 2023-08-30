@@ -36,6 +36,10 @@ public interface MypageDAO {
 	
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	
+//	public List<OrderVO> selectOrderList(Map pagingMap);
+//
+//	public List<Map> countOrderNums();
+	
 	public MemberVO selectMypageList(String member_id) throws DataAccessException;
 	
 	//민아 프로필 편집
@@ -59,6 +63,5 @@ public interface MypageDAO {
 	public void updateMemberInfo(MemberVO memberVO) throws DataAccessException;
 	
 	public List<ReviewVO> reviewList(int memberNo) throws DataAccessException;
-
 	
 }
