@@ -67,12 +67,16 @@ public class CommunityControllerImpl implements CommunityController {
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("recipe_search_type", recipe_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 6);
-
+		System.out.println("section="+section);
+		System.out.println("pageNum="+pageNum);
+		
 		List<RecipeVO> recipeList = communityService.selectRecipeList(pagingMap);
 		List<RecipeVO> newRecipeList = communityService.selectNewRecipeList();
 		mav.addObject("recipeList", recipeList);
 		mav.addObject("newRecipeList", newRecipeList);
 		mav.addAllObjects(pagingMap);
+		System.out.println("recipList="+recipeList);
+		System.out.println("newRecipeList="+newRecipeList);
 
 		List<Map> resultMap = communityService.countRecipeNums();
 		// 등록된 레시피가 몇 개인지

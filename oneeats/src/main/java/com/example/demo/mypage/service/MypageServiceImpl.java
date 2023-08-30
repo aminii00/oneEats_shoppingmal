@@ -62,6 +62,16 @@ public class MypageServiceImpl implements MypageService{
 		mypageDAO.updateDeliveryStatusToCancel(order_seqNo);
 	}
 
+//	@Override
+//	public List<OrderVO> selectOrderList(Map pagingMap) {
+//		return mypageDAO.selectOrderList(pagingMap);
+//	}
+//
+//	@Override
+//	public List<Map> countOrderNums() {
+//		return mypageDAO.countOrderNums();
+//	}
+
 	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {
 		System.out.println("listMyPageService");
