@@ -46,7 +46,7 @@
                     
                     <c:choose>
 				<c:when test="${myList.profileImg==null}">
-					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2">
+					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2" >
                     <input type="file" name="profileImg"><br>
                     
 				</c:when>

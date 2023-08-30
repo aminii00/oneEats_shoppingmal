@@ -111,6 +111,17 @@ public class CommunityServiceImpl implements CommunityService {
 		OneQnAVO oneQnaVO = communityDAO.oneQnADetail(qnaNo);
 		return oneQnaVO;
 	}
-	
+	public void replyInsert(OneQnAVO oneQnAVO){
+		 communityDAO.replyInsert(oneQnAVO);
+	}
 
+	public int newQnANo() {
+		int newQnANo = communityDAO.newQnANo();
+		return newQnANo;
+	}
+	
+	public List<OneQnAVO> replyList(int qnaNo){
+		List<OneQnAVO> replyList = communityDAO.replyList(qnaNo);
+		return replyList;
+	}
 }
