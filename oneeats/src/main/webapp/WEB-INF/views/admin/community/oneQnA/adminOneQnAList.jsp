@@ -62,7 +62,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="row oneQnAList-title">
                 <div class="col-md-3">${oneQnA.memberNo}</div>
                 <div class="col-md">${oneQnA.title}</div>
-                <div class="col-md-3">${oneQnA.creaDate}</div>
+                <div class="col-md-3">${oneQnA.creDate}</div>
                 <div class="col-md-3">${oneQnA.status}</div>
               </div>
             </c:forEach>

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.example.demo.vo.IngredientVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
 
 public interface CommunityService {
@@ -35,4 +36,7 @@ public interface CommunityService {
 
 	public List<Map> countRecipeNums();
 
+	public List<OneQnAVO> oneQnAList();
+	
+	public OneQnAVO oneQnADetail(int qnaNo);
 }

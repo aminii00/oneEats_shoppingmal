@@ -95,6 +95,16 @@ public class MypageServiceImpl implements MypageService{
 		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
 		return couponVO;
 	}
+	@Override
+	public CouponVO couponNum(int couponNo) {
+		CouponVO result = mypageDAO.couponNum(couponNo);
+		return result;
+	}
+	
+	@Override
+	public void couponInsert(CouponVO result) {
+		mypageDAO.couponInsert(result);
+	}
 	
 	@Override
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException{

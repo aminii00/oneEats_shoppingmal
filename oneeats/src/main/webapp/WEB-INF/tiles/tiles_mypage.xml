@@ -68,6 +68,7 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageReview.jsp" />
     </definition>
+    
     <definition name="/review/writeReview" extends="mainLayout">
        <put-attribute name="title" value="리뷰 페이지" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />

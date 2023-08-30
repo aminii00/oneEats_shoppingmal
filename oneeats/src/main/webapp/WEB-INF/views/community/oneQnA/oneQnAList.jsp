@@ -33,41 +33,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col-md-3">작성일</div>
           <div class="col-md-3">답변상태</div>
         </div>
-        <hr class="line-black" />
-        <div
-          class="row oneQnAList-title"
-          onclick="location.href='${contextPath}/community/oneQnA/oneQnADetail.do';"
-        >
-          <div class="col-md">배송조회가 되지 않습니다..</div>
-          <div class="col-md-3">2023/08/11</div>
-          <div class="col-md-3">대기중</div>
-        </div>
-        <hr class="line-gray" />
-        <div
-          class="row oneQnAList-title"
-          onclick="location.href='${contextPath}/community/oneQnA/oneQnADetail.do';"
-        >
-          <div class="col-md">배송조회가 되지 않습니다..</div>
-          <div class="col-md-3">2023/08/11</div>
-          <div class="col-md-3">대기중</div>
-        </div>
-        <hr class="line-gray" />
-        <div
-          class="row oneQnAList-title"
-          onclick="location.href='${contextPath}/community/oneQnA/oneQnADetail.do';"
-        >
-          <div class="col-md">배송조회가 되지 않습니다..</div>
-          <div class="col-md-3">2023/08/11</div>
-          <div class="col-md-3">대기중</div>
-        </div>
+
         <!--1:1문의 리스트를 넣을 곳-->
         <c:choose>
           <c:when test="${not empty oneQnAList}">
             <c:forEach var="oneQnA" items="${oneQnAList}">
               <hr class="line-gray" />
-              <div class="row oneQnAList-title">
+              <div
+                class="row oneQnAList-title"
+                onclick="location.href='${contextPath}/community/oneQnA/oneQnADetail.do?qnaNo=${oneQnA.qnaNo}';"
+              >
                 <div class="col-md">${oneQnA.title}</div>
-                <div class="col-md-3">${oneQnA.creaDate}</div>
+                <div class="col-md-3">${oneQnA.creDate}</div>
                 <div class="col-md-3">${oneQnA.status}</div>
               </div>
             </c:forEach>

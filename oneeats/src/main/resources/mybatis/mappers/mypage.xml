@@ -76,6 +76,8 @@
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
+	
+	
 
 	<resultMap id="DeliveryResult" type="deliveryAddressVO">
 		<result property="receiver_name" column="receiver_name" />
@@ -239,8 +241,25 @@ on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 
 		]]>
 	</select>
-
+	
 	<!-- 민아 쿠폰, 적립금 조회 -->
+	<select id="couponNum" resultType="couponVO"
+		parameterType="int">
+		<![CDATA[
+		    select couponNo, name, discount_price, expDate, creDate from coupon 
+			where 
+			couponNo=#{couponNo}
+		]]>
+	</select>
+	
+	<!-- 민아 쿠폰, 적립금 조회 -->
+	<insert id="couponInsert" parameterType="couponVO">
+		<![CDATA[
+		    insert into member_coupon(couponNo, memberNo) 
+		    values(#{couponNo}, #{memberNo})
+		]]>
+	</insert>
+
 	<select id="myAddress" resultMap="DeliveryResult"
 		parameterType="int">
 		<![CDATA[
