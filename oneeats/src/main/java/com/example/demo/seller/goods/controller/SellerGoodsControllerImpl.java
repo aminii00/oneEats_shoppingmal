@@ -85,18 +85,20 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		pagingMap.put("goods_search_type", goods_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
 		
-		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList(pagingMap);
-		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList();
+		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList(pagingMap);
+		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList();
 
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
 		
 		List<Map> resultMap = sellerGoodsService.countGoodsNums();
-		// 등록된 레시피가 몇 개인지
+		// 등록된 상품가 몇 개인지
 				long totalGoodsNum = (long) resultMap.get(0).get("cnt") ;
-				// 현재 보고 있는 카테고리의 레시피가 몇 개인지
+				// 현재 보고 있는 카테고리의상품이 몇 개인지
 				long searchGoodsNum = -1;
+				String type ="관리자";
+				if("관리자".equals(type)) {
 				// Output the result
 				for (Map<String, Object> row : resultMap) {
 					String cate = (String) row.get("category");
@@ -110,35 +112,25 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 				if (searchGoodsNum<0) {
 					searchGoodsNum = totalGoodsNum;
 				}
-				
-				
-				
+				}
 				mav.addObject("goodsNumMap", resultMap);
 				mav.addObject("totalGoodsNum", totalGoodsNum);
 				mav.addObject("searchGoodsNum",searchGoodsNum);
-				
-				
-				
-				System.out.println("resultMap:"+ resultMap);
-				System.out.println("totalGoodsNum:"+ totalGoodsNum);
-				System.out.println("searchGoodsNum:"+ searchGoodsNum);
-				
-				System.out.println("newGoodsList:" + newGoodsList);
-				System.out.println("goodsList:" + goodsList);
+
 				System.out.println("mav :"+mav);
 				return mav;
 	}
 
-	@RequestMapping(value = "/seller/goods/sellerModForm.do")
-	public ModelAndView sellerModForm(HttpServletRequest request) {
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-
-		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
-		HttpSession session = request.getSession();
-		System.out.println(mav);
-		return mav;
-	}
+//	@RequestMapping(value = "/seller/goods/sellerModForm.do")
+//	public ModelAndView sellerModForm(HttpServletRequest request) {
+//		String viewName = (String) request.getAttribute("viewName");
+//		ModelAndView mav = new ModelAndView(viewName);
+//
+//		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
+//		HttpSession session = request.getSession();
+//		System.out.println(mav);
+//		return mav;
+//	}
 
 	// 상품 등록
 	@Override

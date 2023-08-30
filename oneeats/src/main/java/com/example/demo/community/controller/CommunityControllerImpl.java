@@ -200,7 +200,7 @@ public class CommunityControllerImpl implements CommunityController {
 			mav.addObject("redirectPage", request.getContextPath() + "/community/recipe/recipeList.do");
 			mav.setViewName("/alert");
 		}
-
+System.out.println("map : " + map);
 		return mav;
 	}
 

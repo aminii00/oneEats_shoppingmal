@@ -96,8 +96,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <input
                     type="file"
                     name="img1"
-                    value="img1"
-                    onchange="readURL(this)"
+                    value="onchange"
+                    ="readURL(this)"
                   />
                   <input
                     type="file"
