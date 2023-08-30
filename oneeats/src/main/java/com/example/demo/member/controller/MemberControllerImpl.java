@@ -246,7 +246,7 @@ public class MemberControllerImpl implements MemberController {
 		String bunho = request.getParameter("bunho");
 		
 		String resultNumber = memberService.loadRandomSMSInzungBunho(bunho);
-		if (resultNumber!=null || resultNumber.trim().length()<1) {
+		if (resultNumber==null || resultNumber.trim().length()<1) {
 			result = "fail";
 		}
 		
