@@ -31,19 +31,49 @@ public class SellerHotDealServiceImpl implements SellerHotDealService{
 
 
 	@Override
-	public void addHotDeal(Map map) {
+	public void addHotDeal(HotDealVO hotDealVO) {
 		
-		sellerHotDealDAO.insertHotDeal(map);
+		sellerHotDealDAO.insertHotDeal(hotDealVO);
 	}
 
 
+	@Override
+	public HotDealVO selectHotDealByHotDealNo(int hotdealNo) {
+		return sellerHotDealDAO.selectHotDealByHotDealNo(hotdealNo);
+	}
+
+
+	@Override
+	public List<GoodsVO> selectGoodsList(Map map) {
+		return sellerHotDealDAO.selectGoodsList(map);
+	}
+
+	@Override
+	public GoodsVO SearchGoods(int goodsNo) {
+		GoodsVO goodsVO = sellerHotDealDAO.SearchGoods(goodsNo);
+		return goodsVO;
+	}
+
+	//상품 목록
+		@Override
+		public List<HotDealVO> selectNewHotDealList() {
+			return sellerHotDealDAO.selectNewHotDealList();
+		}
+		//카테고리
+		@Override
+		public List<Map> countHotDealNums() {
+			return sellerHotDealDAO.countHotDealNums();
+		};
+	
+		@Override
+		public List<HotDealVO> selectHotDealList(Map pagingMap) {
+			return sellerHotDealDAO.selectHotDealList(pagingMap);
+		}
+		
 }
 	
 
 
-	
-	
-	
 	
 	
 	

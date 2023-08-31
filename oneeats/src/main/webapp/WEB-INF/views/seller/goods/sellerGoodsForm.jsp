@@ -390,7 +390,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <div style="display: inline-block; margin: 50px 145px 0 0">
                     <button
                       class="cart-button css-cartbtn e4nu7ef3"
-                      type="submit"
+                      type="reset"
                       radius="3"
                       style="width: 100px"
                     >

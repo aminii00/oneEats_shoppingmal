@@ -9,7 +9,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="zxx">
   <head>
     <meta charset="UTF-8" />
-    <title>goodsDetail</title>
+    <title>hotdealDetail</title>
 
     <link href="${contextPath}/css/goodsDetail.css" rel="stylesheet" />
     <style>
@@ -37,7 +37,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         <div class="row">
           <div class="col-lg-12 text-center">
             <div class="breadcrumb__text">
-              <h2>${goods.category}</h2>
+              <h2>${hotdeal.category}</h2>
               <div class="breadcrumb__option">
                 <span></span>
               </div>
@@ -54,38 +54,34 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__details__pic">
               <div class="product__details__pic__item">
                 <img
-                  class="product__details__pic__item--large"
-                  src="${contextPath}/download.do?imgFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
-                  alt=""
+                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
                 />
-              </div>
-              <div class="product__details__pic__slider owl-carousel">
-                <img
-                  data-imgbigurl="img/product/details/product-details-2.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-3.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-5.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
-                  alt=""
-                />
-                <img
-                  data-imgbigurl="img/product/details/product-details-4.jpg"
-                  src="${contextPath}/download.do?imgFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
-                  alt=""
-                />
+                <c:if test="${not empty goods.img2}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img3}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img4}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img5}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
               </div>
             </div>
           </div>
           <div class="col-lg-6 col-md-6 text-left">
             <div class="product__details__text">
-              <h3>${goods.name}</h3>
+              <h3>${hotdeal.name}</h3>
               <div class="product__details__rating">
                 <img
                   src="${contextPath}/img/product/review/star.jpg"
@@ -93,20 +89,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 />
                 <span>평균 ${reviewAvg} 점 </span>
                 <span>(${totalReviewsNum} reviews)</span>
-                <div class="product__details__price">￦${goods.price}</div>
+                <div class="product__details__price">
+                  ${hotdeal.discounted_price}
+                </div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
                     <c:choose>
                       <c:when test="${goods.type=='사업자'}">
                         <div class="goods_detail_description">
-                          <dl class="property-flex2">
-                            <dt class="property-input-gd">판매자</dt>
-                            <dd class="property-flex4">
-                              <span class="property-input"
-                                >${goods.sellerName}</span
-                              >
-                            </dd>
-                          </dl>
                           <dl class="property-flex2">
                             <dt class="property-input-gd">포장타입</dt>
                             <dd class="property-flex4">
@@ -137,16 +127,42 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               >
                             </dd>
                           </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 수량</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.goods_qty}</span
+                              >
+                            </dd>
+                          </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 종료일</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.finishDate}</span
+                              >
+                            </dd>
+                          </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 정보 정보</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.description}</span
+                              >
+                            </dd>
+                          </dl>
                         </div>
                       </c:when>
+
                       <c:otherwise>
                         <div class="goods_detail_description">
                           <dl class="property-flex2">
                             <dt class="property-input-gd">판매자</dt>
                             <dd class="property-flex4">
-                              <span class="property-input"
-                                >${goods.sellerName}</span
-                              >
+                              <span class="property-input">원이츠</span>
                             </dd>
                           </dl>
                           <dl class="property-flex2">
@@ -181,6 +197,33 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               >
                             </dd>
                           </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 수량</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.goods_qty}</span
+                              >
+                            </dd>
+                          </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 종료일</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.finishDate}</span
+                              >
+                            </dd>
+                          </dl>
+
+                          <dl class="property-flex2">
+                            <dt class="property-input-gd">핫딜 정보 정보</dt>
+                            <dd class="property-flex4">
+                              <span class="property-input"
+                                >${hotdeal.description}</span
+                              >
+                            </dd>
+                          </dl>
                         </div>
                       </c:otherwise>
                     </c:choose>
@@ -192,101 +235,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <!--수정-->
                       <div class="property-margin" style="margin-bottom: -40px">
                         <div class="property-margin1">
-                          <dl class="property-flex2" style="height: 170px">
-                            <dt
-                              class="property-input-gd"
-                              style="margin-top: 16px"
-                            >
-                              상품선택
-                            </dt>
-                            <dd class="property-flex4">
-                              <div
-                                style="align-content: center"
-                                style="overflow-y: scrol"
-                              >
-                                <select
-                                  name="select"
-                                  id="select_option"
-                                  class="margin4 opt"
-                                >
-                                  <option
-                                    value="옵션을 선택해주세요"
-                                    selected
-                                  ></option>
-                                  <c:forEach
-                                    items="${goodsOptionList}"
-                                    var="goodsOption"
-                                  >
-                                    <option value="${goodsOption.optionNo}">
-                                      ${goodsOption.optionName}
-                                      ${goodsOption.optionPrice}
-                                    </option>
-                                  </c:forEach>
-                                </select>
-                              </div>
-                              <c:forEach
-                                items="${goodsOptionList}"
-                                var="goodsOption"
-                              >
-                                <input
-                                  type="hidden"
-                                  class="h_option_qty_${goodsOption.optionNo}"
-                                  value="${goodsOption.optionQty}"
-                                />
-                                <input
-                                  type="hidden"
-                                  class="h_option_price_${goodsOption.optionNo}"
-                                  value="${goodsOption.optionPrice}"
-                                />
-                                <input
-                                  type="hidden"
-                                  class="h_option_name_${goodsOption.optionNo}"
-                                  value="${goodsOption.optionName}"
-                                />
-                              </c:forEach>
-                            </dd>
-                          </dl>
-
                           <div
                             class="cart-option-item property-flex5 goods_option_grid"
                             style="width: 525px"
                           >
                             <!--선택한 상품 옵션이 나타나는 구역 -->
-                            <div class="goods_option_rows"></div>
-                            <span
-                              class="property-font3 text-right"
-                              style="
-                                font-size: 16px;
-                                border-top: 1px solid rgb(244, 244, 244);
-                                margin: 12px 0 -10px 0;
-                                padding: 10px 0 10px 0;
-                              "
-                            >
-                              총 상품금액
-                            </span>
-                            <span
-                              class="property-font3 text-right"
-                              style="font-size: 22px; margin-bottom: -10px"
-                              id="payment_price"
-                              >0</span
-                            >
-                            <span
-                              class="property-font3 text-right"
-                              style="
-                                font-size: 16px;
-                                border-top: 1px solid rgb(244, 244, 244);
-                                margin: 12px 0 -10px 0;
-                                padding: 10px 0 10px 0;
-                              "
-                            >
-                              할인 금액
-                            </span>
-                            <span
-                              class="property-font3 text-right"
-                              style="font-size: 22px; margin-bottom: -10px"
-                              id="discount_price"
-                              >0</span
-                            >
 
                             <span
                               class="property-font3 text-right"
@@ -303,7 +256,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
                               id="t_price"
-                              >0</span
+                            >
+                              ${hotdeal.discounted_price}</span
                             >
                             <!--배송비와 상품금액 hidden-->
                             <input
