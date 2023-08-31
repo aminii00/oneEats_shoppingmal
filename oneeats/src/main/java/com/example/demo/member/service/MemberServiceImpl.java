@@ -76,7 +76,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public void insertSellerMemberWithMap(Map memberMap) {
+		String inzung_id = memberMap.get("inzung_id").toString();
+		memberDAO.updateVerificationNumberVerificated(inzung_id);
 		memberDAO.insertSellerMemberWithMap(memberMap);
 
 	}
@@ -97,10 +100,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectVerificationNumber(inputNumber);
 	}
 	
+
 	@Override
-	public int loadVerificationIdByNumber(String number) {
-		return memberDAO.selectVerificationIdByNumber(number);
-		
+	public int loadVerificationNoByNumber(String number) {
+		return memberDAO.selectVerificationNoByNumber(number);
 	}
 
 

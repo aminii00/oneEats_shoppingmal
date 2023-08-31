@@ -142,11 +142,11 @@
 	</select>
 	
 	
-	<select id="selectVerificationIdByNumber" parameterType="String">
-		select id from random_verification where number=#{number} and verificated="no"
+	<select id="selectVerificationNoByNumber" parameterType="String">
+		select verNo from random_verification where number=#{number} and verificated="no"
 	</select>
 	
 	<update id="updateVerificationNumberVerificated" parameterType="String">
-		update random_verification set verificated="yes" where id=#{inzung_id}
+		update random_verification set verificated="yes" where verNo=#{inzung_id}
 	</update>
 </mapper>

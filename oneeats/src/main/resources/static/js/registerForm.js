@@ -251,7 +251,7 @@ function fn_open_inzung_row() {
 		inzung_interval_id = setInterval(fn_update_inzung_time, 1000);
 		setTimeout(function() {
 			clearInterval(inzung_interval_id);
-		}, 5000);
+		}, 300000);
 	}
 }
 

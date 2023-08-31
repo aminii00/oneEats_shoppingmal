@@ -27,5 +27,6 @@ public interface MemberService {
 	public List<String> selectIdList(MemberVO memberVO);
 	public void saveRandomSMSInzungBunho(String randomNumber);
 	public String loadRandomSMSInzungBunho(String bunho);
-	public int loadVerificationIdByNumber(String number);
+	
+	public int loadVerificationNoByNumber(String number);
 }

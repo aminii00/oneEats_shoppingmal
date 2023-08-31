@@ -131,39 +131,47 @@ public class MypageControllerImpl implements MypageController {
 			return mav;
 		}
 
-		int memberNo = member.getMemberNo();
-		String viewName = (String) request.getAttribute("viewName");
+		
+		try {
+			int memberNo = member.getMemberNo();
+			String viewName = (String) request.getAttribute("viewName");
 
-		String[] goodsNos = request.getParameterValues("goodsNo");
-		String[] goodsQtys = request.getParameterValues("goodsQty");
-		String[] goodsInbun = request.getParameterValues("goodsInbun");
-		String[] optionNos = request.getParameterValues("optionNo");
-		String shippingFee = request.getParameter("shippingFee");
-		String payment_price = request.getParameter("payment_price");
-		String discount_price = request.getParameter("discount_price");
+			String[] goodsNos = request.getParameterValues("goodsNo");
+			String[] goodsQtys = request.getParameterValues("goodsQty");
+			String[] goodsInbun = request.getParameterValues("goodsInbun");
+			String[] optionNos = request.getParameterValues("optionNo");
+			String shippingFee = request.getParameter("shippingFee");
+			String payment_price = request.getParameter("payment_price");
+			String discount_price = request.getParameter("discount_price");
 
-		List<CouponVO> couponList = mypageService.selectCouponByMemberNo(memberNo);
+			List<CouponVO> couponList = mypageService.selectCouponByMemberNo(memberNo);
 
-		List<OrderVO> selectGoodsList = new ArrayList();
-		for (int i = 0; i < goodsNos.length; i++) {
-			OrderVO temp = new OrderVO();
-			temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
-			temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
-			temp.setGoods_inbun(goodsInbun[i]);
-			temp.setOptionNo(Integer.parseInt(optionNos[i]));
-			temp.setShippingfee(Integer.parseInt(shippingFee));
-			temp.setPayment_price(Integer.parseInt(payment_price));
-			temp.setDiscount_price(Integer.parseInt(discount_price));
-			selectGoodsList.add(temp);
+			List<OrderVO> selectGoodsList = new ArrayList();
+			for (int i = 0; i < goodsNos.length; i++) {
+				OrderVO temp = new OrderVO();
+				temp.setGoodsNo(Integer.parseInt(goodsNos[i]));
+				temp.setGoods_qty(Integer.parseInt(goodsQtys[i]));
+				temp.setGoods_inbun(goodsInbun[i]);
+				temp.setOptionNo(Integer.parseInt(optionNos[i]));
+				temp.setShippingfee(Integer.parseInt(shippingFee));
+				temp.setPayment_price(Integer.parseInt(payment_price));
+				temp.setDiscount_price(Integer.parseInt(discount_price));
+				selectGoodsList.add(temp);
+			}
+
+			mav.setViewName(viewName);
+			mav.addObject("payment_price", payment_price);
+			mav.addObject("shippingFee", shippingFee);
+			mav.addObject("discount_price", discount_price);
+			mav.addObject("selectGoodsList", selectGoodsList);
+			mav.addObject("couponList", couponList);
+			session.setAttribute("selectGoodsList", selectGoodsList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			String previousPage = request.getHeader("Referer");
+			mav = Alert.alertAndRedirect("주문 정보를 받아오지 못 했습니다.", previousPage);
 		}
-
-		mav.setViewName(viewName);
-		mav.addObject("payment_price", payment_price);
-		mav.addObject("shippingFee", shippingFee);
-		mav.addObject("discount_price", discount_price);
-		mav.addObject("selectGoodsList", selectGoodsList);
-		mav.addObject("couponList", couponList);
-		session.setAttribute("selectGoodsList", selectGoodsList);
+		
 		return mav;
 	}
 
@@ -175,7 +183,7 @@ public class MypageControllerImpl implements MypageController {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
-		String viewName = (String) request.getAttribute("viewName");
+	
 
 		int orderNo = mypageService.selectNewOrderNo();
 		String orderer_name = request.getParameter("orderer_name");

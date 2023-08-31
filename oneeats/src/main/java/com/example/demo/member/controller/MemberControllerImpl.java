@@ -72,27 +72,26 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView Register(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
+		Map memberMap = GeneralFileUploader.getParameterMap(request);
 		try {
 			int memberNo = memberService.registerInfoNo(); // 새로운 No
-			Map memberMap = GeneralFileUploader.getParameterMap(request);
 			memberMap.put("memberNo", memberNo);
 			String _birth = (String) memberMap.get("birth");
 			String sms_agreement = (String) memberMap.get("sms_agreement");
 			String email_agreement = (String) memberMap.get("email_agreement");
 			String zipCode = (String) memberMap.get("zipCode");
 			String inzung_bunho = (String) memberMap.get("inzung_bunho");
-			
-			
+
 			// 휴대폰 인증번호가 맞지 않으면 오류를 일으킴
-			if(inzung_bunho == null || inzung_bunho.trim().length()!=6) {
+			if (inzung_bunho == null || inzung_bunho.trim().length() != 6) {
 				throw new Exception("인증번호가 null이거나 형식에 맞지 않습니다.");
 			}
-			int inzung_id = memberService.loadVerificationIdByNumber(inzung_bunho);
-			if(inzung_id<1) {
+			int inzung_id = memberService.loadVerificationNoByNumber(inzung_bunho);
+			if (inzung_id < 1) {
 				throw new Exception("데이터베이스에서 인증번호를 찾을 수 없었습니다.");
 			}
 			memberMap.put("inzung_id", inzung_id);
-			
+
 			if (_birth == null || _birth.trim().length() < 1) {
 				memberMap.put("birth", null);
 			}
@@ -107,14 +106,15 @@ public class MemberControllerImpl implements MemberController {
 				memberMap.put("zipCode", 0);
 			}
 			System.out.println(memberMap);
-			
+
 			memberService.insertMemberWithMap(memberMap);
-			
+
 			mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath() + "/member/loginForm.do");
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav.addAllObjects(memberMap);
 			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못 했습니다.",
-					request.getContextPath() + "/member/registerTypeSelect.do");
+					request.getContextPath() + "/member/registerForm.do");
 		}
 
 		return mav;
@@ -129,7 +129,7 @@ public class MemberControllerImpl implements MemberController {
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberVO = new MemberVO();
 		String phone = request.getParameter("phone");
-		
+
 		phone = phone.replaceAll("-", "");
 		String name = request.getParameter("name");
 		memberVO.setName(name);
@@ -137,7 +137,7 @@ public class MemberControllerImpl implements MemberController {
 
 		List<String> idList = memberService.selectIdList(memberVO);
 
-		if (idList == null || idList.size()<1) {
+		if (idList == null || idList.size() < 1) {
 			mav = Alert.alertAndRedirect("해당하는 아이디가 존재하지 않습니다.", request.getContextPath() + "/member/idSearchForm.do");
 			return mav;
 		}
@@ -194,7 +194,6 @@ public class MemberControllerImpl implements MemberController {
 
 	}
 
-	
 	@Override
 	@RequestMapping(value = "/member/sellerRegister.do", method = RequestMethod.POST)
 	public ModelAndView sellerRegister(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -206,8 +205,18 @@ public class MemberControllerImpl implements MemberController {
 			String email_agreement = request.getParameter("email_agreement");
 			String birth = request.getParameter("birth");
 			String zipCode = request.getParameter("zipCode");
-			
-			
+			String inzung_bunho = (String) memberMap.get("inzung_bunho");
+
+			// 휴대폰 인증번호가 맞지 않으면 오류를 일으킴
+			if (inzung_bunho == null || inzung_bunho.trim().length() != 6) {
+				throw new Exception("인증번호가 null이거나 형식에 맞지 않습니다.");
+			}
+			int inzung_id = memberService.loadVerificationNoByNumber(inzung_bunho);
+			if (inzung_id < 1) {
+				throw new Exception("데이터베이스에서 인증번호를 찾을 수 없었습니다.");
+			}
+			memberMap.put("inzung_id", inzung_id);
+
 			if (birth == null || birth.trim().length() < 1) {
 				memberMap.put("birth", null);
 			}
@@ -220,20 +229,17 @@ public class MemberControllerImpl implements MemberController {
 			if (zipCode == null || zipCode.trim().length() < 1) {
 				memberMap.put("zipCode", 0);
 			}
-			
-			
-			
+
 			memberService.insertSellerMemberWithMap(memberMap);
-			mav.addObject("registerResult","success");
+			mav.addObject("registerResult", "success");
 			mav.setViewName("/member/sellerRegisterForm");
 		} catch (Exception e) {
 			e.printStackTrace();
 			mav.addAllObjects(memberMap);
-			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못했습니다.", request.getContextPath()+"/member/sellerRegisterForm.do");
+			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못했습니다.",
+					request.getContextPath() + "/member/sellerRegisterForm.do");
 		}
-		
-		
-		
+
 		return mav;
 	}
 
@@ -257,12 +263,12 @@ public class MemberControllerImpl implements MemberController {
 	public String phoneInzung(HttpServletRequest request) {
 		String result = "success";
 		String bunho = request.getParameter("bunho");
-		
+
 		String resultNumber = memberService.loadRandomSMSInzungBunho(bunho);
-		if (resultNumber==null || resultNumber.trim().length()<1) {
+		if (resultNumber == null || resultNumber.trim().length() < 1) {
 			result = "fail";
 		}
-		
+
 		return result;
 	}
 
