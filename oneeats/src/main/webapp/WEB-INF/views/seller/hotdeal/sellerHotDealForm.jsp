@@ -32,7 +32,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           id="register-form"
           method="post"
           enctype="multipart/form-data"
-          action="${contextPath}/seller/hotdeal/sellerHotDealAdd.do?hotdealNo=${hotdeal.hotdealNo}"
+          action="${contextPath}/seller/hotdeal/sellerHotDealAdd.do?goodsNo=${goods.goodsNo}"
         >
           <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -101,18 +101,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="vegetable">채소</option>
-                            <option value="fruit">과일</option>
-                            <option value="juiceAndJam">
+                            <option value="채소">채소</option>
+                            <option value="과일">과일</option>
+                            <option value="주스 & 잼">
                               못난이 주스 / 수제청
                             </option>
-                            <option value="zzigae">찌개 / 탕 /찜</option>
-                            <option value="meal">식사 / 안주류</option>
-                            <option value="porridge">죽</option>
-                            <option value="meal replacement">
-                              식사 대용식
+                            <option value="찌개 &탕 &찜">찌개 / 탕 /찜</option>
+                            <option value="식사&안주류">식사 / 안주류</option>
+                            <option value="죽">죽</option>
+                            <option value="식사 대용식">식사 대용식</option>
+                            <option value="간편 한끼 반찬">
+                              간편 한끼 반찬
                             </option>
-                            <option value="sidedish">간편 한끼 반찬</option>
                           </select>
                         </div>
                       </dd>
@@ -129,8 +129,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </dt>
                       <dd class="property-flex1">
                         <input
-                          name="name"
-                          disabled
+                          name="goodsname"
+                          readonly
                           value="${goods.name}"
                           class="property-font1 nice-select"
                           style="width: 176px"
@@ -149,7 +149,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="price"
-                        disabled
+                        readonly
                         value="${goods.price}"
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -166,7 +166,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        disabled
+                        readonly
                         value="${memberInfo.name}"
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -183,7 +183,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        disabled
+                        readonly
                         name="rapping"
                         value="${goods.rapping}"
                         class="property-font1 nice-select"
@@ -201,7 +201,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        disabled
+                        readonly
                         name="manufacturer"
                         value="${goods.manufacturer}"
                         class="property-font1 nice-select"
@@ -219,7 +219,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        disabled
+                        readonly
                         name="weight"
                         value="${goods.weight}"
                         class="property-font1 nice-select"
@@ -237,7 +237,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        disabled
+                        readonly
                         value="${goods.harvest}"
                         type="text"
                         class="property-font1 nice-select"
@@ -348,10 +348,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <!--중간부분-->
                   <div style="display: inline-block">
                     <button
+                      type="submit"
                       class="cart-button css-cartbtn"
                       radius="3"
                       style="width: 100px"
-                      onclick="location.href='${contextPath}/seller/hotdeal/sellerHotDealForm.do?goodsNo=${goods.goodsNo}'"
                     >
                       <div class="css-nytqmg textbold">핫딜 등록</div>
                     </button>

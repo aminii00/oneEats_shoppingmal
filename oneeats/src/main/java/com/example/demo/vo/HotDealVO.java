@@ -10,7 +10,7 @@ public class HotDealVO {
 	private String name;
 	private String discounted_price;
 	private String goods_qty;
-	private Date finishDate;
+	private String finishDate;
 	private String description;
 	private Date creDate;
 	private String category;
@@ -56,10 +56,10 @@ public class HotDealVO {
 	public void setGoods_qty(String goods_qty) {
 		this.goods_qty = goods_qty;
 	}
-	public Date getFinishDate() {
+	public String getFinishDate() {
 		return finishDate;
 	}
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(String finishDate) {
 		this.finishDate = finishDate;
 	}
 	public String getDescription() {
