@@ -3,6 +3,7 @@ package com.example.demo.seller.goods.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -244,6 +245,98 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		mav.addObject("goods", goodsVO);
 		mav.setViewName("/seller/goods/sellerGoodsModForm");
 
+		return mav;
+	}
+	
+
+	@RequestMapping(value = "/seller/goods/sellerGoodsModForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView sellerGoodsModForm(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		System.out.println("여기는 sellerGoodsModForm");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		String viewName = (String) request.getAttribute("viewName");
+		
+		int goodsNo = (Integer.parseInt(request.getParameter("goodsNo")));
+		System.out.println("goodsNo="+goodsNo);
+		GoodsVO sellerGoods = sellerGoodsService.selectGoodsByGoodsNo(goodsNo);
+		System.out.println("sellerGoods=" + sellerGoods);
+		List<OptionVO> options = sellerGoodsService.selectOptionByGoodsNo(goodsNo);
+		System.out.println("options="+options);
+
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("sellerGoods", sellerGoods);
+		mav.addObject("options", options);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/seller/goods/sellerGoodsMod.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView sellerGoodsMod(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		System.out.println("여기는 sellerGoodsMod");
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String) request.getAttribute("viewName");
+		
+//		String goodsNo_= request.getParameter("goodsNo");
+//		int goodsNo = Integer.parseInt("goodsNo_");
+		String[] goods_No_= request.getParameterValues("goodsNo");
+		int[] goodsNo_ = new int[goods_No_.length];
+		for (int i=0; i<goodsNo_.length; i++) {
+			goodsNo_[i] = Integer.parseInt(goods_No_[i]);
+		}
+		int goodsNo = goodsNo_[0];
+		System.out.println("goodsNo="+goodsNo);
+		
+		String category = request.getParameter("category");
+		String name = request.getParameter("name");
+		String price = request.getParameter("price");
+		String rapping = request.getParameter("rapping");
+		String manufacturer = request.getParameter("manufacturer");
+		String weight = request.getParameter("weight");
+		String harvest = request.getParameter("harvest");
+		String description = request.getParameter("description");
+		String[] option_names = request.getParameterValues("option_name");
+		String[] option_qtys = request.getParameterValues("option_qty");
+		String[] option_prices = request.getParameterValues("option_price");
+		System.out.println("option_names="+Arrays.toString(option_names));
+			
+		
+		int[] optionNos = sellerGoodsService.selectOptionNoByGoodsNo(goodsNo);
+		for (int optionNo : optionNos) {
+			sellerGoodsService.deleteOption(optionNo);
+		}
+
+		GoodsVO sellerGoods = new GoodsVO();
+		sellerGoods.setCategory(category);
+		sellerGoods.setName(name);
+		sellerGoods.setPrice(price);
+		sellerGoods.setRapping(rapping);
+		sellerGoods.setManufacturer(manufacturer);
+		sellerGoods.setWeight(weight);
+		sellerGoods.setHarvest(harvest);
+		sellerGoods.setDescription(description);
+		sellerGoods.setGoodsNo(goodsNo);
+		System.out.println("sellerGoods="+sellerGoods);
+		
+		List<OptionVO> selectOptions = new ArrayList();
+		for (int i=0; i<option_names.length; i++) {
+			OptionVO temp = new OptionVO();
+			temp.setName(option_names[i]);
+			temp.setOption_qty(option_qtys[i]);
+			temp.setPrice(option_prices[i]);
+			temp.setGoodsNo(goodsNo);
+			selectOptions.add(temp);
+		}
+		System.out.println("selectOptions"+selectOptions);
+		
+
+		sellerGoodsService.updateSellerGoods(sellerGoods);
+		for (OptionVO optionVO : selectOptions) {
+			sellerGoodsService.insertOptionForMod(optionVO);
+		}
+
+		ModelAndView mav = new ModelAndView("redirect:/seller/goods/sellerGoodsList.do");
 		return mav;
 	}
 

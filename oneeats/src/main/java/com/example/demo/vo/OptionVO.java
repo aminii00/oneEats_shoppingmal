@@ -14,8 +14,9 @@ public class OptionVO {
 	private String option_qty;
 	private String price;
 	private int goodsNo;
+
 	
-	
+
 	public int getOptionNo() {
 		return optionNo;
 	}
@@ -63,11 +64,10 @@ public class OptionVO {
 		this.optionNo=optionNo;
 		this.goodsNo=goodsNo;
 	}
-	
 	@Override
 	public String toString() {
-		return "OptionVO [optionNo=" + optionNo + ", name=" + name + ", option_qty=" + option_qty
-				+ ", price=" + price + ", goodsNo=" + goodsNo  + "]";
+		return "OptionVO [optionNo=" + optionNo + ", name=" + name + ", option_qty=" + option_qty + ", price=" + price
+				+ ", goodsNo=" + goodsNo + "]";
 	}
 	
 	

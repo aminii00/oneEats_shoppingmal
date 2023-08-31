@@ -71,7 +71,7 @@ public class SellerCouponControllerImpl implements SellerCouponController{
 		coupon.setName(name);
 		coupon.setDiscount_price(discount_price);
 		coupon.setCondition(condition);
-		coupon.setExpDate(null);
+		coupon.setExpDate(expDate);
 		coupon.setMemberNo(memberNo);
 		System.out.println("coupon="+coupon);
 

@@ -45,8 +45,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <tr>
         <th style="width: 10%">번호</th>
         <th>쿠폰등록일</th>
-        <th style="width: 40%">쿠폰명</th>
+        <th style="width: 30%">쿠폰명</th>
         <th>사용처</th>
+        <th>유효기간</th>
         <th style="width: 10%">삭제</th>
       </tr>
 
@@ -56,6 +57,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <td>${sellerCoupon.creDate}</td>
           <td>${sellerCoupon.name}</td>
           <td>${sellerCoupon.memberName}</td>
+          <td>${sellerCoupon.expDate}</td>
           <td>
             <a
               href="javascript:void(0)"

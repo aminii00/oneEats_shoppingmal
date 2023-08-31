@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.seller.goods.dao.SellerGoodsDAO;
 import com.example.demo.vo.GoodsVO;
@@ -121,6 +122,62 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		sellerGoodsDAO.updateNewGoodsWithMap(goodsvo);
 
 	}
+
+
+	@Override
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo) {
+		return sellerGoodsDAO.selectGoodsByGoodsNo(goodsNo);
+	}
+
+	@Override
+	public int[] selectOptionNoByGoodsNo(int goodsNo) {
+		return sellerGoodsDAO.selectOptionNoByGoodsNo(goodsNo);
+	}
+
+	@Override
+	public void updateOption(int optionNo) {
+		sellerGoodsDAO.updateOption(optionNo);
+		
+	}
+
+	@Override
+	public List<OptionVO> selectOptionByGoodsNo(int goodsNo) {
+		return sellerGoodsDAO.selectOptionByGoodsNo(goodsNo);
+	}
+
+	@Override
+	public void updateOption(List<OptionVO> selectOptions) {
+		sellerGoodsDAO.updateOption(selectOptions);
+		
+	}
+
+	@Override
+	public void updateSellerGoods(GoodsVO sellerGoods) {
+		
+		sellerGoodsDAO.updateSellerGoods(sellerGoods);	
+		
+	}
+
+	@Override
+	public void deleteOption(int optionNo) {
+		sellerGoodsDAO.deleteOption(optionNo);
+		
+	}
+
+	@Override
+	public void insertOptionsForMod(List<OptionVO> selectOptions) {
+		sellerGoodsDAO.insertOptionsForMod(selectOptions);
+	
+	}
+
+	@Override
+	public void insertOptionForMod(OptionVO optionVO) {
+		sellerGoodsDAO.insertOptionForMod(optionVO);
+		
+	}
+	
+	
+	
 	// 북샵 따라해보기
 	// @Override
 	// public void modifyGoodsInfo(Map goodsMap) throws Exception{

@@ -28,6 +28,7 @@
 		<result column="category" property="category" />
 		<result column="type" property="type" />
 		<result column="memberNo" property="memberNo"/>
+
 	</resultMap>
 
 
@@ -37,6 +38,7 @@
 		<result column="option_qty" property="option_qty" />
 		<result column="price" property="price" />
 		<result column="goodsNo" property="goodsNo" />
+		
 	</resultMap>
 
 
@@ -244,6 +246,64 @@ goodsNo=#{goodsNo}
 		by cnt
 		desc limit 10)) as t
 		where category!='' and category!='none'
+	</select>
+	
+	<select id="selectGoodsByGoodsNo" resultMap="GoodsResult" parameterType="int">
+		<![CDATA[
+			select * from goods where goodsNo=#{goodsNo}
+		]]>
+	</select>
+	
+	<select id="selectOptionNoByGoodsNo" resultType="int" parameterType="int">
+		<![CDATA[
+			select optionNo	from `option` where goodsNo=#{goodsNo};
+		]]>
+	</select> 
+	
+	<update id="updateOption" parameterType="java.util.List">
+    	<foreach collection="list" item="item" separator=";">
+        	UPDATE `option`
+        	SET
+        	option_name = #{item.option_name},
+        	option_qty = #{item.option_qty},
+        	option_price = #{item.option_price}
+        	WHERE optionNo = #{item.optionNo}
+    	</foreach>
+	</update>
+	
+	<delete id="deleteOption" parameterType="int">
+		delete from `option`
+		where optionNo=#{optionNo}
+	</delete>
+	
+	<insert id="insertOptionsForMod" parameterType="java.util.List">
+
+		insert into `option`
+		(name,option_qty,price,goodsNo) values
+		(#{name},
+		#{option_qty},#{price},#{goodsNo})
+	</insert>
+	
+	<insert id="insertOptionForMod" parameterType="optionVO">
+		insert into `option`
+		(name,option_qty,price,goodsNo) values
+		(#{name},
+		#{option_qty},#{price},#{goodsNo})
+	</insert>
+	
+	<update id="updateSellerGoods" parameterType="goodsVO">
+		update goods
+		set
+		category=#{category}, name=#{name}, price=#{price}, manufacturer=#{manufacturer},
+		weight=#{weight}, harvest=#{harvest}, description=#{description}
+		where goodsNo=#{goodsNo}
+	</update>
+	
+	
+	<select id="selectOptionByGoodsNo" resultMap="OptionResult" parameterType="int">
+		<![CDATA[
+			select optionNo, name, option_qty, price, goodsNo  from `option` where goodsNo=#{goodsNo}
+		]]>
 	</select>
 
 

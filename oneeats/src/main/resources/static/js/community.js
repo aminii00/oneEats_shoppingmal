@@ -18,13 +18,13 @@ $(document).ready(function () {
 			var newRow= `
 			<div class="row ingredient_row">
                     <div class="col-md">
-                      <input type="text" name="name" class="form-control" placeholder="이름" />
+                      <input type="text" name="option_name" class="form-control" placeholder="이름" />
                     </div>
                     <div class="col-md">
                       <input type="text" name="option_qty" class="form-control" placeholder="양" />
                     </div>
                      <div class="col-md">
-                      <input type="text" name="price" class="form-control" placeholder="가격" />
+                      <input type="text" name="option_price" class="form-control" placeholder="가격" />
                     </div>
                     <div class="col-md-1">
                       <img
