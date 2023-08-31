@@ -58,6 +58,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <input
                 class="brd-lightgray btn-round btn-memberInfo textsize-1 text-center"
                 type="password"
+                value="${memberInfo.pwd}"
                 name="pwd"
               />
             </div>
@@ -74,6 +75,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <input
                 class="brd-lightgray btn-round btn-memberInfo textsize-1 text-center"
                 type="password"
+                value="${memberInfo.pwd}"
               />
             </div>
           </div>
@@ -127,6 +129,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   <input type="radio" 
                   name="gender" 
                   value="no" 
+                  checked
                   /><span class="textsize-1">선택안함</span>
                 </div>
               </div>

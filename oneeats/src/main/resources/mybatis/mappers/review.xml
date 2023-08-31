@@ -4,5 +4,61 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 	<mapper namespace="com.example.demo.review.dao.ReviewDAO">
+	
+	<resultMap id="ReviewResult" type="reviewVO">
+		<result property="reviewNo" column="reviewNo" />
+		<result property="star" column="star" />
+		<result property="reviewImg" column="reviewImg" />
+		<result property="content" column="content" />
+		<result property="goodsNo" column="goodsNo" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap>
+		
+		<resultMap id="GoodsResult" type="goodsVO">
+		<result column="goodsNo" property="goodsNo" />
+		<result column="name" property="name" />
+		<result column="price" property="price" />
+		<result column="rapping" property="rapping" />
+		<result column="manufacturer" property="manufacturer" />
+		<result column="weight" property="weight" />
+		<result column="expDate" property="expDate"
+			javaType="java.sql.Date" />
+		<result column="description" property="description" />
+		<result column="harvest" property="harvest" />
+		<result column="creDate" property="creDate"
+			javaType="java.sql.Date" />
+		<result column="img1" property="img1" />
+		<result column="img2" property="img2" />
+		<result column="img3" property="img3" />
+		<result column="img4" property="img4" />
+		<result column="img5" property="img5" />
+		<result column="category" property="category" />
+		<result column="type" property="type" />
+		<result column="memberNo" property="memberNo" />
+		<result column="seller_id" property="seller_id" />
+	</resultMap>
+		
+		
+		<select id="SearchGoods" resultType="goodsVO" parameterType="GoodsVO">
+		<![CDATA[
+			select goodsNo, name, price, img1 from goods where memberNo=#{memberNo} and goodsNo=#{goodsNo}
+		]]>
+	</select>
+	
+	<select id="newReviewNo" resultType="int">
+		<![CDATA[
+			select ifnull(max(reviewNo),0)+1 from review
+		]]>
+	</select>
+	
+	<!-- 리뷰 insert -->
+	<insert id="reviewInsert" parameterType="ReviewVO">
+		<![CDATA[
+		insert into review(reviewNo, star, reviewImg, content, goodsNo, memberNo)
+		values(#{reviewNo}, #{star}, #{reviewImg}, #{content}, #{goodsNo}, #{memberNo})
+		]]>
+	</insert>
+	
+
 		
 </mapper>

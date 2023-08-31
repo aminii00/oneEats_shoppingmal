@@ -335,21 +335,25 @@ public class MypageControllerImpl implements MypageController {
 		int memberNo = memberInfo.getMemberNo();
 		
 		String couponNo_ = request.getParameter("couponNo");
+		if(couponNo_.isEmpty()) {
+			mav = Alert.alertAndRedirect("쿠폰번호를 입력해주세요.", request.getContextPath() + "/mypage/couponSearch.do");
+			return mav;
+		}
 		int couponNo = Integer.parseInt(couponNo_);
 		System.out.println("couponNo = "+couponNo);
-		CouponVO result;
-		try {
-			result = mypageService.couponNum(couponNo);
-			System.out.println("result = " + result);
-			
-			
-		}catch(Exception e){
+		CouponVO couponVO = mypageService.couponNum(couponNo);
+		System.out.println("couponVO = " + couponVO);
+		if (couponVO == null) {
 			mav = Alert.alertAndRedirect("쿠폰이 존재하지 않습니다.", request.getContextPath() + "/mypage/couponSearch.do");
+			return mav;	
 		}
-		result = mypageService.couponNum(couponNo);
-		System.out.println("result = " + result);
-		result.setMemberNo(memberNo);
-		mypageService.couponInsert(result);
+		couponVO.setMemberNo(memberNo);
+		CouponVO couponNull = mypageService.couponNull(couponVO);
+		if (couponNull != null) {
+			mav = Alert.alertAndRedirect("이미 등록 되어있는 쿠폰입니다.", request.getContextPath() + "/mypage/couponSearch.do");
+			return mav;	
+		}
+		mypageService.couponInsert(couponVO);
 		
 		mav = Alert.alertAndRedirect("등록되었습니다.", request.getContextPath() + "/mypage/couponSearch.do");
 		return mav;
@@ -439,7 +443,7 @@ public class MypageControllerImpl implements MypageController {
 			memberVO.setBirth(null);
 		}
 		mypageService.updateMember(memberVO);
-		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberModForm.do");
+		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberMod.do");
 		return mav;
 	}
 
@@ -447,16 +451,19 @@ public class MypageControllerImpl implements MypageController {
 	@RequestMapping(value = "/mypage/mypageReviewList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView mypageReview(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 mypageReview Controller");
-		ModelAndView mav = new ModelAndView();
+		// 리뷰를 들어가면 1.작성가능리뷰 2.작성한 리뷰 리스트들이 출력 됨.
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
-		System.out.println("1");
 		int memberNo = memberInfo.getMemberNo();
-		System.out.println("2");
-		List<ReviewVO> reviewList = mypageService.reviewList(memberNo);
-		System.out.println("3");
+		// 1. 작성가능 리뷰 가져오기 (배송완료인 상품들)
+		List<OrderVO> reviewList = mypageService.reviewList(memberNo);
 		System.out.println("reviewList = " + reviewList);
+		// 2. 작성완료 리뷰 가져오기 (리뷰작성완료인 상품들)
+		List<OrderVO> writeReview = mypageService.writeReview(memberNo);
+		System.out.println("writeReview = " + writeReview);
+		ModelAndView mav = new ModelAndView();
 		mav.addObject("reviewList", reviewList);
+		mav.addObject("writeReview", writeReview);
 		mav.setViewName("/mypage/mypageReview");
 		return mav;
 	}

@@ -34,6 +34,10 @@
 		<result property="gun" column="gun" />
 		<result property="shippingFee" column="shippingFee" />
 		<result property="optionNo" column="optionNo" />
+		<result property="reviewNo" column="reviewNo" />
+		<result property="star" column="star" />
+		<result property="reviewImg" column="reviewImg" />
+		<result property="content" column="content" />
 	</resultMap>
 
 	<resultMap id="MemberResult" type="memberVO">
@@ -76,8 +80,8 @@
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
-	
-	
+
+
 
 	<resultMap id="DeliveryResult" type="deliveryAddressVO">
 		<result property="receiver_name" column="receiver_name" />
@@ -98,6 +102,8 @@
 		<result property="goods_qty" column="goods_qty" />
 		<result property="deliveryDate" column="deliveryDate" />
 		<result property="goodsName" column="goodsName" />
+		<result property="goodsImg" column="goodsImg" />
+		<result property="delivery_status" column="delivery_status" />
 	</resultMap>
 
 	<select id="selectOrderList" resultMap="OrderResult">
@@ -110,7 +116,8 @@
 		]]>
 	</select>
 
-	<select id="selectOrderByMemberNo" resultMap="OrderResult" parameterType="int">
+	<select id="selectOrderByMemberNo" resultMap="OrderResult"
+		parameterType="int">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
 			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo WHERE t_order.memberNo=#{memberNo}) 
@@ -165,7 +172,7 @@
 			select ifnull(max(orderNo),0)+1 from t_order
 		]]>
 	</select>
-	
+
 
 	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
 		<![CDATA[
@@ -212,17 +219,33 @@
 			inner join goods 
 			on 
 			bookmark.goodsNo=goods.goodsNO 
-			where 
+	  	where 
 			bookmark.memberNo=#{memberNo}
 		]]>
 	</select>
 
-	<!-- 리뷰 수정중 -->
-	<select id="reviewList" parameterType="int" resultMap="ReviewResult">
+	<!-- 리뷰 1 -->
+	<select id="reviewList" parameterType="int"
+		resultMap="OrderResult">
 	    <![CDATA[
-select * from review inner join
-(select t_order.goods_qty, t_order.deliveryDate, goods.name as goodsName, goods.goodsNo from t_order inner join goods on t_order.memberNo=goods.memberNo) as orderplusgoods
-on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
+        
+         select t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+         from t_order
+         inner join goods on t_order.memberNo=goods.memberNo 
+         where t_order.delivery_status='배송완료' and t_order.memberNo=#{memberNo}
+		]]>
+	</select>
+	
+		<!-- 리뷰 2 -->
+	<select id="writeReview" parameterType="int"
+		resultMap="OrderResult">
+	    <![CDATA[
+          select * from review inner join
+         (select t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+         from t_order 
+         inner join goods on t_order.memberNo=goods.memberNo where t_order.delivery_status='배송완료' ) 
+         as orderplusgoods
+         on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 		]]>
 	</select>
 
@@ -230,7 +253,6 @@ on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 	<select id="couponSearch" resultMap="CouponResult"
 		parameterType="memberVO">
 		<![CDATA[
-		
 		    select * from member_coupon 
 			inner join coupon 
 			on 
@@ -240,18 +262,27 @@ on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 
 		]]>
 	</select>
-	
+
 	<!-- 민아 쿠폰, 적립금 조회 -->
-	<select id="couponNum" resultType="couponVO"
-		parameterType="int">
+	<select id="couponNum" resultType="couponVO" parameterType="int">
 		<![CDATA[
 		    select couponNo, name, discount_price, expDate, creDate from coupon 
 			where 
 			couponNo=#{couponNo}
 		]]>
 	</select>
-	
-	<!-- 민아 쿠폰, 적립금 조회 -->
+
+	<!-- 민아 쿠폰 있는 지 없는 지 -->
+	<select id="couponNull" resultType="couponVO"
+		parameterType="couponVO">
+		<![CDATA[
+		    select * from member_coupon 
+			where 
+			couponNo=#{couponNo} and memberNo=#{memberNo}
+		]]>
+	</select>
+
+	<!-- 민아 쿠폰 등록 -->
 	<insert id="couponInsert" parameterType="couponVO">
 		<![CDATA[
 		    insert into member_coupon(couponNo, memberNo) 
