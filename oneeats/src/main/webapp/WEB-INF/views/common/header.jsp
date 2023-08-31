@@ -71,13 +71,14 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <div class="col-6">
           <div class="row">
             <div class="col-md">
-              <form action="${contextPath}/goods/goodsList.do">
+              <form action="${contextPath}/goods/search.do">
                 <div class="row vertical-align">
                   <div class="col-md-2 p-0">
                     <select name="filter_type" id="">
                       <option value="all">전체</option>
-                      <option value="베스트">베스트</option>
-                      <option value="채소">채소</option>
+                      <option value="상품명">상품명</option>
+                      <option value="판매자">판매자</option>
+                      <option value="원산지">원산지</option>
                     </select>
                   </div>
                   <div class="col-md p-0">

@@ -25,8 +25,8 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <div class="breadcrumb__text">
               <h2>One.eats</h2>
               <div class="breadcrumb__option">
-                <a href="./index.html">못난이 과일</a>
-                <span>채소</span>
+                <!-- <a href="${contextPath}/main/mainPage.do">${category}</a> -->
+                <span>${category}</span>
               </div>
             </div>
           </div>

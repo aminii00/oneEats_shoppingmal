@@ -113,7 +113,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               >
             </li>
           </c:forEach>
-          <c:if test="${section*10<totalMostQnANum}">
+          <c:if test="${section*100<totalMostQnANum}">
             <li class="li-btn">
               <a
                 href="${contextPath}/community/mostQnA/mostQnAList.do?section=${section+1}&pageNum=1"

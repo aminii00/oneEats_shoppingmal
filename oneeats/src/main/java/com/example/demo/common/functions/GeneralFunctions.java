@@ -3,6 +3,7 @@ package com.example.demo.common.functions;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -66,6 +67,17 @@ public class GeneralFunctions {
 	
 	public static ModelAndView getAlertPreviousRedirect(HttpServletRequest request, String msg) {
 		return Alert.alertAndRedirect(msg, getPreviousPage(request));
+	}
+	
+	public static String getQuery(Map map) {
+		String query = "";
+		for (Object key : map.keySet()) {
+			String _key = key.toString();
+		    String value = map.get(key).toString();
+		    query += "&"+_key+"="+value;
+		}
+		query = query.substring(1);
+		return query;
 	}
 
 }
