@@ -99,7 +99,7 @@ function fn_bookmark(contextPath,goodsNo) {
 
 
 // 상품 목록 페이지에서 상품을 카트에 첫번째 옵션으로 추가
-function fn_toCartFromList(contextPath,num) {
+function fn_addCartOneItem(contextPath,num) {
 	$.ajax({
 		type: "POST",
 		url: contextPath+"/addCartItem.do",

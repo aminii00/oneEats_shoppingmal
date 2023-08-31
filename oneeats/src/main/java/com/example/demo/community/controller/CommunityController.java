@@ -16,4 +16,5 @@ public interface CommunityController {
 	public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response);
 	public ModelAndView oneQnAReply(HttpServletRequest request, HttpServletResponse response);
 	public ModelAndView DoubleReply(HttpServletRequest request, HttpServletResponse response);
+	ModelAndView mostQnAList(HttpServletRequest request) throws IOException;
 	}

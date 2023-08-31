@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.member.dao.MemberDAO;
 import com.example.demo.vo.MemberVO;
@@ -56,9 +57,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void insertMemberWithMap(Map memberMap) {
+	@Transactional
+	public void insertMemberWithMap(Map memberMap) throws Exception{
+		String inzung_id = memberMap.get("inzung_id").toString();
+		memberDAO.updateVerificationNumberVerificated(inzung_id);
 		memberDAO.insertMemberWithMap(memberMap);
-
 	}
 
 	@Override
@@ -73,7 +76,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public void insertSellerMemberWithMap(Map memberMap) {
+		String inzung_id = memberMap.get("inzung_id").toString();
+		memberDAO.updateVerificationNumberVerificated(inzung_id);
 		memberDAO.insertSellerMemberWithMap(memberMap);
 
 	}
@@ -82,7 +88,42 @@ public class MemberServiceImpl implements MemberService {
 	public List<String> selectIdList(MemberVO memberVO) {
 		return memberDAO.selectIdList(memberVO);
 	}
+
+	@Override
+	public void saveRandomSMSInzungBunho(String randomNumber) {
+		memberDAO.insertRandomBunho(randomNumber);
+		
+	}
+
+	@Override
+	public String loadRandomSMSInzungBunho(String inputNumber) {
+		return memberDAO.selectVerificationNumber(inputNumber);
+	}
 	
+
+	@Override
+	public int loadVerificationNoByNumber(String number) {
+		return memberDAO.selectVerificationNoByNumber(number);
+	}
+
+	@Override
+	public String selectMemberFromSNSId(Map infoMap) {
+		
+		return memberDAO.selectMemberFromSNSId(infoMap);
+	}
+
+	@Override
+	@Transactional
+	public void insertMemberWithSNSMap(Map memberMap) {
+		int memberNo = memberDAO.selectNewSNSMemberNo();
+		String id = (String) memberMap.get("id");
+		id += "_"+memberNo;
+		memberMap.put("id", id);
+		memberDAO.insertMemberWithMap(memberMap);
+		memberDAO.insertSNSIdWithMap(memberMap);
+	}
+
+
 	
 
 }

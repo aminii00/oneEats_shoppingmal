@@ -10,6 +10,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <meta charset="UTF-8" />
     <title>자주하는 질문 작성</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
+    <script src="${contextPath}/js/textareaToInput.js"></script>
   </head>
 
   <body>
@@ -19,7 +20,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         자주하는 질문
       </div>
       <hr class="line-black" />
-      <form action="" method="post">
+      <form
+        action="${contextPath}/admin/community/mostQnA/addMostQnA.do"
+        method="post"
+      >
         <div class="mostQnAForm_grid">
           <div class="row mostQnAForm_title">
             <div class="col textcolor-black textbold text-left textsize-3">
@@ -41,9 +45,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </div>
             <div class="col-md">
               <select name="category" id="">
-                <option value="">결제</option>
-                <option value="">배송</option>
-                <option value="">주문</option>
+                <option value="결제">결제</option>
+                <option value="배송">배송</option>
+                <option value="주문">주문</option>
               </select>
             </div>
           </div>
@@ -52,13 +56,13 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="row mostQnAForm_content">
             <div class="col textcolor-black text-left textsize-2">
               <textarea
-                name="content"
-                class="form-control"
+                class="form-control s_textarea"
                 id=""
                 rows="10"
                 placeholder="내용을 입력해주세요."
                 required
               ></textarea>
+              <input type="hidden" name="content" id="h_input" value="" />
             </div>
           </div>
           <hr class="line-black" />
@@ -73,7 +77,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 취소
               </button>
               &nbsp;
-              <button class="btn-write" onclick="" type="submit">작성</button>
+              <button class="btn-write" type="submit">작성</button>
             </div>
           </div>
         </div>

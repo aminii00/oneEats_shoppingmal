@@ -34,6 +34,8 @@ dependencies {
     // 메일링
     implementation 'org.springframework.boot:spring-boot-starter-mail'
     
+    // 폰 메시지 보내기
+    implementation 'net.nurigo:sdk:4.3.0'
     
     runtimeOnly ('mysql:mysql-connector-java:8.0.25')
 

@@ -1,7 +1,10 @@
 package com.example.demo.goods.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.common.file.GeneralFileUploader;
+import com.example.demo.common.functions.GeneralFunctions;
 import com.example.demo.goods.service.GoodsService;
 import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
@@ -85,14 +90,32 @@ public class GoodsControllerImpl implements GoodsController {
 		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
 		mav.setViewName(viewName);
-
-		List<GoodsVO> goodsList = goodsService.selectAllGoodsList();
+		
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		
+		int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 12;
+		pagingMap.put("start", start);
+		
+		List<GoodsVO> goodsList = goodsService.selectGoodsListWithPagingMap(pagingMap);
 		mav.addObject("goodsList", goodsList);
-		int totalGoodsNum = goodsService.selectTotalGoodsNumForAll();
+		int totalGoodsNum = goodsService.selectGoodsTotalNumWithPagingMap(pagingMap);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
 
 		List<HotDealVO> newHotdealList = goodsService.selectNewHotDealList();
 		mav.addObject("newHotDealList", newHotdealList);
+		
+		mav.addAllObjects(pagingMap);
+		System.out.println(mav);
 		return mav;
 	}
 
@@ -153,5 +176,37 @@ public class GoodsControllerImpl implements GoodsController {
 		}
 		return result;
 	}
+	
+	
+	@RequestMapping("/goods/search.do")
+	public ModelAndView goodsSearch(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView("/goods/goodsList");
+		request.setCharacterEncoding("utf-8");
+		Map searchMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) searchMap.get("pageNum");
+		String section = (String) searchMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			searchMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			searchMap.put("section", section);
+		}
+		
+		int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 12;
+		searchMap.put("start", start);
+		
+		System.out.println(searchMap);
+		List<GoodsVO> goodsList =  goodsService.selectGoodsListWithSearchFilter(searchMap);
+		int totalGoodsNum = goodsService.selectGoodsTotalNumWithSearchFilter(searchMap);
 
+		
+		mav.addObject("goodsList", goodsList);
+		mav.addObject("totalGoodsNum",totalGoodsNum);
+		
+		mav.addAllObjects(searchMap);
+		System.out.println(mav);
+		return mav;
+	}
 }

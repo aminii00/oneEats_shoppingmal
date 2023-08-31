@@ -1,6 +1,7 @@
 package com.example.demo.goods.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -76,6 +77,28 @@ public class GoodsServiceImpl implements GoodsService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<GoodsVO> selectGoodsListWithSearchFilter(Map searchMap) {
+		return goodsDAO.selectGoodsListWithSearchFilter(searchMap);
+	}
+
+	@Override
+	public int selectGoodsTotalNumWithSearchFilter(Map searchMap) {
+		return goodsDAO.selectGoodsTotalNumWithSearchFilter(searchMap);
+	}
+
+	@Override
+	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap) {
+		return goodsDAO.selectGoodsListWithPagingMap(pagingMap);
+	}
+
+	@Override
+	public int selectGoodsTotalNumWithPagingMap(Map pagingMap) {
+		return goodsDAO.selectGoodsTotalNumWithPagingMap(pagingMap);
 	};
+	
+	
 
 }

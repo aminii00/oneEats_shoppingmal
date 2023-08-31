@@ -1,10 +1,12 @@
 package com.example.demo.admin.community.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.RecipeVO;
 
@@ -24,4 +26,16 @@ public interface AdminCommunityDAO {
 	 public int newNum();
 	 
 	 public void addNotice(NoticeVO noticeVO);
+
+	public int selectMostQnAListTotalNumWithCategory(String category);
+
+	public List<MostQnAVO> selectMostQnAListWithPagingMap(Map pagingMap);
+
+	public void insertNewMostQnAWithMap(Map condMap);
+
+	public MostQnAVO selectMostQnAByNo(String qnaNo);
+
+	public void updateMostQnAWithMap(Map condMap);
+
+	public void deleteMostQnA(int qnaNo);
 }

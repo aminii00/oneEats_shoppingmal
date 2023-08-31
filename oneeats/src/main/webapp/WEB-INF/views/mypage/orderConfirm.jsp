@@ -69,6 +69,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }).open();
       }
     </script>
+    <!--다음 주소 api 스크립트 끝-->
   </head>
   <body>
     <!-- 주문/결제 -->
@@ -272,47 +273,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>결제방법</td>
           <td>
-            <button
-              class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1"
-              type="button"
-              href="#"
-            >
-              신용카드
-            </button>
-            <button
-              class="btn-round btn-fat1 bg-white textcolor-black btn-border textsize-1"
-              type="button"
-              href="#"
-            >
-              계좌이체
-            </button>
-            <br />
-            <button class="btn-round btn-fat1 bg-white textbold btn-border">
-              <img
-                style="width: 40px; height: 25px"
-                src="${contextPath}/img/icon/kpay.png"
-              />
-            </button>
-            <button class="btn-round btn-fat1 bg-white textbold btn-border">
-              <img class="img-1" src="${contextPath}/img/icon/npay.png" />
-            </button>
-            <br />
-            <select name="payment_type">
-              <option value="카드사 선택">카드사 선택</option>
-              <option value="신한카드">신한카드</option>
-              <option value="현대카드">현대카드</option>
-              <option value="삼성카드">삼성카드</option>
-            </select>
-            <select>
-              <option value="일시불">일시불</option>
-              <option value="2개월 할부">2개월 할부</option>
-              <option value="3개월 할부">3개월 할부</option>
-              <option value="4개월 할부">4개월 할부</option>
-            </select>
+            <div id="payment-method"></div>
           </td>
         </tr>
       </table>
-
+      <input name="payment_type" type="hidden" />
       <hr class="linebold" style="margin: 0" />
       <br />
 
@@ -326,11 +291,54 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </button>
         <button
           class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0"
-          type="submit"
+          id="payment-request-button"
+          type="button"
         >
           결제하기
         </button>
       </div>
     </form>
+    <!--토스결제 api-->
+    <script src="https://js.tosspayments.com/v1/payment-widget"></script>
+    <script>
+      const paymentWidget = PaymentWidget(
+        "test_ck_kYG57Eba3GZb4JRkMzQ8pWDOxmA1",
+        // 비회원 customerKey
+        "${memberInfo.memberNo}"
+      );
+
+      /**
+       * 결제창을 렌더링합니다.
+       * @docs https://docs.tosspayments.com/reference/widget-sdk#renderpaymentmethods%EC%84%A0%ED%83%9D%EC%9E%90-%EA%B2%B0%EC%A0%9C-%EA%B8%88%EC%95%A1
+       */
+      paymentWidget.renderPaymentMethods("#payment-method", {
+        value: "${total_price}",
+        currency: "KRW",
+        country: "KR",
+      });
+
+      const paymentRequestButton = document.getElementById(
+        "payment-request-button"
+      );
+      paymentRequestButton.addEventListener("click", () => {
+        /** 결제 요청
+         * @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment%EA%B2%B0%EC%A0%9C-%EC%A0%95%EB%B3%B4
+         */
+
+        // 여기에 주문자정보를 일단 넣어두는 코드를 적어야
+
+        paymentWidget.requestPayment({
+          orderId: generateRandomString(),
+          orderName: "테스트 주문",
+          successUrl: window.location.origin + "/toss/orderSuccess.do",
+          failUrl: window.location.origin + "/toss/orderFail.do",
+        });
+      });
+
+      function generateRandomString() {
+        return window.btoa(Math.random()).slice(0, 20);
+      }
+    </script>
+    <!--토스결제 api 끝-->
   </body>
 </html>

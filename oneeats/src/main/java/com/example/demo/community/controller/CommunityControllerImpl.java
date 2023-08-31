@@ -27,6 +27,7 @@ import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.community.service.CommunityService;
 import com.example.demo.vo.IngredientVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
@@ -406,6 +407,45 @@ System.out.println("map : " + map);
 		mav.addObject("redirectMessage", msg);
 		mav.addObject("redirectPage", page);
 		return mav;
+	}
+
+	@Override
+	@RequestMapping(value="/mostQnA/mostQnAList.do")
+	public ModelAndView mostQnAList(HttpServletRequest request) throws IOException {
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		request.setCharacterEncoding("utf-8");
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		String category = (String) pagingMap.get("category");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		if (category == null || category.trim().length() < 1) {
+			category = "all";
+			pagingMap.put("category", category);
+		}
+		try {
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<MostQnAVO> mostQnAList = communityService.selectMostQnAListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("mostQnAList", mostQnAList);
+			int totalMostQnANum = communityService.selectMostQnAListTotalNumWithCategory(category);
+			mav.addObject("totalMostQnANum",totalMostQnANum);
+			
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+
 	}
 
 }

@@ -28,6 +28,11 @@ function calculate() {
         total_price = parseInt(total_price) - row_total_price;
         calculate();
         changeTexts();
+        
+        row.find(".h_goods_no").attr("disabled","disabled");
+        row.find(".h_option_no").attr("disabled","disabled");
+        row.find(".h_goods_inbun").attr("disabled","disabled");
+         console.log(row.find(".h_goods_no").val());
       }
 
       function fn_checkCartItem(row) {
@@ -44,6 +49,12 @@ function calculate() {
         total_price = parseInt(total_price) + row_total_price;
         calculate();
         changeTexts();
+        
+        row.find(".h_goods_no").removeAttr("disabled");
+        row.find(".h_option_no").removeAttr("disabled");
+        row.find(".h_goods_inbun").removeAttr("disabled");
+       
+        
       }
 
       $(document).on("click", ".goods_option_plus_btn", function () {

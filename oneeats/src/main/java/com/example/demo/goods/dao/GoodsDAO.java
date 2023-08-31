@@ -2,6 +2,7 @@ package com.example.demo.goods.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSession;
@@ -41,6 +42,14 @@ public interface GoodsDAO {
 	public void insertNewBookmark(BookmarkVO bookmarkVO);
 
 	public int isExistBookmark(BookmarkVO bookmarkVO);
+
+	public List<GoodsVO> selectGoodsListWithSearchFilter(Map searchMap);
+
+	public int selectGoodsTotalNumWithSearchFilter(Map searchMap);
+
+	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap);
+
+	public int selectGoodsTotalNumWithPagingMap(Map pagingMap);
 }
 	
 

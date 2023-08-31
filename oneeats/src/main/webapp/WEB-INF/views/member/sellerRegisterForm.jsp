@@ -628,6 +628,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                               <input
                                 class="form-control"
                                 id="inzung"
+                                name="inzung_bunho"
                                 placeholder=" 인증번호를 입력하세요"
                                 type="text"
                               />

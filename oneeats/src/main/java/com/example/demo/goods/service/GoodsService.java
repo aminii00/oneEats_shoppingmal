@@ -1,6 +1,7 @@
 package com.example.demo.goods.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CartVO;
@@ -31,6 +32,14 @@ public interface GoodsService {
 	public void insertNewBookmark(BookmarkVO bookmarkVO);
 
 	public boolean isExistBookmark(BookmarkVO bookmarkVO);
+
+	public List<GoodsVO> selectGoodsListWithSearchFilter(Map searchMap);
+
+	public int selectGoodsTotalNumWithSearchFilter(Map searchMap);
+
+	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap);
+
+	public int selectGoodsTotalNumWithPagingMap(Map pagingMap);
 	
 
 }

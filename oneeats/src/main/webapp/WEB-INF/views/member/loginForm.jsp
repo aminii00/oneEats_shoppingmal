@@ -174,7 +174,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <a
                 id="kakao-btn"
                 class="d-flex justify-content-center align-items-center"
-                href="${contextPath}/kakao/registerForm.do"
+                href="${contextPath}/kakao/loginForm.do"
               >
                 <img src="${contextPath}/img/icon/kakao.png" />
                 카카오 로그인
@@ -185,7 +185,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <a
                 id="naver-btn"
                 class="d-flex justify-content-center align-items-center"
-                href="#"
+                href="${contextPath}/naver/loginForm.do"
               >
                 <img src="${contextPath}/img/icon/naver.png" />
                 네이버 로그인

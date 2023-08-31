@@ -105,6 +105,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       method="post"
       action="${contextPath}/api/register.do"
     >
+      <input type="hidden" value="${phone}" name="phone" />
+      <input type="hidden" value="${sns_type}" name="sns_type" />
+      <input type="hidden" value="${sns_id}" name="sns_id" />
       <br />
       <br />
       <br />
@@ -177,6 +180,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 name="email"
                 placeholder=" 이메일을 입력해 주세요"
                 type="text"
+                value="${email}"
               />
             </div>
           </div>
@@ -184,7 +188,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="col-md-3"></div>
             <div class="col-md"><span id="errmsg_email">&nbsp;</span></div>
           </div>
-
           <div class="row">&nbsp;</div>
           <div class="row">
             <div class="col-md-3 text-left textsize-2 textbold">
