@@ -46,9 +46,14 @@ public interface MypageService {
 	
 	public void updateMember(MemberVO memberVO) throws DataAccessException;
 	
-	public List<ReviewVO> reviewList(int memberNo) throws DataAccessException;
+	public List<OrderVO> reviewList(int memberNo) throws DataAccessException;
+	
+	public List<OrderVO> writeReview(int memberNo) throws DataAccessException;
 	
 	public CouponVO couponNum(int couponNo);
 	
+	public CouponVO couponNull(CouponVO result);
+	
 	public void couponInsert(CouponVO result);
+	
 }

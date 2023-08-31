@@ -15,14 +15,27 @@ public class ReviewVO {
 	private int goods_qty;
 	private Date deliveryDate;
 	private String goodsName;
+	private String goodsImg;
+	private String delivery_status;
 	
 	
-	
+	public String getDelivery_status() {
+		return delivery_status;
+	}
+	public void setDelivery_status(String delivery_status) {
+		this.delivery_status = delivery_status;
+	}
+	public String getGoodsImg() {
+		return goodsImg;
+	}
+	public void setGoodsImg(String goodsImg) {
+		this.goodsImg = goodsImg;
+	}
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewNo=" + reviewNo + ", star=" + star + ", reviewImg=" + reviewImg + ", content=" + content
 				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + ", goods_qty=" + goods_qty + ", deliveryDate="
-				+ deliveryDate + ", goodsName=" + goodsName + "]";
+				+ deliveryDate + ", goodsName=" + goodsName+ ", goodsImg= " + goodsImg + " delivery_status= "+ delivery_status + "]" ;
 	}
 	public int getGoodsNo() {
 		return goodsNo;

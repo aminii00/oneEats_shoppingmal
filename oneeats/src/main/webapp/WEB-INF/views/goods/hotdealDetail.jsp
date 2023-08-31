@@ -93,7 +93,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 />
                 <span>평균 ${reviewAvg} 점 </span>
                 <span>(${totalReviewsNum} reviews)</span>
-                <div class="product__details__price">￦${goods.price}</div>
+                <div class="product__details__price">${goods.price}</div>
                 <section class="css-1ua1wyk">
                   <div class="css-iqoq9n">
                     <c:choose>

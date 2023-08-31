@@ -18,7 +18,7 @@ import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.ReviewVO;
 
 @Service("mypageService")
-public class MypageServiceImpl implements MypageService{
+public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private MypageDAO mypageDAO;
 
@@ -26,27 +26,33 @@ public class MypageServiceImpl implements MypageService{
 	public List<OrderVO> selectOrderList() throws DataAccessException {
 		return mypageDAO.selectOrderList();
 	}
-	
+
 	@Override
 	public List<OrderVO> selectOrderByMemberNo(int memberNo) {
 		return mypageDAO.selectOrderByMemberNo(memberNo);
 	}
-	
+
 	@Override
-	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception{
+	public List<OrderVO> selectOrderByOrderNo(int orderNo) throws Exception {
 		return mypageDAO.selectOrderByOrderNo(orderNo);
 	}
-	
+
 	@Override
-	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws Exception{
+	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws Exception {
 		return mypageDAO.selectCouponByMemberNo(memberNo);
 	}
-	
+
+	@Override
+	public CouponVO couponNull(CouponVO result) {
+		CouponVO couponNull = mypageDAO.couponNull(result);
+		return couponNull;
+	}
+
 	@Override
 	public void insertOrderList(List<OrderVO> orderList) {
 		mypageDAO.insertOrderList(orderList);
 	}
-	
+
 	@Override
 	public int selectNewOrderNo() {
 		return mypageDAO.selectNewOrderNo();
@@ -77,16 +83,16 @@ public class MypageServiceImpl implements MypageService{
 		System.out.println("listMyPageService");
 		return mypageDAO.selectMypageList(member_id);
 	}
-	
-	//민아 프로필편집
+
+	// 민아 프로필편집
 	@Override
 	public void mypageintro(HashMap memberMap) {
 		System.out.println("mypageintroService");
-		 mypageDAO.mypageintroupdate(memberMap);
+		mypageDAO.mypageintroupdate(memberMap);
 
 	}
-	
-	//민아 찜
+
+	// 민아 찜
 	@Override
 	public List selectBookList(MemberVO memberInfo) throws DataAccessException {
 		System.out.println("selectBookList Service");
@@ -94,45 +100,55 @@ public class MypageServiceImpl implements MypageService{
 		bookList = mypageDAO.selectBookList(memberInfo);
 		return bookList;
 	}
-	
+
 	@Override
 	public int removeBookMark(int goodsNo) throws DataAccessException {
 		return mypageDAO.deleteBookMark(goodsNo);
 	}
-	
+
 	@Override
-	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException{
+	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException {
 		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
 		return couponVO;
 	}
+
 	@Override
 	public CouponVO couponNum(int couponNo) {
 		CouponVO result = mypageDAO.couponNum(couponNo);
 		return result;
 	}
-	
+
 	@Override
 	public void couponInsert(CouponVO result) {
 		mypageDAO.couponInsert(result);
 	}
-	
+
 	@Override
-	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException{
+	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException {
 		List<DeliveryAddressVO> myAddressVO = mypageDAO.myAddress(memberNo);
 		return myAddressVO;
 	}
-	
-	//민아 회원정보 수정2
+
+	// 민아 회원정보 수정2
 	@Override
-	public void updateMember(MemberVO memberVO) throws DataAccessException{
+	public void updateMember(MemberVO memberVO) throws DataAccessException {
 		mypageDAO.updateMemberInfo(memberVO);
 	}
 
-	//민아 회원정보 수정2
+	// 민아 리뷰1
+	@Override
+	public List<OrderVO> reviewList(int memberNo) throws DataAccessException {
+		List<OrderVO> reviewList = mypageDAO.reviewList(memberNo);
+		return reviewList;
+	}
+	// 민아 리뷰2
 		@Override
-		public List<ReviewVO> reviewList(int memberNo) throws DataAccessException{
-			List<ReviewVO> reviewList = mypageDAO.reviewList(memberNo);
-			return reviewList;
-		}
-	
+	public List<OrderVO> writeReview(int memberNo) throws DataAccessException{
+			List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
+			return writeReview;
+		
+	}
+
+
+
 }
