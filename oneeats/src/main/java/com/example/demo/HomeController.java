@@ -38,11 +38,9 @@ public class HomeController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/sendInzungSMStest.do")
+	@RequestMapping(value = "/sms/sendInzungSMStest.do")
 	public String sendsmstest(HttpServletRequest request) {
 		String randomNumber = getRandomNumber();
-		Map condMap = GeneralFileUploader.getParameterMap(request);
-		System.out.println(condMap);
 		memberService.saveRandomSMSInzungBunho(randomNumber);
 		return "success";
 	}

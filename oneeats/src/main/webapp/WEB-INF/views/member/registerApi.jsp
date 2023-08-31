@@ -106,6 +106,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       action="${contextPath}/api/register.do"
     >
       <input type="hidden" value="${phone}" name="phone" />
+      <input type="hidden" value="${sns_type}" name="sns_type" />
+      <input type="hidden" value="${sns_id}" name="sns_id" />
       <br />
       <br />
       <br />

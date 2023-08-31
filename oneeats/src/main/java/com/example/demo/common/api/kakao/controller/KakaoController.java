@@ -1,17 +1,18 @@
 package com.example.demo.common.api.kakao.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
-import com.example.demo.common.api.common.MsgEntity;
 import com.example.demo.common.api.kakao.dto.KakaoDTO;
 import com.example.demo.common.api.kakao.service.KakaoService;
 import com.example.demo.member.service.MemberService;
@@ -61,8 +62,15 @@ public class KakaoController {
 		// 가입된 유저면 그대로 로그인, 가입되지 않은 유저면 회원가입창으로 이동.
 		long hash = kakaoInfo.hash();
 		System.out.println(kakaoInfo);
-
-		MemberVO member = memberService.selectMemberById("kakao_" + hash);
+		
+		Map infoMap = new HashMap();
+		infoMap.put("id", "kakao_"+hash);
+		infoMap.put("sns_id", kakaoInfo.getId());
+		infoMap.put("sns_type", "kakao");
+		
+		String memberId = memberService.selectMemberFromSNSId(infoMap);
+		MemberVO member = memberService.selectMemberById(memberId);
+				
 
 		if (member == null || member.getId().trim().length() < 1) {
 			if (kakaoFor.equals("login")) {

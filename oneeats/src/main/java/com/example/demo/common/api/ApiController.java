@@ -62,7 +62,7 @@ public class ApiController {
 			memberMap.put("pwd", "snsRegister");
 
 			try {
-				memberService.insertMemberWithMap(memberMap);
+				memberService.insertMemberWithSNSMap(memberMap);
 			} catch (Exception e) {
 				e.printStackTrace();
 				result = false;

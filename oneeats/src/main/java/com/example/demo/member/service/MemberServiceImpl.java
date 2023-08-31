@@ -106,5 +106,24 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectVerificationNoByNumber(number);
 	}
 
+	@Override
+	public String selectMemberFromSNSId(Map infoMap) {
+		
+		return memberDAO.selectMemberFromSNSId(infoMap);
+	}
+
+	@Override
+	@Transactional
+	public void insertMemberWithSNSMap(Map memberMap) {
+		int memberNo = memberDAO.selectNewSNSMemberNo();
+		String id = (String) memberMap.get("id");
+		id += "_"+memberNo;
+		memberMap.put("id", id);
+		memberDAO.insertMemberWithMap(memberMap);
+		memberDAO.insertSNSIdWithMap(memberMap);
+	}
+
+
+	
 
 }

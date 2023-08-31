@@ -48,5 +48,11 @@ public interface MemberDAO {
 	public int selectVerificationNoByNumber(String number);
 
 	public void updateVerificationNumberVerificated(String inzung_id);
+
+	public String selectMemberFromSNSId(Map infoMap);
+
+	public void insertSNSIdWithMap(Map memberMap);
+
+	public int selectNewSNSMemberNo();
 	
 }

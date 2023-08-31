@@ -29,4 +29,7 @@ public interface MemberService {
 	public String loadRandomSMSInzungBunho(String bunho);
 	
 	public int loadVerificationNoByNumber(String number);
+	public String selectMemberFromSNSId(Map infoMap);
+	public void insertMemberWithSNSMap(Map memberMap);
+
 }

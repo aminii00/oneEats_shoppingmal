@@ -2,6 +2,8 @@ package com.example.demo.common.api.naver.controller;
 
 import java.math.BigInteger;
 import java.security.SecureRandom;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,39 +24,36 @@ import com.example.demo.vo.MemberVO;
 @RequestMapping("naver")
 @Controller
 public class NaverController {
-	
+
 	@Autowired
 	private NaverService naverService;
 
 	@Autowired
 	private MemberService memberService;
 
-	
 	@RequestMapping(value = "/loginForm.do")
 	public ModelAndView naverlogin(HttpServletRequest request) {
 		SecureRandom random = new SecureRandom();
-	    String state = new BigInteger(130, random).toString();
-		ModelAndView mav = new ModelAndView("redirect:"+naverService.getNaverLogin(state));
+		String state = new BigInteger(130, random).toString();
+		ModelAndView mav = new ModelAndView("redirect:" + naverService.getNaverLogin(state));
 		HttpSession session = request.getSession();
 		session.setAttribute("naverFor", "login");
 		return mav;
-		
+
 	}
-	
-	
+
 	@RequestMapping(value = "/registerForm.do")
-	
+
 	public ModelAndView naverRegister(HttpSession session) {
 		SecureRandom random = new SecureRandom();
-	    String state = new BigInteger(130, random).toString();
-		ModelAndView mav = new ModelAndView("redirect:"+naverService.getNaverLogin(state));
+		String state = new BigInteger(130, random).toString();
+		ModelAndView mav = new ModelAndView("redirect:" + naverService.getNaverLogin(state));
 		session.setAttribute("naverFor", "register");
 		return mav;
 	}
-	
 
 	@RequestMapping(value = "/callback")
-	public ModelAndView callback(HttpServletRequest request) throws Exception{
+	public ModelAndView callback(HttpServletRequest request) throws Exception {
 		System.out.println("네이버 콜백 됨.");
 		NaverDTO naverInfo = naverService.getNaverInfo(request.getParameter("code"), request.getParameter("state"));
 
@@ -62,16 +61,23 @@ public class NaverController {
 		HttpSession session = request.getSession();
 		String naverFor = (String) session.getAttribute("naverFor");
 		session.removeAttribute("naverFor");
-		
+
 		if (naverFor == null || naverFor.trim().length() < 1) {
 			mav = Alert.alertAndRedirect("잘못된 api 접근입니다.", request.getContextPath() + "/main/mainPage.do");
 			return mav;
 		}
-		
+
 		String hash = naverInfo.hash();
-		
-		MemberVO member = memberService.selectMemberById("n_"+hash);
-		
+		hash = hash.substring(0, 10);
+		Map infoMap = new HashMap();
+		infoMap.put("id", "n_" + hash);
+		infoMap.put("sns_id", naverInfo.getId());
+		infoMap.put("sns_type", "naver");
+		mav.addAllObjects(infoMap);
+
+		String memberId = memberService.selectMemberFromSNSId(infoMap);
+		MemberVO member = memberService.selectMemberById(memberId);
+
 		if (member == null || member.getId().trim().length() < 1) {
 			if (naverFor.equals("login")) {
 				mav = Alert.alertAndRedirect("네이버 계정으로 가입된 계정이 아닙니다. \\n 회원가입 페이지로 이동합니다.",
@@ -95,26 +101,28 @@ public class NaverController {
 			}
 
 		}
-		
-		
-		
+
 		return mav;
-		
+
 	}
-	
-	
+
 	@RequestMapping("/registerApiForm.do")
-	public ModelAndView registerApi(HttpSession session) {
+	public ModelAndView registerApi(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("/member/registerApi");
+		HttpSession session = request.getSession();
 		NaverDTO naverInfo = (NaverDTO) session.getAttribute("naverInfo");
 		session.removeAttribute("naverInfo");
-		String hash = naverInfo.hash();
+		String hash = naverInfo.hash().substring(0, 10);
+		String sns_id = request.getParameter("sns_id");
+		String sns_type = request.getParameter("sns_type");
+
+		mav.addObject("sns_id", sns_id);
+		mav.addObject("sns_type", sns_type);
 		mav.addObject("api_id", "n_" + hash);
 		mav.addObject("name", naverInfo.getName());
-		mav.addObject("phone",naverInfo.getPhone());
+		mav.addObject("phone", naverInfo.getPhone());
 		mav.addObject("email", naverInfo.getEmail());
 		return mav;
 	}
 
-	 
 }
