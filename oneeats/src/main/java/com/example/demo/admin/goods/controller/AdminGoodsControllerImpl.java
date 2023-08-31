@@ -74,7 +74,7 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		String[] optionQtys = request.getParameterValues("option_qty");
 		String[] optionPrice = request.getParameterValues("option_price");
 
-		OptionVO[] options = new OptionVO[5];
+		OptionVO[] options = new OptionVO[optionNames.length];
 		for (int i = 0; i < options.length; i++) {
 			OptionVO optionVO = new OptionVO();
 			options[i] = optionVO;

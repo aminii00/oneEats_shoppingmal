@@ -54,6 +54,24 @@ public interface SellerGoodsDAO {
 
 	public void DeleteGoods(GoodsVO goodsvo);
 
+	public int[] selectOptionNoByGoodsNo(int goodsNo);
+
+	public void updateOption(int optionNo);
+
+	public List<OptionVO> selectOptionByGoodsNo(int goodsNo);
+
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo);
+
+	public void updateOption(List<OptionVO> selectOptions);
+
+	public void updateSellerGoods(GoodsVO sellerGoods);
+
+	public void deleteOption(int optionNo);
+
+	public void insertOptionsForMod(List<OptionVO> selectOptions);
+
+	public void insertOptionForMod(OptionVO optionVO);
+
 	
 	
 	//북샵따라하기

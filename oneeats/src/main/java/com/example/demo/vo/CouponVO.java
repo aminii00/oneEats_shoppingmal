@@ -10,12 +10,18 @@ public class CouponVO {
 	private String name;
 	private String discount_price;
 	private String condition;
-	private Date expDate;
+	private String expDate;
 	private Date creDate;
 	private int memberNo;
 	private String memberName;
 	
 	
+	public String getExpDate() {
+		return expDate;
+	}
+	public void setExpDate(String expDate) {
+		this.expDate = expDate;
+	}
 	public String getMemberName() {
 		return memberName;
 	}
@@ -52,12 +58,7 @@ public class CouponVO {
 	public void setCondition(String condition) {
 		this.condition = condition;
 	}
-	public Date getExpDate() {
-		return expDate;
-	}
-	public void setExpDate(Date expDate) {
-		this.expDate = expDate;
-	}
+	
 	public Date getCreDate() {
 		return creDate;
 	}
@@ -70,5 +71,6 @@ public class CouponVO {
 				+ ", condition=" + condition + ", expDate=" + expDate + ", creDate=" + creDate + ", memberNo="
 				+ memberNo + ", memberName=" + memberName + "]";
 	}
+	
 	
 }

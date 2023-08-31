@@ -35,4 +35,13 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		return adminOrderDAO.selectOrderByMemberType();
 	}	
 	
+//	@Override
+//	public List<OrderVO> selectOrderList(Map pagingMap) {
+//		return mypageDAO.selectOrderList(pagingMap);
+//	}
+//
+//	@Override
+//	public List<Map> countOrderNums() {
+//		return mypageDAO.countOrderNums();
+//	}
 }

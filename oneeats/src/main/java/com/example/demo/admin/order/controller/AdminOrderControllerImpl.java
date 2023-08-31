@@ -29,10 +29,59 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
 		String viewName = (String) request.getAttribute("viewName");
+		
+//		String category = request.getParameter("category");
+//		String _section = request.getParameter("section");
+//		String _pageNum = request.getParameter("pageNum");
+//		String order_search_type = request.getParameter("order_search_type");
+//		int pageNum;
+//		int section;
+//		if (_pageNum == null || _pageNum.length() <= 0) {
+//			pageNum = 1;
+//		} else {
+//			pageNum = Integer.parseInt(_pageNum);
+//		}
+//		if (_section == null || _section.length() <= 0) {
+//			section = 1;
+//		} else {
+//			section = Integer.parseInt(_section);
+//		}
+//		if (order_search_type !=null && order_search_type.length() < 1) {
+//			order_search_type = "all";
+//		}
+//		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+//		pagingMap.put("category", category);
+//		pagingMap.put("section", section);
+//		pagingMap.put("order_search_type", order_search_type);
+//		pagingMap.put("start", ((section-1) * 10 + pageNum - 1) * 10);
+//	
+//		List<OrderVO> orderList = mypageService.selectOrderList(pagingMap);		
 					
 		List<OrderVO> adminOrderList = adminOrderService.selectOrderByMemberType();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("adminOrderList", adminOrderList);
+		
+//		mav.addAllObjects(pagingMap);
+//		
+//		List<Map> resultMap = mypageService.countOrderNums();
+//		long totalOrderNum = (long) resultMap.get(0).get("cnt");
+//		long searchOrderNum = -1;
+//		for (Map < String, Object> row : resultMap) {
+//			String cate = (String) row.get("category");
+//			long count = (long) row.get("cnt");
+//			System.out.println("category=" + cate + ", count=" + count);
+//			if (cate.equals(category)) {
+//				searchOrderNum = count;
+//			}
+//		}
+//		if (searchOrderNum < 0) {
+//			searchOrderNum = totalOrderNum;
+//		}
+//		
+//		mav.addObject("orderNumMap", resultMap);
+//		mav.addObject("totalOrderNum", totalOrderNum);
+//		mav.addObject("searchOrderNum", searchOrderNum);		
+		
 		System.out.println(mav);
 		return mav;
 	}

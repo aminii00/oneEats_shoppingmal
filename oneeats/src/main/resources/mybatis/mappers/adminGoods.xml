@@ -58,11 +58,11 @@
 
 	</insert>
 
-	<insert id="insertOptions" parameterType="java.util.List">
+	<insert id="insertOptions" parameterType="optionVO">
 
 		insert into `option`
-		(optionNo,name,option_qty,price,goodsNo) values
-		(#{optionNo}, #{name},
+		(name,option_qty,price,goodsNo) values
+		( #{name},
 		#{option_qty},#{price},#{goodsNo})
 	</insert>
 

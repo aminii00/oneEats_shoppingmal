@@ -51,6 +51,24 @@ public interface SellerGoodsService {
 
 	public GoodsVO goodsItem(int goodsvo);
 
+	public int[] selectOptionNoByGoodsNo(int goodsNo);
+
+	public void updateOption(int optionNo);
+
+	public List<OptionVO> selectOptionByGoodsNo(int goodsNo);
+
+	public GoodsVO selectGoodsByGoodsNo(int goodsNo);
+
+	public void updateOption(List<OptionVO> selectOptions);
+
+	public void updateSellerGoods(GoodsVO sellerGoods);
+
+	public void deleteOption(int optionNo);
+
+	public void insertOptionsForMod(List<OptionVO> selectOptions);
+
+	public void insertOptionForMod(OptionVO optionVO);
+
 
 //북샵 따라해보기	
 	//public void modifyGoodsInfo(Map goodsMap) throws Exception;

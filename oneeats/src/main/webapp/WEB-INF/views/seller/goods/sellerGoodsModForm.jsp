@@ -84,7 +84,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <form
           id="mod-form"
-          action="${contextPath}/seller/goods/modSellerGoods.do?goodsNo=${goods.goodsNo}"
+          action="${contextPath}/seller/goods/sellerGoodsMod.do?goodsNo=${sellerGoods.goodsNo}"
           method="post"
           enctype="multipart/form-data"
         >
@@ -139,7 +139,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </dt>
                       <dd class="property-flex1">
                         <div style="align-content: center; margin-top: 4px">
-                          <select name="select" class="opt">
+                          <select name="category" class="opt">
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
@@ -172,7 +172,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <dd class="property-flex1">
                         <input
                           name="name"
-                          value="${goods.name}"
+                          value="${sellerGoods.name}"
                           class="property-font1 nice-select"
                           style="width: 176px"
                         />
@@ -190,7 +190,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="price"
-                        value="${goods.price}"
+                        value="${sellerGoods.price}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -206,7 +206,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        value="가나다"
+                        value="${memberInfo.name}"
                         readonly
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -224,7 +224,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="rapping"
-                        value="${goods.rapping}"
+                        value="${sellerGoods.rapping}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -241,7 +241,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="manufacturer"
-                        value="${goods.manufacturer}"
+                        value="${sellerGoods.manufacturer}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -258,7 +258,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="weight"
-                        value="${goods.weight}"
+                        value="${sellerGoods.weight}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -274,7 +274,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        value="${goods.harvest}"
+                        value="${sellerGoods.harvest}"
                         type="text"
                         class="property-font1 nice-select"
                         style="width: 176px"
@@ -295,15 +295,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="col-md">가격</div>
                             <div class="col-md-1"></div>
                           </div>
-                          <c:forEach items="${option}" var="goodsOption">
+                          <c:forEach items="${options}" var="option">
                             <div class="row ingredient_row">
                               <div class="col-md">
                                 <input
                                   name="option_name"
                                   type="text"
-                                  value="${goodsOption.name}"
+                                  value="${option.name}"
                                   class="form-control"
-                                  placeholder="상품명"
+                                  placeholder="옵션명"
                                   required
                                 />
                               </div>
@@ -311,7 +311,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 <input
                                   name="option_qty"
                                   type="text"
-                                  value="${goodsOption.option_qty}"
+                                  value="${option.option_qty}"
                                   class="form-control"
                                   placeholder="양"
                                   required
@@ -323,7 +323,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 <input
                                   name="option_price"
                                   type="text"
-                                  value="${goodsOption.price}"
+                                  value="${option.price}"
                                   class="form-control"
                                   placeholder="가격"
                                   required
@@ -370,7 +370,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value=""
+                      value="${sellerGoods.description}"
                     />
                   </p>
 

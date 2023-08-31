@@ -15,5 +15,9 @@ public interface AdminOrderService {
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
 	List<OrderVO> selectOrderByMemberType();
+	
+//	public List<OrderVO> selectOrderList(Map pagingMap);
+//
+//	public List<Map> countOrderNums();
 
 }
