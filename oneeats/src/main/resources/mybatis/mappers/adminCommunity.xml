@@ -2,13 +2,14 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
-<mapper namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
-	<!-- 리절트 맵 정의 -->	
+
+<mapper
+	namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
+	<!-- 리절트 맵 정의 -->
 	<resultMap id="recipeResult" type="recipeVO">
-	    <result property="recipeNO" column="recipeNO" />
+		<result property="recipeNO" column="recipeNO" />
 	</resultMap>
-	
+
 	<resultMap id="noticeResult" type="noticeVO">
 		<result property="noticeNo" column="noticeNo" />
 		<result property="category" column="category" />
@@ -16,24 +17,35 @@
 		<result property="content" column="content" />
 		<result property="creDate" column="creDate" />
 	</resultMap>
-	
-	<select id="sellectAllRecipe" resultMap="recipeResult" parameterType="recipeVO" >
+
+	<resultMap id="mostQnAResult" type="mostQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="category" column="category" />
+	</resultMap>
+
+
+	<select id="sellectAllRecipe" resultMap="recipeResult"
+		parameterType="recipeVO">
 	    <![CDATA[
 			select * from recipe
 		]]>
 	</select>
-	
+
 	<update id="adminNotideDetailupdate" parameterType="noticeVO">
-		update notice set category = #{category}, title = #{title}, content = #{content}
+		update notice
+		set category = #{category}, title = #{title}, content = #{content}
 		where
 		noticeNo=#{noticeNo}
 	</update>
-	
+
 	<select id="adminNoticeList" resultMap="noticeResult"
 		parameterType="String">
 		select * from notice
 	</select>
-	
+
 	<select id="adminNoticeDetail" resultMap="noticeResult">
 	    <![CDATA[
 			select * from notice 
@@ -41,13 +53,13 @@
 			noticeNo=#{noticeNo}
 		]]>
 	</select>
-	
+
 	<select id="newNum" resultType="int">
 		<![CDATA[
 			select ifnull(max(noticeNo),0)+1 from notice
 		]]>
 	</select>
-	
+
 	<insert id="addNotice" parameterType="noticeVO">
 		<![CDATA[
 		insert into notice(noticeNo,title, category, content)
@@ -55,8 +67,42 @@
 		(#{noticeNo}, #{title}, #{category}, #{content})
 		]]>
 	</insert>
-	
+
 	<delete id="deleteNotice" parameterType="int">
-	delete from notice where noticeNo=#{noticeNo}
+		delete from notice where noticeNo=#{noticeNo}
+	</delete>
+
+	<select id="selectMostQnAListWithPagingMap"
+		parameterType="java.util.Map" resultMap="mostQnAResult">
+		select * from mostQnA
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+		order by creDate
+		limit #{start},10
+	</select>
+
+	<select id="selectMostQnAListTotalNumWithCategory"
+		parameterType="String" resultType="int">
+		select count(qnaNo) from mostQnA
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+	</select>
+	
+	<insert id="insertNewMostQnAWithMap" parameterType="java.util.Map">
+		insert into mostQnA (title, content, category) values (#{title},#{content},#{category})
+	</insert>
+
+	<select id="selectMostQnAByNo" parameterType="String" resultType="mostQnAVO">
+		select * from mostQnA where qnaNo=#{qnaNo}
+	</select>
+	
+	<update id="updateMostQnAWithMap" parameterType="java.util.Map">
+		update mostQnA set category=#{category}, title=#{title}, content=#{content} where qnaNo=#{qnaNo}
+	</update>
+	
+	<delete id="deleteMostQnA" parameterType="int">
+		delete from mostQnA where qnaNo=#{qnaNo}
 	</delete>
 </mapper>

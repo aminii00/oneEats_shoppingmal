@@ -11,6 +11,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <title>레시피 목록</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/recipe.js"></script>
+    <script src="${contextPath}/js/textareaToInput.js"></script>
     <script type="text/javascript">
       function readURL(input) {
         if (input.files && input.files[0]) {
@@ -200,7 +201,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="row">
                 <div class="col howto_form">
                   <textarea
-                    class="howto_recipe form-control description_textarea"
+                    class="howto_recipe form-control s_textarea"
                     rows="10"
                   >
 ${recipe.description}</textarea
@@ -208,7 +209,7 @@ ${recipe.description}</textarea
                   <input
                     type="hidden"
                     value="${recipe.description}"
-                    id="h_description"
+                    id="h_input"
                     name="description"
                   />
                 </div>
@@ -236,19 +237,5 @@ ${recipe.description}</textarea
       <div>&nbsp;</div>
       <div>&nbsp;</div>
     </section>
-
-    <script>
-      $(document).ready(function () {
-        var textareaInput = $("#h_description").val();
-        var input = textareaInput.replace(/<br>/g, "\n");
-        $(".description_textarea").val(input);
-
-        $(".description_textarea").on("input", function () {
-          var textareaInput = $(this).val();
-          var output = textareaInput.replace(/\n/g, "<br>");
-          $("#h_description").val(output);
-        });
-      });
-    </script>
   </body>
 </html>

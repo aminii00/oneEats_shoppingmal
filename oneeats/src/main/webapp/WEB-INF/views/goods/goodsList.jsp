@@ -131,7 +131,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                         </li>
 
                         <li
-                          onclick="fn_toCartFromList('${contextPath}','${item.goodsNo}')"
+                          onclick="fn_addCartOneItem('${contextPath}','${item.goodsNo}')"
                         >
                           <a href="#"><i class="fa fa-shopping-cart"></i></a>
                         </li>

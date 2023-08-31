@@ -10,14 +10,20 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <meta charset="UTF-8" />
     <title>자주하는 질문 수정</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
+    <script src="${contextPath}/js/textareaToInput.js"></script>
   </head>
   <body>
     <section>
       <div class="textsize-3 text-left textbold textcolor-black">
         자주하는 질문
       </div>
+      ${mostQnA.category}
       <hr class="line-black" />
-      <form action="" method="post">
+      <form
+        action="${contextPath}/admin/community/mostQnA/modMostQnA.do"
+        method="post"
+      >
+        <input type="hidden" value="${mostQnA.qnaNo}" name="qnaNo" />
         <div class="mostQnAForm_grid">
           <div class="row mostQnAForm_title">
             <div class="col textcolor-black textbold text-left textsize-3">
@@ -40,9 +46,16 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             </div>
             <div class="col-md">
               <select name="category" id="">
-                <option value="">결제</option>
-                <option value="">배송</option>
-                <option value="">주문</option>
+                <c:forEach items="${['결제', '주문', '배송']}" var="i">
+                  <c:choose>
+                    <c:when test="${i==mostQnA.category}">
+                      <option value="${i}" selected>${i}</option>
+                    </c:when>
+                    <c:otherwise>
+                      <option value="${i}">${i}</option>
+                    </c:otherwise>
+                  </c:choose>
+                </c:forEach>
               </select>
             </div>
           </div>
@@ -51,8 +64,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="row mostQnAForm_content">
             <div class="col textcolor-black text-left textsize-2">
               <textarea
-                name="content"
-                class="form-control"
+                class="form-control s_textarea"
                 id=""
                 rows="10"
                 placeholder="내용을 입력해주세요."
@@ -60,6 +72,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               >
 ${mostQnA.content}</textarea
               >
+              <input type="hidden" name="content" id="h_input" />
             </div>
           </div>
           <hr class="line-black" />

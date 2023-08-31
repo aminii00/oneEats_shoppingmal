@@ -4,6 +4,12 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.servlet.ModelAndView;
+
+import com.example.demo.common.alert.Alert;
+
 public class GeneralFunctions {
 	public static boolean isInteger(String string) {
 		boolean isInteger = string.matches("-?\\d+");
@@ -52,6 +58,14 @@ public class GeneralFunctions {
 			e.printStackTrace();
 		}
 		return hash;
+	}
+	
+	public static String getPreviousPage(HttpServletRequest request) {
+		return request.getHeader("Referer");
+	}
+	
+	public static ModelAndView getAlertPreviousRedirect(HttpServletRequest request, String msg) {
+		return Alert.alertAndRedirect(msg, getPreviousPage(request));
 	}
 
 }

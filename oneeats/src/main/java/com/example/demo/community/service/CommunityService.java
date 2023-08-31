@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
@@ -39,4 +40,8 @@ public interface CommunityService {
 	public List<OneQnAVO> oneQnAList();
 	
 	public OneQnAVO oneQnADetail(int qnaNo);
+
+	public List<MostQnAVO> selectMostQnAListWithPagingMap(Map pagingMap);
+
+	public int selectMostQnAListTotalNumWithCategory(String category);
 }

@@ -10,7 +10,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
-    <script src="${contextPath}/js/recipe.js"></script>
+    <script src="${contextPath}/js/community.js"></script>
+    <script src="${contextPath}/js/textareaToInput.js"></script>
     <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
     <script type="text/javascript">
       function readURL(input) {
@@ -377,7 +378,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      class="goodsinfo description_textarea"
+                      class="goodsinfo s_textarea"
                       cols="50"
                       rows="8"
                       style="width: 350px"
@@ -386,7 +387,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <input
                       type="hidden"
                       name="description"
-                      id="goods_description"
+                      id="h_input"
                       value=""
                     />
                   </p>
@@ -419,21 +420,5 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </form>
       </div>
     </section>
-    <script>
-      $(document).ready(function () {
-        var textareaInput = $(".description_textarea").val();
-        var output = textareaInput.replace(/\n/g, "<br>");
-        var input = textareaInput.replace(/<br>/g, "\n");
-        $(".description_textarea").val(input);
-        $("#goods_description").val(output);
-
-        $(".description_textarea").on("input", function () {
-          var textareaInput = $(this).val();
-          var output = textareaInput.replace(/\n/g, "<br>");
-
-          $("#goods_description").val(output);
-        });
-      });
-    </script>
   </body>
 </html>

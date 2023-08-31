@@ -13,19 +13,20 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
-  </head>
-  <script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $("#goods_preview").attr("src", e.target.result);
-        };
+    <script src="${contextPath}/js/textareaToInput.js"></script>
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#goods_preview").attr("src", e.target.result);
+          };
 
-        reader.readAsDataURL(input.files[0]);
+          reader.readAsDataURL(input.files[0]);
+        }
       }
-    }
-  </script>
+    </script>
+  </head>
   <body>
     <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
@@ -370,7 +371,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      class="goodsinfo description_textarea"
+                      class="goodsinfo s_textarea"
                       cols="50"
                       rows="8"
                       style="width: 350px"
@@ -378,7 +379,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <input
                       type="hidden"
                       name="description"
-                      id="goods_description"
+                      id="h_input"
                       value=""
                     />
                   </p>
@@ -411,21 +412,5 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </form>
       </div>
     </section>
-    <script>
-      $(document).ready(function () {
-        var textareaInput = $(".description_textarea").val();
-        var output = textareaInput.replace(/\n/g, "<br>");
-        var input = textareaInput.replace(/<br>/g, "\n");
-        $(".description_textarea").val(input);
-        $("#goods_description").val(output);
-
-        $(".description_textarea").on("input", function () {
-          var textareaInput = $(this).val();
-          var output = textareaInput.replace(/\n/g, "<br>");
-
-          $("#goods_description").val(output);
-        });
-      });
-    </script>
   </body>
 </html>

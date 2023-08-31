@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.community.dao.CommunityDAO;
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
@@ -111,6 +112,16 @@ public class CommunityServiceImpl implements CommunityService {
 		OneQnAVO oneQnaVO = communityDAO.oneQnADetail(qnaNo);
 		return oneQnaVO;
 	}
+	@Override
+	public List<MostQnAVO> selectMostQnAListWithPagingMap(Map pagingMap) {
+		
+		return communityDAO.selectMostQnAListWithPagingMap(pagingMap);
+	}
+	@Override
+	public int selectMostQnAListTotalNumWithCategory(String category) {
+		return communityDAO.selectMostQnAListTotalNumWithCategory(category);
+	}
+	
 	
 
 }

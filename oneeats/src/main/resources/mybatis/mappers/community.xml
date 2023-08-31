@@ -31,7 +31,7 @@
 		<result property="content" column="content" />
 		<result property="creDate" column="creDate" />
 	</resultMap>
-	
+
 	<resultMap id="oneQnAResult" type="oneQnAVO">
 		<result property="qnaNo" column="qnaNo" />
 		<result property="title" column="title" />
@@ -41,16 +41,25 @@
 		<result property="parentNo" column="parentNo" />
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
+
+	<resultMap id="mostQnAResult" type="mostQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="category" column="category" />
+	</resultMap>
 	
 	
 	<select id="oneQnAList" resultMap="oneQnAResult">
 		select * from oneqna
 	</select>
-	
-	<select id="oneQnADetail" resultType="oneQnAVO" parameterType="int" >
+
+	<select id="oneQnADetail" resultType="oneQnAVO"
+		parameterType="int">
 		select * from oneqna
 		where qnaNo=#{qnaNo}
-		
+
 	</select>
 
 	<select id="sellectAllRecipe" resultMap="recipeResult">
@@ -212,5 +221,22 @@
 		by cnt
 		desc limit 10)) as t
 		where category!='' and category!='none'
+	</select>
+
+	<select id="selectMostQnAListWithPagingMap"
+		parameterType="java.util.Map" resultMap="mostQnAResult">
+		select * from mostQnA
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+		order by creDate
+		limit #{start},10
+	</select>
+	
+	<select id="selectMostQnAListTotalNumWithCategory" parameterType="String" resultType="int">
+		select count(qnaNo) from mostQnA
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
 	</select>
 </mapper>
