@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.member.dao.MemberDAO;
 import com.example.demo.vo.MemberVO;
@@ -56,9 +57,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public void insertMemberWithMap(Map memberMap) {
+	@Transactional
+	public void insertMemberWithMap(Map memberMap) throws Exception{
+		String inzung_id = memberMap.get("inzung_id").toString();
+		memberDAO.updateVerificationNumberVerificated(inzung_id);
 		memberDAO.insertMemberWithMap(memberMap);
-
 	}
 
 	@Override
@@ -94,6 +97,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectVerificationNumber(inputNumber);
 	}
 	
-	
+	@Override
+	public int loadVerificationIdByNumber(String number) {
+		return memberDAO.selectVerificationIdByNumber(number);
+		
+	}
+
 
 }

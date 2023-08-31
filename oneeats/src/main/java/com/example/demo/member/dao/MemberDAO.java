@@ -44,5 +44,9 @@ public interface MemberDAO {
 
 
 	public String selectVerificationNumber(String inputNumber);
+
+	public int selectVerificationIdByNumber(String number);
+
+	public void updateVerificationNumberVerificated(String inzung_id);
 	
 }

@@ -19,12 +19,13 @@ public interface MemberService {
 	
 	public MemberVO pwSearch(MemberVO memberVO) throws DataAccessException;
 	
-	public int updatePw(MemberVO memberVO) throws DataAccessException;
-	public void insertMemberWithMap(Map memberMap);
+	public int updatePw(MemberVO memberVO) throws Exception;
+	public void insertMemberWithMap(Map memberMap) throws Exception;
 	public MemberVO selectMemberByEmail(String email);
 	public MemberVO selectMemberById(String string);
 	public void insertSellerMemberWithMap(Map memberMap);
 	public List<String> selectIdList(MemberVO memberVO);
 	public void saveRandomSMSInzungBunho(String randomNumber);
 	public String loadRandomSMSInzungBunho(String bunho);
+	public int loadVerificationIdByNumber(String number);
 }

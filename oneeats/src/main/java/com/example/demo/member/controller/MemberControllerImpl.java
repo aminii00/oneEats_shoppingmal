@@ -80,7 +80,19 @@ public class MemberControllerImpl implements MemberController {
 			String sms_agreement = (String) memberMap.get("sms_agreement");
 			String email_agreement = (String) memberMap.get("email_agreement");
 			String zipCode = (String) memberMap.get("zipCode");
-
+			String inzung_bunho = (String) memberMap.get("inzung_bunho");
+			
+			
+			// 휴대폰 인증번호가 맞지 않으면 오류를 일으킴
+			if(inzung_bunho == null || inzung_bunho.trim().length()!=6) {
+				throw new Exception("인증번호가 null이거나 형식에 맞지 않습니다.");
+			}
+			int inzung_id = memberService.loadVerificationIdByNumber(inzung_bunho);
+			if(inzung_id<1) {
+				throw new Exception("데이터베이스에서 인증번호를 찾을 수 없었습니다.");
+			}
+			memberMap.put("inzung_id", inzung_id);
+			
 			if (_birth == null || _birth.trim().length() < 1) {
 				memberMap.put("birth", null);
 			}
@@ -94,12 +106,13 @@ public class MemberControllerImpl implements MemberController {
 			if (zipCode == null || zipCode.trim().length() < 1) {
 				memberMap.put("zipCode", 0);
 			}
-
 			System.out.println(memberMap);
+			
 			memberService.insertMemberWithMap(memberMap);
+			
 			mav = Alert.alertAndRedirect("회원가입이 완료되었습니다.", request.getContextPath() + "/member/loginForm.do");
-
 		} catch (Exception e) {
+			e.printStackTrace();
 			mav = Alert.alertAndRedirect("오류가 일어나 가입하지 못 했습니다.",
 					request.getContextPath() + "/member/registerTypeSelect.do");
 		}

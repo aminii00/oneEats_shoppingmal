@@ -94,6 +94,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       var pwd_input_text = "";
       var pwd_check_text = "-1";
       var contextPath = "${contextPath}";
+      var inzung_interval_id = "";
     </script>
     <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
     <script src="${contextPath}/js/registerForm.js"></script>
@@ -267,10 +268,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <div class="row toggle-content inzung_row">
             <div class="col">
               <div class="row">
-                <div class="col input-group">
+                <div class="col-md-3 d-flex align-items-center">
+                  <span>
+                    <input type="hidden" id="inzung_time" value="" />
+                    남은 시간 <span id="phone_inzung_time_text">5:00</span>
+                  </span>
+                </div>
+                <div class="col-md input-group">
                   <input
                     class="form-control"
                     id="inzung"
+                    name="inzung_bunho"
                     placeholder=" 인증번호를 입력하세요"
                     type="text"
                   />

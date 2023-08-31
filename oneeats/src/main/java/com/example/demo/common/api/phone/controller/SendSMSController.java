@@ -19,6 +19,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.member.service.MemberService;
 
@@ -34,8 +35,10 @@ import net.nurigo.sdk.message.response.MultipleDetailMessageSentResponse;
 import net.nurigo.sdk.message.response.SingleMessageSentResponse;
 import net.nurigo.sdk.message.service.DefaultMessageService;
 
-@Controller
-@RequestMapping("sms")
+
+// 여기를 풀면 실제로 문자가 감
+//@Controller
+//@RequestMapping("sms")
 public class SendSMSController {
 
 	@Value("${sms.send.num}")
@@ -51,25 +54,41 @@ public class SendSMSController {
 
 	@Autowired
 	MemberService memberService;
+	
 
-	@PostMapping("/sendInzung.do")
-	public SingleMessageSentResponse sendOne(HttpServletRequest request) throws IOException {
-		messageService = NurigoApp.INSTANCE.initialize(API_KEY, API_SECRET, "https://api.coolsms.co.kr");
-		Message message = new Message();
-		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-		request.setCharacterEncoding("utf-8");
-		String toNumber = request.getParameter("toNumber");
-		String randomNumber = getRandomNumber();
-		memberService.saveRandomSMSInzungBunho(randomNumber);
-		Message coolsms = new Message();
-		coolsms.setFrom(SEND_NUM);
-		coolsms.setTo(toNumber);
-		coolsms.setText("[one.eats] 인증번호 " + randomNumber + " 를 입력하세요.");
+	@ResponseBody
+	@PostMapping("/sendInzungSMS.do")
+	public String sendOne(HttpServletRequest request) throws IOException {
+		String result="";
+		
+		try {
+			System.out.println("APIKEY = "+API_KEY);
+			System.out.println("APISECRET  = "+API_SECRET);
+			messageService = NurigoApp.INSTANCE.initialize(API_KEY, API_SECRET, "https://api.coolsms.co.kr");
+			// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
+			request.setCharacterEncoding("utf-8");
+			String toNumber = request.getParameter("toNumber");
+			toNumber = toNumber.trim();
+			String randomNumber = getRandomNumber();
+			memberService.saveRandomSMSInzungBunho(randomNumber);
+			Message coolsms = new Message();
+			coolsms.setFrom(SEND_NUM);
+			coolsms.setTo(toNumber);
+			coolsms.setText("[one.eats] 인증번호 " + randomNumber + " 를 입력하세요.");
+			System.out.println(coolsms);
+			SingleMessageSentResponse response = messageService.sendOne(new SingleMessageSendingRequest(coolsms));
+			System.out.println(response);
+			if(response.getStatusCode().contains("2000")) {
+				result = "success";
+			}else {
+				result = "fail";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		}
 
-		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
-		System.out.println(response);
-
-		return response;
+		return result;
 	}
 
 	private String getRandomNumber() {

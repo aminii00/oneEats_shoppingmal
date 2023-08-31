@@ -25,8 +25,8 @@ import java.util.ArrayList;
  * 모든 발송 API에는 발신, 수신번호 입력 항목에 +82 또는 +8210, 010-0000-0000 같은 형태로 기입할 수 없습니다.
  * 수/발신 가능한 예시) 01000000000, 020000000 등
  */
-@RestController
-@RequestMapping("/kakao")
+//@RestController
+//@RequestMapping("/kakao")
 public class KakaoExampleController {
 
     private final DefaultMessageService messageService;
