@@ -67,5 +67,9 @@ public interface MypageDAO {
 	public CouponVO couponNull(CouponVO result);
 	
 	public void couponInsert(CouponVO result);
+
+	public void insertTempOrderList(List<OrderVO> orderList);
+
+	public void updateTempOrderList(Map payInfoMap);
 	
 }

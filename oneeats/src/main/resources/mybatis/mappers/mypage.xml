@@ -166,6 +166,40 @@
 			#{item.goodsNo}, #{item.optionNo})
 		</foreach>
 	</insert>
+	
+	<insert id="insertTempOrderList" parameterType="java.util.List">
+		insert into t_order (orderNo, orderer_name, orderer_phone,
+		receiver_name, receiver_address, receiver_phone, receiver_comment,
+		used_point, used_couponId, payment_price, discount_price, shippingfee,
+		point_price, total_price,
+		payment_type, goods_qty, goods_inbun,
+		memberNo, goodsNo, optionNo,delivery_status)
+
+		values
+
+		<foreach collection="list" item="item" separator=",">
+			(#{item.orderNo}, #{item.orderer_name}, #{item.orderer_phone},
+			#{item.receiver_name}, #{item.receiver_address},
+			#{item.receiver_phone}, #{item.receiver_comment},
+			#{item.used_point},
+			#{item.used_couponId}, #{item.payment_price},
+			#{item.discount_price},
+			#{item.shippingfee}, #{item.point_price},
+			#{item.total_price},
+			'결제중',#{item.goods_qty}, #{item.goods_inbun},
+			#{item.memberNo},
+			#{item.goodsNo}, #{item.optionNo},'결제중')
+		</foreach>
+	</insert>
+	
+	<update id="updateTempOrderList" parameterType="java.util.Map">
+		update t_order
+		set
+		payment_type=#{payment_type}, total_price=#{total_price}, delivery_status='결제완료'
+		where memberNo=#{memberNo} and orderNo=#{orderNo} and delivery_status='결제중'
+		
+	</update>
+	
 
 	<select id="selectNewOrderNo" resultType="int">
 		<![CDATA[

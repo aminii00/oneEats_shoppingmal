@@ -131,14 +131,27 @@ public class MypageServiceImpl implements MypageService {
 		List<OrderVO> reviewList = mypageDAO.reviewList(memberNo);
 		return reviewList;
 	}
+
 	// 민아 리뷰2
-		@Override
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException{
-			List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
-			return writeReview;
-		
+	@Override
+	public List<OrderVO> writeReview(int memberNo) throws DataAccessException {
+		List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
+		return writeReview;
+
 	}
 
+	@Override
+	public void insertTempOrderList(List<OrderVO> orderList) {
+		mypageDAO.insertTempOrderList(orderList);
 
+	}
+
+	@Override
+	public void updateTempOrderList(Map payInfoMap) {
+		mypageDAO.updateTempOrderList(payInfoMap);
+		
+	}
+	
+	
 
 }
