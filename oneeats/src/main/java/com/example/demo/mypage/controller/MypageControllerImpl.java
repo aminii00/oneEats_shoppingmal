@@ -1,7 +1,10 @@
 package com.example.demo.mypage.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -269,7 +272,7 @@ public class MypageControllerImpl implements MypageController {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		System.out.println("memberInfo = " + memberInfo);
 		List bookList = mypageService.selectBookList(memberInfo);
-
+		
 		System.out.println(bookList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookList", bookList);
@@ -360,6 +363,81 @@ public class MypageControllerImpl implements MypageController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/mypage/addAddress.do")
+	public ModelAndView addAddress(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		request.setCharacterEncoding("utf-8");
+		Map condMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		
+		try {
+			int memberNo = member.getMemberNo();
+			condMap.put("memberNo", memberNo);
+			
+			mypageService.insertAddressWithMap(condMap);
+			mav = Alert.alertAndRedirect("주소지를 추가했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav = Alert.alertAndRedirect("배송지를 추가하지 못 했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		}
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/mypage/modAddress.do")
+	public ModelAndView modAddress(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		request.setCharacterEncoding("utf-8");
+		Map condMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		try {
+			int memberNo = member.getMemberNo();
+			condMap.put("memberNo", memberNo);
+			String isBasicAddress = (String) condMap.get("isBasicAddress");
+			
+			// 기본 배송지로 설정을 눌렀을 때. 수정 폼에 넣은 주소지가 가장 작은 deliveryNo을 가지게 한다.
+			// 가장 작은 deliveryNo을 가진 배송지를 찾아내서 -> 그 배송지와 deliveryNo을 교환하는 방식.
+			// member 테이블에 해당하는 배송지 정보도 넣는다.
+			if (isBasicAddress != null && isBasicAddress.equals("yes")) {
+				String _deliveryNo = (String) condMap.get("deliveryNo");
+				int deliveryNo = Integer.parseInt(_deliveryNo);
+				List<DeliveryAddressVO> addressList = mypageService.myAddress(memberNo);
+				int idx = -1;
+				int minDeliveryNo = deliveryNo;
+				for (int i = 0; i < addressList.size(); i++) {
+					DeliveryAddressVO temp = addressList.get(i);
+					if (minDeliveryNo>temp.getDeliveryNo()) {
+						minDeliveryNo = temp.getDeliveryNo();
+						idx = i;
+					}
+				}
+				if (idx<0) {
+					mypageService.updateDeliveryAddressWithMap(condMap);
+				}else {
+					condMap.put("deliveryNo", minDeliveryNo);
+					DeliveryAddressVO targetDeliveryAddress = addressList.get(idx);
+					targetDeliveryAddress.setDeliveryNo(deliveryNo);
+					mypageService.swapDeliveryAddress(condMap,targetDeliveryAddress);
+				}
+				
+			}else {
+				mypageService.updateDeliveryAddressWithMap(condMap);				
+			}
+			mav = Alert.alertAndRedirect("수정했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav = Alert.alertAndRedirect("수정하지 못 했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		}
+		return mav;
+		
+	}
+	
+	
 	@RequestMapping(value = "/mypage/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("*Form.do");

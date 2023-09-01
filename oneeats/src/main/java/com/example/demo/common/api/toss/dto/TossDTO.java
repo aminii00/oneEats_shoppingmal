@@ -3,6 +3,8 @@ package com.example.demo.common.api.toss.dto;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONObject;
+
 public class TossDTO {
 	
 	private String version;
@@ -44,9 +46,13 @@ public class TossDTO {
 	private List<TossCashReceiptDTO> cashReceipts;
 	private int discount;
 	
+	private String paymentType;
 	
 	
-	
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
+	}
+
 	public String getVersion() {
 		return version;
 	}
@@ -336,7 +342,6 @@ public class TossDTO {
 	}
 	
 	
-	
 	@Override
 	public String toString() {
 		return "TossDTO [version=" + version + ", paymentKey=" + paymentKey + ", type=" + type + ", orderId=" + orderId
@@ -360,7 +365,8 @@ public class TossDTO {
 		this.orderName = (String) map.get("orderName");
 		this.method = (String) map.get("method");
 		this.totalAmount = (long) map.get("totalAmount");
-		
+		JSONObject result = new JSONObject(map);
+		this.paymentType = result.toJSONString();
 	}
 	
 	public TossDTO() {
@@ -368,7 +374,7 @@ public class TossDTO {
 	}
 	
 	public String getPaymentType() {
-		return method;
+		return paymentType;
 	}
 	
 	

@@ -43,14 +43,18 @@
   border: 0px solid #bcbcbc;
 }
 
-@media only screen and (max-width: 768px) {
-  #sidebar-left{
-    display: none;
-  }
+@media only screen and (max-width: 980px) {
+  	#sidebar-left{
+    	display: none;
+	}
   
   #content{
 	width:95%;
 	margin:auto;
+	}
+	
+	#sideber-open-btn{
+		display:inherit;
 	}
 }
 

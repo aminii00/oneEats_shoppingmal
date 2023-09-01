@@ -11,94 +11,382 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-     <!-- 다음 주소 api 스크립트 -->
-     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-     <script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script>
+      function execDaumPostCode_() {
+        new daum.Postcode({
+          oncomplete: function (data) {
+            var addr = ""; // 주소 변수
+            var extraAddr = ""; // 참고항목 변수
 
-      // 팝업창 띄우기
-      function openPopUp() {
-        // 함수 동작 테스트
-        //alert("팝업 테스트");
+            if (data.userSelectedType === "R") {
+              addr = data.roadAddress;
+            } else {
+              addr = data.jibunAddress;
+            }
 
-        //window.open("[팝업을 띄울 파일명 path]", "[별칭]", "[팝업 옵션]")
-        window.open(
-          "mypageAddressAddForm.do",
-          "배송지추가",
-          "width=450, height=450, top=150, left=200"
-        );
+            if (data.userSelectedType === "R") {
+              if (data.bname !== "" && /[동|로|가]$/g.test(data.bname)) {
+                extraAddr += data.bname;
+              }
+
+              if (data.buildingName !== "" && data.apartment === "Y") {
+                extraAddr +=
+                  extraAddr !== ""
+                    ? ", " + data.buildingName
+                    : data.buildingName;
+              }
+
+              if (extraAddr !== "") {
+                extraAddr = " (" + extraAddr + ")";
+              }
+
+              document.getElementById("address_extra_input").value = extraAddr; //참고항목
+            } else {
+              document.getElementById("address_extra_input").value = "";
+            }
+
+            document.getElementById("h_input_zipcode").value = data.zonecode; // 우편번호
+            document.getElementById("address_input").value = addr;
+
+            document.getElementById("address_detail_input").focus(); // 상세주소
+          },
+        }).open();
       }
-      function showHidden() {
-        alert(document.testForm.flag.value);
+    </script>
+    <style>
+      .address_add_form {
+        max-width: 400px;
+        margin: auto;
       }
-     </script>
-     
+      .address_add_form .input-tall {
+        height: 60px;
+      }
+      .address_add_form .input-group-append > button {
+        min-width: 120px;
+      }
+      .address_table {
+        width: 100%;
+      }
+      .address_table :first-child {
+        border-bottom: 1px solid #333333;
+      }
+      .address_table :nth-child(2) {
+        font-weight: 600;
+      }
+    </style>
+    <script>
+      function fn_openAddressModForm(num) {
+        var row = $(".delivery_address_row_" + num);
+        var address = row.find(".h_row_address").val();
+        var address_detail = row.find(".h_row_address_detail").val();
+        var receiver_name = row.find(".h_row_receiver_name").val();
+        var receiver_phone = row.find(".h_row_receiver_phone").val();
+        var zipCode = row.find(".h_row_zipCode").val();
+
+        var modForm = $("#address_mod_form");
+        modForm.find("input[name=address]").val(address);
+        modForm.find("input[name=address_detail]").val(address_detail);
+        modForm.find("input[name=receiver_name]").val(receiver_name);
+        modForm.find("input[name=receiver_phone]").val(receiver_phone);
+        modForm.find("input[name=zipCode]").val(zipCode);
+        modForm.find("input[name=deliveryNo]").val(num);
+        if (modForm.parent().css("display") == "none") {
+          modForm.parent().slideToggle();
+        }
+      }
+
+      $(document).ready(function () {
+        $("#modFormExit").on("click", function () {
+          var modForm = $("#address_mod_form");
+          modForm.parent().slideToggle();
+        });
+      });
+    </script>
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
-   
   </head>
   <body>
-    <form method="post" action="#">
-      <div class="div-p1">
-        <br />
-        <p class="textsize-2 text-left textcolor-black textbold">
-          배송지 관리<a class="textsize-1" style="float: right" onclick="openPopUp()"
-            >+새 배송지 추가</a
-          >
-        </p>
+    <div class="div-p1">
+      <div class="text-left">
+        <span class="textbold">배송지 관리</span>
+        <a class="textsize-1 toggle-btn" style="float: right">
+          +새 배송지 추가
+        </a>
+        <div class="clear"></div>
         <hr class="linebold" />
-
-        <table class="coupontd textsize-2">
-          <tr class="coupontr textbold">
-            <td class="addresstd1">&nbsp;선택</td>
-            <td class="addresstd2">주소</td>
-            <td class="addresstd3">받으실 분</td>
-            <td class="addresstd4">연락처</td>
-            <td>수정</td>
-          </tr>
-          <c:forEach var="item" items="${myAddress}" varStatus="status">
-            <tr class="coupontr">
-              <td class="addresstd1">&nbsp&nbsp선택</td>
-              <td class="addresstd2">
-                ${item.address} &nbsp ${item.address_detail}
-              </td>
-              <td class="addresstd3">${item.receiver_name}</td>
-              <td class="addresstd4">${item.receiver_phone}</td>
-              <td><button class ="border-0" type="button" onclick="openPopUp()">
-                <img class ="border-0" 
-                src="${contextPath}/img/icon/mod.png"
-                alt="Logo"
-                style="width: 35px; height: auto"></button></td>
-            </tr>
-          </c:forEach>
-        </table>
-        <br />
-        <br />
-        <br />
-        <div id="wrapper">
-          <main id="product">
-            <section class="view">
-              <article class="review">
-                <div class="paging">
-                  <span class="prev">
-                    <a href="#">< 이전</a>
-                  </span>
-                  <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                  </span>
-                  <span class="next">
-                    <a href="#">다음 ></a>
-                  </span>
+        <div class="toggle-content">
+          <form
+            action="${contextPath}/mypage/addAddress.do"
+            class="address_add_form"
+          >
+            <div class="row">
+              <div class="col textsize-2 textbold">배송지 추가</div>
+            </div>
+            <div class="row">&nbsp;</div>
+            <div class="row">
+              <div class="col">
+                <div class="row">
+                  <div class="col text-left textsize-2">받는 분 성함</div>
                 </div>
-              </article>
-            </section>
-          </main>
+                <div class="row">
+                  <div class="col input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="receiver_name"
+                      value="${memberInfo.name}"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col text-left textsize-2">받는 분 전화번호</div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <input
+                      type="text"
+                      class="form-control"
+                      name="receiver_phone"
+                      value="${memberInfo.phone}"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                  <div class="col input-group">
+                    <input
+                      type="text"
+                      id="address_input"
+                      name="address"
+                      class="form-control"
+                      placeholder="주소"
+                      readonly
+                      required
+                    />
+                    <div class="input-group-append">
+                      <button
+                        type="button"
+                        class="bg-lightgreen textsize-2 border-0"
+                        onclick="execDaumPostCode_()"
+                      >
+                        주소검색
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                  <div class="col">
+                    <input
+                      id="address_detail_input"
+                      class="form-control"
+                      name="address_detail"
+                      placeholder=" 상세 주소를 입력해주세요."
+                      type="text"
+                    />
+                    <input
+                      type="hidden"
+                      id="h_input_zipcode"
+                      placeholder="우편번호"
+                      name="zipCode"
+                    />
+                    <input
+                      type="hidden"
+                      id="address_extra_input"
+                      placeholder="참고주소"
+                    />
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                  <div class="col">
+                    <button class="btn-long bg-lightgreen border-0">
+                      추가
+                    </button>
+                  </div>
+                </div>
+                <div class="row">&nbsp;</div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-    </form>
+      <div class="toggle-content">
+        <form
+          id="address_mod_form"
+          action="${contextPath}/mypage/modAddress.do"
+          class="address_add_form"
+        >
+          <input type="hidden" name="deliveryNo" />
+          <div class="row">
+            <div class="col textsize-2 textbold">배송지 수정</div>
+          </div>
+          <div class="row">&nbsp;</div>
+          <div class="row">
+            <div class="col">
+              <div class="row">
+                <div class="col text-left textsize-2">받는 분 성함</div>
+              </div>
+              <div class="row">
+                <div class="col input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="receiver_name"
+                    value=""
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col text-left textsize-2">받는 분 전화번호</div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="receiver_phone"
+                    value="${memberInfo.phone}"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="col input-group">
+                  <input
+                    type="text"
+                    id="address_input"
+                    name="address"
+                    class="form-control"
+                    placeholder="주소"
+                    readonly
+                    required
+                  />
+                  <div class="input-group-append">
+                    <button
+                      type="button"
+                      class="bg-lightgreen textsize-2 border-0"
+                      onclick="execDaumPostCode_()"
+                    >
+                      주소검색
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="col">
+                  <input
+                    id="address_detail_input"
+                    class="form-control"
+                    name="address_detail"
+                    placeholder=" 상세 주소를 입력해주세요."
+                    type="text"
+                  />
+                  <input
+                    type="hidden"
+                    id="h_input_zipcode"
+                    placeholder="우편번호"
+                    name="zipCode"
+                  />
+                  <input
+                    type="hidden"
+                    id="address_extra_input"
+                    placeholder="참고주소"
+                  />
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="col">
+                  <input type="checkbox" name="isBasicAddress" value="yes" />
+                  기본 배송지로 저장
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row">
+                <div class="col">
+                  <button class="btn-long bg-lightgreen border-0">수정</button>
+                </div>
+                <div class="col">
+                  <button
+                    type="button"
+                    id="modFormExit"
+                    class="bg-lightgray btn-long border-0"
+                  >
+                    닫기
+                  </button>
+                </div>
+              </div>
+              <div class="row">&nbsp;</div>
+              <div class="row"></div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <table class="address_table textsize-2">
+        <tr class="address_header textbold">
+          <td class="addresstd2">주소</td>
+          <td class="addresstd3">받으실 분</td>
+          <td class="addresstd4">연락처</td>
+          <td>수정</td>
+        </tr>
+        <c:forEach var="item" items="${myAddress}" varStatus="status">
+          <tr class="delivery_address_row_${item.deliveryNo}">
+            <input
+              type="hidden"
+              class="h_row_address"
+              value="${item.address}"
+            />
+            <input
+              type="hidden"
+              class="h_row_address_detail"
+              value="${item.address_detail}"
+            />
+            <input
+              type="hidden"
+              class="h_row_receiver_name"
+              value="${item.receiver_name}"
+            />
+            <input
+              type="hidden"
+              class="h_row_receiver_phone"
+              value="${item.receiver_phone}"
+            />
+            <input
+              type="hidden"
+              class="h_row_zipCode"
+              value="${item.zipCode}"
+            />
+            <td class="addresstd2">
+              ${item.address} &nbsp ${item.address_detail}
+            </td>
+            <td class="addresstd3">${item.receiver_name}</td>
+            <td class="addresstd4">${item.receiver_phone}</td>
+            <td>
+              <button
+                class="border-0"
+                type="button"
+                onclick="fn_openAddressModForm('${item.deliveryNo}')"
+              >
+                <img
+                  class="border-0"
+                  src="${contextPath}/img/icon/mod.png"
+                  alt="Logo"
+                  style="width: 35px; height: auto"
+                />
+              </button>
+            </td>
+          </tr>
+        </c:forEach>
+      </table>
+      <br />
+      <br />
+      <br />
+    </div>
   </body>
 </html>

@@ -71,5 +71,13 @@ public interface MypageDAO {
 	public void insertTempOrderList(List<OrderVO> orderList);
 
 	public void updateTempOrderList(Map payInfoMap);
+
+	public void insertAddressWithMap(Map condMap);
+
+	public void updateDeliveryAddressWithMap(Map condMap);
+
+	public void updateDeliveryAddress(DeliveryAddressVO targetDeliveryAddress);
+
+	public void updateMemberAddressWithMap(Map condMap);
 	
 }
