@@ -38,4 +38,8 @@ public interface AdminCommunityDAO {
 	public void updateMostQnAWithMap(Map condMap);
 
 	public void deleteMostQnA(int qnaNo);
+
+	public List<RecipeVO> selectRecipeListWithPagingMap(Map pagingMap);
+
+	public int selectTotalRecipeNum(Map pagingMap);
 }

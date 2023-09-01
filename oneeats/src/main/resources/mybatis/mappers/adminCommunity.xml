@@ -6,10 +6,6 @@
 <mapper
 	namespace="com.example.demo.admin.community.dao.AdminCommunityDAO">
 	<!-- 리절트 맵 정의 -->
-	<resultMap id="recipeResult" type="recipeVO">
-		<result property="recipeNO" column="recipeNO" />
-	</resultMap>
-
 	<resultMap id="noticeResult" type="noticeVO">
 		<result property="noticeNo" column="noticeNo" />
 		<result property="category" column="category" />
@@ -24,6 +20,20 @@
 		<result property="content" column="content" />
 		<result property="creDate" column="creDate" />
 		<result property="category" column="category" />
+	</resultMap>
+
+	<resultMap id="recipeResult" type="recipeVO">
+		<result property="recipeNo" column="recipeNo" />
+		<result column="title" property="title" />
+		<result column="cooking_time" property="cooking_time" />
+		<result column="description" property="description" />
+		<result column="cookingImg" property="cookingImg" />
+		<result column="category" property="category" />
+		<result column="inbun" property="inbun" />
+		<result column="creDate" property="creDate"
+			javaType="java.sql.Date" />
+		<result column="memberNo" property="memberNo" />
+		<result column="memberId" property="memberId" />
 	</resultMap>
 
 
@@ -69,7 +79,8 @@
 	</insert>
 
 	<delete id="deleteNotice" parameterType="int">
-		delete from notice where noticeNo=#{noticeNo}
+		delete from notice where
+		noticeNo=#{noticeNo}
 	</delete>
 
 	<select id="selectMostQnAListWithPagingMap"
@@ -89,20 +100,161 @@
 			where category=#{category}
 		</if>
 	</select>
-	
-	<insert id="insertNewMostQnAWithMap" parameterType="java.util.Map">
-		insert into mostQnA (title, content, category) values (#{title},#{content},#{category})
+
+	<insert id="insertNewMostQnAWithMap"
+		parameterType="java.util.Map">
+		insert into mostQnA (title, content, category) values
+		(#{title},#{content},#{category})
 	</insert>
 
-	<select id="selectMostQnAByNo" parameterType="String" resultType="mostQnAVO">
+	<select id="selectMostQnAByNo" parameterType="String"
+		resultType="mostQnAVO">
 		select * from mostQnA where qnaNo=#{qnaNo}
 	</select>
-	
+
 	<update id="updateMostQnAWithMap" parameterType="java.util.Map">
-		update mostQnA set category=#{category}, title=#{title}, content=#{content} where qnaNo=#{qnaNo}
+		update mostQnA
+		set category=#{category}, title=#{title}, content=#{content} where
+		qnaNo=#{qnaNo}
 	</update>
-	
+
 	<delete id="deleteMostQnA" parameterType="int">
-		delete from mostQnA where qnaNo=#{qnaNo}
+		delete from mostQnA
+		where qnaNo=#{qnaNo}
 	</delete>
+
+	<select id="selectRecipeListWithPagingMap"
+		parameterType="java.util.Map" resultMap="recipeResult">
+		select recipe.*,member.id as memberId from recipe
+		inner join member
+		on
+		recipe.memberNo=member.memberNo
+		where recipeNo in
+		( select recipeNo
+		from(
+		select t.*,m.id as memberId from(
+		select r.*,i.name as
+		ingredientName from recipe as r
+		inner join ingredient as i
+		on
+		r.recipeNo=i.recipeNo
+		) t
+		inner join member as m
+		on t.memberNo=m.memberNo
+
+		) tt
+		where 1=1
+
+
+		<choose>
+			<when test="recipe_search_type==null or recipe_search_type==''">
+				and 1=1
+			</when>
+			<when test="recipe_search_type=='all'">
+				and title Like CONCAT('%', #{recipe_search_word},
+				'%') or description like CONCAT('%', #{recipe_search_word}, '%') or
+				memberId like CONCAT('%',#{recipe_search_word},
+				'%') or
+				ingredientName like
+				CONCAT('%',#{recipe_search_word}, '%')
+			</when>
+			<otherwise>
+				<choose>
+					<when test="recipe_search_type=='title'">
+						and title like CONCAT('%', #{recipe_search_word},
+						'%')
+					</when>
+					<when test="recipe_search_type=='description'">
+						and description like CONCAT('%',
+						#{recipe_search_word}, '%')
+					</when>
+					<when test="recipe_search_type=='memberId'">
+						and memberId like CONCAT('%',#{recipe_search_word},
+						'%')
+					</when>
+					<when test="recipe_search_type=='ingredient'">
+						and ingredientName like
+						CONCAT('%',#{recipe_search_word}, '%')
+					</when>
+				</choose>
+			</otherwise>
+		</choose>
+
+
+		<if test="category!=null and category!=''">
+			and category=#{category}
+		</if>
+
+		)
+		order by creDate desc
+		limit #{start}, 10
+	</select>
+
+
+	<select id="selectTotalRecipeNum" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from recipe
+		inner join member
+		on
+		recipe.memberNo=member.memberNo
+		where recipeNo in
+		( select recipeNo
+		from(
+		select t.*,m.id as memberId from(
+		select r.*,i.name as
+		ingredientName from recipe as r
+		inner join ingredient as i
+		on
+		r.recipeNo=i.recipeNo
+		) t
+		inner join member as m
+		on t.memberNo=m.memberNo
+
+		) tt
+		where 1=1
+
+		<choose>
+			<when test="recipe_search_type==null or recipe_search_type==''">
+				and 1=1
+			</when>
+			<when test="recipe_search_type=='all'">
+				and title Like CONCAT('%', #{recipe_search_word},
+				'%') or description like CONCAT('%', #{recipe_search_word}, '%') or
+				memberId like CONCAT('%',#{recipe_search_word},
+				'%') or
+				ingredientName like
+				CONCAT('%',#{recipe_search_word}, '%')
+			</when>
+			<otherwise>
+				<choose>
+					<when test="recipe_search_type=='title'">
+						and title like CONCAT('%', #{recipe_search_word},
+						'%')
+					</when>
+					<when test="recipe_search_type=='description'">
+						and description like CONCAT('%',
+						#{recipe_search_word}, '%')
+					</when>
+					<when test="recipe_search_type=='memberId'">
+						and memberId like CONCAT('%',#{recipe_search_word},
+						'%')
+					</when>
+					<when test="recipe_search_type=='ingredient'">
+						and ingredientName like
+						CONCAT('%',#{recipe_search_word}, '%')
+					</when>
+				</choose>
+			</otherwise>
+		</choose>
+
+
+		<if test="category!=null and category!=''">
+			and category=#{category}
+		</if>
+
+		)
+
+	</select>
+
+
 </mapper>
