@@ -268,7 +268,7 @@
         
          select t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
          from t_order
-         inner join goods on t_order.memberNo=goods.memberNo 
+         inner join goods on t_order.goodsNo=goods.goodsNo 
          where t_order.delivery_status='배송완료' and t_order.memberNo=#{memberNo}
 		]]>
 	</select>
@@ -380,5 +380,7 @@
 		address_detail=#{address_detail}
 		where memberNo=#{memberNo}
 	</update>
-	
+	<delete id="deleteDeliveryAddressWithMap" parameterType="java.util.Map">
+		delete from deliveryaddress where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+	</delete>
 </mapper>

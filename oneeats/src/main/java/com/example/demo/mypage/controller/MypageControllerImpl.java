@@ -417,6 +417,7 @@ public class MypageControllerImpl implements MypageController {
 				}
 				if (idx<0) {
 					mypageService.updateDeliveryAddressWithMap(condMap);
+					mypageService.updateMemberAddressWithMap(condMap);
 				}else {
 					condMap.put("deliveryNo", minDeliveryNo);
 					DeliveryAddressVO targetDeliveryAddress = addressList.get(idx);
@@ -435,6 +436,25 @@ public class MypageControllerImpl implements MypageController {
 		}
 		return mav;
 		
+	}
+	
+	@RequestMapping("/mypage/deleteAddress.do")
+	public ModelAndView deleteDeliveryAddress(@RequestParam("deliveryNo") int deliveryNo,  HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		try {
+			MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+			int memberNo = member.getMemberNo();
+			Map condMap = new HashMap();
+			condMap.put("deliveryNo", deliveryNo);
+			condMap.put("memberNo", memberNo);
+			mypageService.deleteDeliveryAddressWithMap(condMap);
+			mav = Alert.alertAndRedirect("삭제했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		} catch (Exception e) {
+			mav = Alert.alertAndRedirect("삭제하지 못했습니다.", request.getContextPath() +"/mypage/myAddress.do");
+		}
+		
+		return mav;
 	}
 	
 	

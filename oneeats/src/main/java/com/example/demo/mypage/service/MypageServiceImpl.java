@@ -171,6 +171,17 @@ public class MypageServiceImpl implements MypageService {
 		mypageDAO.updateMemberAddressWithMap(condMap);
 	}
 	
+	@Override
+	public void updateMemberAddressWithMap(Map condMap) {
+		mypageDAO.updateMemberAddressWithMap(condMap);
+	}
+
+	@Override
+	public void deleteDeliveryAddressWithMap(Map condMap) {
+		mypageDAO.deleteDeliveryAddressWithMap(condMap);
+	}
+	
+	
 	
 
 }

@@ -334,6 +334,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <td class="addresstd3">받으실 분</td>
           <td class="addresstd4">연락처</td>
           <td>수정</td>
+          <td>삭제</td>
         </tr>
         <c:forEach var="item" items="${myAddress}" varStatus="status">
           <tr class="delivery_address_row_${item.deliveryNo}">
@@ -373,13 +374,19 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 type="button"
                 onclick="fn_openAddressModForm('${item.deliveryNo}')"
               >
-                <img
-                  class="border-0"
-                  src="${contextPath}/img/icon/mod.png"
-                  alt="Logo"
-                  style="width: 35px; height: auto"
-                />
+                <i class="bi bi-brush"></i>
               </button>
+            </td>
+            <td>
+              <c:if test="${status.index > 0}">
+                <button
+                  class="border-0"
+                  onclick="fn_openalert('삭제하시겠습니까?','${contextPath}/mypage/deleteAddress.do?deliveryNo=${item.deliveryNo}')"
+                  type="button"
+                >
+                  <i class="bi bi-trash3"></i>
+                </button>
+              </c:if>
             </td>
           </tr>
         </c:forEach>

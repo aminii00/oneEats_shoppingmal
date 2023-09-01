@@ -79,5 +79,7 @@ public interface MypageDAO {
 	public void updateDeliveryAddress(DeliveryAddressVO targetDeliveryAddress);
 
 	public void updateMemberAddressWithMap(Map condMap);
+
+	public void deleteDeliveryAddressWithMap(Map condMap);
 	
 }
