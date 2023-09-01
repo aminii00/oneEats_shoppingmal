@@ -28,6 +28,8 @@ public interface MypageService {
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
+	public List<Map> selectOrderBySearchType(Map<String, Object> map);
+	
 	public MemberVO listMyPage(String member_id) throws Exception;
 	
 	public void mypageintro(HashMap<String, String> memberMap);

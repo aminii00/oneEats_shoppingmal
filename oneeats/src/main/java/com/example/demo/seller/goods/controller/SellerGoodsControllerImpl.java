@@ -300,7 +300,8 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		String[] option_qtys = request.getParameterValues("option_qty");
 		String[] option_prices = request.getParameterValues("option_price");
 		System.out.println("option_names="+Arrays.toString(option_names));
-			
+		System.out.println("harvest="+harvest);
+		System.out.println("rapping="+rapping);
 		
 		int[] optionNos = sellerGoodsService.selectOptionNoByGoodsNo(goodsNo);
 		for (int optionNo : optionNos) {
