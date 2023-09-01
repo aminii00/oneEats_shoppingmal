@@ -55,7 +55,7 @@
 		values (#{qnaNo}, #{content}, #{parentNo}, #{memberNo})
 	</insert>
 
-	<select id="oneQnAList" resultMap="oneQnAResult">
+	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna where
 		parentNo=0
 	</select>
