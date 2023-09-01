@@ -15,23 +15,12 @@ public class OneQnAVO {
 	private int memberNo;
 	private String memberName;
 	private String profile;
+	private String id;
 	public int getQnaNo() {
 		return qnaNo;
 	}
 	public void setQnaNo(int qnaNo) {
 		this.qnaNo = qnaNo;
-	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public String getProfile() {
-		return profile;
-	}
-	public void setProfile(String profile) {
-		this.profile = profile;
 	}
 	public String getTitle() {
 		return title;
@@ -69,10 +58,29 @@ public class OneQnAVO {
 	public void setMemberNo(int memberNo) {
 		this.memberNo = memberNo;
 	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getProfile() {
+		return profile;
+	}
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	@Override
 	public String toString() {
 		return "OneQnAVO [qnaNo=" + qnaNo + ", title=" + title + ", content=" + content + ", creDate=" + creDate
-				+ ", status=" + status + ", parentNo=" + parentNo + ", memberNo=" + memberNo + "]";
+				+ ", status=" + status + ", parentNo=" + parentNo + ", memberNo=" + memberNo + ", memberName="
+				+ memberName + ", profile=" + profile + ", id=" + id + "]";
 	}
 	
 	

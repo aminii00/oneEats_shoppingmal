@@ -25,7 +25,25 @@
 		<result property="creDate" column="creDate" />
 		<result property="category" column="category" />
 	</resultMap>
+	<resultMap id="oneQnAResult" type="oneQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="status" column="status" />
+		<result property="parentNo" column="parentNo" />
+		<result property="memberNo" column="memberNo" />
+		<result property="memberName" column="memberName" />
+		<result property="profile" column="profile" />
+		<result property="id" column="id" />
+	</resultMap>
 
+
+	<select id="oneQnAList" resultMap="oneQnAResult">
+		select oneqna.*, member.id
+		from oneqna
+		inner join member on oneqna.memberNo=member.memberNo where parentNo=0
+	</select>
 
 	<select id="sellectAllRecipe" resultMap="recipeResult"
 		parameterType="recipeVO">
@@ -69,7 +87,8 @@
 	</insert>
 
 	<delete id="deleteNotice" parameterType="int">
-		delete from notice where noticeNo=#{noticeNo}
+		delete from notice where
+		noticeNo=#{noticeNo}
 	</delete>
 
 	<select id="selectMostQnAListWithPagingMap"
@@ -89,20 +108,26 @@
 			where category=#{category}
 		</if>
 	</select>
-	
-	<insert id="insertNewMostQnAWithMap" parameterType="java.util.Map">
-		insert into mostQnA (title, content, category) values (#{title},#{content},#{category})
+
+	<insert id="insertNewMostQnAWithMap"
+		parameterType="java.util.Map">
+		insert into mostQnA (title, content, category) values
+		(#{title},#{content},#{category})
 	</insert>
 
-	<select id="selectMostQnAByNo" parameterType="String" resultType="mostQnAVO">
+	<select id="selectMostQnAByNo" parameterType="String"
+		resultType="mostQnAVO">
 		select * from mostQnA where qnaNo=#{qnaNo}
 	</select>
-	
+
 	<update id="updateMostQnAWithMap" parameterType="java.util.Map">
-		update mostQnA set category=#{category}, title=#{title}, content=#{content} where qnaNo=#{qnaNo}
+		update mostQnA
+		set category=#{category}, title=#{title}, content=#{content} where
+		qnaNo=#{qnaNo}
 	</update>
-	
+
 	<delete id="deleteMostQnA" parameterType="int">
-		delete from mostQnA where qnaNo=#{qnaNo}
+		delete from mostQnA
+		where qnaNo=#{qnaNo}
 	</delete>
 </mapper>

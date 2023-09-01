@@ -55,10 +55,16 @@
 		values (#{qnaNo}, #{content}, #{parentNo}, #{memberNo})
 	</insert>
 
-	<select id="oneQnAList_reply" resultMap="oneQnAResult">
+	<select id="oneQnAList" resultMap="oneQnAResult">
 		select * from oneqna where
 		parentNo=0
 	</select>
+	
+	<insert id="oneQnAFormInsert" parameterType="OneQnAVO">
+		insert oneqna
+		(qnaNo, title, content, parentNo, memberNo)
+		values(#{qnaNo},#{title},#{content},#{parentNo},#{memberNo})
+	</insert>
 
 	<resultMap id="mostQnAResult" type="mostQnAVO">
 		<result property="qnaNo" column="qnaNo" />
@@ -69,7 +75,7 @@
 	</resultMap>
 	
 	
-	<select id="oneQnAList" resultMap="oneQnAResult">
+	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna
 	</select>
 
@@ -260,10 +266,36 @@
 		limit #{start},10
 	</select>
 	
+	<select id="selectNoticeListWithPagingMap"
+		parameterType="java.util.Map" resultMap="noticeResult">
+		select * from notice 
+		<if test="category!='all'">
+			where category=#{category} 
+		</if>
+		order by creDate
+		limit #{start},10
+	</select>
+	
+	<select id="selectOneQnAListWithPagingMap"
+		parameterType="java.util.Map" resultMap="oneQnAResult">
+		select * from oneqna where parentNo=0
+		order by creDate
+		limit #{start},10
+	</select>
+	
 	<select id="selectMostQnAListTotalNumWithCategory" parameterType="String" resultType="int">
 		select count(qnaNo) from mostQnA
 		<if test="category!='all'">
 			where category=#{category}
 		</if>
 	</select>
+	
+	<select id="selectNoticeListTotalNumWithCategory" parameterType="String" resultType="int">
+		select count(noticeNo) from notice
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+	</select>
+	
+
 </mapper>

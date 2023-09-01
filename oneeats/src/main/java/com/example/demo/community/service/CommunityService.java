@@ -46,8 +46,17 @@ public interface CommunityService {
 	public int newQnANo();
 	
 	public List<OneQnAVO> replyList(int qnaNo);
+	
+	public void oneQnAFormInsert(OneQnAVO oneQnAVO);
 
 	public List<MostQnAVO> selectMostQnAListWithPagingMap(Map pagingMap);
+	
+	public List<NoticeVO> selectNoticeListWithPagingMap(Map pagingMap);
+	
+	public List<OneQnAVO> selectOneQnAListWithPagingMap(Map pagingMap);
 
 	public int selectMostQnAListTotalNumWithCategory(String category);
+	
+	public int selectNoticeListTotalNumWithCategory(String category);
+	
 }

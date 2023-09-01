@@ -66,7 +66,9 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <li>
               <div style="margin-right: 12px">
                 <div class="textbold" style="width: 100%">
-                  <a href="${contextPath}/mypage/bookmarkList.do">찜한 목록</a>
+                  <a href="${contextPath}/mypage/mypageBookmarkList.do"
+                    >찜한 목록</a
+                  >
                 </div>
               </div>
             </li>
@@ -100,7 +102,11 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
           </ul>
         </div>
         <div class="text-left textsize-2 textcolor-red">
-          <a href="">탈퇴하기</a>
+          <a
+            href="javascript:void(0)"
+            onclick='fn_openalert("정말로 탈퇴하시겠습니까?","${contextPath}/mypage/deleteMember.do")'
+            >탈퇴하기</a
+          >
         </div>
       </div>
     </div>

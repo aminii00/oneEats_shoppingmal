@@ -13,15 +13,16 @@
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
 <script>
-    function readURL(input) {
-      if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-              $('#preview').attr('src', e.target.result);
-          }
-          reader.readAsDataURL(input.files[0]);
-      }
-  }  
+function readURL(input){
+	  if(input.files && input.files[0]){
+		  var reader = new FileReader();
+		  reader.onload = function (e) {
+			  $('#preview').attr('src', e.target.result);
+		  }
+		  reader.readAsDataURL(input.files[0]);
+	  }
+  }
+
 </script>
 <title>프로필 편집</title>
 <style>
@@ -52,10 +53,11 @@
 				</c:when>
 				<c:otherwise>
                     <img class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=member/${myList.memberNo}" alt="프로필사진">
-                    <input type="file" name="profileImg" ><br>
+                    <input type="file"  name="profileImg" ><br>
 				</c:otherwise>
 			</c:choose>
         </div>
+
                 
                 <div class="profile-edit-content">
                     <form class="profile-edit-form" action="#" method="post">

@@ -52,7 +52,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             <td class="addresstd2">주소</td>
             <td class="addresstd3">받으실 분</td>
             <td class="addresstd4">연락처</td>
-            <td>수정</td>
+            <td></td>
           </tr>
           <c:forEach var="item" items="${myAddress}" varStatus="status">
             <tr class="coupontr">
@@ -62,11 +62,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               </td>
               <td class="addresstd3">${item.receiver_name}</td>
               <td class="addresstd4">${item.receiver_phone}</td>
-              <td><button class ="border-0" type="button" onclick="openPopUp()">
+              <td><button class ="border-0" type="button">
                 <img class ="border-0" 
-                src="${contextPath}/img/icon/mod.png"
+                src="${contextPath}/img/icon/delete.PNG"
                 alt="Logo"
-                style="width: 35px; height: auto"></button></td>
+                onclick="location.href='${contextPath}/mypage/deleteAddress.do?deliveryNo=${item.deliveryNo}'"
+                style="width: 30px; height: auto"></button></td>
             </tr>
           </c:forEach>
         </table>

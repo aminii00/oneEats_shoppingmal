@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
 
 @Mapper
@@ -38,4 +39,6 @@ public interface AdminCommunityDAO {
 	public void updateMostQnAWithMap(Map condMap);
 
 	public void deleteMostQnA(int qnaNo);
+	
+	public List<OneQnAVO> oneQnAList();
 }

@@ -142,7 +142,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
             <c:set
               var="result"
-              value="${(searchRecipeNum - (section-1)*60)/6}"
+              value="${(searchRecipeNum - (section-1)*60) div 6}"
             />
             <c:set var="endPage" value="${Math.ceil(result)}" />
           </c:if>

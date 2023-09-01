@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 
 public interface AdminCommunityService {
 	public List<NoticeVO> adminNoticeList();
@@ -30,4 +31,6 @@ public interface AdminCommunityService {
 	public void updateMostQnAWithMap(Map condMap);
 
 	public void deleteMostQnA(int qnaNo);
+	
+	public List<OneQnAVO> oneQnAList();
 }

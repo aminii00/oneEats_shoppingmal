@@ -11,10 +11,10 @@
 <html>
 <head>
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
+<link rel="stylesheet" href="${contextPath}/css/star.css">
 <meta charset="UTF-8">
 <title>프로필 편집</title>
 <style>
-
 
 
 </style>
@@ -49,6 +49,8 @@
         </div>
             </div>
             <br><br><br>
+
+
 
             <p class ="textsize-3 textbold" style="text-align: left;" >사진을 올려주세요.(선택)</p>
             <c:choose>

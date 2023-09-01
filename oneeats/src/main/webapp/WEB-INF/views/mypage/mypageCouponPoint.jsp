@@ -38,7 +38,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               class="brd-lightgray btn-coupon btn-midlong-input textsize-1"
               placeholder="쿠폰 번호를 입력해주세요."
               type="text"
-              name="couponNo"
+              name="couponCode"
             />
             <button
               type="submit"
@@ -119,20 +119,24 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </div>
         <br>
         <table class="coupontd">
+          
           <tr class="coupontr textbold">
             <td style="width: 200px; text-align: left">&nbsp&nbsp내용</td>
             <td style="width: 170px">날짜</td>
             <td>유효기간</td>
             <td>금액</td>
           </tr>
+          <c:forEach var="item" items="${pointDetail}" varStatus="status">
           <tr class="coupontr">
             <td style="width: 200px; text-align: left">
-              &nbsp&nbsp회원가입 환영 적립금
+              &nbsp&nbsp${item.name}
             </td>
-            <td style="width: 170px">2022.05.06</td>
-            <td>2034.06.24</td>
-            <td>2000 point</td>
+            <td style="width: 170px">${item.creDate}</td>
+            <td>${item.finishDate}</td>
+            <td>${item.amount}point</td>
           </tr>
+        </c:forEach>
+       
         </table>
         <br />
         <br />

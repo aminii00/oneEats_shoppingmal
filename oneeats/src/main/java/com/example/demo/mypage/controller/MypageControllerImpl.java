@@ -28,6 +28,7 @@ import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.PointHistoryVO;
 import com.example.demo.vo.ReviewVO;
 
 @Controller("mypageController")
@@ -38,6 +39,22 @@ public class MypageControllerImpl implements MypageController {
 	private OrderVO orderVO;
 	@Autowired
 	private MemberVO memberVO;
+	
+	
+		@Override
+		@RequestMapping(value = "/mypage/deleteMember.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			request.setCharacterEncoding("utf-8");
+			ModelAndView mav = new ModelAndView();
+			response.setContentType("html/text;charset=utf-8");
+			HttpSession session = request.getSession();
+			MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+			mypageService.deleteMember(member);
+			session.setAttribute("isLogOn", false);
+			mav = Alert.alertAndRedirect("탈퇴가 완료 되었습니다.", request.getContextPath() + "/main/mainPage.do");
+			
+			return mav;
+		}
 
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -129,6 +146,7 @@ public class MypageControllerImpl implements MypageController {
 		
 		return mav;
 	}
+	
 
 	@Override
 	@RequestMapping(value = "/mypage/newOrder.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -283,7 +301,7 @@ public class MypageControllerImpl implements MypageController {
 
 	// 민아 찜 (진행중 ...)
 	@Override
-	@RequestMapping(value = "/mypage/bookmarkList.do", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/mypage/mypageBookmarkList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView bookList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 Controller bookmarkList.do");
 		request.setCharacterEncoding("utf-8");
@@ -298,7 +316,7 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println(bookList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("bookList", bookList);
-		mav.setViewName("/mypage/mypageBookmarkList");
+		mav.setViewName(viewName);
 		System.out.println(mav);
 		return mav;
 	}
@@ -325,10 +343,14 @@ public class MypageControllerImpl implements MypageController {
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		System.out.println("memberInfo = " + memberInfo);
-		List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo);
+		List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); //쿠폰List
 		System.out.println("couponDetail = " + couponDetail);
+		
+		List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); // 적립금 List
+		System.out.println("pointDetail = " + pointDetail);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("couponDetail", couponDetail);
+		mav.addObject("pointDetail", pointDetail);
 		mav.setViewName("/mypage/mypageCouponPoint");
 		return mav;
 	}
@@ -342,19 +364,19 @@ public class MypageControllerImpl implements MypageController {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = memberInfo.getMemberNo();
 		
-		String couponNo_ = request.getParameter("couponNo");
-		if(couponNo_.isEmpty()) {
+		String couponCode = request.getParameter("couponCode");
+		if(couponCode.isEmpty()) {
 			mav = Alert.alertAndRedirect("쿠폰번호를 입력해주세요.", request.getContextPath() + "/mypage/couponSearch.do");
 			return mav;
 		}
-		int couponNo = Integer.parseInt(couponNo_);
-		System.out.println("couponNo = "+couponNo);
-		CouponVO couponVO = mypageService.couponNum(couponNo);
+		System.out.println("couponCode = "+couponCode);
+		CouponVO couponVO = mypageService.couponNum(couponCode);
 		System.out.println("couponVO = " + couponVO);
 		if (couponVO == null) {
 			mav = Alert.alertAndRedirect("쿠폰이 존재하지 않습니다.", request.getContextPath() + "/mypage/couponSearch.do");
 			return mav;	
 		}
+		couponVO.setCouponCode(couponCode);
 		couponVO.setMemberNo(memberNo);
 		CouponVO couponNull = mypageService.couponNull(couponVO);
 		if (couponNull != null) {
@@ -384,6 +406,32 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName("/mypage/mypageAddress");
 		return mav;
 	}
+	@Override
+	@RequestMapping(value = "/mypage/deleteAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView deleteAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 Controller deleteAddress.do");
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
+		String deliveryNo_ = request.getParameter("deliveryNo");
+		int deliveryNo = Integer.parseInt(deliveryNo_);
+		mypageService.deleteAddress(deliveryNo);
+		mav.setViewName("redirect:/mypage/myAddress.do");
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/mypage/bookCart.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView bookCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 Controller bookCart.do");
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
+		String goodsNo_ = request.getParameter("goodsNo");
+		int goodsNo = Integer.parseInt(goodsNo_);
+	
+		mav.setViewName("redirect:/mypage/myAddress.do");
+		return mav;
+	}
+
 
 	@RequestMapping(value = "/mypage/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
