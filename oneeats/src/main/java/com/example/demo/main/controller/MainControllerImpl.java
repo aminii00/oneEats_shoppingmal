@@ -243,7 +243,6 @@ public class MainControllerImpl implements MainController {
 				String discountPrice = request.getParameter("discount_price");
 				String[] optionNos = request.getParameterValues("optionNo");
 				String[] goodsQtys = request.getParameterValues("goodsQty");
-
 				// list에 하나씩 추가
 				for (int i = 0; i < optionNos.length; i++) {
 					System.out.println("for문 시작");

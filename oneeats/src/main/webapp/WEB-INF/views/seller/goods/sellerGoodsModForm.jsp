@@ -313,7 +313,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                   type="text"
                                   value="${option.option_qty}"
                                   class="form-control"
-                                  placeholder="양"
+                                  placeholder="숫자로 적어주세요"
                                   required
                                 />
                               </div>
@@ -370,7 +370,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${sellerGoods.description}"
+                      value="${option.name}"
                     />
                   </p>
 
