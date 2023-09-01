@@ -26,28 +26,8 @@ public class GoodsVO {
 	private int memberNo;
 	private String sellerName;
 	private String seller_id;
-	private String optionName;
-	private String option_qty;
-	private int optionPrice;
+
 	
-	public String getOptionName() {
-		return optionName;
-	}
-	public void setOptionName(String optionName) {
-		this.optionName = optionName;
-	}
-	public String getOption_qty() {
-		return option_qty;
-	}
-	public void setOption_qty(String option_qty) {
-		this.option_qty = option_qty;
-	}
-	public int getOptionPrice() {
-		return optionPrice;
-	}
-	public void setOptionPrice(int optionPrice) {
-		this.optionPrice = optionPrice;
-	}
 	public String getSellerName() {
 		return sellerName;
 	}
@@ -175,8 +155,7 @@ public class GoodsVO {
 				+ ", manufacturer=" + manufacturer + ", weight=" + weight + ", expDate=" + expDate + ", description="
 				+ description + ", harvest=" + harvest + ", creDate=" + creDate + ", img1=" + img1 + ", img2=" + img2
 				+ ", img3=" + img3 + ", img4=" + img4 + ", img5=" + img5 + ", category=" + category + ", type=" + type
-				+ ", memberNo=" + memberNo + ", sellerName=" + sellerName + ", seller_id=" + seller_id + ", optionName="
-				+ optionName + ", option_qty=" + option_qty + ", optionPrice=" + optionPrice + "]";
+				+ ", memberNo=" + memberNo + ", sellerName=" + sellerName + ", seller_id=" + seller_id + "]";
 	}
 	
 	
