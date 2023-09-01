@@ -23,12 +23,7 @@ public class CouponVO {
 	public void setCouponCode(String couponCode) {
 		this.couponCode = couponCode;
 	}
-	public String getExpDate() {
-		return expDate;
-	}
-	public void setExpDate(String expDate) {
-		this.expDate = expDate;
-	}
+
 	public String getMemberName() {
 		return memberName;
 	}
