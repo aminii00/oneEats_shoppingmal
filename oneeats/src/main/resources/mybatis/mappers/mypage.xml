@@ -79,11 +79,13 @@
 		<result property="expDate" column="expDate" />
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
+		<result property="couponCode" column="couponCode" />
 	</resultMap>
 
 
 
 	<resultMap id="DeliveryResult" type="deliveryAddressVO">
+		<result property="deliveryNo" column="deliveryNo" />
 		<result property="receiver_name" column="receiver_name" />
 		<result property="receiver_phone" column="receiver_phone" />
 		<result property="zipCode" column="zipCode" />
@@ -105,6 +107,24 @@
 		<result property="goodsImg" column="goodsImg" />
 		<result property="delivery_status" column="delivery_status" />
 	</resultMap>
+
+	<resultMap id="PointHistoryResult" type="pointHistoryVO">
+		<result property="pointNo" column="pointNo" />
+		<result property="name" column="name" />
+		<result property="creDate" column="creDate" />
+		<result property="finishDate" column="finishDate" />
+		<result property="amount" column="amount" />
+		<result property="memberNo" column="memberNo" />
+	</resultMap>
+
+
+	<delete id="deleteMember" parameterType="MemberVO">
+    <![CDATA[
+      delete from member
+      where 
+      memberNo=#{memberNo} and id=#{id} 
+    ]]>
+	</delete>
 
 	<select id="selectOrderList" resultMap="OrderResult">
 		<![CDATA[
@@ -174,7 +194,8 @@
 	</select>
 
 
-	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
+	<select id="selectSeqNoByOrderNo" resultType="int"
+		parameterType="int">
 		<![CDATA[
 			select order_seqNo from t_order where orderNo=#{orderNo};
 		]]>
@@ -235,8 +256,8 @@
          where t_order.delivery_status='배송완료' and t_order.memberNo=#{memberNo}
 		]]>
 	</select>
-	
-		<!-- 리뷰 2 -->
+
+	<!-- 리뷰 2 -->
 	<select id="writeReview" parameterType="int"
 		resultMap="OrderResult">
 	    <![CDATA[
@@ -249,7 +270,7 @@
 		]]>
 	</select>
 
-	<!-- 민아 쿠폰, 적립금 조회 -->
+	<!-- 민아 쿠폰 조회 -->
 	<select id="couponSearch" resultMap="CouponResult"
 		parameterType="memberVO">
 		<![CDATA[
@@ -262,13 +283,22 @@
 
 		]]>
 	</select>
+	<!-- 민아 적립금 조회 -->
+	<select id="pointSearch" resultMap="PointHistoryResult"
+		parameterType="memberVO">
+		<![CDATA[
+		    select * from point_history
+			where memberNo=#{memberNo}
+		]]>
+	</select>
 
 	<!-- 민아 쿠폰, 적립금 조회 -->
-	<select id="couponNum" resultType="couponVO" parameterType="int">
+	<select id="couponNum" resultType="couponVO"
+		parameterType="String">
 		<![CDATA[
-		    select couponNo, name, discount_price, expDate, creDate from coupon 
+		    select couponNo, name, discount_price, expDate, creDate, couponCode from coupon 
 			where 
-			couponNo=#{couponNo}
+			couponCode=#{couponCode}
 		]]>
 	</select>
 
@@ -309,6 +339,13 @@ goodsNo=#{goodsNo}
 ]]>
 	</delete>
 
+	<delete id="deleteAddress" parameterType="int">
+<![CDATA[
+delete from deliveryaddress
+where 
+deliveryNo=#{deliveryNo}
+]]>
+	</delete>
 
 
 </mapper>

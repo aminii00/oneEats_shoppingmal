@@ -9,26 +9,18 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   <head>
     <meta charset="UTF-8" />
     <title>1:1문의 내역</title>
+    <script></script>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
   </head>
   <body>
     <section>
-      <div class="textsize-3 text-left textbold textcolor-black">
-        1:1문의
-        <div style="float: right">
-          <select name="category">
-            <option value="">카테고리</option>
-            <option value="">결제</option>
-            <option value="">주문</option>
-            <option value="">이벤트</option>
-          </select>
-        </div>
-      </div>
+      <div class="textsize-3 text-left textbold textcolor-black">1:1문의</div>
 
       <div class="clear">&nbsp;</div>
       <hr class="line-black" />
       <div class="oneQnAList_grid textcolor-black text-center">
         <div class="row header-row textbold">
+          <div class="col-md">번호</div>
           <div class="col-md">제목</div>
           <div class="col-md-3">작성일</div>
           <div class="col-md-3">답변상태</div>
@@ -43,6 +35,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 class="row oneQnAList-title"
                 onclick="location.href='${contextPath}/community/oneQnA/oneQnADetail.do?qnaNo=${oneQnA.qnaNo}';"
               >
+                <div class="col-md">${oneQnA.qnaNo}</div>
                 <div class="col-md">${oneQnA.title}</div>
                 <div class="col-md-3">${oneQnA.creDate}</div>
                 <div class="col-md-3">${oneQnA.status}</div>
@@ -71,33 +64,51 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <!--페이지 버튼-->
       <div>
         <ul class="ul-li">
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/prev.png"
-                alt="prev"
-              />
-            </button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
+          <c:if test="${section>1}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/mostQnA/mostQnAList.do?section=${section-1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/prev.png"
+                  alt="prev"
+                />
+              </a>
+            </li>
+          </c:if>
+          <c:set var="end" value="${Math.ceil(((section-1)*100) div 10)}" />
+          <c:if test="${end>10}">
+            <c:set var="end" value="10" />
+          </c:if>
+          <c:forEach begin="1" end="${end}" var="i">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section}&pageNum=${i}"
+                class="btn-2 btn-square bg-white btn-border"
+                >${((section-1)*10)+i}</a
+              >
+            </li>
+          </c:forEach>
+          <c:if test="${section*100<totalOneQnANum}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section+1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/next.png"
+                  alt="next"
+                />
+              </a>
+            </li>
+          </c:if>
         </ul>
       </div>
-
-      <br />
     </section>
   </body>
 </html>

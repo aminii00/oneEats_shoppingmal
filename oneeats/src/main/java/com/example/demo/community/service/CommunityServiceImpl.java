@@ -116,14 +116,37 @@ public class CommunityServiceImpl implements CommunityService {
 		 communityDAO.replyInsert(oneQnAVO);
 	}
 	@Override
+	public void oneQnAFormInsert(OneQnAVO oneQnAVO) {
+		communityDAO.oneQnAFormInsert(oneQnAVO);
+	}
+	@Override
 	public List<MostQnAVO> selectMostQnAListWithPagingMap(Map pagingMap) {
 		
 		return communityDAO.selectMostQnAListWithPagingMap(pagingMap);
 	}
+	
+	@Override
+	public List<NoticeVO> selectNoticeListWithPagingMap(Map pagingMap){
+		return communityDAO.selectNoticeListWithPagingMap(pagingMap);
+	}
+	@Override
+	public List<OneQnAVO> selectOneQnAListWithPagingMap(Map pagingMap){
+		return communityDAO.selectOneQnAListWithPagingMap(pagingMap);
+	}
+
+	
 	@Override
 	public int selectMostQnAListTotalNumWithCategory(String category) {
 		return communityDAO.selectMostQnAListTotalNumWithCategory(category);
 	}
+	
+	@Override
+	public int selectNoticeListTotalNumWithCategory(String category) {
+		return communityDAO.selectNoticeListTotalNumWithCategory(category);
+	}
+	
+
+	
 	
 	
 

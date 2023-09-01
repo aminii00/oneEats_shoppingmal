@@ -58,12 +58,13 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <input
                 class="brd-lightgray btn-round btn-memberInfo textsize-1 text-center"
                 type="password"
+                id="pwd"
                 value="${memberInfo.pwd}"
                 name="pwd"
               />
             </div>
           </div>
-          <br />
+  <br>
 
           <div
             class="textpoint-center textsize-1 margin1 textbold"
@@ -75,6 +76,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <input
                 class="brd-lightgray btn-round btn-memberInfo textsize-1 text-center"
                 type="password"
+                id="pwd_confirm"
                 value="${memberInfo.pwd}"
               />
             </div>
@@ -158,8 +160,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 type="text"
               />
             </div>
-            
           </div>
+
+
+
+          
           <br />
 
           <div class="margin1 textbold textsize-1 property_margin">

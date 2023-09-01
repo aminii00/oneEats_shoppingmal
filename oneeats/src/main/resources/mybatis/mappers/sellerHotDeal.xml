@@ -119,9 +119,8 @@
 		<if test="category != null and category != ''">
 			AND category = #{category}
 		</if>
-		ORDER BY creDate DESC
-		LIMIT #{start}, 10
-
+		order by creDate desc
+		limit #{start}, 10
 	</select>
 
 

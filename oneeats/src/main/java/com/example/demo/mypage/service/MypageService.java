@@ -10,8 +10,12 @@ import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.PointHistoryVO;
 import com.example.demo.vo.ReviewVO;
 public interface MypageService {
+	
+	public void deleteMember(MemberVO member);
+	
 	public List<OrderVO> selectOrderList() throws DataAccessException;
 	
 	public List<OrderVO> selectOrderByMemberNo(int memberNo);
@@ -37,8 +41,11 @@ public interface MypageService {
 	public int removeBookMark(int goodsNo) throws DataAccessException;
 	
 	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
+	public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws DataAccessException;
 
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
+	
+	public void deleteAddress(int deliveryNo);
 	
 	public void updateMember(MemberVO memberVO) throws DataAccessException;
 	
@@ -46,7 +53,7 @@ public interface MypageService {
 	
 	public List<OrderVO> writeReview(int memberNo) throws DataAccessException;
 	
-	public CouponVO couponNum(int couponNo);
+	public CouponVO couponNum(String couponCode);
 	
 	public CouponVO couponNull(CouponVO result);
 	

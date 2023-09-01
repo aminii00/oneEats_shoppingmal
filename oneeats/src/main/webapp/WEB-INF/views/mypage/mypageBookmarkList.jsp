@@ -106,7 +106,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </td>
         <td>
           <div class=" book text-right">
-            <button class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" >장바구니</button>
+            <button type="button" onclick="fn_toCart()" class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" >장바구니</button>
             <br>
             <button type="button" onclick="location.href='${contextPath}/mypage/deleteBook.do?goodsNo=${item.goodsNo}'" class ="bookserve bg-lightgreen textsize-1 border-0 margin btn-round">삭제</button>
           </div>
@@ -114,7 +114,10 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       </tr>
       <hr>
     </table>
-    
+   
+
+
+
   </c:forEach>
         <br><br>
         <div id="wrapper">
@@ -143,5 +146,10 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </main>
           </div>
     </form>
-</body>
+<!--옵션을 선택할 때마다 행이 추가됨-->
+
+<script src="${contextPath}/js/goodsDetail.js"></script>
+
+<!-- Js Plugins -->
+  </body>
 </html>

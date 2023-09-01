@@ -15,6 +15,7 @@ import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
+import com.example.demo.vo.PointHistoryVO;
 import com.example.demo.vo.ReviewVO;
 
 @Service("mypageService")
@@ -22,6 +23,11 @@ public class MypageServiceImpl implements MypageService {
 	@Autowired
 	private MypageDAO mypageDAO;
 
+	@Override
+	public void deleteMember(MemberVO member) {
+		mypageDAO.deleteMember(member);
+	}
+	
 	@Override
 	public List<OrderVO> selectOrderList() throws DataAccessException {
 		return mypageDAO.selectOrderList();
@@ -101,10 +107,15 @@ public class MypageServiceImpl implements MypageService {
 		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
 		return couponVO;
 	}
-
 	@Override
-	public CouponVO couponNum(int couponNo) {
-		CouponVO result = mypageDAO.couponNum(couponNo);
+	public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws DataAccessException{
+		List<PointHistoryVO> pointHistoryVO = mypageDAO.pointSearch(memberInfo);
+		return pointHistoryVO;
+	}
+	
+	@Override
+	public CouponVO couponNum(String couponCode) {
+		CouponVO result = mypageDAO.couponNum(couponCode);
 		return result;
 	}
 
@@ -117,6 +128,10 @@ public class MypageServiceImpl implements MypageService {
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException {
 		List<DeliveryAddressVO> myAddressVO = mypageDAO.myAddress(memberNo);
 		return myAddressVO;
+	}
+	@Override
+	public void deleteAddress(int deliveryNo) {
+		mypageDAO.deleteAddress(deliveryNo);
 	}
 
 	// 민아 회원정보 수정2

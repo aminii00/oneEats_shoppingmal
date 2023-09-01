@@ -15,7 +15,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <section>
       <div class="textsize-3 text-left textbold textcolor-black">1:1문의</div>
       <hr class="line-black" />
-      <form action="" method="post">
+      <form
+        action="${contextPath}/community/oneQnA/oneQnAFormInsert.do"
+        method="post"
+      >
         <div class="oneQnAForm_grid">
           <div class="row oneQnAForm_title">
             <div class="col textcolor-black textbold text-left textsize-3">

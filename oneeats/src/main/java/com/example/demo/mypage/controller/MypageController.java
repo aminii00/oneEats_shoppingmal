@@ -11,6 +11,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.demo.vo.OrderVO;
 
 public interface MypageController {
+	
+	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView orderDetail(@RequestParam("orderNo") int orderNo, HttpServletRequest request, HttpServletResponse response)  throws Exception;
@@ -31,6 +34,8 @@ public interface MypageController {
 
 	//민아 배송지관리 - 출력
 	public ModelAndView myAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView deleteAddress(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView bookCart(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	//민아 회원정보수정1
 	public ModelAndView mypageMemberMod(HttpServletRequest request, HttpServletResponse response) throws Exception;

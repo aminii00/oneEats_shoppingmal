@@ -273,21 +273,7 @@ System.out.println("map : " + map);
 
 	}
 
-	// 민아 공지사항리스트
-	@Override
-	@RequestMapping(value = "/notice/noticeList.do")
-	public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("여기는 community noticeList Controller");
-		ModelAndView mav = new ModelAndView();
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("viewName = " + viewName);
-		List<NoticeVO> noticeList = communityService.noticeList();
-		System.out.println("noticeList = " + noticeList);
-		mav.addObject("noticeList", noticeList);
-		mav.setViewName(viewName);
-		return mav;
-
-	}
+	
 
 	// 공지사항 디테일
 	@Override
@@ -315,18 +301,6 @@ System.out.println("map : " + map);
 
 	}
 
-	// 민아 1:1 문의
-	@Override
-	@RequestMapping(value = "/oneQnA/oneQnAList.do")
-	public ModelAndView oneQnA(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView mav = new ModelAndView();
-		List<OneQnAVO> oneQnAList = communityService.oneQnAList();
-		System.out.println("oneQnAList 1:1문의 = " + oneQnAList);
-		String viewName = (String) request.getAttribute("viewName");
-		mav.addObject("oneQnAList", oneQnAList);
-		mav.setViewName(viewName);
-		return mav;
-	}
 
 	// 민아 1:1 문의 detail
 	@Override
@@ -401,6 +375,40 @@ System.out.println("map : " + map);
 			return mav;
 
 		}
+		
+		
+			// 민아 1:1문의 작성
+			@Override
+			@RequestMapping(value = "/oneQnA/oneQnAFormInsert.do", method = RequestMethod.POST)
+			public ModelAndView oneQnAFormInsert(HttpServletRequest request, HttpServletResponse response) {
+				System.out.println("여기는 community oneQnAFormInsert Controller");
+				ModelAndView mav = new ModelAndView();
+				String content = request.getParameter("content");
+				String title = request.getParameter("title");
+				int NewqnaNo = communityService.newQnANo();
+				HttpSession session = request.getSession();  
+				MemberVO member = (MemberVO) session.getAttribute("memberInfo");  //session에 저장되어있는 회원정보
+				if (member == null) {
+					mav = redirectAlertMessage("로그인을 해주세요.",
+							request.getContextPath() + "/member/loginForm.do");
+					return mav;
+				}
+				int memberNo = member.getMemberNo();
+				OneQnAVO oneqnaVO = new OneQnAVO();
+				oneqnaVO.setContent(content);
+				oneqnaVO.setTitle(title);
+				oneqnaVO.setMemberNo(memberNo);
+				oneqnaVO.setQnaNo(NewqnaNo);
+				oneqnaVO.setParentNo(0);
+				
+				communityService.oneQnAFormInsert(oneqnaVO);
+				mav = redirectAlertMessage("등록되었습니다.",
+						request.getContextPath() + "/community/oneQnA/oneQnAList.do");
+				
+				return mav;
+
+			}
+			
 
 	private ModelAndView redirectAlertMessage(String msg, String page) {
 		ModelAndView mav = new ModelAndView("/alert");
@@ -447,5 +455,101 @@ System.out.println("map : " + map);
 		return mav;
 
 	}
+	
+	
+
+	// 민아 1:1 문의리스트
+	@Override
+	@RequestMapping(value = "/oneQnA/oneQnAList.do")
+	public ModelAndView oneQnA(HttpServletRequest request, HttpServletResponse response) throws IOException  {
+		
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		request.setCharacterEncoding("utf-8");
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		
+		try {
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<OneQnAVO> oneQnAList = communityService.selectOneQnAListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("oneQnAList", oneQnAList);
+			
+			
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+
+		/*
+		 * ModelAndView mav = new ModelAndView(); List<OneQnAVO> oneQnAList =
+		 * communityService.oneQnAList(); System.out.println("oneQnAList 1:1문의 = " +
+		 * oneQnAList); String viewName = (String) request.getAttribute("viewName");
+		 * mav.addObject("oneQnAList", oneQnAList); mav.setViewName(viewName); return
+		 * mav;
+		 */
+	}
+	
+	
+	
+	// 민아 공지사항리스트
+		@Override
+		@RequestMapping(value = "/notice/noticeList.do")
+		public ModelAndView noticeList(HttpServletRequest request, HttpServletResponse response) {
+			System.out.println("여기는 community noticeList Controller");
+			
+			ModelAndView mav = new ModelAndView();
+			Map pagingMap = GeneralFileUploader.getParameterMap(request);
+			String pageNum = (String) pagingMap.get("pageNum");
+			String section = (String) pagingMap.get("section");
+			String category = (String) pagingMap.get("category");
+			if (pageNum == null || pageNum.trim().length() < 1) {
+				pageNum = "1";
+				pagingMap.put("pageNum", pageNum);
+			}
+			if (section == null || section.trim().length() < 1) {
+				section = "1";
+				pagingMap.put("section", section);
+			}
+			if (category == null || category.trim().length() < 1) {
+				category = "all";
+				pagingMap.put("category", category);
+			}
+			try {
+				
+				int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+				pagingMap.put("start", start);
+				List<NoticeVO> noticeVO = communityService.selectNoticeListWithPagingMap(pagingMap);
+				mav.addAllObjects(pagingMap);
+				mav.addObject("noticeVO", noticeVO);
+				System.out.println("noticeVO = " +noticeVO);
+				int totalNoticeNum = communityService.selectNoticeListTotalNumWithCategory(category);
+				System.out.println(totalNoticeNum);
+				mav.addObject("totalNoticeNum",totalNoticeNum);
+				
+				System.out.println(mav);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			String viewName = (String) request.getAttribute("viewName");
+			System.out.println("viewName = " + viewName);
+			
+			mav.setViewName(viewName);
+			return mav;
+
+		}
+	
 
 }

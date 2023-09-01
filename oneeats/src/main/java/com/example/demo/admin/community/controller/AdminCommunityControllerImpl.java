@@ -23,6 +23,7 @@ import com.example.demo.common.functions.GeneralFunctions;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
+import com.example.demo.vo.OneQnAVO;
 
 @Controller("adminCommunityController")
 @RequestMapping("/admin/community")
@@ -37,6 +38,20 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 		request.setCharacterEncoding("utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		return mav;
+	}
+
+
+	// 민아 관리자 1:1문의 리스트
+	@RequestMapping("/oneQnA/adminOneQnAList.do")
+	public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 community oneQnADetail Controller");
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		List<OneQnAVO> oneQnAList = adminCommunityService.oneQnAList();
+		System.out.println("oneQnAList= " + oneQnAList);
+		mav.addObject("oneQnAList", oneQnAList);
+		mav.setViewName(viewName);
 		return mav;
 	}
 
@@ -193,7 +208,7 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView();
 		Map condMap = GeneralFileUploader.getParameterMap(request);
-		
+
 		// 설명문의 줄바꿈 처리
 		String content = (String) condMap.get("content");
 		System.out.println(content);

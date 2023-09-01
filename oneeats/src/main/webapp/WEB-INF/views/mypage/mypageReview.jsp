@@ -113,11 +113,7 @@ table {
                     <tr style="border-bottom: 1px solid lightgray;">
                         <td><img class ="reviewImage" src= "${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods/${item.goodsNo}" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
                         <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} ${item.delivery_status}</td>
-                        <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br><button 
-                          type ="button"
-                          class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0"
-                          onclick="location.href='${contextPath}/review/writeReview.do?reviewNo=${item.reviewNo}'"
-                          >리뷰보기</button></td>
+                     </td>
                     </tr>
                 </c:forEach>
                 </table>

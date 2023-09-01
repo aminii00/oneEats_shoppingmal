@@ -19,6 +19,7 @@
     <typeAlias type="com.example.demo.vo.IngredientVO" alias="ingredientVO" />
 	<typeAlias type="com.example.demo.vo.OptionVO" alias="optionVO" />
     <typeAlias type="com.example.demo.vo.CartVO" alias="cartVO" />
+    <typeAlias type="com.example.demo.vo.PointHistoryVO" alias="pointHistoryVO" />
     
   </typeAliases>
 </configuration>
