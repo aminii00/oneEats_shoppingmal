@@ -75,6 +75,11 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
+	public List<Map> selectOrderBySearchType(Map<String, Object> map) {
+		return mypageDAO.selectOrderBySearchType(map);
+	}
+
+	@Override
 	public MemberVO listMyPage(String member_id) throws Exception {
 		System.out.println("listMyPageService");
 		return mypageDAO.selectMypageList(member_id);

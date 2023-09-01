@@ -19,9 +19,13 @@ form {
 	margin-left: auto;
 	margin-top: 10px;
 }
+.div-sib2 {
+	margin-left: auto;
+	margin-top: 10px;
+}
 select {
 	height: 30px;
-	border-radius: 4px;
+	border-radius: 3px;
 	border: 1px solid rgb(221, 221, 221);
 	line-height: 1.5;
 	outline: none;

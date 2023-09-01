@@ -274,6 +274,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
+                        name="harvest"
                         value="${sellerGoods.harvest}"
                         type="text"
                         class="property-font1 nice-select"

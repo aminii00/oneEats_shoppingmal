@@ -59,6 +59,7 @@ public class MypageControllerImpl implements MypageController {
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderList");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
@@ -66,11 +67,37 @@ public class MypageControllerImpl implements MypageController {
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
 		
+		
 		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(memberNo);
+		System.out.println("orderList="+orderList);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("orderList", orderList);
-
 		System.out.println(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/orderSearch.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView orderSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderSearch");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
+		String viewName = (String) request.getAttribute("viewName");
+		String orderSearchType = request.getParameter("orderSearchType");
+		System.out.println("orderSearchType="+orderSearchType);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("orderSearchType", orderSearchType);
+		map.put("memberNo", memberNo);
+		System.out.println("map="+map);
+		
+		List<Map> orderSearch = mypageService.selectOrderBySearchType(map);
+		System.out.println("orderSearch="+orderSearch);
+		request.setAttribute("orderList", orderSearch);
+		
+		ModelAndView mav = new ModelAndView("/mypage/orderList");
 		return mav;
 	}
 
@@ -245,7 +272,7 @@ public class MypageControllerImpl implements MypageController {
 
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
-	}
+	}	
 
 	@Override
 	@RequestMapping(value = "/mypage/myPageMain.do", method = { RequestMethod.GET, RequestMethod.POST })
