@@ -24,6 +24,14 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         reader.readAsDataURL(input.files[0]);
       }
     }
+    function input() {
+      const date = document.querySelector("#input_date").value;
+      console.log(date);
+
+      const goods_description =
+        document.querySelector("#goods_description").value;
+      console.log(goods_description);
+    }
   </script>
   <body>
     <section class="spad" style="padding-top: 28px !important">
@@ -39,46 +47,31 @@ uri="http://java.sun.com/jsp/jstl/core"%>
               <div class="product__details__pic">
                 <div class="product__details__pic__item">
                   <img id="goods_preview" src="" alt="" />
-
-                  <!-- <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
-                  />
-
-                  <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
-                  />
-                  <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
-                  />
-                  <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
-                  />
-                  <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
-                  /> -->
                   <img
                     src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
                   />
-                  <c:if test="${not empty goods.img2}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img3}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img4}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img5}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
-                    />
-                  </c:if>
+                  <div class="product__details__pic__slider owl-carousel">
+                    <c:if test="${not empty goods.img2}">
+                      <img
+                        src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
+                      />
+                    </c:if>
+                    <c:if test="${not empty goods.img3}">
+                      <img
+                        src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
+                      />
+                    </c:if>
+                    <c:if test="${not empty goods.img4}">
+                      <img
+                        src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
+                      />
+                    </c:if>
+                    <c:if test="${not empty goods.img5}">
+                      <img
+                        src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
+                      />
+                    </c:if>
+                  </div>
                 </div>
               </div>
             </div>
@@ -103,11 +96,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </option>
                             <option value="채소">채소</option>
                             <option value="과일">과일</option>
-                            <option value="주스 & 잼">
+                            <option value="주스 / 잼">
                               못난이 주스 / 수제청
                             </option>
-                            <option value="찌개 &탕 &찜">찌개 / 탕 /찜</option>
-                            <option value="식사&안주류">식사 / 안주류</option>
+                            <option value="찌개 / 탕 / 찜">
+                              찌개 / 탕 /찜
+                            </option>
+                            <option value="식사 / 안주류">식사 / 안주류</option>
                             <option value="죽">죽</option>
                             <option value="식사 대용식">식사 대용식</option>
                             <option value="간편 한끼 반찬">
@@ -251,66 +246,68 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       class="property_title1 textbold"
                       style="margin-top: 16px"
                     >
-                      핫딜 상품명
-                    </dt>
-                    <dd class="property-flex1">
-                      <input
-                        name="name"
-                        class="property-font1 nice-select"
-                        style="width: 176px"
-                      />
-                    </dd>
-                  </dl>
-
-                  <dl class="property-flex2" style="height: 60px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    >
-                      할인가
-                    </dt>
-                    <dd class="property-flex1">
-                      <input
-                        name="discounted_price"
-                        class="property-font1 nice-select"
-                        style="width: 176px"
-                      />
-                    </dd>
-                  </dl>
-
-                  <dl class="property-flex2" style="height: 60px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    >
-                      수량
-                    </dt>
-                    <dd class="property-flex1">
-                      <input
-                        name="goods_qty"
-                        class="property-font1 nice-select"
-                        style="width: 176px"
-                      />
-                    </dd>
-                  </dl>
-
-                  <dl class="property-flex2" style="height: 60px">
-                    <dt
-                      class="property_title1 textbold"
-                      style="margin-top: 16px"
-                    >
                       핫딜 종료일
                     </dt>
                     <dd class="property-flex1">
                       <input
                         name="finishDate"
+                        id="input_date"
                         type="date"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
                     </dd>
                   </dl>
+                  <div class="row ingredient_grid">
+                    <div class="col">
+                      <div class="row">&nbsp;</div>
+                      <div class="row ingredient_rows">
+                        <div class="col-md-11 ingredient_col">
+                          <div
+                            class="row ingredient_row head_row bg-lightgreen"
+                          >
+                            <div class="col-md">핫딜 상품명</div>
+                            <div class="col-md">핫딜 수량</div>
 
+                            <div class="col-md">할인가격</div>
+                            <div class="col-md-1"></div>
+                          </div>
+                          <div class="row ingredient_row">
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="name"
+                                class="form-control"
+                                placeholder=" 상품명"
+                                required
+                              />
+                            </div>
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="goods_qty"
+                                class="form-control"
+                                placeholder="양"
+                                required
+                              />
+                            </div>
+                            <input type="hidden" name="optionNo" />
+
+                            <div class="col-md">
+                              <input
+                                type="text"
+                                name="discounted_price"
+                                class="form-control"
+                                placeholder="가격"
+                                required
+                              />
+                            </div>
+                            <div class="col-md-1"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="property-flex2" style="height: 60px">
                     <div
                       class="property_title1 textbold"
@@ -352,6 +349,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       class="cart-button css-cartbtn"
                       radius="3"
                       style="width: 100px"
+                      id="input_submit"
                     >
                       <div class="css-nytqmg textbold">핫딜 등록</div>
                     </button>
