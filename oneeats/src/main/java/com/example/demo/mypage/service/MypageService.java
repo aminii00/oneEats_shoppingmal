@@ -60,5 +60,19 @@ public interface MypageService {
 	public CouponVO couponNull(CouponVO result);
 	
 	public void couponInsert(CouponVO result);
+
+	public void insertTempOrderList(List<OrderVO> orderList);
+
+	public void updateTempOrderList(Map payInfoMap);
+
+	public void insertAddressWithMap(Map condMap);
+
+	public void updateDeliveryAddressWithMap(Map condMap);
+
+	public void swapDeliveryAddress(Map condMap, DeliveryAddressVO targetDeliveryAddress);
+
+	public void updateMemberAddressWithMap(Map condMap);
+
+	public void deleteDeliveryAddressWithMap(Map condMap);
 	
 }

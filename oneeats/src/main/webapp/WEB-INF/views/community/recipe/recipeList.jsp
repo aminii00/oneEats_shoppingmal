@@ -144,7 +144,10 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               var="result"
               value="${(searchRecipeNum - (section-1)*60) div 6}"
             />
-            <c:set var="endPage" value="${Math.ceil(result)}" />
+            <c:set var="endPage" value="${Math.floor(result)}" />
+          </c:if>
+          <c:if test="${endPage>10}">
+            <c:set var="endPage" value="10" />
           </c:if>
           <c:forEach begin="1" end="${endPage}" var="i">
             <li class="li-btn">

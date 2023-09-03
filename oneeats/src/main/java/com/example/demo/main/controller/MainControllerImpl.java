@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.api.toss.dto.TossDTO;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
@@ -210,6 +211,9 @@ public class MainControllerImpl implements MainController {
 
 		return result;
 	}
+	
+	
+	
 
 	@RequestMapping(value = "/orderNow.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView orderNow(HttpServletRequest request) throws IOException {
@@ -245,7 +249,7 @@ public class MainControllerImpl implements MainController {
 				String[] goodsQtys = request.getParameterValues("goodsQty");
 				// list에 하나씩 추가
 				for (int i = 0; i < optionNos.length; i++) {
-					System.out.println("for문 시작");
+					
 					System.out.println(goodsQtys[i]);
 					System.out.println(optionNos[i]);
 					OrderVO temp = mainService.selectOptionsGoodsToOrderByOptionNo(Integer.parseInt(optionNos[i]));

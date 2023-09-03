@@ -14,7 +14,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
   </head>
   <body>
     <section>
-      <form action="">
+      <form
+        action="${contextPath}/admin/community/recipe/adminRecipeList.do"
+        method="post"
+      >
         <div class="row vertical-align">
           <div class="col-md-2 textsize-3 text-left textbold textcolor-black">
             레시피
@@ -22,7 +25,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col-md"></div>
 
           <div class="col-md-2 p-0 justify-content-end d-flex">
-            <select name="filter_type">
+            <select name="recipe_search_type">
+              <option value="all">전체</option>
               <option value="title">제목</option>
               <option value="memberId">작성자아이디</option>
               <option value="ingredient">재료</option>
@@ -31,7 +35,11 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </div>
           <div class="col-md-4 p-0">
             <div class="input-group">
-              <input type="text" name="filter_word" class="form-control" />
+              <input
+                type="text"
+                name="recipe_search_word"
+                class="form-control"
+              />
               <div class="input-group-append">
                 <button
                   class="bg-lightgreen textcolor-white border-0 textsize-2"
@@ -56,43 +64,19 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col-md-1">삭제</div>
         </div>
         <hr class="line-black" />
-        <div class="row recipeList-title">
-          <div class="col-md-1">120</div>
-          <div class="col-md text-left">단호박죽</div>
-          <div class="col-md-2">qwer</div>
-          <div class="col-md-2">2023/08/11</div>
-          <div class="col-md-1">
-            <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/recipe/deleteRecipe.do?recipeNo=120');"
-            >
-              삭제
-            </a>
-          </div>
-        </div>
-        <hr class="line-gray" />
-
-        <div class="row recipeList-title">
-          <div class="col-md-1">121</div>
-          <div class="col-md text-left">단호박죽</div>
-          <div class="col-md-2">qwer</div>
-          <div class="col-md-2">2023/08/11</div>
-          <div class="col-md-1">
-            <a
-              onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/recipe/deleteRecipe.do?recipeNo=123');"
-            >
-              삭제
-            </a>
-          </div>
-        </div>
 
         <!--레시피 리스트를 넣을 곳-->
         <c:choose>
           <c:when test="${not empty recipeList}">
             <c:forEach var="recipe" items="${recipeList}">
-              <hr class="line-gray" />
               <div class="row recipeList-title">
                 <div class="col-md-1">${recipe.recipeNo}</div>
-                <div class="col-md text-left">${recipe.title}</div>
+                <div class="col-md text-left">
+                  <a
+                    href="${contextPath}/community/recipe/recipeDetail.do?recipeNo=${recipe.recipeNo}"
+                    >${recipe.title}</a
+                  >
+                </div>
                 <div class="col-md-2">${recipe.memberId}</div>
                 <div class="col-md-2">${recipe.creDate}</div>
 
@@ -104,6 +88,9 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                   </a>
                 </div>
               </div>
+              <c:if test="${loop.index!=recipeList.size()-1}">
+                <hr class="line-gray" />
+              </c:if>
             </c:forEach>
           </c:when>
         </c:choose>
@@ -125,32 +112,55 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         </div>
       </div>
 
-      <!--페이지 버튼-->
       <div>
         <ul class="ul-li">
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/prev.png"
-                alt="prev"
-              />
-            </button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
+          <c:if test="${section>1}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/admin/community/recipe/recipeList.do?section=${section-1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/prev.png"
+                  alt="prev"
+                />
+              </a>
+            </li>
+          </c:if>
+          <c:set
+            var="end"
+            value="${Math.ceil((totalRecipeNum - (section-1)*100) div 10)}"
+          />
+          <c:if test="${end>10}">
+            <c:set var="end" value="10" />
+          </c:if>
+          <c:forEach begin="1" end="${end}" var="i">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/admin/community/recipe/recipeList.do?section=${section}&pageNum=${i}"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                ${((section-1)*10)+i}
+              </a>
+            </li>
+          </c:forEach>
+          <c:if test="${section*100<totalRecipeNum}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/admin/community/recipe/recipeList.do?section=${section+1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/next.png"
+                  alt="next"
+                />
+              </a>
+            </li>
+          </c:if>
         </ul>
       </div>
     </section>

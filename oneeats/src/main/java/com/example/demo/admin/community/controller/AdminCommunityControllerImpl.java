@@ -24,6 +24,7 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
+import com.example.demo.vo.RecipeVO;
 
 @Controller("adminCommunityController")
 @RequestMapping("/admin/community")
@@ -239,6 +240,47 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 			mav = Alert.alertAndRedirect("삭제하지 못 했습니다.", previousPage);
 		}
 
+		return mav;
+	}
+	
+	@RequestMapping("/recipe/adminRecipeList.do")
+	public ModelAndView adminRecipeList(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String viewName = (String) request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView(viewName);
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		
+		String category = request.getParameter("category");
+		String _section = request.getParameter("section");
+		String _pageNum = request.getParameter("pageNum");
+		String recipe_search_type = request.getParameter("recipe_search_type");
+		int pageNum;
+		int section;
+		if (_pageNum == null || _pageNum.trim().length() < 1) {
+			pageNum = 1;
+		} else {
+			pageNum = Integer.parseInt(_pageNum);
+		}
+		if (_section == null || _section.trim().length() < 1) {
+			section = 1;
+		} else {
+			section = Integer.parseInt(_section);
+		}
+		if (recipe_search_type != null && recipe_search_type.length() < 1) {
+			recipe_search_type = "all";
+		}
+		
+		pagingMap.put("category", category);
+		pagingMap.put("section", section);
+		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("recipe_search_type", recipe_search_type);
+		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+		List<RecipeVO> recipeList= adminCommunityService.selectRecipeListWithPagingMap(pagingMap);
+		mav.addObject("recipeList",recipeList);
+		
+		int totalRecipeNum = adminCommunityService.selectTotalRecipeNum(pagingMap);
+		mav.addObject("totalRecipeNum",totalRecipeNum);
+		mav.addAllObjects(pagingMap);
 		return mav;
 	}
 }

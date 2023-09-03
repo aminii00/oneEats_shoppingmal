@@ -9,6 +9,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.mypage.dao.MypageDAO;
 import com.example.demo.vo.CouponVO;
@@ -151,14 +152,56 @@ public class MypageServiceImpl implements MypageService {
 		List<OrderVO> reviewList = mypageDAO.reviewList(memberNo);
 		return reviewList;
 	}
+
 	// 민아 리뷰2
-		@Override
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException{
-			List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
-			return writeReview;
+	@Override
+	public List<OrderVO> writeReview(int memberNo) throws DataAccessException {
+		List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
+		return writeReview;
+
+	}
+
+	@Override
+	public void insertTempOrderList(List<OrderVO> orderList) {
+		mypageDAO.insertTempOrderList(orderList);
+
+	}
+
+	@Override
+	public void updateTempOrderList(Map payInfoMap) {
+		mypageDAO.updateTempOrderList(payInfoMap);
 		
 	}
 
+	@Override
+	public void insertAddressWithMap(Map condMap) {
+		mypageDAO.insertAddressWithMap(condMap);
+	}
 
+	@Override
+	public void updateDeliveryAddressWithMap(Map condMap) {
+		mypageDAO.updateDeliveryAddressWithMap(condMap);
+	}
+
+	@Override
+	@Transactional
+	public void swapDeliveryAddress(Map condMap, DeliveryAddressVO targetDeliveryAddress) {
+		mypageDAO.updateDeliveryAddressWithMap(condMap);
+		mypageDAO.updateDeliveryAddress(targetDeliveryAddress);
+		mypageDAO.updateMemberAddressWithMap(condMap);
+	}
+	
+	@Override
+	public void updateMemberAddressWithMap(Map condMap) {
+		mypageDAO.updateMemberAddressWithMap(condMap);
+	}
+
+	@Override
+	public void deleteDeliveryAddressWithMap(Map condMap) {
+		mypageDAO.deleteDeliveryAddressWithMap(condMap);
+	}
+	
+	
+	
 
 }

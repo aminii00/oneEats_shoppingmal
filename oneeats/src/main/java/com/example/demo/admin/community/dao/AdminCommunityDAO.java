@@ -41,4 +41,8 @@ public interface AdminCommunityDAO {
 	public void deleteMostQnA(int qnaNo);
 	
 	public List<OneQnAVO> oneQnAList();
+
+	public List<RecipeVO> selectRecipeListWithPagingMap(Map pagingMap);
+
+	public int selectTotalRecipeNum(Map pagingMap);
 }
