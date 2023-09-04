@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
@@ -42,8 +43,15 @@ public interface MypageService {
 	
 	public int removeBookMark(int goodsNo) throws DataAccessException;
 	
-	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException;
-	public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws DataAccessException;
+	// public List<CouponVO> couponSearch(MemberVO memberInfo) throws
+		// DataAccessException;
+		// public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws
+		// DataAccessException;
+
+		public List<CouponVO> selectCouponListWithPagingMap(Map pagingMap);
+		public int selectCouponListTotalNum(int memberNo);
+		public List<PointHistoryVO> selectPointListWithPagingMap(Map pagingMap);
+		public int selectPointListTotalNum(int memberNo);
 
 	public List<DeliveryAddressVO> myAddress(int memberNo) throws DataAccessException;
 	
@@ -60,6 +68,10 @@ public interface MypageService {
 	public CouponVO couponNull(CouponVO result);
 	
 	public void couponInsert(CouponVO result);
+	
+	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap);
+
+	public int selectBookListTotalNum(int memberNo);
 
 	public void insertTempOrderList(List<OrderVO> orderList);
 

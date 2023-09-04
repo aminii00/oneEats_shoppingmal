@@ -17,6 +17,7 @@ import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.review.service.ReviewService;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.ReviewVO;
 
 @Controller("reviewController")
@@ -36,13 +37,18 @@ public class ReviewControllerImpl implements ReviewController{
 	public ModelAndView writeReview(HttpServletRequest request) {
 		System.out.println("여기는 writeReview Controller ");
 		ModelAndView mav = new ModelAndView();
-		String goodsNo_ = request.getParameter("goodsNo");
-		int goodsNo = Integer.parseInt(goodsNo_);
-		GoodsVO goodsVO= new GoodsVO();
-		goodsVO.setGoodsNo(goodsNo);
-		GoodsVO goods = reviewService.SearchGoods(goodsVO);
-		System.out.println("goods= "+goods);
-		mav.addObject("goods",goods);
+		String order_seqNo_ = request.getParameter("order_seqNo");
+		int order_seqNo = Integer.parseInt(order_seqNo_);
+		OrderVO orderVO= new OrderVO();
+		orderVO.setOrder_seqNo(order_seqNo);
+		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = memberInfo.getMemberNo();
+		orderVO.setMemberNo(memberNo);
+		OrderVO order = reviewService.SearchGoods(orderVO);
+		System.out.println("order= "+order);
+		mav.addObject("order",order);
+		mav.addObject("member",memberInfo);
 		mav.setViewName("/review/writeReview");
 		return mav;
 	}
@@ -61,6 +67,7 @@ public class ReviewControllerImpl implements ReviewController{
 		int newReviewNo = reviewService.newReviewNo();
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setReviewNo(newReviewNo);
+		reviewVO.setStar(star);
 		reviewVO.setGoodsNo(goodsNo);
 		reviewVO.setMemberNo(memberNo);
 		reviewVO.setContent(content);

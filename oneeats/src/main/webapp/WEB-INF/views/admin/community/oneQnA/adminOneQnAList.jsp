@@ -55,29 +55,52 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <!--페이지 버튼-->
       <div>
         <ul class="ul-li">
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/prev.png"
-                alt="prev"
-              />
-            </button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">1</button>
-          </li>
-          <li class="li-btn">
-            <button class="btn-2 btn-square bg-white btn-border">
-              <img
-                width="20px"
-                height="20px"
-                src="${contextPath}/img/icon/next.png"
-                alt="next"
-              />
-            </button>
-          </li>
+          <c:if test="${section>1}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section-1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/prev.png"
+                  alt="prev"
+                />
+              </a>
+            </li>
+          </c:if>
+          <c:set
+            var="end"
+            value="${Math.ceil((totalOneQnAQnANum - (section-1)*100) div 10)}"
+          />
+          <c:if test="${end>10}">
+            <c:set var="end" value="10" />
+          </c:if>
+          <c:forEach begin="1" end="${end}" var="i">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section}&pageNum=${i}"
+                class="btn-2 btn-square bg-white btn-border"
+                >${((section-1)*10)+i}</a
+              >
+            </li>
+          </c:forEach>
+          <c:if test="${section*100<totalOneQnAQnANum}">
+            <li class="li-btn">
+              <a
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section+1}&pageNum=1"
+                class="btn-2 btn-square bg-white btn-border"
+              >
+                <img
+                  width="20px"
+                  height="20px"
+                  src="${contextPath}/img/icon/next.png"
+                  alt="next"
+                />
+              </a>
+            </li>
+          </c:if>
         </ul>
       </div>
 

@@ -56,12 +56,35 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	@RequestMapping("/oneQnA/adminOneQnAList.do")
 	public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 community oneQnADetail Controller");
-		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
-		List<OneQnAVO> oneQnAList = adminCommunityService.oneQnAList();
-		System.out.println("oneQnAList= " + oneQnAList);
-		mav.addObject("oneQnAList", oneQnAList);
-		mav.setViewName(viewName);
+		ModelAndView mav = new ModelAndView(viewName);
+		request.setCharacterEncoding("utf-8");
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+
+		try {
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<OneQnAVO> oneQnAList = adminCommunityService.selectOneQnAListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("oneQnAList", oneQnAList);
+			int totalOneQnAQnANum = adminCommunityService.selectOneQnAListTotalNumWithCategory();
+			mav.addObject("totalOneQnAQnANum",totalOneQnAQnANum);
+
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return mav;
 	}
 
@@ -70,11 +93,42 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	public ModelAndView adminNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 community noticeList Controller");
 		ModelAndView mav = new ModelAndView();
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		String category = (String) pagingMap.get("category");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		if (category == null || category.trim().length() < 1) {
+			category = "all";
+			pagingMap.put("category", category);
+		}
+
+		try {
+
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<NoticeVO> noticeList = adminCommunityService.selectNoticeListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("noticeList", noticeList);
+			System.out.println("noticeList = " +noticeList);
+			int totalNoticeNum = adminCommunityService.selectNoticeListTotalNumWithCategory(category);
+			System.out.println(totalNoticeNum);
+			mav.addObject("totalNoticeNum",totalNoticeNum);
+
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("viewName = " + viewName);
-		List<NoticeVO> noticeList = adminCommunityService.adminNoticeList();
-		System.out.println("noticeList = " + noticeList);
-		mav.addObject("noticeList", noticeList);
 		mav.setViewName(viewName);
 		return mav;
 	}

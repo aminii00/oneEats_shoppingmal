@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
@@ -22,6 +23,15 @@ import com.example.demo.vo.ReviewVO;
 @Mapper
 @Repository("mypageDAO")
 public interface MypageDAO {
+	
+	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap);
+
+	public int selectBookListTotalNum(int memberNo);
+
+	public List<CouponVO> selectCouponListWithPagingMap(Map pagingMap);
+	public int selectCouponListTotalNum(int memberNo);
+	public List<PointHistoryVO> selectPointListWithPagingMap(Map pagingMap);
+	public int selectPointListTotalNum(int memberNo);
 	
 	public void deleteMember(MemberVO member);
 

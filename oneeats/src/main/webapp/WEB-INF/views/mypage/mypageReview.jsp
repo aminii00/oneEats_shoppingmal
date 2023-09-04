@@ -65,7 +65,7 @@ table {
                           <button 
                           type = "button"
                           class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0" 
-                          onclick="location.href='${contextPath}/review/writeReview.do?goodsNo=${item.goodsNo}'"
+                          onclick="location.href='${contextPath}/review/writeReview.do?order_seqNo=${item.order_seqNo}'"
                           >
                           리뷰작성
                          </button>

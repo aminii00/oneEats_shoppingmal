@@ -53,6 +53,24 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	}
 
 	@Override
+	public List<NoticeVO> selectNoticeListWithPagingMap(Map pagingMap){
+		return adminCommunityDAO.selectNoticeListWithPagingMap(pagingMap);
+	}
+	@Override
+	public List<OneQnAVO> selectOneQnAListWithPagingMap(Map pagingMap){
+		return adminCommunityDAO.selectOneQnAListWithPagingMap(pagingMap);
+	}
+	@Override
+	public int selectNoticeListTotalNumWithCategory(String category) {
+		return adminCommunityDAO.selectNoticeListTotalNumWithCategory(category);
+	}
+	@Override
+	public int selectOneQnAListTotalNumWithCategory() {
+		int num = adminCommunityDAO.selectOneQnAListTotalNumWithCategory();	
+		return num;
+	}
+	
+	@Override
 	public int selectMostQnAListTotalNumWithCategory(String category) {
 
 		return adminCommunityDAO.selectMostQnAListTotalNumWithCategory(category);

@@ -61,6 +61,37 @@
 		<result property="memberId" column="memberId" />
 	</resultMap>
 
+<select id="selectNoticeListWithPagingMap"
+		parameterType="java.util.Map" resultMap="noticeResult">
+		select * from notice
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+		order by creDate
+		limit #{start},10
+	</select>
+
+	<select id="selectOneQnAListWithPagingMap"
+		parameterType="java.util.Map" resultMap="oneQnAResult">
+		select * from oneqna where
+		parentNo=0
+		order by creDate
+		limit #{start},10
+	</select>
+
+	<select id="selectNoticeListTotalNumWithCategory"
+		parameterType="String" resultType="int">
+		select count(noticeNo) from notice
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+	</select>
+
+	<select id="selectOneQnAListTotalNumWithCategory"
+		parameterType="String" resultType="int">
+		select count(qnaNo) from oneqna where parentNo=0
+	</select>
+
 	<select id="oneQnAList" resultMap="oneQnAResult">
 		select oneqna.*, member.id
 		from oneqna

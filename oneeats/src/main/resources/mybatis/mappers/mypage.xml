@@ -359,10 +359,10 @@ where m.memberNo=#{memberNo}
 		resultMap="OrderResult">
 	    <![CDATA[
         
-         select t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+         select t_order.order_seqNo, t_order.orderNo, t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
          from t_order
-         inner join goods on t_order.goodsNo=goods.goodsNo 
-         where t_order.delivery_status='배송완료' and t_order.memberNo=#{memberNo}
+           inner join goods on t_order.goodsNo=goods.goodsNo
+         where t_order.delivery_status='배송완료' and t_order.review_status='미작성' and t_order.memberNo=#{memberNo}
 		]]>
 	</select>
 
@@ -370,14 +370,41 @@ where m.memberNo=#{memberNo}
 	<select id="writeReview" parameterType="int"
 		resultMap="OrderResult">
 	    <![CDATA[
-          select * from review inner join
-         (select t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+	     select * from review inner join
+        (select t_order.memberNo, t_order.order_seqNo, t_order.orderNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
          from t_order 
-         inner join goods on t_order.memberNo=goods.memberNo where t_order.delivery_status='배송완료' ) 
-         as orderplusgoods
+           inner join goods on t_order.goodsNo=goods.goodsNo where t_order.delivery_status='배송완료' and t_order.review_status='작성완료' and t_order.memberNo=#{memberNo})
+           as orderplusgoods
          on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 		]]>
 	</select>
+	
+	<select id="selectCouponListWithPagingMap"
+		parameterType="java.util.Map" resultMap="CouponResult">
+		select * from member_coupon 
+			inner join coupon 
+			on 
+			member_coupon.couponNo=coupon.couponNo 
+			where 
+			member_coupon.memberNo=#{memberNo}
+		    limit #{start},10 
+	</select>
+
+	<select id="selectCouponListTotalNum" parameterType ="int" resultType="int">
+		select count(couponNo) from coupon where memberNo=#{memberNo}
+	</select>
+	
+	<select id="selectPointListWithPagingMap"
+		parameterType="java.util.Map" resultMap="PointHistoryResult">
+	select * from point_history
+			where memberNo=#{memberNo}
+		    limit #{start},10 
+	</select>
+
+	<select id="selectPointListTotalNum" parameterType ="int" resultType="int">
+		select count(pointNo) from point_history where memberNo=#{memberNo}
+	</select>
+	
 
 	<!-- 민아 쿠폰 조회 -->
 	<select id="couponSearch" resultMap="CouponResult"
@@ -515,4 +542,23 @@ deliveryNo=#{deliveryNo}
 		resultType="String">
 		select sns_id from t_sns where id=#{id}
 	</select>
+	<select id="selectBookListWithPagingMap"
+		parameterType="java.util.Map" resultMap="BookResult">
+		select goods.memberNo,
+		goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark
+		inner join goods
+		on
+		bookmark.goodsNo=goods.goodsNO
+		where
+		bookmark.memberNo=#{memberNo}
+		limit #{start},10
+	</select>
+
+	<select id="selectBookListTotalNum" parameterType="int"
+		resultType="int">
+		select count(memberNo) from bookmark where
+		memberNo=#{memberNo}
+	</select>
+
+
 </mapper>

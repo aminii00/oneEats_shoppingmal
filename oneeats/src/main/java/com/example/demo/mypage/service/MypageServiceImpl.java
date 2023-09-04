@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.common.functions.GeneralFunctions;
 import com.example.demo.mypage.dao.MypageDAO;
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
@@ -108,22 +109,20 @@ public class MypageServiceImpl implements MypageService {
 	public int removeBookMark(int goodsNo) throws DataAccessException {
 		return mypageDAO.deleteBookMark(goodsNo);
 	}
-
 	@Override
-	public List<CouponVO> couponSearch(MemberVO memberInfo) throws DataAccessException {
-		List<CouponVO> couponVO = mypageDAO.couponSearch(memberInfo);
-		return couponVO;
+	public List<PointHistoryVO> selectPointListWithPagingMap(Map pagingMap){
+		List<PointHistoryVO> pointList = mypageDAO.selectPointListWithPagingMap(pagingMap);
+		return pointList;
 	}
-	@Override
-	public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws DataAccessException{
-		List<PointHistoryVO> pointHistoryVO = mypageDAO.pointSearch(memberInfo);
-		return pointHistoryVO;
-	}
-	
 	@Override
 	public CouponVO couponNum(String couponCode) {
 		CouponVO result = mypageDAO.couponNum(couponCode);
 		return result;
+	}
+	@Override
+	public int selectPointListTotalNum(int memberNo) {
+		int num = mypageDAO.selectPointListTotalNum(memberNo);
+		return num;
 	}
 
 	@Override
@@ -155,12 +154,12 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	// 민아 리뷰2
-	@Override
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException {
-		List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
-		return writeReview;
+		@Override
+		public List<OrderVO> writeReview(int memberNo) throws DataAccessException {
+			List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
+			return writeReview;
 
-	}
+		}
 
 	@Override
 	public void insertTempOrderList(List<OrderVO> orderList) {
@@ -231,6 +230,39 @@ public class MypageServiceImpl implements MypageService {
 		return true;
 	}
 	
+	
+	/*
+	 * @Override public List<CouponVO> couponSearch(MemberVO memberInfo) throws
+	 * DataAccessException { List<CouponVO> couponVO =
+	 * mypageDAO.couponSearch(memberInfo); return couponVO; }
+	 * 
+	 * @Override public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws
+	 * DataAccessException { List<PointHistoryVO> pointHistoryVO =
+	 * mypageDAO.pointSearch(memberInfo); return pointHistoryVO; }
+	 */
+
+	@Override
+	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap) {
+		 List<BookmarkVO> booklist = mypageDAO.selectBookListWithPagingMap(pagingMap);
+		return booklist;
+	}
+
+	@Override
+	public int selectBookListTotalNum(int memberNo) {
+		int num = mypageDAO.selectBookListTotalNum(memberNo);
+		return num;
+	}
+
+	@Override
+	public List<CouponVO> selectCouponListWithPagingMap(Map pagingMap){
+		List<CouponVO> couponList = mypageDAO.selectCouponListWithPagingMap(pagingMap);
+		return couponList;
+	}
+	@Override
+	public int selectCouponListTotalNum(int memberNo) {
+		int num = mypageDAO.selectCouponListTotalNum(memberNo);
+		return num;
+	}
 	
 	
 

@@ -61,4 +61,5 @@ public interface CommunityService {
 
 	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap);
 	
+	public int selectOneQnAListTotalNumWithCategory();
 }

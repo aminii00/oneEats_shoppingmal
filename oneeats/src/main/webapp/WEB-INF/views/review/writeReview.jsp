@@ -11,11 +11,41 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/star.css" />
     <meta charset="UTF-8" />
     <title>프로필 편집</title>
-    <style></style>
+    <style>
+      .myform fieldset {
+        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+        border: 0; /* 필드셋 테두리 제거 */
+      }
+      .myform input[type="radio"] {
+        display: none; /* 라디오박스 감춤 */
+      }
+      .myform label {
+        font-size: 2em; /* 이모지 크기 */
+        color: transparent; /* 기존 이모지 컬러 제거 */
+        text-shadow: 0 0 0 yellow; /* 새 이모지 색상 부여 */
+      }
+      .myform label:hover {
+        text-shadow: 0 0 0 yellow; /* 마우스 호버 */
+      }
+      .myform label:hover ~ label {
+        text-shadow: 0 0 0 yellow; /* 마우스 호버 뒤에오는 이모지들 */
+      }
+      .myform fieldset {
+        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
+        direction: rtl; /* 이모지 순서 반전 */
+        border: 0; /* 필드셋 테두리 제거 */
+      }
+      .myform fieldset legend {
+        text-align: left;
+      }
+      .myform input[type="radio"]:checked + label {
+        text-shadow: 0 0 0 orange; /* 마우스 클릭 체크 */
+      }
+    </style>
   </head>
   <body>
     <form
-      action="${contextPath}/review/reviewInsert.do?goodsNo=${goods.goodsNo}"
+      action="${contextPath}/review/reviewInsert.do?goodsNo=${order.goodsNo}"
       method="post"
       enctype="multipart/form-data"
     >

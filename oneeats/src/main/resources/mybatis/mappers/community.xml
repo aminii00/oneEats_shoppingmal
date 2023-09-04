@@ -52,7 +52,8 @@
 	<insert id="replyInsert" parameterType="oneQnAVO">
 		insert into oneqna(qnaNo,
 		content, parentNo, memberNo )
-		values (#{qnaNo}, #{content}, #{parentNo}, #{memberNo})
+		values (#{qnaNo}, #{content},
+		#{parentNo}, #{memberNo})
 	</insert>
 
 	<select id="oneQnAList" resultMap="oneQnAResult">
@@ -88,9 +89,11 @@
 
 	<select id="replyList" resultType="oneQnAVO" parameterType="int">
 
-		SELECT oneqna.*, member.name as memberName, member.profileImg as profile
+		SELECT oneqna.*, member.name as memberName, member.profileImg as
+		profile
 		FROM oneqna
-		INNER JOIN member on oneqna.memberNo = member.memberNo
+		INNER JOIN member on oneqna.memberNo =
+		member.memberNo
 		where parentNo=#{qnaNo}
 
 	</select>
@@ -283,14 +286,16 @@
 		limit #{start},10
 	</select>
 	
-	<select id="selectMostQnAListTotalNumWithCategory" parameterType="String" resultType="int">
+	<select id="selectMostQnAListTotalNumWithCategory"
+		parameterType="String" resultType="int">
 		select count(qnaNo) from mostQnA
 		<if test="category!='all'">
 			where category=#{category}
 		</if>
 	</select>
 	
-	<select id="selectNoticeListTotalNumWithCategory" parameterType="String" resultType="int">
+	<select id="selectNoticeListTotalNumWithCategory"
+		parameterType="String" resultType="int">
 		select count(noticeNo) from notice
 		<if test="category!='all'">
 			where category=#{category}

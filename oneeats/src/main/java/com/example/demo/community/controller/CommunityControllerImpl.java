@@ -314,6 +314,7 @@ System.out.println("map : " + map);
 		mav.addObject("oneQnAList", oneQnADetail);
 		System.out.println("oneQnAList = " +oneQnADetail);
 		
+		
 		//parentNo이 qnaNo인 값을 가져오기
 		List<OneQnAVO> replyList = communityService.replyList(qnaNo);
 		System.out.println("replyList = " +replyList);
