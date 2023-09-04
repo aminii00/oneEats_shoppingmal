@@ -53,7 +53,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <div class="div-left2">
                 <img
                   class="img-1"
-                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=orderNo${order.orderNo}"
+                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=goodsNo${order.goodsNo}"
                   alt="상품메인"
                 />
                 <div class="div-dl">

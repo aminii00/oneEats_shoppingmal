@@ -59,7 +59,7 @@ table {
                 <table style="width: 641px; height: 110px;">
                     <c:forEach var="item" items="${reviewList}" varStatus="status">
                     <tr style="border-bottom: 1px solid lightgray;">
-                        <td><img class ="reviewImage" src= "${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods/${item.goodsNo}" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
+                        <td><img class ="reviewImage" src= "${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
                         <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} ${item.delivery_status}</td>
                         <td class = "textsize-2 textbold" >2023.08.01까지 작성 가능<br>
                           <button 
@@ -111,7 +111,7 @@ table {
                     <c:forEach var="item" items="${writeReview}" varStatus="status">
                       
                     <tr style="border-bottom: 1px solid lightgray;">
-                        <td><img class ="reviewImage" src= "${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goods/${item.goodsNo}" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
+                        <td><img class ="reviewImage" src= "${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}" class="brd-lightgray btn-round imgsize-square2" style="width:110px; height:100px; float: left; " ></td>
                         <td class = "textsize-2 textbold" >${item.goodsName} 총 수량 ${item.goods_qty}개<br>${item.deliveryDate} ${item.delivery_status}</td>
                      </td>
                     </tr>

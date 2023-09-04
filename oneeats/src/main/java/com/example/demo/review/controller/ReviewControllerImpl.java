@@ -33,16 +33,11 @@ public class ReviewControllerImpl implements ReviewController{
 		ModelAndView mav = new ModelAndView();
 		String goodsNo_ = request.getParameter("goodsNo");
 		int goodsNo = Integer.parseInt(goodsNo_);
-		HttpSession session = request.getSession();
-		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = memberInfo.getMemberNo();
 		GoodsVO goodsVO= new GoodsVO();
 		goodsVO.setGoodsNo(goodsNo);
-		goodsVO.setMemberNo(memberNo);
 		GoodsVO goods = reviewService.SearchGoods(goodsVO);
 		System.out.println("goods= "+goods);
 		mav.addObject("goods",goods);
-		mav.addObject("member",memberInfo);
 		mav.setViewName("/review/writeReview");
 		return mav;
 	}

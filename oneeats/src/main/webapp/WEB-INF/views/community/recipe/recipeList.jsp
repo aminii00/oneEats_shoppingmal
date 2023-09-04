@@ -144,7 +144,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               var="result"
               value="${(searchRecipeNum - (section-1)*60) div 6}"
             />
-            <c:set var="endPage" value="${Math.floor(result)}" />
+            <c:set var="endPage" value="${Math.ceil(result)}" />
           </c:if>
           <c:if test="${endPage>10}">
             <c:set var="endPage" value="10" />

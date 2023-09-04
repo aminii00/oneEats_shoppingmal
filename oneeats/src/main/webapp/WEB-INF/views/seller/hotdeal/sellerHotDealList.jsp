@@ -103,7 +103,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             var="result"
             value="${(searchHotDealNum - (section-1)*100)/10}"
           />
-          <c:set var="endPage" value="${Math.floor(result)}" />
+          <c:set var="endPage" value="${Math.ceil(result)}" />
         </c:if>
         <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">

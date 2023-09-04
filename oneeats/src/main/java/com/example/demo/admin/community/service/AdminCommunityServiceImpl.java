@@ -11,6 +11,7 @@ import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
+import com.example.demo.vo.ReviewVO;
 
 @Service("adminCommunityService")
 public class AdminCommunityServiceImpl implements AdminCommunityService {
@@ -97,6 +98,22 @@ public class AdminCommunityServiceImpl implements AdminCommunityService {
 	public List<OneQnAVO> oneQnAList(){
 		List<OneQnAVO> oneQnAList = adminCommunityDAO.oneQnAList();
 		return oneQnAList;
+	}
+
+	@Override
+	public List<ReviewVO> selectReviewListWithPagingMap(Map pagingMap) {
+		return adminCommunityDAO.selectReviewListWithPagingMap(pagingMap);
+	}
+
+	@Override
+	public int selectTotalReviewNum(Map pagingMap) {
+		return adminCommunityDAO.selectTotalReviewNum(pagingMap);
+	}
+
+	@Override
+	public void deleteReview(int reviewNo) {
+		adminCommunityDAO.deleteReview(reviewNo);
+		
 	}
 	
 	

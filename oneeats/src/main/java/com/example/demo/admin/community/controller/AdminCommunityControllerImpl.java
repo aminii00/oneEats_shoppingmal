@@ -25,6 +25,7 @@ import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.RecipeVO;
+import com.example.demo.vo.ReviewVO;
 
 @Controller("adminCommunityController")
 @RequestMapping("/admin/community")
@@ -35,10 +36,18 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 
 	@Override
 	@RequestMapping("/review/adminReviewList.do")
-	public ModelAndView adminReviewList(HttpServletRequest request) throws IOException {
+	public ModelAndView adminReviewList(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		Map map = GeneralFileUploader.getParameterMap(request);
+		Map pagingMap = GeneralFunctions.getPagingMap(map, 10);
+		List<ReviewVO> reviewList = adminCommunityService.selectReviewListWithPagingMap(pagingMap);
+		mav.addAllObjects(pagingMap);
+		mav.addObject("reviewList",reviewList);
+		int totalReviewNum = adminCommunityService.selectTotalReviewNum(pagingMap);
+		mav.addObject("totalReviewNum",totalReviewNum);
 		return mav;
 	}
 
@@ -283,4 +292,21 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 		mav.addAllObjects(pagingMap);
 		return mav;
 	}
+	
+	
+	@RequestMapping("/review/deleteReview.do")
+	public ModelAndView adminDeleteReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		try {
+			adminCommunityService.deleteReview(reviewNo);
+			mav = Alert.alertAndRedirect("삭제했습니다.",request.getContextPath()+"/admin/community/review/adminReviewList.do");
+		} catch (Exception e) {
+			
+			mav = Alert.alertAndRedirect("삭제하지 못 했습니다.", request.getContextPath()+"/admin/community/review/adminReviewList.do");
+		}
+		
+		return mav;
+		
+	}
+	
 }

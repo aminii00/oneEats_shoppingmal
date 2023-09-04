@@ -41,7 +41,7 @@
 		
 		<select id="SearchGoods" resultType="goodsVO" parameterType="GoodsVO">
 		<![CDATA[
-			select goodsNo, name, price, img1 from goods where memberNo=#{memberNo} and goodsNo=#{goodsNo}
+			select goodsNo, name, price, img1 from goods where goodsNo=#{goodsNo}
 		]]>
 	</select>
 	

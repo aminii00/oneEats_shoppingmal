@@ -37,13 +37,13 @@
 					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2" style="width:130px; height:130px; " >
 				</c:when>
 				<c:otherwise>
-					<img src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}" style="width:130px; height:130px; " class="brd-lightgray btn-round">
+					<img src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}" style="width:130px; height:130px; " class="brd-lightgray btn-round">
 				</c:otherwise>
 			</c:choose>
         </div>
 
         <div class="" style="text-align: center;  padding : 15px 90px 0 0;" >
-                <p class = "textsize-2 textbold" >${member.id}님<br> 주문하신 상품이 마음에 드셨나요?</p>
+                <p class = "textsize-2 textbold" >${memberInfo.id}님<br> 주문하신 상품이 마음에 드셨나요?</p>
                 <p class = "textsize-1 ">${goods.name}에 대한 리뷰를 작성해주세요.</p>
                 <img src= "${contextPath}/img/product/review/star.jpg" style="width: 100px; height: 25px;">
         </div>
