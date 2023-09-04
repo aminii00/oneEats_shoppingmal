@@ -1,7 +1,6 @@
 package com.example.demo.seller.order.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -18,9 +17,6 @@ public interface SellerOrderDAO {
 
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
-	List<OrderVO> selectOrderByMemberType(Map pagingMap);
-
-	int selectTotalOrderNum();
-
+	List<OrderVO> selectOrderByMemberType();
 
 }

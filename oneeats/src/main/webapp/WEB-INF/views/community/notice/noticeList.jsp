@@ -69,6 +69,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </c:when>
         </c:choose>
       </div>
+
       <div>
         <ul class="ul-li">
           <c:if test="${section>1}">

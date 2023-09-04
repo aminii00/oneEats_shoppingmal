@@ -144,8 +144,11 @@ public class CommunityServiceImpl implements CommunityService {
 	public int selectNoticeListTotalNumWithCategory(String category) {
 		return communityDAO.selectNoticeListTotalNumWithCategory(category);
 	}
-	
-
+	@Override
+	public int selectOneQnAListTotalNumWithCategory() {
+		int num = communityDAO.selectOneQnAListTotalNumWithCategory();	
+		return num;
+	}
 	
 	
 	
@@ -159,10 +162,4 @@ public class CommunityServiceImpl implements CommunityService {
 		List<OneQnAVO> replyList = communityDAO.replyList(qnaNo);
 		return replyList;
 	}
-	@Override
-	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap) {
-		return communityDAO.selectOneQnAListTotalNumWithPagingMap(pagingMap);
-	}
-	
-	
 }

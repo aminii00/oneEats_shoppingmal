@@ -74,7 +74,7 @@ function fn_show(num) {
 function fn_bookmark(contextPath,goodsNo) {
 	$.ajax({
 		type: "POST",
-		url: contextPath+"/goods/bookmark.do",
+		url: "/goods/bookmark.do",
 		data: {
 			num: goodsNo,
 		},
@@ -86,8 +86,6 @@ function fn_bookmark(contextPath,goodsNo) {
 					"로그인이 필요합니다. <br> 로그인 페이지로 이동하시겠습니까?",
 					contextPath+"/member/loginForm.do"
 				);
-			} else if(response=="duplicated"){
-				alert("이미 찜한 상품입니다.");
 			} else {
 				alert("에러가 일어나 찜하지 못 했습니다.");
 			}

@@ -1,7 +1,6 @@
 package com.example.demo.admin.coupon.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -17,9 +16,5 @@ public interface AdminCouponDAO {
 	void insertAdminCoupon(CouponVO coupon);
 
 	void deleteAdminCoupon(int couponNo);
-
-	List<CouponVO> selectAdminCouponByMemberNo(Map pagingMap);
-
-	int selectTotalCouponNum(int memberNo);
 
 }

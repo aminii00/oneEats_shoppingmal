@@ -23,10 +23,10 @@ public interface AdminGoodsDAO {
 	public void insertNewGoodsWithMap(Map map);
 
 	// 상품 목록
-	public List<GoodsVO> selectGoodsList(Map pagingMap) throws DataAccessException;
+	public List<GoodsVO> selectGoodsList() throws DataAccessException;
 
 	// 페이징 처리
-	public List<GoodsVO> selectNewGoodsList();
+	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
 
 	// 상품 삭제
 	public int deleteAdminGoods(int goodsNo) throws DataAccessException;
@@ -37,33 +37,9 @@ public interface AdminGoodsDAO {
 	public List<Map> selectOptionsBygoodsNo(int goodsNo);
 
 	// 관리자 상품 목록
-	public List<GoodsVO> selectSellerGoodsList(Map pagingMap) throws DataAccessException;
+	public List<GoodsVO> selectSellerGoodsList() throws DataAccessException;
 
 	// 관리자 페이징 처리
-	public List<GoodsVO> selectNewSellerGoodsList();
+	public List<GoodsVO> selectNewSellerGoodsList(Map pagingMap);
 
-	// 카테고리
-	public List<Map> countGoodsNums();
-
-	// 카테고리
-	public List<Map> countSellerGoodsNums();
-	
-	
-	//수정
-
-	public void updateOption(List<OptionVO> selectOptions);
-
-	public void updateSellerGoods(GoodsVO sellerGoods);
-
-	public void deleteOption(int optionNo);
-
-	public void insertOptionsForMod(List<OptionVO> selectOptions);
-
-	public void insertOptionForMod(OptionVO optionVO);
-	
-	public List<OptionVO> selectOptionByGoodsNo(int goodsNo);
-	
-	public int[] selectOptionNoByGoodsNo(int goodsNo);
-	
-	
 }

@@ -89,18 +89,18 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=채소"
+                      href="${contextPath}/goods/goodsList.do?category=vegetable"
                       >채소</a
                     >
                   </li>
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=과일"
+                    <a href="${contextPath}/goods/goodsList.do?category=fruit"
                       >과일</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=못난이주스/수제청"
+                      href="${contextPath}/goods/goodsList.do?category=juiceAndJam"
                       >못난이 주스/수제청</a
                     >
                   </li>
@@ -124,30 +124,30 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
                 <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=찌개 / 탕 /찜"
+                    <a href="${contextPath}/goods/goodsList.do?category=zzigae"
                       >찌개/탕/찜</a
                     >
                   </li>
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=식사/안주류"
+                    <a href="${contextPath}/goods/goodsList.do?category=meal"
                       >식사/안주류</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=죽"
+                      href="${contextPath}/goods/goodsList.do?category=porridge"
                       >죽</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=식사대용식"
+                      href="${contextPath}/goods/goodsList.do?category=mealReplacement"
                       >식사대용식</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=간편한끼 반찬"
+                      href="${contextPath}/goods/goodsList.do?category=sidedish"
                       >간편한끼 반찬</a
                     >
                   </li>
@@ -167,7 +167,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <div
               class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
               data-min="0"
-              data-max="${maxPrice}"
+              data-max="10000"
             >
               <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
               <span

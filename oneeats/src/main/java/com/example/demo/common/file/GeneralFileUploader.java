@@ -61,19 +61,6 @@ public class GeneralFileUploader {
 		return upload(multipartHttpServletRequest);
 	}
 	
-	public static String getFileName(MultipartHttpServletRequest request) {
-		Iterator<String> fileNames = request.getFileNames();
-		String fileName="";
-		String originalFileName="";
-		while (fileNames.hasNext()) {
-			fileName = (String) fileNames.next();
-			MultipartFile mFile = request.getFile(fileName);
-			originalFileName = mFile.getOriginalFilename();
-			break;
-		}
-		return originalFileName;
-	}
-	
 	private static List fileProcess(MultipartHttpServletRequest multipartHttpServletRequest) throws IllegalStateException, IOException {
 		List<String> fileList = new ArrayList<String>();
 		Iterator<String> fileNames = multipartHttpServletRequest.getFileNames();

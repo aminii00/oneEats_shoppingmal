@@ -104,7 +104,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="div-left2" style="margin: 5px 0px">
             <img
               class="img-1"
-              src="${contextPath}/download.do?imageFileName=${cancel.goodsImg}&path=goodsNo${cancel.goodsNo}"
+              src="${contextPath}/download.do?imageFileName=${cancel.goodsImg}&path=order"
               alt="상품메인"
             />
             <div class="div-dl">
@@ -126,63 +126,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </div>
 
     <hr class="linebold" style="margin: 0" />
-    <div class="row">
-      <div class="col">
-        <form id="cancel_form">
-          <input type="hidden" name="orderNo" id="" value="${order.orderNo}" />
-          <input type="hidden" name="paymentKey" value="${paymentKey}" />
-          <input type="hidden" name="paymentType" id="${order.payment_type}" />
-          <select name="cancel_reason" id="" required>
-            <option value="">주문 취소 이유를 선택해주세요</option>
-            <option value="유사한 상품을 이미 주문해서">
-              유사한 상품을 이미 주문해서
-            </option>
-          </select>
-          <c:choose>
-            <c:when test="${order.payment_type=='가상계좌'}">
-              가상계좌 결제의 경우 계좌를 입력해주세요
-              <select name="bank" id="" class="form-control">
-                <option value="20">우리</option>
-                <option value="37">전북</option>
-                <option value="39">경남</option>
-                <option value="32">부산</option>
-                <option value="45">새마을</option>
-                <option value="88">신한</option>
-                <option value="71">우체국</option>
-              </select>
-              <input
-                type="text"
-                name="accountNumber"
-                class="form-control"
-                placeholder="계좌번호(하이픈없이)"
-                required
-              />
-              <input
-                type="text"
-                name="holderName"
-                class="form-control"
-                placeholder="예금주"
-                required
-              />
-            </c:when>
-          </c:choose>
-        </form>
-      </div>
-    </div>
+
     <!-- 주문취소버튼 -->
     <div class="div-btn">
       <button
         class="btn-4 btn-regular bg-lightgreen textcolor-white textbold border-0"
-        onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/toss/orderCancel.do",fn_cancel)'
+        onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/mypage/orderCancelResult.do?orderNo=${order.orderNo}")'
         type="button"
       >
         취소하기
       </button>
     </div>
   </body>
-  <script>
-    function fn_cancel(url) {
-      $("#cancel_form").attr("action", url).submit();
-    }
-  </script>
 </html>

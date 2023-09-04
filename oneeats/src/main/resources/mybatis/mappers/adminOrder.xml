@@ -50,39 +50,10 @@
 		]]>
 	</select>
 	
-	<select id="selectOrderByMemberType" resultMap="OrderResult" parameterType="java.util.Map">
-	
-		select * from order_by_membertype where memberType='관리자'
-			
-		<choose>
-			<when test="order_search_type==null or order_search_type==''">
-				and 1=1
-			</when>
-			<when test="order_search_type=='all'">
-				and orderNo like CONCAT('%', #{order_search_word}, '%')
-				or orderer_name like CONCAT('%', #{order_search_word}, '%')
-				or orderer_id like CONCAT('%', #{order_search_word}, '%')
-			</when>
-			<otherwise>
-			 	<choose>
-			 		<when test="order_search_type=='orderNo'">
-			 			and orderNo like CONCAT('%', #{order_search_word}, '%')
-			 		</when>
-			 		<when test="order_search_type=='orderer_name'">
-			 			and orderer_name like CONCAT('%', #{order_search_word}, '%')
-			 		</when>
-			 		<when test="order_search_type=='orderer_id'">
-			 			and orderer_id like CONCAT('%', #{order_search_word}, '%')
-			 		</when>
-			 	</choose>
-			</otherwise>
-		</choose>
-			
-		order by orderNo desc limit #{start},10
-	</select>
-	
-	<select id="selectTotalOrderNum" resultType="int">
-		select count(*) from order_by_membertype where memberType='관리자'
+	<select id="selectOrderByMemberType" resultMap="OrderResult">
+		<![CDATA[
+			select * from order_by_membertype where memberType='관리자'
+		]]>
 	</select>
 	
 	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
@@ -99,4 +70,39 @@
 		]]>
 	</update>
 	
+	<!-- 	<select id="selectOrderList" resultMap="OrderResult" parameterType="java.util.Map">
+	
+			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
+			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo) 
+			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
+    		on orderplusgoods.orderNo=orderGun.orderNo
+    		order by orderplusgoods.orderNo 
+			
+			<choose>
+				<when test="order_search_type==null or order_search_type==''">
+					and 1=1
+				</when>
+				<when test="order_search_type=='all'">
+					and () like concat('%', #{order_search_type}, '%')
+					or () like concat('%', #{order_search_type}, '%')
+				</when>
+				<otherwise>
+				 	<choose>
+				 		<when test="order_search_type==''">
+				 			and () like concat('%', #{order_search_type}, '%')
+				 		</when>
+				 		<when test="order_search_type==''">
+				 			and () like concat('%', #{order_search_type}, '%')
+				 		</when>
+				 	</choose>
+				</otherwise>
+			</choose>
+			
+			<if test="category!=null and category!=''">
+				and category=#{category}
+			</if>
+			
+			order by creDate desc limit #{start}, 10
+	</select> -->
+
 </mapper>

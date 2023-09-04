@@ -51,7 +51,11 @@
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
        <put-attribute name="body" value="/WEB-INF/views/mypage/mypageBookmarkList.jsp" />
     </definition>
-
+    <definition name="/mypage/mypageAddressAddForm" extends="mainLayout">
+       <put-attribute name="title" value="배송지 수정 팝업창 페이지" />
+       <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />
+       <put-attribute name="body" value="/WEB-INF/views/mypage/mypageAddressAddForm.jsp" />
+    </definition>
     <definition name="/mypage/mypageCouponPoint" extends="mainLayout">
        <put-attribute name="title" value="쿠폰 적립금 페이지" />
        <put-attribute name="side" value="/WEB-INF/views/common/sidebar_mypage.jsp" />

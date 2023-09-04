@@ -1,7 +1,6 @@
 package com.example.demo.admin.order.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -30,15 +29,19 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		adminOrderDAO.updateDeliveryStatusToCancel(order_seqNo);
 		
 	}
-	
-	@Override
-	public List<OrderVO> selectOrderByMemberType(Map pagingMap) {
-		return adminOrderDAO.selectOrderByMemberType(pagingMap);
-	}
 
 	@Override
-	public int selectTotalOrderNum() {
-		return adminOrderDAO.selectTotalOrderNum();
+	public List<OrderVO> selectOrderByMemberType() {
+		return adminOrderDAO.selectOrderByMemberType();
 	}	
 	
+//	@Override
+//	public List<OrderVO> selectOrderList(Map pagingMap) {
+//		return mypageDAO.selectOrderList(pagingMap);
+//	}
+//
+//	@Override
+//	public List<Map> countOrderNums() {
+//		return mypageDAO.countOrderNums();
+//	}
 }

@@ -42,10 +42,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                   도매시장을 거치지 않는 산지 직송 못난이 농산물로<br />
                   시세 대비 20% 이상 저렴한 가격에 판매합니다.
                 </p>
-                <a
-                  href="${contextPath}/goods/goodsList.do"
-                  class="primary-btn"
-                  style="margin-right: 60px"
+                <a href="#" class="primary-btn" style="margin-right: 60px"
                   >상품 보기</a
                 >
               </div>
@@ -172,7 +169,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 ><br />
 
                 <a
-                  href="${contextPath}/goods/goodsList.do?category=motnan"
+                  href="${contextPath}/goods/goodsList.do?category=못난이"
                   class="primary-btn"
                   style="margin-top: 12px"
                   >바로 가기</a
@@ -203,7 +200,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             >
               <span style="font-size: 20px; color: white">밀키트</span><br />
               <a
-                href="${contextPath}/goods/goodsList.do?category=mealkit"
+                href="${contextPath}/goods/goodsList.do?category=밀키트"
                 class="primary-btn"
                 style="margin-top: 12px"
                 >바로 가기</a
