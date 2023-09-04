@@ -44,20 +44,20 @@ public class MypageControllerImpl implements MypageController {
 	private MemberVO memberVO;
 	
 	
-		@Override
-		@RequestMapping(value = "/mypage/deleteMember.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			request.setCharacterEncoding("utf-8");
-			ModelAndView mav = new ModelAndView();
-			response.setContentType("html/text;charset=utf-8");
-			HttpSession session = request.getSession();
-			MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-			mypageService.deleteMember(member);
-			session.setAttribute("isLogOn", false);
-			mav = Alert.alertAndRedirect("탈퇴가 완료 되었습니다.", request.getContextPath() + "/main/mainPage.do");
-			
-			return mav;
-		}
+	@Override
+	@RequestMapping(value = "/mypage/deleteMember.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
+		response.setContentType("html/text;charset=utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		mypageService.deleteMember(member);
+		session.setAttribute("isLogOn", false);
+		mav = Alert.alertAndRedirect("탈퇴가 완료 되었습니다.", request.getContextPath() + "/main/mainPage.do");
+
+		return mav;
+	}
 
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -317,15 +317,37 @@ public class MypageControllerImpl implements MypageController {
 
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = memberInfo.getMemberNo();
 		System.out.println("memberInfo = " + memberInfo);
-		List bookList = mypageService.selectBookList(memberInfo);
-		
-		System.out.println(bookList);
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("bookList", bookList);
-		mav.setViewName(viewName);
-		System.out.println(mav);
-		return mav;
+		request.setCharacterEncoding("utf-8");
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+
+		try {
+			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 10;
+			pagingMap.put("start", start);
+			pagingMap.put("memberNo", memberNo);
+			List<BookmarkVO> bookList = mypageService.selectBookListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("bookList", bookList);
+			System.out.println("bookList = " + bookList);
+			int totalBookListNum = mypageService.selectBookListTotalNum(memberNo);
+			mav.addObject("totalBookListNum", totalBookListNum);
+
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	// 민아 찜 삭제하기(진행중 ...)
@@ -337,7 +359,7 @@ public class MypageControllerImpl implements MypageController {
 		String goodsNo_ = request.getParameter("goodsNo");
 		int goodsNo = Integer.parseInt(goodsNo_);
 		mypageService.removeBookMark(goodsNo);
-		ModelAndView mav = new ModelAndView("redirect:/mypage/bookmarkList.do");
+		ModelAndView mav = new ModelAndView("redirect:/mypage/mypageBookmarkList.do");
 		return mav;
 	}
 
@@ -347,19 +369,76 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 Controller couponSearch.do");
 		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = memberInfo.getMemberNo();
 		System.out.println("memberInfo = " + memberInfo);
 		List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); //쿠폰List
 		System.out.println("couponDetail = " + couponDetail);
-		
-		List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); // 적립금 List
-		System.out.println("pointDetail = " + pointDetail);
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("couponDetail", couponDetail);
-		mav.addObject("pointDetail", pointDetail);
+
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		Map pagingMap1 = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		String pageNum1 = (String) pagingMap.get("pageNum1");
+		String section1 = (String) pagingMap.get("section1");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		if (pageNum1 == null || pageNum1.trim().length() < 1) {
+			pageNum1 = "1";
+			pagingMap.put("pageNum1", pageNum1);
+		}
+		if (section1 == null || section1.trim().length() < 1) {
+			section1 = "1";
+			pagingMap.put("section1", section1);
+		}
+
+		try {
+			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 10;
+			pagingMap.put("start", start);
+			pagingMap.put("memberNo", memberNo);
+			pagingMap1.put("start", start);
+			pagingMap1.put("memberNo", memberNo);
+			// List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); 쿠폰List
+			List<CouponVO> couponDetail = mypageService.selectCouponListWithPagingMap(pagingMap);
+			System.out.println("couponDetail = " + couponDetail);
+			int totalCouponListNum = mypageService.selectCouponListTotalNum(memberNo);
+
+			// List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); 적립금
+			// List
+			List<PointHistoryVO> pointDetail = mypageService.selectPointListWithPagingMap(pagingMap1);
+			int totalPointListNum = mypageService.selectPointListTotalNum(memberNo);
+			System.out.println("pointDetail = " + pointDetail);
+
+			mav.addAllObjects(pagingMap);
+			mav.addAllObjects(pagingMap1);
+			mav.addObject("couponDetail", couponDetail);
+			mav.addObject("pointDetail", pointDetail);
+			mav.addObject("totalCouponListNum", totalCouponListNum);
+			mav.addObject("totalPointListNum", totalPointListNum);
+			System.out.println(mav);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		/*
+		 * List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); //
+		 * 적립금 List System.out.println("pointDetail = " + pointDetail);
+		 * mav.addObject("couponDetail", couponDetail); mav.addObject("pointDetail",
+		 * pointDetail);
+		 */
+
 		mav.setViewName("/mypage/mypageCouponPoint");
 		return mav;
+	}
 	}
 
 	@RequestMapping(value = "/mypage/couponNum.do", method = { RequestMethod.GET, RequestMethod.POST })
