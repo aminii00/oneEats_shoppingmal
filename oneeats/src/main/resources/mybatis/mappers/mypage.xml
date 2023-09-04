@@ -398,6 +398,7 @@ where m.memberNo=#{memberNo}
 		<![CDATA[
 		    select * from point_history
 			where memberNo=#{memberNo}
+			order by creDate
 		]]>
 	</select>
 
