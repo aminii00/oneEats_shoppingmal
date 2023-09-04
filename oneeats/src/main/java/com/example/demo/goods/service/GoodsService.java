@@ -40,6 +40,6 @@ public interface GoodsService {
 	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap);
 
 	public int selectGoodsTotalNumWithPagingMap(Map pagingMap);
-	
+
 
 }

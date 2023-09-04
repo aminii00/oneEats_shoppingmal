@@ -50,6 +50,7 @@ public interface GoodsDAO {
 	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap);
 
 	public int selectGoodsTotalNumWithPagingMap(Map pagingMap);
+
 }
 	
 

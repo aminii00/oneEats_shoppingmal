@@ -116,7 +116,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               >
             </div>
             <div class="col-md">
-              <a href="${contextPath}/goods/goodsList.do?category=hotdeal"
+              <a href="${contextPath}/goods/hotDealList.do"
                 >핫딜</a
               >
             </div>

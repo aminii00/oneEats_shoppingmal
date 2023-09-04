@@ -202,29 +202,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
-
-	/*
-	 * @Override
-	 * 
-	 * @RequestMapping(value="/seller/goods/modSellerGoods.do", method=
-	 * {RequestMethod.GET, RequestMethod.POST}) public ModelAndView
-	 * modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response)
-	 * throws IOException{ String goodsNo1 = request.getParameter("goodsNo"); // 경로와
-	 * 같이 던져준 goodsNo 가져오기 int goodsNo = Integer.parseInt(goodsNo1); // int로 형 변환
-	 * 
-	 * // goodsNo을 보내서 goodsVO 정보 가져오기 GoodsVO goodsVO =
-	 * sellerGoodsService.selectGoodsVO(goodsNo); System.out.println("goodsVO = "
-	 * +goodsVO);
-	 * 
-	 * List<OptionVO> option = (List<OptionVO>)
-	 * sellerGoodsService.selectOptionVO(goodsNo); System.out.println(option);
-	 * ModelAndView mav = new ModelAndView(); mav.addObject("option",option);
-	 * mav.addObject("goods",goodsVO);
-	 * mav.setViewName("/seller/goods/sellerGoodsModForm");
-	 * 
-	 * return mav; }
-	 */
+	
 
 	@Override
 	@RequestMapping(value = "/seller/goods/modSellerGoodsForm.do", method = { RequestMethod.GET, RequestMethod.POST })

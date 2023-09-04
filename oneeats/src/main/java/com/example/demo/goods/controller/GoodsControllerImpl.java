@@ -108,14 +108,17 @@ public class GoodsControllerImpl implements GoodsController {
 		
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithPagingMap(pagingMap);
 		mav.addObject("goodsList", goodsList);
+
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithPagingMap(pagingMap);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
 
 		List<HotDealVO> newHotdealList = goodsService.selectNewHotDealList();
 		mav.addObject("newHotDealList", newHotdealList);
-		
+	
 		mav.addAllObjects(pagingMap);
 		System.out.println(mav);
+		System.out.println("goodsList:"+goodsList);
+
 		return mav;
 	}
 
@@ -140,8 +143,9 @@ public class GoodsControllerImpl implements GoodsController {
 		mav.addObject("totalReviewsNum", totalReviewsNum);
 		mav.addObject("reviewAvg", reviewAvg);
 		mav.addObject("goodsOptionList", goodsOptionList);
-
+		System.out.println(goods.getExpDate());
 		return mav;
+
 	}
 	
 	

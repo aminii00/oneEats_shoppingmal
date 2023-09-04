@@ -70,7 +70,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=못난이주스수제청"
+                      href="${contextPath}/goods/goodsList.do?category=못난이주스/수제청"
                       >못난이 주스/수제청</a
                     >
                   </li>
@@ -98,13 +98,13 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 >
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=찌개탕찜"
+                      href="${contextPath}/goods/goodsList.do?category=찌개/탕/찜"
                       >찌개/탕/찜</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=식사안주류"
+                      href="${contextPath}/goods/goodsList.do?category=식사/안주류"
                       >식사/안주류</a
                     >
                   </li>
