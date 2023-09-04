@@ -88,6 +88,19 @@
 		<result property="goodsPrice" column="goodsPrice" />
 		<result property="goodsImg" column="goodsImg" />
 	</resultMap>
+	<resultMap id="ReviewResult" type="reviewVO">
+		<result property="reviewNo" column="reviewNo" />
+		<result property="star" column="star" />
+		<result property="reviewImg" column="reviewImg" />
+		<result property="content" column="content" />
+		<result property="goodsNo" column="goodsNo" />
+		<result property="memberNo" column="memberNo" />
+		<result property="sellerNo" column="sellerNo" />
+		<result property="goodsName" column="goodsName" />
+		<result property="goodsImg" column="goodsImg" />
+		<result property="sellerId" column="sellerId" />
+		<result property="memberId" column="memberId" />
+	</resultMap>
 
 	<select id="selectAllGoodsList" resultMap="GoodsResult">
 		 <![CDATA[
@@ -250,12 +263,59 @@
 		</if>
 		limit #{start},12
 	</select>
-	
-	<select id="selectGoodsTotalNumWithPagingMap" parameterType="java.util.Map" resultType="int">
+
+	<select id="selectGoodsTotalNumWithPagingMap"
+		parameterType="java.util.Map" resultType="int">
 		select count(goodsNo) from goods
 		<if test="category!=null and category!=''">
 			where category=#{category}
 		</if>
 		limit #{start},12
+	</select>
+
+	<select id="selectNewReviewsByGoodsNo" parameterType="int"
+		resultMap="ReviewResult">
+		select * from
+		(select t2.*, m2.id as memberId from
+		(select
+		t1.*,m.id as
+		sellerId from
+		(select r.*,g.memberNo as sellerNo, g.name as
+		goodsName
+		from review r
+		inner join goods g
+		on r.goodsNo=g.goodsNo) t1
+		inner join
+		member m
+		on t1.sellerNo=m.memberNo) t2
+		inner join member m2
+		on
+		t2.memberNo=m2.memberNo) t3
+		where goodsNo=#{goodsNo}
+		order by reviewNo
+		desc
+		limit 10
+	</select>
+
+	<select id="selectReviewsWithPagingMap"
+		parameterType="java.util.Map" resultMap="ReviewResult">
+		select * from
+		(select t2.*, m2.id as memberId from
+		(select t1.*,m.id as
+		sellerId from
+		(select r.*,g.memberNo as sellerNo, g.name as goodsName
+		from review r
+		inner join goods g
+		on r.goodsNo=g.goodsNo) t1
+		inner join
+		member m
+		on t1.sellerNo=m.memberNo) t2
+		inner join member m2
+		on
+		t2.memberNo=m2.memberNo) t3
+		where goodsNo=#{goodsNo}
+		order by reviewNo
+		desc
+		limit #{start},10
 	</select>
 </mapper> 

@@ -17,18 +17,20 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">상품목록</p>
       <div class="div-sib textsize-1">
-        <select name="search-1">
-          <option value="전체">전체</option>
-          <option value="등록일">등록일</option>
-          <option value="상품명">상품명</option>
-        </select>
-        <input type="text" name="search-2" placeholder="search.." />
-        <button
-          class="btn-1 bg-lightgreen textcolor-white border-0"
-          type="button"
-        >
-          검색
-        </button>
+        <form action="${contextPath}/admin/goods/adminGoodsList.do">
+          <select name="goods_search_type">
+            <option value="전체">전체</option>
+            <option value="creDate">등록일</option>
+            <option value="name">상품명</option>
+          </select>
+          <input type="text" name="goods_search_word" placeholder="search.." />
+          <button
+            class="btn-1 bg-lightgreen textcolor-white border-0"
+            type="button"
+          >
+            검색
+          </button>
+        </form>
       </div>
     </div>
     <table border="0" class="textcolor-black textsize-1">
@@ -78,6 +80,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       style="font-size: 12px; margin-top: 22px; float: right"
       class="btn-1 bg-lightgreen textcolor-white border-0"
       type="button"
+      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm'"
     >
       상품 추가
     </button>

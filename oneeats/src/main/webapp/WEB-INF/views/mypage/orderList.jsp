@@ -15,25 +15,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 검색창 -->
-    <form method="post" action="#">
+    <form method="post" action="${contextPath}/mypage/orderSearch.do">
       <div class="div-p">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           주문내역
         </p>
-        <div class="div-sib textsize-1">
-          <select name="search-1">
-            <option value="전체">전체</option>
-            <option value="1개월">1개월</option>
-            <option value="3개월">3개월</option>
-            <option value="1년">1년</option>
+        <div class="div-sib2 textsize-1">
+          <select name="orderSearchType" onchange="this.form.submit()">
+            <option value="all">전체</option>
+            <option value="1month">1개월</option>
+            <option value="3month">3개월</option>
+            <option value="1year">1년</option>
           </select>
-          <input type="text" name="search-2" placeholder="search.." />
-          <button
-            class="btn-1 textcolor-white border-0 bg-lightgreen"
-            type="button"
-          >
-            검색
-          </button>
         </div>
       </div>
     </form>
@@ -60,7 +53,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <div class="div-left2">
                 <img
                   class="img-1"
-                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=order"
+                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=goodsNo${order.goodsNo}"
                   alt="상품메인"
                 />
                 <div class="div-dl">
