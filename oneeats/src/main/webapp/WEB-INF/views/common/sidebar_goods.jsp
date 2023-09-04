@@ -89,18 +89,18 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 <ul id="category_1" style="margin-left: 12px; margin-top: 12px">
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=vegetable"
+                      href="${contextPath}/goods/goodsList.do?category=채소"
                       >채소</a
                     >
                   </li>
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=fruit"
+                    <a href="${contextPath}/goods/goodsList.do?category=과일"
                       >과일</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=juiceAndJam"
+                      href="${contextPath}/goods/goodsList.do?category=못난이주스/수제청"
                       >못난이 주스/수제청</a
                     >
                   </li>
@@ -124,30 +124,30 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                 </div>
                 <ul id="category_2" style="margin-left: 12px; margin-top: 12px">
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=zzigae"
+                    <a href="${contextPath}/goods/goodsList.do?category=찌개 / 탕 /찜"
                       >찌개/탕/찜</a
                     >
                   </li>
                   <li>
-                    <a href="${contextPath}/goods/goodsList.do?category=meal"
+                    <a href="${contextPath}/goods/goodsList.do?category=식사/안주류"
                       >식사/안주류</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=porridge"
+                      href="${contextPath}/goods/goodsList.do?category=죽"
                       >죽</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=mealReplacement"
+                      href="${contextPath}/goods/goodsList.do?category=식사대용식"
                       >식사대용식</a
                     >
                   </li>
                   <li>
                     <a
-                      href="${contextPath}/goods/goodsList.do?category=sidedish"
+                      href="${contextPath}/goods/goodsList.do?category=간편한끼 반찬"
                       >간편한끼 반찬</a
                     >
                   </li>

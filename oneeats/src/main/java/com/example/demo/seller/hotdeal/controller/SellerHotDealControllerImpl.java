@@ -50,12 +50,7 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 		System.out.println("hotdeal등록하기");
 		ModelAndView mav = new ModelAndView();
 		int newHotDealNo = sellerHotDealService.selectNewHotDealNo();
-//		Map map = new HashMap(); 
-//		map.put("hotdealNo", newHotDealNo);
-//	
-//		System.out.println("newHotDealNo = " + newHotDealNo);
-//
-//		 map.put("hotdealNo", newHotDealNo);
+
 		HotDealVO hotDealVO = new HotDealVO();
 		hotDealVO.setHotdealNo(newHotDealNo);
 		String name = request.getParameter("name");

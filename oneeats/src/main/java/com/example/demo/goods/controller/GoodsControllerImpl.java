@@ -108,6 +108,7 @@ public class GoodsControllerImpl implements GoodsController {
 
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithPagingMap(pagingMap);
 		mav.addObject("goodsList", goodsList);
+
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithPagingMap(pagingMap);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
 
@@ -150,6 +151,7 @@ public class GoodsControllerImpl implements GoodsController {
 		mav.addObject("section", 1);
 		mav.addObject("pageNum", 1);
 		return mav;
+
 	}
 
 	// ajax로 페이징에 따라 리뷰를 불러옴

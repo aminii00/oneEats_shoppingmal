@@ -57,6 +57,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                                   <i class="bi bi-alarm"></i>
                                   남은 시간
                                 </span>
+
                                 <div class="hotdeal_time_text"></div>
                               </div>
                               <div
@@ -200,7 +201,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                   </c:if>
                   <c:set
                     var="end"
-                    value="${Math.ceil((totalGoodsNum - (section-1)*120) div 10)}"
+                    value="${Math.ceil((totalGoodsNum - (section-1)*120) div 12)}"
                   />
                   <c:if test="${end>10}">
                     <c:set var="end" value="10" />

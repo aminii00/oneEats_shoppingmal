@@ -225,6 +225,7 @@ public class MainControllerImpl implements MainController {
 		// 상품 상세 페이지에서 넘겨준 옵션 선택 정보를 session에 저장
 		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
 		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+	
 		String loginFor = (String) session.getAttribute("loginFor");
 		if (orderNowList != null && orderNowList.size() > 0 && loginFor != null && loginFor.equals("orderNow")) {
 			System.out.println("주문 상품을 선택한 정보가 있음");

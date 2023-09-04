@@ -9,33 +9,93 @@ uri="http://java.sun.com/jsp/jstl/core"%>
   <head>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
+    <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
     <script src="${contextPath}/js/community.js"></script>
-    <script src="${contextPath}/js/textareaToInput.js"></script>
-    <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
-    <script type="text/javascript">
-      function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            $("#recipeimg_preview").attr("src", e.target.result);
-          };
 
-          reader.readAsDataURL(input.files[0]);
-        }
-      }
-    </script>
-    <!-- Css Styles -->
+    <link href="${contextPath}/css/cyform.css" rel="stylesheet" />
   </head>
+  <script>
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#goods_preview").attr("src", e.target.result);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function fn_modify_goods(goodsNo, attribute) {
+      //goodsId여ㅑㅆ음
+      var frm_mod_goods = document.frm_mod_goods;
+      var value = "";
+      if (attribute == "goods_sort") {
+        value = frm_mod_goods.goods_sort.value;
+      } else if (attribute == "category") {
+        value = frm_mod_goods.category.value;
+      } else if (attribute == "name") {
+        value = frm_mod_goods.name.value;
+      } else if (attribute == "price") {
+        value = frm_mod_goods.price.value;
+      } else if (attribute == "manufacturer") {
+        value = frm_mod_goods.manufacturer.value;
+      } else if (attribute == "weight") {
+        value = frm_mod_goods.weight.value;
+      } else if (attribute == "expDate") {
+        value = frm_mod_goods.expDate.value;
+      } else if (attribute == "type") {
+        value = frm_mod_goods.type.value;
+      } else if (attribute == "img1") {
+        value = frm_mod_goods.img1.value;
+      }
+
+      $.ajax({
+        type: "post",
+        async: false, //false인 경우 동기식으로 처리한다.
+        url: "${contextPath}/admin/goods/modAdminGoods.do",
+        data: {
+          goodsNo: goodsNo,
+          attribute: attribute,
+          value: value,
+        },
+        success: function (data, textStatus) {
+          if (data.trim() == "mod_success") {
+            alert("상품 정보를 수정했습니다.");
+          } else if (data.trim() == "failed") {
+            alert("다시 시도해 주세요.");
+          }
+        },
+        error: function (data, textStatus) {
+          alert("에러가 발생했습니다." + data);
+        },
+        complete: function (data, textStatus) {
+          alert("작업을완료 했습니다");
+        },
+      }); //end ajax
+    }
+
+    function input() {
+      const date = document.querySelector("#input_date").value;
+      console.log(date);
+
+      const goods_description =
+        document.querySelector("#goods_description").value;
+      console.log(goods_description);
+    }
+  </script>
 
   <body>
+    <!-- Product Details Section Begin -->
     <section class="spad" style="padding-top: 28px !important">
       <div class="container">
         <form
-          id="register-form"
+          id="mod-form"
+          action="${contextPath}/admin/goods/adminGoodsMod.do?goodsNo=${sellerGoods.goodsNo}"
           method="post"
           enctype="multipart/form-data"
-          action="${contextPath}/admin/goods/adminGoodsModForm.do"
         >
           <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -45,8 +105,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   <input
                     type="file"
                     name="img1"
-                    id=""
-                    onchange="readURL(this)"
+                    value="onchange"
+                    ="readURL(this)"
                   />
                   <input
                     type="file"
@@ -92,18 +152,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="vegetable">채소</option>
-                            <option value="fruit">과일</option>
-                            <option value="juiceAndJam">
-                              못난이 주스 / 수제청
+                            <option value="채소">채소</option>
+                            <option value="과일">과일</option>
+                            <option value="못난이주스/수제청">
+                              못난이주스/수제청
                             </option>
-                            <option value="zzigae">찌개 / 탕 /찜</option>
-                            <option value="meal">식사 / 안주류</option>
-                            <option value="porridge">죽</option>
-                            <option value="meal replacement">
-                              식사 대용식
+                            <option value="찌개/탕/찜">찌개 / 탕 /찜</option>
+                            <option value="식사/안주류">식사/안주류</option>
+                            <option value="죽">죽</option>
+                            <option value="식사 대용식">식사 대용식</option>
+                            <option value="간편 한끼 반찬">
+                              간편 한끼 반찬
                             </option>
-                            <option value="sidedish">간편 한끼 반찬</option>
                           </select>
                         </div>
                       </dd>
@@ -121,7 +181,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <dd class="property-flex1">
                         <input
                           name="name"
-                          value="${goods.name}"
+                          value="${sellerGoods.name}"
                           class="property-font1 nice-select"
                           style="width: 176px"
                         />
@@ -139,7 +199,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="price"
-                        value="${goods.price}"
+                        value="${sellerGoods.price}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -156,7 +216,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         value="원이츠"
-                        disabled
+                        readonly
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -173,7 +233,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="rapping"
-                        value="${goods.rapping}"
+                        value="${sellerGoods.rapping}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -190,7 +250,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="manufacturer"
-                        value="${goods.manufacturer}"
+                        value="${sellerGoods.manufacturer}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -207,7 +267,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     <dd class="property-flex1">
                       <input
                         name="weight"
-                        value="${goods.weight}"
+                        value="${sellerGoods.weight}"
                         class="property-font1 nice-select"
                         style="width: 176px"
                       />
@@ -223,14 +283,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        value="${goods.expDate}"
+                        name="expDate"
+                        value="${sellerGoods.expDate}"
                         type="date"
                         class="property-font1 nice-select"
                         style="width: 176px"
+                        id="input_date"
                       />
                     </dd>
                   </dl>
-
                   <div class="row ingredient_grid">
                     <div class="col">
                       <div class="row">&nbsp;</div>
@@ -245,111 +306,43 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <div class="col-md">가격</div>
                             <div class="col-md-1"></div>
                           </div>
-                          <div class="row ingredient_row">
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_name"
-                                class="form-control"
-                                placeholder="상품명"
-                                required
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_qty"
-                                class="form-control"
-                                placeholder="양"
-                                required
-                              />
-                            </div>
-                            <input type="hidden" name="optionNo" />
+                          <c:forEach items="${options}" var="option">
+                            <div class="row ingredient_row">
+                              <div class="col-md">
+                                <input
+                                  name="option_name"
+                                  type="text"
+                                  value="${option.name}"
+                                  class="form-control"
+                                  placeholder="옵션명"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md">
+                                <input
+                                  name="option_qty"
+                                  type="text"
+                                  value="${option.option_qty}"
+                                  class="form-control"
+                                  placeholder="숫자로 적어주세요"
+                                  required
+                                />
+                              </div>
+                              <input type="hidden" name="optionNo" />
 
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_price"
-                                class="form-control"
-                                placeholder="가격"
-                                required
-                              />
+                              <div class="col-md">
+                                <input
+                                  name="option_price"
+                                  type="text"
+                                  value="${option.price}"
+                                  class="form-control"
+                                  placeholder="가격"
+                                  required
+                                />
+                              </div>
+                              <div class="col-md-1"></div>
                             </div>
-                            <div class="col-md-1"></div>
-                          </div>
-
-                          <div class="row ingredient_row">
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_name"
-                                class="form-control"
-                                placeholder="상품명"
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_qty"
-                                class="form-control"
-                                placeholder="양"
-                              />
-                            </div>
-
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_price"
-                                class="form-control"
-                                placeholder="가격"
-                                required
-                              />
-                            </div>
-                            <div class="col-md-1">
-                              <img
-                                id="minus_btn"
-                                class="btn-smallsquare border"
-                                src="${contextPath}/img/icon/minus.png"
-                                alt="빼기 버튼"
-                              />
-                            </div>
-                          </div>
-                          <div class="row ingredient_row">
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_name"
-                                class="form-control"
-                                placeholder="상품명"
-                              />
-                            </div>
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_qty"
-                                class="form-control"
-                                placeholder="양"
-                              />
-                            </div>
-
-                            <div class="col-md">
-                              <input
-                                type="text"
-                                name="option_price"
-                                class="form-control"
-                                placeholder="가격"
-                                required
-                              />
-                            </div>
-                            <div class="col-md-1">
-                              <img
-                                id="minus_btn"
-                                class="btn-smallsquare border"
-                                src="${contextPath}/img/icon/minus.png"
-                                alt="빼기 버튼"
-                              />
-                            </div>
-                          </div>
+                          </c:forEach>
                         </div>
                       </div>
                     </div>
@@ -378,17 +371,17 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   </div>
                   <p style="margin-top: 16px">
                     <textarea
-                      class="goodsinfo s_textarea"
+                      class="goodsinfo description_textarea"
                       cols="50"
                       rows="8"
                       style="width: 350px"
-                    ></textarea>
-
+                    >
+                    </textarea>
                     <input
                       type="hidden"
                       name="description"
-                      id="h_input"
-                      value=""
+                      id="goods_description"
+                      value="${option.name}"
                     />
                   </p>
 
@@ -398,14 +391,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       type="reset"
                       radius="3"
                       style="width: 100px"
+                      onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do'"
                     >
-                      <span class="css-nytqmg textbold">다시 쓰기</span>
+                      <span class="css-nytqmg textbold">취소</span>
                     </button>
                   </div>
                   <!--중간부분-->
                   <div style="display: inline-block">
                     <button
-                      class="cart-button css-cartbtn e4nu7ef3"
+                      class="cart-button css-cartbtn"
                       type="submit"
                       radius="3"
                       style="width: 100px"
@@ -420,5 +414,21 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         </form>
       </div>
     </section>
+    <script>
+      $(document).ready(function () {
+        var textareaInput = $(".description_textarea").val();
+        var output = textareaInput.replace(/\n/g, "<br>");
+        var input = textareaInput.replace(/<br>/g, "\n");
+        $(".description_textarea").val(input);
+        $("#goods_description").val(output);
+
+        $(".description_textarea").on("input", function () {
+          var textareaInput = $(this).val();
+          var output = textareaInput.replace(/\n/g, "<br>");
+
+          $("#goods_description").val(output);
+        });
+      });
+    </script>
   </body>
 </html>
