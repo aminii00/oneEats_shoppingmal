@@ -98,21 +98,13 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
                   style="margin-left: 12px; margin-top: 12px"
                 >
                   <li>
-                    <<<<<<< HEAD <a
-                    href="${contextPath}/goods/goodsList.do?category=zzigae"
-                    =======
-                    <a
-                      href="${contextPath}/goods/goodsList.do?category=찌개/탕/찜"
-                      >>>>>>> chaeyeon7 >찌개/탕/찜</a
+                    <a href="${contextPath}/goods/goodsList.do?category=zzigae">
+                      찌개/탕/찜</a
                     >
                   </li>
                   <li>
-                    <<<<<<< HEAD <a
-                    href="${contextPath}/goods/goodsList.do?category=meal"
-                    =======
-                    <a
-                      href="${contextPath}/goods/goodsList.do?category=식사/안주류"
-                      >>>>>>> chaeyeon7 >식사/안주류</a
+                    <a href="${contextPath}/goods/goodsList.do?category=meal"
+                      >식사/안주류</a
                     >
                   </li>
                   <li>
