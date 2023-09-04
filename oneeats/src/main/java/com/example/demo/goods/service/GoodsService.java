@@ -8,7 +8,6 @@ import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.OptionVO;
-import com.example.demo.vo.ReviewVO;
 
 public interface GoodsService {
 
@@ -41,10 +40,6 @@ public interface GoodsService {
 	public List<GoodsVO> selectGoodsListWithPagingMap(Map pagingMap);
 
 	public int selectGoodsTotalNumWithPagingMap(Map pagingMap);
-
-	public List<ReviewVO> selectNewReviewsByGoodsNo(int goodsNo);
-
-	public List<ReviewVO> selectReviewsWithPagingMap(Map pagingMap);
 	
 
 }

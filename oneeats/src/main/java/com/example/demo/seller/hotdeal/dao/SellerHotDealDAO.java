@@ -32,15 +32,7 @@ public interface SellerHotDealDAO {
 	// 페이징 처리
 	public List<HotDealVO> selectNewHotDealList();
 
-	// 핫딜 목록
-	public List<HotDealVO> selectHotDealListForList(Map pagingMap) throws DataAccessException;
-	
-	//핫딜 삭제
-	public int deleteHotdealGoods(int hotdealNo) throws DataAccessException;
+	// 주문 목록
+	public List<HotDealVO> selectHotDealList(Map pagingMap) throws DataAccessException;
 
-	//수정
-	public GoodsVO selectGoodsByGoodsNo(int goodsNo);
-	public HotDealVO selectHotDealByGoodsNo(int hotdealNo);
-
-	public void updateSellerHotDeal(HotDealVO sellerHotDeal);
 }

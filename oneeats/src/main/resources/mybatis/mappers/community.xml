@@ -52,14 +52,15 @@
 	<insert id="replyInsert" parameterType="oneQnAVO">
 		insert into oneqna(qnaNo,
 		content, parentNo, memberNo )
-		values (#{qnaNo}, #{content}, #{parentNo}, #{memberNo})
+		values (#{qnaNo}, #{content},
+		#{parentNo}, #{memberNo})
 	</insert>
 
 	<select id="oneQnAList" resultMap="oneQnAResult">
 		select * from oneqna where
 		parentNo=0
 	</select>
-	
+
 	<insert id="oneQnAFormInsert" parameterType="OneQnAVO">
 		insert oneqna
 		(qnaNo, title, content, parentNo, memberNo)
@@ -73,8 +74,8 @@
 		<result property="creDate" column="creDate" />
 		<result property="category" column="category" />
 	</resultMap>
-	
-	
+
+
 	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna
 	</select>
@@ -88,9 +89,11 @@
 
 	<select id="replyList" resultType="oneQnAVO" parameterType="int">
 
-		SELECT oneqna.*, member.name as memberName, member.profileImg as profile
+		SELECT oneqna.*, member.name as memberName, member.profileImg as
+		profile
 		FROM oneqna
-		INNER JOIN member on oneqna.memberNo = member.memberNo
+		INNER JOIN member on oneqna.memberNo =
+		member.memberNo
 		where parentNo=#{qnaNo}
 
 	</select>
@@ -265,37 +268,45 @@
 		order by creDate
 		limit #{start},10
 	</select>
-	
+
 	<select id="selectNoticeListWithPagingMap"
 		parameterType="java.util.Map" resultMap="noticeResult">
-		select * from notice 
+		select * from notice
 		<if test="category!='all'">
-			where category=#{category} 
+			where category=#{category}
 		</if>
 		order by creDate
 		limit #{start},10
 	</select>
-	
+
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
-		select * from oneqna where parentNo=0
+		select * from oneqna where
+		parentNo=0
 		order by creDate
 		limit #{start},10
 	</select>
-	
-	<select id="selectMostQnAListTotalNumWithCategory" parameterType="String" resultType="int">
+
+	<select id="selectMostQnAListTotalNumWithCategory"
+		parameterType="String" resultType="int">
 		select count(qnaNo) from mostQnA
 		<if test="category!='all'">
 			where category=#{category}
 		</if>
 	</select>
-	
-	<select id="selectNoticeListTotalNumWithCategory" parameterType="String" resultType="int">
+
+
+
+	<select id="selectNoticeListTotalNumWithCategory"
+		parameterType="String" resultType="int">
 		select count(noticeNo) from notice
 		<if test="category!='all'">
 			where category=#{category}
 		</if>
 	</select>
-	
 
+	<select id="selectOneQnAListTotalNumWithCategory"
+		parameterType="String" resultType="int">
+		select count(qnaNo) from oneqna where parentNo=0
+	</select>
 </mapper>

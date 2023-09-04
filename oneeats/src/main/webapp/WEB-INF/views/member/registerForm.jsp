@@ -54,7 +54,25 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         }).open();
       }
       // 다음 주소 api 스크립트 종료
+
+      // 팝업창 띄우기
+      function openPopUp() {
+        // 함수 동작 테스트
+        //alert("팝업 테스트");
+
+        //window.open("[팝업을 띄울 파일명 path]", "[별칭]", "[팝업 옵션]")
+        window.open(
+          "mypageAddressAddForm.jsp",
+          "배송지추가",
+          "width=450, height=250, top=150, left=200"
+        );
+      }
+      function showHidden() {
+        alert(document.testForm.flag.value);
+      }
     </script>
+
+    <!---->
 
     <style>
       .redText {

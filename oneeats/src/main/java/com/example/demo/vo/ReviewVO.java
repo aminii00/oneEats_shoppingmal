@@ -17,30 +17,8 @@ public class ReviewVO {
 	private String goodsName;
 	private String goodsImg;
 	private String delivery_status;
-	private String memberId;
-	private String sellerId;
-	private int sellerNo;
 	
 	
-	
-	public int getSellerNo() {
-		return sellerNo;
-	}
-	public void setSellerNo(int sellerNo) {
-		this.sellerNo = sellerNo;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
-	public String getSellerId() {
-		return sellerId;
-	}
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
-	}
 	public String getDelivery_status() {
 		return delivery_status;
 	}
@@ -53,7 +31,12 @@ public class ReviewVO {
 	public void setGoodsImg(String goodsImg) {
 		this.goodsImg = goodsImg;
 	}
-	
+	@Override
+	public String toString() {
+		return "ReviewVO [reviewNo=" + reviewNo + ", star=" + star + ", reviewImg=" + reviewImg + ", content=" + content
+				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + ", goods_qty=" + goods_qty + ", deliveryDate="
+				+ deliveryDate + ", goodsName=" + goodsName+ ", goodsImg= " + goodsImg + " delivery_status= "+ delivery_status + "]" ;
+	}
 	public int getGoodsNo() {
 		return goodsNo;
 	}
@@ -107,13 +90,6 @@ public class ReviewVO {
 	}
 	public void setGoodsName(String goodsName) {
 		this.goodsName = goodsName;
-	}
-	@Override
-	public String toString() {
-		return "ReviewVO [reviewNo=" + reviewNo + ", star=" + star + ", reviewImg=" + reviewImg + ", content=" + content
-				+ ", goodsNo=" + goodsNo + ", memberNo=" + memberNo + ", goods_qty=" + goods_qty + ", deliveryDate="
-				+ deliveryDate + ", goodsName=" + goodsName + ", goodsImg=" + goodsImg + ", delivery_status="
-				+ delivery_status + ", memberId=" + memberId + ", sellerId=" + sellerId + "]";
 	}
 	
 	

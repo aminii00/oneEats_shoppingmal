@@ -15,6 +15,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
    
   </head>
   <body>
+    <section>
     <form method="post" action="${contextPath}/mypage/couponNum.do">
       <div class="div-p">
         <br />
@@ -79,34 +80,65 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <br />
         <br />
         <br />
-        <div id="wrapper">
-          <main id="product">
-            <section class="view">
-              <article class="review">
-                <div class="paging">
-                  <span class="prev">
-                    <a href="#">< 이전</a>
-                  </span>
-                  <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                  </span>
-                  <span class="next">
-                    <a href="#">다음 ></a>
-                  </span>
-                </div>
-              </article>
-            </section>
-          </main>
+
+        <div>
+          <ul class="ul-li">
+            <c:if test="${section>1}">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section=${section-1}&pageNum=1"
+                  class="btn-2 btn-square bg-white btn-border"
+                >
+                  <img
+                    width="20px"
+                    height="20px"
+                    src="${contextPath}/img/icon/prev.png"
+                    alt="prev"
+                  />
+                </a>
+              </li>
+            </c:if>
+            <c:set
+              var="end"
+              value="${Math.ceil((totalCouponListNum - (section-1)*100) div 10)}"
+            />
+            <c:if test="${end>10}">
+              <c:set var="end" value="10" />
+            </c:if>
+            <c:forEach begin="1" end="${end}" var="i">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section=${section}&pageNum=${i}"
+                  class="btn-2 btn-square bg-white btn-border"
+                  >${((section-1)*10)+i}</a
+                >
+              </li>
+            </c:forEach>
+            <c:if test="${section*100 < totalCouponListNum}">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section=${section+1}&pageNum=1"
+                  class="btn-2 btn-square bg-white btn-border"
+                >
+                  <img
+                    width="20px"
+                    height="20px"
+                    src="${contextPath}/img/icon/next.png"
+                    alt="next"
+                  />
+                </a>
+              </li>
+            </c:if>
+          </ul>
         </div>
+      </form>
+      </section>
+
 
         <br />
         <br />
+        <section>
+        <form>
         <div style="width:750px; height: 80px; text-align: center;">
           <div class ="pointd textsize-1"> 
             <div style="margin-top: 20px;">
@@ -141,32 +173,57 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <br />
         <br />
         <br />
-        <div id="wrapper">
-          <main id="product">
-            <section class="view">
-              <article class="review">
-                <div class="paging">
-                  <span class="prev">
-                    <a href="#">< 이전</a>
-                  </span>
-                  <span class="num">
-                    <a href="#" class="on">1</a>
-                    <a href="#">2</a>
-                    <a href="#">3</a>
-                    <a href="#">4</a>
-                    <a href="#">5</a>
-                    <a href="#">6</a>
-                    <a href="#">7</a>
-                  </span>
-                  <span class="next">
-                    <a href="#">다음 ></a>
-                  </span>
-                </div>
-              </article>
-            </section>
-          </main>
+        <div>
+          <ul class="ul-li">
+            <c:if test="${section1>1}">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section1=${section1-1}&pageNum1=1"
+                  class="btn-2 btn-square bg-white btn-border"
+                >
+                  <img
+                    width="20px"
+                    height="20px"
+                    src="${contextPath}/img/icon/prev.png"
+                    alt="prev"
+                  />
+                </a>
+              </li>
+            </c:if>
+            <c:set
+              var="end"
+              value="${Math.ceil((totalPointListNum - (section1-1)*100) div 10)}"
+            />
+            <c:if test="${end>10}">
+              <c:set var="end" value="10" />
+            </c:if>
+            <c:forEach begin="1" end="${end}" var="i">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section1=${section1}&pageNum1=${i}"
+                  class="btn-2 btn-square bg-white btn-border"
+                  >${((section1-1)*10)+i}</a>
+              </li>
+            </c:forEach>
+            <c:if test="${section*100<totalPointListNum}">
+              <li class="li-btn">
+                <a
+                  href="${contextPath}/mypage/couponSearch.do?section1=${section1+1}&pageNum1=1"
+                  class="btn-2 btn-square bg-white btn-border"
+                >
+                  <img
+                    width="20px"
+                    height="20px"
+                    src="${contextPath}/img/icon/next.png"
+                    alt="next"
+                  />
+                </a>
+              </li>
+            </c:if>
+          </ul>
         </div>
-        <br><br>
+        <br>
     </form>
+    </section>
   </body>
 </html>

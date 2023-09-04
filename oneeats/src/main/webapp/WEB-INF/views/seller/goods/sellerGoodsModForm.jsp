@@ -274,7 +274,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     </dt>
                     <dd class="property-flex1">
                       <input
-                        name="harvest"
                         value="${sellerGoods.harvest}"
                         type="text"
                         class="property-font1 nice-select"
@@ -314,7 +313,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                   type="text"
                                   value="${option.option_qty}"
                                   class="form-control"
-                                  placeholder="숫자로 적어주세요"
+                                  placeholder="양"
                                   required
                                 />
                               </div>
@@ -371,7 +370,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${option.name}"
+                      value="${sellerGoods.description}"
                     />
                   </p>
 

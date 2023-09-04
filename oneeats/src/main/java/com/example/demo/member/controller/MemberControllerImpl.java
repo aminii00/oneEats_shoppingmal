@@ -32,7 +32,6 @@ public class MemberControllerImpl implements MemberController {
 	@Autowired
 	private MemberService memberService;
 
-	
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam Map<String, String> loginMap, HttpServletRequest request,

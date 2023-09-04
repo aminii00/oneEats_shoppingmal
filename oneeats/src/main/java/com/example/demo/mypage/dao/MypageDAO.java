@@ -12,9 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.PointHistoryVO;
 import com.example.demo.vo.ReviewVO;
@@ -36,8 +38,6 @@ public interface MypageDAO {
 	public int[] selectSeqNoByOrderNo(int orderNo);
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
-	
-	public List<Map> selectOrderBySearchType(Map<String, Object> map);
 	
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	
@@ -74,19 +74,14 @@ public interface MypageDAO {
 	public CouponVO couponNull(CouponVO result);
 	
 	public void couponInsert(CouponVO result);
-
-	public void insertTempOrderList(List<OrderVO> orderList);
-
-	public void updateTempOrderList(Map payInfoMap);
-
-	public void insertAddressWithMap(Map condMap);
-
-	public void updateDeliveryAddressWithMap(Map condMap);
-
-	public void updateDeliveryAddress(DeliveryAddressVO targetDeliveryAddress);
-
-	public void updateMemberAddressWithMap(Map condMap);
-
-	public void deleteDeliveryAddressWithMap(Map condMap);
+	
+	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap);
+	
+	public int selectBookListTotalNum(int memberNo);
+	
+	public List<CouponVO> selectCouponListWithPagingMap(Map pagingMap);
+	public int selectCouponListTotalNum(int memberNo);
+	public List<PointHistoryVO> selectPointListWithPagingMap(Map pagingMap);
+	public int selectPointListTotalNum(int memberNo);
 	
 }

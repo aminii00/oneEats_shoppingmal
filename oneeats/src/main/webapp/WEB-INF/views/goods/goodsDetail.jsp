@@ -114,9 +114,10 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__details__text">
               <h3>${goods.name}</h3>
               <div class="product__details__rating">
-                <c:set var="temp" value="${Math.ceil(reviewAvg)}" />
-                <c:forEach begin="1" end="${Math.floor(reviewAvg)}">★</c:forEach
-                ><c:if test="${temp>reviewAvg}">☆</c:if>
+                <img
+                  src="${contextPath}/img/product/review/star.jpg"
+                  alt="리뷰 별"
+                />
                 <span>평균 ${reviewAvg} 점 </span>
                 <span>(${totalReviewsNum} reviews)</span>
                 <div class="product__details__price">￦${goods.price}</div>
@@ -451,126 +452,125 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                   >
                     상품 후기
                   </h6>
-
+                  <div class="text-left" style="margin-bottom: 30px">
+                    <img
+                      style="padding-top: 8px"
+                      class="expand_img"
+                      src="${contextPath}/img/product/review/carrot.jpg"
+                      alt="리뷰 별"
+                    />
+                  </div>
                   <h6 class="text-left" style="padding-left: 20px">
                     총 ${totalReviewsNum}개
                   </h6>
 
                   <!--상품 후기-->
-                  <div id="reviews-grid">
-                    <c:forEach var="review" items="${newReviewList}">
-                      <div class="property-input1">
-                        <div class="property-gdtail-flex">
-                          <div class="property-gdtail-flex1">
-                            <span class="property-gdtail-font"
-                              >${review.memberId}</span
-                            >
-                          </div>
-                          <div class="property-gdtail-flex1">
-                            <span
-                              class="property-gdtail-font"
-                              style="padding-top: 11px"
-                              ><c:set
-                                var="temp"
-                                value="${Math.ceil(review.star)}"
-                              />
-                              <c:forEach
-                                begin="1"
-                                end="${Math.floor(review.star)}"
-                                >★</c:forEach
-                              ><c:if test="${temp>review.star}">☆</c:if></span
-                            >
-                          </div>
-                        </div>
-                        <article class="property-gdtail-flex2">
-                          <div>
-                            <div class="property-gdtail-flex3">
-                              <h3 class="property-gdtail-font1">
-                                [${review.goodsName}]
-                              </h3>
-                            </div>
-                            <p class="text-left" style="padding: 15px 0 0 0">
-                              ${review.content}
-                              <br />
-                              <c:if test="${not empty review.reviewImg}">
-                                <img
-                                  style="
-                                    padding-top: 8px;
-                                    width: 60px;
-                                    height: 60px;
-                                  "
-                                  src="${contextPath}/download.do?imageFileName=${review.reviewImg}&path=reviewNo${review.reviewNo}"
-                                  class="expand_img"
-                                  alt="리뷰 사진"
-                                />
-                              </c:if>
-                            </p>
-                            <footer class="css-1fkegtf">
-                              <div>
-                                <span class="css-14kcwq8">2023.08.12</span>
-                              </div>
-                              <button class="property-btn1">
-                                <span class="ico property-img"></span
-                                ><span>도움돼요</span>
-                              </button>
-                            </footer>
-                          </div>
-                        </article>
+                  <div
+                    class="property-input1"
+                    style="border-top: 1px solid rgb(244, 244, 244)"
+                  >
+                    <div class="property-gdtail-flex">
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font">강**</span>
                       </div>
-                    </c:forEach>
+                      <div class="property-gdtail-flex1">
+                        <span
+                          class="property-gdtail-font"
+                          style="padding-top: 11px"
+                          ><img
+                            src="${contextPath}/img/product/review/star.jpg"
+                            alt="리뷰 별"
+                        /></span>
+                      </div>
+                    </div>
+                    <article class="property-gdtail-flex2">
+                      <div>
+                        <div class="property-gdtail-flex3">
+                          <h3 class="property-gdtail-font1">[못난이 당근]</h3>
+                        </div>
+                        <p class="text-left" style="padding: 15px 0 0 0">
+                          생긴것과 다르게 맛있어요!!
+                        </p>
+                        <footer class="css-1fkegtf">
+                          <div>
+                            <span class="css-14kcwq8">2023.08.12</span>
+                          </div>
+                          <button class="property-btn1">
+                            <span class="ico property-img"></span
+                            ><span>도움돼요</span>
+                          </button>
+                        </footer>
+                      </div>
+                    </article>
+                  </div>
+                  <div class="property-input1">
+                    <div class="property-gdtail-flex">
+                      <div class="property-gdtail-flex1">
+                        <span class="property-gdtail-font">최**</span>
+                      </div>
+                      <div class="property-gdtail-flex1">
+                        <span
+                          class="property-gdtail-font"
+                          style="padding-top: 11px"
+                          ><img
+                            src="${contextPath}/img/product/review/star.jpg"
+                            alt="리뷰 별"
+                        /></span>
+                      </div>
+                    </div>
+                    <article class="property-gdtail-flex2">
+                      <div>
+                        <div class="property-gdtail-flex3">
+                          <h3 class="property-gdtail-font1">[못난이 당근]</h3>
+                        </div>
+                        <p class="text-left" style="padding: 15px 0 0 0">
+                          아주 맛있어요 믿고 사요!!
+                          <br />
+                          <img
+                            style="padding-top: 8px; width: 60px; height: 60px"
+                            src="${contextPath}/img/product/review/carrot.jpg"
+                            class="expand_img"
+                            alt="리뷰 별"
+                          />
+                        </p>
+                        <footer class="css-1fkegtf">
+                          <div>
+                            <span class="css-14kcwq8">2023.08.12</span>
+                          </div>
+                          <button class="property-btn1">
+                            <span class="ico property-img"></span
+                            ><span>도움돼요</span>
+                          </button>
+                        </footer>
+                      </div>
+                    </article>
                   </div>
 
                   <!--페이징-->
-                  <div>
-                    <ul class="ul-li">
-                      <c:if test="${section>1}">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section-1}','${i}','${goods.goodsNo}')"
-                          >
-                            <img
-                              width="20px"
-                              height="20px"
-                              src="${contextPath}/img/icon/prev.png"
-                              alt="prev"
-                            />
-                          </button>
-                        </li>
-                      </c:if>
-                      <c:set
-                        var="end"
-                        value="${Math.ceil((totalReviewsNum - (section-1)*100) div 10)}"
-                      />
-                      <c:if test="${end>10}">
-                        <c:set var="end" value="10" />
-                      </c:if>
-                      <c:forEach begin="1" end="${end}" var="i">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section}','${i}','${goods.goodsNo}')"
-                          >
-                            ${((section-1)*10)+i}
-                          </button>
-                        </li>
-                      </c:forEach>
-                      <c:if test="${section*100<totalReviewsNum}">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section+1}','${i}','${goods.goodsNo}')"
-                          >
-                            <img
-                              width="20px"
-                              height="20px"
-                              src="${contextPath}/img/icon/next.png"
-                              alt="next"
-                            />
-                          </button>
-                        </li>
-                      </c:if>
-                    </ul>
+                  <div id="wrapper">
+                    <main id="product">
+                      <section class="view">
+                        <article class="review">
+                          <div class="paging">
+                            <span class="prev">
+                              <a href="#">< 이전</a>
+                            </span>
+                            <span class="num">
+                              <a href="#" class="on">1</a>
+                              <a href="#">2</a>
+                              <a href="#">3</a>
+                              <a href="#">4</a>
+                              <a href="#">5</a>
+                              <a href="#">6</a>
+                              <a href="#">7</a>
+                            </span>
+                            <span class="next">
+                              <a href="#">다음 ></a>
+                            </span>
+                          </div>
+                        </article>
+                      </section>
+                    </main>
                   </div>
                   <!--여기까지 상품후기-->
                 </div>
@@ -581,30 +581,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </section>
     <!-- Product Details Section End -->
-    <script>
-      function fn_loadReviews(section, pageNum, goodsNo) {
-        $.ajax({
-          type: "POST",
-          url: "/goods/nextReviews.do",
-          dataType: "html",
-          data: { section: section, pageNum: pageNum, goodsNo: goodsNo },
-          success: function (response) {
-            $("#reviews-grid").html(response);
-            console.log(response);
-            $("html, body").animate(
-              {
-                scrollTop: $("#reviews-grid").offset().top,
-              },
-              500
-            );
-          },
-          error: function (response) {
-            alert("원인불명의 에러");
-            console.log(response);
-          },
-        });
-      }
-    </script>
 
     <!-- Related Product Section Begin -->
     <section class="related-product">

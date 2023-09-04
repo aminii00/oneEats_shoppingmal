@@ -4,16 +4,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Base64.Encoder;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,10 +22,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.example.demo.common.alert.Alert;
-import com.example.demo.common.api.toss.dto.TossDTO;
 
 @Controller
 public class TossController {
@@ -34,9 +31,10 @@ public class TossController {
 	 @Value("${toss.api.key}")
 	 private String TOSS_API;
 	
+	@ResponseBody
 	@RequestMapping("/toss/orderSuccess.do")
-	public ModelAndView orderSuccess(HttpServletRequest request) throws Exception {
-		  String orderId = request.getParameter("orderId");
+	public String get(HttpServletRequest request) throws Exception {
+		String orderId = request.getParameter("orderId");
 		  String paymentKey = request.getParameter("paymentKey");
 		  String amount = request.getParameter("amount");
 		  String secretKey = TOSS_SECRET+":";
@@ -72,22 +70,7 @@ public class TossController {
 		  JSONObject jsonObject = (JSONObject) parser.parse(reader);
 		  responseStream.close();
 		  System.out.println(jsonObject);
-		  
-		  
-		  Map map = (Map)jsonObject;
-		  
-		  ModelAndView mav = new ModelAndView("redirect:/mypage/newOrder.do");
-		  mav.addAllObjects(map);
-		  TossDTO tossInfo = new TossDTO(map);
-		  HttpSession session = request.getSession();
-		  session.setAttribute("tossInfo",tossInfo);
-		  return mav;
+		  System.out.println(jsonObject.toString());
+		  return jsonObject.toString();
 	}
-	
-	@RequestMapping("/toss/orderFail.do")
-	public ModelAndView orderFail(HttpServletRequest request) {
-		ModelAndView mav = Alert.alertAndRedirect("결제에 실패했습니다.", request.getContextPath()+"/mypage/orderConfirm.do");
-		return mav;
-	}
-	
 }

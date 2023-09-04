@@ -144,8 +144,11 @@ public class CommunityServiceImpl implements CommunityService {
 	public int selectNoticeListTotalNumWithCategory(String category) {
 		return communityDAO.selectNoticeListTotalNumWithCategory(category);
 	}
-	
-
+	@Override
+	public int selectOneQnAListTotalNumWithCategory() {
+		int num = communityDAO.selectOneQnAListTotalNumWithCategory();	
+		return num;
+	}
 	
 	
 	
