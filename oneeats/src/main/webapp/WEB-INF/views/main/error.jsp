@@ -31,7 +31,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           ></span>
           <br />
           죄송합니다. <br />
-          에러가 발생했습니다.
+          에러가 발생했습니다. <br />
+          에러코드 : ${statusCode}
         </div>
       </div>
     </div>

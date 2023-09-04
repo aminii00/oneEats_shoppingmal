@@ -1,5 +1,6 @@
 package com.example.demo.common.alert;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
@@ -12,7 +13,15 @@ public class myErrorController implements ErrorController{
 	
 	@RequestMapping("/error")
 	public ModelAndView error(HttpServletRequest request) {
+		
 		ModelAndView mav = new ModelAndView("/main/error");
+		Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+		
+	    if (status != null) {
+	        Integer statusCode = Integer.valueOf(status.toString());
+	        mav.addObject("statusCode",statusCode);
+	        
+	    }
 		return mav;
 		
 	}
