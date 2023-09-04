@@ -136,7 +136,8 @@
 		]]>
 	</select>
 
-	<select id="selectOrderByMemberNo" resultMap="OrderResult" parameterType="int">
+	<select id="selectOrderByMemberNo" resultMap="OrderResult"
+		parameterType="int">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
 			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo WHERE t_order.memberNo=#{memberNo}) 
@@ -243,28 +244,36 @@
 	     	where order_seqNo=#{order_seqNo}
 		]]>
 	</update>
-	
-	<select id="selectOrderBySearchType" resultMap="OrderResult" parameterType="hashMap">
+
+	<select id="selectOrderBySearchType" resultMap="OrderResult"
+		parameterType="hashMap">
 		<choose>
 			<when test="orderSearchType == 'all'">
-				select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
-				goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo 
-				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) 
-				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by orderplusgoods.orderNo
+				select orderplusgoods.*,orderGun.gun from (select
+				t_order.*,goodsAndHotdealView.name as goodsName,
+				goodsAndHotdealView.img1 as goodsImg from t_order inner join
+				goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
+				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join
+				(select orderNo, count(*) as gun from t_order group by orderNo)
+				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
+				orderplusgoods.orderNo
 			</when>
 			<when test="orderSearchType == '1month'">
-				select * from order_by_membertype where orderDate 
-				between DATE_SUB(NOW(), INTERVAL 1 MONTH) and NOW() and memberNo=#{memberNo}
+				select * from order_by_membertype where orderDate
+				between DATE_SUB(NOW(), INTERVAL 1 MONTH) and NOW() and
+				memberNo=#{memberNo}
 			</when>
 			<otherwise>
 				<choose>
 					<when test="orderSearchType == '3month'">
-						select * from order_by_membertype where orderDate 
-						between DATE_SUB(NOW(), INTERVAL 3 MONTH) and NOW() and memberNo=#{memberNo}
+						select * from order_by_membertype where orderDate
+						between DATE_SUB(NOW(), INTERVAL 3 MONTH) and NOW() and
+						memberNo=#{memberNo}
 					</when>
 					<when test="orderSearchType == '1year'">
-						select * from order_by_membertype where orderDate 
-						between DATE_SUB(NOW(), INTERVAL 1 YEAR) and NOW() and memberNo=#{memberNo}
+						select * from order_by_membertype where orderDate
+						between DATE_SUB(NOW(), INTERVAL 1 YEAR) and NOW() and
+						memberNo=#{memberNo}
 					</when>
 				</choose>
 			</otherwise>
@@ -312,10 +321,10 @@
 		resultMap="OrderResult">
 	    <![CDATA[
         
-         select t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+         select t_order.order_seqNo, t_order.orderNo, t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
          from t_order
-         inner join goods on t_order.goodsNo=goods.goodsNo 
-         where t_order.delivery_status='배송완료' and t_order.memberNo=#{memberNo}
+           inner join goods on t_order.goodsNo=goods.goodsNo
+         where t_order.delivery_status='배송완료' and t_order.review_status='미작성' and t_order.memberNo=#{memberNo}
 		]]>
 	</select>
 
@@ -323,14 +332,41 @@
 	<select id="writeReview" parameterType="int"
 		resultMap="OrderResult">
 	    <![CDATA[
-          select * from review inner join
-         (select t_order.goods_qty, t_order.deliveryDate, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
+	     select * from review inner join
+        (select t_order.memberNo, t_order.order_seqNo, t_order.orderNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
          from t_order 
-         inner join goods on t_order.memberNo=goods.memberNo where t_order.delivery_status='배송완료' ) 
-         as orderplusgoods
+           inner join goods on t_order.goodsNo=goods.goodsNo where t_order.delivery_status='배송완료' and t_order.review_status='작성완료' and t_order.memberNo=#{memberNo})
+           as orderplusgoods
          on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 		]]>
 	</select>
+	
+	<select id="selectCouponListWithPagingMap"
+		parameterType="java.util.Map" resultMap="CouponResult">
+		select * from member_coupon 
+			inner join coupon 
+			on 
+			member_coupon.couponNo=coupon.couponNo 
+			where 
+			member_coupon.memberNo=#{memberNo}
+		    limit #{start},10 
+	</select>
+
+	<select id="selectCouponListTotalNum" parameterType ="int" resultType="int">
+		select count(couponNo) from coupon where memberNo=#{memberNo}
+	</select>
+	
+	<select id="selectPointListWithPagingMap"
+		parameterType="java.util.Map" resultMap="PointHistoryResult">
+	select * from point_history
+			where memberNo=#{memberNo}
+		    limit #{start},10 
+	</select>
+
+	<select id="selectPointListTotalNum" parameterType ="int" resultType="int">
+		select count(pointNo) from point_history where memberNo=#{memberNo}
+	</select>
+	
 
 	<!-- 민아 쿠폰 조회 -->
 	<select id="couponSearch" resultMap="CouponResult"
@@ -412,39 +448,69 @@ deliveryNo=#{deliveryNo}
 
 
 	<insert id="insertAddressWithMap" parameterType="java.util.Map">
-		insert into deliveryaddress (receiver_name,receiver_phone,zipCode,address,address_detail,memberNo)
-		 values (#{receiver_name},#{receiver_phone},#{zipCode},#{address},#{address_detail},#{memberNo})
-		
+		insert into
+		deliveryaddress
+		(receiver_name,receiver_phone,zipCode,address,address_detail,memberNo)
+		values
+		(#{receiver_name},#{receiver_phone},#{zipCode},#{address},#{address_detail},#{memberNo})
+
 	</insert>
-	
-	<update id="updateDeliveryAddressWithMap" parameterType="java.util.Map">
+
+	<update id="updateDeliveryAddressWithMap"
+		parameterType="java.util.Map">
 		update deliveryaddress set
 		receiver_name=#{receiver_name},
 		receiver_phone=#{receiver_phone},
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
-		where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+		where memberNo=#{memberNo} and
+		deliveryNo=#{deliveryNo}
 	</update>
-	
-	<update id="updateDeliveryAddress" parameterType="deliveryAddressVO">
+
+	<update id="updateDeliveryAddress"
+		parameterType="deliveryAddressVO">
 		update deliveryaddress set
 		receiver_name=#{receiver_name},
 		receiver_phone=#{receiver_phone},
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
-		where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+		where memberNo=#{memberNo} and
+		deliveryNo=#{deliveryNo}
 	</update>
-	
-	<update id="updateMemberAddressWithMap" parameterType="java.util.Map">
+
+	<update id="updateMemberAddressWithMap"
+		parameterType="java.util.Map">
 		update member set
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
 		where memberNo=#{memberNo}
 	</update>
-	<delete id="deleteDeliveryAddressWithMap" parameterType="java.util.Map">
-		delete from deliveryaddress where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+	<delete id="deleteDeliveryAddressWithMap"
+		parameterType="java.util.Map">
+		delete from deliveryaddress where memberNo=#{memberNo}
+		and deliveryNo=#{deliveryNo}
 	</delete>
+
+	<select id="selectBookListWithPagingMap"
+		parameterType="java.util.Map" resultMap="BookResult">
+		select goods.memberNo,
+		goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark
+		inner join goods
+		on
+		bookmark.goodsNo=goods.goodsNO
+		where
+		bookmark.memberNo=#{memberNo}
+		limit #{start},10
+	</select>
+
+	<select id="selectBookListTotalNum" parameterType="int"
+		resultType="int">
+		select count(memberNo) from bookmark where
+		memberNo=#{memberNo}
+	</select>
+
+
 </mapper>

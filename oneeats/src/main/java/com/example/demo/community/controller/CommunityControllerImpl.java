@@ -484,7 +484,9 @@ System.out.println("map : " + map);
 			pagingMap.put("start", start);
 			List<OneQnAVO> oneQnAList = communityService.selectOneQnAListWithPagingMap(pagingMap);
 			mav.addAllObjects(pagingMap);
+			System.out.println("oneQnAList = " + oneQnAList);
 			mav.addObject("oneQnAList", oneQnAList);
+			
 			
 			int totalOneQnAQnANum = communityService.selectOneQnAListTotalNumWithCategory();
 			mav.addObject("totalOneQnAQnANum",totalOneQnAQnANum);

@@ -74,7 +74,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section>1}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/noticeList.do?section=${section-1}&pageNum=1"
+                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section-1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img
@@ -88,7 +88,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </c:if>
           <c:set
             var="end"
-            value="${Math.ceil((totalNoticeNum - (section-1)*100) div 10)}"
+            value="${Math.ceil((totalOneQnAQnANum - (section-1)*100) div 10)}"
           />
           <c:if test="${end>10}">
             <c:set var="end" value="10" />
@@ -102,7 +102,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               >
             </li>
           </c:forEach>
-          <c:if test="${section*100<totalNoticeNum}">
+          <c:if test="${section*100<totalOneQnAQnANum}">
             <li class="li-btn">
               <a
                 href="${contextPath}/community/notice/noticeList.do?section=${section+1}&pageNum=1"
