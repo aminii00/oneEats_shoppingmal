@@ -1,14 +1,19 @@
 package com.example.demo.review.controller;
 
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.review.service.ReviewService;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
@@ -43,8 +48,7 @@ public class ReviewControllerImpl implements ReviewController{
 	}
 	
 	@RequestMapping(value = "/review/reviewInsert.do")
-	public ModelAndView reviewInsert(HttpServletRequest request) {
-		System.out.println("여기는 reviewInsert Controller ");
+	public ModelAndView reviewInsert(MultipartHttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String goodsNo_ = request.getParameter("goodsNo");// goodsNo 가져오기
 		int goodsNo = Integer.parseInt(goodsNo_);
@@ -52,7 +56,8 @@ public class ReviewControllerImpl implements ReviewController{
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo"); //memberNo가져오기
 		int memberNo = memberInfo.getMemberNo();
 		String content = request.getParameter("content");
-		String reviewImg = request.getParameter("reviewImg");
+		String reviewImg = GeneralFileUploader.getFileName(request);
+		String star = request.getParameter("star");
 		int newReviewNo = reviewService.newReviewNo();
 		ReviewVO reviewVO = new ReviewVO();
 		reviewVO.setReviewNo(newReviewNo);
@@ -60,7 +65,21 @@ public class ReviewControllerImpl implements ReviewController{
 		reviewVO.setMemberNo(memberNo);
 		reviewVO.setContent(content);
 		reviewVO.setReviewImg(reviewImg);
-		reviewService.reviewInsert(reviewVO);
+		reviewVO.setStar(star);
+		
+		System.out.println(reviewVO);
+		
+		// 최근 한달 내에 이 상품의 리뷰를 썼었는지 확인. 안 썼다면 포인트 추가.
+		boolean isReviewed = reviewService.isReviewed(reviewVO);
+		if (isReviewed==false) {
+			reviewService.updateMemberPoint(reviewVO);
+		}
+		
+		
+
+		
+		int reviewNo = reviewService.reviewInsert(reviewVO);
+		List fileList = GeneralFileUploader.upload(request, "/review/" + reviewNo);
 		//등록되엇습니당
 		mav = Alert.alertAndRedirect("등록되었습니다.", request.getContextPath() + "/mypage/mypageReviewList.do");
 		return mav;

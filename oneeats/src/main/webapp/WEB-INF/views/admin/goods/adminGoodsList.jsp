@@ -80,7 +80,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       style="font-size: 12px; margin-top: 22px; float: right"
       class="btn-1 bg-lightgreen textcolor-white border-0"
       type="button"
-      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm'"
+      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm.do'"
     >
       상품 추가
     </button>

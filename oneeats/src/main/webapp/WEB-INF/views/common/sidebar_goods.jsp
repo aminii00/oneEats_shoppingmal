@@ -167,7 +167,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             <div
               class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
               data-min="0"
-              data-max="10000"
+              data-max="${maxPrice}"
             >
               <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
               <span

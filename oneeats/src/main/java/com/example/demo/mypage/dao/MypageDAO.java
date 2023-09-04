@@ -88,5 +88,17 @@ public interface MypageDAO {
 	public void updateMemberAddressWithMap(Map condMap);
 
 	public void deleteDeliveryAddressWithMap(Map condMap);
+
+	public void insertPointHistory(Map payInfoMap);
+
+	public void updateMemberPoint(Map payInfoMap);
+
+	public OrderVO selectTempOrder(Map condMap);
+
+	public void insertTossApi(Map payInfoMap);
+
+	public String selectTossApiByOrderNo(int orderNo);
+
+	public String isSNSMember(MemberVO memberInfo);
 	
 }

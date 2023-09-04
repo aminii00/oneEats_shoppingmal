@@ -272,14 +272,14 @@
 		<if test="category!='all'">
 			where category=#{category} 
 		</if>
-		order by creDate
+		order by creDate desc
 		limit #{start},10
 	</select>
 	
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
-		select * from oneqna where parentNo=0
-		order by creDate
+		select * from oneqna where parentNo=0 and  memberNo=#{memberNo}
+		order by creDate desc
 		limit #{start},10
 	</select>
 	
@@ -295,6 +295,11 @@
 		<if test="category!='all'">
 			where category=#{category}
 		</if>
+	</select>
+	
+	<select id="selectOneQnAListTotalNumWithPagingMap">
+		select count(qnaNo) from oneQnA
+		where memberNo=#{memberNo}
 	</select>
 	
 

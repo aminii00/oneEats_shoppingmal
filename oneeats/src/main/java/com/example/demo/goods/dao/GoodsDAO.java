@@ -55,6 +55,10 @@ public interface GoodsDAO {
 	public List<ReviewVO> selectNewReviewsByGoodsNo(int goodsNo);
 
 	public List<ReviewVO> selectReviewsWithPagingMap(Map pagingMap);
+
+	public int selectMaxPrice(Map pagingMap);
+
+	public int selectMaxPriceWithSearchFilter(Map searchMap);
 }
 	
 

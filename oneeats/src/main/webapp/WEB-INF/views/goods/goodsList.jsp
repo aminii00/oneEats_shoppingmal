@@ -17,7 +17,6 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
     <title>상품 목록</title>
     <script src="${contextPath}/js/hotdealClock.js"></script>
   </head>
-
   <body>
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -119,7 +118,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             </div>
             <div class="row">
               <c:forEach var="item" items="${goodsList }">
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6 product_col">
                   <div class="product__item">
                     <div
                       class="product__item__pic set-bg"
@@ -147,6 +146,11 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         >
                       </h6>
                       <h5>￦${item.price}</h5>
+                      <input
+                        type="hidden"
+                        class="h_col_goods_price"
+                        value="${item.price}"
+                      />
                     </div>
                   </div>
                 </div>

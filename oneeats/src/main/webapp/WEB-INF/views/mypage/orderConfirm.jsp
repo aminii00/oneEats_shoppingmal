@@ -184,7 +184,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>사용적립금</td>
           <td>
-            <input type="text" id="used_point" name="used_point" value="0" />
+            <input
+              type="number"
+              id="used_point"
+              name="used_point"
+              min="0"
+              max="${memberInfo.point}"
+              value="0"
+            />
           </td>
         </tr>
 

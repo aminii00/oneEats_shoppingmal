@@ -66,6 +66,7 @@ public class SellerCouponControllerImpl implements SellerCouponController{
 		String discount_price = request.getParameter("discount_price");
 		String condition = request.getParameter("condition");
 		String expDate = request.getParameter("expDate");
+		String couponCode = request.getParameter("couponCode");
 		
 		CouponVO coupon = new CouponVO();
 		coupon.setName(name);
@@ -73,6 +74,7 @@ public class SellerCouponControllerImpl implements SellerCouponController{
 		coupon.setCondition(condition);
 		coupon.setExpDate(expDate);
 		coupon.setMemberNo(memberNo);
+		coupon.setCouponCode(couponCode);
 		System.out.println("coupon="+coupon);
 
 		sellerCouponService.insertSellerCoupon(coupon);

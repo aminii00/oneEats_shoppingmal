@@ -74,7 +74,8 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public boolean isExistBookmark(BookmarkVO bookmarkVO) {
-		if (goodsDAO.isExistBookmark(bookmarkVO) > 0) {
+		int bookmarkNum = goodsDAO.isExistBookmark(bookmarkVO);
+		if (bookmarkNum > 0) {
 			return true;
 		}
 		return false;
@@ -109,6 +110,17 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<ReviewVO> selectReviewsWithPagingMap(Map pagingMap) {
 		
 		return goodsDAO.selectReviewsWithPagingMap(pagingMap);
+	}
+
+	@Override
+	public int selectMaxPrice(Map pagingMap) {
+		return goodsDAO.selectMaxPrice(pagingMap);
+	}
+
+	@Override
+	public int selectMaxPriceWithSearchFilter(Map searchMap) {
+		
+		return goodsDAO.selectMaxPriceWithSearchFilter(searchMap);
 	};
 	
 	

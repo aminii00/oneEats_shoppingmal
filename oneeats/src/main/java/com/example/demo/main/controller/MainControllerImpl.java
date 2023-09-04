@@ -241,6 +241,7 @@ public class MainControllerImpl implements MainController {
 		} else {
 			orderNowList = new ArrayList<OrderVO>();
 			try {
+			
 				// request에서 정보를 받아옴
 				String shippingFee = request.getParameter("shippingFee");
 				String paymentPrice = request.getParameter("payment_price");
@@ -267,7 +268,7 @@ public class MainControllerImpl implements MainController {
 				mav.addObject("shippingFee", shippingFee);
 				mav.addObject("payment_price", paymentPrice);
 				mav.addObject("discount_price", discountPrice);
-
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				String previousPage = request.getHeader("Referer");
@@ -295,7 +296,7 @@ public class MainControllerImpl implements MainController {
 			mav = Alert.alertAndRedirect("주문자 정보를 받아오지 못 했습니다.", previousPage);
 			return mav;
 		}
-
+		System.out.println(mav);
 		return mav;
 	}
 	
