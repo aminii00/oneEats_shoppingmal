@@ -15,22 +15,26 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 검색창 -->
-    <form method="post" action="#">
+    <form method="post" action="${contextPath}/admin/coupon/adminCouponList.do">
       <div class="div-p">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           쿠폰목록
         </p>
         <div class="div-sib textsize-1">
-          <select name="search-1">
-            <option value="전체">전체</option>
-            <option value="쿠폰등록일">쿠폰등록일</option>
-            <option value="쿠폰명">쿠폰명</option>
-            <option value="사용처">사용처</option>
+          <select name="coupon_search_type">
+            <option value="all">전체</option>
+            <option value="couponNo">쿠폰번호</option>
+            <option value="name">쿠폰명</option>
+            <option value="memberName">사용처</option>
           </select>
-          <input type="text" name="search-2" placeholder="search.." />
+          <input
+            type="search"
+            name="coupon_search_word"
+            placeholder="search.."
+          />
           <button
             class="btn-1 textcolor-white border-0 bg-lightgreen"
-            type="button"
+            type="submit"
           >
             검색
           </button>
@@ -81,66 +85,54 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </button>
 
     <!-- 페이징 -->
-    <%--
-    <!--    <div> 페이징처리
-        <c:if test="${totArticles != null}"
-            <c:choose>
-            <c:when test="${totArticles > 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <c:if test="${section > 1 && page == 1}">
-                    <a href="#">&nbsp:prev</a>
-                    </c:if>
-                    <a href="#"></a>
-                    <c:if test="${page == 10}">
-                    <a href="#">&nbsp:next</a>
-                    </c:if>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles == 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <a href="#">${page}</a>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles < 100}">
-                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
-                <c:choose>
-                    <c:when test="${page == pageNum}">
-                    <a href="#">${page}</a>
-                    </c:when>
-                    <c:otherwise>
-                    <a href="#">${page}</a>
-                    </c:otherwise>
-                </c:choose>
-                </c:foreach>
-            </c:when>
-            </c:choose>
-        </c:if>
-        </div> 
--->
-    --%>
     <div>
       <ul class="ul-li">
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              class="img-2"
-              src="${contextPath}/img/icon/prev.png"
-              alt="prev"
-            />
-          </button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">1</button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              class="img-2"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/coupon/adminCouponList.do?section=${section-1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </a>
+          </li>
+        </c:if>
+        <c:set
+          var="end"
+          value="${Math.ceil((totalCouponNum - (section-1)*100)/ 10)}"
+        />
+        <c:if test="${end>10}">
+          <c:set var="end" value="10" />
+        </c:if>
+        <c:forEach begin="1" end="${end}" var="i">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/coupon/adminCouponList.do?section=${section}&pageNum=${i}"
+              class="btn-2 btn-square bg-white btn-border"
+              >${((section-1)*10)+i}</a
+            >
+          </li>
+        </c:forEach>
+        <c:if test="${section*100<totalCouponNum}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/coupon/adminCouponList.do?section=${section+1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </a>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>

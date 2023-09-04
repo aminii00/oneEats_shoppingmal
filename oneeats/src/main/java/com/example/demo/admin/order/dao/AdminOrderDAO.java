@@ -1,6 +1,7 @@
 package com.example.demo.admin.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -18,10 +19,8 @@ public interface AdminOrderDAO {
 
 	void updateDeliveryStatusToCancel(int order_seqNo);
 
-	List<OrderVO> selectOrderByMemberType();
-	
-//	public List<OrderVO> selectOrderList(Map pagingMap);
-//
-//	public List<Map> countOrderNums();
+	int selectTotalOrderNum();
+
+	List<OrderVO> selectOrderByMemberType(Map pagingMap);
 
 }

@@ -3,7 +3,9 @@ package com.example.demo.admin.coupon.controller;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.admin.coupon.service.AdminCouponService;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.MemberVO;
 
@@ -30,15 +33,44 @@ public class AdminCouponControlllerImpl implements AdminCouponController {
 	public ModelAndView adminCouponList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 adminCouponList");
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
-			
-		List<CouponVO> adminCouponList = adminCouponService.selectAdminCouponByMemberNo(memberNo);
+		
+		String _section = request.getParameter("section");
+		String _pageNum = request.getParameter("pageNum");
+		String coupon_search_type = request.getParameter("coupon_search_type");
+		int pageNum;
+		int section;
+		if (_pageNum == null || _pageNum.length() <= 0) {
+			pageNum = 1;
+		} else {
+			pageNum = Integer.parseInt(_pageNum);
+		}
+		if (_section == null || _section.length() <= 0) {
+			section = 1;
+		} else {
+			section = Integer.parseInt(_section);
+		}
+		if (coupon_search_type != null && coupon_search_type.length() < 1) {
+			coupon_search_type = "all";
+		}
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		pagingMap.put("section", section);
+		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("coupon_search_type", coupon_search_type);
+		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+		pagingMap.put("memberNo", memberNo);
+		
+		List<CouponVO> adminCouponList = adminCouponService.selectAdminCouponByMemberNo(pagingMap);
+		int totalCouponNum = adminCouponService.selectTotalCouponNum(memberNo);
+		
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addAllObjects(pagingMap);
 		mav.addObject("adminCouponList", adminCouponList);
+		mav.addObject("totalCouponNum", totalCouponNum);
+		System.out.println("totalCouponNum="+totalCouponNum);
 		System.out.println(mav);
 		return mav;
 	}

@@ -40,6 +40,10 @@ public interface SellerHotDealService {
 	
 	//수정
 	public void updateSellerHotDeal(HotDealVO sellerHotDeal);
+
+	public List<HotDealVO> selectSellerHotDealList(Map pagingMap);
+
+	public int selectTotalHotDealNum();
 	
 	
 }

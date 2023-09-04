@@ -122,8 +122,44 @@
 		order by creDate desc
 		limit #{start}, 10
 	</select>
+	
+	<select id="selectSellerHotDealList" resultMap="HotDealResult" parameterType="java.util.Map">
+		SELECT hotdeal.*, goods.goodsNo, goods.type
+		FROM hotdeal
+		INNER JOIN
+		goods ON goods.goodsNo = hotdeal.goodsNo
+		WHERE goods.type = '사업자'
+		
+		<choose>
+			<when test="hotdeal_search_type==null or hotdeal_search_type==''">
+				and 1=1
+			</when>
+			<when test="hotdeal_search_type=='all'">
+				and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
+				or hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
+			</when>
+			<otherwise>
+			 	<choose>
+			 		<when test="hotdeal_search_type=='creDate'">
+			 			and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
+			 		</when>
+			 		<when test="hotdeal_search_type=='name'">
+			 			and hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
+			 		</when>
+			 	</choose>
+			</otherwise>
+		</choose>
+			
+		order by creDate desc limit #{start},10
+	</select>
 
-
+	<select id="selectTotalHotDealNum" resultType="int">
+		<![CDATA[
+			SELECT count(*) from (select hotdeal.*, goods.type FROM hotdeal
+			INNER JOIN goods ON goods.goodsNo = hotdeal.goodsNo
+			WHERE goods.type = '사업자') t
+		]]>
+	</select>
 
 	<select id="countHotDealNums" resultType="java.util.Map">
 		select * from (
