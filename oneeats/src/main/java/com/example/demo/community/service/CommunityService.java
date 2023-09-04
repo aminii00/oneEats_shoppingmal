@@ -58,7 +58,7 @@ public interface CommunityService {
 	public int selectMostQnAListTotalNumWithCategory(String category);
 	
 	public int selectNoticeListTotalNumWithCategory(String category);
-	
-	public int selectOneQnAListTotalNumWithCategory();
+
+	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap);
 	
 }

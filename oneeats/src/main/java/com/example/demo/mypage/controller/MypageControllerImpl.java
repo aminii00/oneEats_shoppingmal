@@ -1,7 +1,7 @@
 package com.example.demo.mypage.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,28 +10,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.api.toss.dto.TossDTO;
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.mypage.service.MypageService;
-import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
-import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
-import com.example.demo.vo.OneQnAVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.PointHistoryVO;
-import com.example.demo.vo.ReviewVO;
 
 @Controller("mypageController")
 public class MypageControllerImpl implements MypageController {
@@ -41,37 +42,66 @@ public class MypageControllerImpl implements MypageController {
 	private OrderVO orderVO;
 	@Autowired
 	private MemberVO memberVO;
-
-	@Override
-	@RequestMapping(value = "/mypage/deleteMember.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView();
-		response.setContentType("html/text;charset=utf-8");
-		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		mypageService.deleteMember(member);
-		session.setAttribute("isLogOn", false);
-		mav = Alert.alertAndRedirect("탈퇴가 완료 되었습니다.", request.getContextPath() + "/main/mainPage.do");
-
-		return mav;
-	}
+	
+	
+		@Override
+		@RequestMapping(value = "/mypage/deleteMember.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView deleteMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			request.setCharacterEncoding("utf-8");
+			ModelAndView mav = new ModelAndView();
+			response.setContentType("html/text;charset=utf-8");
+			HttpSession session = request.getSession();
+			MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+			mypageService.deleteMember(member);
+			session.setAttribute("isLogOn", false);
+			mav = Alert.alertAndRedirect("탈퇴가 완료 되었습니다.", request.getContextPath() + "/main/mainPage.do");
+			
+			return mav;
+		}
 
 	@Override
 	@RequestMapping(value = "/mypage/orderList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderList");
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
+		
+		
 
 		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(memberNo);
+		System.out.println("orderList="+orderList);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("orderList", orderList);
-
 		System.out.println(mav);
+		return mav;
+	}
+	
+	@RequestMapping(value = "/mypage/orderSearch.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView orderSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 orderSearch");
+		request.setCharacterEncoding("utf-8");
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int memberNo = member.getMemberNo();
+		String viewName = (String) request.getAttribute("viewName");
+		String orderSearchType = request.getParameter("orderSearchType");
+		System.out.println("orderSearchType="+orderSearchType);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("orderSearchType", orderSearchType);
+		map.put("memberNo", memberNo);
+		System.out.println("map="+map);
+		
+		List<Map> orderSearch = mypageService.selectOrderBySearchType(map);
+		System.out.println("orderSearch="+orderSearch);
+		request.setAttribute("orderList", orderSearch);
+		
+		ModelAndView mav = new ModelAndView("/mypage/orderList");
 		return mav;
 	}
 
@@ -146,6 +176,7 @@ public class MypageControllerImpl implements MypageController {
 
 		return mav;
 	}
+	
 
 	@Override
 	@RequestMapping(value = "/mypage/newOrder.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -154,52 +185,39 @@ public class MypageControllerImpl implements MypageController {
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = member.getMemberNo();
-
-		int orderNo = mypageService.selectNewOrderNo();
-		String orderer_name = request.getParameter("orderer_name");
-		String orderer_phone = request.getParameter("orderer_phone");
-		String receiver_name = request.getParameter("receiver_name");
-		String receiver_address = request.getParameter("receiver_address");
-		String receiver_addressDetail = request.getParameter("receiver_addressDetail");
-		String receiver_phone = request.getParameter("receiver_phone");
-		String receiver_comment = request.getParameter("receiver_comment");
-		String used_point = request.getParameter("used_point");
-		String used_couponId = request.getParameter("used_couponId");
-		String point_price = request.getParameter("point_price");
-		String total_price = request.getParameter("total_price");
-		String payment_type = request.getParameter("payment_type");
-
-		List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
-		List<OrderVO> orderList = new ArrayList();
-		System.out.println("selectGoodsList" + selectGoodsList);
-		for (int i = 0; i < selectGoodsList.size(); i++) {
-			OrderVO temp = selectGoodsList.get(i);
-			temp.setOrderNo(orderNo);
-			temp.setOrderer_name(orderer_name);
-			temp.setOrderer_phone(orderer_phone);
-			temp.setReceiver_name(receiver_name);
-			temp.setReceiver_address(receiver_address + "&nbsp" + receiver_addressDetail);
-			temp.setReceiver_phone(receiver_phone);
-			temp.setReceiver_comment(receiver_comment);
-			temp.setUsed_point(Integer.parseInt(used_point));
-			temp.setUsed_couponId(Integer.parseInt(used_couponId));
-			temp.setPoint_price(Integer.parseInt(point_price));
-			temp.setTotal_price(Integer.parseInt(total_price));
-			temp.setPayment_type(payment_type);
-			temp.setMemberNo(memberNo);
-
-			orderList.add(temp);
-		}
+		ModelAndView mav = new ModelAndView();
 
 		try {
-			mypageService.insertOrderList(orderList);
+			Map payInfoMap = new HashMap();
+			int memberNo = member.getMemberNo();
+			int orderNo = (int) session.getAttribute("tempOrderNo");
+			TossDTO tossInfo = (TossDTO) session.getAttribute("tossInfo");
+			String payment_type = tossInfo.getPaymentType();
+			long totalAmount = tossInfo.getTotalAmount();
+			String json_data = tossInfo.getJson_data();
+			payInfoMap.put("json_data", json_data);
+			payInfoMap.put("memberNo", memberNo);
+			payInfoMap.put("orderNo", orderNo);
+			OrderVO tempOrder = mypageService.selectTempOrder(payInfoMap);
+			
+			int used_point = tempOrder.getUsed_point();
+			payInfoMap.put("used_point", used_point);
+			
+			payInfoMap.put("payment_type", payment_type);
+			payInfoMap.put("total_price", totalAmount);
+			
+			
+			mypageService.updateTempOrderList(payInfoMap);
+			
+			mav = new ModelAndView("redirect:/mypage/orderList.do");
+			session.removeAttribute("cartList");
+			session.removeAttribute("selectGoodsList");
+			session.removeAttribute("tempOrderNo");
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav = Alert.alertAndRedirect("오류가 발생하였습니다.", "redirect:/mypage/orderConfirm.do");
 		}
-		session.removeAttribute("cartList");
 
-		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}
 
@@ -219,6 +237,22 @@ public class MypageControllerImpl implements MypageController {
 		mav.addObject("orderCancel", orderCancel);
 		mav.addObject("order", orderVO);
 		session.setAttribute("orderCancel", orderCancel);
+
+		
+		String order_tossData = mypageService.selectTossApiByOrderNo(orderNo);
+		JSONParser parser = new JSONParser();
+		String paymentKey = "";
+		try {
+		    JSONObject tossJsonData = (JSONObject) parser.parse(order_tossData);
+		    TossDTO tossInfo = new TossDTO(tossJsonData);
+		    paymentKey = tossInfo.getPaymentKey();
+		    mav.addObject("paymentKey", paymentKey);
+		    
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		
+		
 		return mav;
 	}
 
@@ -226,24 +260,16 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView orderCancelResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderCancelResult");
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = member.getMemberNo();
-		String viewName = (String) request.getAttribute("viewName");
 		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
-		String delivery_status = request.getParameter("delivery_status");
-
+		
 		int[] order_seqNos = mypageService.selectSeqNoByOrderNo(orderNo);
 		for (int order_seqNo : order_seqNos) {
 			mypageService.updateDeliveryStatusToCancel(order_seqNo);
 		}
-
-		int firstOrderSeqNo = order_seqNos.length > 0 ? order_seqNos[0] : 0;
-		mypageService.updateDeliveryStatusToCancel(firstOrderSeqNo);
-
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
-	}
+	}	
 
 	@Override
 	@RequestMapping(value = "/mypage/myPageMain.do", method = { RequestMethod.GET, RequestMethod.POST })
@@ -308,46 +334,18 @@ public class MypageControllerImpl implements MypageController {
 
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = memberInfo.getMemberNo();
 		System.out.println("memberInfo = " + memberInfo);
-		// List bookList = mypageService.selectBookList(memberInfo);
-
+		List bookList = mypageService.selectBookList(memberInfo);
+		
+		System.out.println(bookList);
 		ModelAndView mav = new ModelAndView();
-		request.setCharacterEncoding("utf-8");
-		Map pagingMap = GeneralFileUploader.getParameterMap(request);
-		String pageNum = (String) pagingMap.get("pageNum");
-		String section = (String) pagingMap.get("section");
-		if (pageNum == null || pageNum.trim().length() < 1) {
-			pageNum = "1";
-			pagingMap.put("pageNum", pageNum);
-		}
-		if (section == null || section.trim().length() < 1) {
-			section = "1";
-			pagingMap.put("section", section);
-		}
-
-		try {
-			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 10;
-			pagingMap.put("start", start);
-			pagingMap.put("memberNo", memberNo);
-			List<BookmarkVO> bookList = mypageService.selectBookListWithPagingMap(pagingMap);
-			mav.addAllObjects(pagingMap);
-			mav.addObject("bookList", bookList);
-			System.out.println("bookList = " + bookList);
-			int totalBookListNum = mypageService.selectBookListTotalNum(memberNo);
-			mav.addObject("totalBookListNum", totalBookListNum);
-
-			System.out.println(mav);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		mav.addObject("bookList", bookList);
 		mav.setViewName(viewName);
 		System.out.println(mav);
 		return mav;
 	}
 
-	// 민아 찜 삭제하기
+	// 민아 찜 삭제하기(진행중 ...)
 	@Override
 	@RequestMapping(value = "/mypage/deleteBook.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView deleteBook(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -356,7 +354,7 @@ public class MypageControllerImpl implements MypageController {
 		String goodsNo_ = request.getParameter("goodsNo");
 		int goodsNo = Integer.parseInt(goodsNo_);
 		mypageService.removeBookMark(goodsNo);
-		ModelAndView mav = new ModelAndView("redirect:/mypage/mypageBookmarkList.do");
+		ModelAndView mav = new ModelAndView("redirect:/mypage/bookmarkList.do");
 		return mav;
 	}
 
@@ -366,71 +364,17 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView couponSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 Controller couponSearch.do");
 		request.setCharacterEncoding("utf-8");
-		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = memberInfo.getMemberNo();
 		System.out.println("memberInfo = " + memberInfo);
-
-		Map pagingMap = GeneralFileUploader.getParameterMap(request);
-		Map pagingMap1 = GeneralFileUploader.getParameterMap(request);
-		String pageNum = (String) pagingMap.get("pageNum");
-		String section = (String) pagingMap.get("section");
-		String pageNum1 = (String) pagingMap.get("pageNum1");
-		String section1 = (String) pagingMap.get("section1");
-		if (pageNum == null || pageNum.trim().length() < 1) {
-			pageNum = "1";
-			pagingMap.put("pageNum", pageNum);
-		}
-		if (section == null || section.trim().length() < 1) {
-			section = "1";
-			pagingMap.put("section", section);
-		}
-		if (pageNum1 == null || pageNum1.trim().length() < 1) {
-			pageNum1 = "1";
-			pagingMap.put("pageNum1", pageNum1);
-		}
-		if (section1 == null || section1.trim().length() < 1) {
-			section1 = "1";
-			pagingMap.put("section1", section1);
-		}
-
-		try {
-			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 10;
-			pagingMap.put("start", start);
-			pagingMap.put("memberNo", memberNo);
-			pagingMap1.put("start", start);
-			pagingMap1.put("memberNo", memberNo);
-			// List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); 쿠폰List
-			List<CouponVO> couponDetail = mypageService.selectCouponListWithPagingMap(pagingMap);
-			System.out.println("couponDetail = " + couponDetail);
-			int totalCouponListNum = mypageService.selectCouponListTotalNum(memberNo);
-
-			// List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); 적립금
-			// List
-			List<PointHistoryVO> pointDetail = mypageService.selectPointListWithPagingMap(pagingMap1);
-			int totalPointListNum = mypageService.selectPointListTotalNum(memberNo);
-			System.out.println("pointDetail = " + pointDetail);
-
-			mav.addAllObjects(pagingMap);
-			mav.addAllObjects(pagingMap1);
-			mav.addObject("couponDetail", couponDetail);
-			mav.addObject("pointDetail", pointDetail);
-			mav.addObject("totalCouponListNum", totalCouponListNum);
-			mav.addObject("totalPointListNum", totalPointListNum);
-			System.out.println(mav);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		/*
-		 * List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); //
-		 * 적립금 List System.out.println("pointDetail = " + pointDetail);
-		 * mav.addObject("couponDetail", couponDetail); mav.addObject("pointDetail",
-		 * pointDetail);
-		 */
-
+		List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); //쿠폰List
+		System.out.println("couponDetail = " + couponDetail);
+		
+		List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); // 적립금 List
+		System.out.println("pointDetail = " + pointDetail);
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("couponDetail", couponDetail);
+		mav.addObject("pointDetail", pointDetail);
 		mav.setViewName("/mypage/mypageCouponPoint");
 		return mav;
 	}
@@ -443,13 +387,13 @@ public class MypageControllerImpl implements MypageController {
 		ModelAndView mav = new ModelAndView();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = memberInfo.getMemberNo();
-
+		
 		String couponCode = request.getParameter("couponCode");
-		if (couponCode.isEmpty()) {
+		if(couponCode.isEmpty()) {
 			mav = Alert.alertAndRedirect("쿠폰번호를 입력해주세요.", request.getContextPath() + "/mypage/couponSearch.do");
 			return mav;
 		}
-		System.out.println("couponCode = " + couponCode);
+		System.out.println("couponCode = "+couponCode);
 		CouponVO couponVO = mypageService.couponNum(couponCode);
 		System.out.println("couponVO = " + couponVO);
 		if (couponVO == null) {
@@ -486,7 +430,6 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName("/mypage/mypageAddress");
 		return mav;
 	}
-
 	@Override
 	@RequestMapping(value = "/mypage/deleteAddress.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView deleteAddress(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -499,7 +442,7 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName("redirect:/mypage/myAddress.do");
 		return mav;
 	}
-
+	
 	@Override
 	@RequestMapping(value = "/mypage/bookCart.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView bookCart(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -508,11 +451,107 @@ public class MypageControllerImpl implements MypageController {
 		ModelAndView mav = new ModelAndView();
 		String goodsNo_ = request.getParameter("goodsNo");
 		int goodsNo = Integer.parseInt(goodsNo_);
-
+	
 		mav.setViewName("redirect:/mypage/myAddress.do");
 		return mav;
 	}
 
+
+	@RequestMapping(value = "/mypage/addAddress.do")
+	public ModelAndView addAddress(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		request.setCharacterEncoding("utf-8");
+		Map condMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		
+		try {
+			int memberNo = member.getMemberNo();
+			condMap.put("memberNo", memberNo);
+			
+			mypageService.insertAddressWithMap(condMap);
+			mav = Alert.alertAndRedirect("주소지를 추가했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav = Alert.alertAndRedirect("배송지를 추가하지 못 했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		}
+		
+		return mav;
+	}
+	
+	
+	@RequestMapping(value = "/mypage/modAddress.do")
+	public ModelAndView modAddress(HttpServletRequest request) throws IOException {
+		ModelAndView mav = new ModelAndView();
+		request.setCharacterEncoding("utf-8");
+		Map condMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		try {
+			int memberNo = member.getMemberNo();
+			condMap.put("memberNo", memberNo);
+			String isBasicAddress = (String) condMap.get("isBasicAddress");
+			
+			// 기본 배송지로 설정을 눌렀을 때. 수정 폼에 넣은 주소지가 가장 작은 deliveryNo을 가지게 한다.
+			// 가장 작은 deliveryNo을 가진 배송지를 찾아내서 -> 그 배송지와 deliveryNo을 교환하는 방식.
+			// member 테이블에 해당하는 배송지 정보도 넣는다.
+			if (isBasicAddress != null && isBasicAddress.equals("yes")) {
+				String _deliveryNo = (String) condMap.get("deliveryNo");
+				int deliveryNo = Integer.parseInt(_deliveryNo);
+				List<DeliveryAddressVO> addressList = mypageService.myAddress(memberNo);
+				int idx = -1;
+				int minDeliveryNo = deliveryNo;
+				for (int i = 0; i < addressList.size(); i++) {
+					DeliveryAddressVO temp = addressList.get(i);
+					if (minDeliveryNo>temp.getDeliveryNo()) {
+						minDeliveryNo = temp.getDeliveryNo();
+						idx = i;
+					}
+				}
+				if (idx<0) {
+					mypageService.updateDeliveryAddressWithMap(condMap);
+					mypageService.updateMemberAddressWithMap(condMap);
+				}else {
+					condMap.put("deliveryNo", minDeliveryNo);
+					DeliveryAddressVO targetDeliveryAddress = addressList.get(idx);
+					targetDeliveryAddress.setDeliveryNo(deliveryNo);
+					mypageService.swapDeliveryAddress(condMap,targetDeliveryAddress);
+				}
+				
+			}else {
+				mypageService.updateDeliveryAddressWithMap(condMap);				
+			}
+			mav = Alert.alertAndRedirect("수정했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav = Alert.alertAndRedirect("수정하지 못 했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		}
+		return mav;
+		
+	}
+	
+	@RequestMapping("/mypage/deleteAddress.do")
+	public ModelAndView deleteDeliveryAddress(@RequestParam("deliveryNo") int deliveryNo,  HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		HttpSession session = request.getSession();
+		try {
+			MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+			int memberNo = member.getMemberNo();
+			Map condMap = new HashMap();
+			condMap.put("deliveryNo", deliveryNo);
+			condMap.put("memberNo", memberNo);
+			mypageService.deleteDeliveryAddressWithMap(condMap);
+			mav = Alert.alertAndRedirect("삭제했습니다.", request.getContextPath()+"/mypage/myAddress.do");
+		} catch (Exception e) {
+			mav = Alert.alertAndRedirect("삭제하지 못했습니다.", request.getContextPath() +"/mypage/myAddress.do");
+		}
+		
+		return mav;
+	}
+	
+	
 	@RequestMapping(value = "/mypage/*Form.do", method = { RequestMethod.GET, RequestMethod.POST })
 	private ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("*Form.do");
@@ -532,6 +571,11 @@ public class MypageControllerImpl implements MypageController {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		String id = memberInfo.getId();
 		ModelAndView mav = new ModelAndView();
+		boolean isSNSMember = mypageService.isSNSMember(memberInfo);
+		if (isSNSMember) {
+			mav.setViewName("/mypage/mypageMemberInfoModForm");
+			return mav;
+		}
 		mav.addObject("id", id);
 		mav.setViewName("/mypage/mypageMemberModForm");
 		return mav;
@@ -541,7 +585,6 @@ public class MypageControllerImpl implements MypageController {
 	@Override
 	@RequestMapping(value = "/mypage/mypageMemberModInfo.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("여기는 Controller myAddress.do");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
@@ -549,7 +592,6 @@ public class MypageControllerImpl implements MypageController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(inputPwd + ", " + memberInfo.getPwd());
 		if (memberInfo.getPwd().equals(inputPwd)) {
-			mav.addObject("memberInfo", memberInfo);
 			mav.setViewName("/mypage/mypageMemberInfoModForm");
 		} else {
 			mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요",
@@ -602,6 +644,61 @@ public class MypageControllerImpl implements MypageController {
 		mav.addObject("writeReview", writeReview);
 		mav.setViewName("/mypage/mypageReview");
 		return mav;
+	}
+
+	// ajax로 주문자 정보나 사용한 쿠폰 id를 db에 저장해놓기 위한 코드
+	@ResponseBody
+	@PostMapping(value = "/storeOrderInfo.do")
+	public String storeOrderInfo(HttpServletRequest request) {
+		String result = "";
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int orderNo = mypageService.selectNewOrderNo();
+		try {
+			int memberNo = member.getMemberNo();
+			String orderer_name = request.getParameter("orderer_name");
+			String orderer_phone = request.getParameter("orderer_phone");
+			String receiver_name = request.getParameter("receiver_name");
+			String receiver_address = request.getParameter("receiver_address");
+			String receiver_addressDetail = request.getParameter("receiver_addressDetail");
+			String receiver_phone = request.getParameter("receiver_phone");
+			String receiver_comment = request.getParameter("receiver_comment");
+			String used_point = request.getParameter("used_point");
+			String used_couponId = request.getParameter("used_couponId");
+			String point_price = request.getParameter("point_price");
+			String total_price = request.getParameter("total_price");
+
+			List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+			List<OrderVO> orderList = new ArrayList();
+			System.out.println("selectGoodsList" + selectGoodsList);
+			for (int i = 0; i < selectGoodsList.size(); i++) {
+				OrderVO temp = selectGoodsList.get(i);
+				temp.setOrderNo(orderNo);
+				temp.setOrderer_name(orderer_name);
+				temp.setOrderer_phone(orderer_phone);
+				temp.setReceiver_name(receiver_name);
+				temp.setReceiver_address(receiver_address + "&nbsp" + receiver_addressDetail);
+				temp.setReceiver_phone(receiver_phone);
+				temp.setReceiver_comment(receiver_comment);
+				temp.setUsed_point(Integer.parseInt(used_point));
+				temp.setUsed_couponId(Integer.parseInt(used_couponId));
+				temp.setPoint_price(Integer.parseInt(point_price));
+				temp.setTotal_price(Integer.parseInt(total_price));
+				temp.setMemberNo(memberNo);
+
+				orderList.add(temp);
+			}
+			// 일단 데이터베이스에 저장해뒀다가 결제가 완료되면 다시 끌고 옴
+			mypageService.insertTempOrderList(orderList);
+			session.setAttribute("tempOrderNo", orderNo);
+			result = "success";
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return result;
+
 	}
 
 }

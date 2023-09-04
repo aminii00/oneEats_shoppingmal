@@ -89,6 +89,7 @@
 		<result property="expDate" column="expDate" />
 		<result property="creDate" column="creDate" />
 		<result property="memberNo" column="memberNo" />
+		<result property="couponCode" column="couponCode" />
 	</resultMap>
 
 	<resultMap id="OrderResult" type="orderVO">
@@ -198,7 +199,10 @@
 	<select id="selectCouponByMemberNo" resultMap="CouponResult"
 		parameterType="int">
 		<![CDATA[
-			select * from coupon where memberNo=#{memberNo}
+			select c.* from coupon c
+inner join member_coupon m
+on c.couponNo=m.couponNo
+where m.memberNo=#{memberNo}
 		]]>
 	</select>
 
@@ -220,26 +224,30 @@
 	</select>
 
 	<select id="selectNewHotDealList" resultMap="HotDealResult">
-		select
-		h.hotdealNo,
-		h.name,
-		h.discounted_price,
-		h.goods_qty,
-		h.finishDate,
-		h.description,
-		h.creDate,
-		g.goodsNo,
-		g.price as goodsPrice,
-		g.category as category,
-		g.name as goodsName,
-		g.img1 as goodsImg
-		from hotdeal as h
-		inner join
-		goods as g
-		on
-		h.goodsNo=g.goodsNo
-		order by h.creDate desc
-		limit 6
+	SELECT
+    h.hotdealNo,
+    h.name,
+    h.discounted_price,
+    h.goods_qty,
+    h.finishDate,
+    h.description,
+    h.creDate,
+    g.goodsNo,
+    g.price AS goodsPrice,
+    g.category AS category,
+    g.name AS goodsName,
+    g.img1 AS goodsImg
+FROM
+    hotdeal AS h
+INNER JOIN
+    goods AS g
+ON
+    h.goodsNo = g.goodsNo
+WHERE
+    h.finishDate > Now()
+ORDER BY
+    h.creDate DESC
+LIMIT 6;
 	</select>
 
 	<select id="selectNewRecipeList" resultMap="RecipeResult">
@@ -285,7 +293,8 @@
 		goodsNo,
 		goods.name as goodsName,
 		goods.img1 as goodsImg, goods.price
-		as goodsPrice from `option`
+		as
+		goodsPrice from `option`
 		inner
 		join goods
 		on `option`.goodsNo =

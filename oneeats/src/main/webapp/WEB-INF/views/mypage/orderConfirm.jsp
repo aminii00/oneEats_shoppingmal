@@ -73,7 +73,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   </head>
   <body>
     <!-- 주문/결제 -->
-    <form method="post" action="${contextPath}/mypage/newOrder.do">
+    <form
+      method="post"
+      action="${contextPath}/mypage/newOrder.do"
+      id="orderForm"
+    >
       <div class="div-p">
         <p class="p-1 extsize-2 text-left textcolor-black textbold">
           주문/결제
@@ -180,7 +184,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>사용적립금</td>
           <td>
-            <input type="text" id="used_point" name="used_point" value="0" />
+            <input
+              type="number"
+              id="used_point"
+              name="used_point"
+              min="0"
+              max="${memberInfo.point}"
+              value="0"
+            />
           </td>
         </tr>
 
@@ -292,6 +303,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <button
           class="btn-1 btn-regular bg-lightgreen textcolor-white textbold border-0"
           id="payment-request-button"
+          onclick="fn_sendOrderInfo('${contextPath}')"
           type="button"
         >
           결제하기
@@ -304,7 +316,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       const paymentWidget = PaymentWidget(
         "test_ck_kYG57Eba3GZb4JRkMzQ8pWDOxmA1",
         // 비회원 customerKey
-        "${memberInfo.memberNo}"
+        PaymentWidget.ANONYMOUS
       );
 
       /**
@@ -317,23 +329,37 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         country: "KR",
       });
 
-      const paymentRequestButton = document.getElementById(
-        "payment-request-button"
-      );
-      paymentRequestButton.addEventListener("click", () => {
-        /** 결제 요청
-         * @docs https://docs.tosspayments.com/reference/widget-sdk#requestpayment%EA%B2%B0%EC%A0%9C-%EC%A0%95%EB%B3%B4
-         */
+      function fn_sendOrderInfo(contextPath) {
+        var formData = $("#orderForm").serialize();
 
-        // 여기에 주문자정보를 일단 넣어두는 코드를 적어야
+        $.ajax({
+          type: "POST",
+          url: contextPath + "/storeOrderInfo.do",
+          data: formData,
+          success: function (response) {
+            if (response == "success") {
+              alert("저장되었습니다.");
+              fn_requestPayment();
+            } else {
+              alert("주문정보를 저장하지 못 했습니다.");
+            }
+          },
+          error: function (response) {
+            alert("원인불명의 에러");
+            console.log(response);
+          },
+        });
+      }
 
+      function fn_requestPayment() {
         paymentWidget.requestPayment({
           orderId: generateRandomString(),
           orderName: "테스트 주문",
           successUrl: window.location.origin + "/toss/orderSuccess.do",
           failUrl: window.location.origin + "/toss/orderFail.do",
+          customerName: "${memberInfo.name}",
         });
-      });
+      }
 
       function generateRandomString() {
         return window.btoa(Math.random()).slice(0, 20);

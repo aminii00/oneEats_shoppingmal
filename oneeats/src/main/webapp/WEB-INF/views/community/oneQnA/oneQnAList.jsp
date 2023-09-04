@@ -81,7 +81,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </c:if>
           <c:set
             var="end"
-            value="${Math.ceil((totalOneQnAQnANum - (section-1)*100) div 10)}"
+            value="${Math.ceil((totalOneQnANum - (section-1)*100) div 10)}"
           />
           <c:if test="${end>10}">
             <c:set var="end" value="10" />
@@ -95,7 +95,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               >
             </li>
           </c:forEach>
-          <c:if test="${section*100<totalOneQnAQnANum}">
+          <c:if test="${section*100<totalOneQnANum}">
             <li class="li-btn">
               <a
                 href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section+1}&pageNum=1"

@@ -176,13 +176,6 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		
 	}
 	
-	
-	
-	// 북샵 따라해보기
-	// @Override
-	// public void modifyGoodsInfo(Map goodsMap) throws Exception{
-	// sellerGoodsDAO.updateGoodsInfo(goodsMap);
 
-	// }
 
 }
