@@ -2,6 +2,7 @@ package com.example.demo.goods.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +116,10 @@ public class GoodsControllerImpl implements GoodsController {
 
 		mav.addAllObjects(pagingMap);
 		System.out.println(mav);
+
+		int maxPrice = goodsService.selectMaxPrice(pagingMap);
+		mav.addObject("maxPrice", maxPrice);
+
 		return mav;
 	}
 
@@ -277,6 +282,10 @@ public class GoodsControllerImpl implements GoodsController {
 
 		mav.addAllObjects(searchMap);
 		System.out.println(mav);
+
+		int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
+		mav.addObject("maxPrice", maxPrice);
+
 		return mav;
 	}
 }

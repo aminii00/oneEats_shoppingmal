@@ -110,6 +110,17 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<ReviewVO> selectReviewsWithPagingMap(Map pagingMap) {
 		
 		return goodsDAO.selectReviewsWithPagingMap(pagingMap);
+	}
+
+	@Override
+	public int selectMaxPrice(Map pagingMap) {
+		return goodsDAO.selectMaxPrice(pagingMap);
+	}
+
+	@Override
+	public int selectMaxPriceWithSearchFilter(Map searchMap) {
+		
+		return goodsDAO.selectMaxPriceWithSearchFilter(searchMap);
 	};
 	
 	
