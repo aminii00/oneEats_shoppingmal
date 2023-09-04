@@ -39,7 +39,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th>상품번호</th>
         <th>등록일</th>
         <th>상품명</th>
-        <th>핫딜 등록</th>
+        <th style="text-align: right">핫딜 등록</th>
 
         <th style="text-align: right">수정</th>
         <th style="text-align: right">삭제</th>
@@ -124,6 +124,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           />
           <c:set var="endPage" value="${Math.ceil(result)}" />
         </c:if>
+
         <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
             <button

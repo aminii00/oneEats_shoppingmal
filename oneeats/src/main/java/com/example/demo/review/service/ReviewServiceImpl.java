@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.review.dao.ReviewDAO;
 import com.example.demo.vo.GoodsVO;
-import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.ReviewVO;
 
 @Service("reviewService")
@@ -14,9 +13,9 @@ public class ReviewServiceImpl implements ReviewService{
 	private ReviewDAO reviewDAO;
 	
 	@Override
-	public OrderVO SearchGoods(OrderVO order) {
-		OrderVO orderVO = reviewDAO.SearchGoods(order);
-		return orderVO;
+	public GoodsVO SearchGoods(GoodsVO goodsVO) {
+		GoodsVO goods = reviewDAO.SearchGoods(goodsVO);
+		return goods;
 	}
 	@Override
 	public int newReviewNo() {

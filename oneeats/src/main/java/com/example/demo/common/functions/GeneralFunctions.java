@@ -79,5 +79,35 @@ public class GeneralFunctions {
 		query = query.substring(1);
 		return query;
 	}
+	
+	
+	public static Map getPagingMap(Map map,int elNumForPage) throws Exception {
+		String _pageNum = (String) map.get("pageNum");
+		String _section = (String) map.get("section");
+		String category = (String) map.get("category");
+		
+		
+		if (_pageNum==null||_pageNum.trim().length()<1) {
+			_pageNum = "1";
+		}
+		if (_section==null || _section.trim().length()<1) {
+			_section = "1";
+		}
+		if (category==null) {
+			category="";
+		}
+		
+		int start = ((Integer.parseInt(_section) - 1) + Integer.parseInt(_pageNum) - 1) * elNumForPage;
+		
+		map.put("section", _section);
+		map.put("pageNum", _pageNum);
+		map.put("category", category);
+		map.put("start", start);
+		
+		return map;
+	}
 
+	public static Map getPagingMap(Map map) throws Exception{
+		return getPagingMap(map,10);
+	}
 }

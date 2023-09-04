@@ -15,6 +15,27 @@ public class CouponVO {
 	private int memberNo;
 	private String memberName;
 	private String couponCode;
+	
+	
+	public String getCouponCode() {
+		return couponCode;
+	}
+	public void setCouponCode(String couponCode) {
+		this.couponCode = couponCode;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public int getCouponNo() {
 		return couponNo;
 	}
@@ -51,32 +72,12 @@ public class CouponVO {
 	public void setCreDate(Date creDate) {
 		this.creDate = creDate;
 	}
-	public int getMemberNo() {
-		return memberNo;
-	}
-	public void setMemberNo(int memberNo) {
-		this.memberNo = memberNo;
-	}
-	public String getMemberName() {
-		return memberName;
-	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
-	}
-	public String getCouponCode() {
-		return couponCode;
-	}
-	public void setCouponCode(String couponCode) {
-		this.couponCode = couponCode;
-	}
+	
 	@Override
 	public String toString() {
 		return "CouponVO [couponNo=" + couponNo + ", name=" + name + ", discount_price=" + discount_price
 				+ ", condition=" + condition + ", expDate=" + expDate + ", creDate=" + creDate + ", memberNo="
 				+ memberNo + ", memberName=" + memberName + ", couponCode=" + couponCode + "]";
 	}
-	
-	
-	
 	
 }

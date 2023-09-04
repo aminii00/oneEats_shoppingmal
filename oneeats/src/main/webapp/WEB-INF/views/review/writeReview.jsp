@@ -16,45 +16,12 @@
 <title>프로필 편집</title>
 <style>
 
-.myform fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-    border: 0; /* 필드셋 테두리 제거 */
-}
-.myform input[type=radio]{
-    display: none; /* 라디오박스 감춤 */
-}
-.myform label{
-    font-size: 2em; /* 이모지 크기 */
-    color: transparent; /* 기존 이모지 컬러 제거 */
-    text-shadow: 0 0 0 yellow; /* 새 이모지 색상 부여 */
-}
-
-.myform label:hover{
-    text-shadow: 0 0 0 yellow; /* 마우스 호버 */
-}
-.myform label:hover ~ label{
-    text-shadow: 0 0 0 yellow; /* 마우스 호버 뒤에오는 이모지들 */
-}
-
-.myform fieldset{
-    display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-    direction: rtl; /* 이모지 순서 반전 */ 
-    border: 0; /* 필드셋 테두리 제거 */
-}
-
-.myform fieldset legend{
-    text-align: left;
-}
-
-.myform input[type=radio]:checked + label{
-    text-shadow: 0 0 0 orange; /* 마우스 클릭 체크 */
-}
 
 </style>
 
 </head>
 <body>
-    <form action="${contextPath}/review/reviewInsert.do?goodsNo=${order.goodsNo}" method="post" enctype="multipart/form-data">
+    <form action="${contextPath}/review/reviewInsert.do?goodsNo=${goods.goodsNo}" method="post" enctype="multipart/form-data">
     <div class="content-area">
         <div class="profile-edit-box">
             <div class="profile-edit-header">
@@ -66,28 +33,19 @@
                 <div class="text-center" style="padding: 0 0 0 10px ">
                     
                     <c:choose>
-				<c:when test="${order.img1==null}">
+				<c:when test="${goods.img1==null}">
 					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2" style="width:130px; height:130px; " >
 				</c:when>
 				<c:otherwise>
-					<img src="${contextPath}/download.do?imageFileName=${order.img1}&path=goods/${order.goodsNo}" style="width:130px; height:130px; " class="brd-lightgray btn-round">
+					<img src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}" style="width:130px; height:130px; " class="brd-lightgray btn-round">
 				</c:otherwise>
 			</c:choose>
         </div>
 
         <div class="" style="text-align: center;  padding : 15px 90px 0 0;" >
-                <p class = "textsize-2 textbold" >${member.id}님<br> 주문하신 상품이 마음에 드셨나요?</p>
-                <p class = "textsize-1 ">${order.name}에 대한 리뷰를 작성해주세요.</p>
-            
-                        <fieldset class = "myform">
-                            <legend class = "textsize-1">별점을 선택해주세요</legend>
-                            <input type="radio" name="star" value="1" id="rate1"><label for="rate1">⭐</label>
-                            <input type="radio" name="star" value="2" id="rate2"><label for="rate2">⭐</label>
-                            <input type="radio" name="star" value="3" id="rate3"><label for="rate3">⭐</label>
-                            <input type="radio" name="star" value="4" id="rate4"><label for="rate4">⭐</label>
-                            <input type="radio" name="star" value="5" id="rate5"><label for="rate5">⭐</label>
-                        </fieldset>
-                
+                <p class = "textsize-2 textbold" >${memberInfo.id}님<br> 주문하신 상품이 마음에 드셨나요?</p>
+                <p class = "textsize-1 ">${goods.name}에 대한 리뷰를 작성해주세요.</p>
+                <img src= "${contextPath}/img/product/review/star.jpg" style="width: 100px; height: 25px;">
         </div>
             </div>
             <br><br><br>

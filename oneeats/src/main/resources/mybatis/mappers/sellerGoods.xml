@@ -294,7 +294,7 @@ goodsNo=#{goodsNo}
 	<update id="updateSellerGoods" parameterType="goodsVO">
 		update goods
 		set
-		category=#{category}, name=#{name}, price=#{price}, manufacturer=#{manufacturer},
+		category=#{category}, name=#{name}, price=#{price}, rapping=#{rapping}, manufacturer=#{manufacturer},
 		weight=#{weight}, harvest=#{harvest}, description=#{description}
 		where goodsNo=#{goodsNo}
 	</update>

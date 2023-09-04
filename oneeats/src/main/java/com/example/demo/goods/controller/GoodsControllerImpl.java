@@ -1,7 +1,6 @@
 package com.example.demo.goods.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,7 @@ import com.example.demo.vo.CartVO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
 import com.example.demo.vo.MemberVO;
+import com.example.demo.vo.ReviewVO;
 
 @Controller("goodsController")
 public class GoodsControllerImpl implements GoodsController {
@@ -135,13 +135,99 @@ public class GoodsControllerImpl implements GoodsController {
 		// 상품의 옵션 리스트
 		List<CartVO> goodsOptionList = goodsService.selectOptionsByGoodsNo(goodsNo);
 
+		List<ReviewVO> newReviewList = goodsService.selectNewReviewsByGoodsNo(goodsNo);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("goods", goods);
 		mav.addObject("totalReviewsNum", totalReviewsNum);
 		mav.addObject("reviewAvg", reviewAvg);
 		mav.addObject("goodsOptionList", goodsOptionList);
-
+		mav.addObject("newReviewList",newReviewList);
+		mav.addObject("section",1);
+		mav.addObject("pageNum",1);
 		return mav;
+	}
+	
+	// ajax로 페이징에 따라 리뷰를 불러옴
+	@ResponseBody
+	@RequestMapping("/goods/nextReviews.do")
+	public String nextReviews(HttpServletRequest request) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		Map map = GeneralFileUploader.getParameterMap(request);
+		Map pagingMap = GeneralFunctions.getPagingMap(map);
+		List<ReviewVO> reviewList = goodsService.selectReviewsWithPagingMap(pagingMap);
+		
+		String result = "";
+		
+		for (int i = 0; i < reviewList.size(); i++) {
+			ReviewVO review = reviewList.get(i);
+			result += "<div class=\'property-input1\'>";
+			result += "<div class=\"property-gdtail-flex\">";
+			result += "<div class=\"property-gdtail-flex1\">";
+			result += "<span class=\"property-gdtail-font\">";
+			result += review.getMemberId();
+			result += "</span></div>";
+			result += "<div class=\"property-gdtail-flex1\">\r\n"
+					+ "                          <span\r\n"
+					+ "                            class=\"property-gdtail-font\"\r\n"
+					+ "                            style=\"padding-top: 11px\"\r\n"
+					+ "                            >";
+			float star = Float.parseFloat(review.getStar());
+			for (int j = 0; j < star; j++) {
+				result += "★";
+			}
+			if (star < Math.ceil(star)) {
+				result += "☆";
+			}
+			result += "</span></div></div>";
+			result += "<article class=\"property-gdtail-flex2\">\r\n"
+					+ "                        <div>\r\n"
+					+ "                          <div class=\"property-gdtail-flex3\">\r\n"
+					+ "                            <h3 class=\"property-gdtail-font1\">\r\n"
+					+ "                              [";
+			result += review.getGoodsName();
+			result += "]\r\n"
+					+ "                            </h3>\r\n"
+					+ "                          </div>";
+			result += "<p class=\"text-left\" style=\"padding: 15px 0 0 0\">";
+			result += review.getContent();
+			result += "<br />\r\n";
+			
+			if (review.getGoodsImg()!=null && review.getGoodsImg().trim().length()>0) {
+				result += "                            <img\r\n"
+						+ "                              style=\"\r\n"
+						+ "                                padding-top: 8px;\r\n"
+						+ "                                width: 60px;\r\n"
+						+ "                                height: 60px;\r\n"
+						+ "                              \"\r\n"
+						+ "                              src=\"${contextPath}/download.do?imageFileName="+review.getGoodsImg()
+						+ "&path=reviewNo"+review.getReviewNo()
+						+ "                              class=\"expand_img\"\r\n"
+						+ "                              alt=\"리뷰 사진\"\r\n"
+						+ "                            />";
+			}
+			
+			
+			result += "</p>\r\n"
+					+ "                          <footer class=\"css-1fkegtf\">\r\n"
+					+ "                            <div>\r\n"
+					+ "                              <span class=\"css-14kcwq8\">2023.08.12</span>\r\n"
+					+ "                            </div>\r\n"
+					+ "                            <button class=\"property-btn1\">\r\n"
+					+ "                              <span class=\"ico property-img\"></span\r\n"
+					+ "                              ><span>도움돼요</span>\r\n"
+					+ "                            </button>\r\n"
+					+ "                          </footer>\r\n"
+					+ "                        </div>\r\n"
+					+ "                      </article>\r\n"
+					+ "                    </div>";
+		}
+		
+		
+		
+		return result;
+		
+		
 	}
 	
 	
