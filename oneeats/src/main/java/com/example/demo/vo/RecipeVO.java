@@ -16,16 +16,7 @@ public class RecipeVO {
 	private String inbun;
 	private Date creDate;
 	private int memberNo;
-	private String memberId;
 	
-	
-	
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
-	}
 	public int getRecipeNo() {
 		return recipeNo;
 	}

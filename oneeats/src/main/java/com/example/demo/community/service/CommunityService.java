@@ -59,4 +59,6 @@ public interface CommunityService {
 	
 	public int selectNoticeListTotalNumWithCategory(String category);
 	
+	public int selectOneQnAListTotalNumWithCategory();
+	
 }

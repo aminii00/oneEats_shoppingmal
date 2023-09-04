@@ -24,8 +24,6 @@ import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
-import com.example.demo.vo.RecipeVO;
-import com.example.demo.vo.ReviewVO;
 
 @Controller("adminCommunityController")
 @RequestMapping("/admin/community")
@@ -36,18 +34,10 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 
 	@Override
 	@RequestMapping("/review/adminReviewList.do")
-	public ModelAndView adminReviewList(HttpServletRequest request) throws Exception {
+	public ModelAndView adminReviewList(HttpServletRequest request) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String viewName = (String) request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		
-		Map map = GeneralFileUploader.getParameterMap(request);
-		Map pagingMap = GeneralFunctions.getPagingMap(map, 10);
-		List<ReviewVO> reviewList = adminCommunityService.selectReviewListWithPagingMap(pagingMap);
-		mav.addAllObjects(pagingMap);
-		mav.addObject("reviewList",reviewList);
-		int totalReviewNum = adminCommunityService.selectTotalReviewNum(pagingMap);
-		mav.addObject("totalReviewNum",totalReviewNum);
 		return mav;
 	}
 
@@ -56,12 +46,35 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	@RequestMapping("/oneQnA/adminOneQnAList.do")
 	public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 community oneQnADetail Controller");
-		ModelAndView mav = new ModelAndView();
 		String viewName = (String) request.getAttribute("viewName");
-		List<OneQnAVO> oneQnAList = adminCommunityService.oneQnAList();
-		System.out.println("oneQnAList= " + oneQnAList);
-		mav.addObject("oneQnAList", oneQnAList);
-		mav.setViewName(viewName);
+		ModelAndView mav = new ModelAndView(viewName);
+		request.setCharacterEncoding("utf-8");
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		
+		try {
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<OneQnAVO> oneQnAList = adminCommunityService.selectOneQnAListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("oneQnAList", oneQnAList);
+			int totalOneQnAQnANum = adminCommunityService.selectOneQnAListTotalNumWithCategory();
+			mav.addObject("totalOneQnAQnANum",totalOneQnAQnANum);
+			
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	
 		return mav;
 	}
 
@@ -70,11 +83,44 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 	public ModelAndView adminNoticeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 community noticeList Controller");
 		ModelAndView mav = new ModelAndView();
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		String category = (String) pagingMap.get("category");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+		if (category == null || category.trim().length() < 1) {
+			category = "all";
+			pagingMap.put("category", category);
+		}
+		
+		try {
+			
+			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			pagingMap.put("start", start);
+			List<NoticeVO> noticeList = adminCommunityService.selectNoticeListWithPagingMap(pagingMap);
+			mav.addAllObjects(pagingMap);
+			mav.addObject("noticeList", noticeList);
+			System.out.println("noticeList = " +noticeList);
+			int totalNoticeNum = adminCommunityService.selectNoticeListTotalNumWithCategory(category);
+			System.out.println(totalNoticeNum);
+			mav.addObject("totalNoticeNum",totalNoticeNum);
+			
+			System.out.println(mav);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 		String viewName = (String) request.getAttribute("viewName");
 		System.out.println("viewName = " + viewName);
-		List<NoticeVO> noticeList = adminCommunityService.adminNoticeList();
-		System.out.println("noticeList = " + noticeList);
-		mav.addObject("noticeList", noticeList);
 		mav.setViewName(viewName);
 		return mav;
 	}
@@ -251,62 +297,4 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 
 		return mav;
 	}
-	
-	@RequestMapping("/recipe/adminRecipeList.do")
-	public ModelAndView adminRecipeList(HttpServletRequest request) throws IOException {
-		request.setCharacterEncoding("utf-8");
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		Map pagingMap = GeneralFileUploader.getParameterMap(request);
-		
-		String category = request.getParameter("category");
-		String _section = request.getParameter("section");
-		String _pageNum = request.getParameter("pageNum");
-		String recipe_search_type = request.getParameter("recipe_search_type");
-		int pageNum;
-		int section;
-		if (_pageNum == null || _pageNum.trim().length() < 1) {
-			pageNum = 1;
-		} else {
-			pageNum = Integer.parseInt(_pageNum);
-		}
-		if (_section == null || _section.trim().length() < 1) {
-			section = 1;
-		} else {
-			section = Integer.parseInt(_section);
-		}
-		if (recipe_search_type != null && recipe_search_type.length() < 1) {
-			recipe_search_type = "all";
-		}
-		
-		pagingMap.put("category", category);
-		pagingMap.put("section", section);
-		pagingMap.put("pageNum", pageNum);
-		pagingMap.put("recipe_search_type", recipe_search_type);
-		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
-		List<RecipeVO> recipeList= adminCommunityService.selectRecipeListWithPagingMap(pagingMap);
-		mav.addObject("recipeList",recipeList);
-		
-		int totalRecipeNum = adminCommunityService.selectTotalRecipeNum(pagingMap);
-		mav.addObject("totalRecipeNum",totalRecipeNum);
-		mav.addAllObjects(pagingMap);
-		return mav;
-	}
-	
-	
-	@RequestMapping("/review/deleteReview.do")
-	public ModelAndView adminDeleteReview(@RequestParam("reviewNo") int reviewNo, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		try {
-			adminCommunityService.deleteReview(reviewNo);
-			mav = Alert.alertAndRedirect("삭제했습니다.",request.getContextPath()+"/admin/community/review/adminReviewList.do");
-		} catch (Exception e) {
-			
-			mav = Alert.alertAndRedirect("삭제하지 못 했습니다.", request.getContextPath()+"/admin/community/review/adminReviewList.do");
-		}
-		
-		return mav;
-		
-	}
-	
 }

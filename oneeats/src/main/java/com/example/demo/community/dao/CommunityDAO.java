@@ -64,6 +64,7 @@ public interface CommunityDAO {
 	
 	public int selectNoticeListTotalNumWithCategory(String category);
 	
+	public int selectOneQnAListTotalNumWithCategory();
 	
 	public void replyInsert(OneQnAVO oneQnAVO);
 	

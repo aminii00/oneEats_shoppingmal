@@ -73,16 +73,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             />
           </td>
         </tr>
-        <tr>
-          <th>쿠폰코드</th>
-          <td>
-            <input
-              type="text"
-              name="couponCode"
-              placeholder="쿠폰코드를 입력하세요"
-            />
-          </td>
-        </tr>
       </table>
 
       <hr class="linebold" />

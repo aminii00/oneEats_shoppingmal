@@ -104,7 +104,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="div-left2" style="margin: 5px 0px">
             <img
               class="img-1"
-              src="${contextPath}/download.do?imageFileName=${cancel.goodsImg}&path=goodsNo${cancel.goodsNo}"
+              src="${contextPath}/download.do?imageFileName=${cancel.goodsImg}&path=order"
               alt="상품메인"
             />
             <div class="div-dl">

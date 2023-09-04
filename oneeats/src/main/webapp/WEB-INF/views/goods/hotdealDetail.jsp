@@ -54,30 +54,28 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__details__pic">
               <div class="product__details__pic__item">
                 <img
-                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
                 />
-                <div class="product__details__pic__slider owl-carousel">
-                  <c:if test="${not empty goods.img2}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img3}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img4}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
-                    />
-                  </c:if>
-                  <c:if test="${not empty goods.img5}">
-                    <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
-                    />
-                  </c:if>
-                </div>
+                <c:if test="${not empty goods.img2}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img3}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img4}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
+                <c:if test="${not empty goods.img5}">
+                  <img
+                    src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
+                  />
+                </c:if>
               </div>
             </div>
           </div>
@@ -237,92 +235,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <!--수정-->
                       <div class="property-margin" style="margin-bottom: -40px">
                         <div class="property-margin1">
-                          <dl class="property-flex2" style="height: 170px">
-                            <dt
-                              class="property-input-gd"
-                              style="margin-top: 16px"
-                            >
-                              상품선택
-                            </dt>
-                            <dd class="property-flex4">
-                              <div
-                                style="align-content: center"
-                                style="overflow-y: scrol"
-                              >
-                                <select
-                                  name="select"
-                                  id="select_option"
-                                  class="margin4 opt"
-                                >
-                                  <option
-                                    value="핫딜을 선택해주세요"
-                                    selected
-                                  ></option>
-
-                                  <option value="${hotdeal.hotdealNo}">
-                                    ${hotdeal.name} ${hotdeal.discounted_price}
-                                  </option>
-                                </select>
-                              </div>
-
-                              <input
-                                type="hidden"
-                                class="h_option_qty_${hotdeal.hotdealNo}"
-                                value="${hotdeal.goods_qty}"
-                              />
-                              <input
-                                type="hidden"
-                                class="h_option_price_${hotdeal.hotdealNo}"
-                                value="${hotdeal.discounted_price}"
-                              />
-                              <input
-                                type="hidden"
-                                class="h_option_name_${hotdeal.hotdealNo}"
-                                value=" ${hotdeal.name}"
-                              />
-                            </dd>
-                          </dl>
-
                           <div
                             class="cart-option-item property-flex5 goods_option_grid"
                             style="width: 525px"
                           >
                             <!--선택한 상품 옵션이 나타나는 구역 -->
-                            <div class="goods_option_rows"></div>
-                            <span
-                              class="property-font3 text-right"
-                              style="
-                                font-size: 16px;
-                                border-top: 1px solid rgb(244, 244, 244);
-                                margin: 12px 0 -10px 0;
-                                padding: 10px 0 10px 0;
-                              "
-                            >
-                              총 상품금액
-                            </span>
-                            <span
-                              class="property-font3 text-right"
-                              style="font-size: 22px; margin-bottom: -10px"
-                              id="payment_price"
-                              >0</span
-                            >
-                            <span
-                              class="property-font3 text-right"
-                              style="
-                                font-size: 16px;
-                                border-top: 1px solid rgb(244, 244, 244);
-                                margin: 12px 0 -10px 0;
-                                padding: 10px 0 10px 0;
-                              "
-                            >
-                              할인 금액
-                            </span>
-                            <span
-                              class="property-font3 text-right"
-                              style="font-size: 22px; margin-bottom: -10px"
-                              id="discount_price"
-                              >0</span
-                            >
 
                             <span
                               class="property-font3 text-right"
@@ -339,7 +256,8 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
                               id="t_price"
-                              >0</span
+                            >
+                              ${hotdeal.discounted_price}</span
                             >
                             <!--배송비와 상품금액 hidden-->
                             <input
@@ -382,7 +300,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           width="56"
                           height="56"
                           radius="3"
-                          onclick="fn_bookmark('${hotdeal.hotdealNo}')"
                         >
                           <span class="css-let1"
                             ><img
@@ -402,6 +319,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </div>
                           </button>
                         </div>
+
                         <div class="css-lay2">
                           <button
                             class="cart-button css-cartbtn"
@@ -429,7 +347,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
     <!--옵션을 선택할 때마다 행이 추가됨-->
     <script>
       var storeValueUrl = "${contextPath}" + "/addCartToListValue.do";
-      var goodsPrice = "${hotdeal.discounted_price}";
+      var goodsPrice = "${goods.price}";
       goodsPrice = parseInt(goodsPrice);
       var cartPage = "${contextPath}/main/cart.do";
     </script>

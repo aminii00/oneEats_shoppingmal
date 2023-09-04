@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.seller.hotdeal.dao.SellerHotDealDAO;
@@ -67,34 +66,10 @@ public class SellerHotDealServiceImpl implements SellerHotDealService{
 		};
 	
 		@Override
-		public List<HotDealVO> selectHotDealListForList(Map pagingMap) {
-			return sellerHotDealDAO.selectHotDealListForList(pagingMap);
+		public List<HotDealVO> selectHotDealList(Map pagingMap) {
+			return sellerHotDealDAO.selectHotDealList(pagingMap);
 		}
 		
-		
-		@Override
-		public int deleteHotdealGoods(int goodsNo) throws DataAccessException {
-			return sellerHotDealDAO.deleteHotdealGoods(goodsNo);
-		}
-		
-		@Override
-		public GoodsVO selectGoodsByGoodsNo(int hotdealNo) {
-			return sellerHotDealDAO.selectGoodsByGoodsNo(hotdealNo);
-		}
-		
-		
-		@Override
-		public HotDealVO selectHotDealByGoodsNo(int hotdealNo) {
-			return sellerHotDealDAO.selectHotDealByGoodsNo(hotdealNo);
-		}
-		
-		
-		@Override
-		public void updateSellerHotDeal(HotDealVO sellerHotDeal) {
-			
-			sellerHotDealDAO.updateSellerHotDeal(sellerHotDeal);	
-			
-		}
 }
 	
 
