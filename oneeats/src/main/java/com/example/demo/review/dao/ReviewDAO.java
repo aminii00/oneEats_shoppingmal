@@ -14,6 +14,12 @@ public interface ReviewDAO {
 	
 	public int newReviewNo();
 	
-	public void reviewInsert(ReviewVO reviewVO);
+	public int reviewInsert(ReviewVO reviewVO);
+
+	public int isReviewed(ReviewVO reviewVO);
+
+	public void updateMemberPoint(ReviewVO reviewVO);
+
+	public void insertPointHistoryForReview(ReviewVO reviewVO);
 
 }

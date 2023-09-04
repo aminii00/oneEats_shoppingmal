@@ -74,7 +74,8 @@ public class GoodsServiceImpl implements GoodsService {
 
 	@Override
 	public boolean isExistBookmark(BookmarkVO bookmarkVO) {
-		if (goodsDAO.isExistBookmark(bookmarkVO) > 0) {
+		int bookmarkNum = goodsDAO.isExistBookmark(bookmarkVO);
+		if (bookmarkNum > 0) {
 			return true;
 		}
 		return false;

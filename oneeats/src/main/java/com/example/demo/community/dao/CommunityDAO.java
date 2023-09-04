@@ -70,4 +70,6 @@ public interface CommunityDAO {
 	public int newQnANo();
 	
 	public List<OneQnAVO> replyList(int qnaNo);
+
+	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap);
 }

@@ -1,10 +1,8 @@
 package com.example.demo.mypage.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,7 +33,6 @@ import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.PointHistoryVO;
-import com.example.demo.vo.ReviewVO;
 
 @Controller("mypageController")
 public class MypageControllerImpl implements MypageController {
@@ -194,12 +194,21 @@ public class MypageControllerImpl implements MypageController {
 			TossDTO tossInfo = (TossDTO) session.getAttribute("tossInfo");
 			String payment_type = tossInfo.getPaymentType();
 			long totalAmount = tossInfo.getTotalAmount();
+			String json_data = tossInfo.getJson_data();
+			payInfoMap.put("json_data", json_data);
 			payInfoMap.put("memberNo", memberNo);
 			payInfoMap.put("orderNo", orderNo);
+			OrderVO tempOrder = mypageService.selectTempOrder(payInfoMap);
+			
+			int used_point = tempOrder.getUsed_point();
+			payInfoMap.put("used_point", used_point);
+			
 			payInfoMap.put("payment_type", payment_type);
 			payInfoMap.put("total_price", totalAmount);
 			
+			
 			mypageService.updateTempOrderList(payInfoMap);
+			
 			mav = new ModelAndView("redirect:/mypage/orderList.do");
 			session.removeAttribute("cartList");
 			session.removeAttribute("selectGoodsList");
@@ -228,6 +237,22 @@ public class MypageControllerImpl implements MypageController {
 		mav.addObject("orderCancel", orderCancel);
 		mav.addObject("order", orderVO);
 		session.setAttribute("orderCancel", orderCancel);
+
+		
+		String order_tossData = mypageService.selectTossApiByOrderNo(orderNo);
+		JSONParser parser = new JSONParser();
+		String paymentKey = "";
+		try {
+		    JSONObject tossJsonData = (JSONObject) parser.parse(order_tossData);
+		    TossDTO tossInfo = new TossDTO(tossJsonData);
+		    paymentKey = tossInfo.getPaymentKey();
+		    mav.addObject("paymentKey", paymentKey);
+		    
+		} catch (ParseException e) {
+		    e.printStackTrace();
+		}
+		
+		
 		return mav;
 	}
 
@@ -235,21 +260,13 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView orderCancelResult(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderCancelResult");
 		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = member.getMemberNo();
-		String viewName = (String) request.getAttribute("viewName");
 		int orderNo = (Integer.parseInt(request.getParameter("orderNo")));
-		String delivery_status = request.getParameter("delivery_status");
-
+		
 		int[] order_seqNos = mypageService.selectSeqNoByOrderNo(orderNo);
 		for (int order_seqNo : order_seqNos) {
 			mypageService.updateDeliveryStatusToCancel(order_seqNo);
 		}
-
-		int firstOrderSeqNo = order_seqNos.length > 0 ? order_seqNos[0] : 0;
-		mypageService.updateDeliveryStatusToCancel(firstOrderSeqNo);
-
+		
 		ModelAndView mav = new ModelAndView("redirect:/mypage/orderList.do");
 		return mav;
 	}	
@@ -554,6 +571,11 @@ public class MypageControllerImpl implements MypageController {
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		String id = memberInfo.getId();
 		ModelAndView mav = new ModelAndView();
+		boolean isSNSMember = mypageService.isSNSMember(memberInfo);
+		if (isSNSMember) {
+			mav.setViewName("/mypage/mypageMemberInfoModForm");
+			return mav;
+		}
 		mav.addObject("id", id);
 		mav.setViewName("/mypage/mypageMemberModForm");
 		return mav;
@@ -563,7 +585,6 @@ public class MypageControllerImpl implements MypageController {
 	@Override
 	@RequestMapping(value = "/mypage/mypageMemberModInfo.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView mypageMemberModInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("여기는 Controller myAddress.do");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
@@ -571,7 +592,6 @@ public class MypageControllerImpl implements MypageController {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(inputPwd + ", " + memberInfo.getPwd());
 		if (memberInfo.getPwd().equals(inputPwd)) {
-			mav.addObject("memberInfo", memberInfo);
 			mav.setViewName("/mypage/mypageMemberInfoModForm");
 		} else {
 			mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요",

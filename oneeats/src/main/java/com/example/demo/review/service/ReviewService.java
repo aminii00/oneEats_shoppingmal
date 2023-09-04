@@ -9,5 +9,9 @@ public interface ReviewService {
 	
 	public int newReviewNo();
 	
-	public void reviewInsert(ReviewVO reviewVO);
+	public int reviewInsert(ReviewVO reviewVO);
+
+	public boolean isReviewed(ReviewVO reviewVO);
+
+	public void updateMemberPoint(ReviewVO reviewVO);
 }

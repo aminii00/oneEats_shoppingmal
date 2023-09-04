@@ -52,13 +52,43 @@
 	</select>
 	
 	<!-- 리뷰 insert -->
-	<insert id="reviewInsert" parameterType="ReviewVO">
+	<insert id="reviewInsert" parameterType="reviewVO" useGeneratedKeys="true" keyProperty="reviewNo">
 		<![CDATA[
 		insert into review(reviewNo, star, reviewImg, content, goodsNo, memberNo)
 		values(#{reviewNo}, #{star}, #{reviewImg}, #{content}, #{goodsNo}, #{memberNo})
 		]]>
 	</insert>
 	
+	<select id="isReviewed" parameterType="reviewVO" resultType="int">
+		select count(reviewNo) from review where goodsNo=#{goodsNo} and memberNo=#{memberNo} and creDate between date_sub(now(),interval 1 month) and now() 
+	</select>
 
 		
+	<update id="updateMemberPoint" parameterType="reviewVO">
+		update member
+		set
+		<choose>
+			<when test="reviewImg!=null and reviewImg!=''">
+				point=point+150
+			</when>
+			<otherwise>
+				point=point+50
+			</otherwise>
+		</choose>
+		where memberNo=#{memberNo}
+	</update>
+	
+	<insert id="insertPointHistoryForReview" parameterType="reviewVO">
+		insert into point_history
+		(name, finishDate, amount, memberNo)
+		values
+		<choose>
+			<when test="reviewImg!=null and reviewImg!=''">
+				('사진리뷰',date_add(now(),interval 1 month),150,#{memberNo})
+			</when>
+			<otherwise>
+				('글리뷰',date_add(now(),interval 1 month),50,#{memberNo})
+			</otherwise>
+		</choose>
+	</insert>
 </mapper>

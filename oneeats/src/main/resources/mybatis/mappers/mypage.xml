@@ -214,14 +214,44 @@
 	<update id="updateTempOrderList" parameterType="java.util.Map">
 		update t_order
 		set
-		payment_type=#{payment_type}, total_price=#{total_price},
-		delivery_status='결제완료'
+		payment_type=#{payment_type}, 
+		total_price=#{total_price},
+		<choose>
+			<when test="payment_type=='가상계좌'">
+				delivery_status='입금대기중'
+			</when>
+			<otherwise>
+				delivery_status='결제완료'
+			</otherwise>
+		</choose>
 		where memberNo=#{memberNo} and
 		orderNo=#{orderNo} and delivery_status='결제중'
 
 	</update>
+	
+	<insert id="insertTossApi" parameterType="java.util.Map">
+		insert into toss_api (json_data,orderNo) values(#{json_data},#{orderNo})
+		
+	</insert>
+	
+	<select id="selectTempOrder" parameterType="java.util.Map" resultType="orderVO">
+		select * from t_order where orderNo=#{orderNo} and memberNo=#{memberNo} and delivery_status='결제중' limit 1
+	</select>
+	<update id="updateMemberPoint" parameterType="java.util.Map">
+		update member
+		set
+		point=point+#{point}
+		where memberNo=#{memberNo}
+	</update>
+	
+	<insert id="insertPointHistory" parameterType="java.util.Map">
 
+		INSERT INTO point_history 
+		(name, memberNo, amount)
+    	VALUES ('상품 구입으로 인한 소진',#{memberNo}, #{used_point})
 
+	</insert>
+	
 	<select id="selectNewOrderNo" resultType="int">
 		<![CDATA[
 			select ifnull(max(orderNo),0)+1 from t_order
@@ -447,4 +477,12 @@ deliveryNo=#{deliveryNo}
 	<delete id="deleteDeliveryAddressWithMap" parameterType="java.util.Map">
 		delete from deliveryaddress where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
 	</delete>
+	
+	<select id="selectTossApiByOrderNo" parameterType="int" resultType="String">
+		select json_data from toss_api where orderNo=#{orderNo} limit 1
+	</select>
+	
+	<select id="isSNSMember" parameterType="memberVO" resultType="String">
+		select sns_id from t_sns where id=#{id}
+	</select>
 </mapper>

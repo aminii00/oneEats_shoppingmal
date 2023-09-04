@@ -63,7 +63,7 @@ public interface MypageService {
 
 	public void insertTempOrderList(List<OrderVO> orderList);
 
-	public void updateTempOrderList(Map payInfoMap);
+	public void updateTempOrderList(Map payInfoMap) throws Exception;
 
 	public void insertAddressWithMap(Map condMap);
 
@@ -74,5 +74,11 @@ public interface MypageService {
 	public void updateMemberAddressWithMap(Map condMap);
 
 	public void deleteDeliveryAddressWithMap(Map condMap);
+
+	public OrderVO selectTempOrder(Map condMap);
+
+	public String selectTossApiByOrderNo(int orderNo);
+
+	public boolean isSNSMember(MemberVO memberInfo);
 	
 }

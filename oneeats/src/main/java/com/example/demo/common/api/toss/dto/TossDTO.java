@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONObject;
-
 public class TossDTO {
 	
 	private String version;
@@ -47,8 +46,18 @@ public class TossDTO {
 	private int discount;
 	
 	private String paymentType;
+	private String json_data;
 	
 	
+
+	public String getJson_data() {
+		return json_data;
+	}
+
+	public void setJson_data(String json_data) {
+		this.json_data = json_data;
+	}
+
 	public void setPaymentType(String paymentType) {
 		this.paymentType = paymentType;
 	}
@@ -365,8 +374,17 @@ public class TossDTO {
 		this.orderName = (String) map.get("orderName");
 		this.method = (String) map.get("method");
 		this.totalAmount = (long) map.get("totalAmount");
-		JSONObject result = new JSONObject(map);
-		this.paymentType = result.toJSONString();
+		this.paymentType = (String) map.get("method");
+	}
+	
+	public TossDTO(JSONObject jsonObject ) {
+		super();
+		this.paymentKey = (String) jsonObject.get("paymentKey");
+		this.orderId = (String) jsonObject.get("orderId");
+		this.orderName = (String) jsonObject.get("orderName");
+		this.method = (String) jsonObject.get("method");
+		this.totalAmount = (long) jsonObject.get("totalAmount");
+		this.paymentType = (String) jsonObject.get("method");
 	}
 	
 	public TossDTO() {
