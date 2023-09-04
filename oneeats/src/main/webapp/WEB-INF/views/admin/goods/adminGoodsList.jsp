@@ -38,10 +38,11 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th>번호</th>
         <th>등록일</th>
         <th>상품명</th>
+        <th style="text-align: right">핫딜 등록</th>
         <th style="text-align: right">수정</th>
         <th style="text-align: right">삭제</th>
       </tr>
-      <c:forEach var="goods" items="${newGoodsList}">
+      <c:forEach var="goods" items="${goodsList}">
         <c:choose>
           <c:when test="${goods.goodsNo != preGoodsNo}">
             <tr>
@@ -55,10 +56,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     ${goods.name}</a
                   >
                 </td>
+                <td style="text-align: right">
+                  <a
+                    href="${contextPath}/admin/hotdeal/adminHotDealForm.do?goodsNo=${goods.goodsNo}"
+                    >핫딜 등록</a
+                  >
+                </td>
 
                 <td style="text-align: right">
                   <a
-                    href="${contextPath}/admin/goods/modAdminGoods.do?goodsNo=${goods.goodsNo}"
+                    href="${contextPath}/admin/goods/adminGoodsModForm.do?goodsNo=${goods.goodsNo}"
                     >수정</a
                   >
                 </td>
@@ -80,18 +87,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       style="font-size: 12px; margin-top: 22px; float: right"
       class="btn-1 bg-lightgreen textcolor-white border-0"
       type="button"
-      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm'"
+      onclick="location.href='${contextPath}/admin/goods/adminGoodsForm.do'"
     >
       상품 추가
     </button>
-
     <div>
       <ul class="ul-li">
         <c:if test="${section>1}">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?&section=${section-1}&pageNum=1'"
+              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?&category=${category}&section=${section-1}&pageNum=1'"
             >
               <img
                 width="20px"
@@ -102,29 +108,42 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </button>
           </li>
         </c:if>
-        <c:forEach begin="1" end="10" var="i">
+        <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
+        <c:set var="endPage" value="1" />
+        <c:if test="${not empty searchGoodsNum && searchGoodsNum>0}">
+          <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
+          <c:set
+            var="result"
+            value="${(searchGoodsNum - (section-1)*100)/10}"
+          />
+          <c:set var="endPage" value="${Math.floor(result)}" />
+        </c:if>
+
+        <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?section=${section}&pageNum=${i}'"
+              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?category=${category}&section=${section}&pageNum=${i}'"
             >
               ${(section-1)*10+i}
             </button>
           </li>
         </c:forEach>
-        <li class="li-btn">
-          <button
-            class="btn-2 btn-square bg-white btn-border"
-            onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?section=${section+1}&pageNum=1'"
-          >
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${searchGoodsNum > (section)*100}">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminGoodsList.do?category=${category}&section=${section+1}&pageNum=1'"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </button>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>
