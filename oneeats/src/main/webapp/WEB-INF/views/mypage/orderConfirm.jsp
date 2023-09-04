@@ -190,6 +190,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               name="used_point"
               min="0"
               max="${memberInfo.point}"
+              value="0"
             />
           </td>
         </tr>

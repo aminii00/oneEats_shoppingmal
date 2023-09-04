@@ -136,7 +136,8 @@
 		]]>
 	</select>
 
-	<select id="selectOrderByMemberNo" resultMap="OrderResult" parameterType="int">
+	<select id="selectOrderByMemberNo" resultMap="OrderResult"
+		parameterType="int">
 		<![CDATA[
 			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
 			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo WHERE t_order.memberNo=#{memberNo}) 
@@ -157,7 +158,10 @@
 	<select id="selectCouponByMemberNo" resultMap="CouponResult"
 		parameterType="int">
 		<![CDATA[
-			select * from coupon where memberNo=#{memberNo}
+			select c.* from coupon c
+inner join member_coupon m
+on c.couponNo=m.couponNo
+where m.memberNo=#{memberNo}
 		]]>
 	</select>
 
@@ -214,7 +218,7 @@
 	<update id="updateTempOrderList" parameterType="java.util.Map">
 		update t_order
 		set
-		payment_type=#{payment_type}, 
+		payment_type=#{payment_type},
 		total_price=#{total_price},
 		<choose>
 			<when test="payment_type=='가상계좌'">
@@ -225,17 +229,21 @@
 			</otherwise>
 		</choose>
 		where memberNo=#{memberNo} and
-		orderNo=#{orderNo} and delivery_status='결제중'
+		orderNo=#{orderNo} and
+		delivery_status='결제중'
 
 	</update>
-	
+
 	<insert id="insertTossApi" parameterType="java.util.Map">
-		insert into toss_api (json_data,orderNo) values(#{json_data},#{orderNo})
-		
+		insert into toss_api
+		(json_data,orderNo) values(#{json_data},#{orderNo})
+
 	</insert>
-	
-	<select id="selectTempOrder" parameterType="java.util.Map" resultType="orderVO">
-		select * from t_order where orderNo=#{orderNo} and memberNo=#{memberNo} and delivery_status='결제중' limit 1
+
+	<select id="selectTempOrder" parameterType="java.util.Map"
+		resultType="orderVO">
+		select * from t_order where orderNo=#{orderNo} and
+		memberNo=#{memberNo} and delivery_status='결제중' limit 1
 	</select>
 	<update id="updateMemberPoint" parameterType="java.util.Map">
 		update member
@@ -243,15 +251,16 @@
 		point=point+#{point}
 		where memberNo=#{memberNo}
 	</update>
-	
+
 	<insert id="insertPointHistory" parameterType="java.util.Map">
 
-		INSERT INTO point_history 
+		INSERT INTO
+		point_history
 		(name, memberNo, amount)
-    	VALUES ('상품 구입으로 인한 소진',#{memberNo}, #{used_point})
+		VALUES ('상품 구입으로 인한 소진',#{memberNo}, #{used_point})
 
 	</insert>
-	
+
 	<select id="selectNewOrderNo" resultType="int">
 		<![CDATA[
 			select ifnull(max(orderNo),0)+1 from t_order
@@ -273,28 +282,36 @@
 	     	where order_seqNo=#{order_seqNo}
 		]]>
 	</update>
-	
-	<select id="selectOrderBySearchType" resultMap="OrderResult" parameterType="hashMap">
+
+	<select id="selectOrderBySearchType" resultMap="OrderResult"
+		parameterType="hashMap">
 		<choose>
 			<when test="orderSearchType == 'all'">
-				select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
-				goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo 
-				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) 
-				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by orderplusgoods.orderNo
+				select orderplusgoods.*,orderGun.gun from (select
+				t_order.*,goodsAndHotdealView.name as goodsName,
+				goodsAndHotdealView.img1 as goodsImg from t_order inner join
+				goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
+				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join
+				(select orderNo, count(*) as gun from t_order group by orderNo)
+				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
+				orderplusgoods.orderNo
 			</when>
 			<when test="orderSearchType == '1month'">
-				select * from order_by_membertype where orderDate 
-				between DATE_SUB(NOW(), INTERVAL 1 MONTH) and NOW() and memberNo=#{memberNo}
+				select * from order_by_membertype where orderDate
+				between DATE_SUB(NOW(), INTERVAL 1 MONTH) and NOW() and
+				memberNo=#{memberNo}
 			</when>
 			<otherwise>
 				<choose>
 					<when test="orderSearchType == '3month'">
-						select * from order_by_membertype where orderDate 
-						between DATE_SUB(NOW(), INTERVAL 3 MONTH) and NOW() and memberNo=#{memberNo}
+						select * from order_by_membertype where orderDate
+						between DATE_SUB(NOW(), INTERVAL 3 MONTH) and NOW() and
+						memberNo=#{memberNo}
 					</when>
 					<when test="orderSearchType == '1year'">
-						select * from order_by_membertype where orderDate 
-						between DATE_SUB(NOW(), INTERVAL 1 YEAR) and NOW() and memberNo=#{memberNo}
+						select * from order_by_membertype where orderDate
+						between DATE_SUB(NOW(), INTERVAL 1 YEAR) and NOW() and
+						memberNo=#{memberNo}
 					</when>
 				</choose>
 			</otherwise>
@@ -442,47 +459,60 @@ deliveryNo=#{deliveryNo}
 
 
 	<insert id="insertAddressWithMap" parameterType="java.util.Map">
-		insert into deliveryaddress (receiver_name,receiver_phone,zipCode,address,address_detail,memberNo)
-		 values (#{receiver_name},#{receiver_phone},#{zipCode},#{address},#{address_detail},#{memberNo})
-		
+		insert into
+		deliveryaddress
+		(receiver_name,receiver_phone,zipCode,address,address_detail,memberNo)
+		values
+		(#{receiver_name},#{receiver_phone},#{zipCode},#{address},#{address_detail},#{memberNo})
+
 	</insert>
-	
-	<update id="updateDeliveryAddressWithMap" parameterType="java.util.Map">
+
+	<update id="updateDeliveryAddressWithMap"
+		parameterType="java.util.Map">
 		update deliveryaddress set
 		receiver_name=#{receiver_name},
 		receiver_phone=#{receiver_phone},
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
-		where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+		where memberNo=#{memberNo} and
+		deliveryNo=#{deliveryNo}
 	</update>
-	
-	<update id="updateDeliveryAddress" parameterType="deliveryAddressVO">
+
+	<update id="updateDeliveryAddress"
+		parameterType="deliveryAddressVO">
 		update deliveryaddress set
 		receiver_name=#{receiver_name},
 		receiver_phone=#{receiver_phone},
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
-		where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+		where memberNo=#{memberNo} and
+		deliveryNo=#{deliveryNo}
 	</update>
-	
-	<update id="updateMemberAddressWithMap" parameterType="java.util.Map">
+
+	<update id="updateMemberAddressWithMap"
+		parameterType="java.util.Map">
 		update member set
 		zipCode=#{zipCode},
 		address=#{address},
 		address_detail=#{address_detail}
 		where memberNo=#{memberNo}
 	</update>
-	<delete id="deleteDeliveryAddressWithMap" parameterType="java.util.Map">
-		delete from deliveryaddress where memberNo=#{memberNo} and deliveryNo=#{deliveryNo}
+	<delete id="deleteDeliveryAddressWithMap"
+		parameterType="java.util.Map">
+		delete from deliveryaddress where memberNo=#{memberNo}
+		and deliveryNo=#{deliveryNo}
 	</delete>
-	
-	<select id="selectTossApiByOrderNo" parameterType="int" resultType="String">
-		select json_data from toss_api where orderNo=#{orderNo} limit 1
+
+	<select id="selectTossApiByOrderNo" parameterType="int"
+		resultType="String">
+		select json_data from toss_api where orderNo=#{orderNo}
+		limit 1
 	</select>
-	
-	<select id="isSNSMember" parameterType="memberVO" resultType="String">
+
+	<select id="isSNSMember" parameterType="memberVO"
+		resultType="String">
 		select sns_id from t_sns where id=#{id}
 	</select>
 </mapper>
