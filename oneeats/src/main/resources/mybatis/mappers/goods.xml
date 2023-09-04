@@ -270,7 +270,7 @@ LIMIT 6;
 
 	<select id="selectMaxPriceWithSearchFilter"
 		parameterType="java.util.Map" resultType="int">
-		select max(price) from (select g.*,m.name as sellerName from goods as g
+		select ifnull(max(price),0) from (select g.*,m.name as sellerName from goods as g
 		inner
 		join member as m
 		on g.memberNo=m.memberNo) t where 1=1
@@ -333,7 +333,7 @@ LIMIT 6;
 					</when>
 					<when test="category=='mealkit'">
 						and category='zzigae' or category='meal' or
-						category='porridge' or category='sidedish'
+						category='porridge' or category='mealReplacement' or category='sidedish'
 					</when>
 					<when test="category=='best'">
 						and 1=1
@@ -348,7 +348,7 @@ LIMIT 6;
 
 	<select id="selectMaxPrice" parameterType="java.util.Map"
 		resultType="int">
-		select max(price) from goods where 1=1
+		select ifnull(max(price),0) from goods where 1=1
 		<choose>
 			<when test="category!=null and category!=''">
 				<choose>

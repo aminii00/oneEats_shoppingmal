@@ -88,6 +88,11 @@
 			value="/WEB-INF/views/home.jsp" />
 	</definition>
 
+<definition name="/main/error" extends="mainLayout">
+		<put-attribute name="title" value="에러 페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/main/error.jsp" />
+	</definition>
 
 	<definition name="/main/mainPage" extends="mainLayout">
 		<put-attribute name="title" value="쇼핑몰 메인페이지" />

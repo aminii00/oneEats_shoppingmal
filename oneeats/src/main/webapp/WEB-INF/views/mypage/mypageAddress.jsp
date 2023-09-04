@@ -13,7 +13,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <title>Document</title>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-      function execDaumPostCode_() {
+      function execDaumPostCode_(num) {
         new daum.Postcode({
           oncomplete: function (data) {
             var addr = ""; // 주소 변수
@@ -41,15 +41,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 extraAddr = " (" + extraAddr + ")";
               }
 
-              document.getElementById("address_extra_input").value = extraAddr; //참고항목
+              document.getElementById("address_extra_input" + num).value =
+                extraAddr; //참고항목
             } else {
-              document.getElementById("address_extra_input").value = "";
+              document.getElementById("address_extra_input" + num).value = "";
             }
 
-            document.getElementById("h_input_zipcode").value = data.zonecode; // 우편번호
-            document.getElementById("address_input").value = addr;
+            document.getElementById("h_input_zipcode" + num).value =
+              data.zonecode; // 우편번호
+            document.getElementById("address_input" + num).value = addr;
 
-            document.getElementById("address_detail_input").focus(); // 상세주소
+            document.getElementById("address_detail_input" + num).focus(); // 상세주소
           },
         }).open();
       }
@@ -158,7 +160,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                   <div class="col input-group">
                     <input
                       type="text"
-                      id="address_input"
+                      id="address_input1"
                       name="address"
                       class="form-control"
                       placeholder="주소"
@@ -169,7 +171,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                       <button
                         type="button"
                         class="bg-lightgreen textsize-2 border-0"
-                        onclick="execDaumPostCode_()"
+                        onclick="execDaumPostCode_(1)"
                       >
                         주소검색
                       </button>
@@ -180,7 +182,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <div class="row">
                   <div class="col">
                     <input
-                      id="address_detail_input"
+                      id="address_detail_input1"
                       class="form-control"
                       name="address_detail"
                       placeholder=" 상세 주소를 입력해주세요."
@@ -188,13 +190,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     />
                     <input
                       type="hidden"
-                      id="h_input_zipcode"
+                      id="h_input_zipcode1"
                       placeholder="우편번호"
                       name="zipCode"
                     />
                     <input
                       type="hidden"
-                      id="address_extra_input"
+                      id="address_extra_input1"
                       placeholder="참고주소"
                     />
                   </div>
@@ -259,7 +261,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <div class="col input-group">
                   <input
                     type="text"
-                    id="address_input"
+                    id="address_input2"
                     name="address"
                     class="form-control"
                     placeholder="주소"
@@ -270,7 +272,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                     <button
                       type="button"
                       class="bg-lightgreen textsize-2 border-0"
-                      onclick="execDaumPostCode_()"
+                      onclick="execDaumPostCode_(2)"
                     >
                       주소검색
                     </button>
@@ -281,21 +283,21 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <div class="row">
                 <div class="col">
                   <input
-                    id="address_detail_input"
+                    id="address_detail_input2"
                     class="form-control"
                     name="address_detail"
                     placeholder=" 상세 주소를 입력해주세요."
                     type="text"
                   />
                   <input
+                    id="h_input_zipcode2"
                     type="hidden"
-                    id="h_input_zipcode"
                     placeholder="우편번호"
                     name="zipCode"
                   />
                   <input
+                    id="address_extra_input2"
                     type="hidden"
-                    id="address_extra_input"
                     placeholder="참고주소"
                   />
                 </div>
