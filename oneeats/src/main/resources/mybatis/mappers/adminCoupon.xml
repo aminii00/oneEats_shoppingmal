@@ -17,11 +17,42 @@
 		<result property="couponCode" column="couponCode" />
 	</resultMap>
 	
-	<select id="selectAdminCouponByMemberNo" resultMap="CouponResult"  parameterType="int">
+	<select id="selectAdminCouponByMemberNo" resultMap="CouponResult"  parameterType="java.util.Map">
+		
+		select coupon.*, member.name as memberName from coupon 
+		inner join member on coupon.memberNo=member.memberNo 
+		where coupon.memberNo=#{memberNo}
+
+		<choose>
+			<when test="coupon_search_type==null or coupon_search_type==''">
+				and 1=1
+			</when>
+			<when test="coupon_search_type=='all'">
+				and couponNo like CONCAT('%', #{coupon_search_word}, '%')
+				or coupon.name like CONCAT('%', #{coupon_search_word}, '%')
+				or member.name like CONCAT('%', #{coupon_search_word}, '%')
+			</when>
+			<otherwise>
+			 	<choose>
+			 		<when test="coupon_search_type=='couponNo'">
+			 			and couponNo like CONCAT('%', #{coupon_search_word}, '%')
+			 		</when>
+			 		<when test="coupon_search_type=='name'">
+			 			and coupon.name like CONCAT('%', #{coupon_search_word}, '%')
+			 		</when>
+			 		<when test="coupon_search_type=='memberName'">
+			 			and member.name like CONCAT('%', #{coupon_search_word}, '%')
+			 		</when>
+			 	</choose>
+			</otherwise>
+		</choose>
+			
+		order by couponNo desc limit #{start},10
+	</select>
+	
+	<select id="selectTotalCouponNum" resultType="int" parameterType="int">
 		<![CDATA[
-			select coupon.*, member.Name as memberName from coupon 
-			inner join member on coupon.memberNo=member.memberNo 
-			where coupon.memberNo=#{memberNo}
+			select count(*) from coupon where memberNo=#{memberNo}
 		]]>
 	</select>
 	

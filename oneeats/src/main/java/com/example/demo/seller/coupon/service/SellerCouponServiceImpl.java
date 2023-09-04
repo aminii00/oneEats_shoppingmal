@@ -1,6 +1,7 @@
 package com.example.demo.seller.coupon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,16 @@ public class SellerCouponServiceImpl implements SellerCouponService{
 	@Override
 	public void deleteSellerCoupon(int couponNo) {
 		sellerCouponDAO.deleteSellerCoupon(couponNo);
+	}
+
+	@Override
+	public List<CouponVO> selectSellerCouponByMemberNo(Map pagingMap) {
+		return sellerCouponDAO.selectSellerCouponByMemberNo(pagingMap);
+	}
+
+	@Override
+	public int selectTotalCouponNum(int memberNo) {
+		return sellerCouponDAO.selectTotalCouponNum(memberNo);
 	} 
 	
 	

@@ -176,7 +176,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               href="${contextPath}/goods/goodsDetail.do?goodsNo=${detail.goodsNo}"
               ><img
                 class="img-1"
-                src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=order"
+                src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=orderNo${detail.orderNo}"
                 alt="상품메인"
             /></a>
             <div class="div-dl">

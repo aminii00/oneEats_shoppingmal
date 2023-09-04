@@ -95,6 +95,17 @@ public class SellerHotDealServiceImpl implements SellerHotDealService{
 			sellerHotDealDAO.updateSellerHotDeal(sellerHotDeal);	
 			
 		}
+
+		@Override
+		public List<HotDealVO> selectSellerHotDealList(Map pagingMap) {
+			return sellerHotDealDAO.selectSellerHotDealList(pagingMap);
+		}
+
+		@Override
+		public int selectTotalHotDealNum() {
+			return sellerHotDealDAO.selectTotalHotDealNum();
+		}
+		
 }
 	
 

@@ -17,9 +17,12 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">핫딜목록</p>
       <div class="div-sib textsize-1">
-        <form action="${contextPath}/seller/hotdeal/sellerHotDealList.do">
+        <form
+          method="post"
+          action="${contextPath}/seller/hotdeal/sellerHotDealList.do"
+        >
           <select name="hotdeal_search_type">
-            <option value="">전체</option>
+            <option value="all">전체</option>
             <option value="creDate">등록일</option>
             <option value="name">핫딜상품명</option>
           </select>
@@ -30,7 +33,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           />
           <button
             class="btn-1 bg-lightgreen textcolor-white border-0"
-            type="button"
+            type="submit"
           >
             검색
           </button>
