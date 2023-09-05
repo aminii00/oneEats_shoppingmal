@@ -42,6 +42,15 @@
 		<result property="memberNo" column="memberNo" />
 		<result property="memberName" column="memberName" />
 		<result property="profile" column="profile" />
+		<result property="level" column="level" />
+	</resultMap>
+
+	<resultMap id="mostQnAResult" type="mostQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="category" column="category" />
 	</resultMap>
 
 	<select id="newQnANo" resultType="int">
@@ -58,24 +67,21 @@
 
 	<select id="oneQnAList" resultMap="oneQnAResult">
 		select * from oneqna where
-		parentNo=0
+		parentNo=0 order by creDate desc
 	</select>
-	
+
 	<insert id="oneQnAFormInsert" parameterType="OneQnAVO">
 		insert oneqna
-		(qnaNo, title, content, parentNo, memberNo)
-		values(#{qnaNo},#{title},#{content},#{parentNo},#{memberNo})
+		(title, content, parentNo, memberNo)
+		values(,#{title},#{content},#{parentNo},#{memberNo})
 	</insert>
+	
+	<update id="updateQnAStatusDone" parameterType="int">
+		update oneqna
+		set status='답변완료'
+		where qnaNo=#{parentNo}
+	</update>
 
-	<resultMap id="mostQnAResult" type="mostQnAVO">
-		<result property="qnaNo" column="qnaNo" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="creDate" column="creDate" />
-		<result property="category" column="category" />
-	</resultMap>
-	
-	
 	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna
 	</select>
@@ -88,14 +94,20 @@
 	</select>
 
 	<select id="replyList" resultType="oneQnAVO" parameterType="int">
-
-		SELECT oneqna.*, member.name as memberName, member.profileImg as
-		profile
-		FROM oneqna
-		INNER JOIN member on oneqna.memberNo =
-		member.memberNo
-		where parentNo=#{qnaNo}
-
+		select t.*,m.name as memberName, m.profileImg as profile, m.id as id
+		from (
+		select @row_num :=@row_num+1 as rowNum, tt.* from (SELECT brd.*, fnc.level
+		as level
+		FROM
+		(SELECT function_hierarchical() AS qnaNo, @level AS level
+		FROM (SELECT @start_with:=#{qnaNo}, @qnaNo:=@start_with, @level:=0) as vars
+		JOIN oneQnA
+		WHERE @qnaNo IS NOT NULL) as fnc
+		JOIN oneQnA brd ON fnc.qnaNo = brd.qnaNo) tt, (select @row_num:=0) as var2
+		) t
+		inner join member m
+		on t.memberNo=m.memberNo
+		order by rowNum
 	</select>
 
 	<select id="sellectAllRecipe" resultMap="recipeResult">
@@ -268,24 +280,26 @@
 		order by creDate
 		limit #{start},10
 	</select>
-	
+
 	<select id="selectNoticeListWithPagingMap"
 		parameterType="java.util.Map" resultMap="noticeResult">
-		select * from notice 
+		select * from notice
 		<if test="category!='all'">
-			where category=#{category} 
+			where category=#{category}
 		</if>
 		order by creDate desc
 		limit #{start},10
 	</select>
-	
+
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
-		select * from oneqna where parentNo=0 and  memberNo=#{memberNo}
+		select * from oneqna where
+		parentNo=0 and memberNo=#{memberNo}
 		order by creDate desc
-		limit #{start},10
+		limit
+		#{start},10
 	</select>
-	
+
 	<select id="selectMostQnAListTotalNumWithCategory"
 		parameterType="String" resultType="int">
 		select count(qnaNo) from mostQnA
@@ -293,7 +307,7 @@
 			where category=#{category}
 		</if>
 	</select>
-	
+
 	<select id="selectNoticeListTotalNumWithCategory"
 		parameterType="String" resultType="int">
 		select count(noticeNo) from notice
@@ -301,11 +315,12 @@
 			where category=#{category}
 		</if>
 	</select>
-	
+
 	<select id="selectOneQnAListTotalNumWithPagingMap">
 		select count(qnaNo) from oneQnA
-		where memberNo=#{memberNo}
+		where
+		memberNo=#{memberNo}
 	</select>
-	
+
 
 </mapper>

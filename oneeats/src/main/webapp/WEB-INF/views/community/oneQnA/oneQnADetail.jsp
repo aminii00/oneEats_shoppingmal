@@ -11,7 +11,19 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
     <title>1:1문의 상세</title>
     <style>
       .reply_reply {
-        width: 624px;
+        width: 100%;
+      }
+      .reply_level_2 {
+        padding-left: 20px;
+      }
+      .reply_level_3 {
+        padding-left: 40px;
+      }
+      .reply_level_4 {
+        padding-left: 60px;
+      }
+      .reply_level_5 {
+        padding-left: 80px;
       }
     </style>
     <link rel="stylesheet" href="${contextPath}/css/community.css" />
@@ -93,14 +105,21 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <c:choose>
         <c:when test="${not empty replyList}">
           <c:forEach var="reply" items="${replyList}" varStatus="loop">
-            <hr class="line-black" />
+            <c:if test="${loop.index>0}">
+              <hr class="line-black" />
+            </c:if>
+
+            <c:set var="level" value="${reply.level}" />
+            <c:if test="${level>5}">
+              <c:set var="level" value="5" />
+            </c:if>
             <!--댓글 내용-->
-            <div class="row oneQnA_reply_row">
+            <div class="row oneQnA_reply_row reply_level_${reply.level}">
               <div class="col">
                 <div class="row oneQnA_reply_head">
                   <div class="col-md-2">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${reply.profile}&path=member/${reply.memberNo}"
+                      src="${contextPath}/download.do?imageFileName=${reply.profile}&path=memberNo${reply.memberNo}"
                       alt="프로필 사진"
                     />
                   </div>

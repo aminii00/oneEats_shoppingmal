@@ -6,7 +6,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
 <% request.setCharacterEncoding("utf-8"); %>
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html>
   <head>
     <meta charset="UTF-8" />
     <title>goodsDetail</title>
@@ -25,6 +25,38 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       dl.goods_option_row > dt > div.goods_option_x_btn {
       }
     </style>
+    <!--리뷰 비동기 로드-->
+    <script>
+      var section_num = parseInt("${section}");
+      function fn_loadReviews(prev_next, pageNum, goodsNo) {
+        console.log(section_num);
+        $.ajax({
+          type: "POST",
+          url: "/goods/nextReviews.do",
+          dataType: "html",
+          data: {
+            section: section_num + parseInt(prev_next),
+            pageNum: pageNum,
+            goodsNo: goodsNo,
+          },
+          success: function (response) {
+            console.log(response);
+            $("#reviews-grid").html(response);
+            section_num = section_num + parseInt(prev_next);
+            $("html, body").animate(
+              {
+                scrollTop: $("#reviews-grid").offset().top,
+              },
+              500
+            );
+          },
+          error: function (response) {
+            alert("원인불명의 에러");
+            console.log(response);
+          },
+        });
+      }
+    </script>
   </head>
 
   <body>
@@ -479,71 +511,64 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             </p>
                             <footer class="css-1fkegtf">
                               <div>
-                                <span class="css-14kcwq8">2023.08.12</span>
+                                <span class="css-14kcwq8"
+                                  >${review.creDate}</span
+                                >
                               </div>
-                              <button class="property-btn1">
+                              <!-- <button class="property-btn1">
                                 <span class="ico property-img"></span
                                 ><span>도움돼요</span>
-                              </button>
+                              </button> -->
                             </footer>
                           </div>
                         </article>
                       </div>
                     </c:forEach>
+
+                    <!--페이징-->
+                    <div>
+                      <ul class="ul-li">
+                        <c:if test="${section>1}">
+                          <li class="li-btn">
+                            <button
+                              class="btn-2 btn-square bg-white btn-border"
+                              onclick="fn_loadReviews('-1','1','${goods.goodsNo}')"
+                            >
+                              <i class="bi bi-arrow-left"></i>
+                            </button>
+                          </li>
+                        </c:if>
+                        <c:set
+                          var="end"
+                          value="${Math.ceil((totalReviewsNum - (section-1)*numForPage*10) div numForPage)}"
+                        />
+                        <c:if test="${end>10}">
+                          <c:set var="end" value="10" />
+                        </c:if>
+                        <c:forEach begin="1" end="${end}" var="i">
+                          <li class="li-btn">
+                            <button
+                              class="btn-2 btn-square bg-white btn-border"
+                              onclick="fn_loadReviews('0','${i}','${goods.goodsNo}')"
+                            >
+                              ${((section-1)*10)+i}
+                            </button>
+                          </li>
+                        </c:forEach>
+                        <c:if test="${section*numForPage*10<totalReviewsNum}">
+                          <li class="li-btn">
+                            <button
+                              class="btn-2 btn-square bg-white btn-border"
+                              onclick="fn_loadReviews('1','1','${goods.goodsNo}')"
+                            >
+                              <i class="bi bi-arrow-right"></i>
+                            </button>
+                          </li>
+                        </c:if>
+                      </ul>
+                    </div>
                   </div>
 
-                  <!--페이징-->
-                  <div>
-                    <ul class="ul-li">
-                      <c:if test="${section>1}">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section-1}','${i}','${goods.goodsNo}')"
-                          >
-                            <img
-                              width="20px"
-                              height="20px"
-                              src="${contextPath}/img/icon/prev.png"
-                              alt="prev"
-                            />
-                          </button>
-                        </li>
-                      </c:if>
-                      <c:set
-                        var="end"
-                        value="${Math.ceil((totalReviewsNum - (section-1)*100) div 10)}"
-                      />
-                      <c:if test="${end>10}">
-                        <c:set var="end" value="10" />
-                      </c:if>
-                      <c:forEach begin="1" end="${end}" var="i">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section}','${i}','${goods.goodsNo}')"
-                          >
-                            ${((section-1)*10)+i}
-                          </button>
-                        </li>
-                      </c:forEach>
-                      <c:if test="${section*100<totalReviewsNum}">
-                        <li class="li-btn">
-                          <button
-                            class="btn-2 btn-square bg-white btn-border"
-                            onclick="fn_loadReviews('${section+1}','${i}','${goods.goodsNo}')"
-                          >
-                            <img
-                              width="20px"
-                              height="20px"
-                              src="${contextPath}/img/icon/next.png"
-                              alt="next"
-                            />
-                          </button>
-                        </li>
-                      </c:if>
-                    </ul>
-                  </div>
                   <!--여기까지 상품후기-->
                 </div>
               </div>
@@ -553,30 +578,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </section>
     <!-- Product Details Section End -->
-    <script>
-      function fn_loadReviews(section, pageNum, goodsNo) {
-        $.ajax({
-          type: "POST",
-          url: "/goods/nextReviews.do",
-          dataType: "html",
-          data: { section: section, pageNum: pageNum, goodsNo: goodsNo },
-          success: function (response) {
-            $("#reviews-grid").html(response);
-            console.log(response);
-            $("html, body").animate(
-              {
-                scrollTop: $("#reviews-grid").offset().top,
-              },
-              500
-            );
-          },
-          error: function (response) {
-            alert("원인불명의 에러");
-            console.log(response);
-          },
-        });
-      }
-    </script>
 
     <!-- Related Product Section Begin -->
     <section class="related-product">

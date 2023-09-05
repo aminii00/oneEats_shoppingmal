@@ -257,7 +257,8 @@ where m.memberNo=#{memberNo}
 		INSERT INTO
 		point_history
 		(name, memberNo, amount)
-		VALUES ('상품 구입으로 인한 소진',#{memberNo}, #{used_point})
+		VALUES ('상품 구입으로 인한
+		소진',#{memberNo}, #{used_point})
 
 	</insert>
 
@@ -293,7 +294,8 @@ where m.memberNo=#{memberNo}
 				goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
 				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join
 				(select orderNo, count(*) as gun from t_order group by orderNo)
-				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
+				as
+				orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
 				orderplusgoods.orderNo
 			</when>
 			<when test="orderSearchType == '1month'">
@@ -355,56 +357,106 @@ where m.memberNo=#{memberNo}
 	</select>
 
 	<!-- 리뷰 1 -->
-	<select id="reviewList" parameterType="int"
+	<select id="selectAvailableReviewList" parameterType="int"
 		resultMap="OrderResult">
 	    <![CDATA[
-        
-         select t_order.order_seqNo, t_order.orderNo, t_order.memberNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
-         from t_order
-           inner join goods on t_order.goodsNo=goods.goodsNo
-         where t_order.delivery_status='배송완료' and t_order.review_status='미작성' and t_order.memberNo=#{memberNo}
+	    select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='미작성'  and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		order by orderDate desc
+		limit 0,5
 		]]>
 	</select>
+
+	<select id="selectTotalAvailableReviewsNum" resultType="int" parameterType="int">
+		select ifnull(count(orderNo),0) from( select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='미작성' and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		) ttt
+	</select>
+	
+	<select id="selectAvailableReviewListWithPagingMap" parameterType="java.util.Map" resultMap="OrderResult">
+		select * from( select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='미작성' and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		) ttt 
+		order by orderDate desc
+		limit #{start},#{numForPage}
+	</select>
+	
 
 	<!-- 리뷰 2 -->
-	<select id="writeReview" parameterType="int"
+	<select id="selectDoneReviewList" parameterType="int"
 		resultMap="OrderResult">
 	    <![CDATA[
-	     select * from review inner join
-        (select t_order.memberNo, t_order.order_seqNo, t_order.orderNo, t_order.goods_qty, t_order.deliveryDate, t_order.review_status, t_order.delivery_status, goods.name as goodsName, goods.goodsNo, goods.img1 as goodsImg 
-         from t_order 
-           inner join goods on t_order.goodsNo=goods.goodsNo where t_order.delivery_status='배송완료' and t_order.review_status='작성완료' and t_order.memberNo=#{memberNo})
-           as orderplusgoods
-         on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
+	     select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='작성완료' and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		order by orderDate desc
+		limit 5
 		]]>
 	</select>
 	
+	<select id="selectDoneReviewListWithPagingMap" parameterType="java.util.Map" resultMap="OrderResult">
+	 	select * from( select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='작성완료' and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		) ttt 
+		order by orderDate desc
+		limit #{start},#{numForPage}
+		
+	</select>
+	
+	<select id="selectTotalDoneReviewsNum" parameterType="int" resultType="int">
+		select ifnull(count(orderNo),0) from( select o.*,g.name as goodsName,g.img1 as goodsImg from t_order o
+		inner join goodsandhotdealview g
+		on g.goodsNo=o.goodsNo
+		where delivery_status='배송완료' and review_status='작성완료' and memberNo=#{memberNo}
+		group by (o.goodsNo*1001+o.orderNo) 
+		) ttt
+	
+	</select>
+
 	<select id="selectCouponListWithPagingMap"
 		parameterType="java.util.Map" resultMap="CouponResult">
-		select * from member_coupon 
-			inner join coupon 
-			on 
-			member_coupon.couponNo=coupon.couponNo 
-			where 
-			member_coupon.memberNo=#{memberNo}
-		    limit #{start},10 
+		select * from member_coupon
+		inner join coupon
+		on
+		member_coupon.couponNo=coupon.couponNo
+		where
+		member_coupon.memberNo=#{memberNo}
+		limit #{start},10
 	</select>
 
-	<select id="selectCouponListTotalNum" parameterType ="int" resultType="int">
-		select count(couponNo) from coupon where memberNo=#{memberNo}
+	<select id="selectCouponListTotalNum" parameterType="int"
+		resultType="int">
+		select count(couponNo) from coupon where
+		memberNo=#{memberNo}
 	</select>
-	
+
 	<select id="selectPointListWithPagingMap"
 		parameterType="java.util.Map" resultMap="PointHistoryResult">
-	select * from point_history
-			where memberNo=#{memberNo}
-		    limit #{start},10 
+		select * from point_history
+		where memberNo=#{memberNo}
+		limit #{start},10
 	</select>
 
-	<select id="selectPointListTotalNum" parameterType ="int" resultType="int">
-		select count(pointNo) from point_history where memberNo=#{memberNo}
+	<select id="selectPointListTotalNum" parameterType="int"
+		resultType="int">
+		select count(pointNo) from point_history where
+		memberNo=#{memberNo}
 	</select>
-	
+
 
 	<!-- 민아 쿠폰 조회 -->
 	<select id="couponSearch" resultMap="CouponResult"
@@ -547,7 +599,8 @@ deliveryNo=#{deliveryNo}
 		parameterType="java.util.Map" resultMap="BookResult">
 		select goods.memberNo,
 		goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark
-		inner join goods
+		inner
+		join goods
 		on
 		bookmark.goodsNo=goods.goodsNO
 		where

@@ -75,9 +75,9 @@ public interface MypageDAO {
 	//민아 회원정보 수정
 	public void updateMemberInfo(MemberVO memberVO) throws DataAccessException;
 	
-	public List<OrderVO> reviewList(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectAvailableReviewList(int memberNo) throws DataAccessException;
 	
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectDoneReviewList(int memberNo) throws DataAccessException;
 
 	public CouponVO couponNum(String couponCode);
 	
@@ -110,5 +110,13 @@ public interface MypageDAO {
 	public String selectTossApiByOrderNo(int orderNo);
 
 	public String isSNSMember(MemberVO memberInfo);
+
+	public int selectTotalAvailableReviewsNum(int memberNo);
+
+	public int selectTotalDoneReviewsNum(int memberNo);
+
+	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap);
+
+	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
 	
 }

@@ -160,63 +160,123 @@ public class GoodsControllerImpl implements GoodsController {
 	public String nextReviews(HttpServletRequest request) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		Map map = GeneralFileUploader.getParameterMap(request);
-		Map pagingMap = GeneralFunctions.getPagingMap(map);
+		Map pagingMap = GeneralFunctions.getPagingMap(map,5);
 		List<ReviewVO> reviewList = goodsService.selectReviewsWithPagingMap(pagingMap);
-
+		System.out.println("goodsReviewPagingMap : "+pagingMap);
 		String result = "";
+		System.out.println(reviewList);
+		
+		try {
+			for (int i = 0; i < reviewList.size(); i++) {
+				ReviewVO review = reviewList.get(i);
+				result += "<div class=\'property-input1\'>";
+				result += "<div class=\"property-gdtail-flex\">";
+				result += "<div class=\"property-gdtail-flex1\">";
+				result += "<span class=\"property-gdtail-font\">";
+				result += review.getMemberId();
+				result += "</span></div>";
+				result += "<div class=\"property-gdtail-flex1\">\r\n" + "                          <span\r\n"
+						+ "                            class=\"property-gdtail-font\"\r\n"
+						+ "                            style=\"padding-top: 11px\"\r\n" + "                            >";
+				float star = Float.parseFloat(review.getStar());
+				for (int j = 0; j < star; j++) {
+					result += "★";
+				}
+				if (star < Math.ceil(star)) {
+					result += "☆";
+				}
+				result += "</span></div></div>";
+				result += "<article class=\"property-gdtail-flex2\">\r\n" + "                        <div>\r\n"
+						+ "                          <div class=\"property-gdtail-flex3\">\r\n"
+						+ "                            <h3 class=\"property-gdtail-font1\">\r\n"
+						+ "                              [";
+				result += review.getGoodsName();
+				result += "]\r\n" + "                            </h3>\r\n" + "                          </div>";
+				result += "<p class=\"text-left\" style=\"padding: 15px 0 0 0\">";
+				result += review.getContent();
+				result += "<br />\r\n";
 
-		for (int i = 0; i < reviewList.size(); i++) {
-			ReviewVO review = reviewList.get(i);
-			result += "<div class=\'property-input1\'>";
-			result += "<div class=\"property-gdtail-flex\">";
-			result += "<div class=\"property-gdtail-flex1\">";
-			result += "<span class=\"property-gdtail-font\">";
-			result += review.getMemberId();
-			result += "</span></div>";
-			result += "<div class=\"property-gdtail-flex1\">\r\n" + "                          <span\r\n"
-					+ "                            class=\"property-gdtail-font\"\r\n"
-					+ "                            style=\"padding-top: 11px\"\r\n" + "                            >";
-			float star = Float.parseFloat(review.getStar());
-			for (int j = 0; j < star; j++) {
-				result += "★";
-			}
-			if (star < Math.ceil(star)) {
-				result += "☆";
-			}
-			result += "</span></div></div>";
-			result += "<article class=\"property-gdtail-flex2\">\r\n" + "                        <div>\r\n"
-					+ "                          <div class=\"property-gdtail-flex3\">\r\n"
-					+ "                            <h3 class=\"property-gdtail-font1\">\r\n"
-					+ "                              [";
-			result += review.getGoodsName();
-			result += "]\r\n" + "                            </h3>\r\n" + "                          </div>";
-			result += "<p class=\"text-left\" style=\"padding: 15px 0 0 0\">";
-			result += review.getContent();
-			result += "<br />\r\n";
+				if (review.getReviewImg() != null && review.getReviewImg().trim().length() > 0) {
+					result += "                            <img\r\n" + "                              style=\"\r\n"
+							+ "                                padding-top: 8px;\r\n"
+							+ "                                width: 60px;\r\n"
+							+ "                                height: 60px;\r\n" + "                              \"\r\n"
+							+ "                              src=\""+request.getContextPath()
+							+ "/download.do?imageFileName="
+							+ review.getReviewImg() + "&path=reviewNo" + review.getReviewNo()
+							+ "\"                              class=\"expand_img\"\r\n"
+							+ "                              alt=\"리뷰 사진\"\r\n" + "                            />";
+				}
 
-			if (review.getGoodsImg() != null && review.getGoodsImg().trim().length() > 0) {
-				result += "                            <img\r\n" + "                              style=\"\r\n"
-						+ "                                padding-top: 8px;\r\n"
-						+ "                                width: 60px;\r\n"
-						+ "                                height: 60px;\r\n" + "                              \"\r\n"
-						+ "                              src=\"${contextPath}/download.do?imageFileName="
-						+ review.getGoodsImg() + "&path=reviewNo" + review.getReviewNo()
-						+ "                              class=\"expand_img\"\r\n"
-						+ "                              alt=\"리뷰 사진\"\r\n" + "                            />";
+				result += "</p>\r\n" + "                          <footer class=\"css-1fkegtf\">\r\n"
+						+ "                            <div>\r\n"
+						+ "                              <span class=\"css-14kcwq8\">"+review.getCreDate()
+						+ "</span>\r\n"
+						+ "                            </div>\r\n"
+						+ "                            "
+//						+ "<button class=\"property-btn1\">\r\n"
+//						+ "                              <span class=\"ico property-img\"></span\r\n"
+//						+ "                              ><span>도움돼요</span>\r\n"
+//						+ "                            </button>\r\n" 
+						+ "                          "
+								+ "</footer>\r\n"
+						+ "                        </div>\r\n" + "                      </article>\r\n"
+						+ "                    </div>";
 			}
-
-			result += "</p>\r\n" + "                          <footer class=\"css-1fkegtf\">\r\n"
-					+ "                            <div>\r\n"
-					+ "                              <span class=\"css-14kcwq8\">2023.08.12</span>\r\n"
-					+ "                            </div>\r\n"
-					+ "                            <button class=\"property-btn1\">\r\n"
-					+ "                              <span class=\"ico property-img\"></span\r\n"
-					+ "                              ><span>도움돼요</span>\r\n"
-					+ "                            </button>\r\n" + "                          </footer>\r\n"
-					+ "                        </div>\r\n" + "                      </article>\r\n"
-					+ "                    </div>";
+			int section = Integer.parseInt(pagingMap.get("section").toString());
+			int goodsNo = Integer.parseInt(pagingMap.get("goodsNo").toString());
+			int totalReviewsNum = goodsService.selectTotalReviewsNum(goodsNo);
+			int numForPage = Integer.parseInt(pagingMap.get("numForPage").toString());
+			
+//			result += "<div><ul class=\"ul-li\">";
+//			if (section>1) {
+//				result += "<li class=\"li-btn\">\r\n"
+//						+ "                            <button\r\n"
+//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+//						+ "                              onclick=\"fn_loadReviews('-1','1','"+goodsNo
+//						+ "')\"\r\n"
+//						+ "                            >\r\n"
+//						+ "                              <i class=\"bi bi-arrow-left\"></i>"
+//						+ "                            </button>\r\n"
+//						+ "                          </li>";
+//			}
+//			int end = (int) Math.ceil((totalReviewsNum - (section-1)*100) / 10);
+//			if (end>10) {
+//				end = 10;
+//			}
+//			for (int i = 1; i <= end; i++) {
+//				result += "<li class=\"li-btn\">\r\n"
+//						+ "                            <button\r\n"
+//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+//						+ "                              onclick=\"fn_loadReviews('0','"+i
+//						+ "','"+goodsNo
+//						+ "')\"\r\n"
+//						+ "                            >\r\n"
+//						+ "                              "+(((section-1)*10)+i)
+//						+ "\r\n"
+//						+ "                            </button>\r\n"
+//						+ "                          </li>";
+//			}
+//			if (section*100<totalReviewsNum) {
+//				result += "<li class=\"li-btn\">\r\n"
+//						+ "                            <button\r\n"
+//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+//						+ "                              onclick=\"fn_loadReviews('1','1','"+goodsNo
+//						+ "')\"\r\n"
+//						+ "                            >\r\n"
+//						+ "                              <i class=\"bi bi-arrow-right\"></i>"
+//						+ "                            </button>\r\n"
+//						+ "                          </li>";
+//			}
+//			result += " </ul></div>";
+			
+			String[] params = {String.valueOf(goodsNo)};
+			result += GeneralFunctions.renderPageButtons(section, numForPage, totalReviewsNum, "fn_loadReviews", params);
+			result += "</div>";
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-
+		
 		return result;
 
 	}
@@ -234,25 +294,30 @@ public class GoodsControllerImpl implements GoodsController {
 		}
 		System.out.println("goodsBookmark.do");
 		boolean isExist = false;
+		BookmarkVO bookmarkVO = new BookmarkVO();
 		try {
 			int memberNo = member.getMemberNo();
 			int goodsNo = Integer.parseInt(_goodsNo);
-			BookmarkVO bookmarkVO = new BookmarkVO();
 			bookmarkVO.setGoodsNo(goodsNo);
 			bookmarkVO.setMemberNo(memberNo);
-			isExist = goodsService.isExistBookmark(bookmarkVO);
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		}
+
+		isExist = goodsService.isExistBookmark(bookmarkVO);
+		if (isExist) {
+			return "duplicated";
+		}
+
+		try {
 			goodsService.insertNewBookmark(bookmarkVO);
 			result = "success";
 		} catch (Exception e) {
 			e.printStackTrace();
 			result = "fail";
 		}
-		System.out.println(isExist);
-		if (isExist) {
-			return "duplicated";
-		}
-		System.out.println(result);
 		return result;
 	}
 

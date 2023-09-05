@@ -20,9 +20,15 @@ public class ReviewVO {
 	private String memberId;
 	private String sellerId;
 	private int sellerNo;
+	private Date creDate;
 	
 	
-	
+	public Date getCreDate() {
+		return creDate;
+	}
+	public void setCreDate(Date creDate) {
+		this.creDate = creDate;
+	}
 	public int getSellerNo() {
 		return sellerNo;
 	}

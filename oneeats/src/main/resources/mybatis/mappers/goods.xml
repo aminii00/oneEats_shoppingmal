@@ -100,6 +100,7 @@
 		<result property="goodsImg" column="goodsImg" />
 		<result property="sellerId" column="sellerId" />
 		<result property="memberId" column="memberId" />
+		<result property="creDate" column="creDate" />
 	</resultMap>
 
 	<select id="selectAllGoodsList" resultMap="GoodsResult">
@@ -392,7 +393,7 @@ LIMIT 6;
 		where goodsNo=#{goodsNo}
 		order by reviewNo
 		desc
-		limit 10
+		limit 5
 	</select>
 
 	<select id="selectReviewsWithPagingMap"
@@ -418,6 +419,6 @@ LIMIT 6;
 		where goodsNo=#{goodsNo}
 		order by reviewNo
 		desc
-		limit #{start},10
+		limit #{start},#{numForPage}
 	</select>
 </mapper> 

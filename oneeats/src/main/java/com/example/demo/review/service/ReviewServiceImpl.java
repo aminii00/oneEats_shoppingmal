@@ -1,11 +1,12 @@
 package com.example.demo.review.service;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.review.dao.ReviewDAO;
-import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.OrderVO;
 import com.example.demo.vo.ReviewVO;
 
@@ -27,26 +28,28 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 	
 	@Override
-	public int reviewInsert(ReviewVO reviewVO) {
-		return reviewDAO.reviewInsert(reviewVO);
+	@Transactional
+	public int reviewInsert(Map condMap) {
+		reviewDAO.updateOrderReviewStatus(condMap);
+		boolean isReviewed = isReviewed(condMap);
+		if (isReviewed==false) {
+			reviewDAO.updateMemberPoint(condMap);
+			reviewDAO.insertPointHistoryForReview(condMap);
+		}
+		
+		return reviewDAO.reviewInsert(condMap);
 	}
 	
 	@Override
-	public boolean isReviewed(ReviewVO reviewVO) {
-		int result = reviewDAO.isReviewed(reviewVO);
+	public boolean isReviewed(Map condMap) {
+		int result = reviewDAO.isReviewed(condMap);
 		if (result>0) {
 			return true;
 		}
 		return false;
 	}
-	
-	@Override
-	@Transactional
-	public void updateMemberPoint(ReviewVO reviewVO) {
-		reviewDAO.updateMemberPoint(reviewVO);
-		reviewDAO.insertPointHistoryForReview(reviewVO);
-	}
-	
+
+
 	
 	
 }
