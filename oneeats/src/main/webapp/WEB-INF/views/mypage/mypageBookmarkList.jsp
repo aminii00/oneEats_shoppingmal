@@ -86,7 +86,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <form method="post" action="#">
     <div class="div-p ">
         <br>
-        <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품은 최대 100개까지 저장합니다.</span></p>
+        <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품의 내역입니다.</span></p>
     <hr class="linebold">
     <br>
     <table>
@@ -113,6 +113,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </td>
       </tr>
       </c:forEach>
+     
     </table>
    
     <div>
@@ -165,5 +166,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
       </ul>
     </div>
+    <br><br>
   </body>
 </html>

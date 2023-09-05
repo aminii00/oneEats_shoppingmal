@@ -58,7 +58,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section>1}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section-1}&pageNum=1"
+                href="${contextPath}/admin/community/oneQnA/adminOneQnAList.do?section=${section-1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img
@@ -80,7 +80,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:forEach begin="1" end="${end}" var="i">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section}&pageNum=${i}"
+                href="${contextPath}/admin/community/oneQnA/adminOneQnAList.do?section=${section}&pageNum=${i}"
                 class="btn-2 btn-square bg-white btn-border"
                 >${((section-1)*10)+i}</a
               >
@@ -89,7 +89,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section*100<totalOneQnAQnANum}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section+1}&pageNum=1"
+                href="${contextPath}/admin/community/oneQnA/adminOneQnAList.do?section=${section+1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img

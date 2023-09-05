@@ -496,13 +496,13 @@
 
 	<select id="selectCouponListWithPagingMap"
 		parameterType="java.util.Map" resultMap="CouponResult">
-		select * from member_coupon
-		inner join coupon
-		on
-		member_coupon.couponNo=coupon.couponNo
-		where
-		member_coupon.memberNo=#{memberNo}
-		limit #{start},10
+		select * from member_coupon 
+			inner join coupon 
+			on 
+			member_coupon.couponNo=coupon.couponNo 
+			where 
+			member_coupon.memberNo=#{memberNo}
+		    limit #{start},3 
 	</select>
 
 	<select id="selectCouponListTotalNum" parameterType="int"
@@ -513,9 +513,9 @@
 
 	<select id="selectPointListWithPagingMap"
 		parameterType="java.util.Map" resultMap="PointHistoryResult">
-		select * from point_history
-		where memberNo=#{memberNo}
-		limit #{start},10
+	select * from point_history
+			where memberNo=#{memberNo}
+		    limit #{start},3 
 	</select>
 
 	<select id="selectPointListTotalNum" parameterType="int"

@@ -40,7 +40,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <hr class="line-black" />
       <div class="noticeList_grid textcolor-black text-center">
         <div class="row header-row textbold">
-          <div class="col-md-2">번호</div>
           <div class="col-md-2">카테고리</div>
           <div class="col-md">제목</div>
           <div class="col-md-3">작성일</div>
@@ -59,7 +58,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 class="row noticeList-title"
                 onclick="location.href='${contextPath}/community/notice/noticeDetail.do?noticeNo=${notice.noticeNo}';"
               >
-                <div class="col-md-2">${notice.noticeNo}</div>
                 <div class="col-md-2">${notice.category}</div>
                 <div class="col-md text-left">${notice.title}</div>
                 <div class="col-md-3">${notice.creDate}</div>
@@ -74,7 +72,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section>1}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/oneQnA/oneQnAList.do?section=${section-1}&pageNum=1"
+                href="${contextPath}/community/notice/noticeList.do?section=${section-1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img
@@ -88,7 +86,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           </c:if>
           <c:set
             var="end"
-            value="${Math.ceil((totalOneQnAQnANum - (section-1)*100) div 10)}"
+            value="${Math.ceil((totalNoticeNum - (section-1)*100) div 10)}"
           />
           <c:if test="${end>10}">
             <c:set var="end" value="10" />
@@ -102,7 +100,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               >
             </li>
           </c:forEach>
-          <c:if test="${section*100<totalOneQnAQnANum}">
+          <c:if test="${section*100<totalNoticeNum}">
             <li class="li-btn">
               <a
                 href="${contextPath}/community/notice/noticeList.do?section=${section+1}&pageNum=1"

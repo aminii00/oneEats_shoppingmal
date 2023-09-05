@@ -25,7 +25,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div style="float: right">
           <form
           id="admin_notice_category_form"
-          action="${contextPath}/community/notice/noticeList.do"
+          action="${contextPath}/admin/community/notice/adminNoticeList.do"
         >
           <select id="admin_notice_category_select" name="category">
             <option value="">카테고리</option>
@@ -40,7 +40,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <hr class="line-black" />
       <div class="noticeList_grid textcolor-black text-center">
         <div class="row header-row textbold">
-          <div class="col-md-1">번호</div>
           <div class="col-md-2">카테고리</div>
           <div class="col-md">제목</div>
           <div class="col-md-2">작성일</div>
@@ -54,7 +53,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             <c:forEach var="notice" items="${noticeList}">
               <hr class="line-gray" />
               <div class="row noticeList-title">
-                <div class="col-md-1">${notice.noticeNo}</div>
                 <div class="col-md-2">${notice.category}</div>
                 <div class="col-md text-left">${notice.title}</div>
                 <div class="col-md-2">${notice.creDate}</div>
@@ -84,6 +82,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div class="col">
           <div style="float: right">
             <button
+            type="button"
               class="btn-toform"
               onclick="location.href='${contextPath}/admin/community/notice/adminNoticeForm.do'"
             >
@@ -99,7 +98,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section>1}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/noticeList.do?section=${section-1}&pageNum=1"
+                href="${contextPath}/admin/community/notice/adminNoticeList.do?section=${section-1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img
@@ -130,7 +129,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section*100<totalNoticeNum}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/adminNoticeList.do?section=${section+1}&pageNum=1"
+                href="${contextPath}/admin/community/notice/adminNoticeList.do?section=${section+1}&pageNum=1"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img

@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -53,40 +54,42 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 
 
 	// 민아 관리자 1:1문의 리스트
-	@RequestMapping("/oneQnA/adminOneQnAList.do")
-	public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("여기는 community oneQnADetail Controller");
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		request.setCharacterEncoding("utf-8");
-		Map pagingMap = GeneralFileUploader.getParameterMap(request);
-		String pageNum = (String) pagingMap.get("pageNum");
-		String section = (String) pagingMap.get("section");
-		if (pageNum == null || pageNum.trim().length() < 1) {
-			pageNum = "1";
-			pagingMap.put("pageNum", pageNum);
+		@RequestMapping("/oneQnA/adminOneQnAList.do")
+		public ModelAndView oneQnADetail(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("여기는 community oneQnADetail Controller");
+			String viewName = (String) request.getAttribute("viewName");
+			ModelAndView mav = new ModelAndView(viewName);
+			request.setCharacterEncoding("utf-8");
+			Map pagingMap = GeneralFileUploader.getParameterMap(request);
+			String pageNum = (String) pagingMap.get("pageNum");
+			String section = (String) pagingMap.get("section");
+			if (pageNum == null || pageNum.trim().length() < 1) {
+				pageNum = "1";
+				pagingMap.put("pageNum", pageNum);
+			}
+			if (section == null || section.trim().length() < 1) {
+				section = "1";
+				pagingMap.put("section", section);
+			}
+			
+			try {
+				int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+				pagingMap.put("start", start);
+				List<OneQnAVO> oneQnAList = adminCommunityService.selectOneQnAListWithPagingMap(pagingMap);
+				mav.addAllObjects(pagingMap);
+				mav.addObject("oneQnAList", oneQnAList);
+				System.out.println("oneQnAList = " +oneQnAList);
+				int totalOneQnAQnANum = adminCommunityService.selectOneQnAListTotalNumWithCategory();
+				mav.addObject("totalOneQnAQnANum",totalOneQnAQnANum);
+				HttpSession session = request.getSession();
+				MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+				System.out.println(mav);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+			return mav;
 		}
-		if (section == null || section.trim().length() < 1) {
-			section = "1";
-			pagingMap.put("section", section);
-		}
-
-		try {
-			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
-			pagingMap.put("start", start);
-			List<OneQnAVO> oneQnAList = adminCommunityService.selectOneQnAListWithPagingMap(pagingMap);
-			mav.addAllObjects(pagingMap);
-			mav.addObject("oneQnAList", oneQnAList);
-			int totalOneQnAQnANum = adminCommunityService.selectOneQnAListTotalNumWithCategory();
-			mav.addObject("totalOneQnAQnANum",totalOneQnAQnANum);
-
-			System.out.println(mav);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return mav;
-	}
 
 	// 민아 관리자 공지사항
 	@RequestMapping("/notice/adminNoticeList.do")
