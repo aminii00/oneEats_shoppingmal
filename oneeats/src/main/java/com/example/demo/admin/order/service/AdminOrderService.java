@@ -19,4 +19,6 @@ public interface AdminOrderService {
 
 	List<OrderVO> selectOrderByMemberType(Map pagingMap);
 
+	public void updateDeliveryStatusWithOrderSeqArray(int[] order_seqNos, String delivery_status);
+
 }

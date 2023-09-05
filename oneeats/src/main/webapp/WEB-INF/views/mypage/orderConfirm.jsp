@@ -62,6 +62,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             }
 
             var choizongzuso = "(" + data.zonecode + ")" + addr;
+            document.getElementById("h_input_zipcode").value = data.zonecode;
             document.getElementById("address_input").value = choizongzuso;
 
             document.getElementById("address_detail_input").focus();
@@ -70,6 +71,120 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       }
     </script>
     <!--다음 주소 api 스크립트 끝-->
+
+    <script>
+      function fn_changeText(d_price, t_price) {
+        $("input[name=discount_price]").val(d_price);
+        $("#discount_price_text").text("-" + d_price + "원");
+        $("input[name=total_price]").val(t_price);
+        $("#total_price_text").text(t_price + "원");
+      }
+      $(document).ready(function () {
+        $("#used_point").on("change", function () {
+          var used_point = parseInt($("#used_point").val());
+          var original_discount_price = parseInt(
+            $("#h_original_discount_price").val()
+          );
+          var coupon_discount_price = parseInt(
+            $("#h_coupon_discount_price").val()
+          );
+          var payment_price = parseInt($("input[name=payment_price]").val());
+          var new_total_price =
+            payment_price -
+            used_point -
+            coupon_discount_price -
+            original_discount_price;
+          if (new_total_price < 0) {
+            alert("포인트를 더이상 쓸 수 없습니다.");
+            $(this).val(0);
+            used_point = 0;
+            new_total_price =
+              payment_price -
+              used_point -
+              coupon_discount_price -
+              original_discount_price;
+          }
+          var new_discount_price =
+            used_point + coupon_discount_price + original_discount_price;
+          fn_changeText(new_discount_price, new_total_price);
+        });
+
+        $("select[name=used_couponId]").on("change", function () {
+          var couponNo = $(this).val();
+          console.log("couponNo:" + couponNo);
+          if (parseInt(couponNo) != 0) {
+            $.ajax({
+              type: "POST",
+              url: "/mypage/selectCoupon.do",
+              data: {
+                couponNo: couponNo,
+              },
+              success: function (response) {
+                console.log(response);
+                var result = response.result;
+
+                if (result == "success") {
+                  console.log("success if 실행");
+                  var discount_price = parseInt(response.discount_price);
+                  var used_point = parseInt($("#used_point").val());
+                  var original_discount_price = parseInt(
+                    $("#h_original_discount_price").val()
+                  );
+                  var payment_price = parseInt(
+                    $("input[name=payment_price]").val()
+                  );
+                  var coupon_discount_price = discount_price;
+                  var new_total_price =
+                    payment_price -
+                    used_point -
+                    coupon_discount_price -
+                    original_discount_price;
+                  if (new_total_price < 0) {
+                    alert("쿠폰을 쓸 수 없습니다.");
+                    $(this).val(0);
+                    $("#h_coupon_discount_price").val(0);
+                    coupon_discount_price = 0;
+                    new_total_price =
+                      payment_price -
+                      used_point -
+                      coupon_discount_price -
+                      original_discount_price;
+                  }
+                  var new_discount_price =
+                    used_point +
+                    coupon_discount_price +
+                    original_discount_price;
+                  console.log(coupon_discount_price);
+                  fn_changeText(new_discount_price, new_total_price);
+                } else {
+                  alert("쿠폰 정보를 가져오는 데에 실패했습니다.");
+                }
+              },
+              error: function (response) {
+                alert("원인불명의 에러");
+                console.log(response);
+              },
+            });
+          } else {
+            var used_point = parseInt($("#used_point").val());
+            var original_discount_price = parseInt(
+              $("#h_original_discount_price").val()
+            );
+            var payment_price = parseInt($("input[name=payment_price]").val());
+            var coupon_discount_price = 0;
+            var new_total_price =
+              payment_price -
+              used_point -
+              coupon_discount_price -
+              original_discount_price;
+            var new_discount_price =
+              used_point + coupon_discount_price + original_discount_price;
+            console.log(coupon_discount_price);
+            fn_changeText(new_discount_price, new_total_price);
+          }
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- 주문/결제 -->
@@ -132,18 +247,26 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <td>배송주소</td>
           <td>
             <input
+              type="hidden"
+              id="h_input_zipCode"
+              name="zipCode"
+              value="${memberInfo.zipCode}"
+            />
+            <input
               onclick="execDaumPostCode()"
               readonly
               type="text"
               id="address_input"
               name="receiver_address"
               value="(${memberInfo.zipCode}) ${memberInfo.address}"
+              placeholder="주소"
             /><br />
             <input
               type="text"
               id="address_detail_input"
               name="receiver_addressDetail"
               value="${memberInfo.address_detail}"
+              placeholder="상세주소"
             />
           </td>
         </tr>
@@ -167,7 +290,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <option value="문앞에 놔주세요">문앞에 놔주세요</option>
               <option value="택배함에 넣어주세요">택배함에 넣어주세요</option>
               <option value="direct">직접입력</option>
-              <input type="text" id="selboxDirect" />
+              <input
+                type="text"
+                id="selboxDirect"
+                name="receiver_comment_direct"
+              />
             </select>
           </td>
         </tr>
@@ -184,12 +311,16 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>사용적립금</td>
           <td>
+            <c:set var="point_max_value" value="${memberInfo.point}" />
+            <c:if test="${point_max_value>total_price}">
+              <c:set var="point_max_value" value="total_price" />
+            </c:if>
             <input
               type="number"
               id="used_point"
               name="used_point"
               min="0"
-              max="${memberInfo.point}"
+              max="${point_max_value}"
               value="0"
             />
           </td>
@@ -207,15 +338,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               <option value="0" selected>쿠폰을 선택해주세요</option>
               <c:forEach var="coupon" items="${couponList}">
                 <option value="${coupon.couponNo}">${coupon.name}</option>
-                <input
-                  type="hidden"
-                  id="used_coupon"
-                  value="${coupon.discount_price}"
-                />
               </c:forEach>
             </select>
           </td>
         </tr>
+        <input type="hidden" id="h_coupon_discount_price" value="0" />
 
         <!-- 결제정보 -->
         <tr class="tr-1">
@@ -248,7 +375,12 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               type="hidden"
               name="discount_price"
               value="${discount_price}"
-            />-${discount_price}원
+            /><span id="discount_price_text">-${discount_price}원</span>
+            <input
+              type="hidden"
+              id="h_original_discount_price"
+              value="${discount_price}"
+            />
           </td>
         </tr>
         <tr>
@@ -274,11 +406,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <tr>
           <td>총 결제금액</td>
           <td>
-            <input
-              type="hidden"
-              name="total_price"
-              value="${total_price}"
-            />${total_price}원
+            <input type="hidden" name="total_price" value="${total_price}" />
+            <span id="total_price_text">${total_price}원</span>
           </td>
         </tr>
         <tr>
@@ -329,9 +458,18 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         country: "KR",
       });
 
+      function fn_render_widget(price) {
+        paymentWidget.renderPaymentMethods("#payment-method", {
+          value: price,
+          currency: "KRW",
+          country: "KR",
+        });
+      }
+
       function fn_sendOrderInfo(contextPath) {
         var formData = $("#orderForm").serialize();
-
+        var total_price = $("#orderForm").find("input[name=total_price]").val();
+        fn_render_widget(total_price);
         $.ajax({
           type: "POST",
           url: contextPath + "/storeOrderInfo.do",

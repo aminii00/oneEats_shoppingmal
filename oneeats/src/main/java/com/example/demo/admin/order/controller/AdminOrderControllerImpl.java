@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.admin.order.service.AdminOrderService;
+import com.example.demo.common.alert.Alert;
 import com.example.demo.common.file.GeneralFileUploader;
-import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
 @Controller("adminOrderController")
@@ -89,5 +89,26 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		
 		ModelAndView mav = new ModelAndView("redirect:/admin/order/adminOrderList.do");
 		return mav;
+	}
+	
+	@RequestMapping("/admin/order/modDeliveryStatus.do")
+	public ModelAndView modDeliveryStatus(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		int orderNo = Integer.parseInt(request.getParameter("orderNo"));
+		String delivery_status = request.getParameter("delivery_status");
+		int[] order_seqNos = adminOrderService.selectSeqNoByOrderNo(orderNo);
+		try {
+			adminOrderService.updateDeliveryStatusWithOrderSeqArray(order_seqNos,delivery_status);
+			mav = Alert.alertAndRedirect("수정했습니다.", request.getContextPath() +"/admin/order/adminOrderList.do");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mav = Alert.alertAndRedirect("수정하지 못 했습니다.", request.getContextPath() +"/admin/order/adminOrderList.do");
+		}
+		
+		
+		
+		return mav;
+		
+		
 	}
 }

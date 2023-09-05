@@ -23,4 +23,12 @@ public interface AdminOrderDAO {
 
 	List<OrderVO> selectOrderByMemberType(Map pagingMap);
 
+	public void updateDeliveryStatus(OrderVO temp);
+
+	OrderVO selectOrderByOrderSeqNo(int order_seqNo);
+
+	void updateMemberPoint(OrderVO orderVO);
+
+	void insertPointHistoryWithOrderVO(OrderVO orderVO);
+
 }

@@ -200,9 +200,9 @@
 		parameterType="int">
 		<![CDATA[
 			select c.* from coupon c
-inner join member_coupon m
-on c.couponNo=m.couponNo
-where m.memberNo=#{memberNo}
+			inner join member_coupon m
+			on c.couponNo=m.couponNo
+			where m.memberNo=#{memberNo} and m.used="no"
 		]]>
 	</select>
 
