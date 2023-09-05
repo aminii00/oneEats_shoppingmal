@@ -153,16 +153,16 @@ public class MypageServiceImpl implements MypageService {
 
 	// 민아 리뷰1
 	@Override
-	public List<OrderVO> reviewList(int memberNo) throws DataAccessException {
-		List<OrderVO> reviewList = mypageDAO.reviewList(memberNo);
+	public List<OrderVO> selectAvailableReviewList(int memberNo) throws DataAccessException {
+		List<OrderVO> reviewList = mypageDAO.selectAvailableReviewList(memberNo);
 		return reviewList;
 	}
 
 	// 민아 리뷰2
 		@Override
-		public List<OrderVO> writeReview(int memberNo) throws DataAccessException {
-			List<OrderVO> writeReview = mypageDAO.writeReview(memberNo);
-			return writeReview;
+		public List<OrderVO> selectDoneReviewList(int memberNo) throws DataAccessException {
+			List<OrderVO> doneReviewList = mypageDAO.selectDoneReviewList(memberNo);
+			return doneReviewList;
 
 		}
 
@@ -236,15 +236,6 @@ public class MypageServiceImpl implements MypageService {
 	}
 	
 	
-	/*
-	 * @Override public List<CouponVO> couponSearch(MemberVO memberInfo) throws
-	 * DataAccessException { List<CouponVO> couponVO =
-	 * mypageDAO.couponSearch(memberInfo); return couponVO; }
-	 * 
-	 * @Override public List<PointHistoryVO> pointSearch(MemberVO memberInfo) throws
-	 * DataAccessException { List<PointHistoryVO> pointHistoryVO =
-	 * mypageDAO.pointSearch(memberInfo); return pointHistoryVO; }
-	 */
 
 	@Override
 	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap) {
@@ -267,6 +258,27 @@ public class MypageServiceImpl implements MypageService {
 	public int selectCouponListTotalNum(int memberNo) {
 		int num = mypageDAO.selectCouponListTotalNum(memberNo);
 		return num;
+	}
+
+	@Override
+	public int selectTotalAvailableReviewsNum(int memberNo) {
+		
+		return mypageDAO.selectTotalAvailableReviewsNum(memberNo);
+	}
+
+	@Override
+	public int selectTotalDoneReviewsNum(int memberNo) {
+		return mypageDAO.selectTotalDoneReviewsNum(memberNo);
+	}
+
+	@Override
+	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap) {
+		return mypageDAO.selectDoneReviewListWithPagingMap(pagingMap);
+	}
+
+	@Override
+	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap) {
+		return mypageDAO.selectAvailableReviewListWithPagingMap(pagingMap);
 	}
 	
 	

@@ -42,13 +42,27 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         text-shadow: 0 0 0 orange; /* 마우스 클릭 체크 */
       }
     </style>
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $("#review_preview").attr("src", e.target.result);
+          };
+
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+    </script>
   </head>
   <body>
     <form
-      action="${contextPath}/review/reviewInsert.do?goodsNo=${order.goodsNo}"
+      action="${contextPath}/review/reviewInsert.do"
       method="post"
       enctype="multipart/form-data"
     >
+      <input type="hidden" name="goodsNo" value="${order.goodsNo}" />
+      <input type="hidden" name="orderNo" value="${order.orderNo}" />
       <div class="content-area">
         <div class="profile-edit-box">
           <div class="profile-edit-header">
@@ -82,11 +96,31 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             ${memberInfo.id}님<br />
             주문하신 상품이 마음에 드셨나요?
           </p>
-          <p class="textsize-1">${goods.name}에 대한 리뷰를 작성해주세요.</p>
-          <img
-            src="${contextPath}/img/product/review/star.jpg"
-            style="width: 100px; height: 25px"
-          />
+          <p class="textsize-1">${order.name}에 대한 리뷰를 작성해주세요.</p>
+
+          <fieldset class="myform">
+            <legend class="textsize-1">별점을 선택해주세요</legend>
+            <input type="radio" name="star" value="1" id="rate1" /><label
+              for="rate1"
+              >⭐</label
+            >
+            <input type="radio" name="star" value="2" id="rate2" /><label
+              for="rate2"
+              >⭐</label
+            >
+            <input type="radio" name="star" value="3" id="rate3" /><label
+              for="rate3"
+              >⭐</label
+            >
+            <input type="radio" name="star" value="4" id="rate4" /><label
+              for="rate4"
+              >⭐</label
+            >
+            <input type="radio" name="star" value="5" id="rate5" /><label
+              for="rate5"
+              >⭐</label
+            >
+          </fieldset>
         </div>
 
         <br />
@@ -96,24 +130,15 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         <p class="textsize-3 textbold" style="text-align: left">
           사진을 올려주세요.(선택)
         </p>
-        <c:choose>
-          <c:when test="${review.reviewImg==null}">
-            <img
-              src="${contextPath}/img/product/review/noImage.jpg"
-              class="brd-lightgray btn-round imgsize-square2"
-              style="width: 110px; height: 100px"
-            />
-            <input type="file" name="reviewImg" /><br />
-          </c:when>
-          <c:otherwise>
-            <img
-              class="brd-lightgray btn-round imgsize-square2"
-              src="${contextPath}/download.do?imageFileName=${review.reviewImg}&path=reviewNo${review.reviewNo}"
-              alt="프로필사진"
-            />
-            <input type="file" name="reviewImg" /><br />
-          </c:otherwise>
-        </c:choose>
+
+        <img
+          src="${contextPath}/img/product/review/noImage.jpg"
+          class="brd-lightgray btn-round imgsize-square2"
+          style="width: 110px; height: 100px"
+          id="review_preview"
+        />
+        <input type="file" name="reviewImg" onchange="readURL(this)" /><br />
+
         <input type="hidden" value="5" name="star" />
 
         <br />

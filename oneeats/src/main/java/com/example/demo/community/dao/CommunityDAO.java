@@ -73,4 +73,6 @@ public interface CommunityDAO {
 	public List<OneQnAVO> replyList(int qnaNo);
 
 	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap);
+
+	public void updateQnAStatusDone(int parentNo);
 }

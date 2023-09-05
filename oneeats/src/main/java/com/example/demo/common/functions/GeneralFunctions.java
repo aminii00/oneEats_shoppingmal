@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 
 public class GeneralFunctions {
 	public static boolean isInteger(String string) {
@@ -97,17 +98,91 @@ public class GeneralFunctions {
 			category="";
 		}
 		
-		int start = ((Integer.parseInt(_section) - 1) + Integer.parseInt(_pageNum) - 1) * elNumForPage;
-		
+		int start = ((Integer.parseInt(_section) - 1)*10 + Integer.parseInt(_pageNum) - 1) * elNumForPage;
+		int numForPage = elNumForPage;
 		map.put("section", _section);
 		map.put("pageNum", _pageNum);
 		map.put("category", category);
 		map.put("start", start);
-		
+		map.put("numForPage", numForPage);
 		return map;
 	}
 
 	public static Map getPagingMap(Map map) throws Exception{
 		return getPagingMap(map,10);
 	}
+	
+	
+	public static Map getPagingMap(HttpServletRequest request) throws Exception{
+		return getPagingMap(GeneralFileUploader.getParameterMap(request));
+	}
+	
+	public static Map getPagingMap(HttpServletRequest request,int elNumForPage) throws Exception{
+		return getPagingMap(GeneralFileUploader.getParameterMap(request),elNumForPage);
+	}
+	
+	
+	public static String renderPageButtons(int section, int elNumForPage, int totalNumber,String onclickFunction,String[] functionParams) {
+		String result = "";
+		result += " <div><ul class=\"ul-li\">";
+
+		if (section > 1) {
+			result += " <li class=\"li-btn\">\r\n" + "                <button\r\n"
+					+ "                  class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+					+ "                  onclick=\""+onclickFunction
+					+ "('-1','1'";
+			for (String param : functionParams) {
+				result += ",'"+param+"'";
+			}
+			result += ")\"\r\n"
+					+ "                >\r\n" + "                  <i class=\"bi bi-arrow-left\"></i>\r\n"
+					+ "                </button>\r\n" + "              </li>";
+
+		}
+		double remainPages = (totalNumber - (section-1)*elNumForPage*10);
+		int end = (int) Math.ceil(remainPages / elNumForPage);
+		if (end>10) {
+			end = 10;
+		}
+		for (int i = 1; i <= end; i++) {
+			result += "<li class=\"li-btn\">\r\n"
+					+ "                            <button\r\n"
+					+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+					+ "                              onclick=\""+onclickFunction
+					+ "('0','"+i
+					+ "'";
+			for (String param : functionParams) {
+				result += ",'"+param+"'";
+			}
+			
+			result		+= ")\"\r\n"
+					+ "                            >\r\n"
+					+ "                              "+(((section-1)*10)+i)
+					+ "\r\n"
+					+ "                            </button>\r\n"
+					+ "                          </li>";
+		}
+		
+		if (section*elNumForPage*10<totalNumber) {
+			result += "<li class=\"li-btn\">\r\n"
+					+ "                            <button\r\n"
+					+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
+					+ "                              onclick=\""+onclickFunction
+					+ "('1','1'";
+			for (String param : functionParams) {
+				result += ",'"+param+"'";
+			}
+			result
+					+= ")\"\r\n"
+					+ "                            >\r\n"
+					+ "                              <i class=\"bi bi-arrow-right\"></i>"
+					+ "                            </button>\r\n"
+					+ "                          </li>";
+		}
+		result += " </ul></div>";
+		
+		
+		return result;
+	}
+
 }

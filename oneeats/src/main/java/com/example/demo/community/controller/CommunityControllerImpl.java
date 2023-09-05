@@ -327,7 +327,6 @@ System.out.println("map : " + map);
 	@Override
 	@RequestMapping(value = "/oneQnA/QnAReply.do", method = RequestMethod.POST)
 	public ModelAndView oneQnAReply(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("여기는 community QnAReply Controller");
 		ModelAndView mav = new ModelAndView();
 		String content = request.getParameter("content");
 		String qnaNo_ = request.getParameter("qnaNo");
@@ -337,13 +336,11 @@ System.out.println("map : " + map);
 		int qnaNo = Integer.parseInt(qnaNo_);
 		System.out.println("content = " + content+ "qnaNo = " +qnaNo);
 		// no을 parentNo으롷 memberNo는 댓글이나 답글을 작성 한 사람
-		int NewqnaNo = communityService.newQnANo(); // 새로운 qnaNo 찾기
 		OneQnAVO oneqnaVO = new OneQnAVO();
-		oneqnaVO.setParentNo(qnaNo); // parentNo을 qnaNo으로
+		oneqnaVO.setParentNo(qnaNo);
 		oneqnaVO.setContent(content);
-		oneqnaVO.setQnaNo(NewqnaNo); // 새로운 qnaNo값을 가져와서 set
-		oneqnaVO.setMemberNo(memberNo); // 세션에 있는 로그인정보를 가져와서 memberNo에 넣기
-		communityService.replyInsert(oneqnaVO); // parentNo에 1을 넣은 oneqnaVO insert하기
+		oneqnaVO.setMemberNo(memberNo);
+		communityService.replyInsert(oneqnaVO);
 		mav.addObject("qnaNo",qnaNo);
 		mav.setViewName("redirect:/community/oneQnA/oneQnADetail.do");
 		return mav;

@@ -61,9 +61,9 @@ public interface MypageService {
 	
 	public void updateMember(MemberVO memberVO) throws DataAccessException;
 	
-	public List<OrderVO> reviewList(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectAvailableReviewList(int memberNo) throws DataAccessException;
 	
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectDoneReviewList(int memberNo) throws DataAccessException;
 	
 	public CouponVO couponNum(String couponCode);
 	
@@ -94,5 +94,13 @@ public interface MypageService {
 	public String selectTossApiByOrderNo(int orderNo);
 
 	public boolean isSNSMember(MemberVO memberInfo);
+
+	public int selectTotalAvailableReviewsNum(int memberNo);
+
+	public int selectTotalDoneReviewsNum(int memberNo);
+
+	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap);
+
+	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
 	
 }

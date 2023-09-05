@@ -12,6 +12,7 @@
 		<result property="content" column="content" />
 		<result property="goodsNo" column="goodsNo" />
 		<result property="memberNo" column="memberNo" />
+		<result property="creDate" column="creDate" />
 	</resultMap>
 		
 		<resultMap id="GoodsResult" type="goodsVO">
@@ -79,7 +80,7 @@
 	
 		
 		
-		<select id="SearchGoods" parameterType="OrderVO" resultMap="OrderResult">
+		<select id="SearchGoods" parameterType="orderVO" resultMap="OrderResult">
 		<![CDATA[
 			select t_order.order_seqNo, t_order.memberNo, t_order.orderNo, goods.goodsNo, goods.name, goods.price, goods.img1 
             from t_order
@@ -96,19 +97,25 @@
 	</select>
 	
 	<!-- 리뷰 insert -->
-	<insert id="reviewInsert" parameterType="reviewVO" useGeneratedKeys="true" keyProperty="reviewNo">
+	<insert id="reviewInsert" parameterType="java.util.Map" useGeneratedKeys="true" keyProperty="reviewNo">
 		<![CDATA[
-		insert into review(reviewNo, star, reviewImg, content, goodsNo, memberNo)
-		values(#{reviewNo}, #{star}, #{reviewImg}, #{content}, #{goodsNo}, #{memberNo})
+		insert into review(star, reviewImg, content, goodsNo, memberNo)
+		values(#{star}, #{reviewImg}, #{content}, #{goodsNo}, #{memberNo})
 		]]>
 	</insert>
 	
-	<select id="isReviewed" parameterType="reviewVO" resultType="int">
+	<update id="updateOrderReviewStatus" parameterType="java.util.Map">
+		update t_order
+		set review_status='작성완료'
+		where review_status='미작성' and memberNo=#{memberNo} and orderNo=#{orderNo} and goodsNo=#{goodsNo}
+	</update>
+	
+	<select id="isReviewed" parameterType="java.util.Map" resultType="int">
 		select count(reviewNo) from review where goodsNo=#{goodsNo} and memberNo=#{memberNo} and creDate between date_sub(now(),interval 1 month) and now() 
 	</select>
 
 		
-	<update id="updateMemberPoint" parameterType="reviewVO">
+	<update id="updateMemberPoint" parameterType="java.util.Map">
 		update member
 		set
 		<choose>
@@ -122,7 +129,7 @@
 		where memberNo=#{memberNo}
 	</update>
 	
-	<insert id="insertPointHistoryForReview" parameterType="reviewVO">
+	<insert id="insertPointHistoryForReview" parameterType="java.util.Map">
 		insert into point_history
 		(name, finishDate, amount, memberNo)
 		values

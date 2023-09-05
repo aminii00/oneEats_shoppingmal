@@ -112,7 +112,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           </div>
         </td>
       </tr>
-      <hr>
+      </c:forEach>
     </table>
    
     <div>

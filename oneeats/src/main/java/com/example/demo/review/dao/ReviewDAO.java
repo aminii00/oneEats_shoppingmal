@@ -1,5 +1,7 @@
 package com.example.demo.review.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,12 +17,14 @@ public interface ReviewDAO {
 	
 	public int newReviewNo();
 	
-	public int reviewInsert(ReviewVO reviewVO);
+	public int reviewInsert(Map condMap);
 
-	public int isReviewed(ReviewVO reviewVO);
+	public int isReviewed(Map condMap);
 
-	public void updateMemberPoint(ReviewVO reviewVO);
+	public void updateMemberPoint(Map condMap);
 
-	public void insertPointHistoryForReview(ReviewVO reviewVO);
+	public void insertPointHistoryForReview(Map condMap);
+
+	public void updateOrderReviewStatus(Map condMap);
 
 }
