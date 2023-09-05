@@ -111,4 +111,6 @@ public interface MypageDAO {
 
 	public String isSNSMember(MemberVO memberInfo);
 	
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo);
+	
 }

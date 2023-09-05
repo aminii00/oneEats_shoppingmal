@@ -117,6 +117,7 @@
 		<result property="memberNo" column="memberNo" />
 	</resultMap>
 
+	
 
 	<delete id="deleteMember" parameterType="MemberVO">
     <![CDATA[
@@ -257,7 +258,8 @@ where m.memberNo=#{memberNo}
 		INSERT INTO
 		point_history
 		(name, memberNo, amount)
-		VALUES ('상품 구입으로 인한 소진',#{memberNo}, #{used_point})
+		VALUES ('상품 구입으로 인한
+		소진',#{memberNo}, #{used_point})
 
 	</insert>
 
@@ -293,7 +295,8 @@ where m.memberNo=#{memberNo}
 				goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo
 				WHERE t_order.memberNo=#{memberNo}) as orderplusgoods inner join
 				(select orderNo, count(*) as gun from t_order group by orderNo)
-				as orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
+				as
+				orderGun on orderplusgoods.orderNo=orderGun.orderNo order by
 				orderplusgoods.orderNo
 			</when>
 			<when test="orderSearchType == '1month'">
@@ -378,33 +381,45 @@ where m.memberNo=#{memberNo}
          on review.goodsNo=orderplusgoods.goodsNo where review.memberNo=#{memberNo}
 		]]>
 	</select>
-	
+
 	<select id="selectCouponListWithPagingMap"
 		parameterType="java.util.Map" resultMap="CouponResult">
-		select * from member_coupon 
-			inner join coupon 
-			on 
-			member_coupon.couponNo=coupon.couponNo 
-			where 
-			member_coupon.memberNo=#{memberNo}
-		    limit #{start},3 
+		select * from member_coupon
+		inner join coupon
+		on
+		member_coupon.couponNo=coupon.couponNo
+		where
+		member_coupon.memberNo=#{memberNo} 
+		limit #{start},3 
 	</select>
 
-	<select id="selectCouponListTotalNum" parameterType ="int" resultType="int">
-		select count(couponNo) from coupon where memberNo=#{memberNo}
+	<select id="selectCouponListTotalNum" parameterType="int"
+		resultType="int">
+
+		SELECT COUNT(mc.couponNo) AS couponCount
+		FROM member_coupon mc
+		INNER JOIN coupon c ON mc.couponNo = c.couponNo
+		WHERE mc.memberNo = #{memberNo}
 	</select>
-	
+
 	<select id="selectPointListWithPagingMap"
 		parameterType="java.util.Map" resultMap="PointHistoryResult">
-	select * from point_history
-			where memberNo=#{memberNo}
-		    limit #{start},3 
+		select * from point_history
+		where memberNo=#{memberNo} order by creDate desc
+		limit #{start1},3
 	</select>
 
-	<select id="selectPointListTotalNum" parameterType ="int" resultType="int">
-		select count(pointNo) from point_history where memberNo=#{memberNo}
+	<select id="selectPointListTotalNum" parameterType="int"
+		resultType="int">
+		select count(pointNo) from point_history where
+		memberNo=#{memberNo}
 	</select>
 	
+	<select id="memberPoint" parameterType="memberVO"
+		resultMap="PointHistoryResult">
+		select * from point_history where memberNo=#{memberNo}
+	</select>
+
 
 	<!-- 민아 쿠폰 조회 -->
 	<select id="couponSearch" resultMap="CouponResult"
@@ -547,7 +562,8 @@ deliveryNo=#{deliveryNo}
 		parameterType="java.util.Map" resultMap="BookResult">
 		select goods.memberNo,
 		goods.goodsNo, goods.name, goods.price, goods.img1 from bookmark
-		inner join goods
+		inner
+		join goods
 		on
 		bookmark.goodsNo=goods.goodsNO
 		where

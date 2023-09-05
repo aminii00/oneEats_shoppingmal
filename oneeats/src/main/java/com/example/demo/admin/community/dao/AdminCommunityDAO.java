@@ -47,7 +47,7 @@ public interface AdminCommunityDAO {
 
 	public List<OneQnAVO> selectOneQnAListWithPagingMap(Map pagingMap);
 
-	public int selectNoticeListTotalNumWithCategory(String category);
+	public int selectNoticeListTotalNumWithCategory(Map pagingMap);
 
 	public int selectOneQnAListTotalNumWithCategory();
 

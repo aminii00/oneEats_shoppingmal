@@ -75,6 +75,11 @@
 		<result property="category" column="category" />
 	</resultMap>
 	
+	<select id="selectMemberByMemberNo" resultType="MemberVO">
+		<![CDATA[
+			select * from member where memberNo=#{memberNo}
+		]]>
+	</select>
 	
 	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna
@@ -279,6 +284,14 @@
 		limit #{start},10
 	</select>
 	
+	<select id="selectNoticeListTotalNumWithCategory"
+		parameterType="java.util.Map" resultType="int">
+		select count(noticeNo) from notice 
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+	</select>
+	
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
 		select oneqna.*, member.id
@@ -291,14 +304,6 @@
 	<select id="selectMostQnAListTotalNumWithCategory"
 		parameterType="String" resultType="int">
 		select count(qnaNo) from mostQnA
-		<if test="category!='all'">
-			where category=#{category}
-		</if>
-	</select>
-	
-	<select id="selectNoticeListTotalNumWithCategory"
-		parameterType="String" resultType="int">
-		select count(noticeNo) from notice 
 		<if test="category!='all'">
 			where category=#{category}
 		</if>

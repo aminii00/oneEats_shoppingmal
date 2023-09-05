@@ -120,7 +120,9 @@ public class CommunityControllerImpl implements CommunityController {
 		RecipeVO recipeVO = communityService.selectRecipeByRecipeNo(recipeNo);
 		mav.addObject("recipe", recipeVO);
 		List<Map> ingredientList = communityService.selectingredientByRecipeNo(recipeNo);
-
+		int memberNo = recipeVO.getMemberNo();
+		MemberVO writer = communityService.selectMemberByMemberNo(memberNo);
+		mav.addObject("writer",writer);
 		mav.addObject("ingredientList", ingredientList);
 
 		System.out.println(mav);
@@ -539,7 +541,7 @@ System.out.println("map : " + map);
 				mav.addAllObjects(pagingMap);
 				mav.addObject("noticeVO", noticeVO);
 				System.out.println("noticeVO = " +noticeVO);
-				int totalNoticeNum = communityService.selectNoticeListTotalNumWithCategory(category);
+				int totalNoticeNum = communityService.selectNoticeListTotalNumWithCategory(pagingMap);
 				System.out.println(totalNoticeNum);
 				mav.addObject("totalNoticeNum",totalNoticeNum);
 				

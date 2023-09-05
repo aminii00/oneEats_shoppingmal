@@ -12,18 +12,18 @@
 <head>
 <link rel="stylesheet" href="${contextPath}/css/mina.css">
 <meta charset="UTF-8">
-<script>
-function readURL(input){
-	  if(input.files && input.files[0]){
-		  var reader = new FileReader();
-		  reader.onload = function (e) {
-			  $('#preview').attr('src', e.target.result);
-		  }
-		  reader.readAsDataURL(input.files[0]);
-	  }
-  }
+<script type="text/javascript">
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $("#profileImg_preview").attr("src", e.target.result);
+        };
 
-</script>
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+  </script>
 <title>프로필 편집</title>
 <style>
 
@@ -47,13 +47,13 @@ function readURL(input){
                     
                     <c:choose>
 				<c:when test="${myList.profileImg==null}">
-					<img src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2" >
-                    <input type="file" name="profileImg"><br>
+					<img id="profileImg_preview" src= "${contextPath}/img/icon/profile.png" class="brd-lightgray btn-round imgsize-square2" >
+                    <input type="file" name="profileImg" onchange="readURL(this);"><br>
                     
 				</c:when>
 				<c:otherwise>
-                    <img class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=member/${myList.memberNo}" alt="프로필사진">
-                    <input type="file"  name="profileImg" ><br>
+                    <img id="profileImg_preview" class="brd-lightgray btn-round imgsize-square2" src="${contextPath}/download.do?imageFileName=${myList.profileImg}&path=member/${myList.memberNo}" alt="프로필사진">
+                    <input  type="file"  name="profileImg" onchange="readURL(this);" ><br>
 				</c:otherwise>
 			</c:choose>
         </div>

@@ -93,4 +93,6 @@ public interface MypageService {
 
 	public boolean isSNSMember(MemberVO memberInfo);
 	
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo);
+	
 }
