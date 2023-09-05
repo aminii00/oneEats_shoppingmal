@@ -28,7 +28,7 @@ public interface SellerGoodsService {
 
 //상품 리스트	
 	public List<GoodsVO> selectGoodsList(Map pagingMap);
-
+	public int selectTotalGoodsNum();
 
 	
 //카테고리 

@@ -85,6 +85,11 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsVO> selectGoodsListWithSearchFilter(Map searchMap) {
 		return goodsDAO.selectGoodsListWithSearchFilter(searchMap);
 	}
+	
+	@Override
+	public List<HotDealVO> selectHotDealListWithSearchFilter(Map searchMap) {
+		return goodsDAO.selectHotDealListWithSearchFilter(searchMap);
+	}
 
 	@Override
 	public int selectGoodsTotalNumWithSearchFilter(Map searchMap) {
@@ -96,9 +101,22 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDAO.selectGoodsListWithPagingMap(pagingMap);
 	}
 
+	
+	@Override
+	public List<HotDealVO> selectHotDealListWithPagingMap(Map pagingMap) {
+		return goodsDAO.selectHotDealListWithPagingMap(pagingMap);
+	}
+
+	
+
 	@Override
 	public int selectGoodsTotalNumWithPagingMap(Map pagingMap) {
 		return goodsDAO.selectGoodsTotalNumWithPagingMap(pagingMap);
+	}
+	
+	@Override
+	public int selectHotDealTotalNumWithPagingMap(Map pagingMap) {
+		return goodsDAO.selectHotDealTotalNumWithPagingMap(pagingMap);
 	}
 
 	@Override

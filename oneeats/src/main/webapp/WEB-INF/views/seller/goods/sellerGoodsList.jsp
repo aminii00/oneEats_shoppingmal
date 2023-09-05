@@ -13,23 +13,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <title>사업자 상품 리스트</title>
     <link rel="stylesheet" href="${contextPath}/css/list.css" />
   </head>
-  <script>
-    $(document).ready(function () {
-      $("#goods_category_select").change(function () {
-        $(this).closest("form").submit();
-      });
-    });
-  </script>
+
   <body>
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">상품목록</p>
       <div class="div-sib textsize-1">
         <form
-          id="goods_category_form"
+          method="post"
           action="${contextPath}/seller/goods/sellerGoodsList.do"
         >
-          <select id="goods_category_select" name="goods_search_type">
-            <option value="">전체</option>
+          <select name="goods_search_type">
+            <option value="all">전체</option>
             <option value="creDate">등록일</option>
             <option value="name">상품명</option>
           </select>

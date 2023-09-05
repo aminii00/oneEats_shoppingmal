@@ -35,6 +35,7 @@ public interface GoodsService {
 	public boolean isExistBookmark(BookmarkVO bookmarkVO);
 
 	public List<GoodsVO> selectGoodsListWithSearchFilter(Map searchMap);
+	public List<HotDealVO> selectHotDealListWithSearchFilter(Map searchMap);
 
 	public int selectGoodsTotalNumWithSearchFilter(Map searchMap);
 
@@ -49,6 +50,10 @@ public interface GoodsService {
 	public int selectMaxPrice(Map pagingMap);
 
 	public int selectMaxPriceWithSearchFilter(Map searchMap);
+
+	public List<HotDealVO> selectHotDealListWithPagingMap(Map pagingMap);
+
+	public int selectHotDealTotalNumWithPagingMap(Map pagingMap);
 	
 
 }

@@ -13,10 +13,10 @@
 		<result column="rapping" property="rapping" />
 		<result column="manufacturer" property="manufacturer" />
 		<result column="weight" property="weight" />
-		<result column="expDate" property="expDate"/>
+		<result column="expDate" property="expDate" />
 		<result column="description" property="description" />
 		<result column="harvest" property="harvest" />
-			<result column="harvest" property="harvest" />
+		<result column="harvest" property="harvest" />
 		<result column="creDate" property="creDate"
 			javaType="java.sql.Date" />
 		<result column="img1" property="img1" />
@@ -87,6 +87,12 @@
 		<result property="goodsName" column="goodsName" />
 		<result property="goodsPrice" column="goodsPrice" />
 		<result property="goodsImg" column="goodsImg" />
+		<result column="sellerName" property="sellerName" />
+		<result column="manufacturer" property="manufacturer" />
+		
+		
+		
+		
 	</resultMap>
 	<resultMap id="ReviewResult" type="reviewVO">
 		<result property="reviewNo" column="reviewNo" />
@@ -134,7 +140,7 @@
 		]]>
 	</select>
 
-<select id="selectNewGoodsList" resultMap="GoodsResult"
+	<select id="selectNewGoodsList" resultMap="GoodsResult"
 		parameterType="java.util.Map">
 
 		select * from goods
@@ -174,30 +180,30 @@
 	</select>
 
 	<select id="selectNewHotDealList" resultMap="HotDealResult">
-	SELECT
-    h.hotdealNo,
-    h.name,
-    h.discounted_price,
-    h.goods_qty,
-    h.finishDate,
-    h.description,
-    h.creDate,
-    g.goodsNo,
-    g.price AS goodsPrice,
-    g.category AS category,
-    g.name AS goodsName,
-    g.img1 AS goodsImg
-FROM
-    hotdeal AS h
-INNER JOIN
-    goods AS g
-ON
-    h.goodsNo = g.goodsNo
-WHERE
-    h.finishDate > Now()
-ORDER BY
-    h.creDate DESC
-LIMIT 6;
+		SELECT
+		h.hotdealNo,
+		h.name,
+		h.discounted_price,
+		h.goods_qty,
+		h.finishDate,
+		h.description,
+		h.creDate,
+		g.goodsNo,
+		g.price AS goodsPrice,
+		g.category AS category,
+		g.name AS goodsName,
+		g.img1 AS goodsImg
+		FROM
+		hotdeal AS h
+		INNER JOIN
+		goods AS g
+		ON
+		h.goodsNo = g.goodsNo
+		WHERE
+		h.finishDate > Now()
+		ORDER BY
+		h.creDate DESC
+		LIMIT 6;
 	</select>
 
 	<select id="selectTotalGoodsNumForAll" resultType="int">
@@ -243,6 +249,45 @@ LIMIT 6;
 	</select>
 
 
+
+	<select id="selectHotDealListWithSearchFilter"
+		parameterType="java.util.Map" resultMap="HotDealResult">
+		SELECT memberNumSearch.*,member.name as sellerName, member.memberNo
+		FROM member
+		INNER JOIN (
+		SELECT goods.memberNo, goods.goodsNo AS goodsNumber, goods.manufacturer,
+		hotdeal.*
+		FROM hotdeal
+		INNER JOIN goods ON goods.goodsNo = hotdeal.goodsNo
+		) AS memberNumSearch
+		ON member.memberNo = memberNumSearch.memberNo
+		where 1=1
+		<if test="filter_type==null or filter_type==''">
+			and 1=1
+		</if>
+		<if test="filter_type=='all'">
+			and (
+			memberNumSearch.name like concat('%',#{filter_word},'%')
+			or member.name like concat('%',#{filter_word},'%')
+			or memberNumSearch.manufacturer like concat('%',#{filter_word},'%')
+			)
+		</if>
+
+
+		<if test="filter_type=='상품명'">
+			and memberNumSearch.name like concat('%',#{filter_word},'%')
+		</if>
+		<if test="filter_type=='판매자'">
+			and member.name like concat('%',#{filter_word},'%')
+		</if>
+		<if test="filter_type=='원산지'">
+			and memberNumSearch.manufacturer like concat('%',#{filter_word},'%')
+		</if>
+		limit #{start},12
+	</select>
+
+
+
 	<select id="selectGoodsTotalNumWithSearchFilter"
 		parameterType="java.util.Map" resultType="int">
 		select count(*) from (select g.*,m.name as sellerName from goods as g
@@ -270,7 +315,8 @@ LIMIT 6;
 
 	<select id="selectMaxPriceWithSearchFilter"
 		parameterType="java.util.Map" resultType="int">
-		select ifnull(max(price),0) from (select g.*,m.name as sellerName from goods as g
+		select ifnull(max(price),0) from (select g.*,m.name as sellerName from
+		goods as g
 		inner
 		join member as m
 		on g.memberNo=m.memberNo) t where 1=1
@@ -333,7 +379,8 @@ LIMIT 6;
 					</when>
 					<when test="category=='mealkit'">
 						and category='zzigae' or category='meal' or
-						category='porridge' or category='mealReplacement' or category='sidedish'
+						category='porridge' or category='mealReplacement' or
+						category='sidedish'
 					</when>
 					<when test="category=='best'">
 						and 1=1
@@ -420,4 +467,67 @@ LIMIT 6;
 		desc
 		limit #{start},10
 	</select>
+
+	<select id="selectHotDealListWithPagingMap"
+		parameterType="java.util.Map" resultMap="HotDealResult">
+
+		SELECT hotdeal.*,
+		goods.goodsNo, goods.img1 as goodsImg
+		FROM hotdeal
+		INNER JOIN goods ON goods.goodsNo
+		= hotdeal.goodsNo
+
+
+		where 1=1
+		<choose>
+			<when test="category!=null and category!=''">
+				<choose>
+					<when test="category=='motnan'">
+						and category='vegetable' or category='fruit' or
+						category='juiceAndJam'
+					</when>
+					<when test="category=='mealkit'">
+						and category='zzigae' or category='meal' or
+						category='porridge' or category='sidedish'
+					</when>
+					<when test="category=='best'">
+						and 1=1
+					</when>
+					<otherwise>
+						and category=#{category}
+					</otherwise>
+				</choose>
+			</when>
+		</choose>
+
+		limit #{start},12
+	</select>
+
+	<select id="selectHotDealTotalNumWithPagingMap"
+		parameterType="java.util.Map" resultType="int">
+		select count(hotdealNo) from hotdeal where 1=1
+		<choose>
+			<when test="category!=null and category!=''">
+				<choose>
+					<when test="category=='motnan'">
+						and category='vegetable' or category='fruit' or
+						category='juiceAndJam'
+					</when>
+					<when test="category=='mealkit'">
+						and category='zzigae' or category='meal' or
+						category='porridge' or category='mealReplacement' or
+						category='sidedish'
+					</when>
+					<when test="category=='best'">
+						and 1=1
+					</when>
+					<otherwise>
+						and category=#{category}
+					</otherwise>
+				</choose>
+			</when>
+		</choose>
+	</select>
+
+
 </mapper> 

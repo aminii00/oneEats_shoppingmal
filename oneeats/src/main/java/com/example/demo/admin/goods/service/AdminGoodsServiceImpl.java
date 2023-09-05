@@ -135,6 +135,13 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 				
 			}
 
+			
+			
+			@Override
+			public int selectTotalGoodsNum() {
+				return adminGoodsDAO.selectTotalGoodsNum();
+			}
+
 		
 
 			@Override

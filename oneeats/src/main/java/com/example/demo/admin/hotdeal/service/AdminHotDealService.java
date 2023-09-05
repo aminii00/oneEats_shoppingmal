@@ -40,6 +40,8 @@ public interface AdminHotDealService {
 	
 	//수정
 	public void updateAdminHotDeal(HotDealVO sellerHotDeal);
+
+	public int selectTotalHotDealNum();
 	
 	
 	

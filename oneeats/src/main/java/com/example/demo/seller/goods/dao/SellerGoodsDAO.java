@@ -35,7 +35,7 @@ public interface SellerGoodsDAO {
 	public void updateNewGoodsWithMap(GoodsVO goodsvo);
 
 	// 주문 목록
-	public List<GoodsVO> selectGoodsList(Map pagingMap) throws DataAccessException;
+	public List<GoodsVO> selectGoodsList(Map pagingMap);
 
 	
 	//카테고리
@@ -71,6 +71,8 @@ public interface SellerGoodsDAO {
 	public void insertOptionsForMod(List<OptionVO> selectOptions);
 
 	public void insertOptionForMod(OptionVO optionVO);
+
+	public int selectTotalGoodsNum();
 
 	
 	

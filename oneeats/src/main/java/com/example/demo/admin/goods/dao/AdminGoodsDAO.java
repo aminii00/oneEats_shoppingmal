@@ -24,6 +24,7 @@ public interface AdminGoodsDAO {
 
 	// 상품 목록
 	public List<GoodsVO> selectGoodsList(Map pagingMap) throws DataAccessException;
+	public int selectTotalGoodsNum();
 
 	// 페이징 처리
 	public List<GoodsVO> selectNewGoodsList();
