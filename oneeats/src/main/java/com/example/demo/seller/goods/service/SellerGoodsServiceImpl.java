@@ -175,7 +175,11 @@ public class SellerGoodsServiceImpl implements SellerGoodsService {
 		sellerGoodsDAO.insertOptionForMod(optionVO);
 		
 	}
-	
+
+	@Override
+	public int selectTotalGoodsNum() {
+		return sellerGoodsDAO.selectTotalGoodsNum();
+	}
 
 
 }

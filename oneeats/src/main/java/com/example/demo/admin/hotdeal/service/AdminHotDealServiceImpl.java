@@ -93,5 +93,10 @@ public class AdminHotDealServiceImpl implements AdminHotDealService {
 			adminHotDealDAO.updateAdminHotDeal(sellerHotDeal);	
 			
 		}
+		@Override
+		public int selectTotalHotDealNum() {
+			return adminHotDealDAO.selectTotalHotDealNum();
+		}
+		
 }
 	

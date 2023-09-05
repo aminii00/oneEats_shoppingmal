@@ -42,4 +42,6 @@ public interface AdminHotDealDAO {
 	public HotDealVO selectHotDealByGoodsNo(int hotdealNo);
 
 	public void updateAdminHotDeal(HotDealVO sellerHotDeal);
+	
+	public int selectTotalHotDealNum();
 }

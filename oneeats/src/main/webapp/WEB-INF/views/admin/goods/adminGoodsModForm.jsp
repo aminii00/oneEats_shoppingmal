@@ -152,16 +152,16 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="채소">채소</option>
-                            <option value="과일">과일</option>
-                            <option value="못난이주스/수제청">
+                            <option value="vegetable">채소</option>
+                            <option value="fruit">과일</option>
+                            <option value="juiceAndJam">
                               못난이주스/수제청
                             </option>
-                            <option value="찌개/탕/찜">찌개 / 탕 /찜</option>
-                            <option value="식사/안주류">식사/안주류</option>
-                            <option value="죽">죽</option>
-                            <option value="식사 대용식">식사 대용식</option>
-                            <option value="간편 한끼 반찬">
+                            <option value="zzigae">찌개 / 탕 /찜</option>
+                            <option value="meal">식사/안주류</option>
+                            <option value="porridge">죽</option>
+                            <option value="mealReplacement">식사 대용식</option>
+                            <option value="sidedish">
                               간편 한끼 반찬
                             </option>
                           </select>

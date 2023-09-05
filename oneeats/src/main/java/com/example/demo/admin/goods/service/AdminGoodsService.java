@@ -53,5 +53,5 @@ public interface AdminGoodsService {
 	public void updateOption(List<OptionVO> selectOptions);
 	void insertOptionForMod(OptionVO optionVO);
 
-
+	public int selectTotalGoodsNum();
 }

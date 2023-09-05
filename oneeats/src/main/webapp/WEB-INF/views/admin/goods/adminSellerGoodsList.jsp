@@ -17,20 +17,25 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">상품</p>
       <div class="div-sib textsize-1">
-        <select name="search-1">
-          <option value="전체">전체</option>
-          <option value="사업자번호">사업자번호</option>
-          <option value="상품명">상품명</option>
-          <option value="아이디">아이디</option>
-          <option value="등록일">등록일</option>
-        </select>
-        <input type="text" name="search-2" placeholder="search.." />
-        <button
-          class="btn-1 bg-lightgreen textcolor-white border-0"
-          type="button"
+        <form
+          method="post"
+          action="${contextPath}/admin/goods/adminSellerGoodsList.do"
         >
-          검색
-        </button>
+          <select name="goods_search_type">
+            <option value="all">전체</option>
+            <option value="memberNo">사업자번호</option>
+            <option value="name">상품명</option>
+            <option value="seller_id">아이디</option>
+            <option value="creDate">등록일</option>
+          </select>
+          <input type="text" name="goods_search_word" placeholder="search.." />
+          <button
+            class="btn-1 bg-lightgreen textcolor-white border-0"
+            type="submit"
+          >
+            검색
+          </button>
+        </form>
       </div>
     </div>
     <table border="0" class="textcolor-black textsize-1">

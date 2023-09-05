@@ -123,7 +123,59 @@ public class GoodsControllerImpl implements GoodsController {
 
 		return mav;
 	}
+	
+	
+	//핫딜 리스트
+	
+	@RequestMapping(value = "/goods/hotDealList.do", method = { RequestMethod.POST, RequestMethod.GET })
+	public ModelAndView hotDealList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		ModelAndView mav = new ModelAndView();
+		String viewName = (String) request.getAttribute("viewName");
+		mav.setViewName(viewName);
+
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		String pageNum = (String) pagingMap.get("pageNum");
+		String section = (String) pagingMap.get("section");
+		if (pageNum == null || pageNum.trim().length() < 1) {
+			pageNum = "1";
+			pagingMap.put("pageNum", pageNum);
+		}
+		if (section == null || section.trim().length() < 1) {
+			section = "1";
+			pagingMap.put("section", section);
+		}
+
+		int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 12;
+		pagingMap.put("start", start);
+
+		List<HotDealVO> hotDealList = goodsService.selectHotDealListWithPagingMap(pagingMap);
+		mav.addObject("hotDealList", hotDealList);
+
+		int totalHotDealNum = goodsService.selectHotDealTotalNumWithPagingMap(pagingMap);
+		mav.addObject("totalHotDealNum", totalHotDealNum);
+
+		List<HotDealVO> newHotdealList = goodsService.selectNewHotDealList();
+		mav.addObject("newHotDealList", newHotdealList);
+
+		mav.addAllObjects(pagingMap);
+		System.out.println(mav);
+
+		int maxPrice = goodsService.selectMaxPrice(pagingMap);
+		mav.addObject("maxPrice", maxPrice);
+
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//
 	@RequestMapping(value = "/goods/goodsDetail.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView goodsDetail(@RequestParam("goodsNo") int goodsNo, HttpServletRequest request) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
@@ -323,9 +375,12 @@ public class GoodsControllerImpl implements GoodsController {
 
 	@RequestMapping("/goods/search.do")
 	public ModelAndView goodsSearch(HttpServletRequest request) throws IOException {
-		ModelAndView mav = new ModelAndView("/goods/goodsList");
+		
+		ModelAndView mav = new ModelAndView("/goods/goodsHotDealList");
 		request.setCharacterEncoding("utf-8");
 		Map searchMap = GeneralFileUploader.getParameterMap(request);
+		
+		
 		String pageNum = (String) searchMap.get("pageNum");
 		String section = (String) searchMap.get("section");
 		if (pageNum == null || pageNum.trim().length() < 1) {
@@ -342,13 +397,15 @@ public class GoodsControllerImpl implements GoodsController {
 
 		System.out.println(searchMap);
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithSearchFilter(searchMap);
+		List<HotDealVO> hotDealList = goodsService.selectHotDealListWithSearchFilter(searchMap);
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithSearchFilter(searchMap);
 
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
+		mav.addObject("hotDealList", hotDealList);
 
 		mav.addAllObjects(searchMap);
-		System.out.println(mav);
+		System.out.println("Search mav:" +mav);
 
 		int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
 		mav.addObject("maxPrice", maxPrice);
