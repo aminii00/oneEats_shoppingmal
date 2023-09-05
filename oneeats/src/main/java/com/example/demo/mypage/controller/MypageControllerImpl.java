@@ -64,42 +64,53 @@ public class MypageControllerImpl implements MypageController {
 	public ModelAndView orderList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println("여기는 orderList");
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
 		int memberNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
-
-		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(memberNo);
+		System.out.println("memberNo="+memberNo);
+		
+		String _section = request.getParameter("section");
+		String _pageNum = request.getParameter("pageNum");
+		String order_search_type = request.getParameter("order_search_type");
+		int pageNum;
+		int section;
+		if (_pageNum == null || _pageNum.length() <= 0) {
+			pageNum = 1;
+		} else {
+			pageNum = Integer.parseInt(_pageNum);
+		}
+		if (_section == null || _section.length() <= 0) {
+			section = 1;
+		} else {
+			section = Integer.parseInt(_section);
+		}
+		if (order_search_type == null || order_search_type.length() <= 0) {
+			order_search_type = "all";
+		}
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		pagingMap.put("section", section);
+		pagingMap.put("pageNum", pageNum);
+		pagingMap.put("order_search_type", order_search_type);
+		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 6);
+		pagingMap.put("memberNo", memberNo);
+		
+		List<OrderVO> orderList = mypageService.selectOrderByMemberNo(pagingMap);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("order_search_type", order_search_type);
+		map.put("memberNo", memberNo);
+		
+		int totalOrderNum = mypageService.selectCountOrderNum(map);
 		System.out.println("orderList=" + orderList);
+		System.out.println("totalOrderNum="+totalOrderNum);
 
 		ModelAndView mav = new ModelAndView(viewName);
+		mav.addAllObjects(pagingMap);
+		mav.addObject("order_search_type", order_search_type);
 		mav.addObject("orderList", orderList);
+		mav.addObject("totalOrderNum", totalOrderNum);
 		System.out.println(mav);
-		return mav;
-	}
-
-	@RequestMapping(value = "/mypage/orderSearch.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView orderSearch(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("여기는 orderSearch");
-		request.setCharacterEncoding("utf-8");
-		HttpSession session = request.getSession();
-		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
-		int memberNo = member.getMemberNo();
-		String viewName = (String) request.getAttribute("viewName");
-		String orderSearchType = request.getParameter("orderSearchType");
-		System.out.println("orderSearchType=" + orderSearchType);
-
-		Map<String, Object> map = new HashMap<>();
-		map.put("orderSearchType", orderSearchType);
-		map.put("memberNo", memberNo);
-		System.out.println("map=" + map);
-
-		List<Map> orderSearch = mypageService.selectOrderBySearchType(map);
-		System.out.println("orderSearch=" + orderSearch);
-		request.setAttribute("orderList", orderSearch);
-
-		ModelAndView mav = new ModelAndView("/mypage/orderList");
 		return mav;
 	}
 

@@ -38,7 +38,8 @@ public class OrderVO {
 	private int optionNo;
 	
 	private String orderer_id;
-	private String memberType;
+	private String sellerType;
+	private int sellerNo;
 	private int reviewNo;
 	private String star;
 	private String reviewImg;
@@ -47,6 +48,14 @@ public class OrderVO {
 	private String name;
 	private String img1;
 	private String price;
+	
+	
+	public int getSellerNo() {
+		return sellerNo;
+	}
+	public void setSellerNo(int sellerNo) {
+		this.sellerNo = sellerNo;
+	}
 	public int getOrder_seqNo() {
 		return order_seqNo;
 	}
@@ -233,11 +242,11 @@ public class OrderVO {
 	public void setOrderer_id(String orderer_id) {
 		this.orderer_id = orderer_id;
 	}
-	public String getMemberType() {
-		return memberType;
+	public String getSellerType() {
+		return sellerType;
 	}
-	public void setMemberType(String memberType) {
-		this.memberType = memberType;
+	public void setSellerType(String sellerType) {
+		this.sellerType = sellerType;
 	}
 	public int getReviewNo() {
 		return reviewNo;
@@ -293,10 +302,9 @@ public class OrderVO {
 				+ ", goods_inbun=" + goods_inbun + ", memberNo=" + memberNo + ", goodsNo=" + goodsNo + ", goodsName="
 				+ goodsName + ", goodsImg=" + goodsImg + ", gun=" + gun + ", goodsPrice=" + goodsPrice + ", weight="
 				+ weight + ", shippingFee=" + shippingFee + ", optionNo=" + optionNo + ", orderer_id=" + orderer_id
-				+ ", memberType=" + memberType + ", reviewNo=" + reviewNo + ", star=" + star + ", reviewImg="
-				+ reviewImg + ", content=" + content + ", name=" + name + ", img1=" + img1 + ", price=" + price + "]";
+				+ ", sellerType=" + sellerType + ", sellerNo=" + sellerNo + ", reviewNo=" + reviewNo + ", star=" + star
+				+ ", reviewImg=" + reviewImg + ", content=" + content + ", name=" + name + ", img1=" + img1 + ", price="
+				+ price + "]";
 	}
-	
-
 
 }
