@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.community.dao.CommunityDAO;
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
@@ -19,6 +20,11 @@ public class CommunityServiceImpl implements CommunityService {
 	@Autowired
 	private CommunityDAO communityDAO;
 
+	@Override
+	public MemberVO selectMemberByMemberNo(int memberNo) {
+		MemberVO member= communityDAO.selectMemberByMemberNo(memberNo);
+		return member;
+	}
 	@Override
 	public List<RecipeVO> selectRecipeList(Map pagingMap) {
 		return communityDAO.selectRecipeList(pagingMap); 
@@ -152,8 +158,8 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public int selectNoticeListTotalNumWithCategory(String category) {
-		return communityDAO.selectNoticeListTotalNumWithCategory(category);
+	public int selectNoticeListTotalNumWithCategory(Map pagingMap) {
+		return communityDAO.selectNoticeListTotalNumWithCategory(pagingMap);
 	}
 	
 	@Override

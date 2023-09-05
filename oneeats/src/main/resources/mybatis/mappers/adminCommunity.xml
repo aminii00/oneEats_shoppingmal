@@ -73,7 +73,7 @@
 
 
 	<select id="selectNoticeListTotalNumWithCategory"
-		parameterType="String" resultType="int">
+		parameterType="java.util.Map" resultType="int">
 		select count(noticeNo) from notice
 		<if test="category!='all'">
 			where category=#{category}

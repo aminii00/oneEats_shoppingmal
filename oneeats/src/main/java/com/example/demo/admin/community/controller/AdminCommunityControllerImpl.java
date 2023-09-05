@@ -73,7 +73,7 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 			}
 			
 			try {
-				int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+				int start = ((Integer.parseInt(section)-1)*10+Integer.parseInt(pageNum)-1)*10;
 				pagingMap.put("start", start);
 				List<OneQnAVO> oneQnAList = adminCommunityService.selectOneQnAListWithPagingMap(pagingMap);
 				mav.addAllObjects(pagingMap);
@@ -115,13 +115,13 @@ public class AdminCommunityControllerImpl implements AdminCommunityController {
 
 		try {
 
-			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			int start = ((Integer.parseInt(section)-1)*10+Integer.parseInt(pageNum)-1)*10;
 			pagingMap.put("start", start);
 			List<NoticeVO> noticeList = adminCommunityService.selectNoticeListWithPagingMap(pagingMap);
 			mav.addAllObjects(pagingMap);
 			mav.addObject("noticeList", noticeList);
 			System.out.println("noticeList = " +noticeList);
-			int totalNoticeNum = adminCommunityService.selectNoticeListTotalNumWithCategory(category);
+			int totalNoticeNum = adminCommunityService.selectNoticeListTotalNumWithCategory(pagingMap);
 			System.out.println(totalNoticeNum);
 			mav.addObject("totalNoticeNum",totalNoticeNum);
 

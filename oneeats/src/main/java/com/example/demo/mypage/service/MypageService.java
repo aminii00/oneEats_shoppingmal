@@ -103,4 +103,6 @@ public interface MypageService {
 
 	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
 	
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo);
+	
 }

@@ -408,8 +408,8 @@ public class MypageControllerImpl implements MypageController {
 		Map pagingMap1 = GeneralFileUploader.getParameterMap(request);
 		String pageNum = (String) pagingMap.get("pageNum");
 		String section = (String) pagingMap.get("section");
-		String pageNum1 = (String) pagingMap.get("pageNum1");
-		String section1 = (String) pagingMap.get("section1");
+		String pageNum1 = (String) pagingMap1.get("pageNum1");
+		String section1 = (String) pagingMap1.get("section1");
 		if (pageNum == null || pageNum.trim().length() < 1) {
 			pageNum = "1";
 			pagingMap.put("pageNum", pageNum);
@@ -428,11 +428,12 @@ public class MypageControllerImpl implements MypageController {
 		}
 
 		try {
-			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 3;
+			int start = ((Integer.parseInt(section) - 1)*10 + Integer.parseInt(pageNum) - 1) * 3;
+			int start1 = ((Integer.parseInt(section1) - 1)*10 + Integer.parseInt(pageNum1) - 1) * 3;
 			pagingMap.put("start", start);
 			pagingMap.put("memberNo", memberNo);
 			
-			pagingMap1.put("start", start);
+			pagingMap1.put("start1", start1);
 			pagingMap1.put("memberNo", memberNo);
 			// List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); 쿠폰List
 			List<CouponVO> couponDetail = mypageService.selectCouponListWithPagingMap(pagingMap);
@@ -440,13 +441,17 @@ public class MypageControllerImpl implements MypageController {
 			int totalCouponListNum = mypageService.selectCouponListTotalNum(memberNo);
 
 			// List<PointHistoryVO> pointDetail = mypageService.pointSearch(memberInfo); 적립금
-			// List
 			List<PointHistoryVO> pointDetail = mypageService.selectPointListWithPagingMap(pagingMap1);
 			int totalPointListNum = mypageService.selectPointListTotalNum(memberNo);
 			System.out.println("pointDetail = " + pointDetail);
-
+			List<PointHistoryVO> pointList = mypageService.memberPoint(memberInfo); // 회원이 가지고 있는 총 적립금
+			System.out.println("pointList = " + pointList);
+			
+			System.out.println("pagingMap = " +pagingMap );
+			System.out.println("pagingMap1 = " +pagingMap1 );
 			mav.addAllObjects(pagingMap);
 			mav.addAllObjects(pagingMap1);
+			mav.addObject("pointList",pointList);
 			mav.addObject("couponDetail", couponDetail);
 			mav.addObject("pointDetail", pointDetail);
 			mav.addObject("totalCouponListNum", totalCouponListNum);
@@ -707,6 +712,7 @@ public class MypageControllerImpl implements MypageController {
 		if (birth == null || birth.trim().length() < 1) {
 			memberVO.setBirth(null);
 		}
+		System.out.println("memberVO = " + memberVO);
 		mypageService.updateMember(memberVO);
 		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberMod.do");
 		return mav;

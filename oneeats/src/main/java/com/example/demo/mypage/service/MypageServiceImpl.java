@@ -281,6 +281,10 @@ public class MypageServiceImpl implements MypageService {
 		return mypageDAO.selectAvailableReviewListWithPagingMap(pagingMap);
 	}
 	
-	
+	@Override
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo) {
+		List<PointHistoryVO> memberPoint = mypageDAO.memberPoint(memberInfo);
+		return memberPoint;
+	}
 
 }

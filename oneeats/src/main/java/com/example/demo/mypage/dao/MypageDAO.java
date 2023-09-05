@@ -121,4 +121,6 @@ public interface MypageDAO {
 
 	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
 	
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo);
+	
 }

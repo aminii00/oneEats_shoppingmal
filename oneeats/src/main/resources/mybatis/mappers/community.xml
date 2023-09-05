@@ -82,6 +82,20 @@
 		where qnaNo=#{parentNo}
 	</update>
 
+	<resultMap id="mostQnAResult" type="mostQnAVO">
+		<result property="qnaNo" column="qnaNo" />
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="creDate" column="creDate" />
+		<result property="category" column="category" />
+	</resultMap>
+	
+	<select id="selectMemberByMemberNo" resultType="MemberVO">
+		<![CDATA[
+			select * from member where memberNo=#{memberNo}
+		]]>
+	</select>
+	
 	<select id="oneQnAList_reply" resultMap="oneQnAResult">
 		select * from oneqna
 	</select>
@@ -290,7 +304,15 @@
 		order by creDate desc
 		limit #{start},10
 	</select>
-
+	
+	<select id="selectNoticeListTotalNumWithCategory"
+		parameterType="java.util.Map" resultType="int">
+		select count(noticeNo) from notice 
+		<if test="category!='all'">
+			where category=#{category}
+		</if>
+	</select>
+	
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
 		select oneqna.*, member.id
