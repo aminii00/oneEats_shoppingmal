@@ -408,17 +408,18 @@ public class MypageControllerImpl implements MypageController {
 		}
 		if (pageNum1 == null || pageNum1.trim().length() < 1) {
 			pageNum1 = "1";
-			pagingMap.put("pageNum1", pageNum1);
+			pagingMap1.put("pageNum1", pageNum1);
 		}
 		if (section1 == null || section1.trim().length() < 1) {
 			section1 = "1";
-			pagingMap.put("section1", section1);
+			pagingMap1.put("section1", section1);
 		}
 
 		try {
-			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 10;
+			int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 3;
 			pagingMap.put("start", start);
 			pagingMap.put("memberNo", memberNo);
+			
 			pagingMap1.put("start", start);
 			pagingMap1.put("memberNo", memberNo);
 			// List<CouponVO> couponDetail = mypageService.couponSearch(memberInfo); 쿠폰List

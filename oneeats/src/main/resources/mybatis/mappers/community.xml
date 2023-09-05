@@ -281,9 +281,11 @@
 	
 	<select id="selectOneQnAListWithPagingMap"
 		parameterType="java.util.Map" resultMap="oneQnAResult">
-		select * from oneqna where parentNo=0 and  memberNo=#{memberNo}
-		order by creDate desc
-		limit #{start},10
+		select oneqna.*, member.id
+		from oneqna
+		inner join member on oneqna.memberNo=member.memberNo 
+		where parentNo=0 
+		order by creDate limit #{start},10
 	</select>
 	
 	<select id="selectMostQnAListTotalNumWithCategory"
@@ -296,7 +298,7 @@
 	
 	<select id="selectNoticeListTotalNumWithCategory"
 		parameterType="String" resultType="int">
-		select count(noticeNo) from notice
+		select count(noticeNo) from notice 
 		<if test="category!='all'">
 			where category=#{category}
 		</if>

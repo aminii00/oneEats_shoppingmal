@@ -387,7 +387,7 @@ where m.memberNo=#{memberNo}
 			member_coupon.couponNo=coupon.couponNo 
 			where 
 			member_coupon.memberNo=#{memberNo}
-		    limit #{start},10 
+		    limit #{start},3 
 	</select>
 
 	<select id="selectCouponListTotalNum" parameterType ="int" resultType="int">
@@ -398,7 +398,7 @@ where m.memberNo=#{memberNo}
 		parameterType="java.util.Map" resultMap="PointHistoryResult">
 	select * from point_history
 			where memberNo=#{memberNo}
-		    limit #{start},10 
+		    limit #{start},3 
 	</select>
 
 	<select id="selectPointListTotalNum" parameterType ="int" resultType="int">
