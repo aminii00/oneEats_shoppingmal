@@ -47,7 +47,9 @@ public interface MypageDAO {
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
-	public List<Map> selectOrderBySearchType(Map<String, Object> map);
+	public int selectCountOrderNum(Map<String, Object> map);
+	
+	public List<OrderVO> selectOrderByMemberNo(Map pagingMap);
 	
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	

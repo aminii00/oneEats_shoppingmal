@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.seller.order.service.SellerOrderService;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OrderVO;
 
 @Controller("sellerOrderController")
@@ -28,6 +29,8 @@ public class SellerOrderControllerImpl implements SellerOrderController{
 		System.out.println("여기는 sellerOrderList");
 		request.setCharacterEncoding("utf-8");
 		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		int sellerNo = member.getMemberNo();
 		String viewName = (String) request.getAttribute("viewName");
 		
 		String _section = request.getParameter("section");
@@ -53,10 +56,12 @@ public class SellerOrderControllerImpl implements SellerOrderController{
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("order_search_type", order_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
+		pagingMap.put("sellerNo", sellerNo);
 		
 		List<OrderVO> sellerOrderList = sellerOrderService.selectOrderByMemberType(pagingMap);
 		int totalOrderNum = sellerOrderService.selectTotalOrderNum();
-
+		System.out.println("sellerOrderList="+sellerOrderList);
+		
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addAllObjects(pagingMap);
 		mav.addObject("sellerOrderList", sellerOrderList);

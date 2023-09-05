@@ -57,7 +57,7 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		
 		List<OrderVO> adminOrderList = adminOrderService.selectOrderByMemberType(pagingMap);
 		int totalOrderNum = adminOrderService.selectTotalOrderNum();
-
+		System.out.println(adminOrderList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addAllObjects(pagingMap);
 		mav.addObject("adminOrderList", adminOrderList);

@@ -33,7 +33,9 @@ public interface MypageService {
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
-	public List<Map> selectOrderBySearchType(Map<String, Object> map);
+	public List<OrderVO> selectOrderByMemberNo(Map pagingMap);
+
+	public int selectCountOrderNum(Map<String, Object> map);
 	
 	public MemberVO listMyPage(String member_id) throws Exception;
 	
