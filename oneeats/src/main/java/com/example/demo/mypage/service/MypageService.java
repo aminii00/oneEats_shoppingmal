@@ -102,5 +102,8 @@ public interface MypageService {
 	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap);
 
 	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
+
+	public Map selectCouponByCouponNoAndMemberNo(Map condMap);
+
 	
 }

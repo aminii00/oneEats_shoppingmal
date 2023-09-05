@@ -237,10 +237,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                   id="select_option"
                                   class="margin4 opt"
                                 >
-                                  <option
-                                    value="옵션을 선택해주세요"
-                                    selected
-                                  ></option>
+                                  <option value="0" selected>
+                                    옵션을 선택해주세요
+                                  </option>
                                   <c:forEach
                                     items="${goodsOptionList}"
                                     var="goodsOption"
@@ -334,11 +333,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               >0</span
                             >
                             <!--배송비와 상품금액 hidden-->
-                            <input
-                              type="hidden"
-                              name="shippingFee"
-                              value="2500"
-                            />
+                            <input type="hidden" name="shippingFee" value="0" />
                             <input
                               type="hidden"
                               id="h_payment_price"

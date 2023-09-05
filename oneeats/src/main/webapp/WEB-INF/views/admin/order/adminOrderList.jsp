@@ -12,6 +12,16 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 주문/배송</title>
     <link rel="stylesheet" href="${contextPath}/css/minzy.css" />
+    <script>
+      $(document).ready(function () {
+        $("select[name=delivery_status]").on("change", function () {
+          $(this)
+            .closest("form.delivery_status_form")
+            .attr("action", "/admin/order/modDeliveryStatus.do")
+            .submit();
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- 검색창 -->
@@ -70,7 +80,31 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                   ${adminOrder.goodsName} 외 ${adminOrder.gun}건</a
                 >
               </td>
-              <td>${adminOrder.delivery_status}</td>
+              <td>
+                <form class="delivery_status_form">
+                  <input
+                    type="hidden"
+                    name="orderNo"
+                    value="${adminOrder.orderNo}"
+                  />
+                  <c:set
+                    var="status_array"
+                    value="${['결제완료','배송중','배송완료','취소완료']}"
+                  />
+                  <select name="delivery_status">
+                    <c:forEach items="${status_array}" var="i">
+                      <c:choose>
+                        <c:when test="${i==adminOrder.delivery_status}">
+                          <option value="${i}" selected>${i}</option>
+                        </c:when>
+                        <c:otherwise>
+                          <option value="${i}">${i}</option>
+                        </c:otherwise>
+                      </c:choose>
+                    </c:forEach>
+                  </select>
+                </form>
+              </td>
               <td>
                 <a
                   href="javascript:void(0)"

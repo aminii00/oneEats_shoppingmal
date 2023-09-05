@@ -177,10 +177,16 @@ public class MypageServiceImpl implements MypageService {
 	public void updateTempOrderList(Map payInfoMap) throws Exception{
 		mypageDAO.updateTempOrderList(payInfoMap);
 		int used_point = (int) payInfoMap.get("used_point");
-		if (used_point >0) {
+		if (used_point > 0) {
 			mypageDAO.insertPointHistory(payInfoMap);
 			payInfoMap.put("point", -used_point);
 			mypageDAO.updateMemberPoint(payInfoMap);
+		}
+		int used_couponId = Integer.parseInt(payInfoMap.get("used_couponId").toString());
+		System.out.println("used_couponId in update temp order list: "+used_couponId);
+		System.out.println("payInfoMap" +payInfoMap);
+		if (used_couponId>0) {
+			mypageDAO.updateMemberCouponUsed(payInfoMap);
 		}
 		mypageDAO.insertTossApi(payInfoMap);
 		
@@ -280,7 +286,10 @@ public class MypageServiceImpl implements MypageService {
 	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap) {
 		return mypageDAO.selectAvailableReviewListWithPagingMap(pagingMap);
 	}
-	
-	
 
+	@Override
+	public Map selectCouponByCouponNoAndMemberNo(Map condMap) {
+		return mypageDAO.selectCouponByCouponNoAndMemberNo(condMap);
+	}
+	
 }

@@ -10,7 +10,8 @@ $(document).ready(function() {
 	selectTag.on("change", function() {
 		// Get the selected value
 		var selectedOptionNo = $(this).val();
-		var selectedOptionPrice = $(
+		if(selectedOptionNo!="0"){
+			var selectedOptionPrice = $(
 			".h_option_price_" + selectedOptionNo
 		).val();
 		var selectedOptionName = $(
@@ -73,6 +74,8 @@ $(document).ready(function() {
 
 		// 새 행을 추가
 		rowsDiv.append(newRow);
+		}
+		
 	});
 });
 
@@ -143,8 +146,6 @@ $(document).on("click", ".goods_option_minus_btn", function() {
 	option_qty = parseInt(option_qty);
 	
 	
-	
-	
 	if (changedVar > 0) {
 		$(this).parent().find(".goodsQty_input").val(changedVar);
 		var discount_plus = parentRow.find(".h_option_discount").val();
@@ -162,13 +163,20 @@ $(document).on("click", ".goods_option_x_btn", function() {
 	var qty = parentRow.find(".goodsQty_input").val();
 	qty = parseInt(qty);
 	var discount_plus = parentRow.find(".h_option_discount").val();
+	var selectedOptionNo = parentRow.find(".h_optionNo").val();
+	var option_qty = parseInt(
+			$(".h_option_qty_" + selectedOptionNo).val()
+		);
 	discount_plus = parseInt(discount_plus);
 	changeDiscountValue(-discount_plus * qty);
 	var payment_plus = goodsPrice;
-	payment_plus = parseInt(payment_plus);
+	payment_plus = parseInt(payment_plus)*option_qty;
 	changePaymentValue(-payment_plus * qty);
 	changeTotalValue();
 	parentRow.remove();
+	console.log(payment_plus);
+	console.log(discount_plus);
+	console.log(qty);
 });
 function changePaymentValue(num) {
 	var payment_price = parseInt($("#h_payment_price").val());

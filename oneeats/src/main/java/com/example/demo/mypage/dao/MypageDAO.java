@@ -120,5 +120,11 @@ public interface MypageDAO {
 	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap);
 
 	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
+
+	public void updateMemberCouponUsed(Map payInfoMap);
+
+	public Map selectCouponByCouponNoAndMemberNo(Map condMap);
+
+	public int selectValidateTotalPrice(Map payInfoMap);
 	
 }

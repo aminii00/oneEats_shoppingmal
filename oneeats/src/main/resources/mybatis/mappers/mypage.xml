@@ -228,7 +228,7 @@
 	<select id="selectCouponByMemberNo" resultMap="CouponResult" parameterType="int">
 		<![CDATA[
 			select c.* from coupon c inner join member_coupon m
-			on c.couponNo=m.couponNo where m.memberNo=#{memberNo}
+			on c.couponNo=m.couponNo where m.memberNo=#{memberNo} and m.used="no"
 		]]>
 	</select>
 
@@ -681,5 +681,18 @@ deliveryNo=#{deliveryNo}
 		memberNo=#{memberNo}
 	</select>
 
+	<update id="updateMemberCouponUsed" parameterType="java.util.Map">
+		update member_coupon
+		set used="yes"
+		where memberNo=#{memberNo} and couponNo=#{used_couponId}
+	</update>
 
+	<select id="selectCouponByCouponNoAndMemberNo" parameterType="java.util.Map" resultType="java.util.Map">
+		select c.* from coupon c
+			inner join member_coupon m
+			on c.couponNo=m.couponNo
+			where c.couponNo=#{couponNo} and m.memberNo=#{memberNo} and m.used="no"
+	
+	</select>
+	
 </mapper>

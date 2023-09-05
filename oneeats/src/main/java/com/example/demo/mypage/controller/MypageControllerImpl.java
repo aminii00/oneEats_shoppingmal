@@ -210,11 +210,13 @@ public class MypageControllerImpl implements MypageController {
 			OrderVO tempOrder = mypageService.selectTempOrder(payInfoMap);
 
 			int used_point = tempOrder.getUsed_point();
-			payInfoMap.put("used_point", used_point);
-
+			int used_couponId = tempOrder.getUsed_couponId();
+			
+			payInfoMap.put("used_point", -used_point);
+			payInfoMap.put("used_couponId", used_couponId);
 			payInfoMap.put("payment_type", payment_type);
 			payInfoMap.put("total_price", totalAmount);
-
+			
 			mypageService.updateTempOrderList(payInfoMap);
 
 			mav = new ModelAndView("redirect:/mypage/orderList.do");
@@ -759,10 +761,14 @@ public class MypageControllerImpl implements MypageController {
 			String used_couponId = request.getParameter("used_couponId");
 			String point_price = request.getParameter("point_price");
 			String total_price = request.getParameter("total_price");
+			String discount_price = request.getParameter("discount_price");
+			if (receiver_comment.equals("direct")) {
+				receiver_comment = request.getParameter("receiver_comment_direct");
+			}
 
 			List<OrderVO> selectGoodsList = (List<OrderVO>) session.getAttribute("selectGoodsList");
 			List<OrderVO> orderList = new ArrayList();
-			System.out.println("selectGoodsList" + selectGoodsList);
+			
 			for (int i = 0; i < selectGoodsList.size(); i++) {
 				OrderVO temp = selectGoodsList.get(i);
 				temp.setOrderNo(orderNo);
@@ -776,10 +782,11 @@ public class MypageControllerImpl implements MypageController {
 				temp.setUsed_couponId(Integer.parseInt(used_couponId));
 				temp.setPoint_price(Integer.parseInt(point_price));
 				temp.setTotal_price(Integer.parseInt(total_price));
+				temp.setDiscount_price(Integer.parseInt(discount_price));
 				temp.setMemberNo(memberNo);
-
 				orderList.add(temp);
 			}
+			
 			// 일단 데이터베이스에 저장해뒀다가 결제가 완료되면 다시 끌고 옴
 			mypageService.insertTempOrderList(orderList);
 			session.setAttribute("tempOrderNo", orderNo);
@@ -895,6 +902,28 @@ public class MypageControllerImpl implements MypageController {
 		return result;
 	}
 	
-	
+	@ResponseBody
+	@PostMapping("/mypage/selectCoupon.do")
+	public Map selectCoupon(HttpServletRequest request){
+		Map condMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		Map result = new HashMap();
+		
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		System.out.println("condMap : "+condMap);
+		try {
+			condMap.put("memberNo", member.getMemberNo());
+			result = mypageService.selectCouponByCouponNoAndMemberNo(condMap);
+			result.put("result", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = new HashMap();
+			result.put("result", "fail");
+		}
+		System.out.println(result);
+		return result;
+		
+		
+	} 
 	
 }

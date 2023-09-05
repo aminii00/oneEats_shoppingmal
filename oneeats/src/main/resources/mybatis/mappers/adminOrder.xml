@@ -94,4 +94,26 @@
 		]]>
 	</update>
 	
+	<update id="updateDeliveryStatus" parameterType="orderVO">
+		update t_order
+		set delivery_status=#{delivery_status}
+		where order_seqNo=#{order_seqNo}
+	</update>
+	
+	<select id="selectOrderByOrderSeqNo" parameterType="int" resultType="orderVO">
+		select * from t_order where order_seqNo=#{order_seqNo} limit 1
+	</select>
+	
+	<update id="updateMemberPoint" parameterType="orderVO">
+		update member
+		set point=point+#{point_price}
+		where memberNo=#{memberNo}
+	</update>
+	
+	<insert id="insertPointHistoryWithOrderVO" parameterType="orderVO">
+		insert into point_history
+		(name,finishDate,amount,memberNo)
+		values
+		("상품 구입",date_add(now(),interval 1 month),#{point_price},#{memberNo})
+	</insert>
 </mapper>
