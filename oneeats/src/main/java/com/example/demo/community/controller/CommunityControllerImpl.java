@@ -215,6 +215,8 @@ System.out.println("map : " + map);
 		map.put("cookingImg", originalFileName);
 		System.out.println("originalFileName" + originalFileName);
 		Iterator<String> files = request.getFileNames();
+		
+		
 		if (files.hasNext()) {
 			String fileName = (String) files.next();
 			fileName.strip();

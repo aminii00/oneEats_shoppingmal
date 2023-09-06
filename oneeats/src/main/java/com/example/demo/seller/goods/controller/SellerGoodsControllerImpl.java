@@ -215,17 +215,12 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 	}
 	
 	@RequestMapping(value = "/seller/goods/sellerGoodsMod.do", method = { RequestMethod.GET, RequestMethod.POST })
-	public ModelAndView sellerGoodsMod(HttpServletRequest request, HttpServletResponse response)
+	public ModelAndView sellerGoodsMod(MultipartHttpServletRequest request, HttpServletResponse response)
 			throws IOException {
 		System.out.println("여기는 sellerGoodsMod");
 		request.setCharacterEncoding("utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		String[] goods_No_= request.getParameterValues("goodsNo");
-		int[] goodsNo_ = new int[goods_No_.length];
-		for (int i=0; i<goodsNo_.length; i++) {
-			goodsNo_[i] = Integer.parseInt(goods_No_[i]);
-		}
-		int goodsNo = goodsNo_[0];
+		int goodsNo= (Integer.parseInt(request.getParameter("goodsNo")));
 		System.out.println("goodsNo="+goodsNo);
 		
 		String category = request.getParameter("category");
@@ -248,6 +243,14 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 			sellerGoodsService.deleteOption(optionNo);
 		}
 
+		String[] originalFileNames = new String[5];
+		originalFileNames[0]=request.getParameter("originalFileName1");
+		originalFileNames[1]=request.getParameter("originalFileName2");
+		originalFileNames[2]=request.getParameter("originalFileName3");
+		originalFileNames[3]=request.getParameter("originalFileName4");
+		originalFileNames[4]=request.getParameter("originalFileName5");
+		
+		
 		GoodsVO sellerGoods = new GoodsVO();
 		sellerGoods.setCategory(category);
 		sellerGoods.setName(name);
@@ -258,6 +261,60 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		sellerGoods.setHarvest(harvest);
 		sellerGoods.setDescription(description);
 		sellerGoods.setGoodsNo(goodsNo);
+		
+		Iterator<String> files = request.getFileNames();
+		String[] imgs = new String[5];
+		while (files.hasNext()) {
+			String fileName = (String) files.next();
+			fileName.strip();
+			MultipartFile mFile = request.getFile(fileName);
+			System.out.println("fileName="+fileName);
+			if (fileName.equals("img1")) {
+				imgs[0] = mFile.getOriginalFilename();
+			}else if(fileName.equals("img2")) {
+				imgs[1] = mFile.getOriginalFilename();
+				
+			}else if(fileName.equals("img3")) {
+				imgs[2] = mFile.getOriginalFilename();
+			}else if(fileName.equals("img4")) {
+				imgs[3] = mFile.getOriginalFilename();
+				
+			}else if(fileName.equals("img5")) {
+				imgs[4] = mFile.getOriginalFilename();
+			}
+
+		}
+		
+		
+		boolean isImgModify = false;
+		for (int i = 0; i < imgs.length; i++) {
+			String goodsImg = imgs[i];
+			goodsImg = goodsImg.strip();
+			System.out.println(goodsImg);
+			if (goodsImg != null && goodsImg.length() > 0) {
+				System.out.println("goodsImg="+goodsImg +"저장하고, "+originalFileNames[i]+"를 지운다?");
+				isImgModify = true;
+				GeneralFileUploader.removeFile(originalFileNames[i], "/goods/" + goodsNo);
+				if (i==1) {
+					sellerGoods.setImg1(goodsImg);
+				}else if(i==2) {
+					sellerGoods.setImg2(goodsImg);
+				}else if(i==3) {
+					sellerGoods.setImg3(goodsImg);
+				}else if(i==4) {
+					sellerGoods.setImg4(goodsImg);
+				}else if(i==5) {
+					sellerGoods.setImg5(goodsImg);
+				}
+			}
+		}
+		if (isImgModify) {
+			GeneralFileUploader.upload(request, "/goods/" + goodsNo);
+		}
+		
+		
+		
+		
 		System.out.println("sellerGoods="+sellerGoods);
 		
 		List<OptionVO> selectOptions = new ArrayList();
@@ -277,7 +334,8 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 			sellerGoodsService.insertOptionForMod(optionVO);
 		}
 
-		ModelAndView mav = new ModelAndView("redirect:/seller/goods/sellerGoodsList.do");
+		ModelAndView mav = new ModelAndView("redirect:/goods/goodsDetail.do");
+		mav.addObject("goodsNo", goodsNo);
 		return mav;
 	}
 
