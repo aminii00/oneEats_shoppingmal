@@ -464,7 +464,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <div class="property-gdtail-flex">
                           <div class="property-gdtail-flex1">
                             <span class="property-gdtail-font"
-                              >${review.memberId}</span
+                              >&nbsp&nbsp${review.memberId}</span
                             >
                           </div>
                           <div class="property-gdtail-flex1">

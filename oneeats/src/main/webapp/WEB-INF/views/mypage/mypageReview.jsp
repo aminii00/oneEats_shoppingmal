@@ -46,23 +46,28 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         height: 100px;
         text-align: center;
       }
+
+      div#done_reviews_grid img {
+        width: 150px;
+        text-align: left;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
     <div class="profile-edit-header text-left">
       <br />
-      <hr class="line-black" />
       <span class="textsize-3 textbold">리뷰작성</span>
       <hr class="line-black" />
-
+      <br />
       <p class="textsize-1 text-left textcolor-lightgray">
         · 사진후기 150원, 글후기 50원 적립, 동일 상품의 후기는 월 1회만 적립금을
         지급해드립니다. <br />
         · 후기 작성 후 첫 영업일에 적립금이 지급됩니다.
       </p>
-
-      <h5 class="textsize-2" style="text-align: left">
-        작성 가능 리뷰 ${totalAvailableReviewsNum} 개
+      <br /><br />
+      <h5 class="textsize-2 reviewdiv">
+        작성가능 리뷰 ${totalAvailableReviewsNum} 개
       </h5>
       <br />
       <div id="available_reviews_grid">
@@ -70,7 +75,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="row">
             <div class="col-md-3">
               <img
-                class="reviewImage"
                 src="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
               />
             </div>
@@ -80,7 +84,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="col-md textsize-2 textbold">
               <button
-                class="bg-lightgreen btn-round border-0"
+                class="bg-lightgreen border-0"
                 type="button"
                 onclick="location.href='${contextPath}/review/writeReview.do?order_seqNo=${item.order_seqNo}'"
               >
@@ -136,9 +140,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
       <br />
       <hr class="line-black" />
       <br />
-      <h5 class="textsize-2" style="text-align: left">
-        작성한 리뷰 ${totalDoneReviewsNum}개
-      </h5>
+      <h5 class="textsize-2 reviewdiv">작성한 리뷰 ${totalDoneReviewsNum}개</h5>
 
       <br />
       <div id="done_reviews_grid">
@@ -149,7 +151,6 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           >
             <div class="col-md-3 reviewImage">
               <img
-                class="reviewImage"
                 src="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
               />
             </div>

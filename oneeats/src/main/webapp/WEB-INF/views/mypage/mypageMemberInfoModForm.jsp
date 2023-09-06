@@ -11,6 +11,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
     <meta charset="UTF-8" />
     <title>회원가입 선택 창</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="${contextPath}/js/registerForm.js"></script>
     <script>
       $(document).ready(function(){
@@ -76,6 +77,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           </div>
   <br>
 
+
           <div
             class="textpoint-center textsize-1 margin1 textbold"
             style="margin-right: 15px"
@@ -92,6 +94,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
           <br />
+
+
 
 
           <div class="margin1 textbold textsize-1">

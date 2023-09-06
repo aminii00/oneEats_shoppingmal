@@ -89,8 +89,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품의 내역입니다.</span></p>
     <hr class="linebold">
     <br>
-    <table>
+    
       <c:forEach var="item" items="${bookList}" varStatus="status">
+        <table>
       <tr>
         <td>
           <a href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}">
@@ -113,9 +114,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           </div>
         </td>
       </tr>
-      </c:forEach>
-     
     </table>
+    <hr>
+      </c:forEach>
    
     <div>
       <ul class="ul-li">

@@ -689,7 +689,7 @@ public class MypageControllerImpl implements MypageController {
 			mav.setViewName("/mypage/mypageMemberInfoModForm");
 		} else {
 			mav = Alert.alertAndRedirect("비밀번호가 틀립니다. 다시 시도해 주세요",
-					request.getContextPath() + "/member/mypageMemberMod.do");
+					request.getContextPath() + "/mypage/mypageMemberMod.do");
 		}
 
 		return mav;
@@ -718,6 +718,9 @@ public class MypageControllerImpl implements MypageController {
 		mypageService.updateMember(memberVO);
 		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberMod.do");
 		HttpSession session = request.getSession();
+		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
+		memberInfo = memberVO;
+		session.setAttribute("memberInfo", memberInfo);
 		return mav;
 	}
 
