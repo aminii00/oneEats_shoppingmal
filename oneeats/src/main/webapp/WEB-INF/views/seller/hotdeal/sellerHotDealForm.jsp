@@ -48,27 +48,27 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                 <div class="product__details__pic__item">
                   <img id="goods_preview" src="" alt="" />
                   <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
+                    src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
                   />
                   <div class="product__details__pic__slider owl-carousel">
                     <c:if test="${not empty goods.img2}">
                       <img
-                        src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
+                        src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
                       />
                     </c:if>
                     <c:if test="${not empty goods.img3}">
                       <img
-                        src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
+                        src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
                       />
                     </c:if>
                     <c:if test="${not empty goods.img4}">
                       <img
-                        src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
+                        src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
                       />
                     </c:if>
                     <c:if test="${not empty goods.img5}">
                       <img
-                        src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
+                        src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
                       />
                     </c:if>
                   </div>
@@ -94,18 +94,18 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="채소">채소</option>
-                            <option value="과일">과일</option>
-                            <option value="주스 / 잼">
+                            <option value="vegetable">채소</option>
+                            <option value="fruit">과일</option>
+                            <option value="juiceAndJam">
                               못난이 주스 / 수제청
                             </option>
-                            <option value="찌개 / 탕 / 찜">
+                            <option value="zzigae">
                               찌개 / 탕 /찜
                             </option>
-                            <option value="식사 / 안주류">식사 / 안주류</option>
-                            <option value="죽">죽</option>
-                            <option value="식사 대용식">식사 대용식</option>
-                            <option value="간편 한끼 반찬">
+                            <option value="meal">식사 / 안주류</option>
+                            <option value="porridge">죽</option>
+                            <option value="mealReplacement">식사 대용식</option>
+                            <option value="sidedish">
                               간편 한끼 반찬
                             </option>
                           </select>

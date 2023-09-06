@@ -13,13 +13,17 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <title>사업자 상품 리스트</title>
     <link rel="stylesheet" href="${contextPath}/css/list.css" />
   </head>
+
   <body>
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">상품목록</p>
       <div class="div-sib textsize-1">
-        <form action="${contextPath}/seller/goods/sellerGoodsList.do">
+        <form
+          method="post"
+          action="${contextPath}/seller/goods/sellerGoodsList.do"
+        >
           <select name="goods_search_type">
-            <option value="">전체</option>
+            <option value="all">전체</option>
             <option value="creDate">등록일</option>
             <option value="name">상품명</option>
           </select>
@@ -122,7 +126,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             var="result"
             value="${(searchGoodsNum - (section-1)*100)/10}"
           />
-          <c:set var="endPage" value="${Math.floor(result)}" />
+          <c:set var="endPage" value="${Math.ceil(result)}" />
         </c:if>
 
         <c:forEach begin="1" end="${endPage}" var="i">

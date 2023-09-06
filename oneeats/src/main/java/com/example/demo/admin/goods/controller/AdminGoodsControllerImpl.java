@@ -2,6 +2,8 @@
 package com.example.demo.admin.goods.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -116,10 +118,9 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-
 		String _pageNum = request.getParameter("pageNum");
 		String _section = request.getParameter("section");
+		String goods_search_type = request.getParameter("goods_search_type");
 		int pageNum;
 		int section;
 		if (_pageNum == null || _pageNum.length() <= 0) {
@@ -132,19 +133,26 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		} else {
 			section = Integer.parseInt(_section);
 		}
-		Map pagingMap = new HashMap();
+		if (goods_search_type != null && goods_search_type.length() < 1) {
+			goods_search_type = "all";
+		}
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("section", section);
+		pagingMap.put("goods_search_type", goods_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
-		List<GoodsVO> newGoodsList = adminGoodsService.selectNewGoodsList(pagingMap);
-		List<GoodsVO> goodsList = adminGoodsService.selectGoodsList();
-
+		
+		List<GoodsVO> goodsList = adminGoodsService.selectGoodsList(pagingMap);
+		List<GoodsVO> newGoodsList = adminGoodsService.selectNewGoodsList();
+		int totalGoodsNum = adminGoodsService.selectTotalGoodsNum();
+		
+		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
-		System.out.println(mav);
-		System.out.println("newGoodsList:" + newGoodsList);
-		return mav;
+		mav.addObject("totalGoodsNum", totalGoodsNum);
+		System.out.println("mav :" + mav);
+				return mav;
 	}
 
 	//리스트 삭제
@@ -188,27 +196,17 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 
 		}
 
-	
-		
-		
-		
-		
-		
-		
-		
+
 		
 		//관리자 사업자 목록창
 		@RequestMapping(value = "/admin/goods/adminSellerGoodsList.do", method = { RequestMethod.GET, RequestMethod.POST })
 		public ModelAndView adminSellerGoodsList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("html/text;charset=utf-8");
-			
-			HttpSession session = request.getSession();
 			String viewName = (String) request.getAttribute("viewName");
-			ModelAndView mav = new ModelAndView(viewName);
-
 			String _pageNum = request.getParameter("pageNum");
 			String _section = request.getParameter("section");
+			String goods_search_type = request.getParameter("goods_search_type");
 			int pageNum;
 			int section;
 			if (_pageNum == null || _pageNum.length() <= 0) {
@@ -221,22 +219,122 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			} else {
 				section = Integer.parseInt(_section);
 			}
-			Map pagingMap = new HashMap();
+			if (goods_search_type !=null && goods_search_type.length()<1) {
+				goods_search_type = "all";
+			}	
+			Map pagingMap = GeneralFileUploader.getParameterMap(request);
 			pagingMap.put("pageNum", pageNum);
 			pagingMap.put("section", section);
+			pagingMap.put("goods_search_type", goods_search_type);
 			pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
-			List<GoodsVO> newGoodsList = adminGoodsService.selectNewSellerGoodsList(pagingMap);
-			List<GoodsVO> goodsList = adminGoodsService.selectSellerGoodsList();		
+			
+			List<GoodsVO> goodsList = adminGoodsService.selectSellerGoodsList(pagingMap);
+			List<GoodsVO> newGoodsList = adminGoodsService.selectNewSellerGoodsList();
+			int totalGoodsNum = adminGoodsService.selectTotalGoodsNum();
+			
+			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("goodsList", goodsList);
 			mav.addObject("newGoodsList", newGoodsList);
 			mav.addAllObjects(pagingMap);
-			System.out.println(mav);
-			System.out.println("newGoodsList:" + newGoodsList);
+			mav.addObject("totalGoodsNum", totalGoodsNum);
+			System.out.println("mav :" + mav);
+			return mav;
+			
+		}
+		
+		@RequestMapping(value = "/admin/goods/adminGoodsModForm.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView sellerGoodsModForm(HttpServletRequest request, HttpServletResponse response)
+				throws IOException {
+			System.out.println("여기는 adminGoodsModForm");
+			request.setCharacterEncoding("utf-8");
+			HttpSession session = request.getSession();
+			String viewName = (String) request.getAttribute("viewName");
+			
+			int goodsNo = (Integer.parseInt(request.getParameter("goodsNo")));
+			System.out.println("goodsNo="+goodsNo);
+			GoodsVO sellerGoods = adminGoodsService.selectGoodsByGoodsNo(goodsNo);
+			System.out.println("sellerGoods=" + sellerGoods);
+			List<OptionVO> options = adminGoodsService.selectOptionByGoodsNo(goodsNo);
+			System.out.println("options="+options);
+
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("sellerGoods", sellerGoods);
+			mav.addObject("options", options);
+			return mav;
+		}
+		
+		@RequestMapping(value = "/admin/goods/adminGoodsMod.do", method = { RequestMethod.GET, RequestMethod.POST })
+		public ModelAndView sellerGoodsMod(HttpServletRequest request, HttpServletResponse response)
+				throws IOException {
+			System.out.println("여기는 adminGoodsMod");
+			request.setCharacterEncoding("utf-8");
+			String viewName = (String) request.getAttribute("viewName");
+			String[] goods_No_= request.getParameterValues("goodsNo");
+			int[] goodsNo_ = new int[goods_No_.length];
+			for (int i=0; i<goodsNo_.length; i++) {
+				goodsNo_[i] = Integer.parseInt(goods_No_[i]);
+			}
+			int goodsNo = goodsNo_[0];
+			System.out.println("goodsNo="+goodsNo);
+			
+			String category = request.getParameter("category");
+			String name = request.getParameter("name");
+			String price = request.getParameter("price");
+			String rapping = request.getParameter("rapping");
+			String manufacturer = request.getParameter("manufacturer");
+			String weight = request.getParameter("weight");
+			String expDate = request.getParameter("expDate");
+			String description = request.getParameter("description");
+			String[] option_names = request.getParameterValues("option_name");
+			String[] option_qtys = request.getParameterValues("option_qty");
+			String[] option_prices = request.getParameterValues("option_price");
+			System.out.println("option_names="+Arrays.toString(option_names));
+			System.out.println("expDate="+expDate);
+			System.out.println("rapping="+rapping);
+			
+			int[] optionNos = adminGoodsService.selectOptionNoByGoodsNo(goodsNo);
+			for (int optionNo : optionNos) {
+				adminGoodsService.deleteOption(optionNo);
+			}
+
+			GoodsVO sellerGoods = new GoodsVO();
+			sellerGoods.setCategory(category);
+			sellerGoods.setName(name);
+			sellerGoods.setPrice(price);
+			sellerGoods.setRapping(rapping);
+			sellerGoods.setManufacturer(manufacturer);
+			sellerGoods.setWeight(weight);
+			sellerGoods.setExpDate(expDate);
+			sellerGoods.setDescription(description);
+			sellerGoods.setGoodsNo(goodsNo);
+			System.out.println("sellerGoods="+sellerGoods);
+			
+			List<OptionVO> selectOptions = new ArrayList();
+			for (int i=0; i<option_names.length; i++) {
+				OptionVO temp = new OptionVO();
+				temp.setName(option_names[i]);
+				temp.setOption_qty(option_qtys[i]);
+				temp.setPrice(option_prices[i]);
+				temp.setGoodsNo(goodsNo);
+				selectOptions.add(temp);
+			}
+			System.out.println("selectOptions"+selectOptions);
+			
+
+			adminGoodsService.updateSellerGoods(sellerGoods);
+			for (OptionVO optionVO : selectOptions) {
+				adminGoodsService.insertOptionForMod(optionVO);
+			}
+
+			ModelAndView mav = new ModelAndView("redirect:/admin/goods/adminGoodsList.do");
 			return mav;
 		}
 
 		
 		
 		
-	
+		
+		
 }
+

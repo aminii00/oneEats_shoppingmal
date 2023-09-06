@@ -110,8 +110,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <div class="col-md-2 writer_profile_img">
             <div class="profile_img_wrapper">
               <img
-                class="btn-square"
-                src="${contextPath}/download.do?imageFileName=${writer.profileImg}&path=prop"
+                class="imgsize-square1"
+                src="${contextPath}/download.do?imageFileName=${writer.profileImg}&path=member/${writer.memberNo}"
                 alt="프로필 이미지"
               />
             </div>

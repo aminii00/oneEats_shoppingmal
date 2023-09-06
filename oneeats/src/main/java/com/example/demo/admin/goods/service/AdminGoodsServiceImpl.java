@@ -49,14 +49,14 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 	// 상품 페이징 처리
 
 	@Override
-	public List<GoodsVO> selectNewGoodsList(Map pagingMap) {
-		return adminGoodsDAO.selectNewGoodsList(pagingMap);
+	public List<GoodsVO> selectNewGoodsList() {
+		return adminGoodsDAO.selectNewGoodsList();
 	}
 
 	// 상품 목록
 	@Override
-	public List<GoodsVO> selectGoodsList() throws DataAccessException {
-		return adminGoodsDAO.selectGoodsList();
+	public List<GoodsVO> selectGoodsList(Map pagingMap) {
+		return adminGoodsDAO.selectGoodsList(pagingMap);
 	}
 	
 	//상품 삭제
@@ -81,17 +81,76 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 		// 관리자 상품 페이징 처리
 
 		@Override
-		public List<GoodsVO> selectNewSellerGoodsList(Map pagingMap) {
-			return adminGoodsDAO.selectNewSellerGoodsList(pagingMap);
+		public List<GoodsVO> selectNewSellerGoodsList() {
+			return adminGoodsDAO.selectNewSellerGoodsList();
 		}
 
 		// 관리자 상품 목록
 		@Override
-		public List<GoodsVO> selectSellerGoodsList() throws DataAccessException {
-			return adminGoodsDAO.selectSellerGoodsList();
+		public List<GoodsVO> selectSellerGoodsList(Map pagingMap){
+			return adminGoodsDAO.selectSellerGoodsList(pagingMap);
 		}
+	
+
+		//카테고리
+			@Override
+			public List<Map> countGoodsNums() {
+				return adminGoodsDAO.countGoodsNums();
+			};
+			//카테고리
+			@Override
+			public List<Map> countSellerGoodsNums() {
+				return adminGoodsDAO.countSellerGoodsNums();
+			};
+	
+			@Override
+			public void updateOption(List<OptionVO> selectOptions) {
+				adminGoodsDAO.updateOption(selectOptions);
+				
+			}
+
+			@Override
+			public void updateSellerGoods(GoodsVO sellerGoods) {
+				
+				adminGoodsDAO.updateSellerGoods(sellerGoods);	
+				
+			}
+
+			@Override
+			public void deleteOption(int optionNo) {
+				adminGoodsDAO.deleteOption(optionNo);
+				
+			}
+
+			@Override
+			public void insertOptionsForMod(List<OptionVO> selectOptions) {
+				adminGoodsDAO.insertOptionsForMod(selectOptions);
+			
+			}
+
+			@Override
+
+			public void insertOptionForMod(OptionVO optionVO) {
+				adminGoodsDAO.insertOptionForMod(optionVO);
+				
+			}
+
+			
+			
+			@Override
+			public int selectTotalGoodsNum() {
+				return adminGoodsDAO.selectTotalGoodsNum();
+			}
+
 		
-		
-		
-		
+
+			@Override
+			public int[] selectOptionNoByGoodsNo(int goodsNo) {
+				return adminGoodsDAO.selectOptionNoByGoodsNo(goodsNo);
+			}
+
+			@Override
+			public List<OptionVO> selectOptionByGoodsNo(int goodsNo) {
+				return adminGoodsDAO.selectOptionByGoodsNo(goodsNo);
+			}
 }

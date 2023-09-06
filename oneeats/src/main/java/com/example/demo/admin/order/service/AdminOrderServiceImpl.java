@@ -1,10 +1,12 @@
 package com.example.demo.admin.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.admin.order.dao.AdminOrderDAO;
 import com.example.demo.vo.OrderVO;
@@ -29,19 +31,35 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 		adminOrderDAO.updateDeliveryStatusToCancel(order_seqNo);
 		
 	}
+	
+	@Override
+	public List<OrderVO> selectOrderByMemberType(Map pagingMap) {
+		return adminOrderDAO.selectOrderByMemberType(pagingMap);
+	}
 
 	@Override
-	public List<OrderVO> selectOrderByMemberType() {
-		return adminOrderDAO.selectOrderByMemberType();
+	public int selectTotalOrderNum() {
+		return adminOrderDAO.selectTotalOrderNum();
+	}
+
+	@Override
+	@Transactional
+	public void updateDeliveryStatusWithOrderSeqArray(int[] order_seqNos, String delivery_status) {
+		for (int i = 0; i < order_seqNos.length; i++) {
+			int order_seqNo = order_seqNos[i];
+			OrderVO temp = new OrderVO();
+			temp.setOrder_seqNo(order_seqNo);
+			temp.setDelivery_status(delivery_status);
+			adminOrderDAO.updateDeliveryStatus(temp);
+		}
+		if (delivery_status.equals("배송완료")) {			
+			OrderVO orderVO = adminOrderDAO.selectOrderByOrderSeqNo(order_seqNos[0]);
+			adminOrderDAO.updateMemberPoint(orderVO);
+			adminOrderDAO.insertPointHistoryWithOrderVO(orderVO);
+		}
+		
 	}	
 	
-//	@Override
-//	public List<OrderVO> selectOrderList(Map pagingMap) {
-//		return mypageDAO.selectOrderList(pagingMap);
-//	}
-//
-//	@Override
-//	public List<Map> countOrderNums() {
-//		return mypageDAO.countOrderNums();
-//	}
+	
+	
 }

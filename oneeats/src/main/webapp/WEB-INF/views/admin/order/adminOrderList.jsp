@@ -12,25 +12,39 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 주문/배송</title>
     <link rel="stylesheet" href="${contextPath}/css/minzy.css" />
+    <script>
+      $(document).ready(function () {
+        $("select[name=delivery_status]").on("change", function () {
+          $(this)
+            .closest("form.delivery_status_form")
+            .attr("action", "/admin/order/modDeliveryStatus.do")
+            .submit();
+        });
+      });
+    </script>
   </head>
   <body>
     <!-- 검색창 -->
-    <form method="post" action="#">
+    <form method="post" action="${contextPath}/admin/order/adminOrderList.do">
       <div class="div-p2">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           주문/배송
         </p>
         <div class="div-sib textsize-1">
-          <select name="search-1">
-            <option value="전체">전체</option>
-            <option value="주문번호">주문번호</option>
-            <option value="주문자명">주문자명</option>
-            <option value="아이디">아이디</option>
+          <select name="order_search_type">
+            <option value="all">전체</option>
+            <option value="orderNo">주문번호</option>
+            <option value="orderer_name">주문자명</option>
+            <option value="orderer_id">아이디</option>
           </select>
-          <input type="text" name="search-2" placeholder="search.." />
+          <input
+            type="search"
+            name="order_search_word"
+            placeholder="search.."
+          />
           <button
             class="btn-1 bg-lightgreen textcolor-white border-0"
-            type="button"
+            type="submit"
           >
             검색
           </button>
@@ -66,7 +80,31 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                   ${adminOrder.goodsName} 외 ${adminOrder.gun}건</a
                 >
               </td>
-              <td>${adminOrder.delivery_status}</td>
+              <td>
+                <form class="delivery_status_form">
+                  <input
+                    type="hidden"
+                    name="orderNo"
+                    value="${adminOrder.orderNo}"
+                  />
+                  <c:set
+                    var="status_array"
+                    value="${['결제완료','배송중','배송완료','취소완료']}"
+                  />
+                  <select name="delivery_status">
+                    <c:forEach items="${status_array}" var="i">
+                      <c:choose>
+                        <c:when test="${i==adminOrder.delivery_status}">
+                          <option value="${i}" selected>${i}</option>
+                        </c:when>
+                        <c:otherwise>
+                          <option value="${i}">${i}</option>
+                        </c:otherwise>
+                      </c:choose>
+                    </c:forEach>
+                  </select>
+                </form>
+              </td>
               <td>
                 <a
                   href="javascript:void(0)"
@@ -84,68 +122,54 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <hr class="linebold" />
 
     <!-- 페이징 -->
-    <%--
-    <!--    <div> 페이징처리
-        <c:if test="${totArticles != null}"
-            <c:choose>
-            <c:when test="${totArticles > 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <c:if test="${section > 1 && page == 1}">
-                    <a href="#">&nbsp:prev</a>
-                    </c:if>
-                    <a href="#"></a>
-                    <c:if test="${page == 10}">
-                    <a href="#">&nbsp:next</a>
-                    </c:if>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles == 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <a href="#">${page}</a>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles < 100}">
-                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
-                <c:choose>
-                    <c:when test="${page == pageNum}">
-                    <a href="#">${page}</a>
-                    </c:when>
-                    <c:otherwise>
-                    <a href="#">${page}</a>
-                    </c:otherwise>
-                </c:choose>
-                </c:foreach>
-            </c:when>
-            </c:choose>
-        </c:if>
-        </div> 
--->
-    --%>
     <div>
       <ul class="ul-li">
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/prev.png"
-              alt="prev"
-            />
-          </button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">1</button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/order/adminOrderList.do?section=${section-1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </a>
+          </li>
+        </c:if>
+        <c:set
+          var="end"
+          value="${Math.ceil((totalOrderNum - (section-1)*100)/ 10)}"
+        />
+        <c:if test="${end>10}">
+          <c:set var="end" value="10" />
+        </c:if>
+        <c:forEach begin="1" end="${end}" var="i">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/order/adminOrderList.do?section=${section}&pageNum=${i}"
+              class="btn-2 btn-square bg-white btn-border"
+              >${((section-1)*10)+i}</a
+            >
+          </li>
+        </c:forEach>
+        <c:if test="${section*100<totalOrderNum}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/admin/order/adminOrderList.do?section=${section+1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </a>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>

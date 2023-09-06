@@ -83,14 +83,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </style>
     </head>
     <body>
-    <form method="post" action="#">
+  
     <div class="div-p ">
         <br>
-        <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품은 최대 100개까지 저장합니다.</span></p>
+        <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품의 내역입니다.</span></p>
     <hr class="linebold">
     <br>
-   <c:forEach var="item" items="${bookList}" varStatus="status">
-    <table>
+    
+      <c:forEach var="item" items="${bookList}" varStatus="status">
+        <table>
       <tr>
         <td>
           <img
@@ -106,50 +107,66 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </td>
         <td>
           <div class=" book text-right">
-            <button type="button" onclick="fn_toCart()" class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" >장바구니</button>
+            <button type="button" class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" onclick='fn_addCartOneItem("${contextPath}","${item.goodsNo}")'>장바구니</button>
             <br>
             <button type="button" onclick="location.href='${contextPath}/mypage/deleteBook.do?goodsNo=${item.goodsNo}'" class ="bookserve bg-lightgreen textsize-1 border-0 margin btn-round">삭제</button>
           </div>
         </td>
       </tr>
-      <hr>
     </table>
+    <hr>
+      </c:forEach>
    
-
-
-
-  </c:forEach>
-        <br><br>
-        <div id="wrapper">
-            <main id="product">
-              <section class="view">
-                <article class="review">
-                  <div class="paging">
-                    <span class="prev">
-                      <a href="#">< 이전</a>
-                    </span>
-                    <span class="num">
-                      <a href="#" class="on">1</a>
-                      <a href="#">2</a>
-                      <a href="#">3</a>
-                      <a href="#">4</a>
-                      <a href="#">5</a>
-                      <a href="#">6</a>
-                      <a href="#">7</a>
-                    </span>
-                    <span class="next">
-                      <a href="#">다음 ></a>
-                    </span>
-                  </div>
-                </article>
-              </section>
-            </main>
-          </div>
-    </form>
-<!--옵션을 선택할 때마다 행이 추가됨-->
-
-<script src="${contextPath}/js/goodsDetail.js"></script>
-
-<!-- Js Plugins -->
+    <div>
+      <ul class="ul-li">
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/mypageBookmarkList.do?section=${section-1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </a>
+          </li>
+        </c:if>
+        <c:set
+          var="end"
+          value="${Math.ceil((totalBookListNum - (section-1)*100) div 10)}"
+        />
+        <c:if test="${end>10}">
+          <c:set var="end" value="10" />
+        </c:if>
+        <c:forEach begin="1" end="${end}" var="i">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/mypageBookmarkList.do?section=${section}&pageNum=${i}"
+              class="btn-2 btn-square bg-white btn-border"
+              >${((section-1)*10)+i}</a
+            >
+          </li>
+        </c:forEach>
+        <c:if test="${section*100<totalBookListNum}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/mypageBookmarkList.do?section=${section+1}&pageNum=1"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </a>
+          </li>
+        </c:if>
+      </ul>
+    </div>
+    <br><br>
   </body>
 </html>

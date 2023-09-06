@@ -17,20 +17,25 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <div class="div-p">
       <p class="textsize-2 text-left textcolor-black textbold">상품</p>
       <div class="div-sib textsize-1">
-        <select name="search-1">
-          <option value="전체">전체</option>
-          <option value="사업자번호">사업자번호</option>
-          <option value="상품명">상품명</option>
-          <option value="아이디">아이디</option>
-          <option value="등록일">등록일</option>
-        </select>
-        <input type="text" name="search-2" placeholder="search.." />
-        <button
-          class="btn-1 bg-lightgreen textcolor-white border-0"
-          type="button"
+        <form
+          method="post"
+          action="${contextPath}/admin/goods/adminSellerGoodsList.do"
         >
-          검색
-        </button>
+          <select name="goods_search_type">
+            <option value="all">전체</option>
+            <option value="memberNo">사업자번호</option>
+            <option value="name">상품명</option>
+            <option value="seller_id">아이디</option>
+            <option value="creDate">등록일</option>
+          </select>
+          <input type="text" name="goods_search_word" placeholder="search.." />
+          <button
+            class="btn-1 bg-lightgreen textcolor-white border-0"
+            type="submit"
+          >
+            검색
+          </button>
+        </form>
       </div>
     </div>
     <table border="0" class="textcolor-black textsize-1">
@@ -43,7 +48,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th style="text-align: right">삭제</th>
       </tr>
 
-      <c:forEach var="goods" items="${newGoodsList}">
+      <c:forEach var="goods" items="${goodsList}">
         <c:choose>
           <c:when test="${goods.goodsNo != preGoodsNo}">
             <tr>
@@ -71,50 +76,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <c:set var="preGoodsNo" value="${goods.goodsNo}" />
       </c:forEach>
     </table>
-    <%--
-    <!--    <div> 페이징처리
-        <c:if test="${totArticles != null}"
-            <c:choose>
-            <c:when test="${totArticles > 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <c:if test="${section > 1 && page == 1}">
-                    <a href="#">&nbsp:prev</a>
-                    </c:if>
-                    <a href="#"></a>
-                    <c:if test="${page == 10}">
-                    <a href="#">&nbsp:next</a>
-                    </c:if>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles == 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <a href="#">${page}</a>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles < 100}">
-                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
-                <c:choose>
-                    <c:when test="${page == pageNum}">
-                    <a href="#">${page}</a>
-                    </c:when>
-                    <c:otherwise>
-                    <a href="#">${page}</a>
-                    </c:otherwise>
-                </c:choose>
-                </c:foreach>
-            </c:when>
-            </c:choose>
-        </c:if>
-        </div> 
--->
-    --%>
     <div>
       <ul class="ul-li">
         <c:if test="${section>1}">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?&section=${section-1}&pageNum=1'"
+              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?&category=${category}&section=${section-1}&pageNum=1'"
             >
               <img
                 width="20px"
@@ -125,29 +93,42 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </button>
           </li>
         </c:if>
-        <c:forEach begin="1" end="10" var="i">
+        <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
+        <c:set var="endPage" value="1" />
+        <c:if test="${not empty searchGoodsNum && searchGoodsNum>0}">
+          <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
+          <c:set
+            var="result"
+            value="${(searchGoodsNum - (section-1)*100)/10}"
+          />
+          <c:set var="endPage" value="${Math.floor(result)}" />
+        </c:if>
+
+        <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?section=${section}&pageNum=${i}'"
+              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?category=${category}&section=${section}&pageNum=${i}'"
             >
               ${(section-1)*10+i}
             </button>
           </li>
         </c:forEach>
-        <li class="li-btn">
-          <button
-            class="btn-2 btn-square bg-white btn-border"
-            onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?section=${section+1}&pageNum=1'"
-          >
-            <img
-              width="20px"
-              height="20px"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${searchGoodsNum > (section)*100}">
+          <li class="li-btn">
+            <button
+              class="btn-2 btn-square bg-white btn-border"
+              onclick="location.href='${contextPath}/admin/goods/adminSellerGoodsList.do?category=${category}&section=${section+1}&pageNum=1'"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </button>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>

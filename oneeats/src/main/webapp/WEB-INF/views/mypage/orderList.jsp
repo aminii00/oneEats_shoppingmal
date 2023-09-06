@@ -15,13 +15,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
   </head>
   <body>
     <!-- 검색창 -->
-    <form method="post" action="${contextPath}/mypage/orderSearch.do">
+    <form method="post" action="${contextPath}/mypage/orderList.do">
       <div class="div-p">
         <p class="p-1 textsize-2 text-left textcolor-black textbold">
           주문내역
         </p>
         <div class="div-sib2 textsize-1">
-          <select name="orderSearchType" onchange="this.form.submit()">
+          <select name="order_search_type" onchange="this.form.submit()">
             <option value="all">전체</option>
             <option value="1month">1개월</option>
             <option value="3month">3개월</option>
@@ -53,7 +53,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <div class="div-left2">
                 <img
                   class="img-1"
-                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=orderNo${order.orderNo}"
+                  src="${contextPath}/download.do?imageFileName=${order.goodsImg}&path=goodsNo${order.goodsNo}"
                   alt="상품메인"
                 />
                 <div class="div-dl">
@@ -114,66 +114,54 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     <hr class="linebold" />
 
     <!-- 페이징 -->
-    <%--
-    <!--    <div> 페이징처리
-        <c:if test="${totArticles != null}"
-            <c:choose>
-            <c:when test="${totArticles > 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <c:if test="${section > 1 && page == 1}">
-                    <a href="#">&nbsp:prev</a>
-                    </c:if>
-                    <a href="#"></a>
-                    <c:if test="${page == 10}">
-                    <a href="#">&nbsp:next</a>
-                    </c:if>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles == 100}">
-                <c:foreach var="page" begin="1" end="10" step="1">
-                    <a href="#">${page}</a>
-                </c:foreach>
-            </c:when>
-            <c:when test="${totArticles < 100}">
-                <c:foreach var="page" begin="1" end="${totArticles/10+1}" step="1">
-                <c:choose>
-                    <c:when test="${page == pageNum}">
-                    <a href="#">${page}</a>
-                    </c:when>
-                    <c:otherwise>
-                    <a href="#">${page}</a>
-                    </c:otherwise>
-                </c:choose>
-                </c:foreach>
-            </c:when>
-            </c:choose>
-        </c:if>
-        </div> 
--->
-    --%>
     <div>
       <ul class="ul-li">
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              class="img-2"
-              src="${contextPath}/img/icon/prev.png"
-              alt="prev"
-            />
-          </button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">1</button>
-        </li>
-        <li class="li-btn">
-          <button class="btn-2 btn-square bg-white btn-border">
-            <img
-              class="img-2"
-              src="${contextPath}/img/icon/next.png"
-              alt="next"
-            />
-          </button>
-        </li>
+        <c:if test="${section>1}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/orderList.do?section=${section-1}&pageNum=1&order_search_type=${order_search_type}"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/prev.png"
+                alt="prev"
+              />
+            </a>
+          </li>
+        </c:if>
+        <c:set
+          var="end"
+          value="${Math.ceil((totalOrderNum - (section-1)*60)/ 6)}"
+        />
+        <c:if test="${end>10}">
+          <c:set var="end" value="10" />
+        </c:if>
+        <c:forEach begin="1" end="${end}" var="i">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/orderList.do?section=${section}&pageNum=${i}&order_search_type=${order_search_type}"
+              class="btn-2 btn-square bg-white btn-border"
+              >${((section-1)*10)+i}</a
+            >
+          </li>
+        </c:forEach>
+        <c:if test="${section*60<totalOrderNum}">
+          <li class="li-btn">
+            <a
+              href="${contextPath}/mypage/orderList.do?section=${section+1}&pageNum=1&order_search_type=${order_search_type}"
+              class="btn-2 btn-square bg-white btn-border"
+            >
+              <img
+                width="20px"
+                height="20px"
+                src="${contextPath}/img/icon/next.png"
+                alt="next"
+              />
+            </a>
+          </li>
+        </c:if>
       </ul>
     </div>
   </body>

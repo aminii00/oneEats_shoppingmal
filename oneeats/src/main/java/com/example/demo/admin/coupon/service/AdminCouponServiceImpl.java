@@ -1,6 +1,7 @@
 package com.example.demo.admin.coupon.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +29,14 @@ public class AdminCouponServiceImpl implements AdminCouponService {
 		adminCouponDAO.deleteAdminCoupon(couponNo);
 	}
 
+	@Override
+	public List<CouponVO> selectAdminCouponByMemberNo(Map pagingMap) {
+		return adminCouponDAO.selectAdminCouponByMemberNo(pagingMap);
+	}
+
+	@Override
+	public int selectTotalCouponNum(int memberNo) {
+		return adminCouponDAO.selectTotalCouponNum(memberNo);
+	}
+	
 }

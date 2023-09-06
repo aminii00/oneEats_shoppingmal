@@ -18,8 +18,22 @@ public class HotDealVO {
 	private String goodsName;
 	private int goodsPrice;
 	private String goodsImg;
+	private String sellerName;
+	private String manufacturer;
 	
 	
+	public String getSellerName() {
+		return sellerName;
+	}
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+	public String getManufacturer() {
+		return manufacturer;
+	}
+	public void setManufacturer(String manufacturer) {
+		this.manufacturer = manufacturer;
+	}
 	public String getGoodsImg() {
 		return goodsImg;
 	}
@@ -99,9 +113,9 @@ public class HotDealVO {
 		return "HotDealVO [hotdealNo=" + hotdealNo + ", name=" + name + ", discounted_price=" + discounted_price
 				+ ", goods_qty=" + goods_qty + ", finishDate=" + finishDate + ", description=" + description
 				+ ", creDate=" + creDate + ", category=" + category + ", goodsNo=" + goodsNo + ", goodsName="
-				+ goodsName + ", goodsPrice=" + goodsPrice + ", goodsImg=" + goodsImg + "]";
+				+ goodsName + ", goodsPrice=" + goodsPrice + ", goodsImg=" + goodsImg + ", sellerName=" + sellerName + ", manufacturer=" +manufacturer + "]";
 	}
 	
-	
+
 	
 }

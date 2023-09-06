@@ -41,8 +41,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             <div class="col-md">
               <select name="category" id="">
                 <option value="결제">결제</option>
-                <option value="배송">배송</option>
                 <option value="주문">주문</option>
+                <option value="이벤트">이벤트</option>
               </select>
             </div>
           </div>

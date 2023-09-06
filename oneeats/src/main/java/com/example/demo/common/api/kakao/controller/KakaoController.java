@@ -106,6 +106,8 @@ public class KakaoController {
 		session.removeAttribute("kakaoInfo");
 		long hash = kakaoInfo.hash();
 		mav.addObject("api_id", "kakao_" + hash);
+		mav.addObject("sns_id", hash);
+		mav.addObject("sns_type","kakao");
 		mav.addObject("name", kakaoInfo.getNickname());
 		mav.addObject("email", kakaoInfo.getEmail());
 		return mav;

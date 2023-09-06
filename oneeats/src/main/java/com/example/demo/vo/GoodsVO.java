@@ -12,7 +12,7 @@ public class GoodsVO {
 	private String rapping;
 	private String manufacturer;
 	private String weight;
-	private Date expDate;
+	private String expDate;
 	private String description;
 	private String harvest;
 	private Date creDate;
@@ -70,10 +70,11 @@ public class GoodsVO {
 	public void setWeight(String weight) {
 		this.weight = weight;
 	}
-	public Date getExpDate() {
+	public String getExpDate() {
 		return expDate;
 	}
-	public void setExpDate(Date expDate) {
+
+	public void setExpDate(String expDate) {
 		this.expDate = expDate;
 	}
 	public String getDescription() {

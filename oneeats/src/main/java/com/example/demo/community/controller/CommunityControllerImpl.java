@@ -120,7 +120,9 @@ public class CommunityControllerImpl implements CommunityController {
 		RecipeVO recipeVO = communityService.selectRecipeByRecipeNo(recipeNo);
 		mav.addObject("recipe", recipeVO);
 		List<Map> ingredientList = communityService.selectingredientByRecipeNo(recipeNo);
-
+		int memberNo = recipeVO.getMemberNo();
+		MemberVO writer = communityService.selectMemberByMemberNo(memberNo);
+		mav.addObject("writer",writer);
 		mav.addObject("ingredientList", ingredientList);
 
 		System.out.println(mav);
@@ -314,6 +316,7 @@ System.out.println("map : " + map);
 		mav.addObject("oneQnAList", oneQnADetail);
 		System.out.println("oneQnAList = " +oneQnADetail);
 		
+		
 		//parentNo이 qnaNo인 값을 가져오기
 		List<OneQnAVO> replyList = communityService.replyList(qnaNo);
 		System.out.println("replyList = " +replyList);
@@ -326,7 +329,6 @@ System.out.println("map : " + map);
 	@Override
 	@RequestMapping(value = "/oneQnA/QnAReply.do", method = RequestMethod.POST)
 	public ModelAndView oneQnAReply(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("여기는 community QnAReply Controller");
 		ModelAndView mav = new ModelAndView();
 		String content = request.getParameter("content");
 		String qnaNo_ = request.getParameter("qnaNo");
@@ -336,13 +338,11 @@ System.out.println("map : " + map);
 		int qnaNo = Integer.parseInt(qnaNo_);
 		System.out.println("content = " + content+ "qnaNo = " +qnaNo);
 		// no을 parentNo으롷 memberNo는 댓글이나 답글을 작성 한 사람
-		int NewqnaNo = communityService.newQnANo(); // 새로운 qnaNo 찾기
 		OneQnAVO oneqnaVO = new OneQnAVO();
-		oneqnaVO.setParentNo(qnaNo); // parentNo을 qnaNo으로
+		oneqnaVO.setParentNo(qnaNo);
 		oneqnaVO.setContent(content);
-		oneqnaVO.setQnaNo(NewqnaNo); // 새로운 qnaNo값을 가져와서 set
-		oneqnaVO.setMemberNo(memberNo); // 세션에 있는 로그인정보를 가져와서 memberNo에 넣기
-		communityService.replyInsert(oneqnaVO); // parentNo에 1을 넣은 oneqnaVO insert하기
+		oneqnaVO.setMemberNo(memberNo);
+		communityService.replyInsert(oneqnaVO);
 		mav.addObject("qnaNo",qnaNo);
 		mav.setViewName("redirect:/community/oneQnA/oneQnADetail.do");
 		return mav;
@@ -440,7 +440,7 @@ System.out.println("map : " + map);
 			pagingMap.put("category", category);
 		}
 		try {
-			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			int start = ((Integer.parseInt(section)-1)*10+Integer.parseInt(pageNum)-1)*10;
 			pagingMap.put("start", start);
 			List<MostQnAVO> mostQnAList = communityService.selectMostQnAListWithPagingMap(pagingMap);
 			mav.addAllObjects(pagingMap);
@@ -451,6 +451,7 @@ System.out.println("map : " + map);
 			System.out.println(mav);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav = Alert.alertAndRedirect("목록을 표시하지 못 했습니다.",request.getContextPath()+"/main/mainPage.do");
 		}
 		return mav;
 
@@ -467,6 +468,13 @@ System.out.println("map : " + map);
 		ModelAndView mav = new ModelAndView(viewName);
 		request.setCharacterEncoding("utf-8");
 		Map pagingMap = GeneralFileUploader.getParameterMap(request);
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO) session.getAttribute("memberInfo");
+		if (member==null || member.getId().trim().length()<1) {
+			mav = Alert.alertAndRedirect("로그인이 필요합니다.", request.getContextPath()+"/member/loginForm.do");
+			return mav;
+		}
+
 		String pageNum = (String) pagingMap.get("pageNum");
 		String section = (String) pagingMap.get("section");
 		if (pageNum == null || pageNum.trim().length() < 1) {
@@ -479,26 +487,22 @@ System.out.println("map : " + map);
 		}
 		
 		try {
-			int start = ((Integer.parseInt(section)-1)+Integer.parseInt(pageNum)-1)*10;
+			int start = ((Integer.parseInt(section)-1)*10+Integer.parseInt(pageNum)-1)*10;
 			pagingMap.put("start", start);
+			pagingMap.put("memberNo", member.getMemberNo());
 			List<OneQnAVO> oneQnAList = communityService.selectOneQnAListWithPagingMap(pagingMap);
-			mav.addAllObjects(pagingMap);
 			mav.addObject("oneQnAList", oneQnAList);
-			
-			
+			int totalOneQnANum = communityService.selectOneQnAListTotalNumWithPagingMap(pagingMap);
+			mav.addObject("totalOneQnANum",totalOneQnANum);
 			System.out.println(mav);
 		} catch (Exception e) {
 			e.printStackTrace();
+			mav = Alert.alertAndRedirect("목록을 표시하지 못 했습니다.",request.getContextPath()+"/main/mainPage.do");
 		}
+		mav.addAllObjects(pagingMap);
 		return mav;
 
-		/*
-		 * ModelAndView mav = new ModelAndView(); List<OneQnAVO> oneQnAList =
-		 * communityService.oneQnAList(); System.out.println("oneQnAList 1:1문의 = " +
-		 * oneQnAList); String viewName = (String) request.getAttribute("viewName");
-		 * mav.addObject("oneQnAList", oneQnAList); mav.setViewName(viewName); return
-		 * mav;
-		 */
+
 	}
 	
 	
@@ -534,7 +538,7 @@ System.out.println("map : " + map);
 				mav.addAllObjects(pagingMap);
 				mav.addObject("noticeVO", noticeVO);
 				System.out.println("noticeVO = " +noticeVO);
-				int totalNoticeNum = communityService.selectNoticeListTotalNumWithCategory(category);
+				int totalNoticeNum = communityService.selectNoticeListTotalNumWithCategory(pagingMap);
 				System.out.println(totalNoticeNum);
 				mav.addObject("totalNoticeNum",totalNoticeNum);
 				

@@ -8,8 +8,17 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
   <head>
     <link rel="stylesheet" href="${contextPath}/css/mina.css" />
+    <link rel="stylesheet" href="${contextPath}/css/loginForm.css" />
     <meta charset="UTF-8" />
     <title>회원가입 선택 창</title>
+    <script src="${contextPath}/js/registerForm.js"></script>
+    <script>
+      $(document).ready(function(){
+	$("input:radio[name='gender']:radio[value='${memberInfo.gender}']").prop('checked', true);
+  $("input:radio[name='email_agreement']:radio[value='${memberInfo.email_agreement}']").prop('checked', true);
+  $("input:radio[name='sms_agreement']:radio[value='${memberInfo.sms_agreement}']").prop('checked', true);
+});
+    </script>
     <style>
       .genderdv {
         width: 200px;
@@ -26,6 +35,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
         </script>
       </c:when>
     </c:choose>
+    
   </head>
   <body>
     <form method="post" action="${contextPath}/mypage/memberInfoMod.do">
@@ -116,22 +126,21 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <div class="btn-memberInfo textsize-1">
               <div style="display: flex; justify-content: center">
                 <div>
-                  <input type="radio" 
+                  <input type="radio"
                   name="gender" 
                   value="m" />
                   <span class="textsize-1">남</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </div>
                 <div>
                   <input 
-                  type="radio" 
+                  type="radio"
                   name="gender" 
                   value="w" /><span class="textsize-1">여</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                 </div>
                 <div>
-                  <input type="radio" 
+                  <input type="radio"
                   name="gender" 
                   value="no" 
-                  checked
                   /><span class="textsize-1">선택안함</span>
                 </div>
               </div>
@@ -150,32 +159,19 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 value="${memberInfo.phone}"
               />
               <br>
-              <button
-              class="brd-lightgray btn-round margin1 btn-memberInfo textsize-1 border-0.5"
-              type="text"
-              >인증번호 요청</button>
-              <br>
-              <input
-                class="brd-lightgray btn-round btn-memberInfo textsize-1 border-0.5 margin1 text-center"
-                type="text"
-              />
+          
             </div>
           </div>
-
-
-
-          
+ 
           <br />
 
           <div class="margin1 textbold textsize-1 property_margin">
             SMS
             <div>
-              <input 
-              type="radio" 
+              <input type="radio"
               name="sms_agreement" 
               value="yes" /><span class="textsize-1">&nbsp&nbsp&nbsp&nbsp&nbsp수신함</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input 
-              type="radio" 
+              <input type="radio"
               name="sms_agreement" 
               value="no" />
               <span class="textsize-1" > &nbsp&nbsp&nbsp&nbsp&nbsp수신안함</span>
@@ -187,13 +183,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           style="margin-top:20px;" >
             email
             <div>
-              <input 
-              type="radio" 
+              <input type="radio" 
               name="email_agreement" 
               value="yes" />
               <span class="textsize-1">&nbsp&nbsp&nbsp&nbsp&nbsp수신함</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-              <input 
-              type="radio" 
+              <input type="radio"
               name="email_agreement" 
               value="no"
               />

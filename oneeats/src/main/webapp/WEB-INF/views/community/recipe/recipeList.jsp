@@ -146,6 +146,9 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             />
             <c:set var="endPage" value="${Math.ceil(result)}" />
           </c:if>
+          <c:if test="${endPage>10}">
+            <c:set var="endPage" value="10" />
+          </c:if>
           <c:forEach begin="1" end="${endPage}" var="i">
             <li class="li-btn">
               <button

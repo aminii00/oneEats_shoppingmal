@@ -43,4 +43,8 @@ public interface SellerHotDealDAO {
 	public HotDealVO selectHotDealByGoodsNo(int hotdealNo);
 
 	public void updateSellerHotDeal(HotDealVO sellerHotDeal);
+
+	public List<HotDealVO> selectSellerHotDealList(Map pagingMap);
+
+	public int selectTotalHotDealNum();
 }

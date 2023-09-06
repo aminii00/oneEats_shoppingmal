@@ -19,10 +19,10 @@ public interface AdminGoodsService {
 	public boolean optionaddGoods(OptionVO optionVO);
 
 	// 상품 리스트
-	public List<GoodsVO> selectGoodsList();
+	public List<GoodsVO> selectGoodsList(Map pagingMap);
 
 	// 상품 목록 페이징
-	public List<GoodsVO> selectNewGoodsList(Map pagingMap);
+	public List<GoodsVO> selectNewGoodsList();
 
 	// 상품 삭제
 	public int deleteAdminGoods(int goodsNo) throws DataAccessException;
@@ -32,8 +32,26 @@ public interface AdminGoodsService {
 	public List<Map> selectOptionsBygoodsNo(int goodsNo);
 
 	// 관리자 상품 리스트
-	public List<GoodsVO> selectSellerGoodsList();
+	public List<GoodsVO> selectSellerGoodsList(Map pagingMap);
 
 	// 관리자 상품 목록 페이징
-	public List<GoodsVO> selectNewSellerGoodsList(Map pagingMap);
+	public List<GoodsVO> selectNewSellerGoodsList();
+
+	// 카테고리
+	public List<Map> countGoodsNums();
+
+	// 카테고리
+	public List<Map> countSellerGoodsNums();
+	
+	//수정
+	
+	public List<OptionVO> selectOptionByGoodsNo(int goodsNo);
+	public int[] selectOptionNoByGoodsNo(int goodsNo);
+	public void deleteOption(int optionNo);
+	public void updateSellerGoods(GoodsVO sellerGoods);
+	public void insertOptionsForMod(List<OptionVO> selectOptions);
+	public void updateOption(List<OptionVO> selectOptions);
+	void insertOptionForMod(OptionVO optionVO);
+
+	public int selectTotalGoodsNum();
 }

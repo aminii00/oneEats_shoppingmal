@@ -14,8 +14,7 @@
 		<result column="rapping" property="rapping" />
 		<result column="manufacturer" property="manufacturer" />
 		<result column="weight" property="weight" />
-		<result column="expDate" property="expDate"
-			javaType="java.sql.Date" />
+		<result column="expDate" property="expDate" />
 		<result column="description" property="description" />
 		<result column="harvest" property="harvest" />
 		<result column="creDate" property="creDate"
@@ -86,55 +85,47 @@
 	</select>
 
 
-	<select id="selectHotDealListForList" resultMap="HotDealResult"
-		parameterType="java.util.Map">
+
+	
+	<select id="selectSellerHotDealList" resultMap="HotDealResult" parameterType="java.util.Map">
 		SELECT hotdeal.*, goods.goodsNo, goods.type
 		FROM hotdeal
 		INNER JOIN
 		goods ON goods.goodsNo = hotdeal.goodsNo
 		WHERE goods.type = '사업자'
+		
 		<choose>
-			<when
-				test="hotdeal_search_type == null or hotdeal_search_type == ''">
-				AND 1=1
+			<when test="hotdeal_search_type==null or hotdeal_search_type==''">
+				and 1=1
 			</when>
-			<when test="hotdeal_search_type == 'all'">
-				AND (creDate LIKE CONCAT('%', #{hotdeal_search_word},
-				'%') OR name LIKE
-				CONCAT('%', #{hotdeal_search_word}, '%'))
+			<when test="hotdeal_search_type=='all'">
+				and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
+				or hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
 			</when>
 			<otherwise>
-				<choose>
-					<when test="hotdeal_search_type == 'creDate'">
-						AND creDate LIKE CONCAT('%',
-						#{hotdeal_search_word}, '%')
-					</when>
-					<when test="hotdeal_search_type == 'name'">
-						AND name LIKE CONCAT('%', #{hotdeal_search_word},
-						'%')
-					</when>
-				</choose>
+			 	<choose>
+			 		<when test="hotdeal_search_type=='creDate'">
+			 			and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
+			 		</when>
+			 		<when test="hotdeal_search_type=='name'">
+			 			and hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
+			 		</when>
+			 	</choose>
 			</otherwise>
 		</choose>
-		<if test="category != null and category != ''">
-			AND category = #{category}
-		</if>
-		order by creDate desc
-		limit #{start}, 10
+			
+		order by creDate desc limit #{start},10
+	</select>
+
+	<select id="selectTotalHotDealNum" resultType="int">
+		<![CDATA[
+			SELECT count(*) from (select hotdeal.*, goods.type FROM hotdeal
+			INNER JOIN goods ON goods.goodsNo = hotdeal.goodsNo
+			WHERE goods.type = '사업자') t
+		]]>
 	</select>
 
 
-
-	<select id="countHotDealNums" resultType="java.util.Map">
-		select * from (
-		select
-		count(*) as cnt, concat('전체') as category from hotdeal
-		union (select
-		count(*) as cnt, category from hotdeal group by category order
-		by cnt
-		desc limit 10)) as t
-		where category!='' and category!='none'
-	</select>
 
 
 	<select id="selectNewHotDealList" resultMap="HotDealResult">

@@ -118,19 +118,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
 
     <!-- 배송정보 -->
     <div class="div-tot">
-      <div class="div-t1 textbold textcolor-black textsize-1">
-        <span>배송정보</span>
-        <button
-          class="btn-5 textcolor-white bg-lightgreen border-0 textsize-1"
-          style="float: right"
-          type="button"
+      <div class="div-t1 textsize-1 textcolor-white">
+        <span class="textcolor-black textbold">배송정보</span>
+        <span>${order.delivery_status}</span>
+        <a
+          class="bg-lightgreen border-0 textsize-1 float-right btn-5 d-flex align-items-center justify-content-center"
+          href="https://tracker.delivery/#/kr.epost/1111111111111"
+          target="_blank"
+          >배송조회</a
         >
-          <a
-            href="https://tracker.delivery/#/kr.epost/1111111111111"
-            target="_blank"
-            >배송조회</a
-          >
-        </button>
       </div>
       <div class="div-t2">
         <div class="div-left">
@@ -176,7 +172,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               href="${contextPath}/goods/goodsDetail.do?goodsNo=${detail.goodsNo}"
               ><img
                 class="img-1"
-                src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=order"
+                src="${contextPath}/download.do?imageFileName=${detail.goodsImg}&path=goodsNo${detail.goodsNo}"
                 alt="상품메인"
             /></a>
             <div class="div-dl">

@@ -16,6 +16,17 @@ public class OneQnAVO {
 	private String memberName;
 	private String profile;
 	private String id;
+	private int level;
+	
+	
+	
+	
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
+	}
 	public int getQnaNo() {
 		return qnaNo;
 	}
@@ -80,7 +91,7 @@ public class OneQnAVO {
 	public String toString() {
 		return "OneQnAVO [qnaNo=" + qnaNo + ", title=" + title + ", content=" + content + ", creDate=" + creDate
 				+ ", status=" + status + ", parentNo=" + parentNo + ", memberNo=" + memberNo + ", memberName="
-				+ memberName + ", profile=" + profile + ", id=" + id + "]";
+				+ memberName + ", profile=" + profile + ", id=" + id + ", level=" + level + "]";
 	}
 	
 	

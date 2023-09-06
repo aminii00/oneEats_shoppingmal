@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.vo.BookmarkVO;
 import com.example.demo.vo.CouponVO;
 import com.example.demo.vo.DeliveryAddressVO;
 import com.example.demo.vo.MemberVO;
@@ -22,6 +23,15 @@ import com.example.demo.vo.ReviewVO;
 @Mapper
 @Repository("mypageDAO")
 public interface MypageDAO {
+	
+	public List<BookmarkVO> selectBookListWithPagingMap(Map pagingMap);
+
+	public int selectBookListTotalNum(int memberNo);
+
+	public List<CouponVO> selectCouponListWithPagingMap(Map pagingMap);
+	public int selectCouponListTotalNum(int memberNo);
+	public List<PointHistoryVO> selectPointListWithPagingMap(Map pagingMap);
+	public int selectPointListTotalNum(int memberNo);
 	
 	public void deleteMember(MemberVO member);
 
@@ -37,7 +47,9 @@ public interface MypageDAO {
 
 	public void updateDeliveryStatusToCancel(int order_seqNo);
 	
-	public List<Map> selectOrderBySearchType(Map<String, Object> map);
+	public int selectCountOrderNum(Map<String, Object> map);
+	
+	public List<OrderVO> selectOrderByMemberNo(Map pagingMap);
 	
 	public List<CouponVO> selectCouponByMemberNo(int memberNo) throws DataAccessException;
 	
@@ -65,14 +77,56 @@ public interface MypageDAO {
 	//민아 회원정보 수정
 	public void updateMemberInfo(MemberVO memberVO) throws DataAccessException;
 	
-	public List<OrderVO> reviewList(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectAvailableReviewList(int memberNo) throws DataAccessException;
 	
-	public List<OrderVO> writeReview(int memberNo) throws DataAccessException;
+	public List<OrderVO> selectDoneReviewList(int memberNo) throws DataAccessException;
 
 	public CouponVO couponNum(String couponCode);
 	
 	public CouponVO couponNull(CouponVO result);
 	
 	public void couponInsert(CouponVO result);
+
+	public void insertTempOrderList(List<OrderVO> orderList);
+
+	public void updateTempOrderList(Map payInfoMap);
+
+	public void insertAddressWithMap(Map condMap);
+
+	public void updateDeliveryAddressWithMap(Map condMap);
+
+	public void updateDeliveryAddress(DeliveryAddressVO targetDeliveryAddress);
+
+	public void updateMemberAddressWithMap(Map condMap);
+
+	public void deleteDeliveryAddressWithMap(Map condMap);
+
+	public void insertPointHistory(Map payInfoMap);
+
+	public void updateMemberPoint(Map payInfoMap);
+
+	public OrderVO selectTempOrder(Map condMap);
+
+	public void insertTossApi(Map payInfoMap);
+
+	public String selectTossApiByOrderNo(int orderNo);
+
+	public String isSNSMember(MemberVO memberInfo);
+
+	public int selectTotalAvailableReviewsNum(int memberNo);
+
+	public int selectTotalDoneReviewsNum(int memberNo);
+
+	public List<OrderVO> selectDoneReviewListWithPagingMap(Map pagingMap);
+
+	public List<OrderVO> selectAvailableReviewListWithPagingMap(Map pagingMap);
+
+	public void updateMemberCouponUsed(Map payInfoMap);
+
+	public Map selectCouponByCouponNoAndMemberNo(Map condMap);
+
+	public int selectValidateTotalPrice(Map payInfoMap);
+	
+	public List<PointHistoryVO> memberPoint (MemberVO memberInfo);
 	
 }

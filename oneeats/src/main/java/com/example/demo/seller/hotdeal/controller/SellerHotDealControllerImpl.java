@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.seller.hotdeal.service.SellerHotDealService;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
@@ -50,12 +51,7 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 		System.out.println("hotdeal등록하기");
 		ModelAndView mav = new ModelAndView();
 		int newHotDealNo = sellerHotDealService.selectNewHotDealNo();
-//		Map map = new HashMap(); 
-//		map.put("hotdealNo", newHotDealNo);
-//	
-//		System.out.println("newHotDealNo = " + newHotDealNo);
-//
-//		 map.put("hotdealNo", newHotDealNo);
+
 		HotDealVO hotDealVO = new HotDealVO();
 		hotDealVO.setHotdealNo(newHotDealNo);
 		String name = request.getParameter("name");
@@ -110,11 +106,10 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 	// 상품 목록
 	@RequestMapping(value = "/seller/hotdeal/sellerHotDealList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView sellerHotDealList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("여기는 sellerHotDealList");
 		request.setCharacterEncoding("utf-8");
-		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		String category = request.getParameter("category");
+
 		String _pageNum = request.getParameter("pageNum");
 		String _section = request.getParameter("section");
 		String hotdeal_search_type = request.getParameter("hotdeal_search_type");
@@ -133,45 +128,22 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 		if (hotdeal_search_type != null && hotdeal_search_type.length() < 1) {
 			hotdeal_search_type = "all";
 		}
-		Map pagingMap = new HashMap();
-		pagingMap.put("category", category);
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("section", section);
 		pagingMap.put("hotdeal_search_type", hotdeal_search_type);
 		pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
 
-		List<HotDealVO> hotdealList = sellerHotDealService.selectHotDealListForList(pagingMap);
+		//List<HotDealVO> hotdealList = sellerHotDealService.selectHotDealListForList(pagingMap);
+		List<HotDealVO> hotdealList = sellerHotDealService.selectSellerHotDealList(pagingMap);
 		List<HotDealVO> newHotDealList = sellerHotDealService.selectNewHotDealList();
-
+		int totalHotDealNum = sellerHotDealService.selectTotalHotDealNum();
+		
+		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("HotDealList", hotdealList);
 		mav.addObject("newHotDealList", newHotDealList);
 		mav.addAllObjects(pagingMap);
-
-		List<Map> resultMap = sellerHotDealService.countHotDealNums();
-		// 등록된 상품가 몇 개인지
-		long totalHotDealNum = (long) resultMap.get(0).get("cnt");
-		// 현재 보고 있는 카테고리의상품이 몇 개인지
-		long searchHotDealNum = -1;
-		String type = "관리자";
-		if ("관리자".equals(type)) {
-			// Output the result
-			for (Map<String, Object> row : resultMap) {
-				String cate = (String) row.get("category");
-				long count = (long) row.get("cnt");
-				System.out.println("Category: " + cate + ", Count: " + count);
-				if (cate.equals(category)) {
-					searchHotDealNum = count;
-				}
-			}
-
-			if (searchHotDealNum < 0) {
-				searchHotDealNum = totalHotDealNum;
-			}
-		}
-		mav.addObject("hotdealNumMap", resultMap);
 		mav.addObject("totalHotDealNum", totalHotDealNum);
-		mav.addObject("searchHotDealNum", searchHotDealNum);
-
 		System.out.println("mav :" + mav);
 		return mav;
 	}

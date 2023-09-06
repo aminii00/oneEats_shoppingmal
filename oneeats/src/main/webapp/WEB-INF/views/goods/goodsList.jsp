@@ -17,7 +17,6 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
     <title>상품 목록</title>
     <script src="${contextPath}/js/hotdealClock.js"></script>
   </head>
-
   <body>
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -58,6 +57,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                                   <i class="bi bi-alarm"></i>
                                   남은 시간
                                 </span>
+
                                 <div class="hotdeal_time_text"></div>
                               </div>
                               <div
@@ -119,7 +119,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             </div>
             <div class="row">
               <c:forEach var="item" items="${goodsList }">
-                <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6 product_col">
                   <div class="product__item">
                     <div
                       class="product__item__pic set-bg"
@@ -147,6 +147,11 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                         >
                       </h6>
                       <h5>￦${item.price}</h5>
+                      <input
+                        type="hidden"
+                        class="h_col_goods_price"
+                        value="${item.price}"
+                      />
                     </div>
                   </div>
                 </div>
@@ -196,7 +201,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                   </c:if>
                   <c:set
                     var="end"
-                    value="${Math.ceil((totalGoodsNum - (section-1)*120) div 10)}"
+                    value="${Math.ceil((totalGoodsNum - (section-1)*120) div 12)}"
                   />
                   <c:if test="${end>10}">
                     <c:set var="end" value="10" />

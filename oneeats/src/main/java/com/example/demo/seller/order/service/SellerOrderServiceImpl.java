@@ -1,6 +1,7 @@
 package com.example.demo.seller.order.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,11 +31,13 @@ public class SellerOrderServiceImpl implements SellerOrderService{
 	}
 
 	@Override
-	public List<OrderVO> selectOrderByMemberType() {
-		return sellerOrderDAO.selectOrderByMemberType();
+	public List<OrderVO> selectOrderByMemberType(Map pagingMap) {
+		return sellerOrderDAO.selectOrderByMemberType(pagingMap);
 	}
-	
-	
 
-	
+	@Override
+	public int selectTotalOrderNum() {
+		return sellerOrderDAO.selectTotalOrderNum();
+	}
+
 }

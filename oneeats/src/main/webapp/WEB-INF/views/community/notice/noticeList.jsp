@@ -27,7 +27,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
             action="${contextPath}/community/notice/noticeList.do"
           >
             <select id="notice_category_select" name="category">
-              <option value="">카테고리</option>
+              <option value="all">카테고리</option>
               <option value="결제">결제</option>
               <option value="주문">주문</option>
               <option value="이벤트">이벤트</option>
@@ -40,7 +40,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
       <hr class="line-black" />
       <div class="noticeList_grid textcolor-black text-center">
         <div class="row header-row textbold">
-          <div class="col-md-2">번호</div>
           <div class="col-md-2">카테고리</div>
           <div class="col-md">제목</div>
           <div class="col-md-3">작성일</div>
@@ -59,7 +58,6 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 class="row noticeList-title"
                 onclick="location.href='${contextPath}/community/notice/noticeDetail.do?noticeNo=${notice.noticeNo}';"
               >
-                <div class="col-md-2">${notice.noticeNo}</div>
                 <div class="col-md-2">${notice.category}</div>
                 <div class="col-md text-left">${notice.title}</div>
                 <div class="col-md-3">${notice.creDate}</div>
@@ -74,7 +72,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section>1}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/noticeList.do?section=${section-1}&pageNum=1"
+                href="${contextPath}/community/notice/noticeList.do?section=${section-1}&pageNum=1&category=${category}"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img
@@ -96,7 +94,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:forEach begin="1" end="${end}" var="i">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/noticeList.do?section=${section}&pageNum=${i}"
+                href="${contextPath}/community/notice/noticeList.do?section=${section}&pageNum=${i}&category=${category}"
                 class="btn-2 btn-square bg-white btn-border"
                 >${((section-1)*10)+i}</a
               >
@@ -105,7 +103,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:if test="${section*100<totalNoticeNum}">
             <li class="li-btn">
               <a
-                href="${contextPath}/community/notice/noticeList.do?section=${section+1}&pageNum=1"
+                href="${contextPath}/community/notice/noticeList.do?section=${section+1}&pageNum=1&category=${category}"
                 class="btn-2 btn-square bg-white btn-border"
               >
                 <img

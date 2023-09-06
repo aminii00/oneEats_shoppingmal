@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.common.alert.Alert;
+import com.example.demo.common.api.toss.dto.TossDTO;
 import com.example.demo.main.service.MainService;
 import com.example.demo.vo.CartVO;
 import com.example.demo.vo.CouponVO;
@@ -210,6 +211,9 @@ public class MainControllerImpl implements MainController {
 
 		return result;
 	}
+	
+	
+	
 
 	@RequestMapping(value = "/orderNow.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView orderNow(HttpServletRequest request) throws IOException {
@@ -221,6 +225,7 @@ public class MainControllerImpl implements MainController {
 		// 상품 상세 페이지에서 넘겨준 옵션 선택 정보를 session에 저장
 		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
 		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
+	
 		String loginFor = (String) session.getAttribute("loginFor");
 		if (orderNowList != null && orderNowList.size() > 0 && loginFor != null && loginFor.equals("orderNow")) {
 			System.out.println("주문 상품을 선택한 정보가 있음");
@@ -237,6 +242,7 @@ public class MainControllerImpl implements MainController {
 		} else {
 			orderNowList = new ArrayList<OrderVO>();
 			try {
+			
 				// request에서 정보를 받아옴
 				String shippingFee = request.getParameter("shippingFee");
 				String paymentPrice = request.getParameter("payment_price");
@@ -245,7 +251,7 @@ public class MainControllerImpl implements MainController {
 				String[] goodsQtys = request.getParameterValues("goodsQty");
 				// list에 하나씩 추가
 				for (int i = 0; i < optionNos.length; i++) {
-					System.out.println("for문 시작");
+					
 					System.out.println(goodsQtys[i]);
 					System.out.println(optionNos[i]);
 					OrderVO temp = mainService.selectOptionsGoodsToOrderByOptionNo(Integer.parseInt(optionNos[i]));
@@ -263,7 +269,7 @@ public class MainControllerImpl implements MainController {
 				mav.addObject("shippingFee", shippingFee);
 				mav.addObject("payment_price", paymentPrice);
 				mav.addObject("discount_price", discountPrice);
-
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				String previousPage = request.getHeader("Referer");
@@ -291,7 +297,7 @@ public class MainControllerImpl implements MainController {
 			mav = Alert.alertAndRedirect("주문자 정보를 받아오지 못 했습니다.", previousPage);
 			return mav;
 		}
-
+		System.out.println(mav);
 		return mav;
 	}
 	

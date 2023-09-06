@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.community.dao.CommunityDAO;
 import com.example.demo.vo.IngredientVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.MostQnAVO;
 import com.example.demo.vo.NoticeVO;
 import com.example.demo.vo.OneQnAVO;
@@ -18,6 +20,11 @@ public class CommunityServiceImpl implements CommunityService {
 	@Autowired
 	private CommunityDAO communityDAO;
 
+	@Override
+	public MemberVO selectMemberByMemberNo(int memberNo) {
+		MemberVO member= communityDAO.selectMemberByMemberNo(memberNo);
+		return member;
+	}
 	@Override
 	public List<RecipeVO> selectRecipeList(Map pagingMap) {
 		return communityDAO.selectRecipeList(pagingMap); 
@@ -112,8 +119,18 @@ public class CommunityServiceImpl implements CommunityService {
 		OneQnAVO oneQnaVO = communityDAO.oneQnADetail(qnaNo);
 		return oneQnaVO;
 	}
+	
+	@Override
+	@Transactional
 	public void replyInsert(OneQnAVO oneQnAVO){
 		 communityDAO.replyInsert(oneQnAVO);
+		 
+		 // 부모글의 작성자와 답글의 작성자가 다르면 부모 글의 status를 답변완료로 바꾼다.
+		 int parentNo = oneQnAVO.getParentNo();
+		 OneQnAVO parentQnA = communityDAO.oneQnADetail(parentNo);
+		 if (!parentQnA.getId().equals(oneQnAVO.getId())) {
+			 communityDAO.updateQnAStatusDone(parentNo);			
+		}
 	}
 	@Override
 	public void oneQnAFormInsert(OneQnAVO oneQnAVO) {
@@ -141,13 +158,15 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 	
 	@Override
-	public int selectNoticeListTotalNumWithCategory(String category) {
-		return communityDAO.selectNoticeListTotalNumWithCategory(category);
+	public int selectNoticeListTotalNumWithCategory(Map pagingMap) {
+		return communityDAO.selectNoticeListTotalNumWithCategory(pagingMap);
 	}
 	
-
-	
-	
+	@Override
+	public int selectOneQnAListTotalNumWithCategory() {
+		int num = communityDAO.selectOneQnAListTotalNumWithCategory();	
+		return num;
+	}
 	
 
 	public int newQnANo() {
@@ -159,4 +178,10 @@ public class CommunityServiceImpl implements CommunityService {
 		List<OneQnAVO> replyList = communityDAO.replyList(qnaNo);
 		return replyList;
 	}
+	@Override
+	public int selectOneQnAListTotalNumWithPagingMap(Map pagingMap) {
+		return communityDAO.selectOneQnAListTotalNumWithPagingMap(pagingMap);
+	}
+	
+	
 }

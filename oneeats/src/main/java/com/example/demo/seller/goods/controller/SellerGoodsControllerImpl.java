@@ -59,8 +59,6 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("html/text;charset=utf-8");
 		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		String category = request.getParameter("category");
 		String _pageNum = request.getParameter("pageNum");
 		String _section = request.getParameter("section");
 		String goods_search_type = request.getParameter("goods_search_type");
@@ -76,11 +74,10 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		} else {
 			section = Integer.parseInt(_section);
 		}
-		if (goods_search_type !=null && goods_search_type.length()<1) {
+		if (goods_search_type != null && goods_search_type.length() < 1) {
 			goods_search_type = "all";
-		}	
-		Map pagingMap = new HashMap();
-		pagingMap.put("category", category);
+		}
+		Map pagingMap = GeneralFileUploader.getParameterMap(request);
 		pagingMap.put("pageNum", pageNum);
 		pagingMap.put("section", section);
 		pagingMap.put("goods_search_type", goods_search_type);
@@ -88,50 +85,18 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		
 		List<GoodsVO> goodsList = sellerGoodsService.selectGoodsList(pagingMap);
 		List<GoodsVO> newGoodsList = sellerGoodsService.selectNewGoodsList();
-
+		int totalGoodsNum = sellerGoodsService.selectTotalGoodsNum();
+		
+		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
+		mav.addObject("totalGoodsNum", totalGoodsNum);
+		System.out.println("mav :" + mav);
+		return mav;
 		
-		List<Map> resultMap = sellerGoodsService.countGoodsNums();
-		// 등록된 상품가 몇 개인지
-				long totalGoodsNum = (long) resultMap.get(0).get("cnt") ;
-				// 현재 보고 있는 카테고리의상품이 몇 개인지
-				long searchGoodsNum = -1;
-				String type ="관리자";
-				if("관리자".equals(type)) {
-				// Output the result
-				for (Map<String, Object> row : resultMap) {
-					String cate = (String) row.get("category");
-					long count = (long) row.get("cnt");
-					System.out.println("Category: " + cate + ", Count: " + count);
-					if (cate.equals(category)) {
-						searchGoodsNum = count;
-					}
-				}
-				
-				if (searchGoodsNum<0) {
-					searchGoodsNum = totalGoodsNum;
-				}
-				}
-				mav.addObject("goodsNumMap", resultMap);
-				mav.addObject("totalGoodsNum", totalGoodsNum);
-				mav.addObject("searchGoodsNum",searchGoodsNum);
-
-				System.out.println("mav :"+mav);
-				return mav;
+		
 	}
-
-//	@RequestMapping(value = "/seller/goods/sellerModForm.do")
-//	public ModelAndView sellerModForm(HttpServletRequest request) {
-//		String viewName = (String) request.getAttribute("viewName");
-//		ModelAndView mav = new ModelAndView(viewName);
-//
-//		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
-//		HttpSession session = request.getSession();
-//		System.out.println(mav);
-//		return mav;
-//	}
 
 	// 상품 등록
 	@Override
@@ -202,29 +167,7 @@ public class SellerGoodsControllerImpl implements SellerGoodsController {
 		return mav;
 	}
 
-	// 채연 - goodsList에서 수정 버튼 누르면 요기로옴
-
-	/*
-	 * @Override
-	 * 
-	 * @RequestMapping(value="/seller/goods/modSellerGoods.do", method=
-	 * {RequestMethod.GET, RequestMethod.POST}) public ModelAndView
-	 * modSellerGoodsForm(HttpServletRequest request, HttpServletResponse response)
-	 * throws IOException{ String goodsNo1 = request.getParameter("goodsNo"); // 경로와
-	 * 같이 던져준 goodsNo 가져오기 int goodsNo = Integer.parseInt(goodsNo1); // int로 형 변환
-	 * 
-	 * // goodsNo을 보내서 goodsVO 정보 가져오기 GoodsVO goodsVO =
-	 * sellerGoodsService.selectGoodsVO(goodsNo); System.out.println("goodsVO = "
-	 * +goodsVO);
-	 * 
-	 * List<OptionVO> option = (List<OptionVO>)
-	 * sellerGoodsService.selectOptionVO(goodsNo); System.out.println(option);
-	 * ModelAndView mav = new ModelAndView(); mav.addObject("option",option);
-	 * mav.addObject("goods",goodsVO);
-	 * mav.setViewName("/seller/goods/sellerGoodsModForm");
-	 * 
-	 * return mav; }
-	 */
+	
 
 	@Override
 	@RequestMapping(value = "/seller/goods/modSellerGoodsForm.do", method = { RequestMethod.GET, RequestMethod.POST })

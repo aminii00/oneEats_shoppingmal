@@ -36,24 +36,48 @@
 		<result property="shippingFee" column="shippingFee" />
 		<result property="optionNo" column="optionNo" />
 		<result property="orderer_id" column="orderer_id" />
-		<result property="memberType" column="memberType" />
+		<result property="sellerType" column="sellerType" />
 	</resultMap>
 	
 	<select id="selectOrderList" resultMap="OrderResult">
 		<![CDATA[
-			select a.*,b.orderer_id from (select orderplusgoods.*, orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName,  
-			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo)
-			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun 
-			on orderplusgoods.orderNo=orderGun.orderNo order by orderplusgoods.orderNo) a inner join
-            (select t_order.*,member.id as orderer_id from t_order inner join member on t_order.memberNo=member.memberNo) b 
-            on a.order_seqNo=b.order_seqNo where a.memberNo=#{memberNo} order by a.orderNo
+			select * from order_by_membertype
 		]]>
 	</select>
 	
-	<select id="selectOrderByMemberType" resultMap="OrderResult">
-		<![CDATA[
-			select * from order_by_membertype where memberType='관리자'
-		]]>
+	<select id="selectOrderByMemberType" resultMap="OrderResult" parameterType="java.util.Map">
+	
+		select * from order_by_membertype where sellerType='관리자'
+			
+		<choose>
+			<when test="order_search_type==null or order_search_type==''">
+				and 1=1
+			</when>
+			<when test="order_search_type=='all'">
+				and orderNo like CONCAT('%', #{order_search_word}, '%')
+				or orderer_name like CONCAT('%', #{order_search_word}, '%')
+				or orderer_id like CONCAT('%', #{order_search_word}, '%')
+			</when>
+			<otherwise>
+			 	<choose>
+			 		<when test="order_search_type=='orderNo'">
+			 			and orderNo like CONCAT('%', #{order_search_word}, '%')
+			 		</when>
+			 		<when test="order_search_type=='orderer_name'">
+			 			and orderer_name like CONCAT('%', #{order_search_word}, '%')
+			 		</when>
+			 		<when test="order_search_type=='orderer_id'">
+			 			and orderer_id like CONCAT('%', #{order_search_word}, '%')
+			 		</when>
+			 	</choose>
+			</otherwise>
+		</choose>
+			
+		order by orderNo desc limit #{start},10
+	</select>
+	
+	<select id="selectTotalOrderNum" resultType="int">
+		select count(*) from order_by_membertype where sellerType='관리자'
 	</select>
 	
 	<select id="selectSeqNoByOrderNo" resultType="int" parameterType="int">
@@ -70,39 +94,26 @@
 		]]>
 	</update>
 	
-	<!-- 	<select id="selectOrderList" resultMap="OrderResult" parameterType="java.util.Map">
+	<update id="updateDeliveryStatus" parameterType="orderVO">
+		update t_order
+		set delivery_status=#{delivery_status}
+		where order_seqNo=#{order_seqNo}
+	</update>
 	
-			select orderplusgoods.*,orderGun.gun from (select t_order.*,goodsAndHotdealView.name as goodsName, 
-			goodsAndHotdealView.img1 as goodsImg from t_order inner join goodsAndHotdealView on t_order.goodsNo=goodsAndHotdealView.goodsNo) 
-			as orderplusgoods inner join (select orderNo, count(*) as gun from t_order group by orderNo) as orderGun
-    		on orderplusgoods.orderNo=orderGun.orderNo
-    		order by orderplusgoods.orderNo 
-			
-			<choose>
-				<when test="order_search_type==null or order_search_type==''">
-					and 1=1
-				</when>
-				<when test="order_search_type=='all'">
-					and () like concat('%', #{order_search_type}, '%')
-					or () like concat('%', #{order_search_type}, '%')
-				</when>
-				<otherwise>
-				 	<choose>
-				 		<when test="order_search_type==''">
-				 			and () like concat('%', #{order_search_type}, '%')
-				 		</when>
-				 		<when test="order_search_type==''">
-				 			and () like concat('%', #{order_search_type}, '%')
-				 		</when>
-				 	</choose>
-				</otherwise>
-			</choose>
-			
-			<if test="category!=null and category!=''">
-				and category=#{category}
-			</if>
-			
-			order by creDate desc limit #{start}, 10
-	</select> -->
-
+	<select id="selectOrderByOrderSeqNo" parameterType="int" resultType="orderVO">
+		select * from t_order where order_seqNo=#{order_seqNo} limit 1
+	</select>
+	
+	<update id="updateMemberPoint" parameterType="orderVO">
+		update member
+		set point=point+#{point_price}
+		where memberNo=#{memberNo}
+	</update>
+	
+	<insert id="insertPointHistoryWithOrderVO" parameterType="orderVO">
+		insert into point_history
+		(name,finishDate,amount,memberNo)
+		values
+		("상품 구입",date_add(now(),interval 1 month),#{point_price},#{memberNo})
+	</insert>
 </mapper>

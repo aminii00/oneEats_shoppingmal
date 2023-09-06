@@ -54,27 +54,27 @@ uri="http://java.sun.com/jsp/jstl/core"%>
             <div class="product__details__pic">
               <div class="product__details__pic__item">
                 <img
-                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goods/${goods.goodsNo}"
+                  src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
                 />
                 <div class="product__details__pic__slider owl-carousel">
                   <c:if test="${not empty goods.img2}">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goods/${goods.goodsNo}"
+                      src="${contextPath}/download.do?imageFileName=${goods.img2}&path=goodsNo${goods.goodsNo}"
                     />
                   </c:if>
                   <c:if test="${not empty goods.img3}">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goods/${goods.goodsNo}"
+                      src="${contextPath}/download.do?imageFileName=${goods.img3}&path=goodsNo${goods.goodsNo}"
                     />
                   </c:if>
                   <c:if test="${not empty goods.img4}">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goods/${goods.goodsNo}"
+                      src="${contextPath}/download.do?imageFileName=${goods.img4}&path=goodsNo${goods.goodsNo}"
                     />
                   </c:if>
                   <c:if test="${not empty goods.img5}">
                     <img
-                      src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goods/${goods.goodsNo}"
+                      src="${contextPath}/download.do?imageFileName=${goods.img5}&path=goodsNo${goods.goodsNo}"
                     />
                   </c:if>
                 </div>

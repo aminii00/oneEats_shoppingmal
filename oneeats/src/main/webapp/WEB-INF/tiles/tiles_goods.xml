@@ -37,6 +37,29 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/goods/goodsList.jsp" />
 	</definition>
+	
+<definition name="/goods/hotDealList"
+		extends="longimageLayout">
+		<put-attribute name="title" value="핫딜목록" />
+		<put-attribute name="long_image"
+			value="/WEB-INF/views/goods/longimage.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/sidebar_goods.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/goods/hotDealList.jsp" />
+	</definition>
+
+<definition name="/goods/goodsHotDealList"
+		extends="longimageLayout">
+		<put-attribute name="title" value="상품핫딜목록" />
+		<put-attribute name="long_image"
+			value="/WEB-INF/views/goods/longimage.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/common/sidebar_goods.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/goods/goodsHotDealList.jsp" />
+	</definition>
+
 
 
 </tiles-definitions>
