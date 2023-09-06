@@ -110,7 +110,7 @@ public class AdminGoodsServiceImpl implements AdminGoodsService {
 			}
 
 			@Override
-			public void updateSellerGoods(GoodsVO sellerGoods) {
+			public void updateAdminGoods(GoodsVO sellerGoods) {
 				
 				adminGoodsDAO.updateSellerGoods(sellerGoods);	
 				

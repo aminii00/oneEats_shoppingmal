@@ -537,7 +537,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         </c:if>
                         <c:set
                           var="end"
-                          value="${Math.floor((totalReviewsNum - (section-1)*numForPage*10) div numForPage)}"
+                          value="${Math.ceil((totalReviewsNum - (section-1)*numForPage*10) div numForPage)}"
                         />
                         <c:if test="${end>10}">
                           <c:set var="end" value="10" />

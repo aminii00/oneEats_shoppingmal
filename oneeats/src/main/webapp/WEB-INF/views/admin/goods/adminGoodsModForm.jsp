@@ -93,10 +93,37 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <form
           id="mod-form"
-          action="${contextPath}/admin/goods/adminGoodsMod.do?goodsNo=${sellerGoods.goodsNo}"
+          action="${contextPath}/admin/goods/adminGoodsMod.do"
           method="post"
           enctype="multipart/form-data"
         >
+          <input type="hidden" name="goodsNo" value="${sellerGoods.goodsNo}" />
+
+          <input
+            type="hidden"
+            name="originalFileName1"
+            value="${sellerGoods.img1}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName2"
+            value="${sellerGoods.img2}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName3"
+            value="${sellerGoods.img3}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName4"
+            value="${sellerGoods.img4}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName5"
+            value="${sellerGoods.img5}"
+          />
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="product__details__pic">
