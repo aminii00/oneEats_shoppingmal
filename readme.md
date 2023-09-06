@@ -23,7 +23,7 @@ IDE(통합개발도구) : sts 4버전 <br>
                   배송조회를 위한 스마트택배 api <br>
 
 ### 화면설계
-https://docs.google.com/presentation/d/1Bz2YKiDqEezLq3NAbIZI2y7ptWIIOG4Zxs7yzKG3p4s/edit?usp=sharing
+https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
 
 ### DB설계
 https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskVfb8/edit?usp=sharing
