@@ -483,7 +483,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           data: formData,
           success: function (response) {
             if (response == "success") {
-              alert("저장되었습니다.");
               fn_requestPayment();
             } else {
               alert("주문정보를 저장하지 못 했습니다.");

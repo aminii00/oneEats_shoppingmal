@@ -338,60 +338,69 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <td>수정</td>
           <td>삭제</td>
         </tr>
-        <c:forEach var="item" items="${myAddress}" varStatus="status">
-          <tr class="delivery_address_row_${item.deliveryNo}">
-            <input
-              type="hidden"
-              class="h_row_address"
-              value="${item.address}"
-            />
-            <input
-              type="hidden"
-              class="h_row_address_detail"
-              value="${item.address_detail}"
-            />
-            <input
-              type="hidden"
-              class="h_row_receiver_name"
-              value="${item.receiver_name}"
-            />
-            <input
-              type="hidden"
-              class="h_row_receiver_phone"
-              value="${item.receiver_phone}"
-            />
-            <input
-              type="hidden"
-              class="h_row_zipCode"
-              value="${item.zipCode}"
-            />
-            <td class="addresstd2">
-              ${item.address} &nbsp ${item.address_detail}
-            </td>
-            <td class="addresstd3">${item.receiver_name}</td>
-            <td class="addresstd4">${item.receiver_phone}</td>
-            <td>
-              <button
-                class="border-0"
-                type="button"
-                onclick="fn_openAddressModForm('${item.deliveryNo}')"
-              >
-                <i class="bi bi-brush"></i>
-              </button>
-            </td>
-            <td>
-              <c:if test="${status.index > 0}">
-                <button
-                  class="border-0"
-                  onclick="fn_openalert('삭제하시겠습니까?','${contextPath}/mypage/deleteAddress.do?deliveryNo=${item.deliveryNo}')"
-                  type="button"
-                >
-                  <i class="bi bi-trash3"></i>
-                </button>
-              </c:if>
-            </td>
-          </tr>
-        </c:forEach>
+        <c:choose>
+          <c:when test="${empty myAddress}">
+            <tr>
+              <td colspan="5">주소지 정보가 없습니다.</td>
+            </tr>
+          </c:when>
+          <c:otherwise>
+            <c:forEach var="item" items="${myAddress}" varStatus="status">
+              <tr class="delivery_address_row_${item.deliveryNo}">
+                <input
+                  type="hidden"
+                  class="h_row_address"
+                  value="${item.address}"
+                />
+                <input
+                  type="hidden"
+                  class="h_row_address_detail"
+                  value="${item.address_detail}"
+                />
+                <input
+                  type="hidden"
+                  class="h_row_receiver_name"
+                  value="${item.receiver_name}"
+                />
+                <input
+                  type="hidden"
+                  class="h_row_receiver_phone"
+                  value="${item.receiver_phone}"
+                />
+                <input
+                  type="hidden"
+                  class="h_row_zipCode"
+                  value="${item.zipCode}"
+                />
+                <td class="addresstd2">
+                  ${item.address} &nbsp ${item.address_detail}
+                </td>
+                <td class="addresstd3">${item.receiver_name}</td>
+                <td class="addresstd4">${item.receiver_phone}</td>
+                <td>
+                  <button
+                    class="border-0"
+                    type="button"
+                    onclick="fn_openAddressModForm('${item.deliveryNo}')"
+                  >
+                    <i class="bi bi-brush"></i>
+                  </button>
+                </td>
+                <td>
+                  <c:if test="${status.index > 0}">
+                    <button
+                      class="border-0"
+                      onclick="fn_openalert('삭제하시겠습니까?','${contextPath}/mypage/deleteAddress.do?deliveryNo=${item.deliveryNo}')"
+                      type="button"
+                    >
+                      <i class="bi bi-trash3"></i>
+                    </button>
+                  </c:if>
+                </td>
+              </tr>
+            </c:forEach>
+          </c:otherwise>
+        </c:choose>
       </table>
       <br />
       <br />
