@@ -25,7 +25,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
         <div style="float: right">
           <form
             id="mostQnA_category_form"
-            action="${contextPath}/admin/community/mostQnA/mostQnAList.do"
+            action="${contextPath}/admin/community/mostQnA/adminMostQnAList.do"
           >
             <select id="mostQnA_category_select" name="category">
               <option value="">카테고리</option>
