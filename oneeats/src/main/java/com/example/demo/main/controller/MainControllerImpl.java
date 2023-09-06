@@ -1,6 +1,7 @@
 package com.example.demo.main.controller;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -72,6 +73,58 @@ public class MainControllerImpl implements MainController {
 		mav.addObject("previousPage", previousPage);
 
 		return mav;
+	}
+
+	@ResponseBody
+	@PostMapping("/addCartOption.do")
+	public String addCartOptionOne(HttpServletRequest request) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String result = "success";
+		HttpSession session = request.getSession();
+		try {
+			String _optionNo = request.getParameter("optionNo");
+			List<CartVO> cartList = new ArrayList<CartVO>();
+			
+			if (session.getAttribute("cartList") != null) {
+				cartList = (List<CartVO>) session.getAttribute("cartList");
+			}
+
+			// 같은 옵션으로 주문한 정보가 있는지 참조하기 위한 맵
+			Map<Integer, Integer> optionNoToidxMap = new HashMap();
+			for (int i = 0; i < cartList.size(); i++) {
+				CartVO temp = cartList.get(i);
+				optionNoToidxMap.put(temp.getOptionNo(), i);
+			}
+
+			int optionNo = Integer.parseInt(_optionNo);
+
+			// 이미 존재하면 그 index에서 빼와서 GoodsQty를 더해줌
+			if (optionNoToidxMap.containsKey(optionNo)) {
+				int idx = optionNoToidxMap.get(optionNo);
+
+				CartVO tempcart = cartList.get(idx);
+				System.out.println("존재해서 더함 : " + tempcart);
+				tempcart.setGoodsQty(1 + tempcart.getGoodsQty());
+				tempcart.setDiscountPrice();
+				System.out.println("계산 후 : " + tempcart);
+				cartList.set(idx, tempcart);
+			} else {
+				CartVO tempcart = new CartVO();
+				tempcart = mainService.selectOptionByNo(optionNo);
+				tempcart.setGoodsQty(1);
+				tempcart.setDiscountPrice();
+				cartList.add(tempcart);
+				optionNoToidxMap.put(optionNo, cartList.size() - 1);
+			}
+
+			System.out.println("cartList" + cartList);
+
+			session.setAttribute("cartList", cartList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = "fail";
+		}
+		return result;
 	}
 
 	// ajax로 cartList를 session에 저장하기 위한 코드
@@ -146,13 +199,13 @@ public class MainControllerImpl implements MainController {
 			if (session.getAttribute("cartList") != null) {
 				cartList = (List<CartVO>) session.getAttribute("cartList");
 			}
-			
+
 			String _goodsNo = request.getParameter("num");
 			int goodsNo = Integer.parseInt(_goodsNo);
 			CartVO tempcart = mainService.selectOneOptionByGoodsNo(goodsNo);
 			tempcart.setGoodsQty(1);
 			tempcart.setDiscountPrice();
-			
+
 			int idx = -1;
 			for (int i = 0; i < cartList.size(); i++) {
 				CartVO t = cartList.get(i);

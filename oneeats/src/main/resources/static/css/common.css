@@ -268,8 +268,13 @@ hr.line-gray {
      display: none;
      background-color: rgba(0, 0, 0, 0.4);
 }
+img.expand_img{
+	 padding-top: 8px;
+     width: 60px;
+     height: 60px;
+}
 
-.clicked{
+img.expand_img.clicked{
 	width: 80%;
 	height: auto;
 	position: absolute;

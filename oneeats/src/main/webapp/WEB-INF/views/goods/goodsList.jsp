@@ -43,11 +43,11 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                       <c:forEach var="item" items="${newHotDealList }">
                         <div class="owl-item cloned" style="width: 277.5px">
                           <div class="col-lg-4">
-                            <div
-                              class="product__discount__item"
-                              onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
-                            >
-                              <div class="hotdeal_time_row textcolor-red">
+                            <div class="product__discount__item">
+                              <div
+                                class="hotdeal_time_row textcolor-red"
+                                onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
+                              >
                                 <input
                                   type="hidden"
                                   class="h_finishDate"
@@ -71,16 +71,23 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                                   <input type="hidden" id="showResult" value="" />
                                 </div> -->
                                 <ul class="product__item__pic__hover">
-                                  <li>
+                                  <li
+                                    onclick="fn_bookmark('${contextPath}','${item.goodsNo}')"
+                                  >
                                     <a><i class="fa fa-heart"></i></a>
                                   </li>
 
-                                  <li>
+                                  <li
+                                    onclick="fn_addCartOneOption('${contextPath}','${item.hotdealNo}')"
+                                  >
                                     <a><i class="fa fa-shopping-cart"></i></a>
                                   </li>
                                 </ul>
                               </div>
-                              <div class="product__discount__item__text">
+                              <div
+                                class="product__discount__item__text"
+                                onclick="location.href='${contextPath}/goods/hotdealDetail.do?hotdealNo=${item.hotdealNo}'"
+                              >
                                 <span>${item.category}</span>
                                 <h5><a>${item.name}</a></h5>
                                 <div class="product__item__price">
@@ -118,44 +125,59 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
               </div>
             </div>
             <div class="row">
-              <c:forEach var="item" items="${goodsList }">
-                <div class="col-lg-4 col-md-6 col-sm-6 product_col">
-                  <div class="product__item">
-                    <div
-                      class="product__item__pic set-bg"
-                      data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
-                    >
-                      <ul class="product__item__pic__hover">
-                        <li
-                          onclick="fn_bookmark('${contextPath}','${item.goodsNo}')"
-                        >
-                          <a><i class="fa fa-heart"></i></a>
-                        </li>
-
-                        <li
-                          onclick="fn_addCartOneItem('${contextPath}','${item.goodsNo}')"
-                        >
-                          <a href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="product__item__text">
-                      <h6>
-                        <a
-                          href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}"
-                          >${item.name}</a
-                        >
-                      </h6>
-                      <h5>￦${item.price}</h5>
-                      <input
-                        type="hidden"
-                        class="h_col_goods_price"
-                        value="${item.price}"
-                      />
-                    </div>
+              <c:choose>
+                <c:when test="${totalGoodsNum<1}">
+                  <div
+                    class="col-lg col-md col-sm d-flex justify-content-center align-items-center textsize-5"
+                    style="min-height: 520px"
+                  >
+                    <span>
+                      <i class="bi bi-emoji-dizzy"></i> <br /> 이런!
+                      <br /> 찾으시는 상품이 없어요. <br />
+                    </span>
                   </div>
-                </div>
-              </c:forEach>
+                </c:when>
+                <c:otherwise>
+                  <c:forEach var="item" items="${goodsList }">
+                    <div class="col-lg-4 col-md-6 col-sm-6 product_col">
+                      <div class="product__item">
+                        <div
+                          class="product__item__pic set-bg"
+                          data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
+                        >
+                          <ul class="product__item__pic__hover">
+                            <li
+                              onclick="fn_bookmark('${contextPath}','${item.goodsNo}')"
+                            >
+                              <a><i class="fa fa-heart"></i></a>
+                            </li>
+
+                            <li
+                              onclick="fn_addCartOneItem('${contextPath}','${item.goodsNo}')"
+                            >
+                              <a><i class="fa fa-shopping-cart"></i></a>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="product__item__text">
+                          <h6>
+                            <a
+                              href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}"
+                              >${item.name}</a
+                            >
+                          </h6>
+                          <h5>￦${item.price}</h5>
+                          <input
+                            type="hidden"
+                            class="h_col_goods_price"
+                            value="${item.price}"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </c:forEach>
+                </c:otherwise>
+              </c:choose>
             </div>
             <div class="product__pagination">
               <c:choose>

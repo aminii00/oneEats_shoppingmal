@@ -12,36 +12,29 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <title>프로필 편집</title>
     <style>
-     
       .star-rating {
         display: flex;
-    font-size: 2.25rem;
-    line-height: 2.5rem;
-    padding: 0 0.3em;
-    text-align: center;
-    width: 5em;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
+        font-size: 2.25rem;
+        line-height: 2.5rem;
+        padding: 0 0.3em;
+        text-align: center;
+        width: 9em;
+        justify-content: center;
       }
 
       .star-rating input {
         display: none;
       }
 
-      .star-rating label {
-        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-        -webkit-text-stroke-width: 2.3px;
-        -webkit-text-stroke-color: #2b2a29;
-        cursor: pointer;
+      .review-star {
+        color: gold;
       }
 
-      .star-rating :checked ~ label {
-        -webkit-text-fill-color: gold;
+      span.review-star-0 {
+        width: 2em;
       }
-
-      .star-rating label:hover,
-      .star-rating label:hover ~ label {
-        -webkit-text-fill-color: #fff58c;
+      span.review-star-6 {
+        width: 2em;
       }
     </style>
     <script>
@@ -54,6 +47,62 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
           reader.readAsDataURL(input.files[0]);
         }
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        $(".review-star-0").click(function () {
+          fn_changeEachReviewStar(0);
+          $(".h_star_rating").val(0);
+        });
+        $(".review-star-6").click(function () {
+          fn_changeEachReviewStar(6);
+          $(".h_star_rating").val(5);
+        });
+
+        $(".review-star").click(function (event) {
+          var element = $(this);
+          var elementOffset = element.offset();
+          var elementWidth = element.width();
+          var clickX = event.pageX - elementOffset.left;
+          var star = parseInt(element.attr("star"));
+          if (clickX < elementWidth / 2) {
+            var curStar = parseFloat($(".h_star_rating").val());
+            if (curStar == 0.5 && star == 1) {
+              star = 0;
+              fn_changeEachReviewStar(star);
+              $(".h_star_rating").val(0);
+            } else {
+              $(this).removeClass("bi-star");
+              $(this).removeClass("bi-star-fill");
+              $(this).addClass("bi-star-half");
+              fn_changeEachReviewStar(star);
+              $(".h_star_rating").val(star - 0.5);
+            }
+          } else {
+            $(this).removeClass("bi-star");
+            $(this).removeClass("bi-star-half");
+            $(this).addClass("bi-star-fill");
+            fn_changeEachReviewStar(star);
+            $(".h_star_rating").val(star);
+          }
+        });
+      });
+
+      function fn_changeEachReviewStar(currentStar) {
+        $(".review-star").each(function () {
+          var starRating = parseInt($(this).attr("star"));
+          if (starRating < currentStar) {
+            $(this).removeClass("bi-star");
+            $(this).removeClass("bi-star-half");
+            $(this).addClass("bi-star-fill");
+          } else if (starRating > currentStar) {
+            $(this).removeClass("bi-star-fill");
+            $(this).removeClass("bi-star-half");
+            $(this).addClass("bi-star");
+          }
+        });
       }
     </script>
   </head>
@@ -103,103 +152,71 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             >
           </p>
 
-        <div class="star-rating space-x-4 mx-auto">
-          <input
-            type="radio"
-            id="5-stars"
-            name="star"
-            value="5"
-            v-model="ratings"
-          />
-          <label for="5-stars" class="star pr-4">★</label>
-          <input
-            type="radio"
-            id="4-stars"
-            name="star"
-            value="4"
-            v-model="ratings"
-          />
-          <label for="4-stars" class="star">★</label>
-          <input
-            type="radio"
-            id="3-stars"
-            name="star"
-            value="3"
-            v-model="ratings"
-          />
-          <label for="3-stars" class="star">★</label>
-          <input
-            type="radio"
-            id="2-stars"
-            name="star"
-            value="2"
-            v-model="ratings"
-          />
-          <label for="2-stars" class="star">★</label>
-          <input
-            type="radio"
-            id="1-star"
-            name="star"
-            value="1"
-            v-model="ratings"
-          />
-          <label for="1-star" class="star">★</label>
-        </div>
+          <div class="star-rating space-x-4 mx-auto">
+            <span class="review-star-0">&nbsp;</span>
+            <i class="bi bi-star review-star" star="1"></i>
+            <i class="bi bi-star review-star" star="2"></i>
+            <i class="bi bi-star review-star" star="3"></i>
+            <i class="bi bi-star review-star" star="4"></i>
+            <i class="bi bi-star review-star" star="5"></i>
+            <span class="review-star-6">&nbsp;</span>
+          </div>
+          <input type="hidden" class="h_star_rating" name="star" value="0" />
+          <div
+            class="profile-edit-box textsize-3 textbold"
+            style="text-align: left"
+          >
+            사진을 올려주세요.(선택)
 
-        <div
-          class="profile-edit-box textsize-3 textbold"
-          style="text-align: left"
-        >
-          사진을 올려주세요.(선택)
+            <img
+              src="${contextPath}/img/product/review/noImage.jpg"
+              class="brd-lightgray btn-round imgsize-square2"
+              style="width: 110px; height: 100px"
+              id="review_preview"
+            />
+            <input
+              class="textsize-2"
+              type="file"
+              style="margin-top: 5px"
+              name="reviewImg"
+              onchange="readURL(this)"
+            /><br />
 
-          <img
-            src="${contextPath}/img/product/review/noImage.jpg"
-            class="brd-lightgray btn-round imgsize-square2"
-            style="width: 110px; height: 100px"
-            id="review_preview"
-          />
-          <input
-            class="textsize-2"
-            type="file"
-            style="margin-top:5px;"
-            name="reviewImg"
-            onchange="readURL(this)"
-          /><br />
-
-          <input type="hidden" value="5" name="star" />
-          <p class="textsize-1" style="text-align: left">
-            상품과 무관한 사진을 첨부하면 노출 제한 처리될 수 있습니다. 사진첨부
-            시 개인정보가 노출되지 않도록 유의해주세요.
+            <input type="hidden" value="5" name="star" />
+            <p class="textsize-1" style="text-align: left">
+              상품과 무관한 사진을 첨부하면 노출 제한 처리될 수 있습니다.
+              사진첨부 시 개인정보가 노출되지 않도록 유의해주세요.
+            </p>
+          </div>
+          <p
+            class="profile-edit-box textsize-3 textbold"
+            style="text-align: left; margin-top: 5px"
+          >
+            상세한 후기를 써주세요.
           </p>
-        </div>
-        <p
-          class="profile-edit-box textsize-3 textbold"
-          style="text-align: left; margin-top:5px;"
-        >
-          상세한 후기를 써주세요.
-        </p>
-        <textarea
-          style="width: 530px; height: 400px"
-          class="brd-lightgray btn-round textsize-2"
-          name="content"
-          value=""
-          cols="30"
-          rows="5"
-        ></textarea>
-        <br /><br /><br />
-        <div style="text-align: center">
-          <button
-            type="reset"
-            class="btn-midlong_2 textsize-1 textbold input btn-round border-0"
-          >
-            취소
-          </button>
-          <button
-            type="submit"
-            class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0"
-          >
-            저장
-          </button>
+          <textarea
+            style="width: 530px; height: 400px"
+            class="brd-lightgray btn-round textsize-2"
+            name="content"
+            value=""
+            cols="30"
+            rows="5"
+          ></textarea>
+          <br /><br /><br />
+          <div style="text-align: center">
+            <button
+              type="reset"
+              class="btn-midlong_2 textsize-1 textbold input btn-round border-0"
+            >
+              취소
+            </button>
+            <button
+              type="submit"
+              class="btn-midlong_2 textsize-1 bg-lightgreen textbold input btn-round border-0"
+            >
+              저장
+            </button>
+          </div>
         </div>
       </div>
     </form>

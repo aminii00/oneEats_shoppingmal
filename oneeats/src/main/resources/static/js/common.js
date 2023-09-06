@@ -20,18 +20,15 @@ $(document).ready(function() {
 	var overlayDiv = $('<div class="overlay_gray"></div>');
 	$('body').append(overlayDiv);
 
-	$('.expand_img').click(
-		function() {
-			if ($(this).hasClass('clicked')) {
-				$(this).removeClass('clicked');
-				$('.overlay_gray').hide();
-			} else {
-				$('.overlay_gray').show();
-				$(this).addClass('clicked');
-			}
-
+	$(document).on("click", '.expand_img', function() {
+		if ($(this).hasClass('clicked')) {
+			$(this).removeClass('clicked');
+			$('.overlay_gray').hide();
+		} else {
+			$('.overlay_gray').show();
+			$(this).addClass('clicked');
 		}
-	);
+	});
 });
 
 function closeModal() {
@@ -122,4 +119,26 @@ function fn_addCartOneItem(contextPath,num) {
 		},
 	});
 
+}
+
+function fn_addCartOneOption(contextPath,optionNo){
+	$.ajax({
+		type: "POST",
+		url: contextPath+"/addCartOption.do",
+		data: {optionNo:optionNo},
+		success: function(response) {
+			if (response == "success") {
+				fn_openalert(
+					"장바구니에 담겼습니다. 장바구니로 이동하시겠습니까?",
+					contextPath+"/main/cart.do"
+				);
+			} else {
+				alert("장바구니에 담지 못 했습니다.");
+			}
+		},
+		error: function(response) {
+			alert("원인불명의 에러");
+			console.log(response);
+		},
+	});
 }
