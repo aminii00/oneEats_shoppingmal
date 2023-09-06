@@ -22,6 +22,30 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         justify-content: center;
         text-align: left;
       }
+
+      .point {
+        text-align: center;
+        margin: 0 auto;
+        width: 250px;
+        height: 80px;
+        padding: 40px 0;
+      }
+
+      table {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .table-review {
+        width: 500px;
+        height: 50px;
+        text-align: center;
+      }
+      .reviewImage {
+        width: 100px;
+        height: 100px;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -46,6 +70,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <div class="row">
             <div class="col-md-3">
               <img
+                class="reviewImage"
                 src="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
               />
             </div>
@@ -55,6 +80,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </div>
             <div class="col-md textsize-2 textbold">
               <button
+                class="bg-lightgreen btn-round border-0"
                 type="button"
                 onclick="location.href='${contextPath}/review/writeReview.do?order_seqNo=${item.order_seqNo}'"
               >
@@ -121,8 +147,9 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             class="row"
             onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
           >
-            <div class="col-md-3">
+            <div class="col-md-3 reviewImage">
               <img
+                class="reviewImage"
                 src="${contextPath}/download.do?imageFileName=${item.goodsImg}&path=goodsNo${item.goodsNo}"
               />
             </div>

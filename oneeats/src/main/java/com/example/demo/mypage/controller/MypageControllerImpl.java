@@ -744,6 +744,7 @@ public class MypageControllerImpl implements MypageController {
 		mav.setViewName("/mypage/mypageReview");
 		mav.addAllObjects(pagingMap);
 		System.out.println(mav);
+		System.out.println("availableReviewList= " +availableReviewList);
 		return mav;
 	}
 

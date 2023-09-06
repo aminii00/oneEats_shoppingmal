@@ -83,7 +83,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
     </style>
     </head>
     <body>
-    <form method="post" action="#">
+  
     <div class="div-p ">
         <br>
         <p class=" textsize-2 text-left textcolor-black textbold">찜한 상품 &nbsp <span class ="textsize-1 textcolor-lightgray">찜한 상품의 내역입니다.</span></p>
@@ -106,7 +106,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </td>
         <td>
           <div class=" book text-right">
-            <button type="button" onclick="fn_toCart()" class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" >장바구니</button>
+            <button type="button" class =" bookserve bg-lightgreen textsize-1 border-0 margin btn-round" onclick='fn_addCartOneItem("${contextPath}","${item.goodsNo}")'>장바구니</button>
             <br>
             <button type="button" onclick="location.href='${contextPath}/mypage/deleteBook.do?goodsNo=${item.goodsNo}'" class ="bookserve bg-lightgreen textsize-1 border-0 margin btn-round">삭제</button>
           </div>
