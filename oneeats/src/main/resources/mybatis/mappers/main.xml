@@ -182,18 +182,14 @@
 
 	<select id="selectOptionByNo" resultType="cartVO"
 		parameterType="int">
-		select `option`.optionNo, `option`.name as
-		optionName,`option`.option_qty as optionQty,`option`.price as
-		optionPrice,
-		`option`.option_inbun as optionInbun,`option`.goodsNo as
-		goodsNo,
-		goods.name as goodsName, goods.img1 as goodsImg, goods.price
-		as goodsPrice from `option`
-		inner join goods
-		on `option`.goodsNo =
-		goods.goodsNo
+		select op.optionNo, op.name as optionName, op.option_qty as optionQty, op.price as optionPrice, op.option_inbun as optionInbun, op.goodsNo as goodsNo, g.name as goodsName, g.img1 as goodsImg, g.price as goodsPrice
+		from (select optionNo,name,option_qty,price,option_inbun,goodsNo from `option`
+		union all 
+		select hotdealNo,name,goods_qty,discounted_price,ifnull(null,null),goodsNo from hotdeal) op
+	    inner join goods g
+	    on op.goodsNo=g.goodsNo
 		where
-		`option`.optionNo=#{optionNo}
+		op.optionNo=#{optionNo}
 	</select>
 
 	<select id="selectCouponByMemberNo" resultMap="CouponResult"
@@ -211,7 +207,9 @@
 		parameterType="int" resultMap="OrderResult">
 		select op.option_inbun as goods_inbun,
 		op.optionNo as optionNo, op.goodsNo as goodsNo, op.name as goodsName
-		from `option` as op
+		from (select optionNo,name,option_inbun,goodsNo from `option`
+			union all 
+			select hotdealNo,name,goods_qty,goodsNo from hotdeal) as op
 		inner join goods as go
 		on op.goodsNo=go.goodsNo
 		where op.optionNo=#{optionNo};

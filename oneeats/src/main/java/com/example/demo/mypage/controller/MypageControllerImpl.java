@@ -920,6 +920,14 @@ public class MypageControllerImpl implements MypageController {
 		try {
 			condMap.put("memberNo", member.getMemberNo());
 			result = mypageService.selectCouponByCouponNoAndMemberNo(condMap);
+			String condition = (String) result.get("condition");
+			if (condition.contains("이상")) {
+				String intStr = condition.replaceAll("[^\\d]", "");
+				int conNum = Integer.parseInt(intStr);
+				result.put("condition", conNum);
+			}else {
+				result.put("condition", 0);
+			}
 			result.put("result", "success");
 		} catch (Exception e) {
 			e.printStackTrace();

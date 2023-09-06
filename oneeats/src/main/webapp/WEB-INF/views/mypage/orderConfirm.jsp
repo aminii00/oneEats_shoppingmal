@@ -125,37 +125,44 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 
                 if (result == "success") {
                   console.log("success if 실행");
-                  var discount_price = parseInt(response.discount_price);
-                  var used_point = parseInt($("#used_point").val());
-                  var original_discount_price = parseInt(
-                    $("#h_original_discount_price").val()
+                  var total_price = parseInt(
+                    $("input[name=total_price]").val()
                   );
-                  var payment_price = parseInt(
-                    $("input[name=payment_price]").val()
-                  );
-                  var coupon_discount_price = discount_price;
-                  var new_total_price =
-                    payment_price -
-                    used_point -
-                    coupon_discount_price -
-                    original_discount_price;
-                  if (new_total_price < 0) {
-                    alert("쿠폰을 쓸 수 없습니다.");
-                    $(this).val(0);
-                    $("#h_coupon_discount_price").val(0);
-                    coupon_discount_price = 0;
-                    new_total_price =
+                  if (parseInt(result.condition) > total_price) {
+                    alert("쿠폰 사용조건을 만족하지 못 했습니다.");
+                  } else {
+                    var discount_price = parseInt(response.discount_price);
+                    var used_point = parseInt($("#used_point").val());
+                    var original_discount_price = parseInt(
+                      $("#h_original_discount_price").val()
+                    );
+                    var payment_price = parseInt(
+                      $("input[name=payment_price]").val()
+                    );
+                    var coupon_discount_price = discount_price;
+                    var new_total_price =
                       payment_price -
                       used_point -
                       coupon_discount_price -
                       original_discount_price;
+                    if (new_total_price < 0) {
+                      alert("쿠폰을 쓸 수 없습니다.");
+                      $(this).val(0);
+                      $("#h_coupon_discount_price").val(0);
+                      coupon_discount_price = 0;
+                      new_total_price =
+                        payment_price -
+                        used_point -
+                        coupon_discount_price -
+                        original_discount_price;
+                    }
+                    var new_discount_price =
+                      used_point +
+                      coupon_discount_price +
+                      original_discount_price;
+                    console.log(coupon_discount_price);
+                    fn_changeText(new_discount_price, new_total_price);
                   }
-                  var new_discount_price =
-                    used_point +
-                    coupon_discount_price +
-                    original_discount_price;
-                  console.log(coupon_discount_price);
-                  fn_changeText(new_discount_price, new_total_price);
                 } else {
                   alert("쿠폰 정보를 가져오는 데에 실패했습니다.");
                 }
