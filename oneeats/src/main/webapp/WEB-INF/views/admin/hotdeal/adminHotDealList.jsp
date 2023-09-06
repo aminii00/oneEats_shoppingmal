@@ -49,35 +49,30 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <th style="text-align: right">삭제</th>
       </tr>
       <c:forEach var="hotdeal" items="${HotDealList}">
-        <c:choose>
-          <c:when test="${hotdeal.hotdealNo != preHotdealNo}">
-            <tr>
-              <td>${hotdeal.hotdealNo}</td>
-              <td>${hotdeal.creDate}</td>
-              <td>
-                <a
-                  href="${contextPath}/goods/hotdealDetail.do?hotdealNo=${hotdeal.hotdealNo}"
-                >
-                  ${hotdeal.name}</a
-                >
-              </td>
-              <td style="text-align: right">
-                <a
-                  href="${contextPath}/admin/hotdeal/adminHotDealModForm.do?hotdealNo=${hotdeal.hotdealNo}"
-                  >수정</a
-                >
-              </td>
-              <td style="text-align: right">
-                <a
-                  href="javascript:void(0)"
-                  onclick='fn_openalert("핫딜을 삭제하시겠습니까?","${contextPath }/admin/hotdeal/deleteHotdealGoods.do?hotdealNo=${hotdeal.hotdealNo}")'
-                  >삭제</a
-                >
-              </td>
-            </tr>
-          </c:when>
-        </c:choose>
-        <c:set var="prehotdealNo" value="${hotdeal.hotdealNo}" />
+        <tr>
+          <td>${hotdeal.hotdealNo}</td>
+          <td>${hotdeal.creDate}</td>
+          <td>
+            <a
+              href="${contextPath}/goods/hotdealDetail.do?hotdealNo=${hotdeal.hotdealNo}"
+            >
+              ${hotdeal.name}</a
+            >
+          </td>
+          <td style="text-align: right">
+            <a
+              href="${contextPath}/admin/hotdeal/adminHotDealModForm.do?hotdealNo=${hotdeal.hotdealNo}"
+              >수정</a
+            >
+          </td>
+          <td style="text-align: right">
+            <a
+              href="javascript:void(0)"
+              onclick='fn_openalert("핫딜을 삭제하시겠습니까?","${contextPath }/admin/hotdeal/deleteHotdealGoods.do?hotdealNo=${hotdeal.hotdealNo}")'
+              >삭제</a
+            >
+          </td>
+        </tr>
       </c:forEach>
     </table>
 
@@ -87,7 +82,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"
-              onclick="location.href='${contextPath}/admin/hotdeal/adminHotDealList.do?&category=${category}&section=${section-1}&pageNum=1'"
+              onclick="location.href='${contextPath}/admin/hotdeal/adminHotDealList.do.do?&category=${category}&section=${section-1}&pageNum=1'"
             >
               <img
                 width="20px"
@@ -100,13 +95,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
         <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
         <c:set var="endPage" value="1" />
-        <c:if test="${not empty searchHotDealNum && searchHotDealNum>0}">
+        <c:if test="${not empty totalHotDealNum && totalHotDealNum>0}">
           <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
           <c:set
             var="result"
-            value="${(searchHotDealNum - (section-1)*100)/10}"
+            value="${(totalHotDealNum - (section-1)*100) div 10}"
           />
-          <c:set var="endPage" value="${Math.floor(result)}" />
+          <c:set var="endPage" value="${Math.ceil(result)}" />
         </c:if>
         <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
@@ -118,7 +113,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </button>
           </li>
         </c:forEach>
-        <c:if test="${searchHotDealNum > (section)*100}">
+        <c:if test="${totalHotDealNum > (section)*100}">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"

@@ -89,20 +89,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="vegetable">채소</option>
-                            <option value="fruit">과일</option>
-                            <option value="juiceAndJam">
-                              못난이주스/수제청
-                            </option>
-                            <option value="zzigae">
-                              찌개 / 탕 /찜
-                            </option>
+
+                            <option value="zzigae">찌개 / 탕 /찜</option>
                             <option value="meal">식사/안주류</option>
                             <option value="porridge">죽</option>
                             <option value="mealReplacement">식사 대용식</option>
-                            <option value="sidedish">
-                              간편 한끼 반찬
-                            </option>
+                            <option value="sidedish">간편 한끼 반찬</option>
                           </select>
                         </div>
                       </dd>

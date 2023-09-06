@@ -138,6 +138,10 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 		List<HotDealVO> newHotDealList = sellerHotDealService.selectNewHotDealList();
 		int totalHotDealNum = sellerHotDealService.selectTotalHotDealNum();
 		
+		
+		
+		System.out.println(totalHotDealNum);
+		System.out.println(hotdealList);
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("HotDealList", hotdealList);
 		mav.addObject("newHotDealList", newHotDealList);

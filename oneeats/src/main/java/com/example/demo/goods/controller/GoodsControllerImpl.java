@@ -397,18 +397,16 @@ public class GoodsControllerImpl implements GoodsController {
 
 		System.out.println(searchMap);
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithSearchFilter(searchMap);
-		List<HotDealVO> hotDealList = goodsService.selectHotDealListWithSearchFilter(searchMap);
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithSearchFilter(searchMap);
-
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
-		mav.addObject("hotDealList", hotDealList);
 
 		mav.addAllObjects(searchMap);
 		System.out.println("Search mav:" +mav);
-
-		int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
-		mav.addObject("maxPrice", maxPrice);
+	System.out.println("GoodsList: "+goodsList);
+	System.out.println("totalGoodsNum:"+totalGoodsNum);
+		//int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
+		//mav.addObject("maxPrice", maxPrice);
 
 		return mav;
 	}

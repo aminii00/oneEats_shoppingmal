@@ -113,15 +113,14 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </c:if>
         <!-- 페이징을 위한 변수. 페이지 버튼이 어디서 끝나야 하는지. -->
         <c:set var="endPage" value="1" />
-        <c:if test="${not empty searchGoodsNum && searchGoodsNum>0}">
+        <c:if test="${not empty totalGoodsNum && totalGoodsNum>0}">
           <!-- 레시피는 한 페이지당 6개, 섹션당 60개이므로 이런 식이 된다.-->
           <c:set
             var="result"
-            value="${(searchGoodsNum - (section-1)*100)/10}"
+            value="${(totalGoodsNum - (section-1)*100) div 10}"
           />
-          <c:set var="endPage" value="${Math.floor(result)}" />
+          <c:set var="endPage" value="${Math.ceil(result)}" />
         </c:if>
-
         <c:forEach begin="1" end="${endPage}" var="i">
           <li class="li-btn">
             <button
@@ -132,7 +131,7 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
             </button>
           </li>
         </c:forEach>
-        <c:if test="${searchGoodsNum > (section)*100}">
+        <c:if test="${totalGoodsNum > (section)*100}">
           <li class="li-btn">
             <button
               class="btn-2 btn-square bg-white btn-border"

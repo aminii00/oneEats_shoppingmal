@@ -151,6 +151,7 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
+		System.out.println("totalGoodsNum :"+totalGoodsNum);
 		System.out.println("mav :" + mav);
 				return mav;
 	}
@@ -229,14 +230,15 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
 			
 			List<GoodsVO> goodsList = adminGoodsService.selectSellerGoodsList(pagingMap);
-			List<GoodsVO> newGoodsList = adminGoodsService.selectNewSellerGoodsList();
+			
 			int totalGoodsNum = adminGoodsService.selectTotalGoodsNum();
 			
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("goodsList", goodsList);
-			mav.addObject("newGoodsList", newGoodsList);
+		
 			mav.addAllObjects(pagingMap);
 			mav.addObject("totalGoodsNum", totalGoodsNum);
+			System.out.println("totalGoodsNum:"+totalGoodsNum);
 			System.out.println("mav :" + mav);
 			return mav;
 			
