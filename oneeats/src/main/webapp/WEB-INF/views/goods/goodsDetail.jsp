@@ -462,7 +462,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         <div class="property-gdtail-flex">
                           <div class="property-gdtail-flex1">
                             <span class="property-gdtail-font"
-                              >${review.memberId}</span
+                              >&nbsp&nbsp${review.memberId}</span
                             >
                           </div>
                           <div class="property-gdtail-flex1">
@@ -476,7 +476,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               <c:forEach
                                 begin="1"
                                 end="${Math.floor(review.star)}"
-                                >★</c:forEach
+                                >⭐</c:forEach
                               ><c:if test="${temp>review.star}">☆</c:if></span
                             >
                           </div>
