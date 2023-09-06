@@ -12,34 +12,36 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <meta charset="UTF-8" />
     <title>프로필 편집</title>
     <style>
-      .myform fieldset {
-        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-        border: 0; /* 필드셋 테두리 제거 */
+     
+      .star-rating {
+        display: flex;
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    padding: 0 0.3em;
+    text-align: center;
+    width: 5em;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
       }
-      .myform input[type="radio"] {
-        display: none; /* 라디오박스 감춤 */
+
+      .star-rating input {
+        display: none;
       }
-      .myform label {
-        font-size: 2em; /* 이모지 크기 */
-        color: transparent; /* 기존 이모지 컬러 제거 */
-        text-shadow: 0 0 0 yellow; /* 새 이모지 색상 부여 */
+
+      .star-rating label {
+        -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+        -webkit-text-stroke-width: 2.3px;
+        -webkit-text-stroke-color: #2b2a29;
+        cursor: pointer;
       }
-      .myform label:hover {
-        text-shadow: 0 0 0 yellow; /* 마우스 호버 */
+
+      .star-rating :checked ~ label {
+        -webkit-text-fill-color: gold;
       }
-      .myform label:hover ~ label {
-        text-shadow: 0 0 0 yellow; /* 마우스 호버 뒤에오는 이모지들 */
-      }
-      .myform fieldset {
-        display: inline-block; /* 하위 별점 이미지들이 있는 영역만 자리를 차지함.*/
-        direction: rtl; /* 이모지 순서 반전 */
-        border: 0; /* 필드셋 테두리 제거 */
-      }
-      .myform fieldset legend {
-        text-align: left;
-      }
-      .myform input[type="radio"]:checked + label {
-        text-shadow: 0 0 0 orange; /* 마우스 클릭 체크 */
+
+      .star-rating label:hover,
+      .star-rating label:hover ~ label {
+        -webkit-text-fill-color: #fff58c;
       }
     </style>
     <script>
@@ -73,7 +75,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           <div class="profile-edit-main">
             <div class="text-center" style="padding: 0 0 0 10px">
               <c:choose>
-                <c:when test="${goods.img1==null}">
+                <c:when test="${order.img1==null}">
                   <img
                     src="${contextPath}/img/icon/profile.png"
                     class="brd-lightgray btn-round imgsize-square2"
@@ -82,7 +84,7 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                 </c:when>
                 <c:otherwise>
                   <img
-                    src="${contextPath}/download.do?imageFileName=${goods.img1}&path=goodsNo${goods.goodsNo}"
+                    src="${contextPath}/download.do?imageFileName=${order.img1}&path=goods/${order.goodsNo}"
                     style="width: 130px; height: 130px"
                     class="brd-lightgray btn-round"
                   />
@@ -91,63 +93,89 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             </div>
           </div>
         </div>
-        <div class="" style="text-align: center; padding: 15px 90px 0 0">
+        <div class="" style="text-align: center">
           <p class="textsize-2 textbold">
             ${memberInfo.id}님<br />
             주문하신 상품이 마음에 드셨나요?
+            <br />
+            <span class="textsize-1"
+              >${order.name}에 대한 리뷰를 작성해주세요.</span
+            >
           </p>
-          <p class="textsize-1">${order.name}에 대한 리뷰를 작성해주세요.</p>
 
-          <fieldset class="myform">
-            <legend class="textsize-1">별점을 선택해주세요</legend>
-            <input type="radio" name="star" value="1" id="rate1" /><label
-              for="rate1"
-              >⭐</label
-            >
-            <input type="radio" name="star" value="2" id="rate2" /><label
-              for="rate2"
-              >⭐</label
-            >
-            <input type="radio" name="star" value="3" id="rate3" /><label
-              for="rate3"
-              >⭐</label
-            >
-            <input type="radio" name="star" value="4" id="rate4" /><label
-              for="rate4"
-              >⭐</label
-            >
-            <input type="radio" name="star" value="5" id="rate5" /><label
-              for="rate5"
-              >⭐</label
-            >
-          </fieldset>
+        <div class="star-rating space-x-4 mx-auto">
+          <input
+            type="radio"
+            id="5-stars"
+            name="star"
+            value="5"
+            v-model="ratings"
+          />
+          <label for="5-stars" class="star pr-4">★</label>
+          <input
+            type="radio"
+            id="4-stars"
+            name="star"
+            value="4"
+            v-model="ratings"
+          />
+          <label for="4-stars" class="star">★</label>
+          <input
+            type="radio"
+            id="3-stars"
+            name="star"
+            value="3"
+            v-model="ratings"
+          />
+          <label for="3-stars" class="star">★</label>
+          <input
+            type="radio"
+            id="2-stars"
+            name="star"
+            value="2"
+            v-model="ratings"
+          />
+          <label for="2-stars" class="star">★</label>
+          <input
+            type="radio"
+            id="1-star"
+            name="star"
+            value="1"
+            v-model="ratings"
+          />
+          <label for="1-star" class="star">★</label>
         </div>
 
-        <br />
-        <br />
-        <br />
-
-        <p class="textsize-3 textbold" style="text-align: left">
+        <div
+          class="profile-edit-box textsize-3 textbold"
+          style="text-align: left"
+        >
           사진을 올려주세요.(선택)
-        </p>
 
-        <img
-          src="${contextPath}/img/product/review/noImage.jpg"
-          class="brd-lightgray btn-round imgsize-square2"
-          style="width: 110px; height: 100px"
-          id="review_preview"
-        />
-        <input type="file" name="reviewImg" onchange="readURL(this)" /><br />
+          <img
+            src="${contextPath}/img/product/review/noImage.jpg"
+            class="brd-lightgray btn-round imgsize-square2"
+            style="width: 110px; height: 100px"
+            id="review_preview"
+          />
+          <input
+            class="textsize-2"
+            type="file"
+            style="margin-top:5px;"
+            name="reviewImg"
+            onchange="readURL(this)"
+          /><br />
 
-        <input type="hidden" value="5" name="star" />
-
-        <br />
-        <p class="textsize-1" style="text-align: left">
-          상품과 무관한 사진을 첨부하면 노출 제한 처리될 수 있습니다. 사진첨부
-          시 개인정보가 노출되지 않도록 유의해주세요.
-        </p>
-        <br />
-        <p class="textsize-3 textbold" style="text-align: left">
+          <input type="hidden" value="5" name="star" />
+          <p class="textsize-1" style="text-align: left">
+            상품과 무관한 사진을 첨부하면 노출 제한 처리될 수 있습니다. 사진첨부
+            시 개인정보가 노출되지 않도록 유의해주세요.
+          </p>
+        </div>
+        <p
+          class="profile-edit-box textsize-3 textbold"
+          style="text-align: left; margin-top:5px;"
+        >
           상세한 후기를 써주세요.
         </p>
         <textarea

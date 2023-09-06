@@ -717,6 +717,7 @@ public class MypageControllerImpl implements MypageController {
 		System.out.println("memberVO = " + memberVO);
 		mypageService.updateMember(memberVO);
 		mav = Alert.alertAndRedirect("수정이 완료되었습니다.", request.getContextPath() + "/mypage/mypageMemberMod.do");
+		HttpSession session = request.getSession();
 		return mav;
 	}
 
