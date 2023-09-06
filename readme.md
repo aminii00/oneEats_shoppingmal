@@ -28,5 +28,5 @@ https://docs.google.com/presentation/d/1GaRP694dciUuufDyfTPmq52oUwPV3JxTusuYKzV_
 ### DB설계
 https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskVfb8/edit?usp=sharing
 
-## 구매 프로세스
+### 구매 프로세스
 https://docs.google.com/presentation/d/1RP85bpW3VXK-wX2F6YwDIuyP89CDm8H0gf5GCMPDJh4/edit?usp=sharing
