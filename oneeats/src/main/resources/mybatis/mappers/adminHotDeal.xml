@@ -85,7 +85,6 @@
 		FROM hotdeal
 		INNER JOIN
 		goods ON goods.goodsNo = hotdeal.goodsNo
-		
 		WHERE goods.type = '관리자'
 			<choose>
 			<when test="hotdeal_search_type==null or hotdeal_search_type==''">

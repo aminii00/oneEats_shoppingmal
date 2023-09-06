@@ -124,6 +124,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                     <div
                       class="product__item__pic set-bg"
                       data-setbg="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
+                      onclick="location.href='${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}'"
                     >
                       <ul class="product__item__pic__hover">
                         <li

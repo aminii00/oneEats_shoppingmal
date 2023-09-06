@@ -192,21 +192,6 @@ goodsNo=#{goodsNo}
 	</select>
 
 
-	<select id="selectNewSellerGoodsList" resultMap="GoodsResult"
-		parameterType="java.util.Map">
-		select goods.*, member.id as seller_id
-		from goods
-		inner
-		join member on goods.memberNo = member.memberNo
-		where goods.type =
-		'사업자'
-		ORDER BY creDate DESC
-
-
-
-
-	</select>
-
 
 	<!-- - -->
 

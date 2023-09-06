@@ -86,36 +86,38 @@
 
 
 
+
 	
 	<select id="selectSellerHotDealList" resultMap="HotDealResult" parameterType="java.util.Map">
-		SELECT hotdeal.*, goods.goodsNo, goods.type
-		FROM hotdeal
-		INNER JOIN
-		goods ON goods.goodsNo = hotdeal.goodsNo
-		WHERE goods.type = '사업자'
-		
-		<choose>
-			<when test="hotdeal_search_type==null or hotdeal_search_type==''">
-				and 1=1
-			</when>
-			<when test="hotdeal_search_type=='all'">
-				and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
-				or hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
-			</when>
-			<otherwise>
-			 	<choose>
-			 		<when test="hotdeal_search_type=='creDate'">
-			 			and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
-			 		</when>
-			 		<when test="hotdeal_search_type=='name'">
-			 			and hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
-			 		</when>
-			 	</choose>
-			</otherwise>
-		</choose>
-			
-		order by creDate desc limit #{start},10
-	</select>
+    SELECT hotdeal.*, goods.goodsNo, goods.type
+    FROM hotdeal
+    INNER JOIN goods ON goods.goodsNo = hotdeal.goodsNo
+    INNER JOIN member ON member.memberNo = goods.memberNo
+    WHERE goods.type = '사업자'
+    <choose>
+        <when test="hotdeal_search_type==null or hotdeal_search_type==''">
+            and 1=1
+        </when>
+        <when test="hotdeal_search_type=='all'">
+            and (hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%') or hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%'))
+        </when>
+        <otherwise>
+            <choose>
+                <when test="hotdeal_search_type=='creDate'">
+                    and hotdeal.creDate like CONCAT('%', #{hotdeal_search_word}, '%')
+                </when>
+                <when test="hotdeal_search_type=='name'">
+                    and hotdeal.name like CONCAT('%', #{hotdeal_search_word}, '%')
+                </when>
+            </choose>
+        </otherwise>
+    </choose>
+    order by creDate desc limit #{start}, 10
+</select>
+	
+	
+	
+	
 
 	<select id="selectTotalHotDealNum" resultType="int">
 		<![CDATA[
@@ -163,23 +165,28 @@
 
 	<select id="selectGoodsByGoodsNo" resultType="goodsVO"
 		parameterType="int">
-		SELECT goods.*, hotdeal.hotdealNo from goods inner join hotdeal on
+		SELECT goods.*, hotdeal.hotdealNo from goods inner join
+		hotdeal on
 		goods.goodsNo=hotdeal.goodsNo
-		WHERE type = '사업자' and hotdeal.hotdealNo
+		WHERE type = '사업자' and
+		hotdeal.hotdealNo
 		=
 		#{hotdealNo}
 	</select>
 
 
-		
+
 	<update id="updateSellerHotDeal" parameterType="hotDealVO">
 		update hotdeal
 		set
-		name=#{name}, discounted_price=#{discounted_price}, goods_qty=#{goods_qty}, finishDate=#{finishDate}, description=#{description},
+		name=#{name}, discounted_price=#{discounted_price},
+		goods_qty=#{goods_qty}, finishDate=#{finishDate},
+		description=#{description},
 		category=#{category}
-		where hotdealNo=#{hotdealNo}
+		where
+		hotdealNo=#{hotdealNo}
 	</update>
-	
+
 
 
 

@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
+import com.example.demo.vo.MemberVO;
 
 public interface SellerHotDealService {
 
@@ -44,6 +45,7 @@ public interface SellerHotDealService {
 	public List<HotDealVO> selectSellerHotDealList(Map pagingMap);
 
 	public int selectTotalHotDealNum();
-	
+
+
 	
 }
