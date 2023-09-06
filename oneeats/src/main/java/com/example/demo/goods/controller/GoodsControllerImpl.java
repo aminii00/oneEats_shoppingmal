@@ -202,6 +202,7 @@ public class GoodsControllerImpl implements GoodsController {
 		mav.addObject("newReviewList", newReviewList);
 		mav.addObject("section", 1);
 		mav.addObject("pageNum", 1);
+		mav.addObject("numForPage",5);
 		return mav;
 
 	}

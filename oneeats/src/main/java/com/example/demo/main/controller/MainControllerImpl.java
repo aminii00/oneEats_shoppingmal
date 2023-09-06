@@ -162,7 +162,7 @@ public class MainControllerImpl implements MainController {
 					break;
 				}
 			}
-			if (idx > 0) {
+			if (idx > -1) {
 				CartVO tempcart2 = cartList.get(idx);
 				tempcart2.setGoodsQty(tempcart.getGoodsQty() + tempcart2.getGoodsQty());
 				tempcart2.setDiscountPrice();

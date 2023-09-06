@@ -125,22 +125,18 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         </div>
         <div class="col-2">
           <div class="row">
-            <div class="col">
+            <div
+              class="col d-flex align-items-center justify-content-center textsize-3"
+            >
               <a href="${contextPath}/main/cart.do">
-                <img
-                  style="width: auto; height: 100%"
-                  src="${contextPath}/img/icon/cart.png"
-                  alt=""
-                />
+                <i class="bi bi-cart4"></i>
               </a>
             </div>
-            <div class="col">
+            <div
+              class="col d-flex align-items-center justify-content-center textsize-3"
+            >
               <a href="${contextPath}/mypage/mypageBookmarkList.do">
-                <img
-                  style="width: auto; height: 100%"
-                  src="${contextPath}/img/icon/bookmark.png"
-                  alt=""
-                />
+                <i class="bi bi-heart"></i>
               </a>
             </div>
             <div class="col">&nbsp;</div>

@@ -22,8 +22,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         float: right;
         font-weight: 600;
       }
-      dl.goods_option_row > dt > div.goods_option_x_btn {
-      }
     </style>
     <!--리뷰 비동기 로드-->
     <script>
