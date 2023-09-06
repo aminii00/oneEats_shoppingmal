@@ -89,11 +89,10 @@ public class SellerHotDealControllerImpl implements SellerHotDealController {
 		System.out.println("hotdealNo = " + hotdealNo);
 		HotDealVO hotdeal = sellerHotDealService.selectHotDealByHotDealNo(hotdealNo);
 		System.out.println("hotdeal = " + hotdeal);
-		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("hotdeal", hotdeal);
 		int goodsNo = hotdeal.getGoodsNo();
-
+		
 		GoodsVO goodsVO = sellerHotDealService.SearchGoods(goodsNo);
 		System.out.println("goods = " + goodsVO);
 		mav.addObject("goods", goodsVO);

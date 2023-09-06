@@ -106,12 +106,12 @@ public class MainControllerImpl implements MainController {
 				// 이미 존재하면 그 index에서 빼와서 GoodsQty를 더해줌
 				if (optionNoToidxMap.containsKey(optionNo)) {
 					int idx = optionNoToidxMap.get(optionNo);
-					
+
 					CartVO tempcart = cartList.get(idx);
-					System.out.println("존재해서 더함 : "+tempcart);
+					System.out.println("존재해서 더함 : " + tempcart);
 					tempcart.setGoodsQty(goodsQty + tempcart.getGoodsQty());
 					tempcart.setDiscountPrice();
-					System.out.println("계산 후 : "+tempcart);
+					System.out.println("계산 후 : " + tempcart);
 					cartList.set(idx, tempcart);
 				} else {
 					CartVO tempcart = new CartVO();
@@ -146,13 +146,13 @@ public class MainControllerImpl implements MainController {
 			if (session.getAttribute("cartList") != null) {
 				cartList = (List<CartVO>) session.getAttribute("cartList");
 			}
-
+			
 			String _goodsNo = request.getParameter("num");
 			int goodsNo = Integer.parseInt(_goodsNo);
 			CartVO tempcart = mainService.selectOneOptionByGoodsNo(goodsNo);
 			tempcart.setGoodsQty(1);
 			tempcart.setDiscountPrice();
-
+			
 			int idx = -1;
 			for (int i = 0; i < cartList.size(); i++) {
 				CartVO t = cartList.get(i);
@@ -211,9 +211,6 @@ public class MainControllerImpl implements MainController {
 
 		return result;
 	}
-	
-	
-	
 
 	@RequestMapping(value = "/orderNow.do", method = { RequestMethod.POST, RequestMethod.GET })
 	public ModelAndView orderNow(HttpServletRequest request) throws IOException {
@@ -225,7 +222,7 @@ public class MainControllerImpl implements MainController {
 		// 상품 상세 페이지에서 넘겨준 옵션 선택 정보를 session에 저장
 		// 그런데 이제 로그인이 안 되어 있어 로그인 페이지로 다녀온 경우는 이 과정을 생략
 		List<OrderVO> orderNowList = (List<OrderVO>) session.getAttribute("selectGoodsList");
-	
+
 		String loginFor = (String) session.getAttribute("loginFor");
 		if (orderNowList != null && orderNowList.size() > 0 && loginFor != null && loginFor.equals("orderNow")) {
 			System.out.println("주문 상품을 선택한 정보가 있음");
@@ -242,7 +239,7 @@ public class MainControllerImpl implements MainController {
 		} else {
 			orderNowList = new ArrayList<OrderVO>();
 			try {
-			
+
 				// request에서 정보를 받아옴
 				String shippingFee = request.getParameter("shippingFee");
 				String paymentPrice = request.getParameter("payment_price");
@@ -251,7 +248,7 @@ public class MainControllerImpl implements MainController {
 				String[] goodsQtys = request.getParameterValues("goodsQty");
 				// list에 하나씩 추가
 				for (int i = 0; i < optionNos.length; i++) {
-					
+
 					System.out.println(goodsQtys[i]);
 					System.out.println(optionNos[i]);
 					OrderVO temp = mainService.selectOptionsGoodsToOrderByOptionNo(Integer.parseInt(optionNos[i]));
@@ -269,7 +266,7 @@ public class MainControllerImpl implements MainController {
 				mav.addObject("shippingFee", shippingFee);
 				mav.addObject("payment_price", paymentPrice);
 				mav.addObject("discount_price", discountPrice);
-			
+
 			} catch (Exception e) {
 				e.printStackTrace();
 				String previousPage = request.getHeader("Referer");
@@ -300,6 +297,5 @@ public class MainControllerImpl implements MainController {
 		System.out.println(mav);
 		return mav;
 	}
-	
-	
+
 }

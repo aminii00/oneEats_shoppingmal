@@ -22,9 +22,36 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         float: right;
         font-weight: 600;
       }
-      dl.goods_option_row > dt > div.goods_option_x_btn {
+      div.div-qty-input {
+        width: 140px;
+        height: 42px;
+        display: inline-block;
+        position: relative;
+        text-align: center;
+        background: #f5f5f5;
+        margin-bottom: 8px;
+        align-content: center;
+        align-self: center;
+      }
+      div.div-qty-input input {
+        height: 100%;
+        width: 100%;
+        font-size: 16px;
+        color: #6f6f6f;
+        width: 50px;
+        border: none;
+        background: #f5f5f5;
+        text-align: center;
       }
     </style>
+    <!--옵션을 선택할 때마다 행이 추가됨-->
+    <script>
+      var storeValueUrl = "${contextPath}" + "/addCartToListValue.do";
+      var goodsPrice = "${goods.price}";
+      goodsPrice = parseInt(goodsPrice);
+      var cartPage = "${contextPath}/main/cart.do";
+    </script>
+    <script src="${contextPath}/js/goodsDetail.js"></script>
   </head>
 
   <body>
@@ -237,7 +264,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <!--수정-->
                       <div class="property-margin" style="margin-bottom: -40px">
                         <div class="property-margin1">
-                          <dl class="property-flex2" style="height: 170px">
+                          <!-- <dl class="property-flex2" style="height: 170px">
                             <dt
                               class="property-input-gd"
                               style="margin-top: 16px"
@@ -265,30 +292,76 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                                 </select>
                               </div>
 
-                              <input
-                                type="hidden"
-                                class="h_option_qty_${hotdeal.hotdealNo}"
-                                value="${hotdeal.goods_qty}"
-                              />
-                              <input
-                                type="hidden"
-                                class="h_option_price_${hotdeal.hotdealNo}"
-                                value="${hotdeal.discounted_price}"
-                              />
-                              <input
-                                type="hidden"
-                                class="h_option_name_${hotdeal.hotdealNo}"
-                                value=" ${hotdeal.name}"
-                              />
                             </dd>
-                          </dl>
+                          </dl> -->
 
+                          <input
+                            type="hidden"
+                            class="h_option_qty_${hotdeal.hotdealNo}"
+                            value="${hotdeal.goods_qty}"
+                          />
+                          <input
+                            type="hidden"
+                            class="h_option_price_${hotdeal.hotdealNo}"
+                            value="${hotdeal.discounted_price}"
+                          />
+                          <input
+                            type="hidden"
+                            class="h_option_name_${hotdeal.hotdealNo}"
+                            value=" ${hotdeal.name}"
+                          />
                           <div
                             class="cart-option-item property-flex5 goods_option_grid"
                             style="width: 525px"
                           >
                             <!--선택한 상품 옵션이 나타나는 구역 -->
-                            <div class="goods_option_rows"></div>
+                            <div class="goods_option_rows">
+                              <dl class="property-flex2 goods_option_row">
+                                <dt class="property-font2 epzddad1">
+                                  <div
+                                    class="property-font3 font-bold"
+                                    style="margin-bottom: 24px; font-size: 22px"
+                                    id="goods_option_name"
+                                  >
+                                    ${hotdeal.name}
+                                  </div>
+                                  <input
+                                    type="hidden"
+                                    value="${hotdeal.hotdealNo}"
+                                    name="optionNo"
+                                    class="h_optionNo"
+                                  />
+                                  <div class="">
+                                    <div class="text-left">
+                                      <div class="div-qty-input border6">
+                                        <a class="goods_option_minus_btn">-</a>
+                                        <input
+                                          type="text"
+                                          value="1"
+                                          name="goodsQty"
+                                          class="goodsQty_input"
+                                        />
+                                        <a class="goods_option_plus_btn">+</a>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="option_price">
+                                    ${hotdeal.discounted_price}
+                                  </div>
+
+                                  <input
+                                    type="hidden"
+                                    class="h_option_price"
+                                    value="${hotdeal.discounted_price}"
+                                  />
+                                  <input
+                                    type="hidden"
+                                    class="h_option_discount"
+                                    value="${goods.price*hotdeal.goods_qty-hotdeal.discounted_price}"
+                                  />
+                                </dt>
+                              </dl>
+                            </div>
                             <span
                               class="property-font3 text-right"
                               style="
@@ -304,7 +377,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
                               id="payment_price"
-                              >0</span
+                              >${goods.price*hotdeal.goods_qty}</span
                             >
                             <span
                               class="property-font3 text-right"
@@ -321,7 +394,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
                               id="discount_price"
-                              >0</span
+                              >${goods.price*hotdeal.goods_qty-hotdeal.discounted_price}</span
                             >
 
                             <span
@@ -339,27 +412,27 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               class="property-font3 text-right"
                               style="font-size: 22px; margin-bottom: -10px"
                               id="t_price"
-                              >0</span
+                              >${hotdeal.discounted_price}</span
                             >
                             <!--배송비와 상품금액 hidden-->
-                            <input
-                              type="hidden"
-                              name="shippingFee"
-                              value="2500"
-                            />
+                            <input type="hidden" name="shippingFee" value="0" />
                             <input
                               type="hidden"
                               id="h_payment_price"
                               name="payment_price"
-                              value="0"
+                              value="${goods.price}"
                             />
                             <input
                               type="hidden"
                               id="h_discount_price"
                               name="discount_price"
-                              value="0"
+                              value="${goods.price*hotdeal.goods_qty-hotdeal.discounted_price}"
                             />
-                            <input type="hidden" id="total_price" value="0" />
+                            <input
+                              type="hidden"
+                              id="total_price"
+                              value="${hotdeal.discounted_price}"
+                            />
                           </div>
                         </div>
 
@@ -382,7 +455,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           width="56"
                           height="56"
                           radius="3"
-                          onclick="fn_bookmark('${hotdeal.hotdealNo}')"
+                          onclick="fn_bookmark('${goods.goodsNo}')"
                         >
                           <span class="css-let1"
                             ><img
@@ -425,15 +498,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       </div>
     </section>
     <!-- Product Details Section End -->
-
-    <!--옵션을 선택할 때마다 행이 추가됨-->
-    <script>
-      var storeValueUrl = "${contextPath}" + "/addCartToListValue.do";
-      var goodsPrice = "${hotdeal.discounted_price}";
-      goodsPrice = parseInt(goodsPrice);
-      var cartPage = "${contextPath}/main/cart.do";
-    </script>
-    <script src="${contextPath}/js/goodsDetail.js"></script>
 
     <!-- Js Plugins -->
   </body>
