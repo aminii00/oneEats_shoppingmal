@@ -23,7 +23,9 @@
   border: 0px solid #bcbcbc;
 }
 
-
+#sidebar-open-btn{
+	display:none;
+}
 #sidebar-left1 {
   width: 20%;
   height: 400px;
@@ -53,9 +55,25 @@
 	margin:auto;
 	}
 	
-	#sideber-open-btn{
-		display:inherit;
+	#sidebar-open-btn{
+		display:inline-block;
 	}
+	
+	#sidebar-left.opened{
+		
+    height: auto;
+	display: inherit;
+    width: 40%;
+    max-height: 90vh;
+    position: fixed;
+    z-index: 9999;
+    left: 20%;
+    top:5vh;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+	}
+	
 }
 
 
@@ -268,8 +286,13 @@ hr.line-gray {
      display: none;
      background-color: rgba(0, 0, 0, 0.4);
 }
+img.expand_img{
+	 padding-top: 8px;
+     width: 60px;
+     height: 60px;
+}
 
-.clicked{
+img.expand_img.clicked{
 	width: 80%;
 	height: auto;
 	position: absolute;
@@ -283,12 +306,15 @@ hr.line-gray {
 
 /*고정 quick menu*/
 .fixed_quick_menu{
+	z-index: 9997;
 	position:fixed;
 	right:20px;
 	bottom:20px;
 	padding:8px;
 	background-color: rgb(255,200,140,0.2);
 }
+
+
 
 .fixed_quick_menu .a{
 	background-color: lightgray;

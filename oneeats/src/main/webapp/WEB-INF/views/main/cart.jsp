@@ -327,7 +327,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                     >
                   </li>
                 </ul>
-                <button type="submit" class="primary-btn">주문하기</button>
+                <button
+                  type="submit"
+                  class="bg-lightgreen textcolor-white textsize-2 btn-long border-0"
+                >
+                  주문하기
+                </button>
               </div>
             </div>
           </div>

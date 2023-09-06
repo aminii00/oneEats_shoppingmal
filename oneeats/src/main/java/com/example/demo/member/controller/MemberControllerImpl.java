@@ -87,9 +87,15 @@ public class MemberControllerImpl implements MemberController {
 				throw new Exception("인증번호가 null이거나 형식에 맞지 않습니다.");
 			}
 			int inzung_id = memberService.loadVerificationNoByNumber(inzung_bunho);
+			
+			
 			if (inzung_id < 1) {
-				throw new Exception("데이터베이스에서 인증번호를 찾을 수 없었습니다.");
+				// 디버그용. 주석을 지울 것.
+				//	throw new Exception("데이터베이스에서 인증번호를 찾을 수 없었습니다.");
 			}
+			
+			
+			
 			memberMap.put("inzung_id", inzung_id);
 
 			if (_birth == null || _birth.trim().length() < 1) {
@@ -267,6 +273,11 @@ public class MemberControllerImpl implements MemberController {
 		String resultNumber = memberService.loadRandomSMSInzungBunho(bunho);
 		if (resultNumber == null || resultNumber.trim().length() < 1) {
 			result = "fail";
+		}
+		
+		// 디버그용. 폰인증 실제로 할 때는 지울 것.
+		if (bunho.equals("111111")) {
+			result = "success";
 		}
 
 		return result;

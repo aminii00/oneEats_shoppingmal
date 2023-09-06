@@ -90,10 +90,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       <dd class="property-flex1">
                         <div style="align-content: center; margin-top: 4px">
                           <select name="category" class="opt">
-                            <option value="category">
-                              카테고리를 선택해주세요
-                            </option>
-
                             <option value="zzigae">찌개 / 탕 /찜</option>
                             <option value="meal">식사 / 안주류</option>
                             <option value="porridge">죽</option>

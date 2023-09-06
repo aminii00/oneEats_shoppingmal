@@ -128,10 +128,11 @@ uri="http://java.sun.com/jsp/jstl/core" %>
                   var total_price = parseInt(
                     $("input[name=total_price]").val()
                   );
-                  if (parseInt(result.condition) > total_price) {
+                  if (parseInt(response.condition) > total_price) {
                     alert("쿠폰 사용조건을 만족하지 못 했습니다.");
                   } else {
                     var discount_price = parseInt(response.discount_price);
+                    $("#h_coupon_discount_price").val(discount_price);
                     var used_point = parseInt($("#used_point").val());
                     var original_discount_price = parseInt(
                       $("#h_original_discount_price").val()
@@ -344,7 +345,10 @@ uri="http://java.sun.com/jsp/jstl/core" %>
             <select name="used_couponId">
               <option value="0" selected>쿠폰을 선택해주세요</option>
               <c:forEach var="coupon" items="${couponList}">
-                <option value="${coupon.couponNo}">${coupon.name}</option>
+                <option value="${coupon.couponNo}">
+                  ${coupon.name} / ${coupon.discount_price}원 할인 /
+                  ${coupon.condition}
+                </option>
               </c:forEach>
             </select>
           </td>
@@ -483,7 +487,6 @@ uri="http://java.sun.com/jsp/jstl/core" %>
           data: formData,
           success: function (response) {
             if (response == "success") {
-              alert("저장되었습니다.");
               fn_requestPayment();
             } else {
               alert("주문정보를 저장하지 못 했습니다.");

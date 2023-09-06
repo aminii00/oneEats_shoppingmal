@@ -142,8 +142,8 @@
 	</select>
 	
 	
-	<select id="selectVerificationNoByNumber" parameterType="String">
-		select verNo from random_verification where number=#{number} and verificated="no" order by creDate limit 1
+	<select id="selectVerificationNoByNumber" parameterType="String" resultType="int">
+		select count(verNo) from random_verification where number=#{number} and verificated="no" order by creDate limit 1
 	</select>
 	
 	<update id="updateVerificationNumberVerificated" parameterType="String">

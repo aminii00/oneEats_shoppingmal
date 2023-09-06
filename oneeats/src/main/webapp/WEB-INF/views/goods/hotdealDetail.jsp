@@ -455,7 +455,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                           width="56"
                           height="56"
                           radius="3"
-                          onclick="fn_bookmark('${hotdeal.hotdealNo}')"
+                          onclick="fn_bookmark('${goods.goodsNo}')"
                         >
                           <span class="css-let1"
                             ><img

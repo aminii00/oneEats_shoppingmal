@@ -202,6 +202,7 @@ public class GoodsControllerImpl implements GoodsController {
 		mav.addObject("newReviewList", newReviewList);
 		mav.addObject("section", 1);
 		mav.addObject("pageNum", 1);
+		mav.addObject("numForPage",5);
 		return mav;
 
 	}
@@ -232,10 +233,10 @@ public class GoodsControllerImpl implements GoodsController {
 						+ "                            style=\"padding-top: 11px\"\r\n" + "                            >";
 				float star = Float.parseFloat(review.getStar());
 				for (int j = 0; j < star; j++) {
-					result += "★";
+					result += "<i class=\"bi bi-star-fill review-star\"></i>";
 				}
 				if (star < Math.ceil(star)) {
-					result += "☆";
+					result += "<i class=\"bi bi-star-half review-star\"></i>";
 				}
 				result += "</span></div></div>";
 				result += "<article class=\"property-gdtail-flex2\">\r\n" + "                        <div>\r\n"
@@ -249,11 +250,7 @@ public class GoodsControllerImpl implements GoodsController {
 				result += "<br />\r\n";
 
 				if (review.getReviewImg() != null && review.getReviewImg().trim().length() > 0) {
-					result += "                            <img\r\n" + "                              style=\"\r\n"
-							+ "                                padding-top: 8px;\r\n"
-							+ "                                width: 60px;\r\n"
-							+ "                                height: 60px;\r\n" + "                              \"\r\n"
-							+ "                              src=\""+request.getContextPath()
+					result += "                            <img src=\""+request.getContextPath()
 							+ "/download.do?imageFileName="
 							+ review.getReviewImg() + "&path=reviewNo" + review.getReviewNo()
 							+ "\"                              class=\"expand_img\"\r\n"
@@ -280,47 +277,7 @@ public class GoodsControllerImpl implements GoodsController {
 			int totalReviewsNum = goodsService.selectTotalReviewsNum(goodsNo);
 			int numForPage = Integer.parseInt(pagingMap.get("numForPage").toString());
 			
-//			result += "<div><ul class=\"ul-li\">";
-//			if (section>1) {
-//				result += "<li class=\"li-btn\">\r\n"
-//						+ "                            <button\r\n"
-//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
-//						+ "                              onclick=\"fn_loadReviews('-1','1','"+goodsNo
-//						+ "')\"\r\n"
-//						+ "                            >\r\n"
-//						+ "                              <i class=\"bi bi-arrow-left\"></i>"
-//						+ "                            </button>\r\n"
-//						+ "                          </li>";
-//			}
-//			int end = (int) Math.ceil((totalReviewsNum - (section-1)*100) / 10);
-//			if (end>10) {
-//				end = 10;
-//			}
-//			for (int i = 1; i <= end; i++) {
-//				result += "<li class=\"li-btn\">\r\n"
-//						+ "                            <button\r\n"
-//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
-//						+ "                              onclick=\"fn_loadReviews('0','"+i
-//						+ "','"+goodsNo
-//						+ "')\"\r\n"
-//						+ "                            >\r\n"
-//						+ "                              "+(((section-1)*10)+i)
-//						+ "\r\n"
-//						+ "                            </button>\r\n"
-//						+ "                          </li>";
-//			}
-//			if (section*100<totalReviewsNum) {
-//				result += "<li class=\"li-btn\">\r\n"
-//						+ "                            <button\r\n"
-//						+ "                              class=\"btn-2 btn-square bg-white btn-border\"\r\n"
-//						+ "                              onclick=\"fn_loadReviews('1','1','"+goodsNo
-//						+ "')\"\r\n"
-//						+ "                            >\r\n"
-//						+ "                              <i class=\"bi bi-arrow-right\"></i>"
-//						+ "                            </button>\r\n"
-//						+ "                          </li>";
-//			}
-//			result += " </ul></div>";
+
 			
 			String[] params = {String.valueOf(goodsNo)};
 			result += GeneralFunctions.renderPageButtons(section, numForPage, totalReviewsNum, "fn_loadReviews", params);

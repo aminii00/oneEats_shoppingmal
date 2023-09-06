@@ -14,9 +14,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <script src="${contextPath}/js/registerForm.js"></script>
     <script>
       $(document).ready(function(){
-	$("input:checkbox[name='gender']:checkbox[value='${memberInfo.gender}']").prop('checked', true);
-  $("input:checkbox[name='email_agreement']:checkbox[value='${memberInfo.email_agreement}']").prop('checked', true);
-  $("input:checkbox[name='sms_agreement']:checkbox[value='${memberInfo.sms_agreement}']").prop('checked', true);
+	$("input:radio[name='gender']:radio[value='${memberInfo.gender}']").prop('checked', true);
+  $("input:radio[name='email_agreement']:radio[value='${memberInfo.email_agreement}']").prop('checked', true);
+  $("input:radio[name='sms_agreement']:radio[value='${memberInfo.sms_agreement}']").prop('checked', true);
 });
     </script>
     <style>
