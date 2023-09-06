@@ -82,13 +82,6 @@
 		where qnaNo=#{parentNo}
 	</update>
 
-	<resultMap id="mostQnAResult" type="mostQnAVO">
-		<result property="qnaNo" column="qnaNo" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="creDate" column="creDate" />
-		<result property="category" column="category" />
-	</resultMap>
 	
 	<select id="selectMemberByMemberNo" resultType="MemberVO">
 		<![CDATA[
@@ -330,13 +323,6 @@
 		</if>
 	</select>
 
-	<select id="selectNoticeListTotalNumWithCategory"
-		parameterType="String" resultType="int">
-		select count(noticeNo) from notice 
-		<if test="category!='all'">
-			where category=#{category}
-		</if>
-	</select>
 
 	<select id="selectOneQnAListTotalNumWithPagingMap">
 		select count(qnaNo) from oneQnA
