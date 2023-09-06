@@ -60,9 +60,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
               }
             } else {
             }
-
-            var choizongzuso = "(" + data.zonecode + ")" + addr;
-            document.getElementById("h_input_zipcode").value = data.zonecode;
+            var zipCode = data.zonecode;
+            var choizongzuso = "(" + zipCode + ")" + addr;
+            document.getElementById("h_input_zipCode").value = zipCode;
             document.getElementById("address_input").value = choizongzuso;
 
             document.getElementById("address_detail_input").focus();

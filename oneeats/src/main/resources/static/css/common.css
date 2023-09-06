@@ -39,6 +39,7 @@
 
 #content {
   width: 70%;
+  min-height: 520px;
   padding: 5px;
   margin-right: 5px;
   float: left;
