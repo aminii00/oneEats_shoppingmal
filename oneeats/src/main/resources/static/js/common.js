@@ -29,7 +29,30 @@ $(document).ready(function() {
 			$(this).addClass('clicked');
 		}
 	});
+	
+	
+	$(document).on("click",'.overlay_gray',function(){
+		$('.expand_img.clicked').removeClass('clicked');
+		$("#sidebar-left.opened").removeClass("opened");
+		
+		$('.overlay_gray').hide();
+	});
+	
+	
 });
+
+
+function fn_openSideBar(){
+	if($("#sidebar-left").hasClass("opened")){
+		$("#sidebar-left").removeClass("opened");
+		$('.overlay_gray').hide();
+	} else{
+		$("#sidebar-left").addClass("opened");
+		$('.overlay_gray').show();
+	}
+	
+}
+
 
 function closeModal() {
 	$('.modal-overlay').fadeOut(300);

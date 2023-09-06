@@ -80,7 +80,7 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         <div id="sidebar-left">
           <tiles:insertAttribute name="side" />
         </div>
-        <div style="margin-left: 12px">
+        <div id="content">
           <tiles:insertAttribute name="body" />
         </div>
       </div>
@@ -115,6 +115,42 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
         </div>
       </div>
     </div>
+    <div class="fixed_quick_menu">
+      <div class="btn_grid">
+        <div class="row">
+          <div class="col">
+            <a href="#top">
+              <img
+                class="btn_square"
+                src="${contextPath}/img/icon/uparrow.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+        <div class="row">
+          <div
+            id="sidebar-open-btn"
+            class="col text-center"
+            onclick="fn_openSideBar();"
+          >
+            <i class="bi bi-window-sidebar textsize-4"></i>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <a href="#bottom">
+              <img
+                class="btn_square"
+                src="${contextPath}/img/icon/downarrow.png"
+                alt=""
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="bottom"></div>
   </body>
   <script src="${contextPath}/js/jquery.nice-select.min.js"></script>
   <script src="${contextPath}/js/jquery-ui.min.js"></script>

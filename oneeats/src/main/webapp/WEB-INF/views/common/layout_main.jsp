@@ -129,7 +129,15 @@ uri ="http://java.sun.com/jsp/jstl/core" %>
             </a>
           </div>
         </div>
-        <div class="row"></div>
+        <div class="row">
+          <div
+            id="sidebar-open-btn"
+            class="col text-center"
+            onclick="fn_openSideBar();"
+          >
+            <i class="bi bi-window-sidebar textsize-4"></i>
+          </div>
+        </div>
         <div class="row">
           <div class="col">
             <a href="#bottom">

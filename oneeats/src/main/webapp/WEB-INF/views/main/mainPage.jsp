@@ -335,7 +335,6 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                           <img
                             src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
                             style="width: 110px"
-                            ;
                           />
                         </div>
                         <div class="latest-product__item__text">
