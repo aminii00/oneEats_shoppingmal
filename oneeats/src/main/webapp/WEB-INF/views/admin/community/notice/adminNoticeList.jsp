@@ -52,7 +52,8 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
           <c:when test="${not empty noticeList}">
             <c:forEach var="notice" items="${noticeList}">
               <hr class="line-gray" />
-              <div class="row noticeList-title">
+              <div class="row noticeList-title" 
+              onclick="location.href='${contextPath}/community/notice/noticeDetail.do?noticeNo=${notice.noticeNo}';">
                 <div class="col-md-2">${notice.category}</div>
                 <div class="col-md text-left">${notice.title}</div>
                 <div class="col-md-2">${notice.creDate}</div>

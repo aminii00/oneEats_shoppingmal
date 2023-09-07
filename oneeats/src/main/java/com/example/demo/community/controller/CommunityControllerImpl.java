@@ -168,7 +168,7 @@ public class CommunityControllerImpl implements CommunityController {
 
 		// 세션에서 로그인한 유저 정보를 불러와 map에 저장
 		HttpSession session = request.getSession();
-		MemberVO memberVO = (MemberVO) session.getAttribute("loginUser");
+		MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 		if (memberVO == null) {
 			map.put("memberNo", 1);
 		} else {
