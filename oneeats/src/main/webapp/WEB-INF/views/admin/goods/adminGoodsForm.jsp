@@ -212,6 +212,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                         type="date"
                         class="property-font1 nice-select"
                         style="width: 176px"
+                        required
                       />
                     </dd>
                   </dl>
