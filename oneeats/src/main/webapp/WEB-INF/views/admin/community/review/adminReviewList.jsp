@@ -104,7 +104,7 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
                 </div>
                 <div class="col-md-1">
                   <a
-                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/communtiy/review/deleteReview.do?reviewNo=${review.reviewNo}');"
+                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/admin/community/review/deleteReview.do?reviewNo=${review.reviewNo}');"
                   >
                     삭제
                   </a>

@@ -92,7 +92,7 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
                 </div>
                 <div class="col-md-1">
                   <a
-                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/seller/communtiy/review/deleteReview.do?reviewNo=${review.reviewNo}');"
+                    onClick="fn_openalert('삭제하시겠습니까?','${contextPath}/seller/community/review/deleteReview.do?reviewNo=${review.reviewNo}');"
                     >삭제</a
                   >
                 </div>
