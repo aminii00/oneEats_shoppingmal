@@ -82,6 +82,7 @@ public class NaverController {
 			if (naverFor.equals("login")) {
 				mav = Alert.alertAndRedirect("네이버 계정으로 가입된 계정이 아닙니다. \\n 회원가입 페이지로 이동합니다.",
 						"/naver/registerApiForm.do");
+				mav.addObject("sns_id","");
 			} else {
 				mav.setViewName("redirect:/naver/registerApiForm.do");
 			}
@@ -113,11 +114,9 @@ public class NaverController {
 		NaverDTO naverInfo = (NaverDTO) session.getAttribute("naverInfo");
 		session.removeAttribute("naverInfo");
 		String hash = naverInfo.hash().substring(0, 10);
-		String sns_id = request.getParameter("sns_id");
-		String sns_type = request.getParameter("sns_type");
-
-		mav.addObject("sns_id", sns_id);
-		mav.addObject("sns_type", sns_type);
+		
+		mav.addObject("sns_id", naverInfo.getId());
+		mav.addObject("sns_type", "naver");
 		mav.addObject("api_id", "n_" + hash);
 		mav.addObject("name", naverInfo.getName());
 		mav.addObject("phone", naverInfo.getPhone());
