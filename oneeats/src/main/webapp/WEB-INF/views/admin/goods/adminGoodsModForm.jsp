@@ -397,12 +397,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       rows="8"
                       style="width: 350px"
                     >
+${sellerGoods.description}
                     </textarea>
                     <input
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${option.name}"
+                      value="${sellerGoods.description}"
                     />
                   </p>
 
