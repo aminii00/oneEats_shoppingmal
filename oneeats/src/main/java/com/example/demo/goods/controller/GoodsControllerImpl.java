@@ -333,8 +333,8 @@ public class GoodsControllerImpl implements GoodsController {
 	@RequestMapping("/goods/search.do")
 	public ModelAndView goodsSearch(HttpServletRequest request) throws IOException {
 		
-		ModelAndView mav = new ModelAndView("/goods/goodsHotDealList");
 		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("/goods/goodsHotDealList");
 		Map searchMap = GeneralFileUploader.getParameterMap(request);
 		
 		
@@ -356,15 +356,14 @@ public class GoodsControllerImpl implements GoodsController {
 		System.out.println(searchMap);
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithSearchFilter(searchMap);
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithSearchFilter(searchMap);
-		System.out.println(totalGoodsNum+"totalGoodsNum은...");
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
 
 		System.out.println("Search mav:" +mav);
 		System.out.println("GoodsList: "+goodsList);
 		System.out.println("totalGoodsNum:"+totalGoodsNum);
-		//int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
-		//mav.addObject("maxPrice", maxPrice);
+		int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
+		mav.addObject("maxPrice", maxPrice);
 
 		return mav;
 	}

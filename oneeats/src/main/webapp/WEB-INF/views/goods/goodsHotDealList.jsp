@@ -34,6 +34,11 @@ uri="http://java.sun.com/jsp/jstl/functions" %>
             <div class="row">
               <c:forEach var="item" items="${goodsList}">
                 <div class="col-lg-4 col-md-6 col-sm-6 product_col">
+                  <input
+                    type="hidden"
+                    class="h_col_goods_price"
+                    value="${item.price}"
+                  />
                   <c:choose>
                     <c:when test="${item.goodsNo < 1000}">
                       <div class="product__item">

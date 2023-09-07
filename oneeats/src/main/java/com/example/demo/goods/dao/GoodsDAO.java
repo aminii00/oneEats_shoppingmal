@@ -65,6 +65,8 @@ public interface GoodsDAO {
 	public List<HotDealVO> selectHotDealListWithPagingMap(Map pagingMap);
 
 	public int selectHotDealTotalNumWithPagingMap(Map pagingMap);
+
+	public int selectMaxPriceWithSearchFilter(Map searchMap);
 }
 	
 
