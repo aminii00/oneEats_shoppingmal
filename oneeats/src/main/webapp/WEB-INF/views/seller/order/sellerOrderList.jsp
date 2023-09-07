@@ -63,42 +63,26 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
               <td>${sellerOrder.orderDate}</td>
               <td>${sellerOrder.orderer_name}</td>
               <td>${sellerOrder.orderer_id}</td>
-
-              <c:if test="${sellerOrder.gun>1}">
-                <td>
-                  <a
-                    href="${contextPath}/mypage/orderDetail.do?orderNo=${sellerOrder.orderNo}"
-                  >
-                    ${sellerOrder.goodsName} 외 ${sellerOrder.gun-1}건</a
-                  >
-                </td>
-                <td>${sellerOrder.delivery_status}</td>
-                <td>
-                  <a
-                    href="javascript:void(0)"
-                    onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/seller/order/sellerOrderCancel.do?orderNo=${sellerOrder.orderNo}")'
-                    >취소</a
-                  >
-                </td>
-              </c:if>
-
-              <c:if test="${sellerOrder.gun==1}">
-                <td>
-                  <a
-                    href="${contextPath}/mypage/orderDetail.do?orderNo=${sellerOrder.orderNo}"
-                  >
-                    ${sellerOrder.goodsName}</a
-                  >
-                </td>
-                <td>${sellerOrder.delivery_status}</td>
-                <td>
-                  <a
-                    href="javascript:void(0)"
-                    onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/seller/order/sellerOrderCancel.do?orderNo=${sellerOrder.orderNo}")'
-                    >취소</a
-                  >
-                </td>
-              </c:if>
+              <td>
+                <a
+                  href="${contextPath}/mypage/orderDetail.do?orderNo=${sellerOrder.orderNo}"
+                >
+                  <c:if test="${sellerOrder.gun>1}">
+                    ${sellerOrder.goodsName} 외 ${sellerOrder.gun-1}건
+                  </c:if>
+                  <c:if test="${sellerOrder.gun==1}">
+                    ${sellerOrder.goodsName}
+                  </c:if>
+                </a>
+              </td>
+              <td>${sellerOrder.delivery_status}</td>
+              <td>
+                <a
+                  href="javascript:void(0)"
+                  onclick='fn_openalert("주문을 취소하시겠습니까?","${contextPath}/seller/order/sellerOrderCancel.do?orderNo=${sellerOrder.orderNo}")'
+                  >취소</a
+                >
+              </td>
             </tr>
           </c:when>
         </c:choose>

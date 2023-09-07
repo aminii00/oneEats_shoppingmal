@@ -349,19 +349,20 @@ public class GoodsControllerImpl implements GoodsController {
 			searchMap.put("section", section);
 		}
 
-		int start = ((Integer.parseInt(section) - 1) + Integer.parseInt(pageNum) - 1) * 12;
+		int start = ((Integer.parseInt(section) - 1)*10 + Integer.parseInt(pageNum) - 1) * 12;
 		searchMap.put("start", start);
-
+		
+		mav.addAllObjects(searchMap);
 		System.out.println(searchMap);
 		List<GoodsVO> goodsList = goodsService.selectGoodsListWithSearchFilter(searchMap);
 		int totalGoodsNum = goodsService.selectGoodsTotalNumWithSearchFilter(searchMap);
+		System.out.println(totalGoodsNum+"totalGoodsNum은...");
 		mav.addObject("goodsList", goodsList);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
 
-		mav.addAllObjects(searchMap);
 		System.out.println("Search mav:" +mav);
-	System.out.println("GoodsList: "+goodsList);
-	System.out.println("totalGoodsNum:"+totalGoodsNum);
+		System.out.println("GoodsList: "+goodsList);
+		System.out.println("totalGoodsNum:"+totalGoodsNum);
 		//int maxPrice = goodsService.selectMaxPriceWithSearchFilter(searchMap);
 		//mav.addObject("maxPrice", maxPrice);
 
