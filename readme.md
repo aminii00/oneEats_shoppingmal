@@ -17,10 +17,10 @@ IDE(통합개발도구) : sts 4버전 <br>
 프레임워크: spring boot, bootstrap, mybatis <br>
 데이터베이스:  mysql 8 버전 <br>
 버전 컨트롤을 위해 git과 github를 도입 <br>
-자바스크립트 api:  로그인을 위한 카카오api 네이버 api,  <br>
-                  결제를 위한 토스 결제 api,  <br>
-                  배송지 추가와 수정할 때 우편번호를 쉽게 찾기 위한 다음 우편번호 찾기 api,  <br>
-                  배송조회를 위한 스마트택배 api <br>
+자바스크립트 api:   카카오로그인 api 네이버로그인 api,  <br>
+                   토스 결제 api,  <br>
+                   다음 우편번호 찾기 api,  <br>
+                   스마트택배 배송조회 api <br>
 
 ### 화면설계
 https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
