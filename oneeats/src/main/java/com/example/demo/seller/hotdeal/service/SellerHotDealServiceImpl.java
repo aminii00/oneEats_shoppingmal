@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.seller.hotdeal.dao.SellerHotDealDAO;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.HotDealVO;
+import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
 
 @Service("sellerHotDealService")
@@ -100,7 +101,9 @@ public class SellerHotDealServiceImpl implements SellerHotDealService{
 		public List<HotDealVO> selectSellerHotDealList(Map pagingMap) {
 			return sellerHotDealDAO.selectSellerHotDealList(pagingMap);
 		}
-
+		
+	
+		
 		@Override
 		public int selectTotalHotDealNum() {
 			return sellerHotDealDAO.selectTotalHotDealNum();

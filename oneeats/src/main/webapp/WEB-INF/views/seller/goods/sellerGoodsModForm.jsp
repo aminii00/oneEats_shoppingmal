@@ -84,45 +84,111 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <form
           id="mod-form"
-          action="${contextPath}/seller/goods/sellerGoodsMod.do?goodsNo=${sellerGoods.goodsNo}"
+          action="${contextPath}/seller/goods/sellerGoodsMod.do"
           method="post"
           enctype="multipart/form-data"
         >
+          <input type="hidden" name="goodsNo" value="${sellerGoods.goodsNo}" />
+
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="product__details__pic">
                 <div class="product__details__pic__item">
-                  <img id="goods_preview" src="" alt="" />
-                  <input
-                    type="file"
-                    name="img1"
-                    value="onchange"
-                    ="readURL(this)"
-                  />
-                  <input
-                    type="file"
-                    name="img2"
-                    id=""
-                    onchange="readURL(this)"
-                  />
-                  <input
-                    type="file"
-                    name="img3"
-                    id=""
-                    onchange="readURL(this)"
-                  />
-                  <input
-                    type="file"
-                    name="img4"
-                    id=""
-                    onchange="readURL(this)"
-                  />
-                  <input
-                    type="file"
-                    name="img5"
-                    id=""
-                    onchange="readURL(this)"
-                  />
+                  <div>
+                    <img
+                      id="goods_preview"
+                      src="${contextPath}/download.do?imgFileName=${sellerGoods.img1}&path=goodsNo${sellerGoods.goodsNo}"
+                      alt=""
+                    />
+                    <input
+                      type="file"
+                      name="img1"
+                      value="${sellerGoods.img1}"
+                      onchange="readURL(this)"
+                    />
+                    ${sellerGoods.img1}
+                    <input
+                      type="hidden"
+                      name="originalFileName1"
+                      value="${sellerGoods.img1}"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      id="goods_preview"
+                      src="${contextPath}/download.do?imgFileName=${sellerGoods.img2}&path=goodsNo${sellerGoods.goodsNo}"
+                      alt=""
+                    />
+                    <input
+                      type="file"
+                      name="img2"
+                      value="${sellerGoods.img2}"
+                      onchange="readURL(this)"
+                    />
+                    ${sellerGoods.img2}
+                    <input
+                      type="hidden"
+                      name="originalFileName2"
+                      value="${sellerGoods.img2}"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      id="goods_preview"
+                      src="${contextPath}/download.do?imgFileName=${sellerGoods.img3}&path=goodsNo${sellerGoods.goodsNo}"
+                      alt=""
+                    />
+                    <input
+                      type="file"
+                      name="img3"
+                      value="${sellerGoods.img3}"
+                      onchange="readURL(this)"
+                    />
+                    ${sellerGoods.img3}
+                    <input
+                      type="hidden"
+                      name="originalFileName3"
+                      value="${sellerGoods.img3}"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      id="goods_preview"
+                      src="${contextPath}/download.do?imgFileName=${sellerGoods.img4}&path=goodsNo${sellerGoods.goodsNo}"
+                      alt=""
+                    />
+                    <input
+                      type="file"
+                      name="img4"
+                      value="${sellerGoods.img4}"
+                      onchange="readURL(this)"
+                    />
+                    ${sellerGoods.img4}
+                    <input
+                      type="hidden"
+                      name="originalFileName4"
+                      value="${sellerGoods.img4}"
+                    />
+                  </div>
+                  <div>
+                    <img
+                      id="goods_preview"
+                      src="${contextPath}/download.do?imgFileName=${sellerGoods.img5}&path=goodsNo${sellerGoods.goodsNo}"
+                      alt=""
+                    />
+                    <input
+                      type="file"
+                      name="img5"
+                      value="${sellerGoods.img5}"
+                      onchange="readURL(this)"
+                    />
+                    ${sellerGoods.img5}
+                    <input
+                      type="hidden"
+                      name="originalFileName5"
+                      value="${sellerGoods.img5}"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -147,13 +213,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="fruit">과일</option>
                             <option value="juiceAndJam">
                               못난이주스/수제청
-                            </option>
-                            <option value="zzigae">찌개 / 탕 /찜</option>
-                            <option value="meal">식사/안주류</option>
-                            <option value="porridge">죽</option>
-                            <option value="mealReplacement">식사 대용식</option>
-                            <option value="sidedish">
-                              간편 한끼 반찬
                             </option>
                           </select>
                         </div>
@@ -366,12 +425,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       rows="8"
                       style="width: 350px"
                     >
+${sellerGoods.description}
                     </textarea>
                     <input
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${option.name}"
+                      value="${sellerGoods.description}"
                     />
                   </p>
 

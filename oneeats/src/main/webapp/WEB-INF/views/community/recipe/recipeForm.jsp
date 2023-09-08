@@ -61,8 +61,10 @@ uri="http://tiles.apache.org/tags-tiles" prefix="tiles" %> <%@ taglib prefix
               <div class="recipe_category textsize-1 text-left textcolor-black">
                 <select name="category" id="">
                   <option value="none">미분류</option>
-                  <option value="">10분 간단 레시피</option>
-                  <option value="">영양만점 건강 레시피</option>
+                  <option value="10분 간단 레시피">10분 간단 레시피</option>
+                  <option value="영양만점 건강 레시피">
+                    영양만점 건강 레시피
+                  </option>
                 </select>
               </div>
             </div>

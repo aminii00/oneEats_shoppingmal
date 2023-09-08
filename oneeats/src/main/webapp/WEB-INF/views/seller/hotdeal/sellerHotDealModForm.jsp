@@ -94,15 +94,11 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="juiceAndJam">
                               못난이 주스 / 수제청
                             </option>
-                            <option value="zzigae">
-                              찌개 / 탕 /찜
-                            </option>
+                            <option value="zzigae">찌개 / 탕 /찜</option>
                             <option value="meal">식사 / 안주류</option>
                             <option value="porridge">죽</option>
                             <option value="mealReplacement">식사 대용식</option>
-                            <option value="sidedish">
-                              간편 한끼 반찬
-                            </option>
+                            <option value="sidedish">간편 한끼 반찬</option>
                           </select>
                         </div>
                       </dd>
@@ -321,13 +317,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       cols="50"
                       rows="8"
                       style="width: 350px"
-                    ></textarea>
+                    >
+${goods.description}</textarea
+                    >
 
                     <input
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${hotdeal.description}"
+                      value="${goods.description}"
                     />
                   </p>
 

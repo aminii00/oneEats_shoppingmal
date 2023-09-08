@@ -4,7 +4,7 @@ package com.example.demo.admin.goods.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,7 +27,6 @@ import com.example.demo.common.file.GeneralFileUploader;
 import com.example.demo.vo.GoodsVO;
 import com.example.demo.vo.MemberVO;
 import com.example.demo.vo.OptionVO;
-import com.example.demo.vo.RecipeVO;
 
 @Controller("adminGoodsController")
 public class AdminGoodsControllerImpl implements AdminGoodsController {
@@ -151,6 +151,7 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		mav.addObject("newGoodsList", newGoodsList);
 		mav.addAllObjects(pagingMap);
 		mav.addObject("totalGoodsNum", totalGoodsNum);
+		System.out.println("totalGoodsNum :"+totalGoodsNum);
 		System.out.println("mav :" + mav);
 				return mav;
 	}
@@ -229,14 +230,15 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			pagingMap.put("start", ((section - 1) * 10 + pageNum - 1) * 10);
 			
 			List<GoodsVO> goodsList = adminGoodsService.selectSellerGoodsList(pagingMap);
-			List<GoodsVO> newGoodsList = adminGoodsService.selectNewSellerGoodsList();
+			
 			int totalGoodsNum = adminGoodsService.selectTotalGoodsNum();
 			
 			ModelAndView mav = new ModelAndView(viewName);
 			mav.addObject("goodsList", goodsList);
-			mav.addObject("newGoodsList", newGoodsList);
+		
 			mav.addAllObjects(pagingMap);
 			mav.addObject("totalGoodsNum", totalGoodsNum);
+			System.out.println("totalGoodsNum:"+totalGoodsNum);
 			System.out.println("mav :" + mav);
 			return mav;
 			
@@ -265,17 +267,14 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 		}
 		
 		@RequestMapping(value = "/admin/goods/adminGoodsMod.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView sellerGoodsMod(HttpServletRequest request, HttpServletResponse response)
+		public ModelAndView adminGoodsMod(MultipartHttpServletRequest request, HttpServletResponse response)
 				throws IOException {
 			System.out.println("여기는 adminGoodsMod");
 			request.setCharacterEncoding("utf-8");
-			String viewName = (String) request.getAttribute("viewName");
-			String[] goods_No_= request.getParameterValues("goodsNo");
-			int[] goodsNo_ = new int[goods_No_.length];
-			for (int i=0; i<goodsNo_.length; i++) {
-				goodsNo_[i] = Integer.parseInt(goods_No_[i]);
-			}
-			int goodsNo = goodsNo_[0];
+	
+			int goodsNo= (Integer.parseInt(request.getParameter("goodsNo")));
+			
+			
 			System.out.println("goodsNo="+goodsNo);
 			
 			String category = request.getParameter("category");
@@ -291,6 +290,8 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			String[] option_prices = request.getParameterValues("option_price");
 			System.out.println("option_names="+Arrays.toString(option_names));
 			System.out.println("expDate="+expDate);
+			
+			
 			System.out.println("rapping="+rapping);
 			
 			int[] optionNos = adminGoodsService.selectOptionNoByGoodsNo(goodsNo);
@@ -298,17 +299,75 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 				adminGoodsService.deleteOption(optionNo);
 			}
 
-			GoodsVO sellerGoods = new GoodsVO();
-			sellerGoods.setCategory(category);
-			sellerGoods.setName(name);
-			sellerGoods.setPrice(price);
-			sellerGoods.setRapping(rapping);
-			sellerGoods.setManufacturer(manufacturer);
-			sellerGoods.setWeight(weight);
-			sellerGoods.setExpDate(expDate);
-			sellerGoods.setDescription(description);
-			sellerGoods.setGoodsNo(goodsNo);
-			System.out.println("sellerGoods="+sellerGoods);
+			GoodsVO adminGoods = new GoodsVO();
+			adminGoods.setCategory(category);
+			adminGoods.setName(name);
+			adminGoods.setPrice(price);
+			adminGoods.setRapping(rapping);
+			adminGoods.setManufacturer(manufacturer);
+			adminGoods.setWeight(weight);
+			adminGoods.setExpDate(expDate);
+			adminGoods.setDescription(description);
+			adminGoods.setGoodsNo(goodsNo);
+			System.out.println("adminGoods="+adminGoods);
+			
+			String[] originalFileNames = new String[5];
+			originalFileNames[0]=request.getParameter("originalFileName1");
+			originalFileNames[1]=request.getParameter("originalFileName2");
+			originalFileNames[2]=request.getParameter("originalFileName3");
+			originalFileNames[3]=request.getParameter("originalFileName4");
+			originalFileNames[4]=request.getParameter("originalFileName5");
+			
+			Iterator<String> files = request.getFileNames();
+			String[] imgs = new String[5];
+			while (files.hasNext()) {
+				String fileName = (String) files.next();
+				fileName.strip();
+				MultipartFile mFile = request.getFile(fileName);
+				System.out.println("fileName="+fileName);
+				if (fileName.equals("img1")) {
+					imgs[0] = mFile.getOriginalFilename();
+				}else if(fileName.equals("img2")) {
+					imgs[1] = mFile.getOriginalFilename();
+					
+				}else if(fileName.equals("img3")) {
+					imgs[2] = mFile.getOriginalFilename();
+				}else if(fileName.equals("img4")) {
+					imgs[3] = mFile.getOriginalFilename();
+					
+				}else if(fileName.equals("img5")) {
+					imgs[4] = mFile.getOriginalFilename();
+				}
+
+			}
+			
+			
+			boolean isImgModify = false;
+			for (int i = 0; i < imgs.length; i++) {
+				String goodsImg = imgs[i];
+				goodsImg = goodsImg.strip();
+				System.out.println(goodsImg);
+				if (goodsImg != null && goodsImg.length() > 0) {
+					System.out.println("goodsImg="+goodsImg +"저장하고, "+originalFileNames[i]+"를 지운다?");
+					isImgModify = true;
+					GeneralFileUploader.removeFile(originalFileNames[i], "/goods/" + goodsNo);
+					if (i==1) {
+						adminGoods.setImg1(goodsImg);
+					}else if(i==2) {
+						adminGoods.setImg2(goodsImg);
+					}else if(i==3) {
+						adminGoods.setImg3(goodsImg);
+					}else if(i==4) {
+						adminGoods.setImg4(goodsImg);
+					}else if(i==5) {
+						adminGoods.setImg5(goodsImg);
+					}
+				}
+			}
+			if (isImgModify) {
+				GeneralFileUploader.upload(request, "/goods/" + goodsNo);
+			}
+			
 			
 			List<OptionVO> selectOptions = new ArrayList();
 			for (int i=0; i<option_names.length; i++) {
@@ -322,7 +381,7 @@ public class AdminGoodsControllerImpl implements AdminGoodsController {
 			System.out.println("selectOptions"+selectOptions);
 			
 
-			adminGoodsService.updateSellerGoods(sellerGoods);
+			adminGoodsService.updateAdminGoods(adminGoods);
 			for (OptionVO optionVO : selectOptions) {
 				adminGoodsService.insertOptionForMod(optionVO);
 			}

@@ -22,7 +22,9 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         float: right;
         font-weight: 600;
       }
-      dl.goods_option_row > dt > div.goods_option_x_btn {
+
+      i.review-star {
+        color: gold;
       }
     </style>
     <!--리뷰 비동기 로드-->
@@ -469,16 +471,21 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <span
                               class="property-gdtail-font"
                               style="padding-top: 11px"
-                              ><c:set
+                            >
+                              <c:set
                                 var="temp"
                                 value="${Math.ceil(review.star)}"
                               />
                               <c:forEach
                                 begin="1"
                                 end="${Math.floor(review.star)}"
-                                >⭐</c:forEach
-                              ><c:if test="${temp>review.star}">☆</c:if></span
-                            >
+                              >
+                                <i class="bi bi-star-fill review-star"></i>
+                              </c:forEach>
+                              <c:if test="${temp>review.star}">
+                                <i class="bi bi-star-half review-star"></i>
+                              </c:if>
+                            </span>
                           </div>
                         </div>
                         <article class="property-gdtail-flex2">
@@ -493,11 +500,6 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                               <br />
                               <c:if test="${not empty review.reviewImg}">
                                 <img
-                                  style="
-                                    padding-top: 8px;
-                                    width: 60px;
-                                    height: 60px;
-                                  "
                                   src="${contextPath}/download.do?imageFileName=${review.reviewImg}&path=reviewNo${review.reviewNo}"
                                   class="expand_img"
                                   alt="리뷰 사진"

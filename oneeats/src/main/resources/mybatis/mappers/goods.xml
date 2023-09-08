@@ -27,6 +27,7 @@
 		<result column="category" property="category" />
 		<result column="type" property="type" />
 		<result column="memberNo" property="memberNo" />
+			<result column="sellerNo" property="sellerNo" />
 		<result column="sellerName" property="sellerName" />
 	</resultMap>
 
@@ -223,121 +224,150 @@
 		goodsNo=#{goodsNo} and memberNo=#{memberNo}
 	</select>
 
-	<select id="selectGoodsListWithSearchFilter"
-		parameterType="java.util.Map" resultMap="GoodsResult">
-		select * from (select g.*,m.name as sellerName from goods as g
-		inner
-		join member as m
-		on g.memberNo=m.memberNo) t where 1=1
-		<if test="filter_type==null or filter_type==''">
-			and 1=1
-		</if>
-		<if test="filter_type='all'">
-			and name like concat('%',#{filter_word},'%') or sellerName
-			like concat('%',#{filter_word},'%') or manufacturer like
-			concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='상품명'">
-			and name like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='판매자'">
-			and sellerName like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='원산지'">
-			and manufacturer like concat('%',#{filter_word},'%')
-		</if>
-		limit #{start},12
-	</select>
-
-
-
-	<select id="selectHotDealListWithSearchFilter"
-		parameterType="java.util.Map" resultMap="HotDealResult">
-		SELECT memberNumSearch.*,member.name as sellerName, member.memberNo
-		FROM member
-		INNER JOIN (
-		SELECT goods.memberNo, goods.goodsNo AS goodsNumber, goods.manufacturer,
-		hotdeal.*
-		FROM hotdeal
-		INNER JOIN goods ON goods.goodsNo = hotdeal.goodsNo
-		) AS memberNumSearch
-		ON member.memberNo = memberNumSearch.memberNo
+<select id="selectGoodsListWithSearchFilter" parameterType="java.util.Map" resultMap="GoodsResult">
+    <![CDATA[
+		select * from
+		(select u1.goodsNo,u1.price,u1.img1,u1.name,u1.manufacturer,u1.weight,u1.sellerName,u1.sellerNo
+		from (select g.*,m.name as sellerName,m.memberNo as sellerNo from goods as g
+		inner join member as m
+		on g.memberNo=m.memberNo) u1
+		
+		union all
+		
+		select u2.hotdealNo,u2.price,u2.img1,u2.name,u2.manufacturer,u2.weight,u2.sellerName,u2.sellerNo
+		from(
+		select h2.*,m.name as sellerName from 
+		(select h.*, g.memberNo as sellerNo,g.manufacturer,g.weight,g.price,
+		 concat(g.img1,'&path=goodsNo',g.goodsNo) AS img1 from hotdeal as h
+		inner join goods as g
+		on g.goodsNo=h.goodsNo) as h2
+		inner join member as m
+		on m.memberNo=h2.sellerNo) u2
+		) result_t
 		where 1=1
-		<if test="filter_type==null or filter_type==''">
-			and 1=1
-		</if>
-		<if test="filter_type=='all'">
-			and (
-			memberNumSearch.name like concat('%',#{filter_word},'%')
-			or member.name like concat('%',#{filter_word},'%')
-			or memberNumSearch.manufacturer like concat('%',#{filter_word},'%')
-			)
-		</if>
+		]]>
+		<choose>
+			<when test="filter_type!=null and filter_type!=''">
+				<choose>
+					<when test="filter_type=='all'">
+						and name like concat('%',#{filter_word},'%') or sellerName
+						like concat('%',#{filter_word},'%') or manufacturer like
+						concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='상품명'">
+						and name like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='판매자'">
+						and sellerName like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='원산지'">
+						and manufacturer like concat('%',#{filter_word},'%')
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				and 1=1
+			</otherwise>
+		</choose>
+	    LIMIT #{start}, 12
+</select>
 
-
-		<if test="filter_type=='상품명'">
-			and memberNumSearch.name like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='판매자'">
-			and member.name like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='원산지'">
-			and memberNumSearch.manufacturer like concat('%',#{filter_word},'%')
-		</if>
-		limit #{start},12
+	<select id="selectMaxPriceWithSearchFilter" parameterType="java.util.Map" resultType="int">
+	
+	 <![CDATA[
+		select ifnull(max(price),0) from
+		(select u1.goodsNo,u1.price,u1.img1,u1.name,u1.manufacturer,u1.weight,u1.sellerName,u1.sellerNo
+		from (select g.*,m.name as sellerName,m.memberNo as sellerNo from goods as g
+		inner join member as m
+		on g.memberNo=m.memberNo) u1
+		
+		union all
+		
+		select u2.hotdealNo,u2.price,u2.img1,u2.name,u2.manufacturer,u2.weight,u2.sellerName,u2.sellerNo
+		from(
+		select h2.*,m.name as sellerName from 
+		(select h.*, g.memberNo as sellerNo,g.manufacturer,g.weight,g.price,
+		 concat(g.img1,'&path=goodsNo',g.goodsNo) AS img1 from hotdeal as h
+		inner join goods as g
+		on g.goodsNo=h.goodsNo) as h2
+		inner join member as m
+		on m.memberNo=h2.sellerNo) u2
+		) result_t
+		where 1=1
+		]]>
+		<choose>
+			<when test="filter_type!=null and filter_type!=''">
+				<choose>
+					<when test="filter_type=='all'">
+						and name like concat('%',#{filter_word},'%') or sellerName
+						like concat('%',#{filter_word},'%') or manufacturer like
+						concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='상품명'">
+						and name like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='판매자'">
+						and sellerName like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='원산지'">
+						and manufacturer like concat('%',#{filter_word},'%')
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				and 1=1
+			</otherwise>
+		</choose>
 	</select>
 
 
 
 	<select id="selectGoodsTotalNumWithSearchFilter"
 		parameterType="java.util.Map" resultType="int">
-		select count(*) from (select g.*,m.name as sellerName from goods as g
-		inner
-		join member as m
-		on g.memberNo=m.memberNo) t where 1=1
-		<if test="filter_type==null or filter_type==''">
-			and 1=1
-		</if>
-		<if test="filter_type='all'">
-			and name like concat('%',#{filter_word},'%') or sellerName
-			like concat('%',#{filter_word},'%') or manufacturer like
-			concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='상품명'">
-			and name like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='판매자'">
-			and sellerName like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='원산지'">
-			and manufacturer like concat('%',#{filter_word},'%')
-		</if>
-	</select>
-
-	<select id="selectMaxPriceWithSearchFilter"
-		parameterType="java.util.Map" resultType="int">
-		select ifnull(max(price),0) from (select g.*,m.name as sellerName from
-		goods as g
-		inner
-		join member as m
-		on g.memberNo=m.memberNo) t where 1=1
-		<if test="filter_type==null or filter_type==''">
-			and 1=1
-		</if>
-		<if test="filter_type='all'">
-			and name like concat('%',#{filter_word},'%') or sellerName
-			like concat('%',#{filter_word},'%') or manufacturer like
-			concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='상품명'">
-			and name like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='판매자'">
-			and sellerName like concat('%',#{filter_word},'%')
-		</if>
-		<if test="filter_type=='원산지'">
-			and manufacturer like concat('%',#{filter_word},'%')
-		</if>
+		 <![CDATA[
+		select count(*) from
+		(select u1.goodsNo,u1.price,u1.img1,u1.name,u1.manufacturer,u1.weight,u1.sellerName,u1.sellerNo
+		from (select g.*,m.name as sellerName,m.memberNo as sellerNo from goods as g
+		inner join member as m
+		on g.memberNo=m.memberNo) u1
+		
+		union all
+		
+		select u2.hotdealNo,u2.price,u2.img1,u2.name,u2.manufacturer,u2.weight,u2.sellerName,u2.sellerNo
+		from(
+		select h2.*,m.name as sellerName from 
+		(select h.*, g.memberNo as sellerNo,g.manufacturer,g.weight,g.price,
+		 concat(g.img1,'&path=goodsNo',g.goodsNo) AS img1 from hotdeal as h
+		inner join goods as g
+		on g.goodsNo=h.goodsNo) as h2
+		inner join member as m
+		on m.memberNo=h2.sellerNo) u2
+		) result_t
+		where 1=1
+		]]>
+		<choose>
+			<when test="filter_type!=null and filter_type!=''">
+				<choose>
+					<when test="filter_type=='all'">
+						and name like concat('%',#{filter_word},'%') or sellerName
+						like concat('%',#{filter_word},'%') or manufacturer like
+						concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='상품명'">
+						and name like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='판매자'">
+						and sellerName like concat('%',#{filter_word},'%')
+					</when>
+					<when test="filter_type=='원산지'">
+						and manufacturer like concat('%',#{filter_word},'%')
+					</when>
+				</choose>
+			</when>
+			<otherwise>
+				and 1=1
+			</otherwise>
+		</choose>
 	</select>
 
 	<select id="selectGoodsListWithPagingMap"

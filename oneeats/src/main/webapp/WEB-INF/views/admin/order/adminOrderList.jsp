@@ -77,8 +77,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <a
                   href="${contextPath}/mypage/orderDetail.do?orderNo=${adminOrder.orderNo}"
                 >
-                  ${adminOrder.goodsName} 외 ${adminOrder.gun}건</a
-                >
+                  <c:if test="${adminOrder.gun>1}">
+                    ${adminOrder.goodsName} 외 ${adminOrder.gun-1}건
+                  </c:if>
+                  <c:if test="${adminOrder.gun==1}">
+                    ${adminOrder.goodsName}
+                  </c:if>
+                </a>
               </td>
               <td>
                 <form class="delivery_status_form">

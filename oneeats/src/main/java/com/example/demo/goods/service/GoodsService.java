@@ -49,11 +49,13 @@ public interface GoodsService {
 
 	public int selectMaxPrice(Map pagingMap);
 
-	public int selectMaxPriceWithSearchFilter(Map searchMap);
+	//public int selectMaxPriceWithSearchFilter(Map searchMap);
 
 	public List<HotDealVO> selectHotDealListWithPagingMap(Map pagingMap);
 
 	public int selectHotDealTotalNumWithPagingMap(Map pagingMap);
+
+	public int selectMaxPriceWithSearchFilter(Map searchMap);
 	
 
 }

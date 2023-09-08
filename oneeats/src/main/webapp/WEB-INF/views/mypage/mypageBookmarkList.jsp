@@ -94,14 +94,15 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
         <table>
       <tr>
         <td>
+          <a href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}">
           <img
               class="img-01"
               src="${contextPath}/download.do?imageFileName=${item.img1}&path=goodsNo${item.goodsNo}"
               alt="상품 이미지"
-            />
+            /></a>
         </td>
         <td class ="booktext text-center" >
-         ${item.name}
+          <a href="${contextPath}/goods/goodsDetail.do?goodsNo=${item.goodsNo}">${item.name}</a>
          <br>
          <span class = "textsize-1">${item.price}원</span>
         </td>

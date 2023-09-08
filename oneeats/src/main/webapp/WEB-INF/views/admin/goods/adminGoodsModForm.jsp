@@ -93,10 +93,37 @@ uri="http://java.sun.com/jsp/jstl/core"%>
       <div class="container">
         <form
           id="mod-form"
-          action="${contextPath}/admin/goods/adminGoodsMod.do?goodsNo=${sellerGoods.goodsNo}"
+          action="${contextPath}/admin/goods/adminGoodsMod.do"
           method="post"
           enctype="multipart/form-data"
         >
+          <input type="hidden" name="goodsNo" value="${sellerGoods.goodsNo}" />
+
+          <input
+            type="hidden"
+            name="originalFileName1"
+            value="${sellerGoods.img1}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName2"
+            value="${sellerGoods.img2}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName3"
+            value="${sellerGoods.img3}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName4"
+            value="${sellerGoods.img4}"
+          />
+          <input
+            type="hidden"
+            name="originalFileName5"
+            value="${sellerGoods.img5}"
+          />
           <div class="row">
             <div class="col-lg-6 col-md-6">
               <div class="product__details__pic">
@@ -152,18 +179,12 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                             <option value="category">
                               카테고리를 선택해주세요
                             </option>
-                            <option value="vegetable">채소</option>
-                            <option value="fruit">과일</option>
-                            <option value="juiceAndJam">
-                              못난이주스/수제청
-                            </option>
+
                             <option value="zzigae">찌개 / 탕 /찜</option>
                             <option value="meal">식사/안주류</option>
                             <option value="porridge">죽</option>
                             <option value="mealReplacement">식사 대용식</option>
-                            <option value="sidedish">
-                              간편 한끼 반찬
-                            </option>
+                            <option value="sidedish">간편 한끼 반찬</option>
                           </select>
                         </div>
                       </dd>
@@ -376,12 +397,13 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       rows="8"
                       style="width: 350px"
                     >
+${sellerGoods.description}
                     </textarea>
                     <input
                       type="hidden"
                       name="description"
                       id="goods_description"
-                      value="${option.name}"
+                      value="${sellerGoods.description}"
                     />
                   </p>
 

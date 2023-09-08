@@ -135,11 +135,8 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsDAO.selectMaxPrice(pagingMap);
 	}
 
-	@Override
-	public int selectMaxPriceWithSearchFilter(Map searchMap) {
-		
-		return goodsDAO.selectMaxPriceWithSearchFilter(searchMap);
-	};
-	
+	@Override public int selectMaxPriceWithSearchFilter(Map searchMap) {
+	 return goodsDAO.selectMaxPriceWithSearchFilter(searchMap); };
+
 	
 }

@@ -67,8 +67,13 @@ pageEncoding="UTF-8" isELIgnored="false"%> <%@ taglib prefix ="fmt" uri
                 <a
                   href="${contextPath}/mypage/orderDetail.do?orderNo=${sellerOrder.orderNo}"
                 >
-                  ${sellerOrder.goodsName} 외 ${sellerOrder.gun}건</a
-                >
+                  <c:if test="${sellerOrder.gun>1}">
+                    ${sellerOrder.goodsName} 외 ${sellerOrder.gun-1}건
+                  </c:if>
+                  <c:if test="${sellerOrder.gun==1}">
+                    ${sellerOrder.goodsName}
+                  </c:if>
+                </a>
               </td>
               <td>${sellerOrder.delivery_status}</td>
               <td>

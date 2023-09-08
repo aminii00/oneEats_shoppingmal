@@ -48,7 +48,7 @@ public interface AdminGoodsService {
 	public List<OptionVO> selectOptionByGoodsNo(int goodsNo);
 	public int[] selectOptionNoByGoodsNo(int goodsNo);
 	public void deleteOption(int optionNo);
-	public void updateSellerGoods(GoodsVO sellerGoods);
+	public void updateAdminGoods(GoodsVO sellerGoods);
 	public void insertOptionsForMod(List<OptionVO> selectOptions);
 	public void updateOption(List<OptionVO> selectOptions);
 	void insertOptionForMod(OptionVO optionVO);

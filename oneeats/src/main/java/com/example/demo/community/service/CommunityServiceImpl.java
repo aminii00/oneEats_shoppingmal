@@ -126,11 +126,11 @@ public class CommunityServiceImpl implements CommunityService {
 		 communityDAO.replyInsert(oneQnAVO);
 		 
 		 // 부모글의 작성자와 답글의 작성자가 다르면 부모 글의 status를 답변완료로 바꾼다.
-		 int parentNo = oneQnAVO.getParentNo();
-		 OneQnAVO parentQnA = communityDAO.oneQnADetail(parentNo);
-		 if (!parentQnA.getId().equals(oneQnAVO.getId())) {
-			 communityDAO.updateQnAStatusDone(parentNo);			
-		}
+//		 int parentNo = oneQnAVO.getParentNo();
+//		 OneQnAVO parentQnA = communityDAO.oneQnADetail(parentNo);
+//		 if (!parentQnA.getId().equals(oneQnAVO.getId())) {
+//			 communityDAO.updateQnAStatusDone(parentNo);			
+//		}
 	}
 	@Override
 	public void oneQnAFormInsert(OneQnAVO oneQnAVO) {

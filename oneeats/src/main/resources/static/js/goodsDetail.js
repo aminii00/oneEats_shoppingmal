@@ -34,7 +34,7 @@ $(document).ready(function() {
 		$("#discount_price").text(
 			discount_price + (goodsPrice * option_qty - selectedOptionPrice)
 		);
-		console.log("상품 가격 : "+goodsPrice+"선택 상품 개수 : "+option_qty+"선택 옵션 가격 : "+selectedOptionPrice);
+		
 		changeTotalValue();
 
 		// 새 행을 만든다
@@ -174,24 +174,19 @@ $(document).on("click", ".goods_option_x_btn", function() {
 	changePaymentValue(-payment_plus * qty);
 	changeTotalValue();
 	parentRow.remove();
-	console.log(payment_plus);
-	console.log(discount_plus);
-	console.log(qty);
+	
 });
 function changePaymentValue(num) {
 	var payment_price = parseInt($("#h_payment_price").val());
 	$("#h_payment_price").val(payment_price + num);
-	console.log("payment_price가 "+num+"만큼 늘어남");
-	console.log($("#h_payment_price").val() + " 이것은 현재= h_payment_price의 값");
+
 	$("#payment_price").text(payment_price + num);
 }
 
 function changeDiscountValue(num) {
 	var discount_price = parseInt($("#h_discount_price").val());
 	$("#h_discount_price").val(discount_price + num);
-	console.log(discount_price + num);
-	console.log("discount_price가 "+num+"만큼 늘어남");
-	console.log($("#h_discount_price").val() + " 이것은 현재= dicsount의 값");
+	
 	$("#discount_price").text(discount_price + num);
 }
 

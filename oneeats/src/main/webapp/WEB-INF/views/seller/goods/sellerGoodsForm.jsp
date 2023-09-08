@@ -25,6 +25,15 @@ uri="http://java.sun.com/jsp/jstl/core"%>
         reader.readAsDataURL(input.files[0]);
       }
     }
+
+    function input() {
+      const category = document.querySelector("#input_category").value;
+      console.log(date);
+
+      const goods_description =
+        document.querySelector("#goods_description").value;
+      console.log(goods_description);
+    }
   </script>
   <body>
     <section class="spad" style="padding-top: 28px !important">
@@ -88,7 +97,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       </dt>
                       <dd class="property-flex1">
                         <div style="align-content: center; margin-top: 4px">
-                          <select name="category" class="opt">
+                          <select id="category" name="category" class="opt">
                             <option value="vegetable">채소</option>
                             <option value="fruit">과일</option>
                             <option value="juiceAndJam">
@@ -394,6 +403,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
                       class="cart-button css-cartbtn"
                       radius="3"
                       style="width: 100px"
+                      id="input_submit"
                     >
                       <div class="css-nytqmg textbold">상품 등록</div>
                     </button>

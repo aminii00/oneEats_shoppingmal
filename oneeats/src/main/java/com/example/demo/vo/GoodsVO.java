@@ -26,8 +26,17 @@ public class GoodsVO {
 	private int memberNo;
 	private String sellerName;
 	private String seller_id;
-
+	private String sellerNo;
+	private String discounted_price;
+	private String hotdealname;
+	private String hotdealNo;
 	
+	public String getDiscounted_price() {
+		return discounted_price;
+	}
+	public void setDiscounted_price(String discounted_price) {
+		this.discounted_price = discounted_price;
+	}
 	public String getSellerName() {
 		return sellerName;
 	}
@@ -156,7 +165,25 @@ public class GoodsVO {
 				+ ", manufacturer=" + manufacturer + ", weight=" + weight + ", expDate=" + expDate + ", description="
 				+ description + ", harvest=" + harvest + ", creDate=" + creDate + ", img1=" + img1 + ", img2=" + img2
 				+ ", img3=" + img3 + ", img4=" + img4 + ", img5=" + img5 + ", category=" + category + ", type=" + type
-				+ ", memberNo=" + memberNo + ", sellerName=" + sellerName + ", seller_id=" + seller_id + "]";
+				+ ", memberNo=" + memberNo + ", sellerName=" + sellerName + ", seller_id=" + seller_id +", hotdealNo=" + hotdealNo+ "]";
+	}
+	public String getSellerNo() {
+		return sellerNo;
+	}
+	public void setSellerNo(String sellerNo) {
+		this.sellerNo = sellerNo;
+	}
+	public String getHotdealname() {
+		return hotdealname;
+	}
+	public void setHotdealname(String hotdealname) {
+		this.hotdealname = hotdealname;
+	}
+	public String getHotdealNo() {
+		return hotdealNo;
+	}
+	public void setHotdealNo(String hotdealNo) {
+		this.hotdealNo = hotdealNo;
 	}
 	
 	

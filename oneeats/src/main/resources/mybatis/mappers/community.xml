@@ -72,8 +72,8 @@
 
 	<insert id="oneQnAFormInsert" parameterType="OneQnAVO">
 		insert oneqna
-		(title, content, parentNo, memberNo)
-		values(,#{title},#{content},#{parentNo},#{memberNo})
+		(qnaNo,title, content, parentNo, memberNo)
+		values(#{qnaNo},#{title},#{content},#{parentNo},#{memberNo})
 	</insert>
 	
 	<update id="updateQnAStatusDone" parameterType="int">
@@ -311,7 +311,7 @@
 		select oneqna.*, member.id
 		from oneqna
 		inner join member on oneqna.memberNo=member.memberNo 
-		where parentNo=0 
+		where parentNo=0 and oneqna.memberNo=#{memberNo}
 		order by creDate limit #{start},10
 	</select>
 
@@ -326,8 +326,7 @@
 
 	<select id="selectOneQnAListTotalNumWithPagingMap">
 		select count(qnaNo) from oneQnA
-		where
-		memberNo=#{memberNo}
+		where  parentNo=0 and memberNo=#{memberNo}
 	</select>
 
 

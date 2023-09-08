@@ -101,8 +101,8 @@ public class AdminHotDealControllerImpl implements AdminHotDealController {
 	}
 	// 상품 목록
 		@RequestMapping(value = "/admin/hotdeal/adminHotDealList.do", method = { RequestMethod.GET, RequestMethod.POST })
-		public ModelAndView sellerHotDealList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-			System.out.println("여기는 sellerHotDealList");
+		public ModelAndView adminHotDealList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			System.out.println("여기는 adminHotDealList");
 			request.setCharacterEncoding("utf-8");
 			response.setContentType("html/text;charset=utf-8");
 			String viewName = (String) request.getAttribute("viewName");
@@ -138,6 +138,7 @@ public class AdminHotDealControllerImpl implements AdminHotDealController {
 			mav.addObject("newHotDealList", newHotDealList);
 			mav.addAllObjects(pagingMap);
 			mav.addObject("totalHotDealNum", totalHotDealNum);
+			System.out.println(totalHotDealNum);
 			System.out.println("mav :" + mav);
 			return mav;
 		}
