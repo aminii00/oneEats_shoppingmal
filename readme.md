@@ -18,7 +18,7 @@
 농산물을 살때 유기농 농산물이 좋은 것은 알고있지만 높은가격으로 인해 부담이 된다는 점.<br>
 이러한 문제를 못난이 농산물 판매로 해결하고자 하였음 <br>
 중간 도매 시장을 거치지 않고 농가와 계약하여 현지 직송을하기 때문에 시세 대비 20%이상 저렴한 가격으로 판매할 수 있어, 식비 부담을 줄이려고 노력하였음. <br>
-
+<br><br>
 ### 기술스택
 IDE(통합개발도구) : sts 4버전 <br>
 프레임워크: spring boot, bootstrap, mybatis <br>
@@ -28,6 +28,7 @@ IDE(통합개발도구) : sts 4버전 <br>
                    토스 결제 api,  <br>
                    다음 우편번호 찾기 api,  <br>
                    스마트택배 배송조회 api <br>
+                   <br>
 
 ### 화면설계
 https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
