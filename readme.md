@@ -3,6 +3,22 @@
 ### 팀원
 강민지, 최민아(본인), 한예지, 황채연
 
+<br>
+
+### 화면설계
+https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
+
+### DB설계
+https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskVfb8/edit?usp=sharing
+
+### 구매 프로세스
+https://docs.google.com/presentation/d/1_d3tnRrdyYS2vHiisWy9GBxk_6NNcPuJnkr14cUiRjk/edit?usp=sharing
+
+### 최종
+https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ-YM/edit?usp=sharing
+
+<br>
+
 ### 개요
 최근 5년간 1인가구는 통계에 따르면 작년 1인가구는 700만을 넘었다고 하며 증가세는 점점 늘어나는 추세로 앞으로도 1인가구는 늘어날 것이라고 봄<br><br>
 또한, 환경부의 발표에 따르면 음식물쓰레기의 70퍼센트가 가정과 소형 음식점에서 나오고, 먹지 않고 남긴 음식물이 30퍼센트를 도달할 정도로 매년 먹지 않고 남겨지는 음식물 쓰레기로 인한 심각한 환경오염.<br><br>
@@ -26,17 +42,3 @@ IDE(통합개발도구) : sts 4버전 <br>
 버전 컨트롤을 위해 git과 github를 도입 <br>
 자바스크립트 api:   카카오로그인 api 네이버로그인 api, 토스 결제 api,  다음 우편번호 찾기 api, 스마트택배 배송조회 api 
 <br>
-
-### 화면설계
-https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
-
-### DB설계
-https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskVfb8/edit?usp=sharing
-
-### 구매 프로세스
-https://docs.google.com/presentation/d/1_d3tnRrdyYS2vHiisWy9GBxk_6NNcPuJnkr14cUiRjk/edit?usp=sharing
-
-### 최종
-https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ-YM/edit?usp=sharing
-
-
