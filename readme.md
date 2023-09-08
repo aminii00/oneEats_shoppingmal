@@ -31,4 +31,5 @@ https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskV
 ### 구매 프로세스
 https://docs.google.com/presentation/d/1_d3tnRrdyYS2vHiisWy9GBxk_6NNcPuJnkr14cUiRjk/edit?usp=sharing
 
-2023년 9월 8일 금요일 완료 예정이며, 진행중에 있습니다.
+### 최종
+https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ-YM/edit?usp=sharing
