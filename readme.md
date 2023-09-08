@@ -36,9 +36,11 @@ https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ
 중간 도매 시장을 거치지 않고 농가와 계약하여 현지 직송을하기 때문에 시세 대비 20%이상 저렴한 가격으로 판매할 수 있어, 식비 부담을 줄이려고 노력하였음. <br>
 <br><br>
 ### 기술스택
-IDE(통합개발도구) : sts 4버전 <br>
-프레임워크: spring boot, bootstrap, mybatis <br>
-데이터베이스:  mysql 8 버전 <br>
-버전 컨트롤을 위해 git과 github를 도입 <br>
+IDE(통합개발도구) : sts 4버전 <br> <br>
+프레임워크: spring boot, bootstrap, mybatis <br> <br>
+데이터베이스:  mysql 8 버전 <br> <br>
+버전 컨트롤을 위해 git과 github를 도입 <br> <br>
 자바스크립트 api:   카카오로그인 api 네이버로그인 api, 토스 결제 api,  다음 우편번호 찾기 api, 스마트택배 배송조회 api 
 <br>
+ <br>
+  <br>
