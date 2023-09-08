@@ -24,11 +24,8 @@ IDE(통합개발도구) : sts 4버전 <br>
 프레임워크: spring boot, bootstrap, mybatis <br>
 데이터베이스:  mysql 8 버전 <br>
 버전 컨트롤을 위해 git과 github를 도입 <br>
-자바스크립트 api:   카카오로그인 api 네이버로그인 api,  <br>
-                   토스 결제 api,  <br>
-                   다음 우편번호 찾기 api,  <br>
-                   스마트택배 배송조회 api <br>
-                   <br>
+자바스크립트 api:   카카오로그인 api 네이버로그인 api, 토스 결제 api,  다음 우편번호 찾기 api, 스마트택배 배송조회 api 
+<br>
 
 ### 화면설계
 https://docs.google.com/presentation/d/1KvBD21ixTFSRbDUbUJL_w2D0II9iIMMl8n_ULRHXVp8/edit?usp=sharing
