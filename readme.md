@@ -20,6 +20,7 @@ https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ
 <br>
 
 ### 개요
+<img width="4768" alt="diagram (1)" src="https://github.com/remonpie1814/shoppingmall/assets/108705125/d649b00d-6106-4194-8d55-595d9bfdd1ca">
 최근 5년간 1인가구는 통계에 따르면 작년 1인가구는 700만을 넘었다고 하며 증가세는 점점 늘어나는 추세로 앞으로도 1인가구는 늘어날 것이라고 봄<br><br>
 또한, 환경부의 발표에 따르면 음식물쓰레기의 70퍼센트가 가정과 소형 음식점에서 나오고, 먹지 않고 남긴 음식물이 30퍼센트를 도달할 정도로 매년 먹지 않고 남겨지는 음식물 쓰레기로 인한 심각한 환경오염.<br><br>
 마지막으로 코로나 이전과 비교해보면 최근 주 1회 이상 외식을 하는 1인가구는 40퍼센트 급증하였고, 대부분 집에서 만들어먹는 가구는 20퍼센트 감소하였음에 따라 1인가구의 배달 포장 음식 비율이 증가하고 있다는 점.<br><br>
@@ -36,6 +37,7 @@ https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ
 중간 도매 시장을 거치지 않고 농가와 계약하여 현지 직송을하기 때문에 시세 대비 20%이상 저렴한 가격으로 판매할 수 있어, 식비 부담을 줄이려고 노력하였음. <br>
 <br><br>
 ### 기술스택
+<img width="3360" alt="diagram" src="https://github.com/remonpie1814/shoppingmall/assets/108705125/3ff97399-0efd-4b44-b1f3-75c7ac7b8982">
 IDE(통합개발도구) : sts 4버전 <br> <br>
 프레임워크: spring boot, bootstrap, mybatis <br> <br>
 데이터베이스:  mysql 8 버전 <br> <br>
