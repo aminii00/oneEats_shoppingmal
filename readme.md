@@ -15,7 +15,7 @@ https://docs.google.com/presentation/d/19POtraVGNLDf10KP02-e5AOPo5f8lFu36BwEMskV
 https://docs.google.com/presentation/d/1_d3tnRrdyYS2vHiisWy9GBxk_6NNcPuJnkr14cUiRjk/edit?usp=sharing
 
 ### 최종
-https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ-YM/edit?usp=sharing
+[https://docs.google.com/presentation/d/1J-PL0NV9SaZfiEgFh2mzPpsb4jInlQHayPuv9VKQ-YM/edit?usp=sharing](https://docs.google.com/presentation/d/1V9tuWyzpFg_7o7kB4mSv15HBjInJlAOzdr2AgGf96_E/edit?usp=sharing)
 
 <br>
 
